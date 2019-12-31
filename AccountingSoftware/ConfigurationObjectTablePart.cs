@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace WebServerTestErlang.AccountingSoftware
 {
-	//Клас для обєкту конфігурації
-	//Наприклад довідник чи документ
-	class ConfigurationObject
+	//
+	//
+	class ConfigurationObjectTablePart
 	{
 		string Name { get; set; }
 
 		Dictionary<string, ConfigurationObjectField> Fields { get; set; }
-
-		Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
 	}
 }
