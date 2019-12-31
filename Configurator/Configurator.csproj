@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{13640253-D4B3-45B9-B4E6-B87BC5785D26}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>WebServerTestErlang</RootNamespace>
-    <AssemblyName>WebServerTestErlang</AssemblyName>
+    <ProjectGuid>{9855A8F8-74D5-4A8A-9966-E68C2F5A4C1C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Configurator</RootNamespace>
+    <AssemblyName>Configurator</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -39,32 +39,45 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountingSoftware\Kernel.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Erlang\helloworld.beam" />
-    <None Include="Erlang\helloworld.erl" />
-    <None Include="Erlang\httpnet.beam" />
-    <None Include="Erlang\httpnet.erl" />
-    <None Include="Erlang\old\httpnet – копія.erl" />
-    <None Include="Erlang\old\scripts – копія.erl" />
-    <None Include="Erlang\scripts.beam" />
-    <None Include="Erlang\scripts.erl" />
-    <None Include="Erlang\tcp\client.beam" />
-    <None Include="Erlang\tcp\client.erl" />
-    <None Include="Erlang\tcp\server.beam" />
-    <None Include="Erlang\tcp\server.erl" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="AccountingSoftware\Info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

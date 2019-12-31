@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{13640253-D4B3-45B9-B4E6-B87BC5785D26}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>WebServerTestErlang</RootNamespace>
-    <AssemblyName>WebServerTestErlang</AssemblyName>
+    <ProjectGuid>{81A2BE3C-2E0F-496A-BB5E-BCAF5639C798}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ConfTrade</RootNamespace>
+    <AssemblyName>ConfTrade</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -43,28 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountingSoftware\Kernel.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Erlang\helloworld.beam" />
-    <None Include="Erlang\helloworld.erl" />
-    <None Include="Erlang\httpnet.beam" />
-    <None Include="Erlang\httpnet.erl" />
-    <None Include="Erlang\old\httpnet – копія.erl" />
-    <None Include="Erlang\old\scripts – копія.erl" />
-    <None Include="Erlang\scripts.beam" />
-    <None Include="Erlang\scripts.erl" />
-    <None Include="Erlang\tcp\client.beam" />
-    <None Include="Erlang\tcp\client.erl" />
-    <None Include="Erlang\tcp\server.beam" />
-    <None Include="Erlang\tcp\server.erl" />
-  </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <Content Include="AccountingSoftware\Info.txt" />
+    <Content Include="Info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
