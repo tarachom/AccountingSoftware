@@ -12,10 +12,16 @@ namespace WebServerTestErlang.AccountingSoftware
 	{
 		string Name { get; set; }
 
+		Dictionary<string, ConfigurationObject> Constants { get; set; }
+
 		Dictionary<string, ConfigurationObject> Directories { get; set; }
 
 		Dictionary<string, ConfigurationObject> Documents { get; set; }
 
+		Dictionary<string, ConfigurationObject> Enums { get; set; }
+
 		Dictionary<string, ConfigurationObject> Registers { get; set; }
 	}
+
+	
 }

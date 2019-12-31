@@ -43,10 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountingSoftware\ConfigurationObjectType.cs" />
     <Compile Include="AccountingSoftware\Configuration.cs" />
     <Compile Include="AccountingSoftware\ConfigurationObjectTablePart.cs" />
     <Compile Include="AccountingSoftware\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\ConfigurationObject.cs" />
+    <Compile Include="AccountingSoftware\ConfigurationObjectValue.cs" />
     <Compile Include="AccountingSoftware\Directory.cs" />
     <Compile Include="AccountingSoftware\Register.cs" />
     <Compile Include="AccountingSoftware\Document.cs" />

@@ -12,6 +12,10 @@ namespace WebServerTestErlang.AccountingSoftware
 	{
 		string Name { get; set; }
 
+		ConfigurationObjectType ConfObjectType { get; set; }
+
+		List<ConfigurationObjectValue> ConfObjectValue { get; set; }
+
 		Dictionary<string, ConfigurationObjectField> Fields { get; set; }
 
 		Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
