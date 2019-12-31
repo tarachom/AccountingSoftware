@@ -64,7 +64,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="AccountingSoftware\Info.txt" />
+    <Content Include="AccountingSoftware\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
