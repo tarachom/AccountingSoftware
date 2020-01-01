@@ -10,11 +10,16 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	abstract class DirectoryPointer
 	{
-		public DirectoryPointer(UnigueID id)
+		public DirectoryPointer()
+		{
+			
+		}
+
+		protected void Init(UnigueID id)
 		{
 			UID = id;
 		}
 
-		public UnigueID UID { get; }
+		public UnigueID UID { get; private set; }
 	}
 }

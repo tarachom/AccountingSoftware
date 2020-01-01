@@ -10,17 +10,19 @@ namespace WebServerTestErlang.AccountingSoftware.Directory
 	{
 		void A()
 		{
-			TestPointer TP = new TestPointer(new UnigueID("",""));
+			TestPointer TP = new TestPointer();
 			
 		}
 	}
 
 	class TestPointer : DirectoryPointer
 	{
-		public TestPointer(UnigueID id): base(id)
+		public TestPointer()
 		{
-			
+			base.Init(UnigueID id);
 		}
+
+
 	}
 
 
