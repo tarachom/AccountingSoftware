@@ -50,6 +50,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectValue.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePart.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryObject.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
