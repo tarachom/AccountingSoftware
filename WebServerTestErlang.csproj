@@ -49,10 +49,16 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectValue.cs" />
-    <Compile Include="AccountingSoftware\Directory.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectoryTablePart.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectoryObject.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
+    <Compile Include="AccountingSoftware\Directory\Directory.cs" />
+    <Compile Include="AccountingSoftware\Directory\_Test.cs" />
     <Compile Include="AccountingSoftware\Register.cs" />
     <Compile Include="AccountingSoftware\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
+    <Compile Include="AccountingSoftware\UnigueID.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
