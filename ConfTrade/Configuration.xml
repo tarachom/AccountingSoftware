@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Directories>
+
+  <Directory>
+    <Name>Test</Name>
+
+    <Fields>
+
+      <Field>
+        <Name>Field1</Name>
+        <Type>string</Type>
+
+      </Field>
+
+    </Fields>
+
+    <TabularParts>
+
+      <TablePart>
+        <Name>A</Name>
+
+        <Fields>
+
+          <Field>
+            <Name>Field1</Name>
+            <Type>string</Type>
+
+          </Field>
+
+        </Fields>
+
+      </TablePart>
+
+    </TabularParts>
+
+  </Directory>
+
+</Directories>
