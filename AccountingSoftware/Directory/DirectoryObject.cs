@@ -10,6 +10,17 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	abstract class DirectoryObject
 	{
+		public UnigueID UID { get; private set; }
 
+		public string Code { get; set; }
+
+		public string Name { get; set; }
+
+		public void Init(UnigueID uid)
+		{
+			UID = uid;
+		}
+
+		
 	}
 }

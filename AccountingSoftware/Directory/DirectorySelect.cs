@@ -10,15 +10,15 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	abstract class DirectorySelect
 	{
-		protected void Init(List<IDirectoryPointer> directoryPointers)
-		{
-			foreach (IDirectoryPointer IDirectoryPointerItem in directoryPointers)
-			{
-				DirectoryPointers.Add(IDirectoryPointerItem);
-			}
-		}
+		//protected void Init(List<IDirectoryPointer> directoryPointers)
+		//{
+		//	foreach (IDirectoryPointer IDirectoryPointerItem in directoryPointers)
+		//	{
+		//		DirectoryPointers.Add(IDirectoryPointerItem);
+		//	}
+		//}
 
-		public List<IDirectoryPointer> DirectoryPointers { get; }
+		//public List<IDirectoryPointer> DirectoryPointers { get; }
 	}
 
 	

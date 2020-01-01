@@ -21,6 +21,8 @@ namespace WebServerTestErlang.AccountingSoftware
 		}
 
 		public UnigueID UID { get; private set; }
+
+		
 	}
 
 	interface IDirectoryPointer

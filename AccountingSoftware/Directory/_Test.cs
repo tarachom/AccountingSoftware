@@ -12,18 +12,38 @@ namespace WebServerTestErlang.AccountingSoftware
 		{
 			TestPointer TP = new TestPointer();
 
-
 			TestSelect TS = new TestSelect();
 			TS.Read();
-			
+
+			//TS.DirectoryPointers[0].GetDirectoryObject().;
+
+		}
+	}
+
+	class TestObjest : DirectoryObject
+	{
+		public TestPointer GetDirectoryPointer()
+		{
+			TestPointer TestPointerItem = new TestPointer();
+			TestPointerItem.Init(base.UID);
+
+			return TestPointerItem;
 		}
 	}
 
 	class TestPointer : DirectoryPointer, IDirectoryPointer
 	{
-		public TestPointer()
+		public TestObjest GetDirectoryObject()
 		{
-			//base.Init(UnigueID id);
+			//Запрос в базу по base.UID
+			TestObjest TestObjestItem = new TestObjest();
+
+			TestObjestItem.Init(base.UID);
+
+			TestObjestItem.Code = "1";
+			TestObjestItem.Name = "1 Name";
+
+			return TestObjestItem;
 		}
 	}
 
@@ -31,21 +51,19 @@ namespace WebServerTestErlang.AccountingSoftware
 	{
 		public TestSelect()
 		{
-			//base.Init(UnigueID id);
+			
 		}
 
 		public void Read()
 		{
-			List<IDirectoryPointer> listTestPointer = new List<IDirectoryPointer>();
-
 			for (int i = 0; i < 10; i++) {
 				TestPointer elementTestPointer = new TestPointer();
 				elementTestPointer.Init(new UnigueID(i.ToString(), "Test"));
 
-				listTestPointer.Add(elementTestPointer);
+				DirectoryPointers.Add(elementTestPointer);
 			}
-
-			base.Init(listTestPointer);
 		}
+
+		public List<TestPointer> DirectoryPointers { get; }
 	}
 }
