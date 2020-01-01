@@ -11,5 +11,6 @@ namespace WebServerTestErlang.AccountingSoftware
 	abstract class Directory
 	{
 
+		public string Name { get; set; }
 	}
 }

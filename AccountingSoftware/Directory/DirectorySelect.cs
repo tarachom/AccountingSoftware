@@ -10,14 +10,16 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	abstract class DirectorySelect
 	{
-		public void Init(object sqlCollection)
+		protected void Init(List<IDirectoryPointer> directoryPointers)
 		{
-			//DirectoryPointer newDirectoryPointer;
-			//newDirectoryPointer.UID
-
-			//DirectoryPointers.Add(
+			foreach (IDirectoryPointer IDirectoryPointerItem in directoryPointers)
+			{
+				DirectoryPointers.Add(IDirectoryPointerItem);
+			}
 		}
 
-		public List<DirectoryPointer> DirectoryPointers { get; private set; }
+		public List<IDirectoryPointer> DirectoryPointers { get; }
 	}
+
+	
 }

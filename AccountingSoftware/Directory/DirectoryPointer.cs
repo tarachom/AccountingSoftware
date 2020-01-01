@@ -15,11 +15,16 @@ namespace WebServerTestErlang.AccountingSoftware
 			
 		}
 
-		protected void Init(UnigueID id)
+		public void Init(UnigueID id)
 		{
 			UID = id;
 		}
 
 		public UnigueID UID { get; private set; }
+	}
+
+	interface IDirectoryPointer
+	{
+		UnigueID UID { get; }
 	}
 }

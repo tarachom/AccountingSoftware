@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebServerTestErlang.AccountingSoftware
 {
-	//Довідник
+	//Довідник Обєкт
 	//
 	abstract class DirectoryObject
 	{
