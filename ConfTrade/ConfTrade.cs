@@ -16,9 +16,20 @@ namespace ConfTrade
     {
         static void Main(string[] args)
         {
-           
+            Generation();
 
-            Console.ReadLine();
+            //Console.ReadLine();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        static void Generation()
+        {
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(PathTemplate);
+
+            xsltCodeGnerator.Transform(PathConf, @"D:\VS\Project\WebServerTestErlang\ConfTrade\CodeGeneration.cs");
         }
 
         public const string PathConf = @"D:\VS\Project\WebServerTestErlang\ConfTrade\Configuration.xml";
@@ -48,12 +59,6 @@ namespace ConfTrade
             }
         }
 
-        public void Generation()
-        {
-            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-            xsltCodeGnerator.Load(PathTemplate);
-
-            xsltCodeGnerator.Transform(PathConf, @"D:\VS\Project\WebServerTestErlang\ConfTrade\CodeGeneration.cs");
-        }
+        
     }
 }
