@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebServerTestErlang.AccountingSoftware
 {
-	enum ConfigurationObjectType
+	public enum ConfigurationObjectType
 	{
 		Constant,
 		Directory,

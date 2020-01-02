@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Наперед задані значення
 	//Це може бути або константа, або елементи довідника
-	class ConfigurationObjectValue
+	public class ConfigurationObjectValue
 	{
 
 	}

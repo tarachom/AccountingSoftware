@@ -8,10 +8,10 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//
 	//
-	class ConfigurationObjectTablePart
+	public class ConfigurationObjectTablePart
 	{
-		string Name { get; set; }
+		public string Name { get; set; }
 
-		Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
 	}
 }

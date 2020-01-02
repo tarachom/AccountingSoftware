@@ -8,9 +8,9 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//
 	//
-	class ConfigurationObjectField
+	public class ConfigurationObjectField
 	{
-		string Name { get; set; }
+		public string Name { get; set; }
 
 
 	}

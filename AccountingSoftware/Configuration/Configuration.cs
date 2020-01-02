@@ -8,19 +8,19 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Конфігурація
 	//В цьому класі має міститися вся інформація про конфігурацію
-	class Configuration
+	public class Configuration
 	{
-		string Name { get; set; }
+		public string Name { get; set; }
 
-		Dictionary<string, ConfigurationObject> Constants { get; set; }
+		public Dictionary<string, ConfigurationObject> Constants { get; set; }
 
-		Dictionary<string, ConfigurationObject> Directories { get; set; }
+		public Dictionary<string, ConfigurationObject> Directories { get; set; }
 
-		Dictionary<string, ConfigurationObject> Documents { get; set; }
+		public Dictionary<string, ConfigurationObject> Documents { get; set; }
 
-		Dictionary<string, ConfigurationObject> Enums { get; set; }
+		public Dictionary<string, ConfigurationObject> Enums { get; set; }
 
-		Dictionary<string, ConfigurationObject> Registers { get; set; }
+		public Dictionary<string, ConfigurationObject> Registers { get; set; }
 	}
 
 	

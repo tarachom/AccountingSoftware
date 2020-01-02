@@ -8,16 +8,16 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Клас для обєкту конфігурації
 	//Наприклад довідник чи документ
-	class ConfigurationObject
+	public class ConfigurationObject
 	{
-		string Name { get; set; }
+		public string Name { get; set; }
 
-		ConfigurationObjectType ConfObjectType { get; set; }
+		public ConfigurationObjectType ConfObjectType { get; set; }
 
-		List<ConfigurationObjectValue> ConfObjectValue { get; set; }
+		public List<ConfigurationObjectValue> ConfObjectValue { get; set; }
 
-		Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
 
-		Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
+		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
 	}
 }

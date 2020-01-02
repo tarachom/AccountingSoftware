@@ -1,38 +1,41 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Directories>
+<Configuration>
+  
+  <Directories>
 
-  <Directory>
-    <Name>Test</Name>
+    <Directory>
+      <Name>Test</Name>
 
-    <Fields>
+      <Fields>
 
-      <Field>
-        <Name>Field1</Name>
-        <Type>string</Type>
+        <Field>
+          <Name>Field1</Name>
+          <Type>string</Type>
 
-      </Field>
+        </Field>
 
-    </Fields>
+      </Fields>
 
-    <TabularParts>
+      <TabularParts>
 
-      <TablePart>
-        <Name>A</Name>
+        <TablePart>
+          <Name>A</Name>
 
-        <Fields>
+          <Fields>
 
-          <Field>
-            <Name>Field1</Name>
-            <Type>string</Type>
+            <Field>
+              <Name>Field1</Name>
+              <Type>string</Type>
 
-          </Field>
+            </Field>
 
-        </Fields>
+          </Fields>
 
-      </TablePart>
+        </TablePart>
 
-    </TabularParts>
+      </TabularParts>
 
-  </Directory>
+    </Directory>
 
-</Directories>
+  </Directories>
+</Configuration>
