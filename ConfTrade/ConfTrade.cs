@@ -9,6 +9,8 @@ using System.Xml.Xsl;
 
 using WebServerTestErlang.AccountingSoftware;
 
+using Npgsql;
+
 //Конфігурація Торгівля
 namespace ConfTrade
 {
@@ -16,14 +18,47 @@ namespace ConfTrade
     {
         static void Main(string[] args)
         {
-            Generation();
+            //Generation();
 
-            //Console.ReadLine();
+            TestPostgres();
+
+            Console.ReadLine();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
+        static void TestPostgres()
+        {
+            NpgsqlConnection nCon = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;");
+            nCon.Open();
+
+            NpgsqlCommand nCommand = new NpgsqlCommand(@"INSERT INTO public.tovary(uid, name, code, description) " +
+                                                        "VALUES(@uid, @name, @code, @description)", nCon);
+
+            nCommand.Parameters.Add(new NpgsqlParameter("uid", null));
+            nCommand.Parameters.Add(new NpgsqlParameter("name", ""));
+            nCommand.Parameters.Add(new NpgsqlParameter("code", "001"));
+            nCommand.Parameters.Add(new NpgsqlParameter("description", "desc"));
+
+            for (int i = 0; i < 10; i++)
+            {
+                nCommand.Parameters["uid"].Value = Guid.NewGuid();
+                nCommand.Parameters["name"].Value = "Name " + i.ToString();
+
+                Console.WriteLine(nCommand.ExecuteNonQuery());                
+            }
+            
+
+            NpgsqlCommand nCommand2 = new NpgsqlCommand("SELECT * FROM public.tovary", nCon);
+
+            NpgsqlDataReader reader = nCommand2.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader["uid"]);
+            }
+            reader.Close();
+
+            nCon.Close();
+        }
+
         static void Generation()
         {
             XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
