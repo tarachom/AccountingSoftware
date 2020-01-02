@@ -4,14 +4,25 @@
 
   <xsl:template match="/">
 
+/*
+* 
+* Автоматично згенерований код.
+*
+* Конфігурації "<xsl:value-of select="Configuration/Name"/>"
+* Автор <xsl:value-of select="Configuration/Autor"/>
+* 
+*/
     <xsl:for-each select="Configuration/Directories/Directory">
+      <xsl:variable name="DirectoryName" select="Name"/>
+
+// --- Objest ---
 
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="Name"/>Objest : DirectoryObject
+class <xsl:value-of select="$DirectoryName"/>Objest : DirectoryObject
 {
-    public <xsl:value-of select="Name"/>Objest()
+    public <xsl:value-of select="$DirectoryName"/>Objest()
     {
          
     }
@@ -23,39 +34,88 @@ class <xsl:value-of select="Name"/>Objest : DirectoryObject
     public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
     </xsl:for-each>
 }
-<!--
-class TestObjest : DirectoryObject
+      
+// --- Pointer ---
+
+/// &lt;summary&gt;
+/// <xsl:value-of select="Desc"/>
+/// &lt;/summary&gt;
+class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirectoryPointer
 {
-		public TestObjest()
-		{
-			ATablePart = new TestATablePart(this);
-		}
-
-		public TestPointer GetDirectoryPointer()
-		{
-			TestPointer TestPointerItem = new TestPointer();
-			TestPointerItem.Init(base.UID);
-
-			return TestPointerItem;
-		}
-
-		public void Save()
-		{
-
-		}
-
-		public TestPointer Field1 { get; set; }
-
-		public TestPointer Field2 { get; set; }
-
-		public TestPointer Field3 { get; set; }
-
-		public string Field4 { get; set; }
-
-		public TestATablePart ATablePart { get; }
-}
--->
+    public <xsl:value-of select="$DirectoryName"/>Pointer()
+    {
+         
+    }
     
+    public <xsl:value-of select="$DirectoryName"/>Objest GetDirectoryObject()
+    {
+         
+    }
+}
+
+// --- Select ---
+
+/// &lt;summary&gt;
+/// <xsl:value-of select="Desc"/>
+/// &lt;/summary&gt;
+class <xsl:value-of select="$DirectoryName"/>Select : DirectorySelect
+{
+    public <xsl:value-of select="$DirectoryName"/>Select()
+    {
+         
+    }
+    
+    public void Read()
+    {
+         
+    }
+    
+    public List&lt;<xsl:value-of select="$DirectoryName"/>Pointer&gt; DirectoryPointers { get; }
+}
+
+      <xsl:for-each select="TabularParts/TablePart">
+        <xsl:variable name="TablePartName" select="Name"/>
+        <xsl:variable name="TablePartFullName" select="concat($DirectoryName, $TablePartName)"/>
+        
+// --- TablePart ---    
+
+/// &lt;summary&gt;
+/// <xsl:value-of select="Desc"/>
+/// &lt;/summary&gt;
+class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
+{
+    public <xsl:value-of select="$TablePartFullName"/>TablePart(<xsl:value-of select="$DirectoryName"/>Objest owner)
+    {
+         Owner = owner;
+    }
+    
+    public <xsl:value-of select="$DirectoryName"/>Objest Owner { get; }
+    
+    public void Read()
+    {
+         
+    }
+    
+    public List&lt;<xsl:value-of select="$TablePartFullName"/>TablePartRecord&gt; RecordCollection { get; }
+}
+
+// --- TablePartRecord ---
+
+/// &lt;summary&gt;
+/// <xsl:value-of select="Desc"/>
+/// &lt;/summary&gt;
+class <xsl:value-of select="$TablePartFullName"/>TablePartRecord : DirectoryTablePartRecord
+{
+    <xsl:for-each select="Fields/Field">
+    /// &lt;summary&gt;
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
+    public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
+    </xsl:for-each>
+}
+
+      </xsl:for-each>
+
     </xsl:for-each>
 
   </xsl:template>

@@ -1,11 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Configuration>
+  <Name>ConfTrade 1.1</Name>
+  <Autor>Yurik</Autor>
   
   <Directories>
 
     <Directory>
-      <Name>Test</Name>
-
+      <Name>Tovary</Name>
+      <Desc>Directory Tovary Info</Desc>
+      
       <Fields>
 
         <Field>
@@ -37,8 +40,9 @@
       <TabularParts>
 
         <TablePart>
-          <Name>A</Name>
-
+          <Name>Ceny</Name>
+          <Desc>TablePart Test Info</Desc>
+          
           <Fields>
 
             <Field>
@@ -47,6 +51,12 @@
               <Desc>Field1</Desc>
             </Field>
 
+            <Field>
+              <Name>Field2</Name>
+              <Type>string</Type>
+              <Desc>Field2</Desc>
+            </Field>
+            
           </Fields>
 
         </TablePart>
