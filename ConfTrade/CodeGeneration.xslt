@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="text" indent="yes"/>
+  <xsl:output method="text" indent="yes" />
 
   <xsl:template match="/">
 
@@ -12,6 +12,12 @@
 * Автор <xsl:value-of select="Configuration/Autor"/>
 * 
 */
+
+using System;
+using System.Collections.Generic;
+
+using WebServerTestErlang.AccountingSoftware;
+
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
 
@@ -49,7 +55,9 @@ class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirect
     
     public <xsl:value-of select="$DirectoryName"/>Objest GetDirectoryObject()
     {
-         
+        <xsl:value-of select="$DirectoryName"/>Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>Objest();
+        <xsl:value-of select="$DirectoryName"/>ObjestItem.Init(base.UID);
+        return <xsl:value-of select="$DirectoryName"/>ObjestItem;
     }
 }
 

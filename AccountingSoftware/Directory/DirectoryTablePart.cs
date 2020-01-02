@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник
 	//
-	abstract class DirectoryTablePart
+	public abstract class DirectoryTablePart
 	{
 		public string Name { get; set; }
 	}

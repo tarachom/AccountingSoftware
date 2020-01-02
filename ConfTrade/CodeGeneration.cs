@@ -8,6 +8,12 @@
 * Автор Yurik
 * 
 */
+
+using System;
+using System.Collections.Generic;
+
+using WebServerTestErlang.AccountingSoftware;
+
     
 
 // --- Objest ---
@@ -29,19 +35,24 @@ class TovaryObjest : DirectoryObject
     public string Field1 { get; set; }
     
     /// <summary>
-    /// Field1
+    /// Field2
     /// </summary>
     public string Field2 { get; set; }
     
     /// <summary>
-    /// Field1
+    /// Field3
     /// </summary>
     public string Field3 { get; set; }
     
     /// <summary>
-    /// Field1
+    /// Field4
     /// </summary>
     public string Field4 { get; set; }
+    
+    /// <summary>
+    /// Field5
+    /// </summary>
+    public string Field5 { get; set; }
     
 }
       
@@ -59,7 +70,9 @@ class TovaryPointer : DirectoryPointer, IDirectoryPointer
     
     public TovaryObjest GetDirectoryObject()
     {
-         
+        TovaryObjest TovaryObjestItem = new TovaryObjest();
+        TovaryObjestItem.Init(base.UID);
+        return TovaryObjestItem;
     }
 }
 

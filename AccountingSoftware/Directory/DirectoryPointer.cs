@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник Вказівник - Ссилка на елемент довідника 
 	//
-	abstract class DirectoryPointer
+	public abstract class DirectoryPointer
 	{
 		public DirectoryPointer()
 		{
@@ -25,7 +25,7 @@ namespace WebServerTestErlang.AccountingSoftware
 		
 	}
 
-	interface IDirectoryPointer
+	public interface IDirectoryPointer
 	{
 		UnigueID UID { get; }
 	}

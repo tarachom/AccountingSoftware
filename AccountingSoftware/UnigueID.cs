@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebServerTestErlang.AccountingSoftware
 {
-	class UnigueID
+	public class UnigueID
 	{
 		public UnigueID(string id, string table)
 		{

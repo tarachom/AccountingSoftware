@@ -20,19 +20,25 @@
         <Field>
           <Name>Field2</Name>
           <Type>string</Type>
-          <Desc>Field1</Desc>
+          <Desc>Field2</Desc>
         </Field>
 
         <Field>
           <Name>Field3</Name>
           <Type>string</Type>
-          <Desc>Field1</Desc>
+          <Desc>Field3</Desc>
         </Field>
 
         <Field>
           <Name>Field4</Name>
           <Type>string</Type>
-          <Desc>Field1</Desc>
+          <Desc>Field4</Desc>
+        </Field>
+
+        <Field>
+          <Name>Field5</Name>
+          <Type>string</Type>
+          <Desc>Field5</Desc>
         </Field>
 
       </Fields>

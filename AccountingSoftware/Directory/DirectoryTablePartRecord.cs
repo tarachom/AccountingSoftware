@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник
 	//
-	abstract class DirectoryTablePartRecord
+	public abstract class DirectoryTablePartRecord
 	{
 
 	}

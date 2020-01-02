@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник Вибірка
 	//
-	abstract class DirectorySelect
+	public abstract class DirectorySelect
 	{
 		//protected void Init(List<IDirectoryPointer> directoryPointers)
 		//{

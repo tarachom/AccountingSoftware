@@ -8,7 +8,7 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник Обєкт
 	//
-	abstract class DirectoryObject
+	public abstract class DirectoryObject
 	{
 		public UnigueID UID { get; private set; }
 
