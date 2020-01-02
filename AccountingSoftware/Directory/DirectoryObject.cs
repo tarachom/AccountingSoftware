@@ -16,6 +16,8 @@ namespace WebServerTestErlang.AccountingSoftware
 
 		public string Name { get; set; }
 
+		public string Desc { get; set; }
+
 		public void Init(UnigueID uid)
 		{
 			UID = uid;
