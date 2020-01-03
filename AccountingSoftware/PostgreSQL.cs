@@ -35,16 +35,32 @@ namespace WebServerTestErlang.AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
-		public void SelectDirectory(string query)
+		public List<DirectoryPointer> SelectDirectory(DirectorySelect sender)
 		{
+			List<DirectoryPointer> listDirectoryPointer = new List<DirectoryPointer>();
+
+			string query = sender.QueryConstructor.Construct();
+
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
+				DirectoryPointer elementPointer = new DirectoryPointer();
+
+				List<KeyValuePair<string, object>> fields = new List<KeyValuePair<string, object>>();
+
 				//Console.WriteLine(reader["uid"]);
+				foreach (KeyValuePair<string, string> field in sender.QueryConstructor.Field)
+				{
+					fields.Add(new KeyValuePair<string, object>(field.Key, reader[field.Key]));
+				}
+
+				elementPointer.Init(new UnigueID(reader["uid"].ToString()), fields);
 			}
 			reader.Close();
+
+			return listDirectoryPointer;
 		}
 	}
 }

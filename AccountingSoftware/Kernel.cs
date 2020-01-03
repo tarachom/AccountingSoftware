@@ -22,9 +22,5 @@ namespace WebServerTestErlang.AccountingSoftware
 
 		public IDataBase DataBase { get; set; }
 
-		public void SelectDirectory(string query)
-		{
-			DataBase.SelectDirectory(query);
-		}
 	}
 }

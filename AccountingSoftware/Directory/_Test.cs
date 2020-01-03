@@ -90,7 +90,17 @@ namespace WebServerTestErlang.AccountingSoftware
 		//Крок 1. Вибірка
 		public void Select()
 		{
-			base.AbstractSelect();
+			List<DirectoryPointer> list = base.AbstractSelect();
+
+			foreach (DirectoryPointer el in list)
+			{
+				Console.WriteLine(el.UID.UID);
+
+				foreach (KeyValuePair<string, object> field in el.Fields)
+				{
+					Console.WriteLine(field.Key + "=" + field.Value);
+				}
+			}
 		}
 
 		//Крок 2. Зчитування

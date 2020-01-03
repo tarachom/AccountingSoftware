@@ -14,6 +14,6 @@ namespace WebServerTestErlang.AccountingSoftware
 
 		string ConnectionString { get; set; }
 
-		void SelectDirectory(string query);
+		List<DirectoryPointer> SelectDirectory(DirectorySelect sender);
 	}
 }

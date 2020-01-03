@@ -14,13 +14,12 @@ namespace WebServerTestErlang.AccountingSoftware
 
 		public Query QueryConstructor { get; set; }
 
-		protected void AbstractSelect()
+		protected List<DirectoryPointer> AbstractSelect()
 		{
-
-			kernel.DataBase.SelectDirectory(QueryConstructor.Construct());
+			return kernel.DataBase.SelectDirectory(this);
 		}
 
-		protected List<DirectoryPointer> AbstractDirectoryPointers { get; }
+		//protected List<DirectoryPointer> AbstractDirectoryPointers { get; }
 	}
 
 	
