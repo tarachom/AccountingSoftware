@@ -64,7 +64,7 @@ class TovaryObjest : DirectoryObject
 /// <summary>
 /// Directory Tovary Info
 /// </summary>
-class TovaryPointer : DirectoryPointer, IDirectoryPointer
+class TovaryPointer : DirectoryPointer
 {
     /// <summary>
     ///

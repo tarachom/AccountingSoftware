@@ -16,7 +16,7 @@ namespace WebServerTestErlang.AccountingSoftware
 
 			while (TS.Read())
 			{
-				TS.
+				//TS.
 			}
 			
 			
