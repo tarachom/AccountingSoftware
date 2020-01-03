@@ -13,5 +13,7 @@ namespace WebServerTestErlang.AccountingSoftware
 		void Close();
 
 		string ConnectionString { get; set; }
+
+		void SelectDirectory(string query);
 	}
 }

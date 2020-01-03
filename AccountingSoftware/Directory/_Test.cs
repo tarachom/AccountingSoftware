@@ -11,13 +11,14 @@ namespace WebServerTestErlang.AccountingSoftware
 		void A()
 		{
 
-			TestSelect TS = new TestSelect();
-			TS.Select();
+			//TestSelect TS = new TestSelect();
+			//TS.QueryConstructor.
+			//TS.Select();
 
-			while (TS.Read())
-			{
-				//TS.
-			}
+			//while (TS.Read())
+			//{
+			//	//TS.
+			//}
 			
 			
 

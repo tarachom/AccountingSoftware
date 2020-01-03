@@ -34,5 +34,17 @@ namespace WebServerTestErlang.AccountingSoftware
 		public string ConnectionString { get; set; }
 
 		private NpgsqlConnection Connection { get; set; }
+
+		public void SelectDirectory(string query)
+		{
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				//Console.WriteLine(reader["uid"]);
+			}
+			reader.Close();
+		}
 	}
 }

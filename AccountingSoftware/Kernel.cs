@@ -20,11 +20,11 @@ namespace WebServerTestErlang.AccountingSoftware
 			DataBase.Close();
 		}
 
-		private IDataBase DataBase { get; set; }
+		public IDataBase DataBase { get; set; }
 
-		public void SelectPointers()
+		public void SelectDirectory(string query)
 		{
-
+			DataBase.SelectDirectory(query);
 		}
 	}
 }

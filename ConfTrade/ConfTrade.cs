@@ -20,18 +20,18 @@ namespace ConfTrade
         {
             Query q = new Query();
 
-            q.Table = "Tovary";
+            q.Table = "public.tovary";
 
             //q.Field.Add("Name", "");
             //q.Field.Add("Desc", "");
             //q.Field.Add("Code", "");
 
-            q.Where.Add(new Tuple<string, Comparison, string, Comparison>("Name", Comparison.EQ, "Test", Comparison.AND));
-            q.Where.Add(new Tuple<string, Comparison, string, Comparison>("Code", Comparison.EQ, "50", Comparison.Empty));
+            //q.Where.Add(new Tuple<string, Comparison, string, Comparison>("Name", Comparison.EQ, "Test", Comparison.AND));
+            //q.Where.Add(new Tuple<string, Comparison, string, Comparison>("Code", Comparison.EQ, "50", Comparison.Empty));
 
             //q.Order.Add("Name", SelectOrder.ASC);
 
-            q.Limit = 10;
+            //q.Limit = 10;
 
             Console.WriteLine(q.Construct());
 

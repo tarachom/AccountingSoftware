@@ -24,15 +24,28 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
+using WebServerTestErlang.AccountingSoftware;
+
 namespace WebServer
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Thread threadListener = new Thread(new ThreadStart(GeneralWorker));
-            threadListener.IsBackground = true;
-            threadListener.Start();
+            Kernel kernel = new Kernel();
+            
+            TestSelect TS = new TestSelect();
+            TS.kernel = kernel;
+            TS.QueryConstructor.Table = "public.tovary";
+            TS.Select();
+
+
+
+            kernel = null;
+
+            //Thread threadListener = new Thread(new ThreadStart(GeneralWorker));
+            //threadListener.IsBackground = true;
+            //threadListener.Start();
 
             Console.ReadLine();
         }
