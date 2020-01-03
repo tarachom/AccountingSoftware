@@ -37,6 +37,11 @@ namespace WebServer
             TestSelect TS = new TestSelect();
             TS.kernel = kernel;
             TS.QueryConstructor.Table = "public.tovary";
+
+            TS.QueryConstructor.Field.Add("uid", "");
+            TS.QueryConstructor.Field.Add("name", "");
+            TS.QueryConstructor.Field.Add("code", "");
+
             TS.Select();
 
 

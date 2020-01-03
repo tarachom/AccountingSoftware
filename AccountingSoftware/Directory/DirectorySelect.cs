@@ -10,6 +10,11 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	public abstract class DirectorySelect
 	{
+		public DirectorySelect()
+		{
+			QueryConstructor = new Query();
+		}
+
 		public Kernel kernel { get; set; }
 
 		public Query QueryConstructor { get; set; }

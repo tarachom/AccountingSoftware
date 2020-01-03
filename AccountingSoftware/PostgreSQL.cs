@@ -54,9 +54,13 @@ namespace WebServerTestErlang.AccountingSoftware
 				foreach (KeyValuePair<string, string> field in sender.QueryConstructor.Field)
 				{
 					fields.Add(new KeyValuePair<string, object>(field.Key, reader[field.Key]));
+
+					//Console.WriteLine(field.Key + " = " + reader[field.Key]);
 				}
 
 				elementPointer.Init(new UnigueID(reader["uid"].ToString()), fields);
+
+				listDirectoryPointer.Add(elementPointer);
 			}
 			reader.Close();
 

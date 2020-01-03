@@ -13,11 +13,15 @@ namespace WebServerTestErlang.AccountingSoftware
 			DataBase = new PostgreSQL();
 			DataBase.ConnectionString = "Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;";
 			DataBase.Open();
+
+			Console.WriteLine("Open");
 		}
 
 		~Kernel()
 		{
 			DataBase.Close();
+
+			Console.WriteLine("Close");
 		}
 
 		public IDataBase DataBase { get; set; }

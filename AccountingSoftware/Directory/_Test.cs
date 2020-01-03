@@ -82,7 +82,7 @@ namespace WebServerTestErlang.AccountingSoftware
 
 	class TestSelect : DirectorySelect
 	{
-		public TestSelect()
+		public TestSelect(): base()
 		{
 			
 		}
@@ -94,7 +94,7 @@ namespace WebServerTestErlang.AccountingSoftware
 
 			foreach (DirectoryPointer el in list)
 			{
-				Console.WriteLine(el.UID.UID);
+				//Console.WriteLine(el.UID.UID);
 
 				foreach (KeyValuePair<string, object> field in el.Fields)
 				{
