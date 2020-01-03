@@ -61,6 +61,7 @@
     <Compile Include="AccountingSoftware\Directory\_Test.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
+    <Compile Include="AccountingSoftware\Query.cs" />
     <Compile Include="AccountingSoftware\Register.cs" />
     <Compile Include="AccountingSoftware\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />

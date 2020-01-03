@@ -10,17 +10,23 @@ namespace WebServerTestErlang.AccountingSoftware
 	{
 		void A()
 		{
-			TestPointer TP = new TestPointer();
 
 			TestSelect TS = new TestSelect();
-			TS.Read();
+			TS.Select();
 
-			TestObjest TObj = TS.DirectoryPointers[0].GetDirectoryObject();
+			while (TS.Read())
+			{
+				TS.
+			}
+			
+			
 
-			TestATablePartRecord record = new TestATablePartRecord();
-			record.Desc = "";
+			//TestObjest TObj = TS.DirectoryPointers[0].GetDirectoryObject();
 
-			TObj.ATablePart.RecordCollection.Add(record);
+			//TestATablePartRecord record = new TestATablePartRecord();
+			//record.Desc = "";
+
+			//TObj.ATablePart.RecordCollection.Add(record);
 		}
 	}
 
@@ -55,7 +61,7 @@ namespace WebServerTestErlang.AccountingSoftware
 		public TestATablePart ATablePart { get; }
 	}
 
-	class TestPointer : DirectoryPointer, IDirectoryPointer
+	class TestPointer : DirectoryPointer
 	{
 		public TestObjest GetDirectoryObject()
 		{
@@ -69,6 +75,8 @@ namespace WebServerTestErlang.AccountingSoftware
 
 			return TestObjestItem;
 		}
+
+		
 	}
 
 	class TestSelect : DirectorySelect
@@ -78,43 +86,21 @@ namespace WebServerTestErlang.AccountingSoftware
 			
 		}
 
-		//Вибірка результат
-		public List<KeyValuePair<string, object>> ResultSelect { get; private set; }
-
-	    //Які поля вибирати
-		public Dictionary<string, object> FieldSelect { get; set; }
-
-		//Умови
-		public Dictionary<string, string> FieldWhere { get; set; } //? AND або OR між полями як задавати
-
-		//Сортування
-		public Dictionary<string, SelectOrder> FieldOrder { get; set; }
-
-		//Обмеження вибірки
-		public int Limit { get; set; }
-
+		//Крок 1. Вибірка
 		public void Select()
 		{
-			KeyValuePair<string, object> a = new KeyValuePair<string, object>();
-
+			base.AbstractSelect();
 		}
 
-		public void Read()
+		//Крок 2. Зчитування
+		public bool Read()
 		{
-			//for (int i = 0; i < 10; i++) 
-			//{
-				//TestPointer elementTestPointer = new TestPointer();
-			//elementTestPointer.Init(
+			//Потрібно опрацювати
 
-			//	elementTestPointer.Init(new UnigueID(i.ToString(), "Test"));
-
-			//	DirectoryPointers.Add(elementTestPointer);
-			//}
-
-			//
+			return true;
 		}
 
-		public List<TestPointer> DirectoryPointers { get; }
+		//public List<TestPointer> DirectoryPointers { get; private set; }
 	}
 
 	class TestATablePart : DirectoryTablePart

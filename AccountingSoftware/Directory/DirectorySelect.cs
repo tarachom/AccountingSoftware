@@ -10,15 +10,29 @@ namespace WebServerTestErlang.AccountingSoftware
 	//
 	public abstract class DirectorySelect
 	{
-		//protected void Init(List<IDirectoryPointer> directoryPointers)
-		//{
-		//	foreach (IDirectoryPointer IDirectoryPointerItem in directoryPointers)
-		//	{
-		//		DirectoryPointers.Add(IDirectoryPointerItem);
-		//	}
-		//}
+		//Вибірка результат
+		//protected List<KeyValuePair<string, object>> ResultSelect { get; private set; }
 
-		//public List<IDirectoryPointer> DirectoryPointers { get; }
+		//Які поля вибирати
+		public Dictionary<string, string> FieldSelect { get; set; }
+
+		//Умови
+		public Dictionary<string, string> FieldWhere { get; set; } //? AND або OR між полями як задавати
+
+		//Сортування
+		public Dictionary<string, SelectOrder> FieldOrder { get; set; }
+
+		//Обмеження вибірки
+		public int Limit { get; set; }
+
+		protected void AbstractSelect()
+		{
+			DirectoryPointer test = new DirectoryPointer();
+			
+			AbstractDirectoryPointers.Add(test);
+		}
+
+		protected List<DirectoryPointer> AbstractDirectoryPointers { get; }
 	}
 
 	public enum SelectOrder

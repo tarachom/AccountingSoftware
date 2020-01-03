@@ -8,16 +8,16 @@ namespace WebServerTestErlang.AccountingSoftware
 {
 	//Довідник Вказівник - Ссилка на елемент довідника 
 	//
-	public abstract class DirectoryPointer
+	public class DirectoryPointer
 	{
 		public DirectoryPointer()
 		{
 			
 		}
 
-		public void Init(UnigueID id, List<KeyValuePair<string, object>> fields = null)
+		public void Init(UnigueID uid, List<KeyValuePair<string, object>> fields = null)
 		{
-			UID = id;
+			UID = uid;
 			Fields = fields;
 		}
 
@@ -29,10 +29,12 @@ namespace WebServerTestErlang.AccountingSoftware
 		public List<KeyValuePair<string, object>> Fields { get; private set; }
 	}
 
-	public interface IDirectoryPointer
-	{
-		UnigueID UID { get; }
+	//public interface IDirectoryPointer
+	//{
+	//	UnigueID UID { get; }
 
-		List<KeyValuePair<string, object>> Fields { get; }
-	}
+	//	List<KeyValuePair<string, object>> Fields { get; }
+
+	//	DirectoryPointer NewEmpty();
+	//}
 }
