@@ -28,6 +28,9 @@ using WebServerTestErlang.AccountingSoftware;
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>Objest : DirectoryObject
 {
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>Objest()
     {
          
@@ -48,11 +51,17 @@ class <xsl:value-of select="$DirectoryName"/>Objest : DirectoryObject
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirectoryPointer
 {
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>Pointer()
     {
          
     }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>Objest GetDirectoryObject()
     {
         <xsl:value-of select="$DirectoryName"/>Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>Objest();
@@ -68,16 +77,25 @@ class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirect
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>Select : DirectorySelect
 {
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>Select()
     {
          
     }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public void Read()
     {
          
     }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public List&lt;<xsl:value-of select="$DirectoryName"/>Pointer&gt; DirectoryPointers { get; }
 }
 
@@ -92,18 +110,30 @@ class <xsl:value-of select="$DirectoryName"/>Select : DirectorySelect
 /// &lt;/summary&gt;
 class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
 {
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$TablePartFullName"/>TablePart(<xsl:value-of select="$DirectoryName"/>Objest owner)
     {
          Owner = owner;
     }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>Objest Owner { get; }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public void Read()
     {
          
     }
     
+    /// &lt;summary&gt;
+    ///
+    /// &lt;/summary&gt;
     public List&lt;<xsl:value-of select="$TablePartFullName"/>TablePartRecord&gt; RecordCollection { get; }
 }
 

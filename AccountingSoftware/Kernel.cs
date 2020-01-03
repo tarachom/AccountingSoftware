@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebServerTestErlang.AccountingSoftware
 {
-	class Kernel
+	public class Kernel
 	{
 
 	}

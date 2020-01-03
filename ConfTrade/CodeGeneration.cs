@@ -23,6 +23,9 @@ using WebServerTestErlang.AccountingSoftware;
 /// </summary>
 class TovaryObjest : DirectoryObject
 {
+    /// <summary>
+    ///
+    /// </summary>
     public TovaryObjest()
     {
          
@@ -63,11 +66,17 @@ class TovaryObjest : DirectoryObject
 /// </summary>
 class TovaryPointer : DirectoryPointer, IDirectoryPointer
 {
+    /// <summary>
+    ///
+    /// </summary>
     public TovaryPointer()
     {
          
     }
     
+    /// <summary>
+    ///
+    /// </summary>
     public TovaryObjest GetDirectoryObject()
     {
         TovaryObjest TovaryObjestItem = new TovaryObjest();
@@ -83,16 +92,25 @@ class TovaryPointer : DirectoryPointer, IDirectoryPointer
 /// </summary>
 class TovarySelect : DirectorySelect
 {
+    /// <summary>
+    ///
+    /// </summary>
     public TovarySelect()
     {
          
     }
     
+    /// <summary>
+    ///
+    /// </summary>
     public void Read()
     {
          
     }
     
+    /// <summary>
+    ///
+    /// </summary>
     public List<TovaryPointer> DirectoryPointers { get; }
 }
 
@@ -105,18 +123,30 @@ class TovarySelect : DirectorySelect
 /// </summary>
 class TovaryCenyTablePart : DirectoryTablePart
 {
+    /// <summary>
+    ///
+    /// </summary>
     public TovaryCenyTablePart(TovaryObjest owner)
     {
          Owner = owner;
     }
     
+    /// <summary>
+    ///
+    /// </summary>
     public TovaryObjest Owner { get; }
     
+    /// <summary>
+    ///
+    /// </summary>
     public void Read()
     {
          
     }
     
+    /// <summary>
+    ///
+    /// </summary>
     public List<TovaryCenyTablePartRecord> RecordCollection { get; }
 }
 

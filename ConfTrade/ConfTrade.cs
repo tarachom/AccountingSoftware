@@ -18,11 +18,11 @@ namespace ConfTrade
     {
         static void Main(string[] args)
         {
-            //Generation();
+            Generation();
 
-            TestPostgres();
+            //TestPostgres();
 
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
         static void TestPostgres()
@@ -94,6 +94,14 @@ namespace ConfTrade
             }
         }
 
-        
+        public void TestGenericGonf()
+        {
+            //Directory.TovarySelect tSelect = new Directory.TovarySelect();
+            //tSelect.Read();
+            //int c = tSelect.DirectoryPointers.Count;
+
+            //Directory.TovaryObjest tObject = tSelect.DirectoryPointers[0].GetDirectoryObject();
+            //string code = tObject.Code;
+        }
     }
 }
