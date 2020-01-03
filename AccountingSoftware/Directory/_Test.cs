@@ -78,15 +78,38 @@ namespace WebServerTestErlang.AccountingSoftware
 			
 		}
 
+		//Вибірка результат
+		public List<KeyValuePair<string, object>> ResultSelect { get; private set; }
+
+	    //Які поля вибирати
+		public Dictionary<string, object> FieldSelect { get; set; }
+
+		//Умови
+		public Dictionary<string, string> FieldWhere { get; set; } //? AND або OR між полями як задавати
+
+		//Сортування
+		public Dictionary<string, SelectOrder> FieldOrder { get; set; }
+
+		//Обмеження вибірки
+		public int Limit { get; set; }
+
+		public void Select()
+		{
+			KeyValuePair<string, object> a = new KeyValuePair<string, object>();
+
+		}
+
 		public void Read()
 		{
-			for (int i = 0; i < 10; i++) 
-			{
-				TestPointer elementTestPointer = new TestPointer();
-				elementTestPointer.Init(new UnigueID(i.ToString(), "Test"));
+			//for (int i = 0; i < 10; i++) 
+			//{
+			//	TestPointer elementTestPointer = new TestPointer();
+			//	elementTestPointer.Init(new UnigueID(i.ToString(), "Test"));
 
-				DirectoryPointers.Add(elementTestPointer);
-			}
+			//	DirectoryPointers.Add(elementTestPointer);
+			//}
+
+			//
 		}
 
 		public List<TestPointer> DirectoryPointers { get; }

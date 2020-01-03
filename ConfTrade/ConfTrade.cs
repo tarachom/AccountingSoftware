@@ -45,7 +45,9 @@ namespace ConfTrade
 
                 Console.WriteLine(nCommand.ExecuteNonQuery());                
             }
+
             
+
 
             NpgsqlCommand nCommand2 = new NpgsqlCommand("SELECT * FROM public.tovary", nCon);
 

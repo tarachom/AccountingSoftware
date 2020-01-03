@@ -21,5 +21,9 @@ namespace WebServerTestErlang.AccountingSoftware
 		//public List<IDirectoryPointer> DirectoryPointers { get; }
 	}
 
-	
+	public enum SelectOrder
+	{
+		ASC,
+		DESC
+	}
 }
