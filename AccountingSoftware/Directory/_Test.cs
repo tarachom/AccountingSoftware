@@ -103,7 +103,9 @@ namespace WebServerTestErlang.AccountingSoftware
 		{
 			//for (int i = 0; i < 10; i++) 
 			//{
-			//	TestPointer elementTestPointer = new TestPointer();
+				//TestPointer elementTestPointer = new TestPointer();
+			//elementTestPointer.Init(
+
 			//	elementTestPointer.Init(new UnigueID(i.ToString(), "Test"));
 
 			//	DirectoryPointers.Add(elementTestPointer);

@@ -15,17 +15,24 @@ namespace WebServerTestErlang.AccountingSoftware
 			
 		}
 
-		public void Init(UnigueID id)
+		public void Init(UnigueID id, List<KeyValuePair<string, object>> fields = null)
 		{
 			UID = id;
+			Fields = fields;
 		}
 
 		public UnigueID UID { get; private set; }
 
+		/// <summary>
+		/// Список додаткових полів та їх значень
+		/// </summary>
+		public List<KeyValuePair<string, object>> Fields { get; private set; }
 	}
 
 	public interface IDirectoryPointer
 	{
 		UnigueID UID { get; }
+
+		List<KeyValuePair<string, object>> Fields { get; }
 	}
 }
