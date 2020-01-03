@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Npgsql">
+      <HintPath>C:\Program Files\PostgreSQL\Npgsql\bin\net451\Npgsql.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,6 +59,8 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
     <Compile Include="AccountingSoftware\Directory\_Test.cs" />
+    <Compile Include="AccountingSoftware\IDataBase.cs" />
+    <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Register.cs" />
     <Compile Include="AccountingSoftware\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
