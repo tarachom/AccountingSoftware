@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfTrade", "ConfTrade\Conf
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{77A40904-3953-4734-8130-C170BFB69EBB}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\Admin\Documents\sql = C:\Users\Admin\Documents\sql
+		C:\Users\Admin\Documents\2.sql = C:\Users\Admin\Documents\2.sql
 	EndProjectSection
 EndProject
 Global
