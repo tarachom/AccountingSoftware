@@ -11,7 +11,7 @@ namespace WebServerTestErlang.AccountingSoftware
 		public Query()
 		{
 			Field = new Dictionary<string, string>();
-			Where = new List<Tuple<string, Comparison, string, Comparison>>();
+			Where = new List<Where>();
 			Order = new Dictionary<string, SelectOrder>();
 		}
 
@@ -34,7 +34,7 @@ namespace WebServerTestErlang.AccountingSoftware
 		/// 4. Тип порівняння з наступним блоком (по замовчуванню AND)
 		/// Example: Name EQ "Test" AND (Name = "Test" AND ... )
 		/// </summary>
-		public List<Tuple<string, Comparison, string, Comparison>> Where { get; set; }
+		public List<Where> Where { get; set; }
 
 		/// <summary>
 		/// Сортування. 
@@ -53,7 +53,7 @@ namespace WebServerTestErlang.AccountingSoftware
 			StringBuilder sb = new StringBuilder();
 			sb.Append("SELECT ");
 
-			if (Field != null && Field.Count > 0)
+			if (Field.Count > 0)
 			{
 				int count = 0;
 
@@ -75,7 +75,7 @@ namespace WebServerTestErlang.AccountingSoftware
 			sb.AppendLine("");
 			sb.Append("FROM " + Table + " ");
 
-			if (Where != null && Where.Count > 0)
+			if (Where.Count > 0)
 			{
 				int count = 0;
 				int lenght = Where.Count;
@@ -83,30 +83,32 @@ namespace WebServerTestErlang.AccountingSoftware
 				sb.AppendLine("");
 				sb.Append("WHERE ");
 
-				foreach (Tuple<string, Comparison, string, Comparison> field in Where)
+				foreach (Where field in Where)
 				{
 					count++;
 
-					sb.Append(field.Item1);
+					sb.Append(field.Name);
 
-					switch (field.Item2)
+					switch (field.Comparison)
 					{
 						case Comparison.EQ:
-							sb.Append(" = ");
+							sb.Append(" = @" + field.Name + " ");
+							break;
+
+						case Comparison.IN:
+							sb.Append(" IN (@" + field.Name + ") ");
 							break;
 
 						default:
-							sb.Append(" " + field.Item2 + " ");
+							sb.Append(" " + field.Comparison + "  @" + field.Name + " ");
 							break;
 					}
 
-					sb.Append(field.Item3 + " ");
-
 					if (count < lenght)
 					{
-						if (field.Item4 != Comparison.Empty)
+						if (field.ComparisonNext != Comparison.Empty)
 						{
-							sb.Append(field.Item4 + " ");
+							sb.Append(field.ComparisonNext + " ");
 						}
 						else
 							sb.Append(Comparison.AND + " ");
@@ -114,7 +116,7 @@ namespace WebServerTestErlang.AccountingSoftware
 				}
 			}
 
-			if (Order != null && Order.Count > 0)
+			if (Order.Count > 0)
 			{
 				int count = 0;
 
@@ -142,11 +144,32 @@ namespace WebServerTestErlang.AccountingSoftware
 		}
 	}
 
+	//Tuple<string, Comparison, string, Comparison>
+	public class Where
+	{
+		public Where(string name, Comparison comparison, object value, Comparison comparisonNext = Comparison.Empty)
+		{
+			Name = name;
+			Comparison = comparison;
+			Value = value;
+			ComparisonNext = comparisonNext;
+		}
+
+		public string Name { get; set; }
+
+		public object Value { get; set; }
+
+		public Comparison Comparison { get; set; }
+
+		public Comparison ComparisonNext { get; set; }
+	}
+
 	public enum Comparison
 	{
 		AND,
 		OR,
 		NOT,
+		IN,
 		EQ, //=
 		Empty
 	}

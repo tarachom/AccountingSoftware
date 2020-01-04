@@ -12,12 +12,12 @@ namespace WebServerTestErlang.AccountingSoftware
 	{
 		public DirectorySelect()
 		{
-			QueryConstructor = new Query();
+			QuerySelect = new Query();
 		}
 
 		public Kernel kernel { get; set; }
 
-		public Query QueryConstructor { get; set; }
+		public Query QuerySelect { get; set; }
 
 		protected List<DirectoryPointer> AbstractSelect()
 		{

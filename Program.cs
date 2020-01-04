@@ -36,11 +36,16 @@ namespace WebServer
             
             TestSelect TS = new TestSelect();
             TS.kernel = kernel;
-            TS.QueryConstructor.Table = "public.tovary";
+            TS.QuerySelect.Table = "public.tovary";
 
-            TS.QueryConstructor.Field.Add("uid", "");
-            TS.QueryConstructor.Field.Add("name", "");
-            TS.QueryConstructor.Field.Add("code", "");
+            TS.QuerySelect.Field.Add("uid", "");
+            TS.QuerySelect.Field.Add("name", "");
+            TS.QuerySelect.Field.Add("code", "");
+
+            TS.QuerySelect.Where.Add(new Where("code", Comparison.IN, "001", Comparison.AND));
+            TS.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "Test"));
+
+            Console.WriteLine(TS.QuerySelect.Construct());
 
             TS.Select();
 

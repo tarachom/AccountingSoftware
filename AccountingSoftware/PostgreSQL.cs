@@ -39,9 +39,15 @@ namespace WebServerTestErlang.AccountingSoftware
 		{
 			List<DirectoryPointer> listDirectoryPointer = new List<DirectoryPointer>();
 
-			string query = sender.QueryConstructor.Construct();
+			string query = sender.QuerySelect.Construct();
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (sender.QuerySelect.Where.Count > 0)
+			{
+				foreach (Where field in sender.QuerySelect.Where)
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+			}
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
@@ -50,7 +56,7 @@ namespace WebServerTestErlang.AccountingSoftware
 
 				List<FieldValue> fields = new List<FieldValue>();
 
-				foreach (KeyValuePair<string, string> field in sender.QueryConstructor.Field)
+				foreach (KeyValuePair<string, string> field in sender.QuerySelect.Field)
 				{
 					fields.Add(new FieldValue(field.Key, reader[field.Key]));
 				}
