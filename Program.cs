@@ -42,8 +42,8 @@ namespace WebServer
             TS.QuerySelect.Field.Add("name", "");
             TS.QuerySelect.Field.Add("code", "");
 
-            TS.QuerySelect.Where.Add(new Where("code", Comparison.IN, "001", Comparison.AND));
-            TS.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "Test"));
+            //TS.QuerySelect.Where.Add(new Where("code", Comparison.IN, "001", Comparison.OR));
+            //TS.QuerySelect.Where.Add(new Where("name", Comparison.IN, "Name 0, Name 1"));
 
             Console.WriteLine(TS.QuerySelect.Construct());
 

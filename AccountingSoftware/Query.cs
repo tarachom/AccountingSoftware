@@ -169,8 +169,30 @@ namespace WebServerTestErlang.AccountingSoftware
 		AND,
 		OR,
 		NOT,
+
+		/// <summary>
+		/// В списку
+		/// </summary>
 		IN,
-		EQ, //=
+
+		/// <summary>
+		/// =
+		/// </summary>
+		EQ, 
+
+		/// <summary>
+		/// &lt;
+		/// </summary>
+		LT,
+
+		/// <summary>
+		/// >
+		/// </summary>
+		QT,
+
+		/// <summary>
+		/// Пустий
+		/// </summary>
 		Empty
 	}
 
