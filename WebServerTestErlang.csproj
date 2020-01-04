@@ -63,8 +63,8 @@
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Query.cs" />
-    <Compile Include="AccountingSoftware\Register.cs" />
-    <Compile Include="AccountingSoftware\Document.cs" />
+    <Compile Include="AccountingSoftware\Register\Register.cs" />
+    <Compile Include="AccountingSoftware\Document\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
     <Compile Include="AccountingSoftware\UnigueID.cs" />
     <Compile Include="Program.cs" />
