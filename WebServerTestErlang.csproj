@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="sql" />
     <Content Include="AccountingSoftware\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
