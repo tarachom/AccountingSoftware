@@ -14,6 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurator", "Configurato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfTrade", "ConfTrade\ConfTrade.csproj", "{81A2BE3C-2E0F-496A-BB5E-BCAF5639C798}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{77A40904-3953-4734-8130-C170BFB69EBB}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\Admin\Documents\sql = C:\Users\Admin\Documents\sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +40,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{77A40904-3953-4734-8130-C170BFB69EBB} = {2F95C15E-EAC3-47B8-8D64-3CF3E7A33B5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EB7953A0-3B1F-4D38-8507-D8897C12D44F}
