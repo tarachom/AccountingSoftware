@@ -48,14 +48,11 @@ namespace WebServerTestErlang.AccountingSoftware
 			{
 				DirectoryPointer elementPointer = new DirectoryPointer();
 
-				List<KeyValuePair<string, object>> fields = new List<KeyValuePair<string, object>>();
+				List<FieldValue> fields = new List<FieldValue>();
 
-				//Console.WriteLine(reader["uid"]);
 				foreach (KeyValuePair<string, string> field in sender.QueryConstructor.Field)
 				{
-					fields.Add(new KeyValuePair<string, object>(field.Key, reader[field.Key]));
-
-					//Console.WriteLine(field.Key + " = " + reader[field.Key]);
+					fields.Add(new FieldValue(field.Key, reader[field.Key]));
 				}
 
 				elementPointer.Init(new UnigueID(reader["uid"].ToString()), fields);

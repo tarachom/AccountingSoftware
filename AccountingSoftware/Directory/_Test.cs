@@ -96,9 +96,9 @@ namespace WebServerTestErlang.AccountingSoftware
 			{
 				//Console.WriteLine(el.UID.UID);
 
-				foreach (KeyValuePair<string, object> field in el.Fields)
+				foreach (FieldValue field in el.Fields)
 				{
-					Console.WriteLine(field.Key + "=" + field.Value);
+					Console.WriteLine(field.Name + "=" + field.Value);
 				}
 			}
 		}

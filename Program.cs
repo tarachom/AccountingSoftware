@@ -44,8 +44,6 @@ namespace WebServer
 
             TS.Select();
 
-
-
             kernel = null;
 
             //Thread threadListener = new Thread(new ThreadStart(GeneralWorker));

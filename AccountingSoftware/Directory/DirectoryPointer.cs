@@ -15,7 +15,7 @@ namespace WebServerTestErlang.AccountingSoftware
 			
 		}
 
-		public void Init(UnigueID uid, List<KeyValuePair<string, object>> fields = null)
+		public void Init(UnigueID uid, List<FieldValue> fields = null)
 		{
 			UID = uid;
 			Fields = fields;
@@ -26,15 +26,6 @@ namespace WebServerTestErlang.AccountingSoftware
 		/// <summary>
 		/// Список додаткових полів та їх значень
 		/// </summary>
-		public List<KeyValuePair<string, object>> Fields { get; private set; }
+		public List<FieldValue> Fields { get; private set; }
 	}
-
-	//public interface IDirectoryPointer
-	//{
-	//	UnigueID UID { get; }
-
-	//	List<KeyValuePair<string, object>> Fields { get; }
-
-	//	DirectoryPointer NewEmpty();
-	//}
 }
