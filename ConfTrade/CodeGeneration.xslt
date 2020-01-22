@@ -15,7 +15,7 @@
 using System;
 using System.Collections.Generic;
 
-using WebServerTestErlang.AccountingSoftware;
+using AccountingSoftware;
 
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>

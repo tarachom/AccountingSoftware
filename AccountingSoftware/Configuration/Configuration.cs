@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebServerTestErlang.AccountingSoftware
+namespace AccountingSoftware
 {
 	//Конфігурація
 	//В цьому класі має міститися вся інформація про конфігурацію

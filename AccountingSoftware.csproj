@@ -72,18 +72,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Erlang\helloworld.beam" />
-    <None Include="Erlang\helloworld.erl" />
-    <None Include="Erlang\httpnet.beam" />
-    <None Include="Erlang\httpnet.erl" />
-    <None Include="Erlang\old\httpnet – копія.erl" />
-    <None Include="Erlang\old\scripts – копія.erl" />
-    <None Include="Erlang\scripts.beam" />
-    <None Include="Erlang\scripts.erl" />
-    <None Include="Erlang\tcp\client.beam" />
-    <None Include="Erlang\tcp\client.erl" />
-    <None Include="Erlang\tcp\server.beam" />
-    <None Include="Erlang\tcp\server.erl" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

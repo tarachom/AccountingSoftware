@@ -7,7 +7,7 @@ using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
-using WebServerTestErlang.AccountingSoftware;
+using AccountingSoftware;
 using Npgsql;
 
 //Конфігурація Торгівля

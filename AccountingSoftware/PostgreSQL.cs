@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Npgsql;
 
-namespace WebServerTestErlang.AccountingSoftware
+namespace AccountingSoftware
 {
 	public class PostgreSQL: IDataBase
 	{

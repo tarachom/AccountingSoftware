@@ -7,7 +7,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 
-using WebServerTestErlang.AccountingSoftware;
+using AccountingSoftware;
 
 namespace WebServer
 {

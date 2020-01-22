@@ -53,16 +53,18 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CodeGeneration.xslt" />
+    <Content Include="CodeGeneration.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Configuration.xml" />
     <Content Include="Old\Fields.xml" />
     <Content Include="Old\Fields.xslt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebServerTestErlang.csproj">
+    <ProjectReference Include="..\AccountingSoftware.csproj">
       <Project>{13640253-d4b3-45b9-b4e6-b87bc5785d26}</Project>
-      <Name>WebServerTestErlang</Name>
+      <Name>AccountingSoftware</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
