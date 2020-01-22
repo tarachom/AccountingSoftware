@@ -41,15 +41,6 @@ namespace ConfTrade
             Console.ReadLine();
         }
 
-        static void TestFields()
-        {
-            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-            xsltCodeGnerator.Load(@"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.xslt");
-
-            xsltCodeGnerator.Transform(@"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.xml",
-                @"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.cs");
-        }
-
         static void TestPostgres()
         {
             NpgsqlConnection nCon = new NpgsqlConnection("Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;");

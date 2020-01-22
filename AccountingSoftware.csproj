@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{13640253-D4B3-45B9-B4E6-B87BC5785D26}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WebServerTestErlang</RootNamespace>
-    <AssemblyName>WebServerTestErlang</AssemblyName>
+    <RootNamespace>AccountingSoftware</RootNamespace>
+    <AssemblyName>AccountingSoftware</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
