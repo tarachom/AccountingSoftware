@@ -22,7 +22,5 @@ namespace WebServerTestErlang.AccountingSoftware
 		{
 			UID = uid;
 		}
-
-		
 	}
 }

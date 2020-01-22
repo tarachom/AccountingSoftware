@@ -8,7 +8,6 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 
 using WebServerTestErlang.AccountingSoftware;
-
 using Npgsql;
 
 //Конфігурація Торгівля
@@ -18,28 +17,37 @@ namespace ConfTrade
     {
         static void Main(string[] args)
         {
-            Query q = new Query();
+            //Query q = new Query();
 
-            q.Table = "public.tovary";
+            //q.Table = "public.tovary";
 
-            q.Field.Add("Name", "");
-            q.Field.Add("Desc", "");
-            q.Field.Add("Code", "");
+            //q.Field.Add("Name", "");
+            //q.Field.Add("Desc", "");
+            //q.Field.Add("Code", "");
 
-            q.Where.Add(new Where("Name", Comparison.EQ, "Test", Comparison.AND));
-            q.Where.Add(new Where("Code", Comparison.EQ, "50", Comparison.Empty));
+            //q.Where.Add(new Where("Name", Comparison.EQ, "Test", Comparison.AND));
+            //q.Where.Add(new Where("Code", Comparison.EQ, "50", Comparison.Empty));
 
-            q.Order.Add("Name", SelectOrder.ASC);
+            //q.Order.Add("Name", SelectOrder.ASC);
 
-            q.Limit = 10;
+            //q.Limit = 10;
 
-            Console.WriteLine(q.Construct());
+            //Console.WriteLine(q.Construct());
 
             //Generation();
 
             //TestPostgres();
 
             Console.ReadLine();
+        }
+
+        static void TestFields()
+        {
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(@"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.xslt");
+
+            xsltCodeGnerator.Transform(@"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.xml",
+                @"D:\VS\Project\WebServerTestErlang\ConfTrade\Fields.cs");
         }
 
         static void TestPostgres()
@@ -91,8 +99,6 @@ namespace ConfTrade
 
         public void Load(string path)
         {
-            
-
             Configuration Conf = new Configuration();
             
             XPathDocument xpDoc = new XPathDocument(PathConf);

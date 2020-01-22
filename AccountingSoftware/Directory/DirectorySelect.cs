@@ -23,9 +23,5 @@ namespace WebServerTestErlang.AccountingSoftware
 		{
 			return kernel.DataBase.SelectDirectory(this);
 		}
-
-		//protected List<DirectoryPointer> AbstractDirectoryPointers { get; }
 	}
-
-	
 }

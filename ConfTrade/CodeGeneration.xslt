@@ -5,13 +5,12 @@
   <xsl:template match="/">
 
 /*
-* 
-* Автоматично згенерований код.
-*
-* Конфігурації "<xsl:value-of select="Configuration/Name"/>"
-* Автор <xsl:value-of select="Configuration/Autor"/>
-* 
-*/
+ * Автоматично згенерований код.
+ *
+ * Конфігурації "<xsl:value-of select="Configuration/Name"/>"
+ * Автор <xsl:value-of select="Configuration/Autor"/>
+ *
+ */
 
 using System;
 using System.Collections.Generic;

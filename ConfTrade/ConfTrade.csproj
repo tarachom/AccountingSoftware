@@ -49,11 +49,14 @@
   <ItemGroup>
     <Compile Include="CodeGeneration.cs" />
     <Compile Include="ConfTrade.cs" />
+    <Compile Include="Old\Fields.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeGeneration.xslt" />
     <Content Include="Configuration.xml" />
+    <Content Include="Old\Fields.xml" />
+    <Content Include="Old\Fields.xslt" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
