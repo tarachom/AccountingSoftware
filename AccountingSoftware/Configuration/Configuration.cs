@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Xml;
 using System.Xml.XPath;
 
 namespace AccountingSoftware
@@ -38,6 +39,11 @@ namespace AccountingSoftware
             XPathDocument xPathDoc = new XPathDocument(pathToConf);
             XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
+            LoadDirectories(Conf, xPathDocNavigator);
+        }
+
+        private static void LoadDirectories(Configuration Conf, XPathNavigator xPathDocNavigator)
+        {
             //Довідники
             XPathNodeIterator directoryNodes = xPathDocNavigator.Select("/Configuration/Directories/Directory");
             while (directoryNodes.MoveNext())
@@ -50,10 +56,13 @@ namespace AccountingSoftware
                 Conf.Directories.Add(nameNodeValue, ConfObjectDirectories);
 
                 LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current);
+
+                LoadTabularParts(ConfObjectDirectories.TabularParts, directoryNodes.Current);
             }
         }
 
-        private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields, XPathNavigator xPathDocNavigator)
+        private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields, 
+            XPathNavigator xPathDocNavigator)
         {
             XPathNodeIterator fieldNodes = xPathDocNavigator.Select("Fields/Field");
             while (fieldNodes.MoveNext())
@@ -67,6 +76,51 @@ namespace AccountingSoftware
 
                 fields.Add(nameNodeValue, ConfObjectField);
             }
+        }
+
+        private static void LoadTabularParts(Dictionary<string, ConfigurationObjectTablePart> tabularParts, 
+            XPathNavigator xPathDocNavigator)
+        {
+            XPathNodeIterator tablePartNodes = xPathDocNavigator.Select("TabularParts/TablePart");
+            while (tablePartNodes.MoveNext())
+            {
+                string nameNodeValue = tablePartNodes.Current.SelectSingleNode("Name").Value;
+
+                ConfigurationObjectTablePart ConfObjectTablePart = new ConfigurationObjectTablePart();
+                ConfObjectTablePart.Name = nameNodeValue;
+
+                tabularParts.Add(nameNodeValue, ConfObjectTablePart);
+
+                LoadFields(ConfObjectTablePart.Fields, tablePartNodes.Current);
+            }
+        }
+
+        public static void Save(string pathToConf, Configuration Conf)
+        {
+            XmlDocument xmlConfDocument = new XmlDocument();
+            xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));            
+
+            XmlElement rootConfiguration = xmlConfDocument.CreateElement("Configuration");
+            xmlConfDocument.AppendChild(rootConfiguration);
+
+            XmlElement rootDirectories = xmlConfDocument.CreateElement("Directories");
+            rootConfiguration.AppendChild(rootDirectories);
+
+            foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
+            {
+                XmlElement nodeDirectory = xmlConfDocument.CreateElement("Directory");
+                rootDirectories.AppendChild(nodeDirectory);
+
+                XmlElement nodeDirectoryName = xmlConfDocument.CreateElement("Name");
+                nodeDirectoryName.InnerText = ConfDirectory.Key;
+                nodeDirectory.AppendChild(nodeDirectoryName);
+
+                XmlElement nodeDirectoryDesc = xmlConfDocument.CreateElement("Desc");
+                nodeDirectoryDesc.InnerText = "";
+                nodeDirectory.AppendChild(nodeDirectoryDesc);
+            }
+
+            xmlConfDocument.Save(pathToConf);
         }
     }
 }

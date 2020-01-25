@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Directories>
+    <Directory>
+      <Name>Tovary</Name>
+      <Desc>
+      </Desc>
+    </Directory>
+    <Directory>
+      <Name>TovaryInfo</Name>
+      <Desc>
+      </Desc>
+    </Directory>
+  </Directories>
+</Configuration>

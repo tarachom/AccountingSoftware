@@ -24,30 +24,60 @@ namespace Configurator
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
+			
+
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
-		
+			rootNode.ImageIndex = 1;
+
 			string pathToConf = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
+			string pathToConfSave = @"D:\VS\Project\AccountingSoftware\ConfTrade\ConfigurationNew.xml";
 
 			Conf = new Configuration();
 
 			Configuration.Load(pathToConf, Conf);
 
 			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
-			
-			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectori in Conf.Directories)
-			{
-				TreeNode directoriNode = directoriesNode.Nodes.Add(ConfDirectori.Key, ConfDirectori.Value.Name);
+			directoriesNode.ImageIndex = 1;
 
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectori.Value.Fields) 
+			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
+			{
+				TreeNode directoryNode = directoriesNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
+				directoryNode.ImageIndex = 1;
+				
+				//Поля
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields) 
 				{
-					directoriNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name);
+					directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name).ImageIndex = 1;
 				}
+
+				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
+				directoriTabularPartsNode.ImageIndex = 1;
+
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts) 
+				{
+					TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+					directoriTablePartNode.ImageIndex = 1;
+
+					//Поля
+					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+					{
+						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name).ImageIndex = 1;
+					}
+				}
+
+				directoriNode.Expand();
 			}
 
 			rootNode.Expand();
 			directoriesNode.Expand();
+
+			//Save
+			Configuration.Save(pathToConfSave, Conf);
 		}
 
-        
-    }
+		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			MessageBox.Show(e.Node.Name);
+		}
+	}
 }
