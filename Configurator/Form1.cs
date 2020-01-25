@@ -65,7 +65,7 @@ namespace Configurator
 					}
 				}
 
-				directoriNode.Expand();
+				directoryNode.Expand();
 			}
 
 			rootNode.Expand();

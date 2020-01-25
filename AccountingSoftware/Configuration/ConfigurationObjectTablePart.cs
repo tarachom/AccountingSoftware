@@ -17,6 +17,8 @@ namespace AccountingSoftware
 
 		public string Name { get; set; }
 
+		public string Desc { get; set; }
+
 		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
 	}
 }
