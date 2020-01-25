@@ -34,7 +34,7 @@ namespace Configurator
 
 			Conf = new Configuration();
 
-			Configuration.Load(pathToConf, Conf);
+			Configuration.Load(pathToConfSave, Conf);
 
 			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
 			directoriesNode.ImageIndex = 1;
@@ -70,6 +70,29 @@ namespace Configurator
 
 			rootNode.Expand();
 			directoriesNode.Expand();
+
+			/*
+			ConfigurationDirectories TmcDirectory = new ConfigurationDirectories();
+			TmcDirectory.Name = "TMC3";
+			TmcDirectory.Desc = "TMC 2";
+
+			ConfigurationObjectField TmcDirectoryField1 = new ConfigurationObjectField();
+			TmcDirectoryField1.Name = "Code";
+			TmcDirectoryField1.Type = "string";
+			TmcDirectoryField1.Desc = "Code";
+
+			ConfigurationObjectField TmcDirectoryField2 = new ConfigurationObjectField();
+			TmcDirectoryField2.Name = "Name";
+			TmcDirectoryField2.Type = "string";
+			TmcDirectoryField2.Desc = "Name";
+
+			TmcDirectory.Fields.Add(TmcDirectoryField1.Name, TmcDirectoryField1);
+			TmcDirectory.Fields.Add(TmcDirectoryField2.Name, TmcDirectoryField2);
+			*/
+
+			Conf.AppendDirectory(new ConfigurationDirectories("TMC5", "Desc"));
+			
+			Conf.Directories["TMC5"].AppendField(new ConfigurationObjectField("Name", "Desc", "string"));
 
 			//Save
 			Configuration.Save(pathToConfSave, Conf);

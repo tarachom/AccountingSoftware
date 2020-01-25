@@ -36,6 +36,11 @@ namespace AccountingSoftware
 
         public Dictionary<string, ConfigurationRegisters> Registers { get; set; }
 
+        public void AppendDirectory(ConfigurationDirectories Directory)
+        {
+            Directories.Add(Directory.Name, Directory);
+        }
+
         public static void Load(string pathToConf, Configuration Conf)
         {
             XPathDocument xPathDoc = new XPathDocument(pathToConf);
@@ -78,8 +83,7 @@ namespace AccountingSoftware
             }
         }
 
-        private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields,
-            XPathNavigator xPathDocNavigator)
+        private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields, XPathNavigator xPathDocNavigator)
         {
             XPathNodeIterator fieldNodes = xPathDocNavigator.Select("Fields/Field");
             while (fieldNodes.MoveNext())
@@ -97,8 +101,7 @@ namespace AccountingSoftware
             }
         }
 
-        private static void LoadTabularParts(Dictionary<string, ConfigurationObjectTablePart> tabularParts,
-            XPathNavigator xPathDocNavigator)
+        private static void LoadTabularParts(Dictionary<string, ConfigurationObjectTablePart> tabularParts, XPathNavigator xPathDocNavigator)
         {
             XPathNodeIterator tablePartNodes = xPathDocNavigator.Select("TabularParts/TablePart");
             while (tablePartNodes.MoveNext())
@@ -202,13 +205,13 @@ namespace AccountingSoftware
 
                 XmlElement nodeTablePartName = xmlConfDocument.CreateElement("Name");
                 nodeTablePartName.InnerText = tablePart.Key;
-                nodeTabularParts.AppendChild(nodeTablePartName);
+                nodeTablePart.AppendChild(nodeTablePartName);
 
                 XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
                 nodeTablePartDesc.InnerText = tablePart.Value.Desc;
-                nodeTabularParts.AppendChild(nodeTablePartDesc);
+                nodeTablePart.AppendChild(nodeTablePartDesc);
 
-                SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTabularParts);
+                SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTablePart);
             }
         }
     }

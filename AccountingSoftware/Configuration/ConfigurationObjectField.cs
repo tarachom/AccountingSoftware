@@ -10,6 +10,18 @@ namespace AccountingSoftware
 	//
 	public class ConfigurationObjectField
 	{
+		public ConfigurationObjectField()
+		{
+
+		}
+
+		public ConfigurationObjectField(string name, string desc, string type)
+		{
+			Name = name;
+			Desc = desc;
+			Type = type;
+		}
+
 		public string Name { get; set; }
 
 		public string Desc { get; set; }
