@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace AccountingSoftware
 {
-	public abstract class ConfigurationObject 
+	public class ConfigurationEnums : ConfigurationObject
 	{
-		public string Name { get; set; }
+		public ConfigurationEnums()
+		{
+
+		}
 	}
 }

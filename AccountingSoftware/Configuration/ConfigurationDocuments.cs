@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace AccountingSoftware
 {
-	//
-	//
-	public class ConfigurationObjectTablePart
+	public class ConfigurationDocuments : ConfigurationObject
 	{
-		public ConfigurationObjectTablePart()
+		public ConfigurationDocuments()
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
+			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
-		public string Name { get; set; }
-
 		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+
+		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
 	}
 }

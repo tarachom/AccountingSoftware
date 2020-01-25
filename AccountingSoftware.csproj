@@ -46,12 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectType.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationRegisters.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationEnums.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationDocuments.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationDirectories.cs" />
+    <Compile Include="AccountingSoftware\Configuration\Old\ConfigurationObjectType.cs" />
     <Compile Include="AccountingSoftware\Configuration\Configuration.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectTablePart.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
-    <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectValue.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePart.cs" />

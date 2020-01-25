@@ -101,12 +101,12 @@ namespace ConfTrade
             {
                 XPathNavigator nameNode = nodesDirectory.Current.SelectSingleNode("Name");
 
-                ConfigurationObject ConfObject = new ConfigurationObject();
-                ConfObject.ConfObjectType = ConfigurationObjectType.Directory;
+                //ConfigurationObject ConfObject = new ConfigurationObject();
+                //ConfObject.ConfObjectType = ConfigurationObjectType.Directory;
                 //ConfObject.Fields.Add(
 
 
-                Conf.Directories.Add(nameNode.Value, ConfObject);
+                //Conf.Directories.Add(nameNode.Value, ConfObject);
             }
         }
 

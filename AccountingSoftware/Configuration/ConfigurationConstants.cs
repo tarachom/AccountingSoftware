@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace AccountingSoftware
 {
-	public abstract class ConfigurationObject 
+	public class ConfigurationConstants : ConfigurationObject
 	{
-		public string Name { get; set; }
+		public ConfigurationObjectDefaultValue DefaultValue { get; set; }
 	}
 }

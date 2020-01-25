@@ -8,7 +8,7 @@ namespace AccountingSoftware
 {
 	//Наперед задані значення
 	//Це може бути або константа, або елементи довідника
-	public class ConfigurationObjectValue
+	public class ConfigurationObjectDefaultValue
 	{
 
 	}
