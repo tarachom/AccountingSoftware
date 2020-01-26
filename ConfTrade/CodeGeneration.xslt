@@ -26,18 +26,8 @@ using AccountingSoftware;
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
 {
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>_Objest()
-    {
-         
-    }
-    
+    public <xsl:value-of select="$DirectoryName"/>_Objest() { }    
     <xsl:for-each select="Fields/Field">
-    /// &lt;summary&gt;
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
     public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
     </xsl:for-each>
 }
@@ -49,17 +39,8 @@ class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
 {
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>_Pointer()
-    {
-         
-    }
+    public <xsl:value-of select="$DirectoryName"/>_Pointer() { }
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
     {
         <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
@@ -75,25 +56,10 @@ class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
 /// &lt;/summary&gt;
 class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
 {
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>_Select()
-    {
-         
-    }
+    public <xsl:value-of select="$DirectoryName"/>_Select() { }
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
-    public void Read()
-    {
-         
-    }
+    public void Read() { }
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
     public List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; DirectoryPointers { get; }
 }
 
@@ -108,30 +74,15 @@ class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
 /// &lt;/summary&gt;
 class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
 {
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
     public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner)
     {
          Owner = owner;
     }
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
     public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; }
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
-    public void Read()
-    {
-         
-    }
+    public void Read() { }   
     
-    /// &lt;summary&gt;
-    ///
-    /// &lt;/summary&gt;
     public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; RecordCollection { get; }
 }
 
@@ -143,9 +94,6 @@ class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
 class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
 {
     <xsl:for-each select="Fields/Field">
-    /// &lt;summary&gt;
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
     public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
     </xsl:for-each>
 }
