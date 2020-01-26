@@ -22,21 +22,18 @@ namespace ConfTrade
             Conf.Config.Kernel.Open();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
-            s.QuerySelect.Field.Add("name");
-            s.QuerySelect.Field.Add("code");
-            s.QuerySelect.Field.Add("field1");
+            //s.QuerySelect.Field.Add("name");
+            //s.QuerySelect.Field.Add("code");
+            //s.QuerySelect.Field.Add("field1");
 
             s.Select();
 
             while (s.MoveNext())
             {
-                Console.WriteLine(s.Current.UID.UID +
-                    ", " + s.Current.Fields["name"].ToString() +
-                    ", " + s.Current.Fields["code"].ToString() +
-                    ", " + s.Current.Fields["field1"].ToString());
+                Console.WriteLine(s.Current.UID.UID);
 
                 Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
-                Console.WriteLine("Code " + obj.code);
+                Console.WriteLine("Name " + obj.name);
             }
 
             Conf.Config.Kernel.Close();

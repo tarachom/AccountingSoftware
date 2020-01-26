@@ -25,6 +25,21 @@ namespace AccountingSoftware.Conf
     {
         public Tovary_Objest() : base(Config.Kernel, "Tovary",
               new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5" }) { }
+              
+        public void Init(UnigueID uid)
+        {
+            BaseInit(uid);
+            
+            name = base.Fields["name"].ToString();
+            code = base.Fields["code"].ToString();
+            description = base.Fields["description"].ToString();
+            field1 = base.Fields["field1"].ToString();
+            field2 = base.Fields["field2"].ToString();
+            field3 = base.Fields["field3"].ToString();
+            field4 = base.Fields["field4"].ToString();
+            field5 = base.Fields["field5"].ToString();
+            
+        }
         
         public string name { get; set; }
         
@@ -42,20 +57,6 @@ namespace AccountingSoftware.Conf
         
         public string field5 { get; set; }
         
-        public void Init(UnigueID uid)
-        {
-            BaseInit(uid);
-            
-            name = base.Fields["name"].ToString();
-            code = base.Fields["code"].ToString();
-            description = base.Fields["description"].ToString();
-            field1 = base.Fields["field1"].ToString();
-            field2 = base.Fields["field2"].ToString();
-            field3 = base.Fields["field3"].ToString();
-            field4 = base.Fields["field4"].ToString();
-            field5 = base.Fields["field5"].ToString();
-            
-        }
     }
 
     class Tovary_Pointer : DirectoryPointer
@@ -140,17 +141,7 @@ namespace AccountingSoftware.Conf
     {
         public TovaryInfo_Objest() : base(Config.Kernel, "TovaryInfo",
               new string[] { "Field1", "Field2", "Field3", "Field4", "Field5" }) { }
-        
-        public string Field1 { get; set; }
-        
-        public string Field2 { get; set; }
-        
-        public string Field3 { get; set; }
-        
-        public string Field4 { get; set; }
-        
-        public string Field5 { get; set; }
-        
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -162,6 +153,17 @@ namespace AccountingSoftware.Conf
             Field5 = base.Fields["Field5"].ToString();
             
         }
+        
+        public string Field1 { get; set; }
+        
+        public string Field2 { get; set; }
+        
+        public string Field3 { get; set; }
+        
+        public string Field4 { get; set; }
+        
+        public string Field5 { get; set; }
+        
     }
 
     class TovaryInfo_Pointer : DirectoryPointer
@@ -248,9 +250,7 @@ namespace AccountingSoftware.Conf
     {
         public TMC_Objest() : base(Config.Kernel, "TMC",
               new string[] { "Code" }) { }
-        
-        public string Code { get; set; }
-        
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -258,6 +258,9 @@ namespace AccountingSoftware.Conf
             Code = base.Fields["Code"].ToString();
             
         }
+        
+        public string Code { get; set; }
+        
     }
 
     class TMC_Pointer : DirectoryPointer
@@ -305,11 +308,7 @@ namespace AccountingSoftware.Conf
     {
         public TMC2_Objest() : base(Config.Kernel, "TMC2",
               new string[] { "Code", "Name" }) { }
-        
-        public string Code { get; set; }
-        
-        public string Name { get; set; }
-        
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -318,6 +317,11 @@ namespace AccountingSoftware.Conf
             Name = base.Fields["Name"].ToString();
             
         }
+        
+        public string Code { get; set; }
+        
+        public string Name { get; set; }
+        
     }
 
     class TMC2_Pointer : DirectoryPointer
@@ -365,9 +369,7 @@ namespace AccountingSoftware.Conf
     {
         public TMC5_Objest() : base(Config.Kernel, "TMC5",
               new string[] { "Name" }) { }
-        
-        public string Name { get; set; }
-        
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -375,6 +377,9 @@ namespace AccountingSoftware.Conf
             Name = base.Fields["Name"].ToString();
             
         }
+        
+        public string Name { get; set; }
+        
     }
 
     class TMC5_Pointer : DirectoryPointer
@@ -440,11 +445,7 @@ namespace AccountingSoftware.Conf
     {
         public TMC6_Objest() : base(Config.Kernel, "TMC6",
               new string[] { "Name", "Code" }) { }
-        
-        public string Name { get; set; }
-        
-        public string Code { get; set; }
-        
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -453,6 +454,11 @@ namespace AccountingSoftware.Conf
             Code = base.Fields["Code"].ToString();
             
         }
+        
+        public string Name { get; set; }
+        
+        public string Code { get; set; }
+        
     }
 
     class TMC6_Pointer : DirectoryPointer

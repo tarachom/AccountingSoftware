@@ -30,9 +30,7 @@ namespace AccountingSoftware.Conf
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>",
               new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) { }
-        <xsl:for-each select="Fields/Field">
-        public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
-        </xsl:for-each>
+              
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -41,6 +39,9 @@ namespace AccountingSoftware.Conf
             <xsl:value-of select="Name"/> = base.Fields["<xsl:value-of select="Name"/>"].ToString();
             </xsl:for-each>
         }
+        <xsl:for-each select="Fields/Field">
+        public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
+        </xsl:for-each>
     }
 
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
