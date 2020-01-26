@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Xml;
 using System.Xml.XPath;
+using System.Xml.Xsl;
 
 namespace AccountingSoftware
 {
@@ -214,6 +215,14 @@ namespace AccountingSoftware
 
                 SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTablePart);
             }
+        }
+
+        public static void Generation(string pathToConf, string pathToTemplate, string pathToSaveCode)
+        {
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(pathToTemplate);
+
+            xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
         }
     }
 }

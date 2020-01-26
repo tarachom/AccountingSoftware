@@ -8,29 +8,28 @@
  * Автоматично згенерований код.
  *
  * Конфігурації "<xsl:value-of select="Configuration/Name"/>"
- * Автор <xsl:value-of select="Configuration/Autor"/>
+ * Автор <xsl:value-of select="Configuration/Author"/>
  *
  */
 
 using System;
 using System.Collections.Generic;
-
 using AccountingSoftware;
 
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
-
+/*******************************************************[ <xsl:value-of select="$DirectoryName"/> ]****************************************************/
 // --- Objest ---
 
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="$DirectoryName"/>Objest : DirectoryObject
+class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
 {
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>Objest()
+    public <xsl:value-of select="$DirectoryName"/>_Objest()
     {
          
     }
@@ -48,12 +47,12 @@ class <xsl:value-of select="$DirectoryName"/>Objest : DirectoryObject
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirectoryPointer
+class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
 {
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>Pointer()
+    public <xsl:value-of select="$DirectoryName"/>_Pointer()
     {
          
     }
@@ -61,9 +60,9 @@ class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirect
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>Objest GetDirectoryObject()
+    public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
     {
-        <xsl:value-of select="$DirectoryName"/>Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>Objest();
+        <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
         <xsl:value-of select="$DirectoryName"/>ObjestItem.Init(base.UID);
         return <xsl:value-of select="$DirectoryName"/>ObjestItem;
     }
@@ -74,12 +73,12 @@ class <xsl:value-of select="$DirectoryName"/>Pointer : DirectoryPointer, IDirect
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="$DirectoryName"/>Select : DirectorySelect
+class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
 {
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>Select()
+    public <xsl:value-of select="$DirectoryName"/>_Select()
     {
          
     }
@@ -95,24 +94,24 @@ class <xsl:value-of select="$DirectoryName"/>Select : DirectorySelect
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public List&lt;<xsl:value-of select="$DirectoryName"/>Pointer&gt; DirectoryPointers { get; }
+    public List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; DirectoryPointers { get; }
 }
 
       <xsl:for-each select="TabularParts/TablePart">
         <xsl:variable name="TablePartName" select="Name"/>
-        <xsl:variable name="TablePartFullName" select="concat($DirectoryName, $TablePartName)"/>
+        <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
         
 // --- TablePart ---    
 
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
+class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
 {
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$TablePartFullName"/>TablePart(<xsl:value-of select="$DirectoryName"/>Objest owner)
+    public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner)
     {
          Owner = owner;
     }
@@ -120,7 +119,7 @@ class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public <xsl:value-of select="$DirectoryName"/>Objest Owner { get; }
+    public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; }
     
     /// &lt;summary&gt;
     ///
@@ -133,7 +132,7 @@ class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
     /// &lt;summary&gt;
     ///
     /// &lt;/summary&gt;
-    public List&lt;<xsl:value-of select="$TablePartFullName"/>TablePartRecord&gt; RecordCollection { get; }
+    public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; RecordCollection { get; }
 }
 
 // --- TablePartRecord ---
@@ -141,7 +140,7 @@ class <xsl:value-of select="$TablePartFullName"/>TablePart : DirectoryTablePart
 /// &lt;summary&gt;
 /// <xsl:value-of select="Desc"/>
 /// &lt;/summary&gt;
-class <xsl:value-of select="$TablePartFullName"/>TablePartRecord : DirectoryTablePartRecord
+class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
 {
     <xsl:for-each select="Fields/Field">
     /// &lt;summary&gt;
@@ -150,9 +149,7 @@ class <xsl:value-of select="$TablePartFullName"/>TablePartRecord : DirectoryTabl
     public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
     </xsl:for-each>
 }
-
       </xsl:for-each>
-
     </xsl:for-each>
 
   </xsl:template>

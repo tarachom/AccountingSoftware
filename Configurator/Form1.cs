@@ -107,6 +107,10 @@ namespace Configurator
 
 			//Save
 			Configuration.Save(pathToConfSave, Conf);
+
+			Configuration.Generation(pathToConfSave,
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
