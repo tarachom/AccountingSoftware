@@ -39,6 +39,15 @@ namespace AccountingSoftware.Conf
             <xsl:value-of select="Name"/> = base.Fields["<xsl:value-of select="Name"/>"].ToString();
             </xsl:for-each>
         }
+        
+        public void Save()
+        {
+            <xsl:for-each select="Fields/Field">
+            base.Fields["<xsl:value-of select="Name"/>"] = <xsl:value-of select="Name"/>;</xsl:for-each>
+      
+            BaseSave();
+        }
+        
         <xsl:for-each select="Fields/Field">
         public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
         </xsl:for-each>

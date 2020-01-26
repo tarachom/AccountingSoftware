@@ -41,6 +41,22 @@ namespace AccountingSoftware.Conf
             
         }
         
+        public void Save()
+        {
+            
+            base.Fields["name"] = name;
+            base.Fields["code"] = code;
+            base.Fields["description"] = description;
+            base.Fields["field1"] = field1;
+            base.Fields["field2"] = field2;
+            base.Fields["field3"] = field3;
+            base.Fields["field4"] = field4;
+            base.Fields["field5"] = field5;
+      
+            BaseSave();
+        }
+        
+        
         public string name { get; set; }
         
         public string code { get; set; }
@@ -154,6 +170,19 @@ namespace AccountingSoftware.Conf
             
         }
         
+        public void Save()
+        {
+            
+            base.Fields["Field1"] = Field1;
+            base.Fields["Field2"] = Field2;
+            base.Fields["Field3"] = Field3;
+            base.Fields["Field4"] = Field4;
+            base.Fields["Field5"] = Field5;
+      
+            BaseSave();
+        }
+        
+        
         public string Field1 { get; set; }
         
         public string Field2 { get; set; }
@@ -259,6 +288,15 @@ namespace AccountingSoftware.Conf
             
         }
         
+        public void Save()
+        {
+            
+            base.Fields["Code"] = Code;
+      
+            BaseSave();
+        }
+        
+        
         public string Code { get; set; }
         
     }
@@ -317,6 +355,16 @@ namespace AccountingSoftware.Conf
             Name = base.Fields["Name"].ToString();
             
         }
+        
+        public void Save()
+        {
+            
+            base.Fields["Code"] = Code;
+            base.Fields["Name"] = Name;
+      
+            BaseSave();
+        }
+        
         
         public string Code { get; set; }
         
@@ -377,6 +425,15 @@ namespace AccountingSoftware.Conf
             Name = base.Fields["Name"].ToString();
             
         }
+        
+        public void Save()
+        {
+            
+            base.Fields["Name"] = Name;
+      
+            BaseSave();
+        }
+        
         
         public string Name { get; set; }
         
@@ -454,6 +511,16 @@ namespace AccountingSoftware.Conf
             Code = base.Fields["Code"].ToString();
             
         }
+        
+        public void Save()
+        {
+            
+            base.Fields["Name"] = Name;
+            base.Fields["Code"] = Code;
+      
+            BaseSave();
+        }
+        
         
         public string Name { get; set; }
         

@@ -57,6 +57,35 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
+		public void SaveDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
+		{
+			string query = "UPDATE " + sender.Table + " SET ";
+
+			int count = 0;
+
+			foreach (string field in sender.FieldList)
+			{
+				if (count > 0) query += ", ";
+				query += field + " = @" + field;
+
+				count++;
+			}
+
+			query += " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
+
+			foreach (string field in sender.FieldList)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fields[field]));
+			}
+
+			//Console.WriteLine(query);
+
+			nCommand.ExecuteNonQuery();
+		}
+
 		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = sender.QuerySelect.Construct();

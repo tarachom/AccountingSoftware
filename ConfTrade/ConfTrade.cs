@@ -22,6 +22,7 @@ namespace ConfTrade
             Conf.Config.Kernel.Open();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
+            //s.QuerySelect.Limit = 10;
             //s.QuerySelect.Field.Add("name");
             //s.QuerySelect.Field.Add("code");
             //s.QuerySelect.Field.Add("field1");
@@ -33,7 +34,16 @@ namespace ConfTrade
                 Console.WriteLine(s.Current.UID.UID);
 
                 Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
-                Console.WriteLine("Name " + obj.name);
+
+                obj.code = obj.UID.UID;
+                obj.description = "description";
+
+                obj.field1 = "field1";
+                obj.field2 = "field2";
+                obj.field3 = "field3";
+                obj.field4 = "field4";
+                obj.field5 = "field5";
+                obj.Save();                
             }
 
             Conf.Config.Kernel.Close();

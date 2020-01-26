@@ -35,6 +35,11 @@ namespace AccountingSoftware
 			Kernel.DataBase.SelectDirectoryObject(this, Fields);
 		}
 
+		protected void BaseSave()
+		{
+			Kernel.DataBase.SaveDirectoryObject(this, Fields);
+		}
+
 		public string[] FieldList { get; set; }
 
 		protected Dictionary<string, object> Fields { get; set; }
