@@ -17,6 +17,7 @@ namespace AccountingSoftware
 		void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer);
 		void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
 		void SaveDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
+		void InsertDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
 
 	}
 }

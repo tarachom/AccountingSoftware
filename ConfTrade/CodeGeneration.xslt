@@ -29,7 +29,12 @@ namespace AccountingSoftware.Conf
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>",
-              new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) { }
+              new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) 
+        {
+            <xsl:for-each select="Fields/Field">
+            <xsl:value-of select="Name"/> = "";
+            </xsl:for-each>
+        }
               
         public void Init(UnigueID uid)
         {

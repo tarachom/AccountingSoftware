@@ -24,7 +24,18 @@ namespace AccountingSoftware.Conf
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "Tovary",
-              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5" }) { }
+              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5" }) 
+        {
+            name = "";
+            code = "";
+            description = "";
+            field1 = "";
+            field2 = "";
+            field3 = "";
+            field4 = "";
+            field5 = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {
@@ -156,7 +167,15 @@ namespace AccountingSoftware.Conf
     class TovaryInfo_Objest : DirectoryObject
     {
         public TovaryInfo_Objest() : base(Config.Kernel, "TovaryInfo",
-              new string[] { "Field1", "Field2", "Field3", "Field4", "Field5" }) { }
+              new string[] { "Field1", "Field2", "Field3", "Field4", "Field5" }) 
+        {
+            Field1 = "";
+            Field2 = "";
+            Field3 = "";
+            Field4 = "";
+            Field5 = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {
@@ -278,7 +297,11 @@ namespace AccountingSoftware.Conf
     class TMC_Objest : DirectoryObject
     {
         public TMC_Objest() : base(Config.Kernel, "TMC",
-              new string[] { "Code" }) { }
+              new string[] { "Code" }) 
+        {
+            Code = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {
@@ -345,7 +368,12 @@ namespace AccountingSoftware.Conf
     class TMC2_Objest : DirectoryObject
     {
         public TMC2_Objest() : base(Config.Kernel, "TMC2",
-              new string[] { "Code", "Name" }) { }
+              new string[] { "Code", "Name" }) 
+        {
+            Code = "";
+            Name = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {
@@ -416,7 +444,11 @@ namespace AccountingSoftware.Conf
     class TMC5_Objest : DirectoryObject
     {
         public TMC5_Objest() : base(Config.Kernel, "TMC5",
-              new string[] { "Name" }) { }
+              new string[] { "Name" }) 
+        {
+            Name = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {
@@ -501,7 +533,12 @@ namespace AccountingSoftware.Conf
     class TMC6_Objest : DirectoryObject
     {
         public TMC6_Objest() : base(Config.Kernel, "TMC6",
-              new string[] { "Name", "Code" }) { }
+              new string[] { "Name", "Code" }) 
+        {
+            Name = "";
+            Code = "";
+            
+        }
               
         public void Init(UnigueID uid)
         {

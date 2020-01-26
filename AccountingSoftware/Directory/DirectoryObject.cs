@@ -28,6 +28,14 @@ namespace AccountingSoftware
 
 		public UnigueID UID { get; private set; }
 
+		protected bool IsNew { get; private set; }
+
+		public void New()
+		{
+			UID = new UnigueID(Guid.NewGuid().ToString());
+			IsNew = true;
+		}
+
 		protected void BaseInit(UnigueID uid)
 		{
 			UID = uid;
@@ -37,7 +45,14 @@ namespace AccountingSoftware
 
 		protected void BaseSave()
 		{
-			Kernel.DataBase.SaveDirectoryObject(this, Fields);
+			if (IsNew)
+			{
+				Kernel.DataBase.InsertDirectoryObject(this, Fields);
+			}
+			else
+			{
+				Kernel.DataBase.SaveDirectoryObject(this, Fields);
+			}
 		}
 
 		public string[] FieldList { get; set; }

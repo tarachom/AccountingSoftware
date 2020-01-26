@@ -21,6 +21,12 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
+            Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
+            newObj.New();
+
+            newObj.name = "New Obj";
+            newObj.Save();
+
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;
             //s.QuerySelect.Field.Add("name");
@@ -45,6 +51,7 @@ namespace ConfTrade
                 obj.field5 = "field5";
                 obj.Save();                
             }
+                       
 
             Conf.Config.Kernel.Close();
 
