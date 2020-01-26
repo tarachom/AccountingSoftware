@@ -28,10 +28,19 @@ namespace AccountingSoftware.Conf
 
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
-        public <xsl:value-of select="$DirectoryName"/>_Objest() { }    
+        public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>",
+              new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) { }
         <xsl:for-each select="Fields/Field">
         public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
         </xsl:for-each>
+        public void Init(UnigueID uid)
+        {
+            BaseInit(uid);
+            
+            <xsl:for-each select="Fields/Field">
+            <xsl:value-of select="Name"/> = base.Fields["<xsl:value-of select="Name"/>"].ToString();
+            </xsl:for-each>
+        }
     }
 
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
@@ -53,12 +62,24 @@ namespace AccountingSoftware.Conf
         public void Select() 
         { 
             base.BaseSelect();
-                        
-            foreach (DirectoryPointer p in base.BaseSelectList)
-            {
-                Console.WriteLine(p.UID.ToString());
-            }
         }
+        
+        public bool MoveNext()
+        {
+            Current = null;
+
+            if (MoveToPosition())
+            {
+                Current = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
     }
       <xsl:for-each select="TabularParts/TablePart">
         <xsl:variable name="TablePartName" select="Name"/>

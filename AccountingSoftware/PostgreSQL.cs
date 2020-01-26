@@ -30,6 +30,33 @@ namespace AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
+		public void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
+		{
+			string query = "SELECT uid ";
+
+			foreach (string field in sender.FieldList)
+			{
+				query += ", " + field;
+			}
+
+			query += " FROM " + sender.Table + " WHERE uid = @uid";
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				foreach (string field in sender.FieldList)
+				{
+					fields[field] = reader[field];
+				}
+			}
+			reader.Close();
+		}
+
 		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = sender.QuerySelect.Construct();

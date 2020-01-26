@@ -10,17 +10,33 @@ namespace AccountingSoftware
 	//
 	public abstract class DirectoryObject
 	{
+		public DirectoryObject(Kernel kernel, string table, string[] fields)
+		{
+			Table = table;
+			Kernel = kernel;
+			FieldList = fields;
+
+			Fields = new Dictionary<string, object>();
+
+			foreach (string field in fields)
+				Fields.Add(field, null);
+		}
+
+		protected Kernel Kernel { get; set; }
+
+		public string Table { get; set; }
+
 		public UnigueID UID { get; private set; }
 
-		public string Code { get; set; }
-
-		public string Name { get; set; }
-
-		public string Desc { get; set; }
-
-		public void Init(UnigueID uid)
+		protected void BaseInit(UnigueID uid)
 		{
 			UID = uid;
+
+			Kernel.DataBase.SelectDirectoryObject(this, Fields);
 		}
+
+		public string[] FieldList { get; set; }
+
+		protected Dictionary<string, object> Fields { get; set; }
 	}
 }
