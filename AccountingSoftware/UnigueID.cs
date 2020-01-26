@@ -23,5 +23,10 @@ namespace AccountingSoftware
 
 		public string UID { get; }
 		public string Table { get; }
+
+		public override string ToString()
+		{
+			return UID;
+		}
 	}
 }

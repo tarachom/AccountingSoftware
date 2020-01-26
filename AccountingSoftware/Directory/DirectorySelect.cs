@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AccountingSoftware
 {
@@ -10,18 +9,23 @@ namespace AccountingSoftware
 	//
 	public abstract class DirectorySelect
 	{
-		public DirectorySelect()
+		public DirectorySelect(Kernel kernel, string table)
 		{
-			QuerySelect = new Query();
+			QuerySelect = new Query(table);
+			Kernel = kernel;
 		}
-
-		public Kernel kernel { get; set; }
 
 		public Query QuerySelect { get; set; }
 
-		protected List<DirectoryPointer> AbstractSelect()
+		protected Kernel Kernel { get; set; }
+
+		protected List<DirectoryPointer> BaseSelectList { get; private set; }
+
+		protected void BaseSelect()
 		{
-			return kernel.DataBase.SelectDirectory(this);
+			BaseSelectList = new List<DirectoryPointer>();
+
+			Kernel.DataBase.SelectDirectory(this, BaseSelectList);
 		}
 	}
 }

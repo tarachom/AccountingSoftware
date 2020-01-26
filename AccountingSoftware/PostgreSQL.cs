@@ -15,11 +15,6 @@ namespace AccountingSoftware
 
 		}
 
-		~PostgreSQL()
-		{
-
-		}
-
 		public void Open()
 		{
 			Connection = new NpgsqlConnection(ConnectionString);
@@ -35,11 +30,10 @@ namespace AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
-		public List<DirectoryPointer> SelectDirectory(DirectorySelect sender)
+		public void SelectDirectory(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
 		{
-			List<DirectoryPointer> listDirectoryPointer = new List<DirectoryPointer>();
-
 			string query = sender.QuerySelect.Construct();
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -52,22 +46,24 @@ namespace AccountingSoftware
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
-				DirectoryPointer elementPointer = new DirectoryPointer();
+				List<FieldValue> fields = null;
 
-				List<FieldValue> fields = new List<FieldValue>();
-
-				foreach (KeyValuePair<string, string> field in sender.QuerySelect.Field)
+				if (sender.QuerySelect.Field.Count > 0)
 				{
-					fields.Add(new FieldValue(field.Key, reader[field.Key]));
+					fields = new List<FieldValue>();
+
+					foreach (KeyValuePair<string, string> field in sender.QuerySelect.Field)
+					{
+						fields.Add(new FieldValue(field.Key, reader[field.Key]));
+					}
 				}
 
+				DirectoryPointer elementPointer = new DirectoryPointer();
 				elementPointer.Init(new UnigueID(reader["uid"].ToString()), fields);
 
 				listDirectoryPointer.Add(elementPointer);
 			}
 			reader.Close();
-
-			return listDirectoryPointer;
 		}
 	}
 }

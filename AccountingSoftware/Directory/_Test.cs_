@@ -82,34 +82,34 @@ namespace AccountingSoftware
 
 	class TestSelect : DirectorySelect
 	{
-		public TestSelect(): base()
+		public TestSelect()
 		{
 			
 		}
 
-		//Крок 1. Вибірка
-		public void Select()
-		{
-			List<DirectoryPointer> list = base.AbstractSelect();
+		////Крок 1. Вибірка
+		//public void Select()
+		//{
+		//	List<DirectoryPointer> list = base.BaseSelect();
 
-			foreach (DirectoryPointer el in list)
-			{
-				//Console.WriteLine(el.UID.UID);
+		//	foreach (DirectoryPointer el in list)
+		//	{
+		//		//Console.WriteLine(el.UID.UID);
 
-				foreach (FieldValue field in el.Fields)
-				{
-					Console.WriteLine(field.Name + "=" + field.Value);
-				}
-			}
-		}
+		//		foreach (FieldValue field in el.Fields)
+		//		{
+		//			Console.WriteLine(field.Name + "=" + field.Value);
+		//		}
+		//	}
+		//}
 
-		//Крок 2. Зчитування
-		public bool Read()
-		{
-			//Потрібно опрацювати
+		////Крок 2. Зчитування
+		//public bool Read()
+		//{
+		//	//Потрібно опрацювати
 
-			return true;
-		}
+		//	return true;
+		//}
 
 		//public List<TestPointer> DirectoryPointers { get; private set; }
 	}

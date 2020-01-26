@@ -8,6 +8,21 @@
       <Desc>Directory Tovary Info</Desc>
       <Fields>
         <Field>
+          <Name>name</Name>
+          <Type>string</Type>
+          <Desc>Name</Desc>
+        </Field>
+        <Field>
+          <Name>code</Name>
+          <Type>string</Type>
+          <Desc>Code</Desc>
+        </Field>
+        <Field>
+          <Name>description</Name>
+          <Type>string</Type>
+          <Desc>description</Desc>
+        </Field>
+        <Field>
           <Name>Field1</Name>
           <Type>string</Type>
           <Desc>Field1</Desc>

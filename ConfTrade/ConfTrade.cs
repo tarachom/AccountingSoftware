@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
 
 using AccountingSoftware;
+using Conf = AccountingSoftware.Conf;
 using Npgsql;
 
 //Конфігурація Торгівля
@@ -17,6 +18,16 @@ namespace ConfTrade
     {
         static void Main(string[] args)
         {
+            Conf.Config.Kernel = new Kernel();
+            Conf.Config.Kernel.Open();
+
+            Conf.Tovary_Select s = new Conf.Tovary_Select();
+
+            s.Select();
+            
+
+            Conf.Config.Kernel.Close();
+
             //Query q = new Query();
 
             //q.Table = "public.tovary";
@@ -39,6 +50,8 @@ namespace ConfTrade
             //TestPostgres();
 
             Console.ReadLine();
+
+           
         }
 
         static void TestPostgres()

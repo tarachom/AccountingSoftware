@@ -8,17 +8,19 @@ namespace AccountingSoftware
 {
 	public class Query
 	{
-		public Query()
+		public Query(string table)
 		{
 			Field = new Dictionary<string, string>();
 			Where = new List<Where>();
 			Order = new Dictionary<string, SelectOrder>();
+
+			Table = table;
 		}
 
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
-		public string Table { get; set; }
+		public string Table { get; private set; }
 
 		/// <summary>
 		/// Які поля вибирати.
@@ -51,25 +53,14 @@ namespace AccountingSoftware
 		public string Construct()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append("SELECT ");
-
+			sb.Append("SELECT uid ");
+			 
 			if (Field.Count > 0)
 			{
-				int count = 0;
-
 				foreach (KeyValuePair<string, string> field in Field)
 				{
-					if (count > 0)
-						sb.Append(", ");
-
-					sb.Append(field.Key);
-
-					count++;
+					sb.Append(", " + field.Key);
 				}
-			}
-			else
-			{
-				sb.Append("*");
 			}
 
 			sb.AppendLine("");
