@@ -65,12 +65,12 @@ namespace AccountingSoftware.Conf
                         
             foreach (DirectoryPointer p in base.BaseSelectList)
             {
-                Console.WriteLine(p.UID.ToString());
+                
+                Console.WriteLine(p.UID.ToString() + " name = " + p.Fields["name"].ToString());
             }
         }
     }
-      
-
+    
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) { Owner = owner; }

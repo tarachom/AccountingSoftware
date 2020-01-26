@@ -22,6 +22,7 @@ namespace ConfTrade
             Conf.Config.Kernel.Open();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
+            s.QuerySelect.Field.Add("name");
 
             s.Select();
             

@@ -25,7 +25,7 @@ namespace AccountingSoftware
 		{
 			BaseSelectList = new List<DirectoryPointer>();
 
-			Kernel.DataBase.SelectDirectory(this, BaseSelectList);
+			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
 		}
 	}
 }

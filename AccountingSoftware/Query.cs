@@ -10,7 +10,7 @@ namespace AccountingSoftware
 	{
 		public Query(string table)
 		{
-			Field = new Dictionary<string, string>();
+			Field = new List<string>();
 			Where = new List<Where>();
 			Order = new Dictionary<string, SelectOrder>();
 
@@ -23,10 +23,9 @@ namespace AccountingSoftware
 		public string Table { get; private set; }
 
 		/// <summary>
-		/// Які поля вибирати.
-		/// Назва поля, синонім
+		/// Які поля вибирати
 		/// </summary>
-		public Dictionary<string, string> Field { get; set; }
+		public List<string> Field { get; set; }
 
 		/// <summary>
 		/// Умови.
@@ -57,9 +56,9 @@ namespace AccountingSoftware
 			 
 			if (Field.Count > 0)
 			{
-				foreach (KeyValuePair<string, string> field in Field)
+				foreach (string field in Field)
 				{
-					sb.Append(", " + field.Key);
+					sb.Append(", " + field);
 				}
 			}
 

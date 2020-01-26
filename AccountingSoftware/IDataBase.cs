@@ -14,6 +14,6 @@ namespace AccountingSoftware
 
 		string ConnectionString { get; set; }
 
-		void SelectDirectory(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer);
+		void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer);
 	}
 }

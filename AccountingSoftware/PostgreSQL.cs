@@ -30,7 +30,7 @@ namespace AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
-		public void SelectDirectory(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
+		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = sender.QuerySelect.Construct();
 			Console.WriteLine(query);
@@ -46,16 +46,14 @@ namespace AccountingSoftware
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
-				List<FieldValue> fields = null;
+				Dictionary<string, object> fields = null;
 
 				if (sender.QuerySelect.Field.Count > 0)
 				{
-					fields = new List<FieldValue>();
+					fields = new Dictionary<string, object>();
 
-					foreach (KeyValuePair<string, string> field in sender.QuerySelect.Field)
-					{
-						fields.Add(new FieldValue(field.Key, reader[field.Key]));
-					}
+					foreach (string field in sender.QuerySelect.Field)
+						fields.Add(field, reader[field]);
 				}
 
 				DirectoryPointer elementPointer = new DirectoryPointer();

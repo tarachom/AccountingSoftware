@@ -15,7 +15,7 @@ namespace AccountingSoftware
 			
 		}
 
-		public void Init(UnigueID uid, List<FieldValue> fields = null)
+		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
 			UID = uid;
 			Fields = fields;
@@ -23,9 +23,6 @@ namespace AccountingSoftware
 
 		public UnigueID UID { get; private set; }
 
-		/// <summary>
-		/// Список додаткових полів та їх значень
-		/// </summary>
-		public List<FieldValue> Fields { get; private set; }
+		public Dictionary<string, object> Fields { get; private set; }
 	}
 }
