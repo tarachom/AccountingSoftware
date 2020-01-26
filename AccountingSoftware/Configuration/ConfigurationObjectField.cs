@@ -15,7 +15,7 @@ namespace AccountingSoftware
 
 		}
 
-		public ConfigurationObjectField(string name, string desc, string type)
+		public ConfigurationObjectField(string name, string desc = "", string type = "string")
 		{
 			Name = name;
 			Desc = desc;

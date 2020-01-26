@@ -36,9 +36,10 @@ namespace AccountingSoftware
 
         public Dictionary<string, ConfigurationRegisters> Registers { get; set; }
 
-        public void AppendDirectory(ConfigurationDirectories Directory)
+        public ConfigurationDirectories AppendDirectory(ConfigurationDirectories Directory)
         {
             Directories.Add(Directory.Name, Directory);
+            return Directory;
         }
 
         public static void Load(string pathToConf, Configuration Conf)

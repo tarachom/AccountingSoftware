@@ -32,8 +32,8 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfiguration));
 			this.splitContainerBase = new System.Windows.Forms.SplitContainer();
 			this.treeConfiguration = new System.Windows.Forms.TreeView();
-			this.dataConfiguration = new System.Windows.Forms.DataGridView();
 			this.imgTreeList = new System.Windows.Forms.ImageList(this.components);
+			this.dataConfiguration = new System.Windows.Forms.DataGridView();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -43,6 +43,7 @@
 			// 
 			// splitContainerBase
 			// 
+			this.splitContainerBase.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.splitContainerBase.Location = new System.Drawing.Point(10, 10);
 			this.splitContainerBase.Margin = new System.Windows.Forms.Padding(10);
 			this.splitContainerBase.Name = "splitContainerBase";
@@ -54,8 +55,8 @@
 			// splitContainerBase.Panel2
 			// 
 			this.splitContainerBase.Panel2.Controls.Add(this.dataConfiguration);
-			this.splitContainerBase.Size = new System.Drawing.Size(843, 521);
-			this.splitContainerBase.SplitterDistance = 234;
+			this.splitContainerBase.Size = new System.Drawing.Size(842, 518);
+			this.splitContainerBase.SplitterDistance = 233;
 			this.splitContainerBase.TabIndex = 0;
 			// 
 			// treeConfiguration
@@ -66,18 +67,9 @@
 			this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
 			this.treeConfiguration.Name = "treeConfiguration";
 			this.treeConfiguration.SelectedImageIndex = 0;
-			this.treeConfiguration.Size = new System.Drawing.Size(234, 521);
+			this.treeConfiguration.Size = new System.Drawing.Size(233, 518);
 			this.treeConfiguration.TabIndex = 0;
 			this.treeConfiguration.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseDoubleClick);
-			// 
-			// dataConfiguration
-			// 
-			this.dataConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataConfiguration.Location = new System.Drawing.Point(0, 0);
-			this.dataConfiguration.Name = "dataConfiguration";
-			this.dataConfiguration.Size = new System.Drawing.Size(605, 521);
-			this.dataConfiguration.TabIndex = 0;
 			// 
 			// imgTreeList
 			// 
@@ -161,6 +153,15 @@
 			this.imgTreeList.Images.SetKeyName(75, "76.ico");
 			this.imgTreeList.Images.SetKeyName(76, "77.ico");
 			// 
+			// dataConfiguration
+			// 
+			this.dataConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dataConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dataConfiguration.Location = new System.Drawing.Point(0, 0);
+			this.dataConfiguration.Name = "dataConfiguration";
+			this.dataConfiguration.Size = new System.Drawing.Size(605, 518);
+			this.dataConfiguration.TabIndex = 0;
+			// 
 			// FormConfiguration
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -168,6 +169,7 @@
 			this.ClientSize = new System.Drawing.Size(862, 538);
 			this.Controls.Add(this.splitContainerBase);
 			this.Name = "FormConfiguration";
+			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Form1";
 			this.Load += new System.EventHandler(this.FormConfiguration_Load);
 			this.splitContainerBase.Panel1.ResumeLayout(false);

@@ -12,6 +12,19 @@ namespace AccountingSoftware
 	{
 		public ConfigurationObjectTablePart()
 		{
+			Init();
+		}
+
+		public ConfigurationObjectTablePart(string name, string desc = "")
+		{
+			Init();
+
+			Name = name;
+			Desc = desc;
+		}
+
+		private void Init()
+		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 		}
 

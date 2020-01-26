@@ -63,8 +63,11 @@ namespace Configurator
 					{
 						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name).ImageIndex = 1;
 					}
+
+					directoriTablePartNode.Expand();
 				}
 
+				directoriTabularPartsNode.Expand();
 				directoryNode.Expand();
 			}
 
@@ -90,9 +93,17 @@ namespace Configurator
 			TmcDirectory.Fields.Add(TmcDirectoryField2.Name, TmcDirectoryField2);
 			*/
 
-			Conf.AppendDirectory(new ConfigurationDirectories("TMC5", "Desc"));
-			
-			Conf.Directories["TMC5"].AppendField(new ConfigurationObjectField("Name", "Desc", "string"));
+
+			//ConfigurationDirectories tmc6 = Conf.AppendDirectory(new ConfigurationDirectories("TMC6", "Desc"));
+			//ConfigurationObjectField fieldName = tmc6.AppendField(new ConfigurationObjectField("Name", "Desc", "string"));
+			//tmc6.AppendField(new ConfigurationObjectField("Code", "Desc", "string"));
+
+
+			//Conf.Directories["TMC6"].TabularParts.Add("Od", new ConfigurationObjectTablePart("Od"));
+			//Conf.Directories["TMC6"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
+
+			//Conf.Directories["Tovary"].TabularParts.Add("Od", new ConfigurationObjectTablePart("Od"));
+			//Conf.Directories["Tovary"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
 
 			//Save
 			Configuration.Save(pathToConfSave, Conf);

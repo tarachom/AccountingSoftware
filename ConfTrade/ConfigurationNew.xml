@@ -50,6 +50,19 @@
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>Od</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Name</Name>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
     </Directory>
     <Directory>
@@ -150,6 +163,63 @@
         </Field>
       </Fields>
       <TabularParts />
+    </Directory>
+    <Directory>
+      <Name>TMC5</Name>
+      <Desc>Desc</Desc>
+      <Fields>
+        <Field>
+          <Name>Name</Name>
+          <Type>string</Type>
+          <Desc>Desc</Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Od</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Name</Name>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+    </Directory>
+    <Directory>
+      <Name>TMC6</Name>
+      <Desc>Desc</Desc>
+      <Fields>
+        <Field>
+          <Name>Name</Name>
+          <Type>string</Type>
+          <Desc>Desc</Desc>
+        </Field>
+        <Field>
+          <Name>Code</Name>
+          <Type>string</Type>
+          <Desc>Desc</Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Od</Name>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Name</Name>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </Directory>
   </Directories>
 </Configuration>

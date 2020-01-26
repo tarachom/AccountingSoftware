@@ -13,11 +13,11 @@ namespace AccountingSoftware
 			Init();
 		}
 
-		public ConfigurationDirectories(string name, string desc)
+		public ConfigurationDirectories(string name, string desc = "")
 		{
 			Init();
 
-			base.Name = Name;
+			base.Name = name;
 			base.Desc = desc;
 		}
 
@@ -31,9 +31,10 @@ namespace AccountingSoftware
 
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
 
-		public void AppendField(ConfigurationObjectField field)
+		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
 		{
 			Fields.Add(field.Name, field);
+			return field;
 		}
 	}
 }
