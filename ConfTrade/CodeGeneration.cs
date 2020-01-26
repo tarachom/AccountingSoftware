@@ -45,8 +45,8 @@ namespace AccountingSoftware.Conf
 
     class Tovary_Pointer : DirectoryPointer
     {
-        public Tovary_Pointer() { }
-    
+        public Tovary_Pointer() : base(Config.Kernel, "Tovary") { }
+
         public Tovary_Objest GetDirectoryObject()
         {
             Tovary_Objest TovaryObjestItem = new Tovary_Objest();
@@ -61,16 +61,28 @@ namespace AccountingSoftware.Conf
     
         public void Select() 
         { 
-            base.BaseSelect();
-                        
-            foreach (DirectoryPointer p in base.BaseSelectList)
-            {
-                
-                Console.WriteLine(p.UID.ToString() + " name = " + p.Fields["name"].ToString());
-            }
+            base.BaseSelect();                       
         }
+
+        public bool MoveNext()
+        {
+            Current = null;
+
+            if (MoveToPosition())
+            {
+                Current = new Tovary_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public Tovary_Pointer Current { get; private set; }
     }
-    
+      
+
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) { Owner = owner; }
@@ -127,8 +139,8 @@ namespace AccountingSoftware.Conf
 
     class TovaryInfo_Pointer : DirectoryPointer
     {
-        public TovaryInfo_Pointer() { }
-    
+        public TovaryInfo_Pointer() : base(Config.Kernel, "TovaryInfo") { }
+
         public TovaryInfo_Objest GetDirectoryObject()
         {
             TovaryInfo_Objest TovaryInfoObjestItem = new TovaryInfo_Objest();
@@ -203,8 +215,8 @@ namespace AccountingSoftware.Conf
 
     class TMC_Pointer : DirectoryPointer
     {
-        public TMC_Pointer() { }
-    
+        public TMC_Pointer() : base(Config.Kernel, "TMC") { }
+
         public TMC_Objest GetDirectoryObject()
         {
             TMC_Objest TMCObjestItem = new TMC_Objest();
@@ -242,8 +254,8 @@ namespace AccountingSoftware.Conf
 
     class TMC2_Pointer : DirectoryPointer
     {
-        public TMC2_Pointer() { }
-    
+        public TMC2_Pointer() : base(Config.Kernel, "TMC2") { }
+
         public TMC2_Objest GetDirectoryObject()
         {
             TMC2_Objest TMC2ObjestItem = new TMC2_Objest();
@@ -279,8 +291,8 @@ namespace AccountingSoftware.Conf
 
     class TMC5_Pointer : DirectoryPointer
     {
-        public TMC5_Pointer() { }
-    
+        public TMC5_Pointer() : base(Config.Kernel, "TMC5") { }
+
         public TMC5_Objest GetDirectoryObject()
         {
             TMC5_Objest TMC5ObjestItem = new TMC5_Objest();
@@ -336,8 +348,8 @@ namespace AccountingSoftware.Conf
 
     class TMC6_Pointer : DirectoryPointer
     {
-        public TMC6_Pointer() { }
-    
+        public TMC6_Pointer() : base(Config.Kernel, "TMC6") { }
+
         public TMC6_Objest GetDirectoryObject()
         {
             TMC6_Objest TMC6ObjestItem = new TMC6_Objest();

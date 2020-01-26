@@ -23,9 +23,16 @@ namespace ConfTrade
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             s.QuerySelect.Field.Add("name");
+            s.QuerySelect.Field.Add("code");
 
             s.Select();
-            
+
+            while (s.MoveNext())
+            {
+                Console.WriteLine(s.Current.UID.UID +
+                    ", " + s.Current.Fields["name"].ToString() +
+                    ", " + s.Current.Fields["code"].ToString());
+            }
 
             Conf.Config.Kernel.Close();
 

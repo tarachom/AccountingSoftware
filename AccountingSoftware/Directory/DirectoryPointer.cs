@@ -15,6 +15,16 @@ namespace AccountingSoftware
 			
 		}
 
+		public DirectoryPointer(Kernel kernel, string table)
+		{
+			Table = table;
+			Kernel = kernel;
+		}
+
+		protected Kernel Kernel { get; set; }
+
+		protected string Table { get; set; }
+
 		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
 			UID = uid;

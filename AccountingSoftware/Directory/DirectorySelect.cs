@@ -19,6 +19,25 @@ namespace AccountingSoftware
 
 		protected Kernel Kernel { get; set; }
 
+		protected int Position { get; set; }
+
+		protected DirectoryPointer DirectoryPointerPosition { get; set; }
+
+		protected bool MoveToPosition()
+		{
+			if (Position < BaseSelectList.Count)
+			{
+				DirectoryPointerPosition = BaseSelectList[Position];
+				Position++;
+				return true;
+			}
+			else
+			{
+				DirectoryPointerPosition = null;
+				return false;
+			}
+		}
+
 		protected List<DirectoryPointer> BaseSelectList { get; private set; }
 
 		protected void BaseSelect()

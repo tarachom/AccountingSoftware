@@ -36,8 +36,8 @@ namespace AccountingSoftware.Conf
 
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
-        public <xsl:value-of select="$DirectoryName"/>_Pointer() { }
-    
+        public <xsl:value-of select="$DirectoryName"/>_Pointer() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>") { }
+
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
