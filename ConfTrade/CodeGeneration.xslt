@@ -28,10 +28,28 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
-              new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) 
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+             </xsl:for-each> }) 
         {
             <xsl:for-each select="Fields/Field">
-            <xsl:value-of select="Name"/> = "";
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text> 
+              <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                  <xsl:text>""</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'int'">
+                  <xsl:text>0</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                  <xsl:text>null</xsl:text>
+                </xsl:when>
+              </xsl:choose>;
             </xsl:for-each>
         }
         
@@ -40,20 +58,50 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             BaseInit(uid);
             
             <xsl:for-each select="Fields/Field">
-            <xsl:value-of select="Name"/> = base.Fields["<xsl:value-of select="Name"/>"].ToString();
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:choose>
+                <xsl:when test="Type = 'int'">
+                  <xsl:value-of select="concat('(', 'int', ')')"/>
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                  <xsl:value-of select="concat('(', Pointer, '_Pointer', ')')"/>
+                </xsl:when>
+              </xsl:choose>
+              <xsl:text>base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+              <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                  <xsl:text>.ToString()</xsl:text>
+                </xsl:when>
+              </xsl:choose>;
             </xsl:for-each>
         }
         
         public void Save()
         {
             <xsl:for-each select="Fields/Field">
-            base.Fields["<xsl:value-of select="Name"/>"] = <xsl:value-of select="Name"/>;</xsl:for-each>
-      
+              <xsl:text>base.Fields["</xsl:text>
+              <xsl:value-of select="Name"/>
+              <xsl:text>"] = </xsl:text>
+              <xsl:value-of select="Name"/>;
+            </xsl:for-each>
             BaseSave();
         }
         
         <xsl:for-each select="Fields/Field">
-        public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }
+          <xsl:text>public </xsl:text>
+          <xsl:choose>
+            <xsl:when test="Type = 'pointer'">
+              <xsl:value-of select="Pointer"/>
+              <xsl:text>_Pointer</xsl:text>
+            </xsl:when>
+            <xsl:otherwise>
+              <xsl:value-of select="Type"/>
+            </xsl:otherwise>
+          </xsl:choose>
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="Name"/>
+          <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
     }
 

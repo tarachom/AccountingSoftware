@@ -15,17 +15,21 @@ namespace AccountingSoftware
 
 		}
 
-		public ConfigurationObjectField(string name, string desc = "", string type = "string")
+		public ConfigurationObjectField(string name, string type, string pointer, string desc = "")
 		{
 			Name = name;
-			Desc = desc;
 			Type = type;
+			Pointer = pointer;
+
+			Desc = desc;
 		}
 
 		public string Name { get; set; }
 
-		public string Desc { get; set; }
-
 		public string Type { get; set; }
+
+		public string Pointer { get; set; }
+
+		public string Desc { get; set; }
 	}
 }

@@ -23,7 +23,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
-              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od" }) 
+             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2" }) 
         {
             name = "";
             code = "";
@@ -33,7 +33,7 @@ namespace ConfTrade_v1_1
             field3 = "";
             field4 = "";
             field5 = "";
-            od = "";
+            od2 = null;
             
         }
         
@@ -49,13 +49,12 @@ namespace ConfTrade_v1_1
             field3 = base.Fields["field3"].ToString();
             field4 = base.Fields["field4"].ToString();
             field5 = base.Fields["field5"].ToString();
-            od = base.Fields["od"].ToString();
+            od2 = (Od_Pointer)base.Fields["od2"];
             
         }
         
         public void Save()
         {
-            
             base.Fields["name"] = name;
             base.Fields["code"] = code;
             base.Fields["description"] = description;
@@ -64,29 +63,20 @@ namespace ConfTrade_v1_1
             base.Fields["field3"] = field3;
             base.Fields["field4"] = field4;
             base.Fields["field5"] = field5;
-            base.Fields["od"] = od;
-      
+            base.Fields["od2"] = od2;
+            
             BaseSave();
         }
         
-        
         public string name { get; set; }
-        
         public string code { get; set; }
-        
         public string description { get; set; }
-        
         public string field1 { get; set; }
-        
         public string field2 { get; set; }
-        
         public string field3 { get; set; }
-        
         public string field4 { get; set; }
-        
         public string field5 { get; set; }
-        
-        public string od { get; set; }
+        public Od_Pointer od2 { get; set; }
         
     }
 
@@ -134,7 +124,7 @@ namespace ConfTrade_v1_1
     class Od_Objest : DirectoryObject
     {
         public Od_Objest() : base(Config.Kernel, "od_v1_1",
-              new string[] { "Name" }) 
+             new string[] { "Name" }) 
         {
             Name = "";
             
@@ -150,12 +140,10 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
-            
             base.Fields["Name"] = Name;
-      
+            
             BaseSave();
         }
-        
         
         public string Name { get; set; }
         

@@ -93,13 +93,14 @@ namespace AccountingSoftware
             XPathNodeIterator fieldNodes = xPathDocNavigator.Select("Fields/Field");
             while (fieldNodes.MoveNext())
             {
-                string nameNodeValue = fieldNodes.Current.SelectSingleNode("Name").Value;
-                string typeNodeValue = fieldNodes.Current.SelectSingleNode("Type").Value;
-                string descNodeValue = fieldNodes.Current.SelectSingleNode("Desc").Value;
+                string name = fieldNodes.Current.SelectSingleNode("Name").Value;
+                string type = fieldNodes.Current.SelectSingleNode("Type").Value;
+                string pointer = (type == "pointer") ? fieldNodes.Current.SelectSingleNode("Pointer").Value : "";
+                string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(nameNodeValue, descNodeValue, typeNodeValue);
+                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, type, pointer, desc);
 
-                fields.Add(nameNodeValue, ConfObjectField);
+                fields.Add(name, ConfObjectField);
             }
         }
 
@@ -194,6 +195,13 @@ namespace AccountingSoftware
                 XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
                 nodeFieldType.InnerText = field.Value.Type;
                 nodeField.AppendChild(nodeFieldType);
+
+                if (field.Value.Type == "pointer")
+                {
+                    XmlElement nodeFieldPointer = xmlConfDocument.CreateElement("Pointer");
+                    nodeFieldPointer.InnerText = field.Value.Pointer;
+                    nodeField.AppendChild(nodeFieldPointer);
+                }
 
                 XmlElement nodeFieldDesc = xmlConfDocument.CreateElement("Desc");
                 nodeFieldDesc.InnerText = field.Value.Desc;
