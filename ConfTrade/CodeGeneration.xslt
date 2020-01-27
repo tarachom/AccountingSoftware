@@ -64,7 +64,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            <xsl:value-of select="$DirectoryName"/>ObjestItem.Init(base.UID);
+            <xsl:value-of select="$DirectoryName"/>ObjestItem.Init(base.UnigueID);
             return <xsl:value-of select="$DirectoryName"/>ObjestItem;
         }
     }
@@ -85,7 +85,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             if (MoveToPosition())
             {
                 Current = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
 
                 return true;
             }

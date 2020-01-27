@@ -44,7 +44,7 @@ namespace AccountingSoftware
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
@@ -71,7 +71,7 @@ namespace AccountingSoftware
 			string query = "INSERT INTO " + sender.Table + "(" + query_field + ") VALUES(" + query_values + ")";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
 
 			//Console.WriteLine(Guid.Parse(sender.UID.UID));
 
@@ -104,7 +104,7 @@ namespace AccountingSoftware
 			query += " WHERE uid = @uid";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
 
 			foreach (string field in sender.FieldList)
 			{
@@ -143,7 +143,7 @@ namespace AccountingSoftware
 				}
 
 				DirectoryPointer elementPointer = new DirectoryPointer();
-				elementPointer.Init(new UnigueID(reader["uid"].ToString()), fields);
+				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields);
 
 				listDirectoryPointer.Add(elementPointer);
 			}

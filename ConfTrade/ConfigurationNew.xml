@@ -6,7 +6,7 @@
   <Directories>
     <Directory>
       <Name>Tovary</Name>
-      <Table>Tovary_v1_1</Table>
+      <Table>tovary_v1_1</Table>
       <Desc>Directory Tovary Info</Desc>
       <Fields>
         <Field>
@@ -49,6 +49,12 @@
           <Type>string</Type>
           <Desc>Field5</Desc>
         </Field>
+        <Field>
+          <Name>od2</Name>
+          <Type>pointer</Type>
+          <Pointer>Od</Pointer>
+          <Desc>od2</Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -83,99 +89,10 @@
       </TabularParts>
     </Directory>
     <Directory>
-      <Name>TovaryInfo</Name>
-      <Table>TovaryInfo</Table>
-      <Desc>Directory Tovary Info</Desc>
+      <Name>Od</Name>
+      <Table>od_v1_1</Table>
+      <Desc>Od</Desc>
       <Fields>
-        <Field>
-          <Name>Field1</Name>
-          <Type>string</Type>
-          <Desc>Field1</Desc>
-        </Field>
-        <Field>
-          <Name>Field2</Name>
-          <Type>string</Type>
-          <Desc>Field2</Desc>
-        </Field>
-        <Field>
-          <Name>Field3</Name>
-          <Type>string</Type>
-          <Desc>Field3</Desc>
-        </Field>
-        <Field>
-          <Name>Field4</Name>
-          <Type>string</Type>
-          <Desc>Field4</Desc>
-        </Field>
-        <Field>
-          <Name>Field5</Name>
-          <Type>string</Type>
-          <Desc>Field5</Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Ceny</Name>
-          <Desc>TablePart Test Info</Desc>
-          <Fields>
-            <Field>
-              <Name>Field1</Name>
-              <Type>string</Type>
-              <Desc>Field1</Desc>
-            </Field>
-            <Field>
-              <Name>Field2</Name>
-              <Type>string</Type>
-              <Desc>Field2</Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>Od</Name>
-          <Desc>TablePart Test Info</Desc>
-          <Fields>
-            <Field>
-              <Name>Field1</Name>
-              <Type>string</Type>
-              <Desc>Field1</Desc>
-            </Field>
-            <Field>
-              <Name>Field2</Name>
-              <Type>string</Type>
-              <Desc>Field2</Desc>
-            </Field>
-            <Field>
-              <Name>Field3</Name>
-              <Type>string</Type>
-              <Desc>Field2</Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-    </Directory>
-    <Directory>
-      <Name>TMC</Name>
-      <Table>TMC</Table>
-      <Desc>TMC</Desc>
-      <Fields>
-        <Field>
-          <Name>Code</Name>
-          <Type>string</Type>
-          <Desc>Code</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>TMC2</Name>
-      <Table>TMC2</Table>
-      <Desc>TMC 2</Desc>
-      <Fields>
-        <Field>
-          <Name>Code</Name>
-          <Type>string</Type>
-          <Desc>Code</Desc>
-        </Field>
         <Field>
           <Name>Name</Name>
           <Type>string</Type>
@@ -183,65 +100,6 @@
         </Field>
       </Fields>
       <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>TMC5</Name>
-      <Table>TMC5</Table>
-      <Desc>Desc</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Desc</Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Od</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Name</Name>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-    </Directory>
-    <Directory>
-      <Name>TMC6</Name>
-      <Table>TMC6</Table>
-      <Desc>Desc</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Desc</Desc>
-        </Field>
-        <Field>
-          <Name>Code</Name>
-          <Type>string</Type>
-          <Desc>Desc</Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Od</Name>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Name</Name>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
     </Directory>
   </Directories>
 </Configuration>

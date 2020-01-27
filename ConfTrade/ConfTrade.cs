@@ -25,6 +25,7 @@ namespace ConfTrade
             newObj.New();
 
             newObj.name = "New Obj";
+
             newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
@@ -37,19 +38,19 @@ namespace ConfTrade
 
             while (s.MoveNext())
             {
-                Console.WriteLine(s.Current.UID.UID);
+                Console.WriteLine(s.Current.UnigueID.ToString());
 
-                Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
+                //Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
 
-                obj.code = obj.UID.UID;
-                obj.description = "description";
+                //obj.code = obj.UnigueID.ToString();
+                //obj.description = "description";
 
-                obj.field1 = "field1";
-                obj.field2 = "field2";
-                obj.field3 = "field3";
-                obj.field4 = "field4";
-                obj.field5 = "field5";
-                obj.Save();                
+                //obj.field1 = "field1";
+                //obj.field2 = "field2";
+                //obj.field3 = "field3";
+                //obj.field4 = "field4";
+                //obj.field5 = "field5";
+                //obj.Save();                
             }
                        
 

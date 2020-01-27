@@ -22,24 +22,23 @@ namespace AccountingSoftware
 				Fields.Add(field, null);
 		}
 
-		protected Kernel Kernel { get; set; }
+		protected Kernel Kernel { get; private set; }
 
-		public string Table { get; set; }
+		public string Table { get; private set; }
 
-		public UnigueID UID { get; private set; }
+		public UnigueID UnigueID { get; private set; }
 
 		protected bool IsNew { get; private set; }
 
 		public void New()
 		{
-			UID = new UnigueID(Guid.NewGuid().ToString());
+			UnigueID = new UnigueID(Guid.NewGuid());
 			IsNew = true;
 		}
 
 		protected void BaseInit(UnigueID uid)
 		{
-			UID = uid;
-
+			UnigueID = uid;
 			Kernel.DataBase.SelectDirectoryObject(this, Fields);
 		}
 

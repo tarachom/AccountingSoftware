@@ -17,11 +17,11 @@ namespace AccountingSoftware
 
 		public Query QuerySelect { get; set; }
 
-		protected Kernel Kernel { get; set; }
+		protected Kernel Kernel { get; private set; }
 
-		protected int Position { get; set; }
+		protected int Position { get; private set; }
 
-		protected DirectoryPointer DirectoryPointerPosition { get; set; }
+		protected DirectoryPointer DirectoryPointerPosition { get; private set; }
 
 		protected bool MoveToPosition()
 		{

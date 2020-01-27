@@ -11,22 +11,23 @@ namespace AccountingSoftware
 		/// <summary>
 		/// 
 		/// </summary>
-		/// <param name="uid">Унікальний ідентифікатор</param>
+		/// <param name="uguid">Унікальний ідентифікатор</param>
 		/// <param name="table">Таблиця задається у випадку составного типу {1111, table1} або {1111, table2}.
 		/// Составний тип використовується у випадку коли в одне поле можна записати елементи з різних довідників наприклад, і
 		/// потрібно вказувати який саме довідник використаний.</param>
-		public UnigueID(string uid, string table = "")
+		public UnigueID(Guid uGuid, string table = "") //
 		{
-			UID = uid;
+			UGuid = uGuid;
 			Table = table;
 		}
 
-		public string UID { get; }
-		public string Table { get; }
+		public Guid UGuid { get; private set; }
+
+		public string Table { get; private set; }
 
 		public override string ToString()
 		{
-			return UID;
+			return UGuid.ToString();
 		}
 	}
 }

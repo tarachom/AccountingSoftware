@@ -22,8 +22,8 @@ namespace ConfTrade_v1_1
 
     class Tovary_Objest : DirectoryObject
     {
-        public Tovary_Objest() : base(Config.Kernel, "Tovary_v1_1",
-              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5" }) 
+        public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
+              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od" }) 
         {
             name = "";
             code = "";
@@ -33,6 +33,7 @@ namespace ConfTrade_v1_1
             field3 = "";
             field4 = "";
             field5 = "";
+            od = "";
             
         }
         
@@ -48,6 +49,7 @@ namespace ConfTrade_v1_1
             field3 = base.Fields["field3"].ToString();
             field4 = base.Fields["field4"].ToString();
             field5 = base.Fields["field5"].ToString();
+            od = base.Fields["od"].ToString();
             
         }
         
@@ -62,6 +64,7 @@ namespace ConfTrade_v1_1
             base.Fields["field3"] = field3;
             base.Fields["field4"] = field4;
             base.Fields["field5"] = field5;
+            base.Fields["od"] = od;
       
             BaseSave();
         }
@@ -83,23 +86,25 @@ namespace ConfTrade_v1_1
         
         public string field5 { get; set; }
         
+        public string od { get; set; }
+        
     }
 
     class Tovary_Pointer : DirectoryPointer
     {
-        public Tovary_Pointer() : base(Config.Kernel, "Tovary_v1_1") { }
+        public Tovary_Pointer() : base(Config.Kernel, "tovary_v1_1") { }
 
         public Tovary_Objest GetDirectoryObject()
         {
             Tovary_Objest TovaryObjestItem = new Tovary_Objest();
-            TovaryObjestItem.Init(base.UID);
+            TovaryObjestItem.Init(base.UnigueID);
             return TovaryObjestItem;
         }
     }
 
     class Tovary_Select : DirectorySelect
     {
-        public Tovary_Select() : base(Config.Kernel, "Tovary_v1_1") { }
+        public Tovary_Select() : base(Config.Kernel, "tovary_v1_1") { }
     
         public void Select() 
         { 
@@ -113,7 +118,7 @@ namespace ConfTrade_v1_1
             if (MoveToPosition())
             {
                 Current = new Tovary_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
 
                 return true;
             }
@@ -124,249 +129,11 @@ namespace ConfTrade_v1_1
         public Tovary_Pointer Current { get; private set; }
     }
     
-    /*******************************************************[ TovaryInfo ]****************************************************/
+    /*******************************************************[ Od ]****************************************************/
 
-    class TovaryInfo_Objest : DirectoryObject
+    class Od_Objest : DirectoryObject
     {
-        public TovaryInfo_Objest() : base(Config.Kernel, "TovaryInfo",
-              new string[] { "Field1", "Field2", "Field3", "Field4", "Field5" }) 
-        {
-            Field1 = "";
-            Field2 = "";
-            Field3 = "";
-            Field4 = "";
-            Field5 = "";
-            
-        }
-        
-        public void Init(UnigueID uid)
-        {
-            BaseInit(uid);
-            
-            Field1 = base.Fields["Field1"].ToString();
-            Field2 = base.Fields["Field2"].ToString();
-            Field3 = base.Fields["Field3"].ToString();
-            Field4 = base.Fields["Field4"].ToString();
-            Field5 = base.Fields["Field5"].ToString();
-            
-        }
-        
-        public void Save()
-        {
-            
-            base.Fields["Field1"] = Field1;
-            base.Fields["Field2"] = Field2;
-            base.Fields["Field3"] = Field3;
-            base.Fields["Field4"] = Field4;
-            base.Fields["Field5"] = Field5;
-      
-            BaseSave();
-        }
-        
-        
-        public string Field1 { get; set; }
-        
-        public string Field2 { get; set; }
-        
-        public string Field3 { get; set; }
-        
-        public string Field4 { get; set; }
-        
-        public string Field5 { get; set; }
-        
-    }
-
-    class TovaryInfo_Pointer : DirectoryPointer
-    {
-        public TovaryInfo_Pointer() : base(Config.Kernel, "TovaryInfo") { }
-
-        public TovaryInfo_Objest GetDirectoryObject()
-        {
-            TovaryInfo_Objest TovaryInfoObjestItem = new TovaryInfo_Objest();
-            TovaryInfoObjestItem.Init(base.UID);
-            return TovaryInfoObjestItem;
-        }
-    }
-
-    class TovaryInfo_Select : DirectorySelect
-    {
-        public TovaryInfo_Select() : base(Config.Kernel, "TovaryInfo") { }
-    
-        public void Select() 
-        { 
-            base.BaseSelect();
-        }
-        
-        public bool MoveNext()
-        {
-            Current = null;
-
-            if (MoveToPosition())
-            {
-                Current = new TovaryInfo_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public TovaryInfo_Pointer Current { get; private set; }
-    }
-    
-    /*******************************************************[ TMC ]****************************************************/
-
-    class TMC_Objest : DirectoryObject
-    {
-        public TMC_Objest() : base(Config.Kernel, "TMC",
-              new string[] { "Code" }) 
-        {
-            Code = "";
-            
-        }
-        
-        public void Init(UnigueID uid)
-        {
-            BaseInit(uid);
-            
-            Code = base.Fields["Code"].ToString();
-            
-        }
-        
-        public void Save()
-        {
-            
-            base.Fields["Code"] = Code;
-      
-            BaseSave();
-        }
-        
-        
-        public string Code { get; set; }
-        
-    }
-
-    class TMC_Pointer : DirectoryPointer
-    {
-        public TMC_Pointer() : base(Config.Kernel, "TMC") { }
-
-        public TMC_Objest GetDirectoryObject()
-        {
-            TMC_Objest TMCObjestItem = new TMC_Objest();
-            TMCObjestItem.Init(base.UID);
-            return TMCObjestItem;
-        }
-    }
-
-    class TMC_Select : DirectorySelect
-    {
-        public TMC_Select() : base(Config.Kernel, "TMC") { }
-    
-        public void Select() 
-        { 
-            base.BaseSelect();
-        }
-        
-        public bool MoveNext()
-        {
-            Current = null;
-
-            if (MoveToPosition())
-            {
-                Current = new TMC_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public TMC_Pointer Current { get; private set; }
-    }
-    
-    /*******************************************************[ TMC2 ]****************************************************/
-
-    class TMC2_Objest : DirectoryObject
-    {
-        public TMC2_Objest() : base(Config.Kernel, "TMC2",
-              new string[] { "Code", "Name" }) 
-        {
-            Code = "";
-            Name = "";
-            
-        }
-        
-        public void Init(UnigueID uid)
-        {
-            BaseInit(uid);
-            
-            Code = base.Fields["Code"].ToString();
-            Name = base.Fields["Name"].ToString();
-            
-        }
-        
-        public void Save()
-        {
-            
-            base.Fields["Code"] = Code;
-            base.Fields["Name"] = Name;
-      
-            BaseSave();
-        }
-        
-        
-        public string Code { get; set; }
-        
-        public string Name { get; set; }
-        
-    }
-
-    class TMC2_Pointer : DirectoryPointer
-    {
-        public TMC2_Pointer() : base(Config.Kernel, "TMC2") { }
-
-        public TMC2_Objest GetDirectoryObject()
-        {
-            TMC2_Objest TMC2ObjestItem = new TMC2_Objest();
-            TMC2ObjestItem.Init(base.UID);
-            return TMC2ObjestItem;
-        }
-    }
-
-    class TMC2_Select : DirectorySelect
-    {
-        public TMC2_Select() : base(Config.Kernel, "TMC2") { }
-    
-        public void Select() 
-        { 
-            base.BaseSelect();
-        }
-        
-        public bool MoveNext()
-        {
-            Current = null;
-
-            if (MoveToPosition())
-            {
-                Current = new TMC2_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public TMC2_Pointer Current { get; private set; }
-    }
-    
-    /*******************************************************[ TMC5 ]****************************************************/
-
-    class TMC5_Objest : DirectoryObject
-    {
-        public TMC5_Objest() : base(Config.Kernel, "TMC5",
+        public Od_Objest() : base(Config.Kernel, "od_v1_1",
               new string[] { "Name" }) 
         {
             Name = "";
@@ -394,21 +161,21 @@ namespace ConfTrade_v1_1
         
     }
 
-    class TMC5_Pointer : DirectoryPointer
+    class Od_Pointer : DirectoryPointer
     {
-        public TMC5_Pointer() : base(Config.Kernel, "TMC5") { }
+        public Od_Pointer() : base(Config.Kernel, "od_v1_1") { }
 
-        public TMC5_Objest GetDirectoryObject()
+        public Od_Objest GetDirectoryObject()
         {
-            TMC5_Objest TMC5ObjestItem = new TMC5_Objest();
-            TMC5ObjestItem.Init(base.UID);
-            return TMC5ObjestItem;
+            Od_Objest OdObjestItem = new Od_Objest();
+            OdObjestItem.Init(base.UnigueID);
+            return OdObjestItem;
         }
     }
 
-    class TMC5_Select : DirectorySelect
+    class Od_Select : DirectorySelect
     {
-        public TMC5_Select() : base(Config.Kernel, "TMC5") { }
+        public Od_Select() : base(Config.Kernel, "od_v1_1") { }
     
         public void Select() 
         { 
@@ -421,8 +188,8 @@ namespace ConfTrade_v1_1
 
             if (MoveToPosition())
             {
-                Current = new TMC5_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
+                Current = new Od_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
 
                 return true;
             }
@@ -430,83 +197,7 @@ namespace ConfTrade_v1_1
                 return false;
         }
 
-        public TMC5_Pointer Current { get; private set; }
-    }
-    
-    /*******************************************************[ TMC6 ]****************************************************/
-
-    class TMC6_Objest : DirectoryObject
-    {
-        public TMC6_Objest() : base(Config.Kernel, "TMC6",
-              new string[] { "Name", "Code" }) 
-        {
-            Name = "";
-            Code = "";
-            
-        }
-        
-        public void Init(UnigueID uid)
-        {
-            BaseInit(uid);
-            
-            Name = base.Fields["Name"].ToString();
-            Code = base.Fields["Code"].ToString();
-            
-        }
-        
-        public void Save()
-        {
-            
-            base.Fields["Name"] = Name;
-            base.Fields["Code"] = Code;
-      
-            BaseSave();
-        }
-        
-        
-        public string Name { get; set; }
-        
-        public string Code { get; set; }
-        
-    }
-
-    class TMC6_Pointer : DirectoryPointer
-    {
-        public TMC6_Pointer() : base(Config.Kernel, "TMC6") { }
-
-        public TMC6_Objest GetDirectoryObject()
-        {
-            TMC6_Objest TMC6ObjestItem = new TMC6_Objest();
-            TMC6ObjestItem.Init(base.UID);
-            return TMC6ObjestItem;
-        }
-    }
-
-    class TMC6_Select : DirectorySelect
-    {
-        public TMC6_Select() : base(Config.Kernel, "TMC6") { }
-    
-        public void Select() 
-        { 
-            base.BaseSelect();
-        }
-        
-        public bool MoveNext()
-        {
-            Current = null;
-
-            if (MoveToPosition())
-            {
-                Current = new TMC6_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UID, base.DirectoryPointerPosition.Fields);
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public TMC6_Pointer Current { get; private set; }
+        public Od_Pointer Current { get; private set; }
     }
     
 }

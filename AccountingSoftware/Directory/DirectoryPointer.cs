@@ -21,17 +21,17 @@ namespace AccountingSoftware
 			Kernel = kernel;
 		}
 
-		protected Kernel Kernel { get; set; }
-
-		protected string Table { get; set; }
-
 		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
-			UID = uid;
+			UnigueID = uid;
 			Fields = fields;
 		}
 
-		public UnigueID UID { get; private set; }
+		protected Kernel Kernel { get; private set; }
+
+		protected string Table { get; private set; }		
+
+		public UnigueID UnigueID { get; private set; }
 
 		public Dictionary<string, object> Fields { get; private set; }
 	}
