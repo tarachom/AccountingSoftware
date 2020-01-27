@@ -61,17 +61,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
               <xsl:value-of select="Name"/>
               <xsl:text> = </xsl:text>
               <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                  <xsl:text>base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
+                </xsl:when>
                 <xsl:when test="Type = 'int'">
-                  <xsl:value-of select="concat('(', 'int', ')')"/>
+                  <xsl:text>(int)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
-                  <xsl:value-of select="concat('(', Pointer, '_Pointer', ')')"/>
-                </xsl:when>
-              </xsl:choose>
-              <xsl:text>base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-              <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>.ToString()</xsl:text>
+                  <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
+                  <xsl:text>_Pointer(base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
@@ -83,7 +81,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
               <xsl:text>base.Fields["</xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:text>"] = </xsl:text>
-              <xsl:value-of select="Name"/>;
+              <xsl:value-of select="Name"/>
+              <xsl:choose>
+                <xsl:when test="Type = 'pointer'">
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                </xsl:when>
+              </xsl:choose>;
             </xsl:for-each>
             BaseSave();
         }
@@ -107,7 +110,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
-        public <xsl:value-of select="$DirectoryName"/>_Pointer() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
+        public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        {
+            if (uid != null) base.Init(new UnigueID((Guid)uid), null);
+        }
 
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {

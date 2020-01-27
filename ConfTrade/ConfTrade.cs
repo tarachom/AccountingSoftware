@@ -21,12 +21,16 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
-            newObj.New();
+            //Conf.Od_Objest newOd = new Conf.Od_Objest();
+            //newOd.New();
+            //newOd.Name = "шт.";
+            //newOd.Save();
 
-            newObj.name = "New Obj";
-
-            newObj.Save();
+            //Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
+            //newObj.New();
+            //newObj.name = "New Obj";
+            //newObj.od2 = newOd.GetPointer();
+            //newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;
@@ -38,9 +42,11 @@ namespace ConfTrade
 
             while (s.MoveNext())
             {
-                Console.WriteLine(s.Current.UnigueID.ToString());
+                //Console.WriteLine(s.Current.UnigueID.ToString());
 
-                //Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
+                Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
+
+                Console.WriteLine(obj.name + ", " + obj.od2.UnigueID.ToString());
 
                 //obj.code = obj.UnigueID.ToString();
                 //obj.description = "description";

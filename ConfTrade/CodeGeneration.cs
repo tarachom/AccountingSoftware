@@ -49,7 +49,7 @@ namespace ConfTrade_v1_1
             field3 = base.Fields["field3"].ToString();
             field4 = base.Fields["field4"].ToString();
             field5 = base.Fields["field5"].ToString();
-            od2 = (Od_Pointer)base.Fields["od2"];
+            od2 = new Od_Pointer(base.Fields["od2"]);
             
         }
         
@@ -63,7 +63,7 @@ namespace ConfTrade_v1_1
             base.Fields["field3"] = field3;
             base.Fields["field4"] = field4;
             base.Fields["field5"] = field5;
-            base.Fields["od2"] = od2;
+            base.Fields["od2"] = od2.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -82,7 +82,10 @@ namespace ConfTrade_v1_1
 
     class Tovary_Pointer : DirectoryPointer
     {
-        public Tovary_Pointer() : base(Config.Kernel, "tovary_v1_1") { }
+        public Tovary_Pointer(object uid = null) : base(Config.Kernel, "tovary_v1_1")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
 
         public Tovary_Objest GetDirectoryObject()
         {
@@ -151,7 +154,10 @@ namespace ConfTrade_v1_1
 
     class Od_Pointer : DirectoryPointer
     {
-        public Od_Pointer() : base(Config.Kernel, "od_v1_1") { }
+        public Od_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
 
         public Od_Objest GetDirectoryObject()
         {
