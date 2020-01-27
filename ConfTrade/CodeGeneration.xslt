@@ -12,7 +12,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using AccountingSoftware;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
@@ -112,7 +111,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
-            if (uid != null) base.Init(new UnigueID((Guid)uid), null);
+            if (uid != null &amp;&amp; uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
         }
 
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()

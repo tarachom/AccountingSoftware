@@ -43,7 +43,6 @@ namespace AccountingSoftware
 		protected void BaseSelect()
 		{
 			BaseSelectList = new List<DirectoryPointer>();
-
 			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
 		}
 	}

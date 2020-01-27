@@ -94,8 +94,6 @@ namespace ConfTrade
             //TestPostgres();
 
             Console.ReadLine();
-
-           
         }
 
         static void TestPostgres()
