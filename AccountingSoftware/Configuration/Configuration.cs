@@ -25,6 +25,8 @@ namespace AccountingSoftware
 
         public string Name { get; set; }
 
+        public string NameSpace { get; set; }
+
         public string Author { get; set; }
 
         public Dictionary<string, ConfigurationConstants> Constants { get; set; }
@@ -60,6 +62,9 @@ namespace AccountingSoftware
             string nameConfiguration = rootNodeConfiguration.SelectSingleNode("Name").Value;
             Conf.Name = nameConfiguration;
 
+            string nameSpaceConfiguration = rootNodeConfiguration.SelectSingleNode("NameSpace").Value;
+            Conf.NameSpace = nameSpaceConfiguration;
+
             string authorConfiguration = rootNodeConfiguration.SelectSingleNode("Author").Value;
             Conf.Author = authorConfiguration;
         }
@@ -71,13 +76,11 @@ namespace AccountingSoftware
             while (directoryNodes.MoveNext())
             {
                 string nameNodeValue = directoryNodes.Current.SelectSingleNode("Name").Value;
+                string tableNodeValue = directoryNodes.Current.SelectSingleNode("Table").Value;
                 string descNodeValue = directoryNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationDirectories ConfObjectDirectories = new ConfigurationDirectories();
-                ConfObjectDirectories.Name = nameNodeValue;
-                ConfObjectDirectories.Desc = descNodeValue;
-
-                Conf.Directories.Add(nameNodeValue, ConfObjectDirectories);
+                ConfigurationDirectories ConfObjectDirectories = new ConfigurationDirectories(nameNodeValue, tableNodeValue, descNodeValue);
+                Conf.Directories.Add(ConfObjectDirectories.Name, ConfObjectDirectories);
 
                 LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current);
 
@@ -94,10 +97,7 @@ namespace AccountingSoftware
                 string typeNodeValue = fieldNodes.Current.SelectSingleNode("Type").Value;
                 string descNodeValue = fieldNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField();
-                ConfObjectField.Name = nameNodeValue;
-                ConfObjectField.Type = typeNodeValue;
-                ConfObjectField.Desc = descNodeValue;
+                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(nameNodeValue, descNodeValue, typeNodeValue);
 
                 fields.Add(nameNodeValue, ConfObjectField);
             }
@@ -111,9 +111,7 @@ namespace AccountingSoftware
                 string nameNodeValue = tablePartNodes.Current.SelectSingleNode("Name").Value;
                 string descNodeValue = tablePartNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectTablePart ConfObjectTablePart = new ConfigurationObjectTablePart();
-                ConfObjectTablePart.Name = nameNodeValue;
-                ConfObjectTablePart.Desc = descNodeValue;
+                ConfigurationObjectTablePart ConfObjectTablePart = new ConfigurationObjectTablePart(nameNodeValue, descNodeValue);
 
                 tabularParts.Add(nameNodeValue, ConfObjectTablePart);
 
@@ -142,6 +140,10 @@ namespace AccountingSoftware
             rootConfigurationName.InnerText = Conf.Name;
             rootNode.AppendChild(rootConfigurationName);
 
+            XmlElement rootConfigurationNameSpace = xmlConfDocument.CreateElement("NameSpace");
+            rootConfigurationNameSpace.InnerText = Conf.NameSpace;
+            rootNode.AppendChild(rootConfigurationNameSpace);
+
             XmlElement rootConfigurationAuthor = xmlConfDocument.CreateElement("Author");
             rootConfigurationAuthor.InnerText = Conf.Author;
             rootNode.AppendChild(rootConfigurationAuthor);
@@ -160,6 +162,10 @@ namespace AccountingSoftware
                 XmlElement nodeDirectoryName = xmlConfDocument.CreateElement("Name");
                 nodeDirectoryName.InnerText = ConfDirectory.Key;
                 nodeDirectory.AppendChild(nodeDirectoryName);
+
+                XmlElement nodeDirectoryTable = xmlConfDocument.CreateElement("Table");
+                nodeDirectoryTable.InnerText = ConfDirectory.Value.Table;
+                nodeDirectory.AppendChild(nodeDirectoryTable);
 
                 XmlElement nodeDirectoryDesc = xmlConfDocument.CreateElement("Desc");
                 nodeDirectoryDesc.InnerText = ConfDirectory.Value.Desc;

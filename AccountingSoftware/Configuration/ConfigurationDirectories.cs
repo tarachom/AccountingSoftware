@@ -13,11 +13,12 @@ namespace AccountingSoftware
 			Init();
 		}
 
-		public ConfigurationDirectories(string name, string desc = "")
+		public ConfigurationDirectories(string name, string table, string desc = "")
 		{
 			Init();
 
 			base.Name = name;
+			base.Table = table;
 			base.Desc = desc;
 		}
 

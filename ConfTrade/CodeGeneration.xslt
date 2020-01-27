@@ -5,7 +5,6 @@
   <xsl:template match="/">
 
 /*
- * Автоматично згенерований код.
  *
  * Конфігурації "<xsl:value-of select="Configuration/Name"/>"
  * Автор <xsl:value-of select="Configuration/Author"/>
@@ -16,7 +15,7 @@ using System;
 using System.Collections.Generic;
 using AccountingSoftware;
 
-namespace AccountingSoftware.Conf
+namespace <xsl:value-of select="Configuration/NameSpace"/>
 {
     static class Config
     {
@@ -28,14 +27,14 @@ namespace AccountingSoftware.Conf
 
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
-        public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>",
+        public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
               new string[] { <xsl:for-each select="Fields/Field"><xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if><xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text></xsl:for-each> }) 
         {
             <xsl:for-each select="Fields/Field">
             <xsl:value-of select="Name"/> = "";
             </xsl:for-each>
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -60,7 +59,7 @@ namespace AccountingSoftware.Conf
 
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
-        public <xsl:value-of select="$DirectoryName"/>_Pointer() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>") { }
+        public <xsl:value-of select="$DirectoryName"/>_Pointer() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
 
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
@@ -72,7 +71,7 @@ namespace AccountingSoftware.Conf
 
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
-        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="$DirectoryName"/>") { }
+        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
     
         public void Select() 
         { 
@@ -96,6 +95,7 @@ namespace AccountingSoftware.Conf
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
     }
+    <!--
       <xsl:for-each select="TabularParts/TablePart">
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
@@ -117,6 +117,7 @@ namespace AccountingSoftware.Conf
         public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }</xsl:for-each>
     }
       </xsl:for-each>
+    -->
     </xsl:for-each>
 }
   </xsl:template>

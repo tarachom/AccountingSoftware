@@ -8,7 +8,7 @@ using System.Xml.XPath;
 using System.Xml.Xsl;
 
 using AccountingSoftware;
-using Conf = AccountingSoftware.Conf;
+using Conf = ConfTrade_v1_1;
 using Npgsql;
 
 //Конфігурація Торгівля

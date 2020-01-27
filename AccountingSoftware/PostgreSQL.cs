@@ -73,16 +73,16 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Parse(sender.UID.UID)));
 
-			Console.WriteLine(Guid.Parse(sender.UID.UID));
+			//Console.WriteLine(Guid.Parse(sender.UID.UID));
 
 			foreach (string field in sender.FieldList)
 			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fields[field]));
 
-				Console.WriteLine(field + " = " + fields[field]);
+				//Console.WriteLine(field + " = " + fields[field]);
 			}
 
-			Console.WriteLine(query);
+			//Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}

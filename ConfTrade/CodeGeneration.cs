@@ -1,7 +1,6 @@
 ﻿
 
 /*
- * Автоматично згенерований код.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
@@ -12,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using AccountingSoftware;
 
-namespace AccountingSoftware.Conf
+namespace ConfTrade_v1_1
 {
     static class Config
     {
@@ -23,7 +22,7 @@ namespace AccountingSoftware.Conf
 
     class Tovary_Objest : DirectoryObject
     {
-        public Tovary_Objest() : base(Config.Kernel, "Tovary",
+        public Tovary_Objest() : base(Config.Kernel, "Tovary_v1_1",
               new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5" }) 
         {
             name = "";
@@ -36,7 +35,7 @@ namespace AccountingSoftware.Conf
             field5 = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -88,7 +87,7 @@ namespace AccountingSoftware.Conf
 
     class Tovary_Pointer : DirectoryPointer
     {
-        public Tovary_Pointer() : base(Config.Kernel, "Tovary") { }
+        public Tovary_Pointer() : base(Config.Kernel, "Tovary_v1_1") { }
 
         public Tovary_Objest GetDirectoryObject()
         {
@@ -100,7 +99,7 @@ namespace AccountingSoftware.Conf
 
     class Tovary_Select : DirectorySelect
     {
-        public Tovary_Select() : base(Config.Kernel, "Tovary") { }
+        public Tovary_Select() : base(Config.Kernel, "Tovary_v1_1") { }
     
         public void Select() 
         { 
@@ -124,44 +123,7 @@ namespace AccountingSoftware.Conf
 
         public Tovary_Pointer Current { get; private set; }
     }
-      
-
-    class Tovary_Ceny_TablePart : DirectoryTablePart
-    {
-        public Tovary_Ceny_TablePart(Tovary_Objest owner) { Owner = owner; }
     
-        public Tovary_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<Tovary_Ceny_TablePartRecord> RecordCollection { get; }
-    }
-
-    class Tovary_Ceny_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Field1 { get; set; }
-        public string Field2 { get; set; }
-    }
-      
-
-    class Tovary_Od_TablePart : DirectoryTablePart
-    {
-        public Tovary_Od_TablePart(Tovary_Objest owner) { Owner = owner; }
-    
-        public Tovary_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<Tovary_Od_TablePartRecord> RecordCollection { get; }
-    }
-
-    class Tovary_Od_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Name { get; set; }
-    }
-      
     /*******************************************************[ TovaryInfo ]****************************************************/
 
     class TovaryInfo_Objest : DirectoryObject
@@ -176,7 +138,7 @@ namespace AccountingSoftware.Conf
             Field5 = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -252,46 +214,7 @@ namespace AccountingSoftware.Conf
 
         public TovaryInfo_Pointer Current { get; private set; }
     }
-      
-
-    class TovaryInfo_Ceny_TablePart : DirectoryTablePart
-    {
-        public TovaryInfo_Ceny_TablePart(TovaryInfo_Objest owner) { Owner = owner; }
     
-        public TovaryInfo_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<TovaryInfo_Ceny_TablePartRecord> RecordCollection { get; }
-    }
-
-    class TovaryInfo_Ceny_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Field1 { get; set; }
-        public string Field2 { get; set; }
-    }
-      
-
-    class TovaryInfo_Od_TablePart : DirectoryTablePart
-    {
-        public TovaryInfo_Od_TablePart(TovaryInfo_Objest owner) { Owner = owner; }
-    
-        public TovaryInfo_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<TovaryInfo_Od_TablePartRecord> RecordCollection { get; }
-    }
-
-    class TovaryInfo_Od_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Field1 { get; set; }
-        public string Field2 { get; set; }
-        public string Field3 { get; set; }
-    }
-      
     /*******************************************************[ TMC ]****************************************************/
 
     class TMC_Objest : DirectoryObject
@@ -302,7 +225,7 @@ namespace AccountingSoftware.Conf
             Code = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -362,7 +285,7 @@ namespace AccountingSoftware.Conf
 
         public TMC_Pointer Current { get; private set; }
     }
-      
+    
     /*******************************************************[ TMC2 ]****************************************************/
 
     class TMC2_Objest : DirectoryObject
@@ -374,7 +297,7 @@ namespace AccountingSoftware.Conf
             Name = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -438,7 +361,7 @@ namespace AccountingSoftware.Conf
 
         public TMC2_Pointer Current { get; private set; }
     }
-      
+    
     /*******************************************************[ TMC5 ]****************************************************/
 
     class TMC5_Objest : DirectoryObject
@@ -449,7 +372,7 @@ namespace AccountingSoftware.Conf
             Name = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -509,25 +432,7 @@ namespace AccountingSoftware.Conf
 
         public TMC5_Pointer Current { get; private set; }
     }
-      
-
-    class TMC5_Od_TablePart : DirectoryTablePart
-    {
-        public TMC5_Od_TablePart(TMC5_Objest owner) { Owner = owner; }
     
-        public TMC5_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<TMC5_Od_TablePartRecord> RecordCollection { get; }
-    }
-
-    class TMC5_Od_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Name { get; set; }
-    }
-      
     /*******************************************************[ TMC6 ]****************************************************/
 
     class TMC6_Objest : DirectoryObject
@@ -539,7 +444,7 @@ namespace AccountingSoftware.Conf
             Code = "";
             
         }
-              
+        
         public void Init(UnigueID uid)
         {
             BaseInit(uid);
@@ -603,24 +508,6 @@ namespace AccountingSoftware.Conf
 
         public TMC6_Pointer Current { get; private set; }
     }
-      
-
-    class TMC6_Od_TablePart : DirectoryTablePart
-    {
-        public TMC6_Od_TablePart(TMC6_Objest owner) { Owner = owner; }
     
-        public TMC6_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List<TMC6_Od_TablePartRecord> RecordCollection { get; }
-    }
-
-    class TMC6_Od_TablePartRecord : DirectoryTablePartRecord
-    {
-        
-        public string Name { get; set; }
-    }
-      
 }
   
