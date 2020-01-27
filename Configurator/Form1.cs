@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Xml.XPath;
@@ -24,12 +23,10 @@ namespace Configurator
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
-			
-
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
 
-			string pathToConf = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
+			//string pathToConf = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
 			string pathToConfSave = @"D:\VS\Project\AccountingSoftware\ConfTrade\ConfigurationNew.xml";
 
 			Conf = new Configuration();

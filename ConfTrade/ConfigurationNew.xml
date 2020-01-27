@@ -55,6 +55,16 @@
           <Pointer>Od</Pointer>
           <Desc>od2</Desc>
         </Field>
+        <Field>
+          <Name>count</Name>
+          <Type>int</Type>
+          <Desc>count</Desc>
+        </Field>
+        <Field>
+          <Name>num</Name>
+          <Type>numeric</Type>
+          <Desc>num</Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>

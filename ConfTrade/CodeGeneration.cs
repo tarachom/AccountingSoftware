@@ -8,7 +8,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using AccountingSoftware;
 
 namespace ConfTrade_v1_1
@@ -23,7 +22,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
-             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2" }) 
+             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num" }) 
         {
             name = "";
             code = "";
@@ -33,7 +32,9 @@ namespace ConfTrade_v1_1
             field3 = "";
             field4 = "";
             field5 = "";
-            od2 = null;
+            od2 = new Od_Pointer();
+            count = 0;
+            num = 0;
             
         }
         
@@ -50,6 +51,8 @@ namespace ConfTrade_v1_1
             field4 = base.Fields["field4"].ToString();
             field5 = base.Fields["field5"].ToString();
             od2 = new Od_Pointer(base.Fields["od2"]);
+            count = (int)base.Fields["count"];
+            num = (decimal)base.Fields["num"];
             
         }
         
@@ -64,6 +67,8 @@ namespace ConfTrade_v1_1
             base.Fields["field4"] = field4;
             base.Fields["field5"] = field5;
             base.Fields["od2"] = od2.UnigueID.UGuid;
+            base.Fields["count"] = count;
+            base.Fields["num"] = num;
             
             BaseSave();
         }
@@ -77,6 +82,8 @@ namespace ConfTrade_v1_1
         public string field4 { get; set; }
         public string field5 { get; set; }
         public Od_Pointer od2 { get; set; }
+        public int count { get; set; }
+        public decimal num { get; set; }
         
     }
 

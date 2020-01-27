@@ -42,11 +42,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 <xsl:when test="Type = 'string'">
                   <xsl:text>""</xsl:text>
                 </xsl:when>
-                <xsl:when test="Type = 'int'">
+                <xsl:when test="Type = 'int' or Type = 'numeric'">
                   <xsl:text>0</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
-                  <xsl:text>null</xsl:text>
+                  <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
@@ -65,6 +65,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 </xsl:when>
                 <xsl:when test="Type = 'int'">
                   <xsl:text>(int)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'numeric'">
+                  <xsl:text>(decimal)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                   <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
@@ -96,6 +99,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             <xsl:when test="Type = 'pointer'">
               <xsl:value-of select="Pointer"/>
               <xsl:text>_Pointer</xsl:text>
+            </xsl:when>
+            <xsl:when test="Type = 'numeric'">
+              <xsl:text>decimal</xsl:text>
             </xsl:when>
             <xsl:otherwise>
               <xsl:value-of select="Type"/>
