@@ -9,7 +9,7 @@ namespace AccountingSoftware
 	public class UnigueID
 	{
 		/// <summary>
-		/// 
+		/// Унікальний ідентифікатор
 		/// </summary>
 		/// <param name="uguid">Унікальний ідентифікатор</param>
 		/// <param name="table">Таблиця задається у випадку составного типу {1111, table1} або {1111, table2}.

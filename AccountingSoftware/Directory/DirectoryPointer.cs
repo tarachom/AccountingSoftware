@@ -12,13 +12,15 @@ namespace AccountingSoftware
 	{
 		public DirectoryPointer()
 		{
-			
+			UnigueID = new UnigueID(Guid.Empty);
 		}
 
 		public DirectoryPointer(Kernel kernel, string table)
 		{
 			Table = table;
 			Kernel = kernel;
+
+			UnigueID = new UnigueID(Guid.Empty);
 		}
 
 		public void Init(UnigueID uid, Dictionary<string, object> fields = null)

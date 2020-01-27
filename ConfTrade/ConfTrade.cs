@@ -23,14 +23,24 @@ namespace ConfTrade
 
             //Conf.Od_Objest newOd = new Conf.Od_Objest();
             //newOd.New();
-            //newOd.Name = "шт.";
+            //newOd.Name = "м.";
             //newOd.Save();
 
-            //Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
-            //newObj.New();
-            //newObj.name = "New Obj";
-            //newObj.od2 = newOd.GetPointer();
-            //newObj.Save();
+            Conf.Od_Select OdSelect = new Conf.Od_Select();
+            OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "м."));
+            OdSelect.QuerySelect.Limit = 1;
+            OdSelect.Select();
+
+            Conf.Od_Pointer OdPointer = new Conf.Od_Pointer();
+
+            if (OdSelect.MoveNext())
+                OdPointer = OdSelect.Current;
+
+            Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
+            newObj.New();
+            newObj.name = "New Obj 6";
+            newObj.od2 = OdPointer;
+            newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;
