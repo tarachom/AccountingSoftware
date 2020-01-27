@@ -80,7 +80,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="back_up\sql" />
-    <Content Include="AccountingSoftware\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
