@@ -155,6 +155,8 @@
 			// 
 			// dataConfiguration
 			// 
+			this.dataConfiguration.AllowUserToAddRows = false;
+			this.dataConfiguration.AllowUserToDeleteRows = false;
 			this.dataConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dataConfiguration.Location = new System.Drawing.Point(0, 0);

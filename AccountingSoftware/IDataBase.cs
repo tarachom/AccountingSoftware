@@ -18,6 +18,6 @@ namespace AccountingSoftware
 		void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
 		void SaveDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
 		void InsertDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
-
+		void DeleteDirectoryObject(DirectoryObject sender);
 	}
 }

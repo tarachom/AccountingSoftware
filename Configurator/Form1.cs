@@ -108,11 +108,36 @@ namespace Configurator
 			Configuration.Generation(pathToConfSave,
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+
+			//-------------------------------------------------------
+
+			dataConfiguration.Columns.Add("Name", "NAME");
+			dataConfiguration.Columns.Add("Code", "CODE");
+
+			DataGridViewComboBoxColumn cbc = new DataGridViewComboBoxColumn();
+			cbc.Name = "List";
+			cbc.FlatStyle = FlatStyle.Flat;
+			cbc.Items.Add("10");
+			cbc.Items.Add("30");
+			cbc.Items.Add("80");
+			cbc.Items.Add("100");
+			dataConfiguration.Columns.Add(cbc);
+
+			DataGridViewCheckBoxColumn cbbc = new DataGridViewCheckBoxColumn(false);
+			cbbc.Name = "Check";
+			dataConfiguration.Columns.Add(cbbc);
+
+			DataGridViewTextBoxColumn tbc = new DataGridViewTextBoxColumn();
+			tbc.Name = "Text";
+			dataConfiguration.Columns.Add(tbc);
+
+			for (int i = 0; i < 30; i++)
+				dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			MessageBox.Show(e.Node.Name);
+		{			
+			
 		}
 	}
 }

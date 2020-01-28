@@ -29,33 +29,6 @@ namespace AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
-		public void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
-		{
-			string query = "SELECT uid ";
-
-			foreach (string field in sender.FieldList)
-			{
-				query += ", " + field;
-			}
-
-			query += " FROM " + sender.Table + " WHERE uid = @uid";
-
-			//Console.WriteLine(query);
-
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
-
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			while (reader.Read())
-			{
-				foreach (string field in sender.FieldList)
-				{
-					fields[field] = reader[field];
-				}
-			}
-			reader.Close();
-		}
-
 		public void InsertDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
 		{
 			string query_field = "uid";
@@ -82,6 +55,16 @@ namespace AccountingSoftware
 			}
 
 			//Console.WriteLine(query);
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void DeleteDirectoryObject(DirectoryObject sender)
+		{
+			string query = "DELETE FROM " + sender.Table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -113,6 +96,33 @@ namespace AccountingSoftware
 			//Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
+		}
+
+		public void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
+		{
+			string query = "SELECT uid ";
+
+			foreach (string field in sender.FieldList)
+			{
+				query += ", " + field;
+			}
+
+			query += " FROM " + sender.Table + " WHERE uid = @uid";
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				foreach (string field in sender.FieldList)
+				{
+					fields[field] = reader[field];
+				}
+			}
+			reader.Close();
 		}
 
 		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
