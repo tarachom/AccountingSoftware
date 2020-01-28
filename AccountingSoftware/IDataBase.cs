@@ -23,6 +23,7 @@ namespace AccountingSoftware
 
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
 	}
 }

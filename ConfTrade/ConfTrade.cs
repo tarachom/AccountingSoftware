@@ -77,8 +77,17 @@ namespace ConfTrade
                 Console.WriteLine(record.name);
             }
 
-            //newObj.Ceny_TablePart.Records.RemoveAt(0);
-            //newObj.Ceny_TablePart.Save();
+            newObj.Ceny_TablePart.Records.RemoveAt(0);
+            newObj.Ceny_TablePart.Save();
+
+            newObj.Ceny_TablePart.Records[0].name = "NewName";
+            newObj.Ceny_TablePart.Save();
+
+            newObj.Ceny_TablePart.Read();
+            foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
+            {
+                Console.WriteLine("name = " + record.name);
+            }
 
             Console.ReadLine();
 

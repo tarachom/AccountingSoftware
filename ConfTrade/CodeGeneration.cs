@@ -196,6 +196,7 @@ namespace ConfTrade_v1_1
         public void Read()
         {
             Records.Clear();
+            base.FieldValueList.Clear();
 
             base.BaseRead(Owner.UnigueID);
 
@@ -210,12 +211,12 @@ namespace ConfTrade_v1_1
 
         public void Save() 
         {
+            base.BaseDelete(Owner.UnigueID);
+
             foreach (Tovary_Ceny_TablePartRecord record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
                 fieldValue.Add("name", record.name);
-
-                Console.WriteLine("Save " + record.name);
 
                 base.BaseSave(Owner.UnigueID, fieldValue);
             }

@@ -32,10 +32,13 @@ namespace AccountingSoftware
 			Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 
+		protected void BaseDelete(UnigueID ownerUnigueID)
+		{
+			Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
+		}
+
 		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
-			Console.WriteLine("BaseSave " + ownerUnigueID.UGuid);
-
 			Kernel.DataBase.InsertDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}

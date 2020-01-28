@@ -217,5 +217,15 @@ namespace AccountingSoftware
 
 			nCommand.ExecuteNonQuery();
 		}
+
+		public void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table)
+		{
+			string query = "DELETE FROM " + table + " WHERE owner = @owner";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			nCommand.ExecuteNonQuery();
+		}
 	}
 }
