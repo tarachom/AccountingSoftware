@@ -58,14 +58,14 @@ namespace AccountingSoftware
         {
             XPathNavigator rootNodeConfiguration = xPathDocNavigator.SelectSingleNode("/Configuration");
 
-            string nameConfiguration = rootNodeConfiguration.SelectSingleNode("Name").Value;
-            Conf.Name = nameConfiguration;
+            string name = rootNodeConfiguration.SelectSingleNode("Name").Value;
+            Conf.Name = name;
 
-            string nameSpaceConfiguration = rootNodeConfiguration.SelectSingleNode("NameSpace").Value;
-            Conf.NameSpace = nameSpaceConfiguration;
+            string nameSpace = rootNodeConfiguration.SelectSingleNode("NameSpace").Value;
+            Conf.NameSpace = nameSpace;
 
-            string authorConfiguration = rootNodeConfiguration.SelectSingleNode("Author").Value;
-            Conf.Author = authorConfiguration;
+            string author = rootNodeConfiguration.SelectSingleNode("Author").Value;
+            Conf.Author = author;
         }
 
         private static void LoadDirectories(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -74,11 +74,11 @@ namespace AccountingSoftware
             XPathNodeIterator directoryNodes = xPathDocNavigator.Select("/Configuration/Directories/Directory");
             while (directoryNodes.MoveNext())
             {
-                string nameNodeValue = directoryNodes.Current.SelectSingleNode("Name").Value;
-                string tableNodeValue = directoryNodes.Current.SelectSingleNode("Table").Value;
-                string descNodeValue = directoryNodes.Current.SelectSingleNode("Desc").Value;
+                string name = directoryNodes.Current.SelectSingleNode("Name").Value;
+                string table = directoryNodes.Current.SelectSingleNode("Table").Value;
+                string desc = directoryNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationDirectories ConfObjectDirectories = new ConfigurationDirectories(nameNodeValue, tableNodeValue, descNodeValue);
+                ConfigurationDirectories ConfObjectDirectories = new ConfigurationDirectories(name, table, desc);
                 Conf.Directories.Add(ConfObjectDirectories.Name, ConfObjectDirectories);
 
                 LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current);
@@ -108,12 +108,13 @@ namespace AccountingSoftware
             XPathNodeIterator tablePartNodes = xPathDocNavigator.Select("TabularParts/TablePart");
             while (tablePartNodes.MoveNext())
             {
-                string nameNodeValue = tablePartNodes.Current.SelectSingleNode("Name").Value;
-                string descNodeValue = tablePartNodes.Current.SelectSingleNode("Desc").Value;
+                string name = tablePartNodes.Current.SelectSingleNode("Name").Value;
+                string table = tablePartNodes.Current.SelectSingleNode("Table").Value;
+                string desc = tablePartNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectTablePart ConfObjectTablePart = new ConfigurationObjectTablePart(nameNodeValue, descNodeValue);
+                ConfigurationObjectTablePart ConfObjectTablePart = new ConfigurationObjectTablePart(name, table, desc);
 
-                tabularParts.Add(nameNodeValue, ConfObjectTablePart);
+                tabularParts.Add(ConfObjectTablePart.Name, ConfObjectTablePart);
 
                 LoadFields(ConfObjectTablePart.Fields, tablePartNodes.Current);
             }
@@ -124,29 +125,29 @@ namespace AccountingSoftware
             XmlDocument xmlConfDocument = new XmlDocument();
             xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
-            XmlElement rootConfiguration = xmlConfDocument.CreateElement("Configuration");
-            xmlConfDocument.AppendChild(rootConfiguration);
+            XmlElement rootNode = xmlConfDocument.CreateElement("Configuration");
+            xmlConfDocument.AppendChild(rootNode);
 
-            SaveConfigurationInfo(Conf, xmlConfDocument, rootConfiguration);
+            SaveConfigurationInfo(Conf, xmlConfDocument, rootNode);
 
-            SaveDirectories(Conf.Directories, xmlConfDocument, rootConfiguration);
+            SaveDirectories(Conf.Directories, xmlConfDocument, rootNode);
 
             xmlConfDocument.Save(pathToConf);
         }
 
         private static void SaveConfigurationInfo(Configuration Conf, XmlDocument xmlConfDocument, XmlElement rootNode)
         {
-            XmlElement rootConfigurationName = xmlConfDocument.CreateElement("Name");
-            rootConfigurationName.InnerText = Conf.Name;
-            rootNode.AppendChild(rootConfigurationName);
+            XmlElement nodeName = xmlConfDocument.CreateElement("Name");
+            nodeName.InnerText = Conf.Name;
+            rootNode.AppendChild(nodeName);
 
-            XmlElement rootConfigurationNameSpace = xmlConfDocument.CreateElement("NameSpace");
-            rootConfigurationNameSpace.InnerText = Conf.NameSpace;
-            rootNode.AppendChild(rootConfigurationNameSpace);
+            XmlElement nodeNameSpace = xmlConfDocument.CreateElement("NameSpace");
+            nodeNameSpace.InnerText = Conf.NameSpace;
+            rootNode.AppendChild(nodeNameSpace);
 
-            XmlElement rootConfigurationAuthor = xmlConfDocument.CreateElement("Author");
-            rootConfigurationAuthor.InnerText = Conf.Author;
-            rootNode.AppendChild(rootConfigurationAuthor);
+            XmlElement nodeAuthor = xmlConfDocument.CreateElement("Author");
+            nodeAuthor.InnerText = Conf.Author;
+            rootNode.AppendChild(nodeAuthor);
         }
 
         private static void SaveDirectories(Dictionary<string, ConfigurationDirectories> ConfDirectories, XmlDocument xmlConfDocument, XmlElement rootNode)
@@ -221,6 +222,10 @@ namespace AccountingSoftware
                 XmlElement nodeTablePartName = xmlConfDocument.CreateElement("Name");
                 nodeTablePartName.InnerText = tablePart.Key;
                 nodeTablePart.AppendChild(nodeTablePartName);
+
+                XmlElement nodeTablePartTable = xmlConfDocument.CreateElement("Table");
+                nodeTablePartTable.InnerText = tablePart.Value.Table;
+                nodeTablePart.AppendChild(nodeTablePartTable);
 
                 XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
                 nodeTablePartDesc.InnerText = tablePart.Value.Desc;

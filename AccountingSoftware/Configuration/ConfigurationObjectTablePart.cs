@@ -14,11 +14,12 @@ namespace AccountingSoftware
 			Init();
 		}
 
-		public ConfigurationObjectTablePart(string name, string desc = "")
+		public ConfigurationObjectTablePart(string name, string table, string desc = "")
 		{
 			Init();
 
 			Name = name;
+			Table = table;
 			Desc = desc;
 		}
 
@@ -28,6 +29,8 @@ namespace AccountingSoftware
 		}
 
 		public string Name { get; set; }
+
+		public string Table { get; set; }
 
 		public string Desc { get; set; }
 
