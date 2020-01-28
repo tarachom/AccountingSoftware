@@ -22,7 +22,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
-             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num" }) 
+             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2" }) 
         {
             name = "";
             code = "";
@@ -35,6 +35,8 @@ namespace ConfTrade_v1_1
             od2 = new Od_Pointer();
             count = 0;
             num = 0;
+            isupdate = false;
+            isupdate2 = false;
             
         }
         
@@ -53,6 +55,8 @@ namespace ConfTrade_v1_1
             od2 = new Od_Pointer(base.Fields["od2"]);
             count = (int)base.Fields["count"];
             num = (decimal)base.Fields["num"];
+            isupdate = (bool)base.Fields["isupdate"];
+            isupdate2 = (bool)base.Fields["isupdate2"];
             
         }
         
@@ -69,6 +73,8 @@ namespace ConfTrade_v1_1
             base.Fields["od2"] = od2.UnigueID.UGuid;
             base.Fields["count"] = count;
             base.Fields["num"] = num;
+            base.Fields["isupdate"] = isupdate;
+            base.Fields["isupdate2"] = isupdate2;
             
             BaseSave();
         }
@@ -84,7 +90,15 @@ namespace ConfTrade_v1_1
         public Od_Pointer od2 { get; set; }
         public int count { get; set; }
         public decimal num { get; set; }
+        public bool isupdate { get; set; }
+        public bool isupdate2 { get; set; }
         
+        
+        public Tovary_Pointer GetDirectoryPointer()
+        {
+            Tovary_Pointer directoryPointer = new Tovary_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
     }
 
     class Tovary_Pointer : DirectoryPointer
@@ -157,6 +171,12 @@ namespace ConfTrade_v1_1
         
         public string Name { get; set; }
         
+        
+        public Od_Pointer GetDirectoryPointer()
+        {
+            Od_Pointer directoryPointer = new Od_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
     }
 
     class Od_Pointer : DirectoryPointer

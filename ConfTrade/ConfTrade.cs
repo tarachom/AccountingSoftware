@@ -21,27 +21,27 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            //Conf.Od_Objest newOd = new Conf.Od_Objest();
-            //newOd.New();
-            //newOd.Name = "м.";
-            //newOd.Save();
+            Conf.Od_Objest newOd = new Conf.Od_Objest();
+            newOd.New();
+            newOd.Name = "м2.";
+            newOd.Save();
 
-            Conf.Od_Select OdSelect = new Conf.Od_Select();
-            OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "кг."));
-            OdSelect.QuerySelect.Limit = 1;
-            OdSelect.Select();
+            //Conf.Od_Select OdSelect = new Conf.Od_Select();
+            //OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "кг."));
+            //OdSelect.QuerySelect.Limit = 1;
+            //OdSelect.Select();
 
-            Conf.Od_Pointer OdPointer = new Conf.Od_Pointer();
+            //Conf.Od_Pointer OdPointer = new Conf.Od_Pointer();
 
-            if (OdSelect.MoveNext())
-                OdPointer = OdSelect.Current;
+            //if (OdSelect.MoveNext())
+            //    OdPointer = OdSelect.Current;
 
             Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
             newObj.New();
-            newObj.name = "New Obj 7";
+            newObj.name = "New Obj 77";
             newObj.count = 1001;
             newObj.num = 11.1113m;
-            newObj.od2 = OdPointer;
+            newObj.od2 = newOd.GetDirectoryPointer();
             newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
@@ -58,7 +58,9 @@ namespace ConfTrade
 
                 Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
 
-                Console.WriteLine(obj.name + ", " + obj.od2.UnigueID.ToString() + ", " + obj.count.ToString() + ", " + (obj.od2.UnigueID.UGuid == Guid.Empty ? "1" : "0"));
+                Console.WriteLine(obj.name + ", " + obj.od2.UnigueID.ToString() + ", " + obj.count.ToString() +
+                    ", " + (obj.od2.UnigueID.UGuid == Guid.Empty ? "1" : "0") + 
+                    ", " + obj.isupdate);
 
                 //obj.code = obj.UnigueID.ToString();
                 //obj.description = "description";

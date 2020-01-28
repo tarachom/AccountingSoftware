@@ -131,7 +131,7 @@ namespace Configurator
 			tbc.Name = "Text";
 			dataConfiguration.Columns.Add(tbc);
 
-			for (int i = 0; i < 30; i++)
+			for (int i = 0; i < 5; i++)
 				dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
 		}
 

@@ -57,13 +57,23 @@
         </Field>
         <Field>
           <Name>count</Name>
-          <Type>int</Type>
+          <Type>integer</Type>
           <Desc>count</Desc>
         </Field>
         <Field>
           <Name>num</Name>
           <Type>numeric</Type>
           <Desc>num</Desc>
+        </Field>
+        <Field>
+          <Name>isupdate</Name>
+          <Type>boolean</Type>
+          <Desc>isupdate</Desc>
+        </Field>
+        <Field>
+          <Name>isupdate2</Name>
+          <Type>boolean</Type>
+          <Desc>isupdate2</Desc>
         </Field>
       </Fields>
       <TabularParts>
