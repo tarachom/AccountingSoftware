@@ -22,7 +22,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
-             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "time_add", "datetime_add" }) 
+             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "date_add3", "time_add", "datetime_add", "text_arr", "int_arr", "numeric_arr" }) 
         {
             name = "";
             code = "";
@@ -38,9 +38,13 @@ namespace ConfTrade_v1_1
             isupdate = false;
             isupdate2 = false;
             date_add = DateTime.MinValue;
-            time_add = TimeSpan.MinValue;
+            date_add3 = DateTime.MinValue;
+            time_add = DateTime.MinValue.TimeOfDay;
             datetime_add = DateTime.MinValue;
-            ts = TimeSpan.MinValue;
+            text_arr = new string[] { };
+            int_arr = new int[] { };
+            numeric_arr = new decimal[] { };
+            
         }
         
         public void Read(UnigueID uid)
@@ -61,9 +65,13 @@ namespace ConfTrade_v1_1
             isupdate = (bool)base.FieldValue["isupdate"];
             isupdate2 = (bool)base.FieldValue["isupdate2"];
             date_add = (base.FieldValue["date_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add"].ToString()) : DateTime.MinValue;
+            date_add3 = (base.FieldValue["date_add3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add3"].ToString()) : DateTime.MinValue;
             time_add = (base.FieldValue["time_add"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["time_add"].ToString()) : DateTime.MinValue.TimeOfDay;
             datetime_add = (base.FieldValue["datetime_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["datetime_add"].ToString()) : DateTime.MinValue;
-            //ts = TimeSpan.Parse();
+            text_arr = (base.FieldValue["text_arr"] != DBNull.Value) ? (string[])base.FieldValue["text_arr"] : new string[] { };
+            int_arr = (base.FieldValue["int_arr"] != DBNull.Value) ? (int[])base.FieldValue["int_arr"] : new int[] { };
+            numeric_arr = (base.FieldValue["numeric_arr"] != DBNull.Value) ? (decimal[])base.FieldValue["numeric_arr"] : new decimal[] { };
+            
         }
         
         public void Save()
@@ -82,14 +90,16 @@ namespace ConfTrade_v1_1
             base.FieldValue["isupdate"] = isupdate;
             base.FieldValue["isupdate2"] = isupdate2;
             base.FieldValue["date_add"] = date_add;
+            base.FieldValue["date_add3"] = date_add3;
             base.FieldValue["time_add"] = time_add;
             base.FieldValue["datetime_add"] = datetime_add;
+            base.FieldValue["text_arr"] = text_arr;
+            base.FieldValue["int_arr"] = int_arr;
+            base.FieldValue["numeric_arr"] = numeric_arr;
             
             BaseSave();
         }
         
-        public TimeSpan ts { get; set; }
-
         public string name { get; set; }
         public string code { get; set; }
         public string description { get; set; }
@@ -104,8 +114,12 @@ namespace ConfTrade_v1_1
         public bool isupdate { get; set; }
         public bool isupdate2 { get; set; }
         public DateTime date_add { get; set; }
+        public DateTime date_add3 { get; set; }
         public TimeSpan time_add { get; set; }
         public DateTime datetime_add { get; set; }
+        public string[] text_arr { get; set; }
+        public int[] int_arr { get; set; }
+        public decimal[] numeric_arr { get; set; }
         
         
         public Tovary_Pointer GetDirectoryPointer()

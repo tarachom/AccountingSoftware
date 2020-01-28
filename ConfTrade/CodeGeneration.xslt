@@ -42,13 +42,28 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 <xsl:when test="Type = 'string'">
                   <xsl:text>""</xsl:text>
                 </xsl:when>
-                <xsl:when test="Type = 'integer' or Type = 'numeric'">
+                <xsl:when test="Type = 'string[]'">
+                  <xsl:text>new string[] { }</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
                   <xsl:text>0</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer[]'">
+                  <xsl:text>new int[] { }</xsl:text>
+                </xsl:when>
+                 <xsl:when test="Type = 'numeric'">
+                  <xsl:text>0</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'numeric[]'">
+                  <xsl:text>new decimal[] { }</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'boolean'">
                   <xsl:text>false</xsl:text>
                 </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+                <xsl:when test="Type = 'time'">
+                  <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime'">
                   <xsl:text>DateTime.MinValue</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
@@ -69,16 +84,36 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 <xsl:when test="Type = 'string'">
                   <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
                 </xsl:when>
+                <xsl:when test="Type = 'string[]'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+                  <xsl:text>(string[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text> : new string[] { }</xsl:text>
+                </xsl:when>
                 <xsl:when test="Type = 'integer'">
                   <xsl:text>(int)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer[]'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+                  <xsl:text>(int[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text> : new int[] { }</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'numeric'">
                   <xsl:text>(decimal)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
+                <xsl:when test="Type = 'numeric[]'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+                  <xsl:text>(decimal[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text> : new decimal[] { }</xsl:text>
+                </xsl:when>
                 <xsl:when test="Type = 'boolean'">
                   <xsl:text>(bool)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+                <xsl:when test="Type = 'time'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+                  <xsl:text>TimeSpan.Parse(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+                  <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime'">
                   <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
                   <xsl:text>DateTime.Parse(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
                   <xsl:text> : DateTime.MinValue</xsl:text>
@@ -108,25 +143,37 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:choose>
+            <xsl:when test="Type = 'string'">
+              <xsl:text>string</xsl:text>
+            </xsl:when>
+            <xsl:when test="Type = 'string[]'">
+              <xsl:text>string[]</xsl:text>
+            </xsl:when>
             <xsl:when test="Type = 'integer'">
               <xsl:text>int</xsl:text>
+            </xsl:when>
+            <xsl:when test="Type = 'integer[]'">
+              <xsl:text>int[]</xsl:text>
             </xsl:when>
             <xsl:when test="Type = 'numeric'">
               <xsl:text>decimal</xsl:text>
             </xsl:when>
+            <xsl:when test="Type = 'numeric[]'">
+              <xsl:text>decimal[]</xsl:text>
+            </xsl:when>
             <xsl:when test="Type = 'boolean'">
               <xsl:text>bool</xsl:text>
             </xsl:when>
-            <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+            <xsl:when test="Type = 'time'">
+              <xsl:text>TimeSpan</xsl:text>
+            </xsl:when>
+            <xsl:when test="Type = 'date' or Type = 'datetime'">
               <xsl:text>DateTime</xsl:text>
             </xsl:when>
             <xsl:when test="Type = 'pointer'">
               <xsl:value-of select="Pointer"/>
               <xsl:text>_Pointer</xsl:text>
             </xsl:when>
-            <xsl:otherwise>
-              <xsl:value-of select="Type"/>
-            </xsl:otherwise>
           </xsl:choose>
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>

@@ -81,6 +81,11 @@
           <Desc>Date Add</Desc>
         </Field>
         <Field>
+          <Name>date_add3</Name>
+          <Type>date</Type>
+          <Desc>Date Add3</Desc>
+        </Field>
+        <Field>
           <Name>time_add</Name>
           <Type>time</Type>
           <Desc>Time Add</Desc>
@@ -89,6 +94,21 @@
           <Name>datetime_add</Name>
           <Type>datetime</Type>
           <Desc>DateTime Add</Desc>
+        </Field>
+        <Field>
+          <Name>text_arr</Name>
+          <Type>string[]</Type>
+          <Desc>text array test</Desc>
+        </Field>
+        <Field>
+          <Name>int_arr</Name>
+          <Type>integer[]</Type>
+          <Desc>int array test</Desc>
+        </Field>
+        <Field>
+          <Name>numeric_arr</Name>
+          <Type>numeric[]</Type>
+          <Desc>numeric array test</Desc>
         </Field>
       </Fields>
       <TabularParts>

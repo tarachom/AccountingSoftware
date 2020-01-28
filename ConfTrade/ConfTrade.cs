@@ -38,12 +38,15 @@ namespace ConfTrade
 
             Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
             newObj.New();
-            newObj.name = "New Obj 77";
+            newObj.name = "New Obj 777";
             newObj.count = 1001;
             newObj.num = 11.1113m;
             newObj.od2 = newOd.GetDirectoryPointer();
             newObj.datetime_add = DateTime.Now;
             newObj.time_add = DateTime.Now.TimeOfDay;
+            newObj.text_arr = new string[] { "test1", "text2", "text3" };
+            newObj.int_arr = new int[] { 10, 20, 30, 40, 50 };
+            newObj.numeric_arr = new decimal[] { 10.2m, 11.3554m };
             newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
@@ -61,11 +64,16 @@ namespace ConfTrade
                 Conf.Tovary_Objest obj = s.Current.GetDirectoryObject();
 
                 Console.WriteLine(obj.name + ", " + obj.od2.UnigueID.ToString() + ", " + obj.count.ToString() +
-                    ", " + (obj.od2.UnigueID.UGuid == Guid.Empty ? "1" : "0") + 
+                    ", " + (obj.od2.UnigueID.UGuid == Guid.Empty ? "1" : "0") +
                     ", " + obj.isupdate +
                     //", " + obj.date_add +
                     ", " + obj.time_add +
-                    ", " + obj.datetime_add);
+                    ", " + obj.datetime_add +
+                    ", " + print_array(obj.text_arr));
+
+                //obj.text_arr = new string[] { };
+                //obj.int_arr = new int[] { 1, 2, 3, 4, 5, 6, 7, 9, 10 };
+                //obj.Save();
 
                 //obj.code = obj.UnigueID.ToString();
                 //obj.description = "description";
@@ -83,6 +91,27 @@ namespace ConfTrade
             Conf.Config.Kernel.Close();
 
             Console.ReadLine();
+        }
+        
+        static string print_array(string[] arr)
+        {
+            bool is_first = true;
+
+            string concat = "{";
+
+            foreach (string e in arr)
+            {
+                if (!is_first)
+                    concat += ", ";
+                 else
+                    is_first = false;
+
+                concat += e;
+            }
+
+            concat += "}";
+
+            return concat;
         }
     }
 }
