@@ -21,13 +21,13 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Conf.Od_Objest newOd = new Conf.Od_Objest();
-            newOd.New();
-            newOd.Name = "м2.";
-            newOd.Save();
+            //Conf.Od_Objest newOd = new Conf.Od_Objest();
+            //newOd.New();
+            //newOd.Name = "м2.";
+            //newOd.Save();
 
             //Conf.Od_Select OdSelect = new Conf.Od_Select();
-            //OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "кг."));
+            //OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "м2."));
             //OdSelect.QuerySelect.Limit = 1;
             //OdSelect.Select();
 
@@ -36,21 +36,51 @@ namespace ConfTrade
             //if (OdSelect.MoveNext())
             //    OdPointer = OdSelect.Current;
 
-            Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
-            newObj.New();
-            newObj.name = "New Obj 777";
-            newObj.count = 1001;
-            newObj.num = 11.1113m;
-            newObj.od2 = newOd.GetDirectoryPointer();
-            newObj.datetime_add = DateTime.Now;
-            newObj.time_add = DateTime.Now.TimeOfDay;
-            newObj.text_arr = new string[] { "test1", "text2", "text3" };
-            newObj.int_arr = new int[] { 10, 20, 30, 40, 50 };
-            newObj.numeric_arr = new decimal[] { 10.2m, 11.3554m };
-            newObj.Save();
+            //Conf.Tovary_Objest newObj = new Conf.Tovary_Objest();
+            //newObj.New();
+            //newObj.name = "New Obj 88";
+            //newObj.count = 1001;
+            //newObj.num = 11.1113m;
+            //newObj.od2 = OdPointer;
+            //newObj.datetime_add = DateTime.Now;
+            //newObj.time_add = DateTime.Now.TimeOfDay;
+            //newObj.text_arr = new string[] { "test1", "text2", "text3" };
+            //newObj.int_arr = new int[] { 10, 20, 30, 40, 50 };
+            //newObj.numeric_arr = new decimal[] { 10.2m, 11.3554m };
+            //newObj.Save();
+
+            Conf.Tovary_Select objSelect = new Conf.Tovary_Select();
+            objSelect.QuerySelect.Where.Add(new Where("uid", Comparison.EQ, Guid.Parse("8ada16bb-c378-4c80-9c9f-c8bf9cec6173")));
+            objSelect.Select();
+
+            Conf.Tovary_Objest newObj = null;
+
+            if (objSelect.MoveNext())
+                newObj = objSelect.Current.GetDirectoryObject();
+            else
+            {
+                Console.WriteLine("Not found");
+                Console.ReadLine();
+            }
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord());
+            //    newObj.Ceny_TablePart.Records[i].name = "Name" + i.ToString();
+            //}
+
+            //newObj.Ceny_TablePart.Save();
 
             newObj.Ceny_TablePart.Read();
-            //newObj.Ceny_TablePart.Records[0].name = "";
+            foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
+            {
+                Console.WriteLine(record.name);
+            }
+
+            //newObj.Ceny_TablePart.Records.RemoveAt(0);
+            //newObj.Ceny_TablePart.Save();
+
+            Console.ReadLine();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;

@@ -40,7 +40,7 @@ namespace AccountingSoftware
 				query_values += ", @" + field;
 			}
 
-			string query = "INSERT INTO " + table + "(" + query_field + ") VALUES(" + query_values + ")";
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
@@ -159,9 +159,63 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void SelectDirectoryTablePartRecords()
+		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
+			bool is_first = true;
+			
+			string query = "SELECT ";
 
+			foreach (string field in fieldArray)
+			{
+				if (!is_first) query += ", "; else is_first = false;
+				query += field;
+			}
+
+			query += " FROM " + table + " WHERE owner = @owner";
+
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+				fieldValueList.Add(fieldValue);
+
+				foreach (string field in fieldArray)
+				{
+					fieldValue.Add(field, reader[field]);
+				}
+			}
+			reader.Close();
+		}
+
+		public void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "owner";
+			string query_values = "@owner";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			nCommand.ExecuteNonQuery();
 		}
 	}
 }

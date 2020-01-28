@@ -17,23 +17,26 @@ namespace AccountingSoftware
 			FieldArray = fieldsArray;
 
 			FieldValueList = new List<Dictionary<string, object>>();
-
-			//FieldValue = new Dictionary<string, object>();
-
-			
 		}
 
 		private Kernel Kernel { get; set; }
 
 		private string Table { get; set; }
 
-		protected string[] FieldArray { get; private set; }
+		private string[] FieldArray { get; set; }
 
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
-		protected void BaseRead(UnigueID OwnerUnigueID)
+		protected void BaseRead(UnigueID ownerUnigueID)
 		{
-			//Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
+			Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
+		}
+
+		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
+		{
+			Console.WriteLine("BaseSave " + ownerUnigueID.UGuid);
+
+			Kernel.DataBase.InsertDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }

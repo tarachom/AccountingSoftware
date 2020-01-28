@@ -185,7 +185,8 @@ namespace ConfTrade_v1_1
         public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
              new string[] { "name" }) 
         {
-            Owner = owner; 
+            Owner = owner;
+            Records = new List<Tovary_Ceny_TablePartRecord>();
         }
         
         public Tovary_Objest Owner { get; private set; }
@@ -194,23 +195,30 @@ namespace ConfTrade_v1_1
         
         public void Read()
         {
+            Records.Clear();
+
             base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Tovary_Ceny_TablePartRecord Record = new Tovary_Ceny_TablePartRecord();
-                Records.Add(Record);
+                Tovary_Ceny_TablePartRecord record = new Tovary_Ceny_TablePartRecord();
+                record.name = fieldValue["name"].ToString();
 
-                foreach (string field in base.FieldArray)
-                {
-                    Record.name = fieldValue[field].ToString();
-                }  
+                Records.Add(record);
             }
         }
 
-        public void Save()
+        public void Save() 
         {
-            
+            foreach (Tovary_Ceny_TablePartRecord record in Records)
+            {
+                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+                fieldValue.Add("name", record.name);
+
+                Console.WriteLine("Save " + record.name);
+
+                base.BaseSave(Owner.UnigueID, fieldValue);
+            }
         }
     }
 
