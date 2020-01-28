@@ -260,7 +260,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             Owner = owner;
         }
         
-        public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; }
+        public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; private set; }
         
         public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; Records { get; set; }
         

@@ -188,15 +188,26 @@ namespace ConfTrade_v1_1
             Owner = owner; 
         }
         
-        public Tovary_Objest Owner { get; }
+        public Tovary_Objest Owner { get; private set; }
         
         public List<Tovary_Ceny_TablePartRecord> Records { get; set; }
         
         public void Read()
         {
-            
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Tovary_Ceny_TablePartRecord Record = new Tovary_Ceny_TablePartRecord();
+                Records.Add(Record);
+
+                foreach (string field in base.FieldArray)
+                {
+                    Record.name = fieldValue[field].ToString();
+                }  
+            }
         }
-        
+
         public void Save()
         {
             

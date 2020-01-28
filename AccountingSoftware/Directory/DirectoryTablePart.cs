@@ -16,21 +16,22 @@ namespace AccountingSoftware
 			Table = table;
 			FieldArray = fieldsArray;
 
-			FieldValue = new Dictionary<string, object>();
+			FieldValueList = new List<Dictionary<string, object>>();
 
-			foreach (string field in FieldArray)
-				FieldValue.Add(field, null);
+			//FieldValue = new Dictionary<string, object>();
+
+			
 		}
 
 		private Kernel Kernel { get; set; }
 
 		private string Table { get; set; }
 
-		private string[] FieldArray { get; set; }
+		protected string[] FieldArray { get; private set; }
 
-		protected Dictionary<string, object> FieldValue { get; set; }
+		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
-		protected void BaseSelect()
+		protected void BaseRead(UnigueID OwnerUnigueID)
 		{
 			//Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
 		}
