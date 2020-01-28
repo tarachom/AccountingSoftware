@@ -75,6 +75,21 @@
           <Type>boolean</Type>
           <Desc>isupdate2</Desc>
         </Field>
+        <Field>
+          <Name>date_add</Name>
+          <Type>date</Type>
+          <Desc>Date Add</Desc>
+        </Field>
+        <Field>
+          <Name>time_add</Name>
+          <Type>time</Type>
+          <Desc>Time Add</Desc>
+        </Field>
+        <Field>
+          <Name>datetime_add</Name>
+          <Type>datetime</Type>
+          <Desc>DateTime Add</Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>

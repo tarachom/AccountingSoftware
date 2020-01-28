@@ -42,6 +42,8 @@ namespace ConfTrade
             newObj.count = 1001;
             newObj.num = 11.1113m;
             newObj.od2 = newOd.GetDirectoryPointer();
+            newObj.datetime_add = DateTime.Now;
+            newObj.time_add = DateTime.Now.TimeOfDay;
             newObj.Save();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
@@ -60,7 +62,10 @@ namespace ConfTrade
 
                 Console.WriteLine(obj.name + ", " + obj.od2.UnigueID.ToString() + ", " + obj.count.ToString() +
                     ", " + (obj.od2.UnigueID.UGuid == Guid.Empty ? "1" : "0") + 
-                    ", " + obj.isupdate);
+                    ", " + obj.isupdate +
+                    //", " + obj.date_add +
+                    ", " + obj.time_add +
+                    ", " + obj.datetime_add);
 
                 //obj.code = obj.UnigueID.ToString();
                 //obj.description = "description";

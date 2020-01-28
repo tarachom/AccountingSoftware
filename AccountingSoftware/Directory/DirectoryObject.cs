@@ -9,25 +9,29 @@ namespace AccountingSoftware
 	//
 	public abstract class DirectoryObject
 	{
-		public DirectoryObject(Kernel kernel, string table, string[] fields)
+		public DirectoryObject(Kernel kernel, string table, string[] fieldsArray)
 		{
-			Table = table;
 			Kernel = kernel;
-			FieldList = fields;
+			Table = table;
+			FieldArray = fieldsArray;
 
-			Fields = new Dictionary<string, object>();
+			FieldValue = new Dictionary<string, object>();
 
-			foreach (string field in fields)
-				Fields.Add(field, null);
+			foreach (string field in FieldArray)
+				FieldValue.Add(field, null);
 		}
 
-		protected Kernel Kernel { get; private set; }
+		private Kernel Kernel { get; set; }
 
-		public string Table { get; private set; }
+		private string Table { get; set; }
+
+		private string[] FieldArray { get; set; }
+
+		protected Dictionary<string, object> FieldValue { get; set; }
 
 		public UnigueID UnigueID { get; private set; }
 
-		protected bool IsNew { get; private set; }
+		public bool IsNew { get; private set; }
 
 		public void New()
 		{
@@ -35,26 +39,24 @@ namespace AccountingSoftware
 			IsNew = true;
 		}
 
-		protected void BaseInit(UnigueID uid)
+		protected void BaseRead(UnigueID uid)
 		{
 			UnigueID = uid;
-			Kernel.DataBase.SelectDirectoryObject(this, Fields);
+			Kernel.DataBase.SelectDirectoryObject(this, Table, FieldArray, FieldValue);
 		}
 
 		protected void BaseSave()
 		{
 			if (IsNew)
 			{
-				Kernel.DataBase.InsertDirectoryObject(this, Fields);
+				Kernel.DataBase.InsertDirectoryObject(this, Table, FieldArray, FieldValue);
 			}
 			else
 			{
-				Kernel.DataBase.SaveDirectoryObject(this, Fields);
+				Kernel.DataBase.SaveDirectoryObject(this, Table, FieldArray, FieldValue);
 			}
 		}
 
-		public string[] FieldList { get; set; }
-
-		protected Dictionary<string, object> Fields { get; set; }
+		
 	}
 }

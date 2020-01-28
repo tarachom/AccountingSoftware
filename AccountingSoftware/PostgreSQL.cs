@@ -29,27 +29,27 @@ namespace AccountingSoftware
 
 		private NpgsqlConnection Connection { get; set; }
 
-		public void InsertDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
+		public void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query_field = "uid";
 			string query_values = "@uid";
 
-			foreach (string field in sender.FieldList)
+			foreach (string field in fieldArray)
 			{
 				query_field += ", " + field; 
 				query_values += ", @" + field;
 			}
 
-			string query = "INSERT INTO " + sender.Table + "(" + query_field + ") VALUES(" + query_values + ")";
+			string query = "INSERT INTO " + table + "(" + query_field + ") VALUES(" + query_values + ")";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
 
 			//Console.WriteLine(Guid.Parse(sender.UID.UID));
 
-			foreach (string field in sender.FieldList)
+			foreach (string field in fieldArray)
 			{
-				nCommand.Parameters.Add(new NpgsqlParameter(field, fields[field]));
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
 
 				//Console.WriteLine(field + " = " + fields[field]);
 			}
@@ -59,23 +59,13 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteDirectoryObject(DirectoryObject sender)
+		public void SaveDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "DELETE FROM " + sender.Table + " WHERE uid = @uid";
-
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
-
-			nCommand.ExecuteNonQuery();
-		}
-
-		public void SaveDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
-		{
-			string query = "UPDATE " + sender.Table + " SET ";
+			string query = "UPDATE " + table + " SET ";
 
 			int count = 0;
 
-			foreach (string field in sender.FieldList)
+			foreach (string field in fieldArray)
 			{
 				if (count > 0) query += ", ";
 				query += field + " = @" + field;
@@ -86,11 +76,11 @@ namespace AccountingSoftware
 			query += " WHERE uid = @uid";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
 
-			foreach (string field in sender.FieldList)
+			foreach (string field in fieldArray)
 			{
-				nCommand.Parameters.Add(new NpgsqlParameter(field, fields[field]));
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
 			}
 
 			//Console.WriteLine(query);
@@ -98,31 +88,41 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields)
+		public void SelectDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query = "SELECT uid ";
 
-			foreach (string field in sender.FieldList)
+			foreach (string field in fieldArray)
 			{
 				query += ", " + field;
 			}
 
-			query += " FROM " + sender.Table + " WHERE uid = @uid";
+			query += " FROM " + table + " WHERE uid = @uid";
 
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", sender.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
-				foreach (string field in sender.FieldList)
+				foreach (string field in fieldArray)
 				{
-					fields[field] = reader[field];
+					fieldValue[field] = reader[field];
 				}
 			}
 			reader.Close();
+		}
+
+		public void DeleteDirectoryObject(DirectoryObject directoryObject, string table)
+		{
+			string query = "DELETE FROM " + table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
+
+			nCommand.ExecuteNonQuery();
 		}
 
 		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)

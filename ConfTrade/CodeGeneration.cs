@@ -22,7 +22,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
-             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2" }) 
+             new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "time_add", "datetime_add" }) 
         {
             name = "";
             code = "";
@@ -37,48 +37,59 @@ namespace ConfTrade_v1_1
             num = 0;
             isupdate = false;
             isupdate2 = false;
-            
+            date_add = DateTime.MinValue;
+            time_add = TimeSpan.MinValue;
+            datetime_add = DateTime.MinValue;
+            ts = TimeSpan.MinValue;
         }
         
-        public void Init(UnigueID uid)
+        public void Read(UnigueID uid)
         {
-            BaseInit(uid);
+            BaseRead(uid);
             
-            name = base.Fields["name"].ToString();
-            code = base.Fields["code"].ToString();
-            description = base.Fields["description"].ToString();
-            field1 = base.Fields["field1"].ToString();
-            field2 = base.Fields["field2"].ToString();
-            field3 = base.Fields["field3"].ToString();
-            field4 = base.Fields["field4"].ToString();
-            field5 = base.Fields["field5"].ToString();
-            od2 = new Od_Pointer(base.Fields["od2"]);
-            count = (int)base.Fields["count"];
-            num = (decimal)base.Fields["num"];
-            isupdate = (bool)base.Fields["isupdate"];
-            isupdate2 = (bool)base.Fields["isupdate2"];
-            
+            name = base.FieldValue["name"].ToString();
+            code = base.FieldValue["code"].ToString();
+            description = base.FieldValue["description"].ToString();
+            field1 = base.FieldValue["field1"].ToString();
+            field2 = base.FieldValue["field2"].ToString();
+            field3 = base.FieldValue["field3"].ToString();
+            field4 = base.FieldValue["field4"].ToString();
+            field5 = base.FieldValue["field5"].ToString();
+            od2 = new Od_Pointer(base.FieldValue["od2"]);
+            count = (int)base.FieldValue["count"];
+            num = (decimal)base.FieldValue["num"];
+            isupdate = (bool)base.FieldValue["isupdate"];
+            isupdate2 = (bool)base.FieldValue["isupdate2"];
+            date_add = (base.FieldValue["date_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add"].ToString()) : DateTime.MinValue;
+            time_add = (base.FieldValue["time_add"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["time_add"].ToString()) : DateTime.MinValue.TimeOfDay;
+            datetime_add = (base.FieldValue["datetime_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["datetime_add"].ToString()) : DateTime.MinValue;
+            //ts = TimeSpan.Parse();
         }
         
         public void Save()
         {
-            base.Fields["name"] = name;
-            base.Fields["code"] = code;
-            base.Fields["description"] = description;
-            base.Fields["field1"] = field1;
-            base.Fields["field2"] = field2;
-            base.Fields["field3"] = field3;
-            base.Fields["field4"] = field4;
-            base.Fields["field5"] = field5;
-            base.Fields["od2"] = od2.UnigueID.UGuid;
-            base.Fields["count"] = count;
-            base.Fields["num"] = num;
-            base.Fields["isupdate"] = isupdate;
-            base.Fields["isupdate2"] = isupdate2;
+            base.FieldValue["name"] = name;
+            base.FieldValue["code"] = code;
+            base.FieldValue["description"] = description;
+            base.FieldValue["field1"] = field1;
+            base.FieldValue["field2"] = field2;
+            base.FieldValue["field3"] = field3;
+            base.FieldValue["field4"] = field4;
+            base.FieldValue["field5"] = field5;
+            base.FieldValue["od2"] = od2.UnigueID.UGuid;
+            base.FieldValue["count"] = count;
+            base.FieldValue["num"] = num;
+            base.FieldValue["isupdate"] = isupdate;
+            base.FieldValue["isupdate2"] = isupdate2;
+            base.FieldValue["date_add"] = date_add;
+            base.FieldValue["time_add"] = time_add;
+            base.FieldValue["datetime_add"] = datetime_add;
             
             BaseSave();
         }
         
+        public TimeSpan ts { get; set; }
+
         public string name { get; set; }
         public string code { get; set; }
         public string description { get; set; }
@@ -92,6 +103,9 @@ namespace ConfTrade_v1_1
         public decimal num { get; set; }
         public bool isupdate { get; set; }
         public bool isupdate2 { get; set; }
+        public DateTime date_add { get; set; }
+        public TimeSpan time_add { get; set; }
+        public DateTime datetime_add { get; set; }
         
         
         public Tovary_Pointer GetDirectoryPointer()
@@ -111,7 +125,7 @@ namespace ConfTrade_v1_1
         public Tovary_Objest GetDirectoryObject()
         {
             Tovary_Objest TovaryObjestItem = new Tovary_Objest();
-            TovaryObjestItem.Init(base.UnigueID);
+            TovaryObjestItem.Read(base.UnigueID);
             return TovaryObjestItem;
         }
     }
@@ -154,17 +168,17 @@ namespace ConfTrade_v1_1
             
         }
         
-        public void Init(UnigueID uid)
+        public void Read(UnigueID uid)
         {
-            BaseInit(uid);
+            BaseRead(uid);
             
-            Name = base.Fields["Name"].ToString();
+            Name = base.FieldValue["Name"].ToString();
             
         }
         
         public void Save()
         {
-            base.Fields["Name"] = Name;
+            base.FieldValue["Name"] = Name;
             
             BaseSave();
         }
@@ -189,7 +203,7 @@ namespace ConfTrade_v1_1
         public Od_Objest GetDirectoryObject()
         {
             Od_Objest OdObjestItem = new Od_Objest();
-            OdObjestItem.Init(base.UnigueID);
+            OdObjestItem.Read(base.UnigueID);
             return OdObjestItem;
         }
     }

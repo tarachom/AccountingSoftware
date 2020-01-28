@@ -48,6 +48,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 <xsl:when test="Type = 'boolean'">
                   <xsl:text>false</xsl:text>
                 </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+                  <xsl:text>DateTime.MinValue</xsl:text>
+                </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                   <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
                 </xsl:when>
@@ -55,29 +58,34 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             </xsl:for-each>
         }
         
-        public void Init(UnigueID uid)
+        public void Read(UnigueID uid)
         {
-            BaseInit(uid);
+            BaseRead(uid);
             
             <xsl:for-each select="Fields/Field">
               <xsl:value-of select="Name"/>
               <xsl:text> = </xsl:text>
               <xsl:choose>
                 <xsl:when test="Type = 'string'">
-                  <xsl:text>base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
+                  <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'integer'">
-                  <xsl:text>(int)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text>(int)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'numeric'">
-                  <xsl:text>(decimal)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text>(decimal)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'boolean'">
-                  <xsl:text>(bool)base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text>(bool)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+                  <xsl:text>DateTime.Parse(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+                  <xsl:text> : DateTime.MinValue</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'pointer'">
                   <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
-                  <xsl:text>_Pointer(base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
+                  <xsl:text>_Pointer(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
@@ -86,7 +94,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public void Save()
         {
             <xsl:for-each select="Fields/Field">
-              <xsl:text>base.Fields["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] = </xsl:text>
+              <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] = </xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer'">
@@ -108,6 +116,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             </xsl:when>
             <xsl:when test="Type = 'boolean'">
               <xsl:text>bool</xsl:text>
+            </xsl:when>
+            <xsl:when test="Type = 'date' or Type = 'time' or Type = 'datetime'">
+              <xsl:text>DateTime</xsl:text>
             </xsl:when>
             <xsl:when test="Type = 'pointer'">
               <xsl:value-of select="Pointer"/>
@@ -139,7 +150,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            <xsl:value-of select="$DirectoryName"/>ObjestItem.Init(base.UnigueID);
+            <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID);
             return <xsl:value-of select="$DirectoryName"/>ObjestItem;
         }
     }

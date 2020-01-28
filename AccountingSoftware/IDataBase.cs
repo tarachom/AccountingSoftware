@@ -15,9 +15,10 @@ namespace AccountingSoftware
 		string ConnectionString { get; set; }
 
 		void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer);
-		void SelectDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
-		void SaveDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
-		void InsertDirectoryObject(DirectoryObject sender, Dictionary<string, object> fields);
-		void DeleteDirectoryObject(DirectoryObject sender);
+
+		void SelectDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void SaveDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteDirectoryObject(DirectoryObject directoryObject, string table);
 	}
 }
