@@ -182,7 +182,8 @@ namespace ConfTrade_v1_1
 
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
-        public Tovary_Ceny_TablePart(Tovary_Objest owner) 
+        public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
+             new string[] { "name" }) 
         {
             Owner = owner; 
         }

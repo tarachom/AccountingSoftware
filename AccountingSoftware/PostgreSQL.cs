@@ -125,16 +125,16 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectDirectoryPointer(DirectorySelect sender, List<DirectoryPointer> listDirectoryPointer)
+		public void SelectDirectoryPointer(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer)
 		{
-			string query = sender.QuerySelect.Construct();
+			string query = select.QuerySelect.Construct();
 			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (sender.QuerySelect.Where.Count > 0)
+			if (select.QuerySelect.Where.Count > 0)
 			{
-				foreach (Where field in sender.QuerySelect.Where)
+				foreach (Where field in select.QuerySelect.Where)
 					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
 			}
 
@@ -143,11 +143,11 @@ namespace AccountingSoftware
 			{
 				Dictionary<string, object> fields = null;
 
-				if (sender.QuerySelect.Field.Count > 0)
+				if (select.QuerySelect.Field.Count > 0)
 				{
 					fields = new Dictionary<string, object>();
 
-					foreach (string field in sender.QuerySelect.Field)
+					foreach (string field in select.QuerySelect.Field)
 						fields.Add(field, reader[field]);
 				}
 
@@ -157,6 +157,11 @@ namespace AccountingSoftware
 				listDirectoryPointer.Add(elementPointer);
 			}
 			reader.Close();
+		}
+
+		public void SelectDirectoryTablePartRecords()
+		{
+
 		}
 	}
 }

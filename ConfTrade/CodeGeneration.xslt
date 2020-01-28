@@ -248,9 +248,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
-        public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) 
+        public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+             </xsl:for-each> }) 
         {
-            Owner = owner; 
+            Owner = owner;
         }
         
         public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; }
