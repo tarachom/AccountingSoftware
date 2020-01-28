@@ -49,6 +49,8 @@ namespace ConfTrade
             newObj.numeric_arr = new decimal[] { 10.2m, 11.3554m };
             newObj.Save();
 
+            //newObj.Ceny_TablePart.Records[0].name = "";
+
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;
             //s.QuerySelect.Field.Add("name");

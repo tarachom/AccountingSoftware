@@ -122,11 +122,6 @@
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
-            <Field>
-              <Name>cena</Name>
-              <Type>numeric</Type>
-              <Desc>Cena</Desc>
-            </Field>
           </Fields>
         </TablePart>
       </TabularParts>

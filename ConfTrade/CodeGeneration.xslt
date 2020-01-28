@@ -12,6 +12,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using AccountingSoftware;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
@@ -70,6 +71,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                   <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
                 </xsl:when>
               </xsl:choose>;
+            </xsl:for-each>
+            //Табличні частини
+            <xsl:for-each select="TabularParts/TablePart">
+                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
+                <xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
             </xsl:for-each>
         }
         
@@ -185,8 +192,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             <xsl:value-of select="$DirectoryName"/>_Pointer directoryPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
+        
+        <xsl:for-each select="TabularParts/TablePart">
+            <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+            <xsl:text>public </xsl:text><xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text> </xsl:text>
+            <xsl:value-of select="$TablePartName"/><xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
     }
-
+    
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
@@ -201,7 +214,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             return <xsl:value-of select="$DirectoryName"/>ObjestItem;
         }
     }
-
+    
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
@@ -228,20 +241,31 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
     }
-    <!--
+    
       <xsl:for-each select="TabularParts/TablePart">
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
 
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
-        public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) { Owner = owner; }
-    
+        public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) 
+        {
+            Owner = owner; 
+        }
+        
         public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; }
-    
-        public void Read() { }   
-    
-        public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; RecordCollection { get; }
+        
+        public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; Records { get; set; }
+        
+        public void Read()
+        {
+            
+        }
+        
+        public void Save()
+        {
+            
+        }
     }
 
     class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
@@ -250,7 +274,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public <xsl:value-of select="Type"/><xsl:text> </xsl:text><xsl:value-of select="Name"/> { get; set; }</xsl:for-each>
     }
       </xsl:for-each>
-    -->
+
     </xsl:for-each>
 }
   </xsl:template>

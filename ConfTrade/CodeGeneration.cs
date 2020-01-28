@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using AccountingSoftware;
 
 namespace ConfTrade_v1_1
@@ -44,6 +45,9 @@ namespace ConfTrade_v1_1
             text_arr = new string[] { };
             int_arr = new int[] { };
             numeric_arr = new decimal[] { };
+            
+            //Табличні частини
+            Ceny_TablePart = new Tovary_Ceny_TablePart(this);
             
         }
         
@@ -127,8 +131,11 @@ namespace ConfTrade_v1_1
             Tovary_Pointer directoryPointer = new Tovary_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
+        
+        public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
+        
     }
-
+    
     class Tovary_Pointer : DirectoryPointer
     {
         public Tovary_Pointer(object uid = null) : base(Config.Kernel, "tovary_v1_1")
@@ -143,7 +150,7 @@ namespace ConfTrade_v1_1
             return TovaryObjestItem;
         }
     }
-
+    
     class Tovary_Select : DirectorySelect
     {
         public Tovary_Select() : base(Config.Kernel, "tovary_v1_1") { }
@@ -171,6 +178,36 @@ namespace ConfTrade_v1_1
         public Tovary_Pointer Current { get; private set; }
     }
     
+      
+
+    class Tovary_Ceny_TablePart : DirectoryTablePart
+    {
+        public Tovary_Ceny_TablePart(Tovary_Objest owner) 
+        {
+            Owner = owner; 
+        }
+        
+        public Tovary_Objest Owner { get; }
+        
+        public List<Tovary_Ceny_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            
+        }
+        
+        public void Save()
+        {
+            
+        }
+    }
+
+    class Tovary_Ceny_TablePartRecord : DirectoryTablePartRecord
+    {
+        
+        public string name { get; set; }
+    }
+      
     /*******************************************************[ Od ]****************************************************/
 
     class Od_Objest : DirectoryObject
@@ -179,6 +216,8 @@ namespace ConfTrade_v1_1
              new string[] { "Name" }) 
         {
             Name = "";
+            
+            //Табличні частини
             
         }
         
@@ -205,8 +244,10 @@ namespace ConfTrade_v1_1
             Od_Pointer directoryPointer = new Od_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
+        
+        
     }
-
+    
     class Od_Pointer : DirectoryPointer
     {
         public Od_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
@@ -221,7 +262,7 @@ namespace ConfTrade_v1_1
             return OdObjestItem;
         }
     }
-
+    
     class Od_Select : DirectorySelect
     {
         public Od_Select() : base(Config.Kernel, "od_v1_1") { }
@@ -249,5 +290,6 @@ namespace ConfTrade_v1_1
         public Od_Pointer Current { get; private set; }
     }
     
+      
 }
   
