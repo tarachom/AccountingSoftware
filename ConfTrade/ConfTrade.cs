@@ -21,7 +21,13 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
+            Conf.Tovary_Objest tovary_Objest = new Conf.Tovary_Objest();
+            tovary_Objest.New();
+            tovary_Objest.name = "NEW Object";
+            tovary_Objest.Save();
+
             Conf.Tovary_Select tovary_Select1 = new Conf.Tovary_Select();
+            tovary_Select1.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "NEW Object"));
 
             if (tovary_Select1.Select())
             {

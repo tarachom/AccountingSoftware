@@ -134,7 +134,7 @@ namespace AccountingSoftware
 		public void SelectDirectoryPointer(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = select.QuerySelect.Construct();
-			Console.WriteLine(query);
+			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
