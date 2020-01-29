@@ -88,7 +88,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public bool SelectDirectoryObject(DirectoryObject directoryObject, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query = "SELECT uid ";
 
@@ -102,7 +102,9 @@ namespace AccountingSoftware
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
+
+			bool isSelectDirectoryObject = false;
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
@@ -111,8 +113,12 @@ namespace AccountingSoftware
 				{
 					fieldValue[field] = reader[field];
 				}
+
+				isSelectDirectoryObject = true;
 			}
 			reader.Close();
+
+			return isSelectDirectoryObject;
 		}
 
 		public void DeleteDirectoryObject(UnigueID unigueID, string table)

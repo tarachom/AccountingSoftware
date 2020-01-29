@@ -52,31 +52,35 @@ namespace ConfTrade_v1_1
             
         }
         
-        public void Read(UnigueID uid)
+        public bool Read(UnigueID uid)
         {
-            BaseRead(uid);
-            
-            name = base.FieldValue["name"].ToString();
-            code = base.FieldValue["code"].ToString();
-            description = base.FieldValue["description"].ToString();
-            field1 = base.FieldValue["field1"].ToString();
-            field2 = base.FieldValue["field2"].ToString();
-            field3 = base.FieldValue["field3"].ToString();
-            field4 = base.FieldValue["field4"].ToString();
-            field5 = base.FieldValue["field5"].ToString();
-            od2 = new Od_Pointer(base.FieldValue["od2"]);
-            count = (int)base.FieldValue["count"];
-            num = (base.FieldValue["num"] != DBNull.Value) ? (decimal)base.FieldValue["num"] : 0;
-            isupdate = (bool)base.FieldValue["isupdate"];
-            isupdate2 = (bool)base.FieldValue["isupdate2"];
-            date_add = (base.FieldValue["date_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add"].ToString()) : DateTime.MinValue;
-            date_add3 = (base.FieldValue["date_add3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add3"].ToString()) : DateTime.MinValue;
-            time_add = (base.FieldValue["time_add"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["time_add"].ToString()) : DateTime.MinValue.TimeOfDay;
-            datetime_add = (base.FieldValue["datetime_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["datetime_add"].ToString()) : DateTime.MinValue;
-            text_arr = (base.FieldValue["text_arr"] != DBNull.Value) ? (string[])base.FieldValue["text_arr"] : new string[] { };
-            int_arr = (base.FieldValue["int_arr"] != DBNull.Value) ? (int[])base.FieldValue["int_arr"] : new int[] { };
-            numeric_arr = (base.FieldValue["numeric_arr"] != DBNull.Value) ? (decimal[])base.FieldValue["numeric_arr"] : new decimal[] { };
-            
+            if (BaseRead(uid))
+            {
+                name = base.FieldValue["name"].ToString();
+                code = base.FieldValue["code"].ToString();
+                description = base.FieldValue["description"].ToString();
+                field1 = base.FieldValue["field1"].ToString();
+                field2 = base.FieldValue["field2"].ToString();
+                field3 = base.FieldValue["field3"].ToString();
+                field4 = base.FieldValue["field4"].ToString();
+                field5 = base.FieldValue["field5"].ToString();
+                od2 = new Od_Pointer(base.FieldValue["od2"]);
+                count = (int)base.FieldValue["count"];
+                num = (base.FieldValue["num"] != DBNull.Value) ? (decimal)base.FieldValue["num"] : 0;
+                isupdate = (bool)base.FieldValue["isupdate"];
+                isupdate2 = (bool)base.FieldValue["isupdate2"];
+                date_add = (base.FieldValue["date_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add"].ToString()) : DateTime.MinValue;
+                date_add3 = (base.FieldValue["date_add3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add3"].ToString()) : DateTime.MinValue;
+                time_add = (base.FieldValue["time_add"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["time_add"].ToString()) : DateTime.MinValue.TimeOfDay;
+                datetime_add = (base.FieldValue["datetime_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["datetime_add"].ToString()) : DateTime.MinValue;
+                text_arr = (base.FieldValue["text_arr"] != DBNull.Value) ? (string[])base.FieldValue["text_arr"] : new string[] { };
+                int_arr = (base.FieldValue["int_arr"] != DBNull.Value) ? (int[])base.FieldValue["int_arr"] : new int[] { };
+                numeric_arr = (base.FieldValue["numeric_arr"] != DBNull.Value) ? (decimal[])base.FieldValue["numeric_arr"] : new decimal[] { };
+                
+                return true;
+            }
+            else
+                return false;
         }
         
         public void Save()
@@ -167,25 +171,33 @@ namespace ConfTrade_v1_1
             base.BaseSelect();
         }
         
-        public void SelectSingle()
+        public bool SelectSingle()
         {
-            base.BaseSelectSingle();
-            MoveNext();
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
         }
         
         public bool MoveNext()
         {
-            Current = null;
-
             if (MoveToPosition())
             {
                 Current = new Tovary_Pointer();
                 Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-
                 return true;
             }
             else
+            {
+                Current = null;
                 return false;
+            }
         }
 
         public Tovary_Pointer Current { get; private set; }
@@ -393,13 +405,17 @@ namespace ConfTrade_v1_1
             
         }
         
-        public void Read(UnigueID uid)
+        public bool Read(UnigueID uid)
         {
-            BaseRead(uid);
-            
-            Name = base.FieldValue["Name"].ToString();
-            FullName = base.FieldValue["FullName"].ToString();
-            
+            if (BaseRead(uid))
+            {
+                Name = base.FieldValue["Name"].ToString();
+                FullName = base.FieldValue["FullName"].ToString();
+                
+                return true;
+            }
+            else
+                return false;
         }
         
         public void Save()
@@ -441,8 +457,6 @@ namespace ConfTrade_v1_1
             OdObjestItem.Read(base.UnigueID);
             return OdObjestItem;
         }
-
-
     }
     
     class Od_Select : DirectorySelect
@@ -454,25 +468,33 @@ namespace ConfTrade_v1_1
             base.BaseSelect();
         }
         
-        public void SelectSingle()
+        public bool SelectSingle()
         {
-            base.BaseSelectSingle();
-            MoveNext();
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
         }
         
         public bool MoveNext()
         {
-            Current = null;
-
             if (MoveToPosition())
             {
                 Current = new Od_Pointer();
                 Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-
                 return true;
             }
             else
+            {
+                Current = null;
                 return false;
+            }
         }
 
         public Od_Pointer Current { get; private set; }

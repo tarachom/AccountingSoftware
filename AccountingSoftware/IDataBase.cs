@@ -16,7 +16,7 @@ namespace AccountingSoftware
 
 		void SelectDirectoryPointer(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer);
 
-		void SelectDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		bool SelectDirectoryObject(DirectoryObject directoryObject, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void SaveDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryObject(UnigueID unigueID, string table);

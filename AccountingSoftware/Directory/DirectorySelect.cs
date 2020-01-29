@@ -13,6 +13,8 @@ namespace AccountingSoftware
 		{
 			QuerySelect = new Query(table);
 			Kernel = kernel;
+
+			BaseSelectList = new List<DirectoryPointer>();
 		}
 
 		public Query QuerySelect { get; set; }
@@ -20,13 +22,12 @@ namespace AccountingSoftware
 		public void MoveToFirst()
 		{
 			Position = 0;
-
 			MoveToPosition();
 		}
 
 		public int Count()
 		{
-			return (BaseSelectList != null) ? BaseSelectList.Count : 0;
+			return BaseSelectList.Count;
 		}
 
 		protected Kernel Kernel { get; private set; }
@@ -39,9 +40,6 @@ namespace AccountingSoftware
 
 		protected bool MoveToPosition()
 		{
-			if (BaseSelectList == null)
-				return false;
-
 			if (Position < BaseSelectList.Count)
 			{
 				DirectoryPointerPosition = BaseSelectList[Position];
@@ -59,12 +57,12 @@ namespace AccountingSoftware
 		{
 			Position = 0;
 			DirectoryPointerPosition = null;
-			BaseSelectList = new List<DirectoryPointer>();
+			BaseSelectList.Clear();
 
 			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
 		}
 
-		protected void BaseSelectSingle()
+		protected bool BaseSelectSingle()
 		{
 			int oldLimitValue = QuerySelect.Limit;
 			QuerySelect.Limit = 1;
@@ -72,6 +70,8 @@ namespace AccountingSoftware
 			BaseSelect();
 
 			QuerySelect.Limit = oldLimitValue;
+
+			return Count() > 0;
 		}
 	}
 }

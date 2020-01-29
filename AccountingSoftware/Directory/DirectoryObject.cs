@@ -39,10 +39,18 @@ namespace AccountingSoftware
 			IsNew = true;
 		}
 
-		protected void BaseRead(UnigueID uid)
+		protected bool BaseRead(UnigueID uid)
 		{
-			UnigueID = uid;
-			Kernel.DataBase.SelectDirectoryObject(this, Table, FieldArray, FieldValue);
+			if (uid == null || uid.UGuid == Guid.Empty)
+				return false;
+
+			if (Kernel.DataBase.SelectDirectoryObject(this, uid, Table, FieldArray, FieldValue))
+			{
+				UnigueID = uid;
+				return true;
+			}
+			else
+				return false;
 		}
 
 		protected void BaseSave()

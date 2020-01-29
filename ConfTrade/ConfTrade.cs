@@ -21,10 +21,32 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            //Conf.Od_Objest newOd = new Conf.Od_Objest();
-            //newOd.New();
-            //newOd.Name = "м2.";
-            //newOd.Save();
+            Conf.Tovary_Select tovary_Select1 = new Conf.Tovary_Select();
+
+            if (tovary_Select1.SelectSingle())
+            {
+
+            }
+
+            Console.ReadLine();
+
+
+            //
+            Conf.Od_Objest od_Objest1 = new Conf.Od_Objest();
+            
+            if (od_Objest1.Read(new UnigueID("836994c1-51db-4578-a7fe-82ef173f02cc")))
+            {
+                Console.WriteLine(od_Objest1.Name);
+
+                od_Objest1.New();
+                od_Objest1.Save();
+
+                Console.WriteLine(od_Objest1.UnigueID);
+            }
+            Console.ReadLine();
+
+
+
 
             Conf.Tovary_Select tovary_Select = new Conf.Tovary_Select();
             tovary_Select.QuerySelect.Where.Add(new Where("Name", Comparison.EQ, "Name 3"));
