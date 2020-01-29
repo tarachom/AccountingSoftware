@@ -230,9 +230,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
     
-        public void Select() 
+        public bool Select() 
         { 
-            base.BaseSelect();
+            return base.BaseSelect();
         }
         
         public bool SelectSingle()

@@ -23,9 +23,39 @@ namespace ConfTrade
 
             Conf.Tovary_Select tovary_Select1 = new Conf.Tovary_Select();
 
-            if (tovary_Select1.SelectSingle())
+            if (tovary_Select1.Select())
             {
+                Console.WriteLine(tovary_Select1.Count());
 
+                Conf.Tovary_Objest tovary_Objest2 = new Conf.Tovary_Objest();
+
+                while (tovary_Select1.MoveNext())
+                {
+                    Console.WriteLine(tovary_Select1.Current.UnigueID);
+
+                    if (tovary_Objest2.Read(tovary_Select1.Current.UnigueID))
+                    {
+                        tovary_Objest2.num += 100;
+
+                        if (String.IsNullOrEmpty(tovary_Objest2.code))
+                            tovary_Objest2.code = "00001";
+
+                        if (String.IsNullOrEmpty(tovary_Objest2.description))
+                            tovary_Objest2.description = "description";
+
+                        if (tovary_Objest2.od2.UnigueID.UGuid == Guid.Empty)
+                        {
+                            Conf.Od_Select od_Select = new Conf.Od_Select();
+                            if (od_Select.SelectSingle())
+                            {
+                                tovary_Objest2.od2 = od_Select.Current;
+                            }
+                        }
+                            
+
+                        tovary_Objest2.Save();
+                    }
+                }
             }
 
             Console.ReadLine();

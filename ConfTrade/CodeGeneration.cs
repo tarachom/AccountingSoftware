@@ -166,9 +166,9 @@ namespace ConfTrade_v1_1
     {
         public Tovary_Select() : base(Config.Kernel, "tovary_v1_1") { }
     
-        public void Select() 
+        public bool Select() 
         { 
-            base.BaseSelect();
+            return base.BaseSelect();
         }
         
         public bool SelectSingle()
@@ -463,9 +463,9 @@ namespace ConfTrade_v1_1
     {
         public Od_Select() : base(Config.Kernel, "od_v1_1") { }
     
-        public void Select() 
+        public bool Select() 
         { 
-            base.BaseSelect();
+            return base.BaseSelect();
         }
         
         public bool SelectSingle()

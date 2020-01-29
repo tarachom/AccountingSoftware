@@ -53,13 +53,15 @@ namespace AccountingSoftware
 			}
 		}
 
-		protected void BaseSelect()
+		protected bool BaseSelect()
 		{
 			Position = 0;
 			DirectoryPointerPosition = null;
 			BaseSelectList.Clear();
 
 			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
+
+			return Count() > 0;
 		}
 
 		protected bool BaseSelectSingle()
