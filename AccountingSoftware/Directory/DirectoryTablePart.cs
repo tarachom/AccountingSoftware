@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AccountingSoftware
 {
-	//Довідник
+	//Довідник Таблична частина
 	//
 	public abstract class DirectoryTablePart
 	{

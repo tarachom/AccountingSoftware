@@ -28,12 +28,16 @@ namespace ConfTrade
 
             Conf.Tovary_Select tovary_Select = new Conf.Tovary_Select();
             tovary_Select.QuerySelect.Where.Add(new Where("Name", Comparison.EQ, "Name 3"));
-            tovary_Select.QuerySelect.Field.Add("Code");
-            tovary_Select.QuerySelect.Field.Add("Name");
+
+            foreach (KeyValuePair<string, ConfigurationObjectField> field in Conf.Config.Kernel.Conf.Directories["Tovary"].Fields)
+            {
+                tovary_Select.QuerySelect.Field.Add(field.Key);
+            }
+
             tovary_Select.QuerySelect.Limit = 1;
 
             tovary_Select.Select();
-            Console.WriteLine("SelectSingle: " + tovary_Select.Count());
+            Console.WriteLine("Select: " + tovary_Select.Count());
 
             while (tovary_Select.MoveNext())
             {

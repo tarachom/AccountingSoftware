@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AccountingSoftware
 {
-	//Довідник Вибірка
+	//Довідник Вибірка ссилок
 	//
 	public abstract class DirectorySelect
 	{
@@ -35,6 +35,8 @@ namespace AccountingSoftware
 
 		protected DirectoryPointer DirectoryPointerPosition { get; private set; }
 
+		protected List<DirectoryPointer> BaseSelectList { get; private set; }
+
 		protected bool MoveToPosition()
 		{
 			if (BaseSelectList == null)
@@ -52,8 +54,6 @@ namespace AccountingSoftware
 				return false;
 			}
 		}
-
-		protected List<DirectoryPointer> BaseSelectList { get; private set; }
 
 		protected void BaseSelect()
 		{
