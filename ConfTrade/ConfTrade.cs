@@ -71,6 +71,8 @@ namespace ConfTrade
 
             //newObj.Ceny_TablePart.Save();
 
+            //newObj.CenyPostach_TablePart.Records[0].od = new Conf.Od_Pointer();
+
             newObj.Ceny_TablePart.Read();
             foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
             {

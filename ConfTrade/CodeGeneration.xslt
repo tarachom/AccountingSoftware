@@ -147,6 +147,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             BaseSave();
         }
         
+        public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
+        {
+            <xsl:value-of select="$DirectoryName"/>_Pointer directoryPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:choose>
@@ -186,13 +192,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
-        
-        public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
-        {
-            <xsl:value-of select="$DirectoryName"/>_Pointer directoryPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
+        //Табличні частини
         <xsl:for-each select="TabularParts/TablePart">
             <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
             <xsl:text>public </xsl:text><xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text> </xsl:text>
