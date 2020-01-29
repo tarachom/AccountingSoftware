@@ -167,6 +167,12 @@ namespace ConfTrade_v1_1
             base.BaseSelect();
         }
         
+        public void SelectSingle()
+        {
+            base.BaseSelectSingle();
+            MoveNext();
+        }
+        
         public bool MoveNext()
         {
             Current = null;
@@ -435,6 +441,8 @@ namespace ConfTrade_v1_1
             OdObjestItem.Read(base.UnigueID);
             return OdObjestItem;
         }
+
+
     }
     
     class Od_Select : DirectorySelect
@@ -444,6 +452,12 @@ namespace ConfTrade_v1_1
         public void Select() 
         { 
             base.BaseSelect();
+        }
+        
+        public void SelectSingle()
+        {
+            base.BaseSelectSingle();
+            MoveNext();
         }
         
         public bool MoveNext()

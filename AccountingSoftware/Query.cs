@@ -18,7 +18,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
-		public string Table { get; private set; }
+		private string Table { get; set; }
 
 		/// <summary>
 		/// Які поля вибирати
@@ -46,6 +46,11 @@ namespace AccountingSoftware
 		/// Обмеження вибірки
 		/// </summary>
 		public int Limit { get; set; }
+
+		/// <summary>
+		/// Пропустити задану кількість записів
+		/// </summary>
+		public int Offset { get; set; }
 
 		public string Construct()
 		{
@@ -126,6 +131,12 @@ namespace AccountingSoftware
 			{
 				sb.AppendLine();
 				sb.Append("LIMIT " + Limit.ToString() + " ");
+			}
+
+			if (Offset > 0)
+			{
+				sb.AppendLine();
+				sb.Append("OFFSET " + Offset.ToString() + " ");
 			}
 
 			return sb.ToString();

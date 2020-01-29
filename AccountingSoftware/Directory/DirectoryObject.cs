@@ -59,7 +59,7 @@ namespace AccountingSoftware
 
 		protected void BaseDelete()
 		{
-			Kernel.DataBase.DeleteDirectoryObject(this, Table);
+			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
 		}
 	}
 }

@@ -231,6 +231,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             base.BaseSelect();
         }
         
+        public void SelectSingle()
+        {
+            base.BaseSelectSingle();
+            MoveNext();
+        }
+        
         public bool MoveNext()
         {
             Current = null;

@@ -17,6 +17,18 @@ namespace AccountingSoftware
 
 		public Query QuerySelect { get; set; }
 
+		public void MoveToFirst()
+		{
+			Position = 0;
+
+			MoveToPosition();
+		}
+
+		public int Count()
+		{
+			return (BaseSelectList != null) ? BaseSelectList.Count : 0;
+		}
+
 		protected Kernel Kernel { get; private set; }
 
 		protected int Position { get; private set; }
@@ -25,6 +37,9 @@ namespace AccountingSoftware
 
 		protected bool MoveToPosition()
 		{
+			if (BaseSelectList == null)
+				return false;
+
 			if (Position < BaseSelectList.Count)
 			{
 				DirectoryPointerPosition = BaseSelectList[Position];
@@ -42,8 +57,21 @@ namespace AccountingSoftware
 
 		protected void BaseSelect()
 		{
+			Position = 0;
+			DirectoryPointerPosition = null;
 			BaseSelectList = new List<DirectoryPointer>();
+
 			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
+		}
+
+		protected void BaseSelectSingle()
+		{
+			int oldLimitValue = QuerySelect.Limit;
+			QuerySelect.Limit = 1;
+
+			BaseSelect();
+
+			QuerySelect.Limit = oldLimitValue;
 		}
 	}
 }

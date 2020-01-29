@@ -26,10 +26,53 @@ namespace ConfTrade
             //newOd.Name = "м2.";
             //newOd.Save();
 
+            Conf.Tovary_Select tovary_Select = new Conf.Tovary_Select();
+            tovary_Select.QuerySelect.Where.Add(new Where("Name", Comparison.EQ, "Name 3"));
+            tovary_Select.QuerySelect.Field.Add("Code");
+            tovary_Select.QuerySelect.Field.Add("Name");
+            tovary_Select.QuerySelect.Limit = 1;
+
+            tovary_Select.Select();
+            Console.WriteLine("SelectSingle: " + tovary_Select.Count());
+
+            while (tovary_Select.MoveNext())
+            {
+                foreach (KeyValuePair<string, object> f in tovary_Select.Current.Fields)
+                {
+                    Console.WriteLine(f.Key + ": " + f.Value);
+                }
+
+                tovary_Select.Current.Delete();
+            }
+
+            Console.ReadLine();
+
+
+
+            Console.WriteLine("SelectSingle: " + tovary_Select.Count());
+            Console.WriteLine(tovary_Select.Current.UnigueID);
+
+            tovary_Select.Select();
+            Console.WriteLine("Select: " + tovary_Select.Count());
+
+            while (tovary_Select.MoveNext())
+            {
+                Console.WriteLine(tovary_Select.Current.UnigueID);
+            }
+
+            Console.ReadLine();
+
+
+
+
+
+
             Conf.Od_Select OdSelect = new Conf.Od_Select();
             OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "м2."));
             OdSelect.QuerySelect.Limit = 1;
             OdSelect.Select();
+
+            
 
             Conf.Od_Pointer OdPointer = null;
             if (OdSelect.MoveNext())

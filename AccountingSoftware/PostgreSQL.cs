@@ -115,12 +115,12 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void DeleteDirectoryObject(DirectoryObject directoryObject, string table)
+		public void DeleteDirectoryObject(UnigueID unigueID, string table)
 		{
 			string query = "DELETE FROM " + table + " WHERE uid = @uid";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
 
 			nCommand.ExecuteNonQuery();
 		}

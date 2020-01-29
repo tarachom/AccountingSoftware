@@ -35,5 +35,10 @@ namespace AccountingSoftware
 		public UnigueID UnigueID { get; private set; }
 
 		public Dictionary<string, object> Fields { get; private set; }
+
+		public void Delete()
+		{
+			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
+		}
 	}
 }
