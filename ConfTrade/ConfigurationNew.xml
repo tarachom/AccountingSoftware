@@ -122,6 +122,17 @@
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
+            <Field>
+              <Name>cena</Name>
+              <Type>numeric</Type>
+              <Desc>Cena</Desc>
+            </Field>
+            <Field>
+              <Name>tovary</Name>
+              <Type>pointer</Type>
+              <Pointer>Tovary</Pointer>
+              <Desc>Cena</Desc>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>

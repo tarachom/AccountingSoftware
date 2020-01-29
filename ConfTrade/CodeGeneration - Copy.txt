@@ -183,9 +183,10 @@ namespace ConfTrade_v1_1
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
-             new string[] { "name", "cena", "tovary" }) 
+             new string[] { "name" }) 
         {
             Owner = owner;
+            Records = new List<Tovary_Ceny_TablePartRecord>();
         }
         
         public Tovary_Objest Owner { get; private set; }
@@ -202,11 +203,8 @@ namespace ConfTrade_v1_1
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
                 Tovary_Ceny_TablePartRecord record = new Tovary_Ceny_TablePartRecord();
-
                 record.name = fieldValue["name"].ToString();
-                record.cena = (decimal)fieldValue["cena"];
-                record.tovary = new Tovary_Pointer(fieldValue["tovary"]);
-                
+
                 Records.Add(record);
             }
         }
@@ -218,11 +216,8 @@ namespace ConfTrade_v1_1
             foreach (Tovary_Ceny_TablePartRecord record in Records)
             {
                 Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
                 fieldValue.Add("name", record.name);
-                fieldValue.Add("cena", record.cena);
-                fieldValue.Add("tovary", record.tovary.UnigueID.UGuid);
-                
+
                 base.BaseSave(Owner.UnigueID, fieldValue);
             }
         }
@@ -230,18 +225,8 @@ namespace ConfTrade_v1_1
 
     class Tovary_Ceny_TablePartRecord : DirectoryTablePartRecord
     {
-        public Tovary_Ceny_TablePartRecord()
-        {
-            name = "";
-            cena = 0;
-            tovary = new Tovary_Pointer();
-            
-        }
         
         public string name { get; set; }
-        public decimal cena { get; set; }
-        public Tovary_Pointer tovary { get; set; }
-        
     }
       
     /*******************************************************[ Od ]****************************************************/
