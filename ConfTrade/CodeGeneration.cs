@@ -105,6 +105,11 @@ namespace ConfTrade_v1_1
             BaseSave();
         }
         
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
         public Tovary_Pointer GetDirectoryPointer()
         {
             Tovary_Pointer directoryPointer = new Tovary_Pointer(UnigueID.UGuid);
@@ -278,7 +283,7 @@ namespace ConfTrade_v1_1
     class Tovary_Od_List_TablePart : DirectoryTablePart
     {
         public Tovary_Od_List_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_od_tablepart_v1_1",
-             new string[] { "od_pointer", "name" }) 
+             new string[] { "Od_Pointer", "Name", "FullName" }) 
         {
             Owner = owner;
             Records = new List<Tovary_Od_List_TablePartRecord>();
@@ -299,8 +304,9 @@ namespace ConfTrade_v1_1
             {
                 Tovary_Od_List_TablePartRecord record = new Tovary_Od_List_TablePartRecord();
 
-                record.od_pointer = new Od_Pointer(fieldValue["od_pointer"]);
-                record.name = fieldValue["name"].ToString();
+                record.Od_Pointer = new Od_Pointer(fieldValue["Od_Pointer"]);
+                record.Name = fieldValue["Name"].ToString();
+                record.FullName = fieldValue["FullName"].ToString();
                 
                 Records.Add(record);
             }
@@ -325,8 +331,9 @@ namespace ConfTrade_v1_1
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
-                    fieldValue.Add("od_pointer", record.od_pointer.UnigueID.UGuid);
-                    fieldValue.Add("name", record.name);
+                    fieldValue.Add("Od_Pointer", record.Od_Pointer.UnigueID.UGuid);
+                    fieldValue.Add("Name", record.Name);
+                    fieldValue.Add("FullName", record.FullName);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -343,21 +350,24 @@ namespace ConfTrade_v1_1
     {
         public Tovary_Od_List_TablePartRecord()
         {
-            od_pointer = new Od_Pointer();
-            name = "";
+            Od_Pointer = new Od_Pointer();
+            Name = "";
+            FullName = "";
             
         }
         
         public Tovary_Od_List_TablePartRecord(
-            Od_Pointer _od_pointer = null, string _name = "")
+            Od_Pointer _Od_Pointer = null, string _Name = "", string _FullName = "")
         {
-            od_pointer = _od_pointer;
-            name = _name;
+            Od_Pointer = _Od_Pointer;
+            Name = _Name;
+            FullName = _FullName;
             
         }
         
-        public Od_Pointer od_pointer { get; set; }
-        public string name { get; set; }
+        public Od_Pointer Od_Pointer { get; set; }
+        public string Name { get; set; }
+        public string FullName { get; set; }
         
     }
       
@@ -368,9 +378,10 @@ namespace ConfTrade_v1_1
     class Od_Objest : DirectoryObject
     {
         public Od_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name" }) 
+             new string[] { "Name", "FullName" }) 
         {
             Name = "";
+            FullName = "";
             
             //Табличні частини
             
@@ -381,14 +392,21 @@ namespace ConfTrade_v1_1
             BaseRead(uid);
             
             Name = base.FieldValue["Name"].ToString();
+            FullName = base.FieldValue["FullName"].ToString();
             
         }
         
         public void Save()
         {
             base.FieldValue["Name"] = Name;
+            base.FieldValue["FullName"] = FullName;
             
             BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
         }
         
         public Od_Pointer GetDirectoryPointer()
@@ -398,6 +416,7 @@ namespace ConfTrade_v1_1
         }
         
         public string Name { get; set; }
+        public string FullName { get; set; }
         
         //Табличні частини
         

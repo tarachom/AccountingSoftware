@@ -27,7 +27,7 @@ namespace ConfTrade
             //newOd.Save();
 
             Conf.Od_Select OdSelect = new Conf.Od_Select();
-            OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "кг."));
+            OdSelect.QuerySelect.Where.Add(new Where("name", Comparison.EQ, "м2."));
             OdSelect.QuerySelect.Limit = 1;
             OdSelect.Select();
 
@@ -71,56 +71,63 @@ namespace ConfTrade
                 Console.ReadLine();
             }
 
-            //newObj.Od_List_TablePart.Records.Add(new Conf.Tovary_Od_List_TablePartRecord(OdPointer, "кілограм"));
-            //nwObj.Od_List_TablePart.Save(false);
+            //newObj.Od_List_TablePart.Records.Add(new Conf.Tovary_Od_List_TablePartRecord(OdPointer, "м2"));
+            //newObj.Od_List_TablePart.Save(false);
 
             newObj.Od_List_TablePart.Read();
             foreach (Conf.Tovary_Od_List_TablePartRecord tovary_Od_List_TablePartRecord in newObj.Od_List_TablePart.Records)
             {
-                Conf.Od_Objest od_Objest = tovary_Od_List_TablePartRecord.od_pointer.GetDirectoryObject();
-                Console.WriteLine(od_Objest.Name);
+                Conf.Od_Objest od_Objest = tovary_Od_List_TablePartRecord.Od_Pointer.GetDirectoryObject();
+                Console.WriteLine(od_Objest.Name + ", " + od_Objest.FullName);
+
+                //od_Objest.FullName = "Full: " + od_Objest.Name;
+                //od_Objest.Save();
+
+                tovary_Od_List_TablePartRecord.FullName = od_Objest.FullName;
             }
 
-            //for (int i = 0; i < 10; i++)
-            //{
-            //    newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord());
-            //    newObj.Ceny_TablePart.Records[i].name = "Name" + i.ToString();
-            //}
+            newObj.Od_List_TablePart.Save();
 
-            //newObj.Ceny_TablePart.Save();
+           //for (int i = 0; i < 10; i++)
+           //{
+           //    newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord());
+           //    newObj.Ceny_TablePart.Records[i].name = "Name" + i.ToString();
+           //}
 
-            //newObj.CenyPostach_TablePart.Records[0].od = new Conf.Od_Pointer();
+           //newObj.Ceny_TablePart.Save();
 
-            //newObj.Ceny_TablePart.Read();
-            //foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
-            //{
-            //    Console.WriteLine(record.name);
-            //}
+           //newObj.CenyPostach_TablePart.Records[0].od = new Conf.Od_Pointer();
 
-            //for (int i = 0; i < newObj.Ceny_TablePart.Records.Count; i++)
-            //{
-            //    newObj.Ceny_TablePart.Records[i].name = "NewName " + i.ToString();
-            //    newObj.Ceny_TablePart.Records[i].cena = 14.55m + 1.43m;
-            //}
+           //newObj.Ceny_TablePart.Read();
+           //foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
+           //{
+           //    Console.WriteLine(record.name);
+           //}
+
+           //for (int i = 0; i < newObj.Ceny_TablePart.Records.Count; i++)
+           //{
+           //    newObj.Ceny_TablePart.Records[i].name = "NewName " + i.ToString();
+           //    newObj.Ceny_TablePart.Records[i].cena = 14.55m + 1.43m;
+           //}
 
 
 
-            //newObj.Ceny_TablePart.Read();
-            //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("dfasd", 10));
-            //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("dfgsdfdsfasg", 10.232m));
-            //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("sdfasd", 10));
-            //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("sdfasdfasd", 10.232m));
-            //newObj.Ceny_TablePart.Save();
+           //newObj.Ceny_TablePart.Read();
+           //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("dfasd", 10));
+           //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("dfgsdfdsfasg", 10.232m));
+           //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("sdfasd", 10));
+           //newObj.Ceny_TablePart.Records.Add(new Conf.Tovary_Ceny_TablePartRecord("sdfasdfasd", 10.232m));
+           //newObj.Ceny_TablePart.Save();
 
-            //newObj.Ceny_TablePart.Read();
-            //foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
-            //{
-            //    Console.WriteLine("name = " + record.name + ", cena = " + record.cena.ToString());
-            //}
+           //newObj.Ceny_TablePart.Read();
+           //foreach (Conf.Tovary_Ceny_TablePartRecord record in newObj.Ceny_TablePart.Records)
+           //{
+           //    Console.WriteLine("name = " + record.name + ", cena = " + record.cena.ToString());
+           //}
 
-            //newObj.Ceny_TablePart.Clear();
+           //newObj.Ceny_TablePart.Clear();
 
-            Console.ReadLine();
+           Console.ReadLine();
 
             Conf.Tovary_Select s = new Conf.Tovary_Select();
             //s.QuerySelect.Limit = 10;

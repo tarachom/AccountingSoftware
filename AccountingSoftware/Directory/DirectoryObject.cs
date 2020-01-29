@@ -57,6 +57,9 @@ namespace AccountingSoftware
 			}
 		}
 
-		
+		protected void BaseDelete()
+		{
+			Kernel.DataBase.DeleteDirectoryObject(this, Table);
+		}
 	}
 }

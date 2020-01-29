@@ -135,15 +135,20 @@
           <Desc>Таблична частина одиниць вимірів</Desc>
           <Fields>
             <Field>
-              <Name>od_pointer</Name>
+              <Name>Od_Pointer</Name>
               <Type>pointer</Type>
               <Pointer>Od</Pointer>
               <Desc>pointer od table</Desc>
             </Field>
             <Field>
-              <Name>name</Name>
+              <Name>Name</Name>
               <Type>string</Type>
               <Desc>Name</Desc>
+            </Field>
+            <Field>
+              <Name>FullName</Name>
+              <Type>string</Type>
+              <Desc>full Name</Desc>
             </Field>
           </Fields>
         </TablePart>
@@ -158,6 +163,11 @@
           <Name>Name</Name>
           <Type>string</Type>
           <Desc>Name</Desc>
+        </Field>
+        <Field>
+          <Name>FullName</Name>
+          <Type>string</Type>
+          <Desc>Full Name</Desc>
         </Field>
       </Fields>
       <TabularParts />

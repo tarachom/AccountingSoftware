@@ -149,6 +149,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             BaseSave();
         }
         
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
         {
             <xsl:value-of select="$DirectoryName"/>_Pointer directoryPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
