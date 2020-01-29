@@ -127,11 +127,23 @@
               <Type>numeric</Type>
               <Desc>Cena</Desc>
             </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Od_List</Name>
+          <Table>tovary_od_tablepart_v1_1</Table>
+          <Desc>Таблична частина одиниць вимірів</Desc>
+          <Fields>
             <Field>
-              <Name>tovary</Name>
+              <Name>od_pointer</Name>
               <Type>pointer</Type>
-              <Pointer>Tovary</Pointer>
-              <Desc>Cena</Desc>
+              <Pointer>Od</Pointer>
+              <Desc>pointer od table</Desc>
+            </Field>
+            <Field>
+              <Name>name</Name>
+              <Type>string</Type>
+              <Desc>Name</Desc>
             </Field>
           </Fields>
         </TablePart>

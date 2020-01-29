@@ -105,7 +105,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                   <xsl:text> : new int[] { }</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'numeric'">
+                  <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
                   <xsl:text>(decimal)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                  <xsl:text> : 0</xsl:text>
                 </xsl:when>
                 <xsl:when test="Type = 'numeric[]'">
                   <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -245,6 +247,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
       <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
+    /// &lt;summary&gt;
+    /// [<xsl:value-of select="$TablePartName"/>] 
+    /// <xsl:value-of select="Desc"/>.
+    /// &lt;/summary&gt;
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -257,6 +263,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
              </xsl:for-each> }) 
         {
             Owner = owner;
+            Records = new List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt;();
         }
         
         public <xsl:value-of select="$DirectoryName"/>_Objest Owner { get; private set; }
@@ -296,7 +303,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                       <xsl:text> : new int[] { }</xsl:text>
                     </xsl:when>
                     <xsl:when test="Type = 'numeric'">
+                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
                       <xsl:text>(decimal)fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+                      <xsl:text> : 0</xsl:text>
                     </xsl:when>
                     <xsl:when test="Type = 'numeric[]'">
                       <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -326,26 +335,43 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             }
         }
         
-        public void Save() 
+        /// &lt;summary&gt;
+        /// Зберегти колекцію Records в базу.
+        /// &lt;/summary&gt;
+        /// &lt;param name="clear_all_before_save"&gt;
+        /// Перед записом колекції, попередні записи видаляються з бази даних.
+        /// Щоб не видаляти треба поставити clear_all_before_save = false.
+        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// &lt;/param&gt;
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (<xsl:value-of select="$TablePartFullName"/>_TablePartRecord record in Records)
+                {
+                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+
+                    <xsl:for-each select="Fields/Field">
+                      <xsl:text>fieldValue.Add("</xsl:text>
+                      <xsl:value-of select="Name"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:choose>
+                        <xsl:when test="Type = 'pointer'">
+                          <xsl:text>.UnigueID.UGuid</xsl:text>
+                        </xsl:when>
+                      </xsl:choose>
+                      <xsl:text>)</xsl:text>;
+                    </xsl:for-each>
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+            }
+        }
+        
+        public void Clear()
         {
             base.BaseDelete(Owner.UnigueID);
-
-            foreach (<xsl:value-of select="$TablePartFullName"/>_TablePartRecord record in Records)
-            {
-                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
-                <xsl:for-each select="Fields/Field">
-                  <xsl:text>fieldValue.Add("</xsl:text>
-                  <xsl:value-of select="Name"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
-                  <xsl:choose>
-                    <xsl:when test="Type = 'pointer'">
-                      <xsl:text>.UnigueID.UGuid</xsl:text>
-                    </xsl:when>
-                  </xsl:choose>
-                  <xsl:text>)</xsl:text>;
-                </xsl:for-each>
-                base.BaseSave(Owner.UnigueID, fieldValue);
-            }
         }
     }
     
@@ -388,6 +414,86 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                   <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
                 </xsl:when>
               </xsl:choose>;
+            </xsl:for-each>
+        }
+        
+        public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord(
+            <xsl:for-each select="Fields/Field">
+              <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
+              <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                  <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'string[]'">
+                  <xsl:text>string[]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
+                  <xsl:text>int</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer[]'">
+                  <xsl:text>int[]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'numeric'">
+                  <xsl:text>decimal</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'numeric[]'">
+                  <xsl:text>decimal[]</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'boolean'">
+                  <xsl:text>bool</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'time'">
+                  <xsl:text>TimeSpan</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime'">
+                  <xsl:text>DateTime</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                  <xsl:value-of select="Pointer"/>
+                  <xsl:text>_Pointer</xsl:text>
+                </xsl:when>
+              </xsl:choose>
+              <xsl:text> _</xsl:text>
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:choose>
+                <xsl:when test="Type = 'string'">
+                  <xsl:text>""</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'string[]'">
+                  <xsl:text>new string[] { }</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer'">
+                  <xsl:text>0</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'integer[]'">
+                  <xsl:text>new int[] { }</xsl:text>
+                </xsl:when>
+                 <xsl:when test="Type = 'numeric'">
+                  <xsl:text>0</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'numeric[]'">
+                  <xsl:text>new decimal[] { }</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'boolean'">
+                  <xsl:text>false</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'time'">
+                  <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime'">
+                  <xsl:text>DateTime.MinValue</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'pointer'">
+                  <xsl:text>null</xsl:text>
+                </xsl:when>
+              </xsl:choose>
+            </xsl:for-each>)
+        {
+            <xsl:for-each select="Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = _</xsl:text>
+              <xsl:value-of select="Name"/>;
             </xsl:for-each>
         }
         

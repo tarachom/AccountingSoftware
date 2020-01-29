@@ -48,6 +48,7 @@ namespace ConfTrade_v1_1
             
             //Табличні частини
             Ceny_TablePart = new Tovary_Ceny_TablePart(this);
+            Od_List_TablePart = new Tovary_Od_List_TablePart(this);
             
         }
         
@@ -65,7 +66,7 @@ namespace ConfTrade_v1_1
             field5 = base.FieldValue["field5"].ToString();
             od2 = new Od_Pointer(base.FieldValue["od2"]);
             count = (int)base.FieldValue["count"];
-            num = (decimal)base.FieldValue["num"];
+            num = (base.FieldValue["num"] != DBNull.Value) ? (decimal)base.FieldValue["num"] : 0;
             isupdate = (bool)base.FieldValue["isupdate"];
             isupdate2 = (bool)base.FieldValue["isupdate2"];
             date_add = (base.FieldValue["date_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add"].ToString()) : DateTime.MinValue;
@@ -133,6 +134,7 @@ namespace ConfTrade_v1_1
         
         //Табличні частини
         public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
+        public Tovary_Od_List_TablePart Od_List_TablePart { get; set; }
         
     }
     
@@ -179,12 +181,17 @@ namespace ConfTrade_v1_1
     }
     
       
+    /// <summary>
+    /// [Ceny] 
+    /// TablePart Test Info.
+    /// </summary>
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
-             new string[] { "name", "cena", "tovary" }) 
+             new string[] { "name", "cena" }) 
         {
             Owner = owner;
+            Records = new List<Tovary_Ceny_TablePartRecord>();
         }
         
         public Tovary_Objest Owner { get; private set; }
@@ -203,27 +210,42 @@ namespace ConfTrade_v1_1
                 Tovary_Ceny_TablePartRecord record = new Tovary_Ceny_TablePartRecord();
 
                 record.name = fieldValue["name"].ToString();
-                record.cena = (decimal)fieldValue["cena"];
-                record.tovary = new Tovary_Pointer(fieldValue["tovary"]);
+                record.cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
                 
                 Records.Add(record);
             }
         }
         
-        public void Save() 
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Перед записом колекції, попередні записи видаляються з бази даних.
+        /// Щоб не видаляти треба поставити clear_all_before_save = false.
+        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// </param>
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Tovary_Ceny_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("name", record.name);
+                    fieldValue.Add("cena", record.cena);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+            }
+        }
+        
+        public void Clear()
         {
             base.BaseDelete(Owner.UnigueID);
-
-            foreach (Tovary_Ceny_TablePartRecord record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("name", record.name);
-                fieldValue.Add("cena", record.cena);
-                fieldValue.Add("tovary", record.tovary.UnigueID.UGuid);
-                
-                base.BaseSave(Owner.UnigueID, fieldValue);
-            }
         }
     }
     
@@ -233,13 +255,109 @@ namespace ConfTrade_v1_1
         {
             name = "";
             cena = 0;
-            tovary = new Tovary_Pointer();
+            
+        }
+        
+        public Tovary_Ceny_TablePartRecord(
+            string _name = "", decimal _cena = 0)
+        {
+            name = _name;
+            cena = _cena;
             
         }
         
         public string name { get; set; }
         public decimal cena { get; set; }
-        public Tovary_Pointer tovary { get; set; }
+        
+    }
+      
+    /// <summary>
+    /// [Od_List] 
+    /// Таблична частина одиниць вимірів.
+    /// </summary>
+    class Tovary_Od_List_TablePart : DirectoryTablePart
+    {
+        public Tovary_Od_List_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_od_tablepart_v1_1",
+             new string[] { "od_pointer", "name" }) 
+        {
+            Owner = owner;
+            Records = new List<Tovary_Od_List_TablePartRecord>();
+        }
+        
+        public Tovary_Objest Owner { get; private set; }
+        
+        public List<Tovary_Od_List_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.FieldValueList.Clear();
+
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Tovary_Od_List_TablePartRecord record = new Tovary_Od_List_TablePartRecord();
+
+                record.od_pointer = new Od_Pointer(fieldValue["od_pointer"]);
+                record.name = fieldValue["name"].ToString();
+                
+                Records.Add(record);
+            }
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Перед записом колекції, попередні записи видаляються з бази даних.
+        /// Щоб не видаляти треба поставити clear_all_before_save = false.
+        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// </param>
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Tovary_Od_List_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("od_pointer", record.od_pointer.UnigueID.UGuid);
+                    fieldValue.Add("name", record.name);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+            }
+        }
+        
+        public void Clear()
+        {
+            base.BaseDelete(Owner.UnigueID);
+        }
+    }
+    
+    class Tovary_Od_List_TablePartRecord : DirectoryTablePartRecord
+    {
+        public Tovary_Od_List_TablePartRecord()
+        {
+            od_pointer = new Od_Pointer();
+            name = "";
+            
+        }
+        
+        public Tovary_Od_List_TablePartRecord(
+            Od_Pointer _od_pointer = null, string _name = "")
+        {
+            od_pointer = _od_pointer;
+            name = _name;
+            
+        }
+        
+        public Od_Pointer od_pointer { get; set; }
+        public string name { get; set; }
         
     }
       

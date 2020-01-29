@@ -173,7 +173,7 @@ namespace AccountingSoftware
 
 			query += " FROM " + table + " WHERE owner = @owner";
 
-			Console.WriteLine(query);
+			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
@@ -205,7 +205,7 @@ namespace AccountingSoftware
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
-			Console.WriteLine(query);
+			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
