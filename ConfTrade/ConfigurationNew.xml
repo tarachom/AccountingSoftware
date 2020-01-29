@@ -135,29 +135,6 @@
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>CenyPostach</Name>
-          <Table>tovary_ceny_tablepart_v1_1</Table>
-          <Desc>TablePart Test Info</Desc>
-          <Fields>
-            <Field>
-              <Name>name</Name>
-              <Type>string</Type>
-              <Desc>Name</Desc>
-            </Field>
-            <Field>
-              <Name>cena</Name>
-              <Type>numeric</Type>
-              <Desc>Cena</Desc>
-            </Field>
-            <Field>
-              <Name>od</Name>
-              <Type>pointer</Type>
-              <Pointer>Od</Pointer>
-              <Desc>Od</Desc>
-            </Field>
-          </Fields>
-        </TablePart>
       </TabularParts>
     </Directory>
     <Directory>

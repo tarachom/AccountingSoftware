@@ -51,6 +51,7 @@ namespace ConfTrade
 
             Conf.Tovary_Select objSelect = new Conf.Tovary_Select();
             objSelect.QuerySelect.Where.Add(new Where("uid", Comparison.EQ, Guid.Parse("8ada16bb-c378-4c80-9c9f-c8bf9cec6173")));
+            
             objSelect.Select();
 
             Conf.Tovary_Objest newObj = null;

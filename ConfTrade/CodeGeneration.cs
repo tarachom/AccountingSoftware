@@ -18,8 +18,8 @@ namespace ConfTrade_v1_1
         public static Kernel Kernel { get; set; }
     }
     
-    /*******************************************************[ Tovary ]****************************************************/
-
+    #region DIRECTORY "Tovary"
+    
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
@@ -48,7 +48,6 @@ namespace ConfTrade_v1_1
             
             //Табличні частини
             Ceny_TablePart = new Tovary_Ceny_TablePart(this);
-            CenyPostach_TablePart = new Tovary_CenyPostach_TablePart(this);
             
         }
         
@@ -134,7 +133,6 @@ namespace ConfTrade_v1_1
         
         //Табличні частини
         public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
-        public Tovary_CenyPostach_TablePart CenyPostach_TablePart { get; set; }
         
     }
     
@@ -181,7 +179,6 @@ namespace ConfTrade_v1_1
     }
     
       
-
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
@@ -212,7 +209,7 @@ namespace ConfTrade_v1_1
                 Records.Add(record);
             }
         }
-
+        
         public void Save() 
         {
             base.BaseDelete(Owner.UnigueID);
@@ -229,7 +226,7 @@ namespace ConfTrade_v1_1
             }
         }
     }
-
+    
     class Tovary_Ceny_TablePartRecord : DirectoryTablePartRecord
     {
         public Tovary_Ceny_TablePartRecord()
@@ -246,73 +243,10 @@ namespace ConfTrade_v1_1
         
     }
       
-
-    class Tovary_CenyPostach_TablePart : DirectoryTablePart
-    {
-        public Tovary_CenyPostach_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
-             new string[] { "name", "cena", "od" }) 
-        {
-            Owner = owner;
-        }
-        
-        public Tovary_Objest Owner { get; private set; }
-        
-        public List<Tovary_CenyPostach_TablePartRecord> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.FieldValueList.Clear();
-
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Tovary_CenyPostach_TablePartRecord record = new Tovary_CenyPostach_TablePartRecord();
-
-                record.name = fieldValue["name"].ToString();
-                record.cena = (decimal)fieldValue["cena"];
-                record.od = new Od_Pointer(fieldValue["od"]);
-                
-                Records.Add(record);
-            }
-        }
-
-        public void Save() 
-        {
-            base.BaseDelete(Owner.UnigueID);
-
-            foreach (Tovary_CenyPostach_TablePartRecord record in Records)
-            {
-                Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                fieldValue.Add("name", record.name);
-                fieldValue.Add("cena", record.cena);
-                fieldValue.Add("od", record.od.UnigueID.UGuid);
-                
-                base.BaseSave(Owner.UnigueID, fieldValue);
-            }
-        }
-    }
-
-    class Tovary_CenyPostach_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Tovary_CenyPostach_TablePartRecord()
-        {
-            name = "";
-            cena = 0;
-            od = new Od_Pointer();
-            
-        }
-        
-        public string name { get; set; }
-        public decimal cena { get; set; }
-        public Od_Pointer od { get; set; }
-        
-    }
-      
-    /*******************************************************[ Od ]****************************************************/
-
+    #endregion
+    
+    #region DIRECTORY "Od"
+    
     class Od_Objest : DirectoryObject
     {
         public Od_Objest() : base(Config.Kernel, "od_v1_1",
@@ -394,5 +328,7 @@ namespace ConfTrade_v1_1
     }
     
       
+    #endregion
+    
 }
   

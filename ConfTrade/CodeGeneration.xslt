@@ -23,8 +23,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     }
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
-    /*******************************************************[ <xsl:value-of select="$DirectoryName"/> ]****************************************************/
-
+    #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
+    
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -242,10 +242,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
     }
     
-      <xsl:for-each select="TabularParts/TablePart">
+      <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
-
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -326,7 +325,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 Records.Add(record);
             }
         }
-
+        
         public void Save() 
         {
             base.BaseDelete(Owner.UnigueID);
@@ -349,7 +348,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             }
         }
     }
-
+    
     class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord()
@@ -432,8 +431,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
           <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
     }
-      </xsl:for-each>
-
+      </xsl:for-each> <!-- TableParts -->
+    #endregion
     </xsl:for-each>
 }
   </xsl:template>
