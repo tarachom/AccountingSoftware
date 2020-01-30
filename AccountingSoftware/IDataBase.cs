@@ -26,6 +26,6 @@ namespace AccountingSoftware
 		void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
-		void Test();
+		void SelectInformationSchema(ConfigurationInformationSchema informationSchema);
 	}
 }

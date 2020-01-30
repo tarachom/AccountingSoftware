@@ -248,5 +248,175 @@ namespace AccountingSoftware
 
             xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
         }
+
+        public static void Comparation(Configuration Conf)
+        {
+            ConfigurationInformationSchema InformationSchema = new ConfigurationInformationSchema();
+
+            foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
+            {
+                if (InformationSchema.Tables.ContainsKey(ConfDirectory.Key))
+                {
+                    foreach (KeyValuePair<string, ConfigurationObjectField> ConfDirectoryField in ConfDirectory.Value.Fields)
+                    {
+                        if (InformationSchema.Tables[ConfDirectory.Key].Columns.ContainsKey(ConfDirectoryField.Key))
+                        {
+                            ConfigurationInformationSchema_Column InformationSchemaColumn = InformationSchema.Tables[ConfDirectory.Key].Columns[ConfDirectoryField.Key];
+
+                            string confType = ConfDirectoryField.Value.Type;
+
+                            string baseType = InformationSchemaColumn.DataType;
+                            string baseType2 = InformationSchemaColumn.UdtName;
+
+                            switch (confType)
+                            {
+                                case "string":
+                                    {
+                                        if (baseType == "text" && baseType2 == "text")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "string[]":
+                                    {
+                                        if (baseType == "ARRAY" && baseType2 == "_text")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "integer":
+                                    {
+                                        if (baseType == "integer" && baseType2 == "int4")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "integer[]":
+                                    {
+                                        if (baseType == "ARRAY" && baseType2 == "_int4")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "numeric":
+                                    {
+                                        if (baseType == "numeric" && baseType2 == "numeric")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "numeric[]":
+                                    {
+                                        if (baseType == "ARRAY" && baseType2 == "_numeric")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "boolean":
+                                    {
+                                        if (baseType == "boolean" && baseType2 == "bool")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "date":
+                                    {
+                                        if (baseType == "date" && baseType2 == "date")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "time":
+                                    {
+                                        if (baseType == "time without time zone" && baseType2 == "time")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "datetime":
+                                    {
+                                        if (baseType == "timestamp without time zone" && baseType2 == "timestamp")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                case "pointer":
+                                    {
+                                        if (baseType == "uuid" && baseType2 == "uuid")
+                                        {
+                                            //ok
+                                        }
+                                        else
+                                        {
+                                            //error
+                                        }
+                                        break;
+                                    }
+                                default:
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            //+field
+                        }
+                    }
+                }
+                else
+                {
+                    //+table
+                }
+            }
+        }
     }
 }

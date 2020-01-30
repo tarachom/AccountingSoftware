@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AccountingSoftware
 {
-	class ConfigurationInformationSchema
+	public class ConfigurationInformationSchema
 	{
 		public ConfigurationInformationSchema()
 		{
@@ -24,7 +24,7 @@ namespace AccountingSoftware
 		}
 	}
 
-	class ConfigurationInformationSchema_Table
+	public class ConfigurationInformationSchema_Table
 	{
 		public ConfigurationInformationSchema_Table()
 		{
@@ -36,7 +36,7 @@ namespace AccountingSoftware
 		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; }
 	}
 
-	class ConfigurationInformationSchema_Column
+	public class ConfigurationInformationSchema_Column
 	{
 		public ConfigurationInformationSchema_Column() { }
 
