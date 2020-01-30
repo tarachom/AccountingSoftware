@@ -19,6 +19,11 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
+            Conf.Config.Kernel.DataBase.Test();
+            Console.ReadLine();
+
+
+
             Conf.Tovary_Objest tovary_Objest = new Conf.Tovary_Objest();
             tovary_Objest.New();
             tovary_Objest.name = "NEW Object";

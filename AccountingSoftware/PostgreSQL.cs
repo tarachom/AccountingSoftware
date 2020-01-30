@@ -233,5 +233,22 @@ namespace AccountingSoftware
 
 			nCommand.ExecuteNonQuery();
 		}
+
+		public void Test()
+		{
+			string query = "select table_name, column_name, data_type, udt_name from information_schema.columns where table_schema = 'public'";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Console.WriteLine(reader["table_name"] + " " + 
+					              reader["column_name"] + " " + 
+								  reader["data_type"] + " " + 
+								  reader["udt_name"]);
+			}
+			reader.Close();
+		}
 	}
 }
