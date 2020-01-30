@@ -371,6 +371,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         {
             if (Records.Count > 0)
             {
+                base.BaseBeginTransaction();
+                
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
@@ -390,6 +392,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                     </xsl:for-each>
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
+                
+                base.BaseCommitTransaction();
             }
         }
         

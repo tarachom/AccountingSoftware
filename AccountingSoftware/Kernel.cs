@@ -14,8 +14,7 @@ namespace AccountingSoftware
 		public void Open()
 		{
 			DataBase = new PostgreSQL();
-			DataBase.ConnectionString = "Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;";
-			DataBase.Open();
+			DataBase.Open("Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;");
 			Console.WriteLine("DataBase Open");
 
 			Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";

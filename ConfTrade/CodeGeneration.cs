@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 30.01.2020 10:14:15
+ * Дата конфігурації: 30.01.2020 03:08:54
  *
  */
 
@@ -252,6 +252,8 @@ namespace ConfTrade_v1_1
         {
             if (Records.Count > 0)
             {
+                base.BaseBeginTransaction();
+                
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
@@ -264,6 +266,8 @@ namespace ConfTrade_v1_1
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
+                
+                base.BaseCommitTransaction();
             }
         }
         
@@ -343,6 +347,8 @@ namespace ConfTrade_v1_1
         {
             if (Records.Count > 0)
             {
+                base.BaseBeginTransaction();
+                
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
@@ -356,6 +362,8 @@ namespace ConfTrade_v1_1
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
+                
+                base.BaseCommitTransaction();
             }
         }
         

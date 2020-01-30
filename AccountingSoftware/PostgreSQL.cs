@@ -14,9 +14,13 @@ namespace AccountingSoftware
 
 		}
 
-		public void Open()
+		private NpgsqlConnection Connection { get; set; }
+
+		private NpgsqlTransaction Transaction { get; set; }
+
+		public void Open(string connectionString)
 		{
-			Connection = new NpgsqlConnection(ConnectionString);
+			Connection = new NpgsqlConnection(connectionString);
 			Connection.Open();
 		}
 
@@ -25,9 +29,20 @@ namespace AccountingSoftware
 			Connection.Close();
 		}
 
-		public string ConnectionString { get; set; }
+		public void BeginTransaction()
+		{
+			Transaction = Connection.BeginTransaction();
+		}
 
-		private NpgsqlConnection Connection { get; set; }
+		public void CommitTransaction()
+		{
+			Transaction.Commit();
+		}
+
+		public void RollbackTransaction()
+		{
+			Transaction.Rollback();
+		}
 
 		public void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{

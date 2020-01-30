@@ -8,11 +8,12 @@ namespace AccountingSoftware
 {
 	public interface IDataBase
 	{
-		void Open();
-
+		void Open(string connectionString);
 		void Close();
 
-		string ConnectionString { get; set; }
+		void BeginTransaction();
+		void CommitTransaction();
+		void RollbackTransaction();
 
 		void SelectDirectoryPointer(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer);
 

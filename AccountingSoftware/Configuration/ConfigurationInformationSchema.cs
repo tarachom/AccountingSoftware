@@ -11,7 +11,7 @@ namespace AccountingSoftware
 			Tables = new Dictionary<string, ConfigurationInformationSchema_Table>();
 		}
 
-		public Dictionary<string, ConfigurationInformationSchema_Table> Tables { get; private set; }
+		public Dictionary<string, ConfigurationInformationSchema_Table> Tables { get; }
 
 		public void Append(string table, string column, string dataType, string udtName)
 		{
@@ -33,7 +33,7 @@ namespace AccountingSoftware
 
 		public string TableName { get; set; }
 
-		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; set; }
+		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; }
 	}
 
 	class ConfigurationInformationSchema_Column

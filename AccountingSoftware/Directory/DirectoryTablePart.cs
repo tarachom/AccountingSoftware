@@ -32,6 +32,24 @@ namespace AccountingSoftware
 			Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 
+		protected void BaseBeginTransaction()
+		{
+			Console.WriteLine("Begin");
+			Kernel.DataBase.BeginTransaction();
+		}
+
+		protected void BaseCommitTransaction()
+		{
+			Console.WriteLine("Commit");
+			Kernel.DataBase.CommitTransaction();
+		}
+
+		protected void BaseRollbackTransaction()
+		{
+			Console.WriteLine("Rollback");
+			Kernel.DataBase.RollbackTransaction();
+		}
+
 		protected void BaseDelete(UnigueID ownerUnigueID)
 		{
 			Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
