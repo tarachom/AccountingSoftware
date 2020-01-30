@@ -249,8 +249,10 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectInformationSchema(ConfigurationInformationSchema informationSchema)
+		public ConfigurationInformationSchema SelectInformationSchema()
 		{
+			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
+
 			string query = "SELECT table_name, column_name, data_type, udt_name " +
 				           "FROM information_schema.columns " +
 			               "WHERE table_schema = 'public'";
@@ -267,6 +269,8 @@ namespace AccountingSoftware
 					reader["udt_name"].ToString());
 			}
 			reader.Close();
+
+			return informationSchema;
 		}
 	}
 }

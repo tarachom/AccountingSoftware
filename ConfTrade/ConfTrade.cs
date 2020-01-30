@@ -19,6 +19,17 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
+            //Comparison
+            ConfigurationInformationSchema informationSchema = Conf.Config.Kernel.DataBase.SelectInformationSchema();
+            Configuration.Comparison(@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml", 
+                Conf.Config.Kernel.Conf, 
+                informationSchema);
+
+            Console.ReadLine();
+
+
+
+
             //Conf.Config.Kernel.DataBase.Test();
             //Console.ReadLine();
 

@@ -28,6 +28,21 @@ namespace Configurator
 
 			Configuration Conf = Kernel.Conf;
 
+			//Save
+			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
+
+			//Comparison
+			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema();
+			Configuration.Comparison(@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml", Conf, informationSchema);
+
+			//SQL Query Execute
+			//...
+
+			//Code Generation
+			Configuration.Generation(Conf.PathToXmlFileConfiguration,
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
 
@@ -69,6 +84,8 @@ namespace Configurator
 			rootNode.Expand();
 			directoriesNode.Expand();
 
+			#region test
+
 			/*
 			ConfigurationDirectories TmcDirectory = new ConfigurationDirectories();
 			TmcDirectory.Name = "TMC3";
@@ -100,12 +117,7 @@ namespace Configurator
 			//Conf.Directories["Tovary"].TabularParts.Add("Od", new ConfigurationObjectTablePart("Od"));
 			//Conf.Directories["Tovary"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
 
-			//Save
-			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
-
-			Configuration.Generation(Conf.PathToXmlFileConfiguration,
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+			#endregion
 
 			//-------------------------------------------------------
 

@@ -249,19 +249,34 @@ namespace AccountingSoftware
             xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
         }
 
-        public static void Comparation(Configuration Conf)
+        public static void Comparison(string pathToSaveReport, Configuration Conf, ConfigurationInformationSchema InformationSchema)
         {
-            ConfigurationInformationSchema InformationSchema = new ConfigurationInformationSchema();
+            XmlDocument xmlComparisonDocument = new XmlDocument();
+            xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
+
+            XmlElement rootNode = xmlComparisonDocument.CreateElement("Comparison");
+            xmlComparisonDocument.AppendChild(rootNode);
+
+            XmlElement CreateNode = xmlComparisonDocument.CreateElement("Create");
+            rootNode.AppendChild(CreateNode);
+
+            XmlElement AlterNode = xmlComparisonDocument.CreateElement("Alter");
+            rootNode.AppendChild(AlterNode);
+
+            Console.WriteLine(InformationSchema.Tables.Count);
 
             foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
             {
-                if (InformationSchema.Tables.ContainsKey(ConfDirectory.Key))
+                Console.WriteLine(ConfDirectory.Value.Table);
+
+                if (InformationSchema.Tables.ContainsKey(ConfDirectory.Value.Table))
                 {
                     foreach (KeyValuePair<string, ConfigurationObjectField> ConfDirectoryField in ConfDirectory.Value.Fields)
                     {
-                        if (InformationSchema.Tables[ConfDirectory.Key].Columns.ContainsKey(ConfDirectoryField.Key))
+                        if (InformationSchema.Tables[ConfDirectory.Value.Table].Columns.ContainsKey(ConfDirectoryField.Key))
                         {
-                            ConfigurationInformationSchema_Column InformationSchemaColumn = InformationSchema.Tables[ConfDirectory.Key].Columns[ConfDirectoryField.Key];
+                            ConfigurationInformationSchema_Column InformationSchemaColumn = 
+                                InformationSchema.Tables[ConfDirectory.Value.Table].Columns[ConfDirectoryField.Key];
 
                             string confType = ConfDirectoryField.Value.Type;
 
@@ -409,14 +424,68 @@ namespace AccountingSoftware
                         else
                         {
                             //+field
+                            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("Table");
+                            AlterNode.AppendChild(alterTableNode);
+
+                            XmlElement alterTableNameNode = xmlComparisonDocument.CreateElement("Name");
+                            alterTableNameNode.InnerText = ConfDirectory.Key;
+                            alterTableNode.AppendChild(alterTableNameNode);
+
+                            ComparisonField(ConfDirectoryField.Value, xmlComparisonDocument, alterTableNode);
                         }
                     }
                 }
                 else
                 {
                     //+table
+                    XmlElement createTableNode = xmlComparisonDocument.CreateElement("Table");
+                    CreateNode.AppendChild(createTableNode);
+
+                    XmlElement createTableNameNode = xmlComparisonDocument.CreateElement("Name");
+                    createTableNameNode.InnerText = ConfDirectory.Value.Table;
+                    createTableNode.AppendChild(createTableNameNode);
+
+                    ComparisonFields(ConfDirectory.Value.Fields, xmlComparisonDocument, createTableNode);
                 }
             }
+
+            xmlComparisonDocument.Save(pathToSaveReport);
+        }
+
+        private static void ComparisonFields(Dictionary<string, ConfigurationObjectField> fields, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        {
+            XmlElement nodeFields = xmlComparisonDocument.CreateElement("Fields");
+            rootNode.AppendChild(nodeFields);
+
+            foreach (KeyValuePair<string, ConfigurationObjectField> field in fields)
+            {
+                ComparisonField(field.Value, xmlComparisonDocument, nodeFields);
+            }
+        }
+
+        private static void ComparisonField(ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        {
+            XmlElement nodeField = xmlComparisonDocument.CreateElement("Field");
+            rootNode.AppendChild(nodeField);
+
+            XmlElement nodeFieldName = xmlComparisonDocument.CreateElement("Name");
+            nodeFieldName.InnerText = field.Name;
+            nodeField.AppendChild(nodeFieldName);
+
+            XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
+            nodeFieldType.InnerText = field.Type;
+            nodeField.AppendChild(nodeFieldType);
+
+            if (field.Type == "pointer")
+            {
+                XmlElement nodeFieldPointer = xmlComparisonDocument.CreateElement("Pointer");
+                nodeFieldPointer.InnerText = field.Pointer;
+                nodeField.AppendChild(nodeFieldPointer);
+            }
+
+            XmlElement nodeFieldDesc = xmlComparisonDocument.CreateElement("Desc");
+            nodeFieldDesc.InnerText = field.Desc;
+            nodeField.AppendChild(nodeFieldDesc);
         }
     }
 }

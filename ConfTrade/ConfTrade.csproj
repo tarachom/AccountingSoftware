@@ -52,6 +52,7 @@
     <Content Include="CodeGeneration.xslt">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Comparison.xml" />
     <Content Include="Configuration.xml" />
     <Content Include="README.txt" />
   </ItemGroup>
