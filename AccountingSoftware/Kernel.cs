@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace AccountingSoftware
@@ -17,12 +16,11 @@ namespace AccountingSoftware
 			DataBase = new PostgreSQL();
 			DataBase.ConnectionString = "Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;";
 			DataBase.Open();
-
 			Console.WriteLine("DataBase Open");
 
-			string pathToConfSave = @"D:\VS\Project\AccountingSoftware\ConfTrade\ConfigurationNew.xml";
+			Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
 
-			Configuration.Load(pathToConfSave, Conf);
+			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
 			Console.WriteLine("Configuration Load");
 		}
 
@@ -35,6 +33,8 @@ namespace AccountingSoftware
 			Conf = null;
 			Console.WriteLine("Configuration Close");
 		}
+
+		
 
 		public Configuration Conf { get; set; }
 

@@ -28,6 +28,8 @@ namespace AccountingSoftware
 
         public string Author { get; set; }
 
+        public string PathToXmlFileConfiguration { get; set; }
+
         public Dictionary<string, ConfigurationConstants> Constants { get; set; }
 
         public Dictionary<string, ConfigurationDirectories> Directories { get; set; }
@@ -148,6 +150,10 @@ namespace AccountingSoftware
             XmlElement nodeAuthor = xmlConfDocument.CreateElement("Author");
             nodeAuthor.InnerText = Conf.Author;
             rootNode.AppendChild(nodeAuthor);
+            
+            XmlElement nodeDateTimeSave = xmlConfDocument.CreateElement("DateTimeSave");
+            nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
+            rootNode.AppendChild(nodeDateTimeSave);
         }
 
         private static void SaveDirectories(Dictionary<string, ConfigurationDirectories> ConfDirectories, XmlDocument xmlConfDocument, XmlElement rootNode)

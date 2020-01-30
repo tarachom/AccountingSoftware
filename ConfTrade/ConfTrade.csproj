@@ -34,9 +34,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Npgsql">
-      <HintPath>C:\Program Files\PostgreSQL\Npgsql\bin\net451\Npgsql.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,7 +53,6 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Configuration.xml" />
-    <Content Include="ConfigurationNew.xml" />
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>

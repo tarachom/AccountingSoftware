@@ -18,20 +18,18 @@ namespace Configurator
 		{
 			InitializeComponent();
 		}
-
-		private Configuration Conf { get; set; }		
+		
+		private Kernel Kernel { get; set; }
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
+			Kernel = new Kernel();
+			Kernel.Open();
+
+			Configuration Conf = Kernel.Conf;
+
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
-
-			//string pathToConf = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
-			string pathToConfSave = @"D:\VS\Project\AccountingSoftware\ConfTrade\ConfigurationNew.xml";
-
-			Conf = new Configuration();
-
-			Configuration.Load(pathToConfSave, Conf);
 
 			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
 			directoriesNode.ImageIndex = 1;
@@ -61,10 +59,10 @@ namespace Configurator
 						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name).ImageIndex = 1;
 					}
 
-					directoriTablePartNode.Expand();
+					//directoriTablePartNode.Expand();
 				}
 
-				directoriTabularPartsNode.Expand();
+				//directoriTabularPartsNode.Expand();
 				directoryNode.Expand();
 			}
 
@@ -103,9 +101,9 @@ namespace Configurator
 			//Conf.Directories["Tovary"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
 
 			//Save
-			Configuration.Save(pathToConfSave, Conf);
+			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
-			Configuration.Generation(pathToConfSave,
+			Configuration.Generation(Conf.PathToXmlFileConfiguration,
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
 
@@ -138,6 +136,11 @@ namespace Configurator
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{			
 			
+		}
+
+		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			Kernel.Close();
 		}
 	}
 }

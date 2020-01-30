@@ -55,7 +55,7 @@
 			// splitContainerBase.Panel2
 			// 
 			this.splitContainerBase.Panel2.Controls.Add(this.dataConfiguration);
-			this.splitContainerBase.Size = new System.Drawing.Size(842, 518);
+			this.splitContainerBase.Size = new System.Drawing.Size(842, 489);
 			this.splitContainerBase.SplitterDistance = 233;
 			this.splitContainerBase.TabIndex = 0;
 			// 
@@ -67,7 +67,7 @@
 			this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
 			this.treeConfiguration.Name = "treeConfiguration";
 			this.treeConfiguration.SelectedImageIndex = 0;
-			this.treeConfiguration.Size = new System.Drawing.Size(233, 518);
+			this.treeConfiguration.Size = new System.Drawing.Size(233, 489);
 			this.treeConfiguration.TabIndex = 0;
 			this.treeConfiguration.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseDoubleClick);
 			// 
@@ -161,18 +161,19 @@
 			this.dataConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dataConfiguration.Location = new System.Drawing.Point(0, 0);
 			this.dataConfiguration.Name = "dataConfiguration";
-			this.dataConfiguration.Size = new System.Drawing.Size(605, 518);
+			this.dataConfiguration.Size = new System.Drawing.Size(605, 489);
 			this.dataConfiguration.TabIndex = 0;
 			// 
 			// FormConfiguration
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(862, 538);
+			this.ClientSize = new System.Drawing.Size(862, 509);
 			this.Controls.Add(this.splitContainerBase);
 			this.Name = "FormConfiguration";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Form1";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguration_FormClosing);
 			this.Load += new System.EventHandler(this.FormConfiguration_Load);
 			this.splitContainerBase.Panel1.ResumeLayout(false);
 			this.splitContainerBase.Panel2.ResumeLayout(false);

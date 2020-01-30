@@ -8,6 +8,7 @@
  *
  * Конфігурації "<xsl:value-of select="Configuration/Name"/>"
  * Автор <xsl:value-of select="Configuration/Author"/>
+ * Дата конфігурації: <xsl:value-of select="Configuration/DateTimeSave"/>
  *
  */
 
@@ -565,5 +566,4 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     </xsl:for-each>
 }
   </xsl:template>
-
 </xsl:stylesheet>

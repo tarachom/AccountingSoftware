@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using System.Xml;
@@ -9,7 +8,6 @@ using System.Xml.Xsl;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
-using Npgsql;
 
 //Конфігурація Торгівля
 namespace ConfTrade
