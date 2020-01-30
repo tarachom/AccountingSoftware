@@ -263,8 +263,8 @@ namespace AccountingSoftware
 			while (reader.Read())
 			{
 				informationSchema.Append(
-					reader["table_name"].ToString(),
-					reader["column_name"].ToString(),
+					reader["table_name"].ToString().ToLower(),
+					reader["column_name"].ToString().ToLower(),
 					reader["data_type"].ToString(),
 					reader["udt_name"].ToString());
 			}

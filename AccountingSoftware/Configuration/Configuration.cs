@@ -257,26 +257,24 @@ namespace AccountingSoftware
             XmlElement rootNode = xmlComparisonDocument.CreateElement("Comparison");
             xmlComparisonDocument.AppendChild(rootNode);
 
-            XmlElement CreateNode = xmlComparisonDocument.CreateElement("Create");
-            rootNode.AppendChild(CreateNode);
-
-            XmlElement AlterNode = xmlComparisonDocument.CreateElement("Alter");
-            rootNode.AppendChild(AlterNode);
-
             Console.WriteLine(InformationSchema.Tables.Count);
 
             foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
             {
-                Console.WriteLine(ConfDirectory.Value.Table);
+                string tableName = ConfDirectory.Value.Table;
+                Console.WriteLine(tableName);
 
-                if (InformationSchema.Tables.ContainsKey(ConfDirectory.Value.Table))
+                if (InformationSchema.Tables.ContainsKey(tableName))
                 {
                     foreach (KeyValuePair<string, ConfigurationObjectField> ConfDirectoryField in ConfDirectory.Value.Fields)
                     {
-                        if (InformationSchema.Tables[ConfDirectory.Value.Table].Columns.ContainsKey(ConfDirectoryField.Key))
+                        string fieldName = ConfDirectoryField.Key.ToLower();
+                        Console.WriteLine(fieldName);
+
+                        if (InformationSchema.Tables[tableName].Columns.ContainsKey(fieldName))
                         {
-                            ConfigurationInformationSchema_Column InformationSchemaColumn = 
-                                InformationSchema.Tables[ConfDirectory.Value.Table].Columns[ConfDirectoryField.Key];
+                            ConfigurationInformationSchema_Column InformationSchemaColumn =
+                                InformationSchema.Tables[tableName].Columns[fieldName];
 
                             string confType = ConfDirectoryField.Value.Type;
 
@@ -423,12 +421,14 @@ namespace AccountingSoftware
                         }
                         else
                         {
+                            Console.WriteLine("+field");
+
                             //+field
-                            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("Table");
-                            AlterNode.AppendChild(alterTableNode);
+                            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("AlterTable");
+                            rootNode.AppendChild(alterTableNode);
 
                             XmlElement alterTableNameNode = xmlComparisonDocument.CreateElement("Name");
-                            alterTableNameNode.InnerText = ConfDirectory.Key;
+                            alterTableNameNode.InnerText = tableName;
                             alterTableNode.AppendChild(alterTableNameNode);
 
                             ComparisonField(ConfDirectoryField.Value, xmlComparisonDocument, alterTableNode);
@@ -437,15 +437,72 @@ namespace AccountingSoftware
                 }
                 else
                 {
+                    Console.WriteLine("+table");
+
                     //+table
-                    XmlElement createTableNode = xmlComparisonDocument.CreateElement("Table");
-                    CreateNode.AppendChild(createTableNode);
+                    XmlElement createTableNode = xmlComparisonDocument.CreateElement("CreateTable");
+                    rootNode.AppendChild(createTableNode);
 
                     XmlElement createTableNameNode = xmlComparisonDocument.CreateElement("Name");
-                    createTableNameNode.InnerText = ConfDirectory.Value.Table;
+                    createTableNameNode.InnerText = tableName;
                     createTableNode.AppendChild(createTableNameNode);
 
                     ComparisonFields(ConfDirectory.Value.Fields, xmlComparisonDocument, createTableNode);
+                }
+
+                foreach (KeyValuePair<string, ConfigurationObjectTablePart> tablePart in ConfDirectory.Value.TabularParts)
+                {
+                    string tablePartName = tablePart.Value.Table;
+
+                    if (InformationSchema.Tables.ContainsKey(tablePartName))
+                    {
+                        foreach (KeyValuePair<string, ConfigurationObjectField> tablePartField in tablePart.Value.Fields)
+                        {
+                            string fieldName = tablePartField.Key.ToLower();
+                            Console.WriteLine(fieldName);
+
+                            if (InformationSchema.Tables[tablePartName].Columns.ContainsKey(fieldName))
+                            {
+                                ConfigurationInformationSchema_Column InformationSchemaColumn =
+                                InformationSchema.Tables[tablePartName].Columns[fieldName];
+
+                                string confType = tablePartField.Value.Type;
+
+                                string baseType = InformationSchemaColumn.DataType;
+                                string baseType2 = InformationSchemaColumn.UdtName;
+
+                                //Перевірка типу
+                            }
+                            else
+                            {
+                                Console.WriteLine("+field");
+
+                                //+field
+                                XmlElement alterTableNode = xmlComparisonDocument.CreateElement("AlterTable");
+                                rootNode.AppendChild(alterTableNode);
+
+                                XmlElement alterTableNameNode = xmlComparisonDocument.CreateElement("Name");
+                                alterTableNameNode.InnerText = tablePartName;
+                                alterTableNode.AppendChild(alterTableNameNode);
+
+                                ComparisonField(tablePartField.Value, xmlComparisonDocument, alterTableNode);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("+tablePart");
+
+                        //+tablePart
+                        XmlElement createTableNode = xmlComparisonDocument.CreateElement("CreateTable");
+                        rootNode.AppendChild(createTableNode);
+
+                        XmlElement createTableNameNode = xmlComparisonDocument.CreateElement("Name");
+                        createTableNameNode.InnerText = tablePartName;
+                        createTableNode.AppendChild(createTableNameNode);
+
+                        ComparisonFields(tablePart.Value.Fields, xmlComparisonDocument, createTableNode);
+                    }
                 }
             }
 
@@ -454,12 +511,9 @@ namespace AccountingSoftware
 
         private static void ComparisonFields(Dictionary<string, ConfigurationObjectField> fields, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
-            XmlElement nodeFields = xmlComparisonDocument.CreateElement("Fields");
-            rootNode.AppendChild(nodeFields);
-
             foreach (KeyValuePair<string, ConfigurationObjectField> field in fields)
             {
-                ComparisonField(field.Value, xmlComparisonDocument, nodeFields);
+                ComparisonField(field.Value, xmlComparisonDocument, rootNode);
             }
         }
 
@@ -475,17 +529,6 @@ namespace AccountingSoftware
             XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
             nodeFieldType.InnerText = field.Type;
             nodeField.AppendChild(nodeFieldType);
-
-            if (field.Type == "pointer")
-            {
-                XmlElement nodeFieldPointer = xmlComparisonDocument.CreateElement("Pointer");
-                nodeFieldPointer.InnerText = field.Pointer;
-                nodeField.AppendChild(nodeFieldPointer);
-            }
-
-            XmlElement nodeFieldDesc = xmlComparisonDocument.CreateElement("Desc");
-            nodeFieldDesc.InnerText = field.Desc;
-            nodeField.AppendChild(nodeFieldDesc);
         }
     }
 }

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>30.01.2020 05:52:45</DateTimeSave>
+  <DateTimeSave>30.01.2020 06:59:12</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -170,12 +170,17 @@
           <Type>string</Type>
           <Desc>Full Name</Desc>
         </Field>
+        <Field>
+          <Name>Test</Name>
+          <Type>string</Type>
+          <Desc>test</Desc>
+        </Field>
       </Fields>
       <TabularParts />
     </Directory>
     <Directory>
-      <Name>Od2</Name>
-      <Table>od_v1_1</Table>
+      <Name>NewDir</Name>
+      <Table>newdir_v1_1</Table>
       <Desc>Od</Desc>
       <Fields>
         <Field>
@@ -188,332 +193,31 @@
           <Type>string</Type>
           <Desc>Full Name</Desc>
         </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od3</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
         <Field>
-          <Name>Name</Name>
+          <Name>Test</Name>
           <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
+          <Desc>test</Desc>
         </Field>
       </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od4</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od5</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od6</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od7</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od8</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od9</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od10</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od11</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od12</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od13</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od14</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od15</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od16</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od17</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od18</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od19</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Directory>
-    <Directory>
-      <Name>Od20</Name>
-      <Table>od_v1_1</Table>
-      <Desc>Od</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <Type>string</Type>
-          <Desc>Name</Desc>
-        </Field>
-        <Field>
-          <Name>FullName</Name>
-          <Type>string</Type>
-          <Desc>Full Name</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>Ceny</Name>
+          <Table>newdir_ceny_tablepart_v1_1</Table>
+          <Desc>TablePart Test Info</Desc>
+          <Fields>
+            <Field>
+              <Name>name</Name>
+              <Type>string</Type>
+              <Desc>Name</Desc>
+            </Field>
+            <Field>
+              <Name>cena</Name>
+              <Type>numeric</Type>
+              <Desc>Cena</Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </Directory>
   </Directories>
 </Configuration>

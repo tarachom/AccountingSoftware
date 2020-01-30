@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 30.01.2020 05:52:45
+ * Дата конфігурації: 30.01.2020 06:59:12
  *
  */
 
@@ -405,10 +405,11 @@ namespace ConfTrade_v1_1
     class Od_Objest : DirectoryObject
     {
         public Od_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
+             new string[] { "Name", "FullName", "Test" }) 
         {
             Name = "";
             FullName = "";
+            Test = "";
             
             //Табличні частини
             
@@ -420,6 +421,7 @@ namespace ConfTrade_v1_1
             {
                 Name = base.FieldValue["Name"].ToString();
                 FullName = base.FieldValue["FullName"].ToString();
+                Test = base.FieldValue["Test"].ToString();
                 
                 return true;
             }
@@ -431,6 +433,7 @@ namespace ConfTrade_v1_1
         {
             base.FieldValue["Name"] = Name;
             base.FieldValue["FullName"] = FullName;
+            base.FieldValue["Test"] = Test;
             
             BaseSave();
         }
@@ -448,6 +451,7 @@ namespace ConfTrade_v1_1
         
         public string Name { get; set; }
         public string FullName { get; set; }
+        public string Test { get; set; }
         
         //Табличні частини
         
@@ -512,17 +516,19 @@ namespace ConfTrade_v1_1
       
     #endregion
     
-    #region DIRECTORY "Od2"
+    #region DIRECTORY "NewDir"
     
-    class Od2_Objest : DirectoryObject
+    class NewDir_Objest : DirectoryObject
     {
-        public Od2_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
+        public NewDir_Objest() : base(Config.Kernel, "newdir_v1_1",
+             new string[] { "Name", "FullName", "Test" }) 
         {
             Name = "";
             FullName = "";
+            Test = "";
             
             //Табличні частини
+            Ceny_TablePart = new NewDir_Ceny_TablePart(this);
             
         }
         
@@ -532,6 +538,7 @@ namespace ConfTrade_v1_1
             {
                 Name = base.FieldValue["Name"].ToString();
                 FullName = base.FieldValue["FullName"].ToString();
+                Test = base.FieldValue["Test"].ToString();
                 
                 return true;
             }
@@ -543,6 +550,7 @@ namespace ConfTrade_v1_1
         {
             base.FieldValue["Name"] = Name;
             base.FieldValue["FullName"] = FullName;
+            base.FieldValue["Test"] = Test;
             
             BaseSave();
         }
@@ -552,37 +560,39 @@ namespace ConfTrade_v1_1
             base.BaseDelete();
         }
         
-        public Od2_Pointer GetDirectoryPointer()
+        public NewDir_Pointer GetDirectoryPointer()
         {
-            Od2_Pointer directoryPointer = new Od2_Pointer(UnigueID.UGuid);
+            NewDir_Pointer directoryPointer = new NewDir_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
         
         public string Name { get; set; }
         public string FullName { get; set; }
+        public string Test { get; set; }
         
         //Табличні частини
+        public NewDir_Ceny_TablePart Ceny_TablePart { get; set; }
         
     }
     
-    class Od2_Pointer : DirectoryPointer
+    class NewDir_Pointer : DirectoryPointer
     {
-        public Od2_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
+        public NewDir_Pointer(object uid = null) : base(Config.Kernel, "newdir_v1_1")
         {
             if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
         }
 
-        public Od2_Objest GetDirectoryObject()
+        public NewDir_Objest GetDirectoryObject()
         {
-            Od2_Objest Od2ObjestItem = new Od2_Objest();
-            Od2ObjestItem.Read(base.UnigueID);
-            return Od2ObjestItem;
+            NewDir_Objest NewDirObjestItem = new NewDir_Objest();
+            NewDirObjestItem.Read(base.UnigueID);
+            return NewDirObjestItem;
         }
     }
     
-    class Od2_Select : DirectorySelect
+    class NewDir_Select : DirectorySelect
     {
-        public Od2_Select() : base(Config.Kernel, "od_v1_1") { }
+        public NewDir_Select() : base(Config.Kernel, "newdir_v1_1") { }
     
         public bool Select() 
         { 
@@ -607,7 +617,7 @@ namespace ConfTrade_v1_1
         {
             if (MoveToPosition())
             {
-                Current = new Od2_Pointer();
+                Current = new NewDir_Pointer();
                 Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
@@ -618,2025 +628,103 @@ namespace ConfTrade_v1_1
             }
         }
 
-        public Od2_Pointer Current { get; private set; }
+        public NewDir_Pointer Current { get; private set; }
     }
     
       
-    #endregion
-    
-    #region DIRECTORY "Od3"
-    
-    class Od3_Objest : DirectoryObject
+    /// <summary>
+    /// [Ceny] 
+    /// TablePart Test Info.
+    /// </summary>
+    class NewDir_Ceny_TablePart : DirectoryTablePart
     {
-        public Od3_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
+        public NewDir_Ceny_TablePart(NewDir_Objest owner) : base(Config.Kernel, "newdir_ceny_tablepart_v1_1",
+             new string[] { "name", "cena" }) 
         {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
+            Owner = owner;
+            Records = new List<NewDir_Ceny_TablePartRecord>();
         }
         
-        public bool Read(UnigueID uid)
+        public NewDir_Objest Owner { get; private set; }
+        
+        public List<NewDir_Ceny_TablePartRecord> Records { get; set; }
+        
+        public void Read()
         {
-            if (BaseRead(uid))
+            Records.Clear();
+            base.FieldValueList.Clear();
+
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
+                NewDir_Ceny_TablePartRecord record = new NewDir_Ceny_TablePartRecord();
+
+                record.name = fieldValue["name"].ToString();
+                record.cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
                 
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od3_Pointer GetDirectoryPointer()
-        {
-            Od3_Pointer directoryPointer = new Od3_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od3_Pointer : DirectoryPointer
-    {
-        public Od3_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od3_Objest GetDirectoryObject()
-        {
-            Od3_Objest Od3ObjestItem = new Od3_Objest();
-            Od3ObjestItem.Read(base.UnigueID);
-            return Od3ObjestItem;
-        }
-    }
-    
-    class Od3_Select : DirectorySelect
-    {
-        public Od3_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
+                Records.Add(record);
             }
         }
         
-        public bool MoveNext()
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Перед записом колекції, попередні записи видаляються з бази даних.
+        /// Щоб не видаляти треба поставити clear_all_before_save = false.
+        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// </param>
+        public void Save(bool clear_all_before_save = true) 
         {
-            if (MoveToPosition())
+            if (Records.Count > 0)
             {
-                Current = new Od3_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od3_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od4"
-    
-    class Od4_Objest : DirectoryObject
-    {
-        public Od4_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
+                base.BaseBeginTransaction();
                 
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od4_Pointer GetDirectoryPointer()
-        {
-            Od4_Pointer directoryPointer = new Od4_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od4_Pointer : DirectoryPointer
-    {
-        public Od4_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
 
-        public Od4_Objest GetDirectoryObject()
-        {
-            Od4_Objest Od4ObjestItem = new Od4_Objest();
-            Od4ObjestItem.Read(base.UnigueID);
-            return Od4ObjestItem;
-        }
-    }
-    
-    class Od4_Select : DirectorySelect
-    {
-        public Od4_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od4_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+                foreach (NewDir_Ceny_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
-        public Od4_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od5"
-    
-    class Od5_Objest : DirectoryObject
-    {
-        public Od5_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
+                    fieldValue.Add("name", record.name);
+                    fieldValue.Add("cena", record.cena);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
                 
-                return true;
+                base.BaseCommitTransaction();
             }
-            else
-                return false;
         }
         
-        public void Save()
+        public void Clear()
         {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od5_Pointer GetDirectoryPointer()
-        {
-            Od5_Pointer directoryPointer = new Od5_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od5_Pointer : DirectoryPointer
-    {
-        public Od5_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od5_Objest GetDirectoryObject()
-        {
-            Od5_Objest Od5ObjestItem = new Od5_Objest();
-            Od5ObjestItem.Read(base.UnigueID);
-            return Od5ObjestItem;
+            base.BaseDelete(Owner.UnigueID);
         }
     }
     
-    class Od5_Select : DirectorySelect
+    class NewDir_Ceny_TablePartRecord : DirectoryTablePartRecord
     {
-        public Od5_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
+        public NewDir_Ceny_TablePartRecord()
         {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od5_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od5_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od6"
-    
-    class Od6_Objest : DirectoryObject
-    {
-        public Od6_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
+            name = "";
+            cena = 0;
             
         }
         
-        public bool Read(UnigueID uid)
+        public NewDir_Ceny_TablePartRecord(
+            string _name = "", decimal _cena = 0)
         {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od6_Pointer GetDirectoryPointer()
-        {
-            Od6_Pointer directoryPointer = new Od6_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od6_Pointer : DirectoryPointer
-    {
-        public Od6_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od6_Objest GetDirectoryObject()
-        {
-            Od6_Objest Od6ObjestItem = new Od6_Objest();
-            Od6ObjestItem.Read(base.UnigueID);
-            return Od6ObjestItem;
-        }
-    }
-    
-    class Od6_Select : DirectorySelect
-    {
-        public Od6_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od6_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od6_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od7"
-    
-    class Od7_Objest : DirectoryObject
-    {
-        public Od7_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
+            name = _name;
+            cena = _cena;
             
         }
         
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od7_Pointer GetDirectoryPointer()
-        {
-            Od7_Pointer directoryPointer = new Od7_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
+        public string name { get; set; }
+        public decimal cena { get; set; }
         
     }
-    
-    class Od7_Pointer : DirectoryPointer
-    {
-        public Od7_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od7_Objest GetDirectoryObject()
-        {
-            Od7_Objest Od7ObjestItem = new Od7_Objest();
-            Od7ObjestItem.Read(base.UnigueID);
-            return Od7ObjestItem;
-        }
-    }
-    
-    class Od7_Select : DirectorySelect
-    {
-        public Od7_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od7_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od7_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od8"
-    
-    class Od8_Objest : DirectoryObject
-    {
-        public Od8_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od8_Pointer GetDirectoryPointer()
-        {
-            Od8_Pointer directoryPointer = new Od8_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od8_Pointer : DirectoryPointer
-    {
-        public Od8_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od8_Objest GetDirectoryObject()
-        {
-            Od8_Objest Od8ObjestItem = new Od8_Objest();
-            Od8ObjestItem.Read(base.UnigueID);
-            return Od8ObjestItem;
-        }
-    }
-    
-    class Od8_Select : DirectorySelect
-    {
-        public Od8_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od8_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od8_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od9"
-    
-    class Od9_Objest : DirectoryObject
-    {
-        public Od9_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od9_Pointer GetDirectoryPointer()
-        {
-            Od9_Pointer directoryPointer = new Od9_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od9_Pointer : DirectoryPointer
-    {
-        public Od9_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od9_Objest GetDirectoryObject()
-        {
-            Od9_Objest Od9ObjestItem = new Od9_Objest();
-            Od9ObjestItem.Read(base.UnigueID);
-            return Od9ObjestItem;
-        }
-    }
-    
-    class Od9_Select : DirectorySelect
-    {
-        public Od9_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od9_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od9_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od10"
-    
-    class Od10_Objest : DirectoryObject
-    {
-        public Od10_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od10_Pointer GetDirectoryPointer()
-        {
-            Od10_Pointer directoryPointer = new Od10_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od10_Pointer : DirectoryPointer
-    {
-        public Od10_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od10_Objest GetDirectoryObject()
-        {
-            Od10_Objest Od10ObjestItem = new Od10_Objest();
-            Od10ObjestItem.Read(base.UnigueID);
-            return Od10ObjestItem;
-        }
-    }
-    
-    class Od10_Select : DirectorySelect
-    {
-        public Od10_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od10_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od10_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od11"
-    
-    class Od11_Objest : DirectoryObject
-    {
-        public Od11_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od11_Pointer GetDirectoryPointer()
-        {
-            Od11_Pointer directoryPointer = new Od11_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od11_Pointer : DirectoryPointer
-    {
-        public Od11_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od11_Objest GetDirectoryObject()
-        {
-            Od11_Objest Od11ObjestItem = new Od11_Objest();
-            Od11ObjestItem.Read(base.UnigueID);
-            return Od11ObjestItem;
-        }
-    }
-    
-    class Od11_Select : DirectorySelect
-    {
-        public Od11_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od11_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od11_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od12"
-    
-    class Od12_Objest : DirectoryObject
-    {
-        public Od12_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od12_Pointer GetDirectoryPointer()
-        {
-            Od12_Pointer directoryPointer = new Od12_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od12_Pointer : DirectoryPointer
-    {
-        public Od12_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od12_Objest GetDirectoryObject()
-        {
-            Od12_Objest Od12ObjestItem = new Od12_Objest();
-            Od12ObjestItem.Read(base.UnigueID);
-            return Od12ObjestItem;
-        }
-    }
-    
-    class Od12_Select : DirectorySelect
-    {
-        public Od12_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od12_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od12_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od13"
-    
-    class Od13_Objest : DirectoryObject
-    {
-        public Od13_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od13_Pointer GetDirectoryPointer()
-        {
-            Od13_Pointer directoryPointer = new Od13_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od13_Pointer : DirectoryPointer
-    {
-        public Od13_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od13_Objest GetDirectoryObject()
-        {
-            Od13_Objest Od13ObjestItem = new Od13_Objest();
-            Od13ObjestItem.Read(base.UnigueID);
-            return Od13ObjestItem;
-        }
-    }
-    
-    class Od13_Select : DirectorySelect
-    {
-        public Od13_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od13_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od13_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od14"
-    
-    class Od14_Objest : DirectoryObject
-    {
-        public Od14_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od14_Pointer GetDirectoryPointer()
-        {
-            Od14_Pointer directoryPointer = new Od14_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od14_Pointer : DirectoryPointer
-    {
-        public Od14_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od14_Objest GetDirectoryObject()
-        {
-            Od14_Objest Od14ObjestItem = new Od14_Objest();
-            Od14ObjestItem.Read(base.UnigueID);
-            return Od14ObjestItem;
-        }
-    }
-    
-    class Od14_Select : DirectorySelect
-    {
-        public Od14_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od14_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od14_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od15"
-    
-    class Od15_Objest : DirectoryObject
-    {
-        public Od15_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od15_Pointer GetDirectoryPointer()
-        {
-            Od15_Pointer directoryPointer = new Od15_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od15_Pointer : DirectoryPointer
-    {
-        public Od15_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od15_Objest GetDirectoryObject()
-        {
-            Od15_Objest Od15ObjestItem = new Od15_Objest();
-            Od15ObjestItem.Read(base.UnigueID);
-            return Od15ObjestItem;
-        }
-    }
-    
-    class Od15_Select : DirectorySelect
-    {
-        public Od15_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od15_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od15_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od16"
-    
-    class Od16_Objest : DirectoryObject
-    {
-        public Od16_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od16_Pointer GetDirectoryPointer()
-        {
-            Od16_Pointer directoryPointer = new Od16_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od16_Pointer : DirectoryPointer
-    {
-        public Od16_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od16_Objest GetDirectoryObject()
-        {
-            Od16_Objest Od16ObjestItem = new Od16_Objest();
-            Od16ObjestItem.Read(base.UnigueID);
-            return Od16ObjestItem;
-        }
-    }
-    
-    class Od16_Select : DirectorySelect
-    {
-        public Od16_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od16_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od16_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od17"
-    
-    class Od17_Objest : DirectoryObject
-    {
-        public Od17_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od17_Pointer GetDirectoryPointer()
-        {
-            Od17_Pointer directoryPointer = new Od17_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od17_Pointer : DirectoryPointer
-    {
-        public Od17_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od17_Objest GetDirectoryObject()
-        {
-            Od17_Objest Od17ObjestItem = new Od17_Objest();
-            Od17ObjestItem.Read(base.UnigueID);
-            return Od17ObjestItem;
-        }
-    }
-    
-    class Od17_Select : DirectorySelect
-    {
-        public Od17_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od17_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od17_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od18"
-    
-    class Od18_Objest : DirectoryObject
-    {
-        public Od18_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od18_Pointer GetDirectoryPointer()
-        {
-            Od18_Pointer directoryPointer = new Od18_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od18_Pointer : DirectoryPointer
-    {
-        public Od18_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od18_Objest GetDirectoryObject()
-        {
-            Od18_Objest Od18ObjestItem = new Od18_Objest();
-            Od18ObjestItem.Read(base.UnigueID);
-            return Od18ObjestItem;
-        }
-    }
-    
-    class Od18_Select : DirectorySelect
-    {
-        public Od18_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od18_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od18_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od19"
-    
-    class Od19_Objest : DirectoryObject
-    {
-        public Od19_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od19_Pointer GetDirectoryPointer()
-        {
-            Od19_Pointer directoryPointer = new Od19_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od19_Pointer : DirectoryPointer
-    {
-        public Od19_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od19_Objest GetDirectoryObject()
-        {
-            Od19_Objest Od19ObjestItem = new Od19_Objest();
-            Od19ObjestItem.Read(base.UnigueID);
-            return Od19ObjestItem;
-        }
-    }
-    
-    class Od19_Select : DirectorySelect
-    {
-        public Od19_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od19_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od19_Pointer Current { get; private set; }
-    }
-    
-      
-    #endregion
-    
-    #region DIRECTORY "Od20"
-    
-    class Od20_Objest : DirectoryObject
-    {
-        public Od20_Objest() : base(Config.Kernel, "od_v1_1",
-             new string[] { "Name", "FullName" }) 
-        {
-            Name = "";
-            FullName = "";
-            
-            //Табличні частини
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Name = base.FieldValue["Name"].ToString();
-                FullName = base.FieldValue["FullName"].ToString();
-                
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["Name"] = Name;
-            base.FieldValue["FullName"] = FullName;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Od20_Pointer GetDirectoryPointer()
-        {
-            Od20_Pointer directoryPointer = new Od20_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Name { get; set; }
-        public string FullName { get; set; }
-        
-        //Табличні частини
-        
-    }
-    
-    class Od20_Pointer : DirectoryPointer
-    {
-        public Od20_Pointer(object uid = null) : base(Config.Kernel, "od_v1_1")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
-        }
-
-        public Od20_Objest GetDirectoryObject()
-        {
-            Od20_Objest Od20ObjestItem = new Od20_Objest();
-            Od20ObjestItem.Read(base.UnigueID);
-            return Od20ObjestItem;
-        }
-    }
-    
-    class Od20_Select : DirectorySelect
-    {
-        public Od20_Select() : base(Config.Kernel, "od_v1_1") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
-        
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-        
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Od20_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
-        public Od20_Pointer Current { get; private set; }
-    }
-    
       
     #endregion
     
