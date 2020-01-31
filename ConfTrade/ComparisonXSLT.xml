@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <sql>
+          CREATE TABLE newdir_v1_1 (
+          uid uuid NOT NULL,
+          Name text,FullName text,Test text,
+          PRIMARY KEY(uid)
+          );
+        </sql>
+  <sql>
+          CREATE TABLE newdir_ceny_tablepart_v1_1 (
+          uid uuid NOT NULL,
+          name text,cena numeric,
+          PRIMARY KEY(uid)
+          );
+        </sql>
+  <sql>
+          ALTER TABLE tovary_v1_1 RENAME name TO name_OLD;
+        </sql>
+  <sql>
+          ALTER TABLE tovary_v1_1 ADD COLUMN name text[];
+        </sql>
+  <sql>
+          ALTER TABLE od_v1_1 ADD COLUMN Test text;
+        </sql>
+</root>

@@ -150,7 +150,7 @@ namespace AccountingSoftware
             XmlElement nodeAuthor = xmlConfDocument.CreateElement("Author");
             nodeAuthor.InnerText = Conf.Author;
             rootNode.AppendChild(nodeAuthor);
-            
+
             XmlElement nodeDateTimeSave = xmlConfDocument.CreateElement("DateTimeSave");
             nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
             rootNode.AppendChild(nodeDateTimeSave);
@@ -249,7 +249,15 @@ namespace AccountingSoftware
             xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
         }
 
-        
+
+
+        public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode)
+        {
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(pathToTemplate);
+
+            xsltCodeGnerator.Transform(pathToXML, pathToSaveCode);
+        }
 
         public static void Comparison(string pathToSaveReport, Configuration Conf, ConfigurationInformationSchema InformationSchema)
         {
@@ -340,8 +348,8 @@ namespace AccountingSoftware
             xmlComparisonDocument.Save(pathToSaveReport);
         }
 
-        private static void ComparisonTransformDataType(string tableName, string dataType, 
-            string informationSchemaDataType, string informationSchemaUdtName, 
+        private static void ComparisonTransformDataType(string tableName, string dataType,
+            string informationSchemaDataType, string informationSchemaUdtName,
             ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
             string configurationFieldType = field.Type;
@@ -354,12 +362,11 @@ namespace AccountingSoftware
                 }
                 else if (configurationFieldType == "string[]")
                 {
+                    
                     ComparisonSaveRenameColumn(tableName, field.Name, field.Name + "_OLD", xmlComparisonDocument, rootNode);
                     ComparisonSaveAddColumn(tableName, dataType, field, xmlComparisonDocument, rootNode);
+                    ComparisonSaveCopyDataColumn(tableName, field.Name + "_OLD", field.Name, xmlComparisonDocument, rootNode);
 
-                    //1. Переназвати стовпчик в fieldName_OLD
-                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
-                    //3. Скопіювати дані з fieldName_OLD в fieldName
                 }
                 else
                 {
@@ -779,18 +786,29 @@ namespace AccountingSoftware
             nodeField.AppendChild(nodeFieldDataType);
         }
 
+        private static void ComparisonSaveCopyDataColumn(string tableName, string fieldNameSource, string fieldNameDestination, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        {
+            XmlElement ColumnNode = xmlComparisonDocument.CreateElement("CopyDataColumn");
+            rootNode.AppendChild(ColumnNode);
+
+            XmlElement TableNameNode = xmlComparisonDocument.CreateElement("TableName");
+            TableNameNode.InnerText = tableName;
+            ColumnNode.AppendChild(TableNameNode);
+
+            XmlElement FieldNode = xmlComparisonDocument.CreateElement("Field");
+            ColumnNode.AppendChild(FieldNode);
+
+            XmlElement FieldNameNode = xmlComparisonDocument.CreateElement("NameSource");
+            FieldNameNode.InnerText = fieldNameSource;
+            FieldNode.AppendChild(FieldNameNode);
+
+            XmlElement FieldNewNameNode = xmlComparisonDocument.CreateElement("NameDestination");
+            FieldNewNameNode.InnerText = fieldNameDestination;
+            FieldNode.AppendChild(FieldNewNameNode);
+        }
+
         //ALTER TABLE public.test DROP COLUMN num;
 
-/*
-UPDATE public.test
-SET text_mas=
-(
-SELECT array_agg(test2.text) 
-FROM public.test AS test2 
-WHERE test2.uid = test.uid
-)
-*/
-
-}
+    }
 }
  

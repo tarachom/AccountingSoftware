@@ -117,52 +117,12 @@
         <UdtName>uuid</UdtName>
       </Column>
       <Column>
-        <Name>number</Name>
-        <DataType>numeric</DataType>
-        <UdtName>numeric</UdtName>
-      </Column>
-      <Column>
-        <Name>dat</Name>
-        <DataType>date</DataType>
-        <UdtName>date</UdtName>
-      </Column>
-      <Column>
-        <Name>fds</Name>
-        <DataType>timestamp without time zone</DataType>
-        <UdtName>timestamp</UdtName>
-      </Column>
-      <Column>
-        <Name>num</Name>
-        <DataType>ARRAY</DataType>
-        <UdtName>_int4</UdtName>
-      </Column>
-      <Column>
-        <Name>tim</Name>
-        <DataType>time without time zone</DataType>
-        <UdtName>time</UdtName>
-      </Column>
-      <Column>
-        <Name>flag</Name>
-        <DataType>boolean</DataType>
-        <UdtName>bool</UdtName>
-      </Column>
-      <Column>
-        <Name>number2</Name>
-        <DataType>ARRAY</DataType>
-        <UdtName>_numeric</UdtName>
-      </Column>
-      <Column>
-        <Name>text</Name>
+        <Name>text_mas</Name>
         <DataType>ARRAY</DataType>
         <UdtName>_text</UdtName>
       </Column>
       <Column>
-        <Name>u</Name>
-        <DataType>uuid</DataType>
-        <UdtName>uuid</UdtName>
-      </Column>
-      <Column>
-        <Name>t</Name>
+        <Name>text</Name>
         <DataType>text</DataType>
         <UdtName>text</UdtName>
       </Column>
@@ -227,6 +187,7 @@
       </Column>
     </Table>
   </InformationSchema>
+  
   <RenameColumn>
     <TableName>tovary_v1_1</TableName>
     <Field>
@@ -234,6 +195,7 @@
       <NewName>name_OLD</NewName>
     </Field>
   </RenameColumn>
+  
   <AddColumn>
     <TableName>tovary_v1_1</TableName>
     <Field>
@@ -242,6 +204,16 @@
       <DataType>text[]</DataType>
     </Field>
   </AddColumn>
+  
+  <CopyDataColumn>
+    <TableName>tovary_v1_1</TableName>
+    <Field>
+      <NameSource>name_OLD</NameSource>
+      <NameDestination>name</NameDestination>
+    </Field>
+  </CopyDataColumn>
+  
+  
   <AddColumn>
     <TableName>od_v1_1</TableName>
     <Field>
