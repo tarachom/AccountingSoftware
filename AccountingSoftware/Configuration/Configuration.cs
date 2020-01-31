@@ -261,6 +261,7 @@ namespace AccountingSoftware
 
             ComparisonSaveInformationSchema(InformationSchema, xmlComparisonDocument, rootNode);
 
+            //Таблиці
             foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
             {
                 //Назва таблиці в базі даних
@@ -268,6 +269,7 @@ namespace AccountingSoftware
 
                 if (InformationSchema.Tables.ContainsKey(tableName))
                 {
+                    //Поля
                     foreach (KeyValuePair<string, ConfigurationObjectField> ConfDirectoryField in ConfDirectory.Value.Fields)
                     {
                         //Назва поля в базі даних
@@ -278,106 +280,17 @@ namespace AccountingSoftware
                             ConfigurationInformationSchema_Column InformationSchemaColumn = InformationSchema.Tables[tableName].Columns[fieldName];
 
                             string configurationFieldType = ConfDirectoryField.Value.Type;
+                            string dataType = ComparisonGetDataType(ConfDirectoryField.Value.Type);
+
                             string informationSchemaDataType = InformationSchemaColumn.DataType;
                             string informationSchemaUdtName = InformationSchemaColumn.UdtName;
 
-                            switch (configurationFieldType)
-                            {
-                                case "string":
-                                    {
-                                        if (!(informationSchemaDataType == "text" && informationSchemaUdtName == "text"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "text", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "string[]":
-                                    {
-                                        if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_text"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "text[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "integer":
-                                    {
-                                        if (!(informationSchemaDataType == "integer" && informationSchemaUdtName == "int4"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "integer", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "integer[]":
-                                    {
-                                        if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_int4"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "integer[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "numeric":
-                                    {
-                                        if (!(informationSchemaDataType == "numeric" && informationSchemaUdtName == "numeric"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "numeric", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "numeric[]":
-                                    {
-                                        if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_numeric"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "numeric[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "boolean":
-                                    {
-                                        if (!(informationSchemaDataType == "boolean" && informationSchemaUdtName == "bool"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "boolean", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "date":
-                                    {
-                                        if (!(informationSchemaDataType == "date" && informationSchemaUdtName == "date"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "date", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "time":
-                                    {
-                                        if (!(informationSchemaDataType == "time without time zone" && informationSchemaUdtName == "time"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "time without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "datetime":
-                                    {
-                                        if (!(informationSchemaDataType == "timestamp without time zone" && informationSchemaUdtName == "timestamp"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "timestamp without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                case "pointer":
-                                    {
-                                        if (!(informationSchemaDataType == "uuid" && informationSchemaUdtName == "uuid"))
-                                        {
-                                            ComparisonSaveAlterColumn(tableName, "uuid", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
-                                        }
-                                        break;
-                                    }
-                                default:
-                                    break;
-                            }
+                            ComparisonTransformDataType(configurationFieldType, dataType, informationSchemaDataType, informationSchemaUdtName);
                         }
                         else
                         {
-                            ComparisonSaveAddColumn(tableName, ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+                            string dataType = ComparisonGetDataType(ConfDirectoryField.Value.Type);
+                            ComparisonSaveAddColumn(tableName, dataType, ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
                         }
                     }
                 }
@@ -411,7 +324,7 @@ namespace AccountingSoftware
                             }
                             else
                             {
-                                ComparisonSaveAlterTable(tablePartName, tablePartField.Value, xmlComparisonDocument, rootNode);
+                                //ComparisonSaveAlterTable(tablePartName, tablePartField.Value, xmlComparisonDocument, rootNode);
                             }
                         }
                     }
@@ -423,6 +336,291 @@ namespace AccountingSoftware
             }
 
             xmlComparisonDocument.Save(pathToSaveReport);
+        }
+
+        private static void ComparisonTransformDataType(string configurationFieldType, string dataType, string informationSchemaDataType, string informationSchemaUdtName)
+        {
+            if (informationSchemaDataType == "text" && informationSchemaUdtName == "text")
+            {
+                if (configurationFieldType == "string")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "string[]")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_text")
+            {
+                if (configurationFieldType == "string[]")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "string")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "integer" && informationSchemaUdtName == "int4")
+            {
+                if (configurationFieldType == "integer")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "integer[]")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_int4")
+            {
+                if (configurationFieldType == "integer[]")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "integer")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "numeric" && informationSchemaUdtName == "numeric")
+            {
+                if (configurationFieldType == "numeric")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "numeric[]")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_numeric")
+            {
+                if (configurationFieldType == "numeric[]")
+                {
+                    //ok
+                }
+                else if (configurationFieldType == "numeric")
+                {
+                    //1. Переназвати стовпчик в fieldName_OLD
+                    //2. Створити новий стовпчик з назвою fieldName з типом string[]
+                    //3. Скопіювати дані з fieldName_OLD в fieldName
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "boolean" && informationSchemaUdtName == "bool")
+            {
+                if (configurationFieldType == "boolean")
+                {
+                    //ok
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "date" && informationSchemaUdtName == "date")
+            {
+                if (configurationFieldType == "date")
+                {
+                    //ok
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "time without time zone" && informationSchemaUdtName == "time")
+            {
+                if (configurationFieldType == "time")
+                {
+                    //ok
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "timestamp without time zone" && informationSchemaUdtName == "timestamp")
+            {
+                if (configurationFieldType == "datetime")
+                {
+                    //ok
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            if (informationSchemaDataType == "uuid" && informationSchemaUdtName == "uuid")
+            {
+                if (configurationFieldType == "pointer")
+                {
+                    //ok
+                }
+                else
+                {
+                    //error
+                }
+            }
+
+            //switch (fieldType)
+            //{
+            //    case "string":
+            //        {
+            //            if (!(informationSchemaDataType == "text" && informationSchemaUdtName == "text"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "text", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "string[]":
+            //        {
+            //            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_text"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "text[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "integer":
+            //        {
+            //            if (!(informationSchemaDataType == "integer" && informationSchemaUdtName == "int4"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "integer", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "integer[]":
+            //        {
+            //            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_int4"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "integer[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "numeric":
+            //        {
+            //            if (!(informationSchemaDataType == "numeric" && informationSchemaUdtName == "numeric"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "numeric", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "numeric[]":
+            //        {
+            //            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_numeric"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "numeric[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "boolean":
+            //        {
+            //            if (!(informationSchemaDataType == "boolean" && informationSchemaUdtName == "bool"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "boolean", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "date":
+            //        {
+            //            if (!(informationSchemaDataType == "date" && informationSchemaUdtName == "date"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "date", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "time":
+            //        {
+            //            if (!(informationSchemaDataType == "time without time zone" && informationSchemaUdtName == "time"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "time without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "datetime":
+            //        {
+            //            if (!(informationSchemaDataType == "timestamp without time zone" && informationSchemaUdtName == "timestamp"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "timestamp without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    case "pointer":
+            //        {
+            //            if (!(informationSchemaDataType == "uuid" && informationSchemaUdtName == "uuid"))
+            //            {
+            //                ComparisonSaveAlterColumn(tableName, "uuid", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+            //            }
+            //            break;
+            //        }
+            //    default:
+            //        break;
+            //}
+        }
+
+        private static string ComparisonGetDataType(string configurationFieldType)
+        {
+            switch (configurationFieldType)
+            {
+                case "string": return "text";
+                case "string[]": return "text[]";
+                case "integer": return "integer";
+                case "integer[]": return "integer[]";
+                case "numeric": return "numeric";
+                case "numeric[]": return "numeric[]";
+                case "boolean": return "boolean";
+                case "date": return "date";
+                case "time": return "time without time zone";
+                case "datetime": return "timestamp without time zone";
+                case "pointer": return "uuid";
+                default:
+                    throw new Exception("Не оприділений тип даних конфігурації");
+            }
         }
 
         private static void ComparisonFields(Dictionary<string, ConfigurationObjectField> fields, XmlDocument xmlComparisonDocument, XmlElement rootNode)
@@ -445,6 +643,10 @@ namespace AccountingSoftware
             XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
             nodeFieldType.InnerText = field.Type;
             nodeField.AppendChild(nodeFieldType);
+
+            XmlElement nodeFieldDataType = xmlComparisonDocument.CreateElement("DataType");
+            nodeFieldDataType.InnerText = ComparisonGetDataType(field.Type);
+            nodeField.AppendChild(nodeFieldDataType);
         }
 
         private static void ComparisonSaveInformationSchema(ConfigurationInformationSchema InformationSchema, XmlDocument xmlComparisonDocument, XmlElement rootNode)
@@ -493,19 +695,57 @@ namespace AccountingSoftware
             ComparisonFields(fields, xmlComparisonDocument, createTableNode);
         }
 
-        private static void ComparisonSaveAddColumn(string tableName, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        private static void ComparisonSaveAddColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
-            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("AddColumn");
+            XmlElement nodeTable = xmlComparisonDocument.CreateElement("AddColumn");
+            rootNode.AppendChild(nodeTable);
+
+            XmlElement nodeTableName = xmlComparisonDocument.CreateElement("TableName");
+            nodeTableName.InnerText = tableName;
+            nodeTable.AppendChild(nodeTableName);
+
+            XmlElement nodeField = xmlComparisonDocument.CreateElement("Field");
+            nodeTable.AppendChild(nodeField);
+
+            XmlElement nodeFieldName = xmlComparisonDocument.CreateElement("Name");
+            nodeFieldName.InnerText = field.Name;
+            nodeField.AppendChild(nodeFieldName);
+
+            XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
+            nodeFieldType.InnerText = field.Type;
+            nodeField.AppendChild(nodeFieldType);
+
+            XmlElement nodeFieldDataType = xmlComparisonDocument.CreateElement("DataType");
+            nodeFieldDataType.InnerText = dataType;
+            nodeField.AppendChild(nodeFieldDataType);
+        }
+
+        private static void ComparisonSaveRenameColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        {
+            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("RenameColumn");
             rootNode.AppendChild(alterTableNode);
 
             XmlElement alterTableNameNode = xmlComparisonDocument.CreateElement("TableName");
             alterTableNameNode.InnerText = tableName;
             alterTableNode.AppendChild(alterTableNameNode);
 
-            ComparisonField(field, xmlComparisonDocument, alterTableNode);
+            XmlElement nodeField = xmlComparisonDocument.CreateElement("Field");
+            rootNode.AppendChild(nodeField);
+
+            XmlElement nodeFieldName = xmlComparisonDocument.CreateElement("Name");
+            nodeFieldName.InnerText = field.Name;
+            nodeField.AppendChild(nodeFieldName);
+
+            XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
+            nodeFieldType.InnerText = field.Type;
+            nodeField.AppendChild(nodeFieldType);
+
+            XmlElement nodeFieldDataType = xmlComparisonDocument.CreateElement("DataType");
+            nodeFieldType.InnerText = dataType;
+            nodeField.AppendChild(nodeFieldDataType);
         }
 
-        private static void ComparisonSaveAlterColumn(string tableName, string fieldDataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        private static void ComparisonSaveAlterColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
             XmlElement alterTableNode = xmlComparisonDocument.CreateElement("AlterColumn");
             rootNode.AppendChild(alterTableNode);
@@ -526,7 +766,7 @@ namespace AccountingSoftware
             nodeField.AppendChild(nodeFieldType);
 
             XmlElement nodeFieldDataType = xmlComparisonDocument.CreateElement("DataType");
-            nodeFieldType.InnerText = fieldDataType;
+            nodeFieldType.InnerText = dataType;
             nodeField.AppendChild(nodeFieldDataType);
         }
 

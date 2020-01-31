@@ -110,6 +110,59 @@
       </Column>
     </Table>
     <Table>
+      <Name>test</Name>
+      <Column>
+        <Name>uid</Name>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+      </Column>
+      <Column>
+        <Name>number</Name>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+      </Column>
+      <Column>
+        <Name>dat</Name>
+        <DataType>date</DataType>
+        <UdtName>date</UdtName>
+      </Column>
+      <Column>
+        <Name>fds</Name>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+      </Column>
+      <Column>
+        <Name>num</Name>
+        <DataType>ARRAY</DataType>
+        <UdtName>_int4</UdtName>
+      </Column>
+      <Column>
+        <Name>tim</Name>
+        <DataType>time without time zone</DataType>
+        <UdtName>time</UdtName>
+      </Column>
+      <Column>
+        <Name>flag</Name>
+        <DataType>boolean</DataType>
+        <UdtName>bool</UdtName>
+      </Column>
+      <Column>
+        <Name>number2</Name>
+        <DataType>ARRAY</DataType>
+        <UdtName>_numeric</UdtName>
+      </Column>
+      <Column>
+        <Name>text</Name>
+        <DataType>ARRAY</DataType>
+        <UdtName>_text</UdtName>
+      </Column>
+      <Column>
+        <Name>u</Name>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+      </Column>
+    </Table>
+    <Table>
       <Name>tovary_ceny_tablepart_v1_1</Name>
       <Column>
         <Name>name</Name>
@@ -169,26 +222,30 @@
       </Column>
     </Table>
   </InformationSchema>
-  <AlterTable>
-    <Name>od_v1_1</Name>
+  <AddColumn>
+    <TableName>od_v1_1</TableName>
     <Field>
       <Name>Test</Name>
       <Type>string</Type>
+      <DataType>text</DataType>
     </Field>
-  </AlterTable>
+  </AddColumn>
   <CreateTable>
     <Name>newdir_v1_1</Name>
     <Field>
       <Name>Name</Name>
       <Type>string</Type>
+      <DataType>text</DataType>
     </Field>
     <Field>
       <Name>FullName</Name>
       <Type>string</Type>
+      <DataType>text</DataType>
     </Field>
     <Field>
       <Name>Test</Name>
       <Type>string</Type>
+      <DataType>text</DataType>
     </Field>
   </CreateTable>
   <CreateTable>
@@ -196,10 +253,12 @@
     <Field>
       <Name>name</Name>
       <Type>string</Type>
+      <DataType>text</DataType>
     </Field>
     <Field>
       <Name>cena</Name>
       <Type>numeric</Type>
+      <DataType>numeric</DataType>
     </Field>
   </CreateTable>
 </Comparison>
