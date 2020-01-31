@@ -17,7 +17,7 @@ namespace AccountingSoftware
 		{
 			if (!Tables.ContainsKey(table))
 			{
-				Tables.Add(table, new ConfigurationInformationSchema_Table());
+				Tables.Add(table, new ConfigurationInformationSchema_Table(table));
 			}
 
 			Tables[table].Columns.Add(column, new ConfigurationInformationSchema_Column(column, dataType, udtName));
@@ -26,13 +26,13 @@ namespace AccountingSoftware
 
 	public class ConfigurationInformationSchema_Table
 	{
-		public ConfigurationInformationSchema_Table()
+		public ConfigurationInformationSchema_Table(string tableName)
 		{
+			TableName = tableName;
 			Columns = new Dictionary<string, ConfigurationInformationSchema_Column>();
 		}
 
 		public string TableName { get; set; }
-
 		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; }
 	}
 
