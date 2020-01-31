@@ -12,7 +12,7 @@
       <Fields>
         <Field>
           <Name>name</Name>
-          <Type>string</Type>
+          <Type>string[]</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>

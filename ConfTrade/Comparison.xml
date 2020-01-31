@@ -161,6 +161,11 @@
         <DataType>uuid</DataType>
         <UdtName>uuid</UdtName>
       </Column>
+      <Column>
+        <Name>t</Name>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Column>
     </Table>
     <Table>
       <Name>tovary_ceny_tablepart_v1_1</Name>
@@ -222,6 +227,21 @@
       </Column>
     </Table>
   </InformationSchema>
+  <RenameColumn>
+    <TableName>tovary_v1_1</TableName>
+    <Field>
+      <Name>name</Name>
+      <NewName>name_OLD</NewName>
+    </Field>
+  </RenameColumn>
+  <AddColumn>
+    <TableName>tovary_v1_1</TableName>
+    <Field>
+      <Name>name</Name>
+      <Type>string[]</Type>
+      <DataType>text[]</DataType>
+    </Field>
+  </AddColumn>
   <AddColumn>
     <TableName>od_v1_1</TableName>
     <Field>

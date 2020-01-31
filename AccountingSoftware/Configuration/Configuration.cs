@@ -272,7 +272,7 @@ namespace AccountingSoftware
                     //Поля
                     foreach (KeyValuePair<string, ConfigurationObjectField> ConfDirectoryField in ConfDirectory.Value.Fields)
                     {
-                        //Назва поля в базі даних
+                        //Назва поля в базі данихConfigurationObjectField
                         string fieldName = ConfDirectoryField.Key.ToLower();
 
                         if (InformationSchema.Tables[tableName].Columns.ContainsKey(fieldName))
@@ -285,7 +285,9 @@ namespace AccountingSoftware
                             string informationSchemaDataType = InformationSchemaColumn.DataType;
                             string informationSchemaUdtName = InformationSchemaColumn.UdtName;
 
-                            ComparisonTransformDataType(configurationFieldType, dataType, informationSchemaDataType, informationSchemaUdtName);
+                            ComparisonTransformDataType(tableName, dataType,
+                                informationSchemaDataType, informationSchemaUdtName,
+                                ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
                         }
                         else
                         {
@@ -338,8 +340,12 @@ namespace AccountingSoftware
             xmlComparisonDocument.Save(pathToSaveReport);
         }
 
-        private static void ComparisonTransformDataType(string configurationFieldType, string dataType, string informationSchemaDataType, string informationSchemaUdtName)
+        private static void ComparisonTransformDataType(string tableName, string dataType, 
+            string informationSchemaDataType, string informationSchemaUdtName, 
+            ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
+            string configurationFieldType = field.Type;
+
             if (informationSchemaDataType == "text" && informationSchemaUdtName == "text")
             {
                 if (configurationFieldType == "string")
@@ -348,6 +354,9 @@ namespace AccountingSoftware
                 }
                 else if (configurationFieldType == "string[]")
                 {
+                    ComparisonSaveRenameColumn(tableName, field.Name, field.Name + "_OLD", xmlComparisonDocument, rootNode);
+                    ComparisonSaveAddColumn(tableName, dataType, field, xmlComparisonDocument, rootNode);
+
                     //1. Переназвати стовпчик в fieldName_OLD
                     //2. Створити новий стовпчик з назвою fieldName з типом string[]
                     //3. Скопіювати дані з fieldName_OLD в fieldName
@@ -697,6 +706,8 @@ namespace AccountingSoftware
 
         private static void ComparisonSaveAddColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
+            //ALTER TABLE distributors ADD COLUMN address varchar(30);
+
             XmlElement nodeTable = xmlComparisonDocument.CreateElement("AddColumn");
             rootNode.AppendChild(nodeTable);
 
@@ -720,29 +731,27 @@ namespace AccountingSoftware
             nodeField.AppendChild(nodeFieldDataType);
         }
 
-        private static void ComparisonSaveRenameColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
+        private static void ComparisonSaveRenameColumn(string tableName, string fieldName, string newFieldName, XmlDocument xmlComparisonDocument, XmlElement rootNode)
         {
-            XmlElement alterTableNode = xmlComparisonDocument.CreateElement("RenameColumn");
-            rootNode.AppendChild(alterTableNode);
+            //ALTER TABLE public.test RENAME uid TO uid2;
 
-            XmlElement alterTableNameNode = xmlComparisonDocument.CreateElement("TableName");
-            alterTableNameNode.InnerText = tableName;
-            alterTableNode.AppendChild(alterTableNameNode);
+            XmlElement ColumnNode = xmlComparisonDocument.CreateElement("RenameColumn");
+            rootNode.AppendChild(ColumnNode);
 
-            XmlElement nodeField = xmlComparisonDocument.CreateElement("Field");
-            rootNode.AppendChild(nodeField);
+            XmlElement TableNameNode = xmlComparisonDocument.CreateElement("TableName");
+            TableNameNode.InnerText = tableName;
+            ColumnNode.AppendChild(TableNameNode);
 
-            XmlElement nodeFieldName = xmlComparisonDocument.CreateElement("Name");
-            nodeFieldName.InnerText = field.Name;
-            nodeField.AppendChild(nodeFieldName);
+            XmlElement FieldNode = xmlComparisonDocument.CreateElement("Field");
+            ColumnNode.AppendChild(FieldNode);
 
-            XmlElement nodeFieldType = xmlComparisonDocument.CreateElement("Type");
-            nodeFieldType.InnerText = field.Type;
-            nodeField.AppendChild(nodeFieldType);
+            XmlElement FieldNameNode = xmlComparisonDocument.CreateElement("Name");
+            FieldNameNode.InnerText = fieldName;
+            FieldNode.AppendChild(FieldNameNode);
 
-            XmlElement nodeFieldDataType = xmlComparisonDocument.CreateElement("DataType");
-            nodeFieldType.InnerText = dataType;
-            nodeField.AppendChild(nodeFieldDataType);
+            XmlElement FieldNewNameNode = xmlComparisonDocument.CreateElement("NewName");
+            FieldNewNameNode.InnerText = newFieldName;
+            FieldNode.AppendChild(FieldNewNameNode);
         }
 
         private static void ComparisonSaveAlterColumn(string tableName, string dataType, ConfigurationObjectField field, XmlDocument xmlComparisonDocument, XmlElement rootNode)
@@ -770,6 +779,18 @@ namespace AccountingSoftware
             nodeField.AppendChild(nodeFieldDataType);
         }
 
-        //ALTER TABLE public.test RENAME uid TO uid2;
-    }
+        //ALTER TABLE public.test DROP COLUMN num;
+
+/*
+UPDATE public.test
+SET text_mas=
+(
+SELECT array_agg(test2.text) 
+FROM public.test AS test2 
+WHERE test2.uid = test.uid
+)
+*/
+
 }
+}
+ 
