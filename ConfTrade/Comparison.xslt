@@ -1,58 +1,133 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl">
+  
   <xsl:output method="xml" indent="yes" />
+
+  <msxsl:script implements-prefix="utils" language="C#">
+    <![CDATA[
+      public string ToLower(string stringValue)
+      {
+        string result = String.Empty;
+
+        if(!String.IsNullOrEmpty(stringValue))
+        {
+          result = stringValue.ToLower(); 
+        }
+
+        return result;
+      }
+    ]]>
+  </msxsl:script>
+  
+  <xsl:template name="FieldsControl">
+    <xsl:param name="InformationSchemaFieldList" />
+    <xsl:param name="ConfigurationFieldList" />
+
+    <xsl:for-each select="$ConfigurationFieldList">
+      <xsl:variable name="ConfFieldName" select="utils:ToLower(Name)" />
+
+      <Control_Field>
+        <Name>
+          <xsl:value-of select="$ConfFieldName"/>
+        </Name>
+
+        <xsl:choose>
+          <xsl:when test="$InformationSchemaFieldList[Name = $ConfFieldName]">
+            <IsExist>yes</IsExist>
+
+
+
+          </xsl:when>
+          <xsl:otherwise>
+            <IsExist>no</IsExist>
+          </xsl:otherwise>
+        </xsl:choose>
+
+      </Control_Field>
+
+    </xsl:for-each>
+
+  </xsl:template>
+
+  <xsl:template name="TabularPartsControl">
+    <xsl:param name="InformationSchemaTableList" />
+    <xsl:param name="ConfigurationTablePartList" />
+
+    <xsl:for-each select="$ConfigurationTablePartList">
+      <xsl:variable name="ConTablePart" select="Name" />
+      <xsl:variable name="ConfTablePartTable" select="Table" />
+
+      <Control_TabularParts>
+        <Name>
+          <xsl:value-of select="$ConTablePart"/>
+        </Name>
+        <Table>
+          <xsl:value-of select="$ConfTablePartTable"/>
+        </Table>
+
+        <xsl:choose>
+          <xsl:when test="$InformationSchemaTableList[Name = $ConfTablePartTable]">
+            <IsExist>yes</IsExist>
+
+
+
+          </xsl:when>
+          <xsl:otherwise>
+            <IsExist>no</IsExist>
+          </xsl:otherwise>
+        </xsl:choose>
+
+      </Control_TabularParts>
+
+    </xsl:for-each>
+
+  </xsl:template>
 
   <xsl:template match="/">
 
     <root>
 
-      <xsl:variable name="TableList" select="Comparison/InformationSchema/Table" />
-      
+      <xsl:variable name="InfoSchemaTableList" select="Comparison/InformationSchema/Table" />
+
       <xsl:for-each select="document('Configuration.xml')/Configuration/Directories/Directory">
-        <xsl:variable name="DirectoryName" select="Name" />
-        <xsl:variable name="DirectoryTable" select="Table" />
-        
-        <text>
-          <name>
-            <xsl:value-of select="$DirectoryName"/>
-          </name>
-          <table>
-            <xsl:value-of select="$DirectoryTable"/>
-          </table>
+        <xsl:variable name="ConfDirectoryName" select="Name" />
+        <xsl:variable name="ConfDirectoryTable" select="Table" />
+
+        <Control_Directory>
+          <Name>
+            <xsl:value-of select="$ConfDirectoryName"/>
+          </Name>
+          <Table>
+            <xsl:value-of select="$ConfDirectoryTable"/>
+          </Table>
 
           <xsl:choose>
-            <xsl:when test="$TableList[Name = $DirectoryTable]">
-              <xsl:variable name="ColumnList" select="$TableList[Name = $DirectoryTable]/Column" />
-              <ok>ok</ok>
+            <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
+              <IsExist>yes</IsExist>
 
-              <xsl:for-each select="Fields/Field">
-                <xsl:variable name="FieldName" select="Name" />
-                
-                <field_name>
-                  <xsl:value-of select="$FieldName"/>
-                </field_name>
+              <xsl:call-template name="FieldsControl">
+                <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
+                <xsl:with-param name="InformationSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+              </xsl:call-template>
 
-                <xsl:choose>
-                  <xsl:when test="$ColumnList[Name = $FieldName]">
-                    <ok>ok</ok>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <no>ok</no>
-                  </xsl:otherwise>
-                </xsl:choose>
-                
-              </xsl:for-each>
-              
+              <xsl:call-template name="TabularPartsControl">
+                <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
+                <xsl:with-param name="InformationSchemaTableList" select="$InfoSchemaTableList" />
+              </xsl:call-template>
+
             </xsl:when>
             <xsl:otherwise>
-              <no>ok</no>
-              
-              
+              <IsExist>no</IsExist>
+
+
             </xsl:otherwise>
           </xsl:choose>
-          
-        </text>
-        
+
+
+
+        </Control_Directory>
+
       </xsl:for-each>
 
       <xsl:for-each select="Comparison/CreateTable">
