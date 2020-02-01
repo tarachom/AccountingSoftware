@@ -254,7 +254,7 @@ namespace AccountingSoftware
         public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode)
         {
             XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-            xsltCodeGnerator.Load(pathToTemplate);
+            xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, false), null);
 
             xsltCodeGnerator.Transform(pathToXML, pathToSaveCode);
         }

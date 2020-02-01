@@ -22,7 +22,7 @@ namespace ConfTrade
             Configuration.ComparisonGeneration(
                 @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml",
                 @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-                @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonXSLT.xml");
+                @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonSql.xml");
 
 
             //Comparison

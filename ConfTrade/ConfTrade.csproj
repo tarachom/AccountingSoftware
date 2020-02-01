@@ -54,7 +54,7 @@
     </Content>
     <Content Include="Comparison.xml" />
     <Content Include="Comparison.xslt" />
-    <Content Include="ComparisonXSLT.xml" />
+    <Content Include="ComparisonSql.xml" />
     <Content Include="Configuration.xml" />
     <Content Include="README.txt" />
   </ItemGroup>

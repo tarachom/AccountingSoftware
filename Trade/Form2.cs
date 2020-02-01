@@ -70,5 +70,10 @@ namespace Trade
 				dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
 			*/
 		}
+
+		private void dataConfiguration_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+		{
+			
+		}
 	}
 }

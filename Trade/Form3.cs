@@ -30,6 +30,13 @@ namespace Trade
 			tovary_Objest.description = textBox3.Text;
 
 			tovary_Objest.Save();
+
+			this.Hide();
+		}
+
+		private void Form3_Load(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

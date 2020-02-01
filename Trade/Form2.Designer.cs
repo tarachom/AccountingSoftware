@@ -42,6 +42,7 @@
 			this.dataConfiguration.ReadOnly = true;
 			this.dataConfiguration.Size = new System.Drawing.Size(776, 426);
 			this.dataConfiguration.TabIndex = 0;
+			this.dataConfiguration.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataConfiguration_CellDoubleClick);
 			// 
 			// Form2
 			// 
