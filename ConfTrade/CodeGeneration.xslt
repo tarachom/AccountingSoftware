@@ -2,6 +2,114 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="text" indent="yes" />
 
+  <xsl:template name="FieldType">
+    <xsl:choose>
+      <xsl:when test="Type = 'string'">
+        <xsl:text>string</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string[]'">
+        <xsl:text>string[]</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer'">
+        <xsl:text>int</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer[]'">
+        <xsl:text>int[]</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric'">
+        <xsl:text>decimal</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric[]'">
+        <xsl:text>decimal[]</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'boolean'">
+        <xsl:text>bool</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'time'">
+        <xsl:text>TimeSpan</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'date' or Type = 'datetime'">
+        <xsl:text>DateTime</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'pointer'">
+        <xsl:value-of select="Pointer"/>
+        <xsl:text>_Pointer</xsl:text>
+      </xsl:when>
+    </xsl:choose>    
+  </xsl:template>
+  
+  <xsl:template name="DefaultFieldValue">
+    <xsl:choose>
+      <xsl:when test="Type = 'string'">
+        <xsl:text>""</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string[]'">
+        <xsl:text>new string[] { }</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer'">
+        <xsl:text>0</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer[]'">
+        <xsl:text>new int[] { }</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric'">
+        <xsl:text>0</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric[]'">
+        <xsl:text>new decimal[] { }</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'boolean'">
+        <xsl:text>false</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'time'">
+        <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'date' or Type = 'datetime'">
+        <xsl:text>DateTime.MinValue</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'pointer'">
+        <xsl:text>new </xsl:text>
+        <xsl:value-of select="Pointer"/>
+        <xsl:text>_Pointer()</xsl:text>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template name="DefaultParamValue">
+    <xsl:choose>
+      <xsl:when test="Type = 'string'">
+        <xsl:text>""</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string[]'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer'">
+        <xsl:text>0</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer[]'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric'">
+        <xsl:text>0</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric[]'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'boolean'">
+        <xsl:text>false</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'time'">
+        <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'date' or Type = 'datetime'">
+        <xsl:text>DateTime.MinValue</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'pointer'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
+    </xsl:choose>
+  </xsl:template>
+  
   <xsl:template match="/">
 
 /*
@@ -39,39 +147,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         {
             <xsl:for-each select="Fields/Field">
               <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text> 
-              <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>""</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                  <xsl:text>new string[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer[]'">
-                  <xsl:text>new int[] { }</xsl:text>
-                </xsl:when>
-                 <xsl:when test="Type = 'numeric'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric[]'">
-                  <xsl:text>new decimal[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text>false</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'time'">
-                  <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'datetime'">
-                  <xsl:text>DateTime.MinValue</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'pointer'">
-                  <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
-                </xsl:when>
-              </xsl:choose>;
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
             //Табличні частини
             <xsl:for-each select="TabularParts/TablePart">
@@ -167,39 +244,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
-          <xsl:choose>
-            <xsl:when test="Type = 'string'">
-              <xsl:text>string</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'string[]'">
-              <xsl:text>string[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'integer'">
-              <xsl:text>int</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'integer[]'">
-              <xsl:text>int[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'numeric'">
-              <xsl:text>decimal</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'numeric[]'">
-              <xsl:text>decimal[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'boolean'">
-              <xsl:text>bool</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'time'">
-              <xsl:text>TimeSpan</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'date' or Type = 'datetime'">
-              <xsl:text>DateTime</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'pointer'">
-              <xsl:value-of select="Pointer"/>
-              <xsl:text>_Pointer</xsl:text>
-            </xsl:when>
-          </xsl:choose>
+          <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}
@@ -409,113 +454,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         {
             <xsl:for-each select="Fields/Field">
               <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text> 
-              <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>""</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                  <xsl:text>new string[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer[]'">
-                  <xsl:text>new int[] { }</xsl:text>
-                </xsl:when>
-                 <xsl:when test="Type = 'numeric'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric[]'">
-                  <xsl:text>new decimal[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text>false</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'time'">
-                  <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'datetime'">
-                  <xsl:text>DateTime.MinValue</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'pointer'">
-                  <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/><xsl:text>_Pointer()</xsl:text>
-                </xsl:when>
-              </xsl:choose>;
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
         
         public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord(
             <xsl:for-each select="Fields/Field">
               <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
-              <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>string</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                  <xsl:text>string[]</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                  <xsl:text>int</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer[]'">
-                  <xsl:text>int[]</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric'">
-                  <xsl:text>decimal</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric[]'">
-                  <xsl:text>decimal[]</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text>bool</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'time'">
-                  <xsl:text>TimeSpan</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'datetime'">
-                  <xsl:text>DateTime</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'pointer'">
-                  <xsl:value-of select="Pointer"/>
-                  <xsl:text>_Pointer</xsl:text>
-                </xsl:when>
-              </xsl:choose>
+              <xsl:call-template name="FieldType" />
               <xsl:text> _</xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:text> = </xsl:text>
-              <xsl:choose>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>""</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                  <xsl:text>new string[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer[]'">
-                  <xsl:text>new int[] { }</xsl:text>
-                </xsl:when>
-                 <xsl:when test="Type = 'numeric'">
-                  <xsl:text>0</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric[]'">
-                  <xsl:text>new decimal[] { }</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text>false</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'time'">
-                  <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'date' or Type = 'datetime'">
-                  <xsl:text>DateTime.MinValue</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'pointer'">
-                  <xsl:text>null</xsl:text>
-                </xsl:when>
-              </xsl:choose>
+              <xsl:call-template name="DefaultParamValue" />
             </xsl:for-each>)
         {
             <xsl:for-each select="Fields/Field">
@@ -527,39 +478,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>
-          <xsl:choose>
-            <xsl:when test="Type = 'string'">
-              <xsl:text>string</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'string[]'">
-              <xsl:text>string[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'integer'">
-              <xsl:text>int</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'integer[]'">
-              <xsl:text>int[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'numeric'">
-              <xsl:text>decimal</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'numeric[]'">
-              <xsl:text>decimal[]</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'boolean'">
-              <xsl:text>bool</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'time'">
-              <xsl:text>TimeSpan</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'date' or Type = 'datetime'">
-              <xsl:text>DateTime</xsl:text>
-            </xsl:when>
-            <xsl:when test="Type = 'pointer'">
-              <xsl:value-of select="Pointer"/>
-              <xsl:text>_Pointer</xsl:text>
-            </xsl:when>
-          </xsl:choose>
+          <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}

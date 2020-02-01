@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 30.01.2020 11:38:49
+ * Дата конфігурації: 01.02.2020 10:59:52
  *
  */
 
@@ -26,7 +26,7 @@ namespace ConfTrade_v1_1
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "date_add3", "time_add", "datetime_add", "text_arr", "int_arr", "numeric_arr" }) 
         {
-            name = "";
+            name = new string[] { };
             code = "";
             description = "";
             field1 = "";
@@ -57,7 +57,7 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                name = base.FieldValue["name"].ToString();
+                name = (base.FieldValue["name"] != DBNull.Value) ? (string[])base.FieldValue["name"] : new string[] { };
                 code = base.FieldValue["code"].ToString();
                 description = base.FieldValue["description"].ToString();
                 field1 = base.FieldValue["field1"].ToString();
@@ -121,7 +121,7 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string name { get; set; }
+        public string[] name { get; set; }
         public string code { get; set; }
         public string description { get; set; }
         public string field1 { get; set; }
