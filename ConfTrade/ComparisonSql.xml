@@ -7,92 +7,309 @@
     <Control_Field>
       <Name>name</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>no</Coincide>
+        <ConfType>string[]</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>code</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>description</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>field1</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>field2</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>field3</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>field4</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>field5</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>od2</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>count</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>integer</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>num</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>isupdate</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>boolean</ConfType>
+        <DataType>boolean</DataType>
+        <UdtName>bool</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>isupdate2</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>boolean</ConfType>
+        <DataType>boolean</DataType>
+        <UdtName>bool</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>date_add</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>date</ConfType>
+        <DataType>date</DataType>
+        <UdtName>date</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>date_add3</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>date</ConfType>
+        <DataType>date</DataType>
+        <UdtName>date</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>time_add</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>time</ConfType>
+        <DataType>time without time zone</DataType>
+        <UdtName>time</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>datetime_add</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>text_arr</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>int_arr</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>integer[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_int4</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>numeric_arr</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>numeric[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_numeric</UdtName>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>Ceny</Name>
       <Table>tovary_ceny_tablepart_v1_1</Table>
       <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>name</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>cena</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>numeric</ConfType>
+          <DataType>numeric</DataType>
+          <UdtName>numeric</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>od_pointer</Name>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>od_pointer</Name>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+        </FieldCreate>
+      </Control_Field>
+      <Control_Field>
+        <Name>name</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>fullname</Name>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>fullname</Name>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </Control_Field>
     </Control_TabularParts>
     <Control_TabularParts>
       <Name>Od_List</Name>
       <Table>tovary_od_tablepart_v1_1</Table>
       <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>name</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>cena</Name>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>cena</Name>
+          <ConfType>numeric</ConfType>
+          <DataType>numeric</DataType>
+        </FieldCreate>
+      </Control_Field>
+      <Control_Field>
+        <Name>od_pointer</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+          <UdtName>uuid</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>name</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>fullname</Name>
+        <IsExist>yes</IsExist>
+        <Type>
+          <Coincide>yes</Coincide>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -102,42 +319,70 @@
     <Control_Field>
       <Name>name</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>fullname</Name>
       <IsExist>yes</IsExist>
+      <Type>
+        <Coincide>yes</Coincide>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>test</Name>
       <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>test</Name>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
     </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>NewDir</Name>
     <Table>newdir_v1_1</Table>
     <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>name</Name>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>fullname</Name>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>test</Name>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+    <Control_TabularParts>
+      <Name>Ceny</Name>
+      <Table>newdir_ceny_tablepart_v1_1</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>name</Name>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>cena</Name>
+          <ConfType>numeric</ConfType>
+          <DataType>numeric</DataType>
+        </FieldCreate>
+      </TableCreate>
+    </Control_TabularParts>
   </Control_Directory>
-  <sql>
-          CREATE TABLE newdir_v1_1 (
-          uid uuid NOT NULL,
-          Name text,FullName text,Test text,
-          PRIMARY KEY(uid)
-          );
-        </sql>
-  <sql>
-          CREATE TABLE newdir_ceny_tablepart_v1_1 (
-          uid uuid NOT NULL,
-          name text,cena numeric,
-          PRIMARY KEY(uid)
-          );
-        </sql>
-  <sql>
-          ALTER TABLE tovary_v1_1 RENAME name TO name_OLD;
-        </sql>
-  <sql>
-          ALTER TABLE tovary_v1_1 ADD COLUMN name text[];
-        </sql>
-  <sql>
-          ALTER TABLE od_v1_1 ADD COLUMN Test text;
-        </sql>
 </root>

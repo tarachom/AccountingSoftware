@@ -4,3 +4,127 @@ select table_name, column_name
 from information_schema.columns 
 where table_schema='public'
 
+---------------------------------------------------------------------------------------------------------------------------------------
+
+<xsl:for-each select="Comparison/CreateTable">
+        <sql>
+          CREATE TABLE <xsl:value-of select="Name"/> (
+          uid uuid NOT NULL,
+          <xsl:for-each select="Field">
+            <xsl:value-of select="Name"/>
+            <xsl:text> </xsl:text>
+            <xsl:value-of select="DataType"/>
+            <xsl:text>,</xsl:text>
+          </xsl:for-each>
+          PRIMARY KEY(uid)
+          );
+        </sql>
+      </xsl:for-each>
+
+      <xsl:for-each select="Comparison/RenameColumn">
+        <sql>
+          ALTER TABLE <xsl:value-of select="TableName"/> RENAME <xsl:value-of select="Field/Name"/> TO <xsl:value-of select="Field/NewName"/>;
+        </sql>
+      </xsl:for-each>
+
+      <xsl:for-each select="Comparison/AddColumn">
+        <sql>
+          ALTER TABLE <xsl:value-of select="TableName"/> ADD COLUMN <xsl:value-of select="Field/Name"/><xsl:text> </xsl:text><xsl:value-of select="Field/DataType"/>;
+        </sql>
+      </xsl:for-each>
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+//switch (fieldType)
+//{
+//    case "string":
+//        {
+//            if (!(informationSchemaDataType == "text" && informationSchemaUdtName == "text"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "text", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "string[]":
+//        {
+//            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_text"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "text[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "integer":
+//        {
+//            if (!(informationSchemaDataType == "integer" && informationSchemaUdtName == "int4"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "integer", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "integer[]":
+//        {
+//            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_int4"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "integer[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "numeric":
+//        {
+//            if (!(informationSchemaDataType == "numeric" && informationSchemaUdtName == "numeric"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "numeric", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "numeric[]":
+//        {
+//            if (!(informationSchemaDataType == "ARRAY" && informationSchemaUdtName == "_numeric"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "numeric[]", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "boolean":
+//        {
+//            if (!(informationSchemaDataType == "boolean" && informationSchemaUdtName == "bool"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "boolean", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "date":
+//        {
+//            if (!(informationSchemaDataType == "date" && informationSchemaUdtName == "date"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "date", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "time":
+//        {
+//            if (!(informationSchemaDataType == "time without time zone" && informationSchemaUdtName == "time"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "time without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "datetime":
+//        {
+//            if (!(informationSchemaDataType == "timestamp without time zone" && informationSchemaUdtName == "timestamp"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "timestamp without time zone", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    case "pointer":
+//        {
+//            if (!(informationSchemaDataType == "uuid" && informationSchemaUdtName == "uuid"))
+//            {
+//                ComparisonSaveAlterColumn(tableName, "uuid", ConfDirectoryField.Value, xmlComparisonDocument, rootNode);
+//            }
+//            break;
+//        }
+//    default:
+//        break;
+//}
