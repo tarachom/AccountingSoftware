@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configurator", "Configurato
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfTrade", "ConfTrade\ConfTrade.csproj", "{81A2BE3C-2E0F-496A-BB5E-BCAF5639C798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trade", "..\Trade\Trade.csproj", "{317B085D-AF4C-4511-8ADA-2D73CC9422B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trade", "Trade\Trade.csproj", "{317B085D-AF4C-4511-8ADA-2D73CC9422B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
