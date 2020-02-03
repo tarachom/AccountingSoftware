@@ -119,47 +119,47 @@
      
      <xsl:choose>
         <xsl:when test="Type = 'string'">
-          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString()</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'string[]'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new string[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'integer'">
-          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'integer[]'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new int[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : 0</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'numeric[]'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new decimal[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
-          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'time'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>TimeSpan.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>TimeSpan.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString())</xsl:text>
           <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'date' or Type = 'datetime'">
-          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString())</xsl:text>
           <xsl:text> : DateTime.MinValue</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'pointer'">
           <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
-          <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
+          <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"])</xsl:text>
         </xsl:when>
      </xsl:choose>
   </xsl:template>
@@ -199,7 +199,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                <xsl:if test="position() != 1">
                  <xsl:text>, </xsl:text>
                </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
              </xsl:for-each> }) 
         {
             <xsl:for-each select="Fields/Field">
@@ -235,7 +235,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public void Save()
         {
             <xsl:for-each select="Fields/Field">
-              <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] = </xsl:text>
+              <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer'">
@@ -348,7 +348,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                <xsl:if test="position() != 1">
                  <xsl:text>, </xsl:text>
                </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
              </xsl:for-each> }) 
         {
             Owner = owner;
@@ -405,7 +405,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
                     <xsl:for-each select="Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="Name"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:choose>
                         <xsl:when test="Type = 'pointer'">
                           <xsl:text>.UnigueID.UGuid</xsl:text>

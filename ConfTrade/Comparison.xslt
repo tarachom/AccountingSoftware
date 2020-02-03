@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl">
-
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
-
+  
+  <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
   <msxsl:script implements-prefix="utils" language="C#">
     <![CDATA[
       public string ToLower(string stringValue)
@@ -12,18 +11,22 @@
       }
     ]]>
   </msxsl:script>
-
+  -->
+  
   <xsl:template name="FieldsControl">
     <xsl:param name="InfoSchemaFieldList" />
     <xsl:param name="ConfigurationFieldList" />
 
     <xsl:for-each select="$ConfigurationFieldList">
-      <xsl:variable name="ConfFieldName" select="utils:ToLower(Name)" />
+      <xsl:variable name="ConfFieldName" select="NameInTable" />
 
       <Control_Field>
         <Name>
-          <xsl:value-of select="$ConfFieldName"/>
+          <xsl:value-of select="Name"/>
         </Name>
+        <NameInTable>
+          <xsl:value-of select="$ConfFieldName"/>
+        </NameInTable>
 
         <xsl:choose>
           <xsl:when test="$InfoSchemaFieldList[Name = $ConfFieldName]">
@@ -105,6 +108,7 @@
 
   <xsl:template name="FieldCreate">
     <xsl:param name="ConfFieldName" />
+    <xsl:param name="ConfFieldNameInTable" />
     <xsl:param name="ConfFieldType" />
 
     <FieldCreate>
@@ -113,6 +117,10 @@
         <xsl:value-of select="$ConfFieldName"/>
       </Name>
 
+      <NameInTable>
+        <xsl:value-of select="$ConfFieldNameInTable"/>
+      </NameInTable>
+      
       <ConfType>
         <xsl:value-of select="$ConfFieldType"/>
       </ConfType>
@@ -192,7 +200,8 @@
 
               <xsl:for-each select="$ConfigurationTablePartList/Fields/Field">
                 <xsl:call-template name="FieldCreate">
-                  <xsl:with-param name="ConfFieldName" select="utils:ToLower(Name)" />
+                  <xsl:with-param name="ConfFieldName" select="Name" />
+                  <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                   <xsl:with-param name="ConfFieldType" select="Type" />
                 </xsl:call-template>
               </xsl:for-each>
@@ -242,7 +251,8 @@
 
                 <xsl:for-each select="Fields/Field">
                   <xsl:call-template name="FieldCreate">
-                    <xsl:with-param name="ConfFieldName" select="utils:ToLower(Name)" />
+                    <xsl:with-param name="ConfFieldName" select="Name" />
+                    <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
                     <xsl:with-param name="ConfFieldType" select="Type" />
                   </xsl:call-template>
                 </xsl:for-each>

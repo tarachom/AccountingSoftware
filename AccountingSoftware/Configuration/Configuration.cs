@@ -93,11 +93,12 @@ namespace AccountingSoftware
             while (fieldNodes.MoveNext())
             {
                 string name = fieldNodes.Current.SelectSingleNode("Name").Value;
+                string nameInTable = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
                 string type = fieldNodes.Current.SelectSingleNode("Type").Value;
                 string pointer = (type == "pointer") ? fieldNodes.Current.SelectSingleNode("Pointer").Value : "";
                 string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, type, pointer, desc);
+                ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc);
 
                 fields.Add(name, ConfObjectField);
             }
@@ -150,7 +151,7 @@ namespace AccountingSoftware
             rootNode.AppendChild(nodeAuthor);
 
             XmlElement nodeDateTimeSave = xmlConfDocument.CreateElement("DateTimeSave");
-            nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
+            nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
             rootNode.AppendChild(nodeDateTimeSave);
         }
 
@@ -195,6 +196,10 @@ namespace AccountingSoftware
                 XmlElement nodeFieldName = xmlConfDocument.CreateElement("Name");
                 nodeFieldName.InnerText = field.Key;
                 nodeField.AppendChild(nodeFieldName);
+
+                XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
+                nodeFieldNameInTable.InnerText = field.Value.NameInTable;
+                nodeField.AppendChild(nodeFieldNameInTable);
 
                 XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
                 nodeFieldType.InnerText = field.Value.Type;

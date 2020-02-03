@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//Довідник Обєкт
-	//
+	/// <summary>
+	/// Довідник Об'єкт
+	/// </summary>
 	public abstract class DirectoryObject
 	{
 		public DirectoryObject(Kernel kernel, string table, string[] fieldsArray)

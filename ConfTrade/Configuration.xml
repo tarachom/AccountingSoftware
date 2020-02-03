@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>03.02.2020 03:04:01</DateTimeSave>
+  <DateTimeSave>03.02.2020 16:40:29</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -11,103 +11,123 @@
       <Desc>Довідник Товари</Desc>
       <Fields>
         <Field>
-          <Name>name</Name>
-          <Type>string[]</Type>
+          <Name>NameME</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
-          <Name>code</Name>
+          <Name>Code</Name>
+          <NameInTable>code</NameInTable>
           <Type>string</Type>
           <Desc>Code</Desc>
         </Field>
         <Field>
-          <Name>description</Name>
+          <Name>Description</Name>
+          <NameInTable>description</NameInTable>
           <Type>string</Type>
           <Desc>description</Desc>
         </Field>
         <Field>
-          <Name>field1</Name>
+          <Name>Field1</Name>
+          <NameInTable>field1</NameInTable>
           <Type>string</Type>
           <Desc>Field1</Desc>
         </Field>
         <Field>
-          <Name>field2</Name>
+          <Name>Field2</Name>
+          <NameInTable>field2</NameInTable>
           <Type>string</Type>
           <Desc>Field2</Desc>
         </Field>
         <Field>
-          <Name>field3</Name>
+          <Name>Field3</Name>
+          <NameInTable>field3</NameInTable>
           <Type>string</Type>
           <Desc>Field3</Desc>
         </Field>
         <Field>
-          <Name>field4</Name>
+          <Name>Field4</Name>
+          <NameInTable>field4</NameInTable>
           <Type>string</Type>
           <Desc>Field4</Desc>
         </Field>
         <Field>
-          <Name>field5</Name>
+          <Name>Field5</Name>
+          <NameInTable>field5</NameInTable>
           <Type>string</Type>
           <Desc>Field5</Desc>
         </Field>
         <Field>
-          <Name>od2</Name>
+          <Name>Od2</Name>
+          <NameInTable>od2</NameInTable>
           <Type>pointer</Type>
           <Pointer>Od</Pointer>
           <Desc>od2</Desc>
         </Field>
         <Field>
-          <Name>count</Name>
+          <Name>Count</Name>
+          <NameInTable>count</NameInTable>
           <Type>integer</Type>
           <Desc>count</Desc>
         </Field>
         <Field>
-          <Name>num</Name>
+          <Name>Num</Name>
+          <NameInTable>num</NameInTable>
           <Type>numeric</Type>
           <Desc>num</Desc>
         </Field>
         <Field>
-          <Name>isupdate</Name>
+          <Name>Isupdate</Name>
+          <NameInTable>isupdate</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate</Desc>
         </Field>
         <Field>
-          <Name>isupdate2</Name>
+          <Name>Isupdate2</Name>
+          <NameInTable>isupdate2</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate2</Desc>
         </Field>
         <Field>
-          <Name>date_add</Name>
+          <Name>Date_add</Name>
+          <NameInTable>date_add</NameInTable>
           <Type>date</Type>
           <Desc>Date Add</Desc>
         </Field>
         <Field>
-          <Name>date_add3</Name>
+          <Name>Date_add3</Name>
+          <NameInTable>date_add3</NameInTable>
           <Type>date</Type>
           <Desc>Date Add3</Desc>
         </Field>
         <Field>
-          <Name>time_add</Name>
+          <Name>Time_add</Name>
+          <NameInTable>time_add</NameInTable>
           <Type>time</Type>
           <Desc>Time Add</Desc>
         </Field>
         <Field>
-          <Name>datetime_add</Name>
+          <Name>Datetime_add</Name>
+          <NameInTable>datetime_add</NameInTable>
           <Type>datetime</Type>
           <Desc>DateTime Add</Desc>
         </Field>
         <Field>
-          <Name>text_arr</Name>
+          <Name>Text_arr</Name>
+          <NameInTable>text_arr</NameInTable>
           <Type>string[]</Type>
           <Desc>text array test</Desc>
         </Field>
         <Field>
-          <Name>int_arr</Name>
+          <Name>Int_arr</Name>
+          <NameInTable>int_arr</NameInTable>
           <Type>integer[]</Type>
           <Desc>int array test</Desc>
         </Field>
         <Field>
-          <Name>numeric_arr</Name>
+          <Name>Numeric_arr</Name>
+          <NameInTable>numeric_arr</NameInTable>
           <Type>numeric[]</Type>
           <Desc>numeric array test</Desc>
         </Field>
@@ -119,12 +139,14 @@
           <Desc>Таблична частина Ціни</Desc>
           <Fields>
             <Field>
-              <Name>name</Name>
+              <Name>Name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
-              <Name>cena</Name>
+              <Name>Cena</Name>
+              <NameInTable>cena</NameInTable>
               <Type>numeric</Type>
               <Desc>Cena</Desc>
             </Field>
@@ -137,17 +159,20 @@
           <Fields>
             <Field>
               <Name>Od_Pointer</Name>
+              <NameInTable>od_pointer</NameInTable>
               <Type>pointer</Type>
               <Pointer>Od</Pointer>
               <Desc>pointer od table</Desc>
             </Field>
             <Field>
               <Name>Name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>FullName</Name>
+              <NameInTable>fullname</NameInTable>
               <Type>string</Type>
               <Desc>full Name</Desc>
             </Field>
@@ -162,102 +187,122 @@
       <Fields>
         <Field>
           <Name>name</Name>
+          <NameInTable>name</NameInTable>
           <Type>string[]</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
           <Name>code</Name>
+          <NameInTable>code</NameInTable>
           <Type>string</Type>
           <Desc>Code</Desc>
         </Field>
         <Field>
           <Name>description</Name>
+          <NameInTable>description</NameInTable>
           <Type>string</Type>
           <Desc>description</Desc>
         </Field>
         <Field>
           <Name>field1</Name>
+          <NameInTable>field1</NameInTable>
           <Type>string</Type>
           <Desc>Field1</Desc>
         </Field>
         <Field>
           <Name>field2</Name>
+          <NameInTable>field2</NameInTable>
           <Type>string</Type>
           <Desc>Field2</Desc>
         </Field>
         <Field>
           <Name>field3</Name>
+          <NameInTable>field3</NameInTable>
           <Type>string</Type>
           <Desc>Field3</Desc>
         </Field>
         <Field>
           <Name>field4</Name>
+          <NameInTable>field4</NameInTable>
           <Type>string</Type>
           <Desc>Field4</Desc>
         </Field>
         <Field>
           <Name>field5</Name>
+          <NameInTable>field5</NameInTable>
           <Type>string</Type>
           <Desc>Field5</Desc>
         </Field>
         <Field>
           <Name>od2</Name>
+          <NameInTable>od2</NameInTable>
           <Type>pointer</Type>
           <Pointer>Od</Pointer>
           <Desc>od2</Desc>
         </Field>
         <Field>
           <Name>count</Name>
+          <NameInTable>count</NameInTable>
           <Type>integer</Type>
           <Desc>count</Desc>
         </Field>
         <Field>
           <Name>num</Name>
+          <NameInTable>num</NameInTable>
           <Type>numeric</Type>
           <Desc>num</Desc>
         </Field>
         <Field>
           <Name>isupdate</Name>
+          <NameInTable>isupdate</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate</Desc>
         </Field>
         <Field>
           <Name>isupdate2</Name>
+          <NameInTable>isupdate2</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate2</Desc>
         </Field>
         <Field>
           <Name>date_add</Name>
+          <NameInTable>date_add</NameInTable>
           <Type>date</Type>
           <Desc>Date Add</Desc>
         </Field>
         <Field>
           <Name>date_add3</Name>
+          <NameInTable>date_add3</NameInTable>
           <Type>date</Type>
           <Desc>Date Add3</Desc>
         </Field>
         <Field>
           <Name>time_add</Name>
+          <NameInTable>time_add</NameInTable>
           <Type>time</Type>
           <Desc>Time Add</Desc>
         </Field>
         <Field>
           <Name>datetime_add</Name>
+          <NameInTable>datetime_add</NameInTable>
           <Type>datetime</Type>
           <Desc>DateTime Add</Desc>
         </Field>
         <Field>
           <Name>text_arr</Name>
+          <NameInTable>text_arr</NameInTable>
           <Type>string[]</Type>
           <Desc>text array test</Desc>
         </Field>
         <Field>
           <Name>int_arr</Name>
+          <NameInTable>int_arr</NameInTable>
           <Type>integer[]</Type>
           <Desc>int array test</Desc>
         </Field>
         <Field>
           <Name>numeric_arr</Name>
+          <NameInTable>numeric_arr</NameInTable>
           <Type>numeric[]</Type>
           <Desc>numeric array test</Desc>
         </Field>
@@ -270,11 +315,13 @@
           <Fields>
             <Field>
               <Name>name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>cena</Name>
+              <NameInTable>cena</NameInTable>
               <Type>numeric</Type>
               <Desc>Cena</Desc>
             </Field>
@@ -287,17 +334,20 @@
           <Fields>
             <Field>
               <Name>Od_Pointer</Name>
+              <NameInTable>od_pointer</NameInTable>
               <Type>pointer</Type>
               <Pointer>Od</Pointer>
               <Desc>pointer od table</Desc>
             </Field>
             <Field>
               <Name>Name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>FullName</Name>
+              <NameInTable>fullname</NameInTable>
               <Type>string</Type>
               <Desc>full Name</Desc>
             </Field>
@@ -312,102 +362,122 @@
       <Fields>
         <Field>
           <Name>name</Name>
+          <NameInTable>name</NameInTable>
           <Type>string[]</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
           <Name>code</Name>
+          <NameInTable>code</NameInTable>
           <Type>string</Type>
           <Desc>Code</Desc>
         </Field>
         <Field>
           <Name>description</Name>
+          <NameInTable>description</NameInTable>
           <Type>string</Type>
           <Desc>description</Desc>
         </Field>
         <Field>
           <Name>field1</Name>
+          <NameInTable>field1</NameInTable>
           <Type>string</Type>
           <Desc>Field1</Desc>
         </Field>
         <Field>
           <Name>field2</Name>
+          <NameInTable>field2</NameInTable>
           <Type>string</Type>
           <Desc>Field2</Desc>
         </Field>
         <Field>
           <Name>field3</Name>
+          <NameInTable>field3</NameInTable>
           <Type>string</Type>
           <Desc>Field3</Desc>
         </Field>
         <Field>
           <Name>field4</Name>
+          <NameInTable>field4</NameInTable>
           <Type>string</Type>
           <Desc>Field4</Desc>
         </Field>
         <Field>
           <Name>field5</Name>
+          <NameInTable>field5</NameInTable>
           <Type>string</Type>
           <Desc>Field5</Desc>
         </Field>
         <Field>
           <Name>od2</Name>
+          <NameInTable>od2</NameInTable>
           <Type>pointer</Type>
           <Pointer>Od</Pointer>
           <Desc>od2</Desc>
         </Field>
         <Field>
           <Name>count</Name>
+          <NameInTable>count</NameInTable>
           <Type>integer</Type>
           <Desc>count</Desc>
         </Field>
         <Field>
           <Name>num</Name>
+          <NameInTable>num</NameInTable>
           <Type>numeric</Type>
           <Desc>num</Desc>
         </Field>
         <Field>
           <Name>isupdate</Name>
+          <NameInTable>isupdate</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate</Desc>
         </Field>
         <Field>
           <Name>isupdate2</Name>
+          <NameInTable>isupdate2</NameInTable>
           <Type>boolean</Type>
           <Desc>isupdate2</Desc>
         </Field>
         <Field>
           <Name>date_add</Name>
+          <NameInTable>date_add</NameInTable>
           <Type>date</Type>
           <Desc>Date Add</Desc>
         </Field>
         <Field>
           <Name>date_add3</Name>
+          <NameInTable>date_add3</NameInTable>
           <Type>date</Type>
           <Desc>Date Add3</Desc>
         </Field>
         <Field>
           <Name>time_add</Name>
+          <NameInTable>time_add</NameInTable>
           <Type>time</Type>
           <Desc>Time Add</Desc>
         </Field>
         <Field>
           <Name>datetime_add</Name>
+          <NameInTable>datetime_add</NameInTable>
           <Type>datetime</Type>
           <Desc>DateTime Add</Desc>
         </Field>
         <Field>
           <Name>text_arr</Name>
+          <NameInTable>text_arr</NameInTable>
           <Type>string[]</Type>
           <Desc>text array test</Desc>
         </Field>
         <Field>
           <Name>int_arr</Name>
+          <NameInTable>int_arr</NameInTable>
           <Type>integer[]</Type>
           <Desc>int array test</Desc>
         </Field>
         <Field>
           <Name>numeric_arr</Name>
+          <NameInTable>numeric_arr</NameInTable>
           <Type>numeric[]</Type>
           <Desc>numeric array test</Desc>
         </Field>
@@ -420,11 +490,13 @@
           <Fields>
             <Field>
               <Name>name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>cena</Name>
+              <NameInTable>cena</NameInTable>
               <Type>numeric</Type>
               <Desc>Cena</Desc>
             </Field>
@@ -437,17 +509,20 @@
           <Fields>
             <Field>
               <Name>Od_Pointer</Name>
+              <NameInTable>od_pointer</NameInTable>
               <Type>pointer</Type>
               <Pointer>Od</Pointer>
               <Desc>pointer od table</Desc>
             </Field>
             <Field>
               <Name>Name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>FullName</Name>
+              <NameInTable>fullname</NameInTable>
               <Type>string</Type>
               <Desc>full Name</Desc>
             </Field>
@@ -462,16 +537,19 @@
       <Fields>
         <Field>
           <Name>Name</Name>
+          <NameInTable>name</NameInTable>
           <Type>string</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
           <Name>FullName</Name>
+          <NameInTable>fullname</NameInTable>
           <Type>string</Type>
           <Desc>Full Name</Desc>
         </Field>
         <Field>
           <Name>Test</Name>
+          <NameInTable>test</NameInTable>
           <Type>string</Type>
           <Desc>test</Desc>
         </Field>
@@ -485,16 +563,19 @@
       <Fields>
         <Field>
           <Name>Name</Name>
+          <NameInTable>name</NameInTable>
           <Type>string</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
           <Name>FullName</Name>
+          <NameInTable>fullname</NameInTable>
           <Type>string</Type>
           <Desc>Full Name</Desc>
         </Field>
         <Field>
           <Name>Test</Name>
+          <NameInTable>test</NameInTable>
           <Type>string</Type>
           <Desc>test</Desc>
         </Field>
@@ -507,11 +588,13 @@
           <Fields>
             <Field>
               <Name>name</Name>
+              <NameInTable>name</NameInTable>
               <Type>string</Type>
               <Desc>Name</Desc>
             </Field>
             <Field>
               <Name>cena</Name>
+              <NameInTable>cena</NameInTable>
               <Type>numeric</Type>
               <Desc>Cena</Desc>
             </Field>
