@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="text" indent="yes" />
 
+  <!-- Для задання типу поля -->
   <xsl:template name="FieldType">
     <xsl:choose>
       <xsl:when test="Type = 'string'">
@@ -38,6 +39,7 @@
     </xsl:choose>    
   </xsl:template>
   
+  <!-- Для конструкторів. Значення поля по замовчуванню відповідно до типу -->
   <xsl:template name="DefaultFieldValue">
     <xsl:choose>
       <xsl:when test="Type = 'string'">
@@ -75,6 +77,7 @@
     </xsl:choose>
   </xsl:template>
 
+  <!-- Для параметрів функцій. Значення параметра по замовчуванню відповідно до типу -->
   <xsl:template name="DefaultParamValue">
     <xsl:choose>
       <xsl:when test="Type = 'string'">
@@ -110,6 +113,57 @@
     </xsl:choose>
   </xsl:template>
   
+  <!-- Для присвоєння значення полям -->
+  <xsl:template name="ReadFieldValue">
+     <xsl:param name="BaseFieldContainer" />
+     
+     <xsl:choose>
+        <xsl:when test="Type = 'string'">
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'string[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text> : new string[] { }</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'integer'">
+          <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'integer[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(int[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text> : new int[] { }</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'numeric'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text> : 0</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'numeric[]'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>(decimal[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+          <xsl:text> : new decimal[] { }</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'boolean'">
+          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'time'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>TimeSpan.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'date' or Type = 'datetime'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>DateTime.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text> : DateTime.MinValue</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'pointer'">
+          <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
+          <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
+        </xsl:when>
+     </xsl:choose>
+  </xsl:template>
+  
   <xsl:template match="/">
 
 /*
@@ -134,6 +188,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     
+    /// &lt;summary&gt; 
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -165,51 +222,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 <xsl:for-each select="Fields/Field">
                   <xsl:value-of select="Name"/>
                   <xsl:text> = </xsl:text>
-                  <xsl:choose>
-                    <xsl:when test="Type = 'string'">
-                      <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'string[]'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(string[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new string[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer'">
-                      <xsl:text>(int)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer[]'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(int[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new int[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(decimal)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : 0</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric[]'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(decimal[])base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new decimal[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean'">
-                      <xsl:text>(bool)base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'time'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>TimeSpan.Parse(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
-                      <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'date' or Type = 'datetime'">
-                      <xsl:text>(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>DateTime.Parse(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
-                      <xsl:text> : DateTime.MinValue</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                      <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
-                      <xsl:text>_Pointer(base.FieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
-                    </xsl:when>
-                  </xsl:choose>;
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                  </xsl:call-template>;
                 </xsl:for-each>
                 return true;
             }
@@ -257,6 +272,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         </xsl:for-each>
     }
     
+    /// &lt;summary&gt; 
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
@@ -272,6 +290,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         }
     }
     
+    /// &lt;summary&gt; 
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
@@ -317,8 +338,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
     /// &lt;summary&gt;
-    /// [<xsl:value-of select="$TablePartName"/>] 
-    /// <xsl:value-of select="Desc"/>.
+    /// <xsl:value-of select="Desc"/>
     /// &lt;/summary&gt;
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
@@ -354,51 +374,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                   <xsl:text>record.</xsl:text>
                   <xsl:value-of select="Name"/>
                   <xsl:text> = </xsl:text>
-                  <xsl:choose>
-                    <xsl:when test="Type = 'string'">
-                      <xsl:text>fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString()</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'string[]'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(string[])fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new string[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer'">
-                      <xsl:text>(int)fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'integer[]'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(int[])fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new int[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(decimal)fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : 0</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'numeric[]'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>(decimal[])fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                      <xsl:text> : new decimal[] { }</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'boolean'">
-                      <xsl:text>(bool)fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"]</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'time'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>TimeSpan.Parse(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
-                      <xsl:text> : DateTime.MinValue.TimeOfDay</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'date' or Type = 'datetime'">
-                      <xsl:text>(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
-                      <xsl:text>DateTime.Parse(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"].ToString())</xsl:text>
-                      <xsl:text> : DateTime.MinValue</xsl:text>
-                    </xsl:when>
-                    <xsl:when test="Type = 'pointer'">
-                      <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
-                      <xsl:text>_Pointer(fieldValue["</xsl:text><xsl:value-of select="Name"/><xsl:text>"])</xsl:text>
-                    </xsl:when>
-                  </xsl:choose>;
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
+                  </xsl:call-template>;
                 </xsl:for-each>
                 Records.Add(record);
             }
@@ -448,6 +426,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         }
     }
     
+    /// &lt;summary&gt; 
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
     class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord()
