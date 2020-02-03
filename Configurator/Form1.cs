@@ -33,7 +33,7 @@ namespace Configurator
 
 			//Comparison
 			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema();
-			Configuration.Comparison(@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml", Conf, informationSchema);
+			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
 			//SQL Query Execute
 			//...

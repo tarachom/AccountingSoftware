@@ -220,7 +220,7 @@
 
     <root>
 
-      <xsl:variable name="InfoSchemaTableList" select="Comparison/InformationSchema/Table" />
+      <xsl:variable name="InfoSchemaTableList" select="InformationSchema/Table" />
 
       <xsl:for-each select="document('Configuration.xml')/Configuration/Directories/Directory">
         <xsl:variable name="ConfDirectoryName" select="Name" />

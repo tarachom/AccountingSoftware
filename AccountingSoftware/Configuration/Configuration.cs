@@ -262,23 +262,18 @@ namespace AccountingSoftware
             xsltCodeGnerator.Transform(pathToXML, pathToSaveCode);
         }
 
-        public static void Comparison(string pathToSaveReport, Configuration Conf, ConfigurationInformationSchema InformationSchema)
+        public static void Comparison(string pathToSave, Configuration Conf, ConfigurationInformationSchema InformationSchema)
+        {
+                      
+        }
+
+        public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
         {
             XmlDocument xmlComparisonDocument = new XmlDocument();
             xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
-            XmlElement rootNode = xmlComparisonDocument.CreateElement("Comparison");
-            xmlComparisonDocument.AppendChild(rootNode);
-
-            ComparisonSaveInformationSchema(InformationSchema, xmlComparisonDocument, rootNode);
-
-            xmlComparisonDocument.Save(pathToSaveReport);
-        }
-
-        private static void ComparisonSaveInformationSchema(ConfigurationInformationSchema InformationSchema, XmlDocument xmlComparisonDocument, XmlElement rootNode)
-        {
             XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
-            rootNode.AppendChild(nodeInformationSchema);
+            xmlComparisonDocument.AppendChild(nodeInformationSchema);
 
             foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
             {
@@ -307,6 +302,8 @@ namespace AccountingSoftware
                     nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
                 }
             }
+
+            xmlComparisonDocument.Save(pathToSave);
         }
 
 

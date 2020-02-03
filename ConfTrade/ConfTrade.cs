@@ -20,7 +20,7 @@ namespace ConfTrade
             Conf.Config.Kernel.Open();
 
             Configuration.ComparisonGeneration(
-                @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml",
+                @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
                 @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
                 @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonSql.xml");
 
