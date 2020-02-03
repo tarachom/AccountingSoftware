@@ -3,14 +3,9 @@
   <Table>
     <Name>tovary_v1_1</Name>
     <Column>
-      <Name>count</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-    <Column>
-      <Name>datetime_add</Name>
-      <DataType>timestamp without time zone</DataType>
-      <UdtName>timestamp</UdtName>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
     </Column>
     <Column>
       <Name>name</Name>
@@ -18,39 +13,14 @@
       <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>od2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
+      <Name>code</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>isupdate</Name>
-      <DataType>boolean</DataType>
-      <UdtName>bool</UdtName>
-    </Column>
-    <Column>
-      <Name>numeric_arr</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_numeric</UdtName>
-    </Column>
-    <Column>
-      <Name>date_add3</Name>
-      <DataType>date</DataType>
-      <UdtName>date</UdtName>
-    </Column>
-    <Column>
-      <Name>int_arr</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_int4</UdtName>
-    </Column>
-    <Column>
-      <Name>time_add</Name>
-      <DataType>time without time zone</DataType>
-      <UdtName>time</UdtName>
-    </Column>
-    <Column>
-      <Name>date_add</Name>
-      <DataType>date</DataType>
-      <UdtName>date</UdtName>
+      <Name>description</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
     <Column>
       <Name>field1</Name>
@@ -59,6 +29,11 @@
     </Column>
     <Column>
       <Name>field2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>field3</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
@@ -73,14 +48,14 @@
       <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>field3</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
+      <Name>od2</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
     </Column>
     <Column>
-      <Name>code</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
+      <Name>count</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
     <Column>
       <Name>num</Name>
@@ -88,24 +63,67 @@
       <UdtName>numeric</UdtName>
     </Column>
     <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
       <Name>isupdate2</Name>
       <DataType>boolean</DataType>
       <UdtName>bool</UdtName>
     </Column>
     <Column>
-      <Name>description</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
+      <Name>isupdate</Name>
+      <DataType>boolean</DataType>
+      <UdtName>bool</UdtName>
+    </Column>
+    <Column>
+      <Name>datetime_add</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>time_add</Name>
+      <DataType>time without time zone</DataType>
+      <UdtName>time</UdtName>
+    </Column>
+    <Column>
+      <Name>date_add3</Name>
+      <DataType>date</DataType>
+      <UdtName>date</UdtName>
+    </Column>
+    <Column>
+      <Name>date_add</Name>
+      <DataType>date</DataType>
+      <UdtName>date</UdtName>
     </Column>
     <Column>
       <Name>text_arr</Name>
       <DataType>ARRAY</DataType>
       <UdtName>_text</UdtName>
+    </Column>
+    <Column>
+      <Name>int_arr</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_int4</UdtName>
+    </Column>
+    <Column>
+      <Name>numeric_arr</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_numeric</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>od_v1_1</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>fullname</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>
@@ -129,6 +147,11 @@
   <Table>
     <Name>tovary_ceny_tablepart_v1_1</Name>
     <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
       <Name>name</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
@@ -137,29 +160,6 @@
       <Name>cena</Name>
       <DataType>numeric</DataType>
       <UdtName>numeric</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>od_v1_1</Name>
-    <Column>
-      <Name>fullname</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>name</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>
@@ -170,9 +170,9 @@
       <UdtName>uuid</UdtName>
     </Column>
     <Column>
-      <Name>fullname</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
+      <Name>od_pointer</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
     </Column>
     <Column>
       <Name>name</Name>
@@ -180,9 +180,9 @@
       <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>od_pointer</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
+      <Name>fullname</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
   </Table>
 </InformationSchema>

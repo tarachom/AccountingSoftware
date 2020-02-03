@@ -32,16 +32,19 @@ namespace Configurator
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
 			//Comparison
-			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema();
+			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema("ConfTrade");
 			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
-
-			//SQL Query Execute
-			//...
 
 			//Code Generation
 			Configuration.Generation(Conf.PathToXmlFileConfiguration,
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+
+			//Аналіз таблиць і полів конфігурації та бази даних
+			Configuration.ComparisonGeneration(
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
