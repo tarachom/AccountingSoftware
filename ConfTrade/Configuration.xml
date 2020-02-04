@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>03.02.2020 20:25:40</DateTimeSave>
+  <DateTimeSave>04.02.2020 14:46:23</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -11,7 +11,7 @@
       <Desc>Довідник Товари</Desc>
       <Fields>
         <Field>
-          <Name>NameME</Name>
+          <Name>Name</Name>
           <NameInTable>name</NameInTable>
           <Type>string</Type>
           <Desc>Name</Desc>
@@ -179,6 +179,22 @@
           </Fields>
         </TablePart>
       </TabularParts>
+      <Views>
+        <View>
+          <Name>View1</Name>
+          <Desc>Візуалізація 1</Desc>
+          <Fields>
+            <Field>
+              <Name>Name</Name>
+              <NameInTable>name</NameInTable>
+            </Field>
+            <Field>
+              <Name>Code</Name>
+              <NameInTable>code</NameInTable>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
     </Directory>
     <Directory>
       <Name>Od</Name>
@@ -205,6 +221,7 @@
         </Field>
       </Fields>
       <TabularParts />
+      <Views />
     </Directory>
     <Directory>
       <Name>NewDir</Name>
@@ -251,6 +268,7 @@
           </Fields>
         </TablePart>
       </TabularParts>
+      <Views />
     </Directory>
   </Directories>
 </Configuration>

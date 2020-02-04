@@ -84,6 +84,8 @@ namespace AccountingSoftware
                 LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current);
 
                 LoadTabularParts(ConfObjectDirectories.TabularParts, directoryNodes.Current);
+
+                LoadViews(ConfObjectDirectories.Views, directoryNodes.Current);
             }
         }
 
@@ -118,6 +120,29 @@ namespace AccountingSoftware
                 tabularParts.Add(ConfObjectTablePart.Name, ConfObjectTablePart);
 
                 LoadFields(ConfObjectTablePart.Fields, tablePartNodes.Current);
+            }
+        }
+
+        private static void LoadViews(Dictionary<string, ConfigurationObjectView> views, XPathNavigator xPathDocNavigator)
+        {
+            XPathNodeIterator viewNodes = xPathDocNavigator.Select("Views/View");
+            while (viewNodes.MoveNext())
+            {
+                string nameView = viewNodes.Current.SelectSingleNode("Name").Value;
+                string descView = viewNodes.Current.SelectSingleNode("Desc").Value;
+
+                ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, descView);
+
+                views.Add(ConfObjectView.Name, ConfObjectView);
+
+                XPathNodeIterator fieldNodes = viewNodes.Current.Select("Fields/Field");
+                while (fieldNodes.MoveNext())
+                {
+                    string nameField = fieldNodes.Current.SelectSingleNode("Name").Value;
+                    string nameInTableField = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
+
+                    ConfObjectView.Fields.Add(nameField, nameInTableField);
+                }
             }
         }
 
@@ -180,6 +205,8 @@ namespace AccountingSoftware
                 SaveFields(ConfDirectory.Value.Fields, xmlConfDocument, nodeDirectory);
 
                 SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
+
+                SaveViews(ConfDirectory.Value.Views, xmlConfDocument, nodeDirectory);
             }
         }
 
@@ -241,6 +268,43 @@ namespace AccountingSoftware
                 nodeTablePart.AppendChild(nodeTablePartDesc);
 
                 SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTablePart);
+            }
+        }
+
+        private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, XmlDocument xmlConfDocument, XmlElement rootNode)
+        {
+            XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
+            rootNode.AppendChild(nodeViews);
+
+            foreach (KeyValuePair<string, ConfigurationObjectView> view in views)
+            {
+                XmlElement nodeView = xmlConfDocument.CreateElement("View");
+                nodeViews.AppendChild(nodeView);
+
+                XmlElement nodeTablePartName = xmlConfDocument.CreateElement("Name");
+                nodeTablePartName.InnerText = view.Key;
+                nodeView.AppendChild(nodeTablePartName);
+
+                XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
+                nodeTablePartDesc.InnerText = view.Value.Desc;
+                nodeView.AppendChild(nodeTablePartDesc);
+
+                XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
+                nodeView.AppendChild(nodeFields);
+
+                foreach (KeyValuePair<string, string> field in view.Value.Fields)
+                {
+                    XmlElement nodeField = xmlConfDocument.CreateElement("Field");
+                    nodeFields.AppendChild(nodeField);
+
+                    XmlElement nodeFieldName = xmlConfDocument.CreateElement("Name");
+                    nodeFieldName.InnerText = field.Key;
+                    nodeField.AppendChild(nodeFieldName);
+
+                    XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
+                    nodeFieldNameInTable.InnerText = field.Value;
+                    nodeField.AppendChild(nodeFieldNameInTable);
+                }
             }
         }
 

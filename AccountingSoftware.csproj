@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountingSoftware\Configuration\ConfigurationInformationSchema.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectView.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationRegisters.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnums.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />

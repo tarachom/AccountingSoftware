@@ -466,6 +466,29 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         </xsl:for-each>
     }
       </xsl:for-each> <!-- TableParts -->
+      
+      <xsl:for-each select="Views/View"> <!-- Views -->
+        <xsl:variable name="ViewsName" select="Name"/>
+        <xsl:variable name="ViewsFullName" select="concat($DirectoryName, '_', $ViewsName)"/>  
+    /// &lt;summary&gt; 
+    /// <xsl:value-of select="Desc"/>
+    /// &lt;/summary&gt;
+    class <xsl:value-of select="$ViewsFullName"/>_View : DirectoryView
+    {
+        public <xsl:value-of select="$ViewsFullName"/>_View() : base(Config.Kernel, "<xsl:value-of select="Table"/>", 
+            <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each> })
+        {
+
+        }
+    }
+      </xsl:for-each> <!-- Views -->
+    
     #endregion
     </xsl:for-each>
 }

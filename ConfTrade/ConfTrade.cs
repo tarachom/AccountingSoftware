@@ -19,11 +19,8 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Conf.Tovary_View1 tovary_View1 = new Conf.Tovary_View1();
-            //tovary_View1.QuerySelect.Field.Add("name AS TEST");
-            tovary_View1.QuerySelect.Limit = 3;
-            tovary_View1.QuerySelect.Offset = 2;
-            tovary_View1.QuerySelect.Order.Add("name", SelectOrder.ASC);
+            Conf.Tovary_View1_View tovary_View1 = new Conf.Tovary_View1_View();
+            tovary_View1.QuerySelect.Limit = 2;
 
             Console.WriteLine(tovary_View1.Read());
 

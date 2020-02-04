@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 03.02.2020 20:25:40
+ * Дата конфігурації: 04.02.2020 14:46:23
  *
  */
 
@@ -18,18 +18,9 @@ namespace ConfTrade_v1_1
     {
         public static Kernel Kernel { get; set; }
     }
-
+    
     #region DIRECTORY "Tovary"
-
-    class Tovary_View1 : DirectoryView
-    {
-        public Tovary_View1() : base(Config.Kernel, "tovary_v1_1", 
-            new string[] { "name", "code", "description" })
-        {
-
-        }
-    }
-
+    
     /// <summary> 
     /// Довідник Товари
     /// </summary>
@@ -38,7 +29,7 @@ namespace ConfTrade_v1_1
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "date_add3", "time_add", "datetime_add", "text_arr", "int_arr", "numeric_arr" }) 
         {
-            NameME = "";
+            Name = "";
             Code = "";
             Description = "";
             Field1 = "";
@@ -69,7 +60,7 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                NameME = base.FieldValue["name"].ToString();
+                Name = base.FieldValue["name"].ToString();
                 Code = base.FieldValue["code"].ToString();
                 Description = base.FieldValue["description"].ToString();
                 Field1 = base.FieldValue["field1"].ToString();
@@ -98,7 +89,7 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
-            base.FieldValue["name"] = NameME;
+            base.FieldValue["name"] = Name;
             base.FieldValue["code"] = Code;
             base.FieldValue["description"] = Description;
             base.FieldValue["field1"] = Field1;
@@ -133,7 +124,7 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string NameME { get; set; }
+        public string Name { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
         public string Field1 { get; set; }
@@ -419,7 +410,20 @@ namespace ConfTrade_v1_1
         public string FullName { get; set; }
         
     }
+        
+    /// <summary> 
+    /// Візуалізація 1
+    /// </summary>
+    class Tovary_View1_View : DirectoryView
+    {
+        public Tovary_View1_View() : base(Config.Kernel, "", 
+            new string[] { "name", "code" })
+        {
+
+        }
+    }
       
+    
     #endregion
     
     #region DIRECTORY "Od"
@@ -545,6 +549,7 @@ namespace ConfTrade_v1_1
     }
     
       
+    
     #endregion
     
     #region DIRECTORY "NewDir"
@@ -768,6 +773,7 @@ namespace ConfTrade_v1_1
         
     }
       
+    
     #endregion
     
 }

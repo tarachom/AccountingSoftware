@@ -5,7 +5,7 @@
     <Table>tovary_v1_1</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>NameME</Name>
+      <Name>Name</Name>
       <NameInTable>name</NameInTable>
       <IsExist>yes</IsExist>
       <Type>

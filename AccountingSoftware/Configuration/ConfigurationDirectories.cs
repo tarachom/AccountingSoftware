@@ -23,11 +23,14 @@ namespace AccountingSoftware
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
+			Views = new Dictionary<string, ConfigurationObjectView>();
 		}
 
 		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
 
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
+
+		public Dictionary<string, ConfigurationObjectView> Views { get; set; }
 
 		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
 		{
