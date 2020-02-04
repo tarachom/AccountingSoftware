@@ -206,7 +206,7 @@ namespace AccountingSoftware
 
                 SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
 
-                SaveViews(ConfDirectory.Value.Views, xmlConfDocument, nodeDirectory);
+                SaveViews(ConfDirectory.Value.Table, ConfDirectory.Value.Views, xmlConfDocument, nodeDirectory);
             }
         }
 
@@ -271,7 +271,7 @@ namespace AccountingSoftware
             }
         }
 
-        private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, XmlDocument xmlConfDocument, XmlElement rootNode)
+        private static void SaveViews(string directoryTableName, Dictionary<string, ConfigurationObjectView> views, XmlDocument xmlConfDocument, XmlElement rootNode)
         {
             XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
             rootNode.AppendChild(nodeViews);
@@ -281,9 +281,13 @@ namespace AccountingSoftware
                 XmlElement nodeView = xmlConfDocument.CreateElement("View");
                 nodeViews.AppendChild(nodeView);
 
-                XmlElement nodeTablePartName = xmlConfDocument.CreateElement("Name");
-                nodeTablePartName.InnerText = view.Key;
-                nodeView.AppendChild(nodeTablePartName);
+                XmlElement nodeViewName = xmlConfDocument.CreateElement("Name");
+                nodeViewName.InnerText = view.Key;
+                nodeView.AppendChild(nodeViewName);
+
+                XmlElement nodeeViewTable = xmlConfDocument.CreateElement("Table");
+                nodeeViewTable.InnerText = directoryTableName;
+                nodeView.AppendChild(nodeeViewTable);
 
                 XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
                 nodeTablePartDesc.InnerText = view.Value.Desc;

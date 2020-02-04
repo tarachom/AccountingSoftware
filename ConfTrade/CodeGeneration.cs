@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 04.02.2020 14:46:23
+ * Дата конфігурації: 04.02.2020 15:30:41
  *
  */
 
@@ -416,7 +416,7 @@ namespace ConfTrade_v1_1
     /// </summary>
     class Tovary_View1_View : DirectoryView
     {
-        public Tovary_View1_View() : base(Config.Kernel, "", 
+        public Tovary_View1_View() : base(Config.Kernel, "tovary_v1_1", 
             new string[] { "name", "code" })
         {
 

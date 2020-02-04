@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>04.02.2020 14:46:23</DateTimeSave>
+  <DateTimeSave>04.02.2020 15:30:41</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -182,6 +182,7 @@
       <Views>
         <View>
           <Name>View1</Name>
+          <Table>tovary_v1_1</Table>
           <Desc>Візуалізація 1</Desc>
           <Fields>
             <Field>

@@ -80,6 +80,23 @@ namespace Configurator
 					//directoriTablePartNode.Expand();
 				}
 
+				TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
+				directoriViewsNode.ImageIndex = 1;
+
+				foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in ConfDirectory.Value.Views)
+				{
+					TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
+					directoriViewNode.ImageIndex = 1;
+
+					//Поля
+					foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
+					{
+						directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key).ImageIndex = 1;
+					}
+
+					//directoriTablePartNode.Expand();
+				}
+
 				//directoriTabularPartsNode.Expand();
 				directoryNode.Expand();
 			}
