@@ -19,11 +19,20 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Configuration.ComparisonGeneration(
-                @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
-                @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-                @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonSql.xml");
+            Conf.Tovary_View1 tovary_View1 = new Conf.Tovary_View1();
+            //tovary_View1.QuerySelect.Field.Add("name AS TEST");
+            tovary_View1.QuerySelect.Limit = 3;
+            tovary_View1.QuerySelect.Offset = 2;
+            tovary_View1.QuerySelect.Order.Add("name", SelectOrder.ASC);
 
+            Console.WriteLine(tovary_View1.Read());
+
+
+
+            //Configuration.ComparisonGeneration(
+            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonSql.xml");
 
             //Comparison
             //ConfigurationInformationSchema informationSchema = Conf.Config.Kernel.DataBase.SelectInformationSchema();

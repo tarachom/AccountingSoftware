@@ -18,9 +18,18 @@ namespace ConfTrade_v1_1
     {
         public static Kernel Kernel { get; set; }
     }
-    
+
     #region DIRECTORY "Tovary"
-    
+
+    class Tovary_View1 : DirectoryView
+    {
+        public Tovary_View1() : base(Config.Kernel, "tovary_v1_1", 
+            new string[] { "name", "code", "description" })
+        {
+
+        }
+    }
+
     /// <summary> 
     /// Довідник Товари
     /// </summary>

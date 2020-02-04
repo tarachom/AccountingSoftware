@@ -26,9 +26,9 @@ namespace AccountingSoftware
 			Fields = fields;
 		}
 
-		protected Kernel Kernel { get; private set; }
+		private Kernel Kernel { get; set; }
 
-		protected string Table { get; private set; }		
+		private string Table { get; set; }
 
 		public UnigueID UnigueID { get; private set; }
 

@@ -270,5 +270,23 @@ namespace AccountingSoftware
 
 			return informationSchema;
 		}
+
+		public string SelectDirectoryView(DirectoryView directoryView)
+		{
+			string query = "SELECT query_to_xml('" + directoryView.QuerySelect.Construct() + "', false, false, '')";
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (directoryView.QuerySelect.Where.Count > 0)
+			{
+				foreach (Where field in directoryView.QuerySelect.Where)
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+			}
+
+			return nCommand.ExecuteScalar().ToString();
+		}
+
+
 	}
 }
