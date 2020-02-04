@@ -1,5 +1,25 @@
 ﻿
 
+
+
+class Tovary_Ceny_View : DirectoryView
+    {
+        public Tovary_Ceny_View() : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
+            new string[] { "name", "cena" })
+        {
+            base.QuerySelect.PrimaryField = "owner";
+
+            Where_owner = new Where("owner", Comparison.EQ, null);
+            base.QuerySelect.Where.Add(Where_owner);
+        }
+
+        public Where Where_owner { get; set; }
+    }
+
+
+
+
+
 select table_name, column_name 
 from information_schema.columns 
 where table_schema='public'

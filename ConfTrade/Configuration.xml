@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>04.02.2020 16:53:47</DateTimeSave>
+  <DateTimeSave>04.02.2020 19:43:50</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -183,6 +183,7 @@
         <View>
           <Name>View1</Name>
           <Table>tovary_v1_1</Table>
+          <PrimaryField>uid</PrimaryField>
           <Desc>Візуалізація 1</Desc>
           <Fields>
             <Field>
@@ -194,10 +195,12 @@
               <NameInTable>code</NameInTable>
             </Field>
           </Fields>
+          <Where />
         </View>
         <View>
           <Name>Ceny</Name>
           <Table>tovary_ceny_tablepart_v1_1</Table>
+          <PrimaryField>owner</PrimaryField>
           <Desc>Візуалізація Табличної частини Ціни елементу довідника</Desc>
           <Fields>
             <Field>
@@ -209,6 +212,11 @@
               <NameInTable>cena</NameInTable>
             </Field>
           </Fields>
+          <Where>
+            <Field>
+              <NameInTable>owner</NameInTable>
+            </Field>
+          </Where>
         </View>
       </Views>
     </Directory>

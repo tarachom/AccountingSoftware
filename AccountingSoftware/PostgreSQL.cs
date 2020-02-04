@@ -287,21 +287,23 @@ namespace AccountingSoftware
 				}
 			}
 
-			string xml = "";
+			string xml = "<" + directoryView.Name + ">\n";
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
-				xml += "<row>\n";
+				xml += "  <row>\n";
 
 				foreach (string field in directoryView.QuerySelect.Field)
 				{
-					xml += "  <" + field + ">" + reader[field] + "</" + field + ">\n";
+					xml += "    <" + field + ">" + reader[field] + "</" + field + ">\n";
 				}
 
-				xml += "</row>\n";
+				xml += "  </row>\n";
 			}
 			reader.Close();
+
+			xml += "</" + directoryView.Name + ">\n";
 
 			return xml;
 		}

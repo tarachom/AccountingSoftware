@@ -130,9 +130,10 @@ namespace AccountingSoftware
             {
                 string nameView = viewNodes.Current.SelectSingleNode("Name").Value;
                 string tableView = viewNodes.Current.SelectSingleNode("Table").Value;
+                string primaryField = viewNodes.Current.SelectSingleNode("PrimaryField").Value;
                 string descView = viewNodes.Current.SelectSingleNode("Desc").Value;
 
-                ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, tableView, descView);
+                ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, tableView, primaryField, descView);
 
                 views.Add(ConfObjectView.Name, ConfObjectView);
 
@@ -143,6 +144,14 @@ namespace AccountingSoftware
                     string nameInTableField = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
 
                     ConfObjectView.Fields.Add(nameField, nameInTableField);
+                }
+
+                XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
+                while (fieldWhere.MoveNext())
+                {
+                    string nameInTableField = fieldWhere.Current.SelectSingleNode("NameInTable").Value;
+
+                    ConfObjectView.Where.Add(nameInTableField);
                 }
             }
         }
@@ -286,9 +295,13 @@ namespace AccountingSoftware
                 nodeViewName.InnerText = view.Key;
                 nodeView.AppendChild(nodeViewName);
 
-                XmlElement nodeeViewTable = xmlConfDocument.CreateElement("Table");
-                nodeeViewTable.InnerText = view.Value.Table;
-                nodeView.AppendChild(nodeeViewTable);
+                XmlElement nodeViewTable = xmlConfDocument.CreateElement("Table");
+                nodeViewTable.InnerText = view.Value.Table;
+                nodeView.AppendChild(nodeViewTable);
+
+                XmlElement nodeeViewPrimary = xmlConfDocument.CreateElement("PrimaryField");
+                nodeeViewPrimary.InnerText = view.Value.PrimaryField;
+                nodeView.AppendChild(nodeeViewPrimary);
 
                 XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
                 nodeTablePartDesc.InnerText = view.Value.Desc;
@@ -308,6 +321,19 @@ namespace AccountingSoftware
 
                     XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
                     nodeFieldNameInTable.InnerText = field.Value;
+                    nodeField.AppendChild(nodeFieldNameInTable);
+                }
+
+                XmlElement nodeWhere = xmlConfDocument.CreateElement("Where");
+                nodeView.AppendChild(nodeWhere);
+
+                foreach (string field in view.Value.Where)
+                {
+                    XmlElement nodeField = xmlConfDocument.CreateElement("Field");
+                    nodeWhere.AppendChild(nodeField);
+
+                    XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
+                    nodeFieldNameInTable.InnerText = field;
                     nodeField.AppendChild(nodeFieldNameInTable);
                 }
             }

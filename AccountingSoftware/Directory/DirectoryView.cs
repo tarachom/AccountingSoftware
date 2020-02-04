@@ -5,11 +5,12 @@ namespace AccountingSoftware
 {
 	public abstract class DirectoryView
 	{
-		public DirectoryView(Kernel kernel, string table, string[] fieldsArray)
+		public DirectoryView(Kernel kernel, string table, string[] fieldsArray, string name)
 		{
 			Table = table;
 			Kernel = kernel;
 			FieldArray = fieldsArray;
+			Name = name;
 
 			QuerySelect = new Query(table);
 
@@ -22,6 +23,8 @@ namespace AccountingSoftware
 		private string Table { get; set; }
 
 		private string[] FieldArray { get; set; }
+
+		public string Name { get; } 
 
 		public Query QuerySelect { get; set; }
 
