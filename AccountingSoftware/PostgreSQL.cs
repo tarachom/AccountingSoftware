@@ -273,7 +273,7 @@ namespace AccountingSoftware
 
 		public string SelectDirectoryView(DirectoryView directoryView)
 		{
-			string query = "SELECT query_to_xml('" + directoryView.QuerySelect.Construct() + "', false, false, '')";
+			string query = directoryView.QuerySelect.Construct();
 			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
@@ -281,10 +281,29 @@ namespace AccountingSoftware
 			if (directoryView.QuerySelect.Where.Count > 0)
 			{
 				foreach (Where field in directoryView.QuerySelect.Where)
+				{
 					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+					Console.WriteLine(field.Name + " = " + field.Value);
+				}
 			}
 
-			return nCommand.ExecuteScalar().ToString();
+			string xml = "";
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				xml += "<row>\n";
+
+				foreach (string field in directoryView.QuerySelect.Field)
+				{
+					xml += "  <" + field + ">" + reader[field] + "</" + field + ">\n";
+				}
+
+				xml += "</row>\n";
+			}
+			reader.Close();
+
+			return xml;
 		}
 
 

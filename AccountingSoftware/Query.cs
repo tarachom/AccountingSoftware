@@ -13,12 +13,16 @@ namespace AccountingSoftware
 			Order = new Dictionary<string, SelectOrder>();
 
 			Table = table;
+
+			PrimaryField = "uid"; //!!!
 		}
 
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
 		private string Table { get; set; }
+
+		public string PrimaryField { get; set; } //!!!
 
 		/// <summary>
 		/// Які поля вибирати
@@ -55,7 +59,7 @@ namespace AccountingSoftware
 		public string Construct()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append("SELECT uid ");
+			sb.Append("SELECT " + PrimaryField);
 			 
 			if (Field.Count > 0)
 			{

@@ -12,11 +12,12 @@ namespace AccountingSoftware
 			Init();
 		}
 
-		public ConfigurationObjectView(string name, string desc = "")
+		public ConfigurationObjectView(string name, string table, string desc = "")
 		{
 			Init();
 
 			Name = name;
+			Table = table;
 			Desc = desc;
 		}
 
@@ -26,6 +27,8 @@ namespace AccountingSoftware
 		}
 
 		public string Name { get; set; }
+
+		public string Table { get; set; }
 
 		public string Desc { get; set; }
 

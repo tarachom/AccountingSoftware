@@ -24,7 +24,10 @@ namespace ConfTrade
 
             Console.WriteLine(tovary_View1.Read());
 
+            Conf.Tovary_Ceny_View tovary_Ceny_View = new Conf.Tovary_Ceny_View();
+            tovary_Ceny_View.Where_owner.Value = Guid.Parse("8ada16bb-c378-4c80-9c9f-c8bf9cec6173");
 
+            Console.WriteLine(tovary_Ceny_View.Read());
 
             //Configuration.ComparisonGeneration(
             //    @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",

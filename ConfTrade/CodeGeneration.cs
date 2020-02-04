@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 04.02.2020 15:30:41
+ * Дата конфігурації: 04.02.2020 16:53:47
  *
  */
 
@@ -421,6 +421,23 @@ namespace ConfTrade_v1_1
         {
 
         }
+    }
+    
+    /// <summary> 
+    /// Візуалізація Табличної частини Ціни елементу довідника
+    /// </summary>
+    class Tovary_Ceny_View : DirectoryView
+    {
+        public Tovary_Ceny_View() : base(Config.Kernel, "tovary_ceny_tablepart_v1_1",
+            new string[] { "name", "cena" })
+        {
+            base.QuerySelect.PrimaryField = "owner";
+
+            Where_owner = new Where("owner", Comparison.EQ, null);
+            base.QuerySelect.Where.Add(Where_owner);
+        }
+
+        public Where Where_owner { get; set; }
     }
       
     
