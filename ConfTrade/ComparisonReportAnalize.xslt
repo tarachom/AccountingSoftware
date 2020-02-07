@@ -32,7 +32,7 @@
     <sql>COMMIT;</sql>
 
   </xsl:template>
-
+  
   <xsl:template name="Template_Control_Field">
     <xsl:param name="Control_Field" />
     <xsl:param name="TableName" />
@@ -44,6 +44,11 @@
 
           <xsl:if test="Type/Coincide = 'no'">
 
+            <info>
+              <xsl:value-of select="Type/DataType"/>
+              <xsl:value-of select="Type/UdtName"/>
+            </info>
+            
             <xsl:choose>
               <xsl:when test="Type/DataType = 'text'">
                 <xsl:choose>
@@ -85,7 +90,9 @@
                       <xsl:value-of select="$TableName"/>
                       <xsl:text> AS t WHERE t.uid = </xsl:text>
                       <xsl:value-of select="$TableName"/>
-                      <xsl:text>.uid);</xsl:text>
+                      <xsl:text>.uid AND t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_OLD != NULL);</xsl:text>
                     </sql>
 
                     <!-- ALTER TABLE table_name DROP COLUMN column_name;  -->
@@ -112,6 +119,75 @@
                 </xsl:choose>
               </xsl:when>
 
+              <xsl:when test="Type/DataType = 'integer' or Type/DataType = 'numeric'">
+                <xsl:choose>
+                  <xsl:when test="Type/ConfType = 'integer[]' or Type/ConfType = 'numeric[]'">
+                    <sql>BEGIN;</sql>
+
+                    <sql>
+                      <xsl:text>ALTER TABLE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> RENAME COLUMN </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> TO </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_OLD;</xsl:text>
+                    </sql>
+
+                    <sql>
+                      <xsl:text>ALTER TABLE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> ADD COLUMN </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> </xsl:text>
+                      <xsl:value-of select="Type/DataTypeCreate"/>
+                      <xsl:text>;</xsl:text>
+                    </sql>
+
+                    <!--
+                    UPDATE public.test
+                          SET text_mas = (SELECT array_agg(test2.text) FROM public.test AS test2 
+                    WHERE test2.uid = test.uid) 
+                    -->
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:value-of select="concat(' = (SELECT array_agg(', 't.', NameInTable, '_OLD) FROM ')"/>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid AND t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_OLD != NULL);</xsl:text>
+                    </sql>
+
+                    <!-- ALTER TABLE table_name DROP COLUMN column_name;  -->
+
+                    <sql>
+                      <xsl:text>ALTER TABLE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> DROP COLUMN </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_OLD;</xsl:text>
+                    </sql>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <xsl:otherwise>
+
+                    <xsl:call-template name="Template_RenameColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:when>
+              
               <xsl:when test="Type/DataType = 'ARRAY' and Type/UdtName = '_text'">
                 <xsl:choose>
                   <xsl:when test="Type/ConfType = 'string'">
@@ -154,7 +230,9 @@
                       <xsl:value-of select="$TableName"/>
                       <xsl:text> AS t WHERE t.uid = </xsl:text>
                       <xsl:value-of select="$TableName"/>
-                      <xsl:text>.uid);</xsl:text>
+                      <xsl:text>.uid AND t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_OLD != NULL);</xsl:text>
                     </sql>
 
                     <sql>
@@ -179,7 +257,8 @@
                 </xsl:choose>
               </xsl:when>
 
-              <xsl:when test="Type/DataType = 'ARRAY' and Type/UdtName != '_text'">
+              <xsl:when test="Type/DataType = 'ARRAY' and Type/UdtName = '_int4'">
+                
                 <xsl:call-template name="Template_RenameColumn">
                   <xsl:with-param name="TableName" select="$TableName" />
                   <xsl:with-param name="FieldNameInTable" select="NameInTable" />
@@ -268,7 +347,7 @@
               <xsl:value-of select="DataType"/>
               <xsl:text>;</xsl:text>
             </sql>
-
+            
           </xsl:for-each>
 
         </xsl:when>

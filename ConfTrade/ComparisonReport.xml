@@ -10,10 +10,9 @@
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>string[]</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>no</Coincide>
-        <DataTypeCreate>text[]</DataTypeCreate>
+        <DataType>ARRAY</DataType>
+        <UdtName>_text</UdtName>
+        <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -28,13 +27,25 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Description</Name>
-      <NameInTable>description</NameInTable>
+      <Name>Count</Name>
+      <NameInTable>count</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>integer[]</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>no</Coincide>
+        <DataTypeCreate>integer[]</DataTypeCreate>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Numer</Name>
+      <NameInTable>numer</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>numeric[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_numeric</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>

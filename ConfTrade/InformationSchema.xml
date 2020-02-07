@@ -37,8 +37,18 @@
     </Column>
     <Column>
       <Name>name</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
+      <DataType>ARRAY</DataType>
+      <UdtName>_text</UdtName>
+    </Column>
+    <Column>
+      <Name>numer</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>count</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
   </Table>
 </InformationSchema>

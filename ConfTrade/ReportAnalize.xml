@@ -1,9 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+  <info>integerint4</info>
   <sql>BEGIN;</sql>
-  <sql>ALTER TABLE tovary RENAME COLUMN name TO name_OLD;</sql>
-  <sql>ALTER TABLE tovary ADD COLUMN name text[];</sql>
-  <sql>UPDATE tovary SET name = (SELECT array_agg(t.name_OLD) FROM tovary AS t WHERE t.uid = tovary.uid);</sql>
-  <sql>ALTER TABLE tovary DROP COLUMN name_OLD;</sql>
+  <sql>ALTER TABLE tovary RENAME COLUMN count TO count_OLD;</sql>
+  <sql>ALTER TABLE tovary ADD COLUMN count integer[];</sql>
+  <sql>UPDATE tovary SET count = (SELECT array_agg(t.count_OLD) FROM tovary AS t WHERE t.uid = tovary.uid AND t.count_OLD != NULL);</sql>
+  <sql>ALTER TABLE tovary DROP COLUMN count_OLD;</sql>
   <sql>COMMIT;</sql>
 </root>

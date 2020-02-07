@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 07.02.2020 19:30:32
+ * Дата конфігурації: 07.02.2020 20:22:31
  *
  */
 
@@ -27,11 +27,12 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "description" }) 
+             new string[] { "name", "code", "count", "numer" }) 
         {
             Name = new string[] { };
             Code = "";
-            Description = "";
+            Count = new int[] { };
+            Numer = new decimal[] { };
             
             //Табличні частини
             Ceny_TablePart = new Tovary_Ceny_TablePart(this);
@@ -44,7 +45,8 @@ namespace ConfTrade_v1_1
             {
                 Name = (base.FieldValue["name"] != DBNull.Value) ? (string[])base.FieldValue["name"] : new string[] { };
                 Code = base.FieldValue["code"].ToString();
-                Description = base.FieldValue["description"].ToString();
+                Count = (base.FieldValue["count"] != DBNull.Value) ? (int[])base.FieldValue["count"] : new int[] { };
+                Numer = (base.FieldValue["numer"] != DBNull.Value) ? (decimal[])base.FieldValue["numer"] : new decimal[] { };
                 
                 return true;
             }
@@ -56,7 +58,8 @@ namespace ConfTrade_v1_1
         {
             base.FieldValue["name"] = Name;
             base.FieldValue["code"] = Code;
-            base.FieldValue["description"] = Description;
+            base.FieldValue["count"] = Count;
+            base.FieldValue["numer"] = Numer;
             
             BaseSave();
         }
@@ -74,7 +77,8 @@ namespace ConfTrade_v1_1
         
         public string[] Name { get; set; }
         public string Code { get; set; }
-        public string Description { get; set; }
+        public int[] Count { get; set; }
+        public decimal[] Numer { get; set; }
         
         //Табличні частини
         public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
