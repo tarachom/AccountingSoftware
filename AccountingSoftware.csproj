@@ -86,6 +86,7 @@
     <Content Include="back_up\Configuration.xml" />
     <Content Include="back_up\ConfigurationNew.xml" />
     <Content Include="back_up\ConfTradeExample_code.txt" />
+    <Content Include="back_up\generic_test.txt" />
     <Content Include="back_up\info.txt" />
   </ItemGroup>
   <ItemGroup>
