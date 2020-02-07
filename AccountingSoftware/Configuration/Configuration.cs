@@ -44,6 +44,45 @@ namespace AccountingSoftware
             return Directory;
         }
 
+        public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
+        {
+            XmlDocument xmlComparisonDocument = new XmlDocument();
+            xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
+
+            XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
+            xmlComparisonDocument.AppendChild(nodeInformationSchema);
+
+            foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
+            {
+                XmlElement nodeInformationSchemaTable = xmlComparisonDocument.CreateElement("Table");
+                nodeInformationSchema.AppendChild(nodeInformationSchemaTable);
+
+                XmlElement nodeInformationSchemaTableName = xmlComparisonDocument.CreateElement("Name");
+                nodeInformationSchemaTableName.InnerText = informationSchemaTable.Value.TableName;
+                nodeInformationSchemaTable.AppendChild(nodeInformationSchemaTableName);
+
+                foreach (KeyValuePair<string, ConfigurationInformationSchema_Column> informationSchemaColumn in informationSchemaTable.Value.Columns)
+                {
+                    XmlElement nodeInformationSchemaColumn = xmlComparisonDocument.CreateElement("Column");
+                    nodeInformationSchemaTable.AppendChild(nodeInformationSchemaColumn);
+
+                    XmlElement nodeInformationSchemaColumnName = xmlComparisonDocument.CreateElement("Name");
+                    nodeInformationSchemaColumnName.InnerText = informationSchemaColumn.Value.ColumnName;
+                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnName);
+
+                    XmlElement nodeInformationSchemaColumnDataType = xmlComparisonDocument.CreateElement("DataType");
+                    nodeInformationSchemaColumnDataType.InnerText = informationSchemaColumn.Value.DataType;
+                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnDataType);
+
+                    XmlElement nodeInformationSchemaColumnUdtName = xmlComparisonDocument.CreateElement("UdtName");
+                    nodeInformationSchemaColumnUdtName.InnerText = informationSchemaColumn.Value.UdtName;
+                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
+                }
+            }
+
+            xmlComparisonDocument.Save(pathToSave);
+        }
+
         public static void Load(string pathToConf, Configuration Conf)
         {
             XPathDocument xPathDoc = new XPathDocument(pathToConf);
@@ -362,44 +401,7 @@ namespace AccountingSoftware
                       
         }
 
-        public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
-        {
-            XmlDocument xmlComparisonDocument = new XmlDocument();
-            xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
-
-            XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
-            xmlComparisonDocument.AppendChild(nodeInformationSchema);
-
-            foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
-            {
-                XmlElement nodeInformationSchemaTable = xmlComparisonDocument.CreateElement("Table");
-                nodeInformationSchema.AppendChild(nodeInformationSchemaTable);
-
-                XmlElement nodeInformationSchemaTableName = xmlComparisonDocument.CreateElement("Name");
-                nodeInformationSchemaTableName.InnerText = informationSchemaTable.Value.TableName;
-                nodeInformationSchemaTable.AppendChild(nodeInformationSchemaTableName);
-
-                foreach (KeyValuePair<string, ConfigurationInformationSchema_Column> informationSchemaColumn in informationSchemaTable.Value.Columns)
-                {
-                    XmlElement nodeInformationSchemaColumn = xmlComparisonDocument.CreateElement("Column");
-                    nodeInformationSchemaTable.AppendChild(nodeInformationSchemaColumn);
-
-                    XmlElement nodeInformationSchemaColumnName = xmlComparisonDocument.CreateElement("Name");
-                    nodeInformationSchemaColumnName.InnerText = informationSchemaColumn.Value.ColumnName;
-                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnName);
-
-                    XmlElement nodeInformationSchemaColumnDataType = xmlComparisonDocument.CreateElement("DataType");
-                    nodeInformationSchemaColumnDataType.InnerText = informationSchemaColumn.Value.DataType;
-                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnDataType);
-
-                    XmlElement nodeInformationSchemaColumnUdtName = xmlComparisonDocument.CreateElement("UdtName");
-                    nodeInformationSchemaColumnUdtName.InnerText = informationSchemaColumn.Value.UdtName;
-                    nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
-                }
-            }
-
-            xmlComparisonDocument.Save(pathToSave);
-        }
+        
 
 
 

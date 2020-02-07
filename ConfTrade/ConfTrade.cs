@@ -12,6 +12,20 @@ using Conf = ConfTrade_v1_1;
 //Конфігурація Торгівля
 namespace ConfTrade
 {
+    class MyGenericClass<T>
+    {
+        public void genericMethod(T[] genericParameter)
+        {
+            
+
+            foreach (T a in genericParameter)
+            {
+                Console.WriteLine(a);
+            }
+
+        }
+    }
+
     public class ConfTrade
     {
         static void Main(string[] args)
@@ -19,31 +33,16 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Conf.Tovary_View1_View tovary_View1 = new Conf.Tovary_View1_View();
-            tovary_View1.QuerySelect.Limit = 2;
+            string[] mas_a = new string[] { "a", "b" };
+            int[] mas_b = new int[] { 1, 2, 3 };
 
-            Console.WriteLine(tovary_View1.Read());
+            MyGenericClass<string> a = new MyGenericClass<string>();
+            a.genericMethod(mas_a);
 
-            Conf.Tovary_Ceny_View tovary_Ceny_View = new Conf.Tovary_Ceny_View();
-            tovary_Ceny_View.Where_owner.Value = Guid.Parse("8ada16bb-c378-4c80-9c9f-c8bf9cec6173");
-
-            Console.WriteLine(tovary_Ceny_View.Read());
-
-            //Configuration.ComparisonGeneration(
-            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
-            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-            //    @"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonSql.xml");
-
-            //Comparison
-            //ConfigurationInformationSchema informationSchema = Conf.Config.Kernel.DataBase.SelectInformationSchema();
-            //Configuration.Comparison(@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xml", 
-            //    Conf.Config.Kernel.Conf, 
-            //    informationSchema);
 
             Console.ReadLine();
-
         }
-        
+
         static string print_array(string[] arr)
         {
             bool is_first = true;
