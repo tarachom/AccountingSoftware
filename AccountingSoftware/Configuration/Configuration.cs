@@ -393,14 +393,20 @@ namespace AccountingSoftware
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
 			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);
 
-			xsltCodeGnerator.Transform(pathToXML, pathToSaveCode);
+			XsltArgumentList xsltArgumentList = new XsltArgumentList();
+			xsltArgumentList.AddParam("KeyUID", "", DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss"));
+
+			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveCode, System.IO.FileMode.Create);
+
+			xsltCodeGnerator.Transform(pathToXML, xsltArgumentList, fileStream);
+
+			fileStream.Close();
 		}
 
 		public static void Comparison(string pathToSave, Configuration Conf, ConfigurationInformationSchema InformationSchema)
 		{
 
 		}
-
 
 		public static List<string> ListComparisonSql(string pathToXML)
 		{

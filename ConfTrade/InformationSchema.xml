@@ -1,6 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <InformationSchema>
   <Table>
+    <Name>tovary</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>description</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>count_old_07_02_2020_23_03_39</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_int4</UdtName>
+    </Column>
+    <Column>
+      <Name>numer_old_07_02_2020_23_03_39</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>code</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>count</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>numer</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tovary_ceny_tablepart</Name>
     <Column>
       <Name>owner</Name>
@@ -17,38 +60,10 @@
       <DataType>numeric</DataType>
       <UdtName>numeric</UdtName>
     </Column>
-  </Table>
-  <Table>
-    <Name>tovary</Name>
     <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>code</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>description</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>name</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_text</UdtName>
-    </Column>
-    <Column>
-      <Name>numer</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_numeric</UdtName>
-    </Column>
-    <Column>
-      <Name>count</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
+      <Name>isnew</Name>
+      <DataType>boolean</DataType>
+      <UdtName>bool</UdtName>
     </Column>
   </Table>
 </InformationSchema>

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 07.02.2020 20:22:31
+ * Дата конфігурації: 07.02.2020 23:09:57
  *
  */
 
@@ -29,10 +29,10 @@ namespace ConfTrade_v1_1
         public Tovary_Objest() : base(Config.Kernel, "tovary",
              new string[] { "name", "code", "count", "numer" }) 
         {
-            Name = new string[] { };
+            Name = "";
             Code = "";
-            Count = new int[] { };
-            Numer = new decimal[] { };
+            Count = 0;
+            Numer = 0;
             
             //Табличні частини
             Ceny_TablePart = new Tovary_Ceny_TablePart(this);
@@ -43,10 +43,10 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                Name = (base.FieldValue["name"] != DBNull.Value) ? (string[])base.FieldValue["name"] : new string[] { };
+                Name = base.FieldValue["name"].ToString();
                 Code = base.FieldValue["code"].ToString();
-                Count = (base.FieldValue["count"] != DBNull.Value) ? (int[])base.FieldValue["count"] : new int[] { };
-                Numer = (base.FieldValue["numer"] != DBNull.Value) ? (decimal[])base.FieldValue["numer"] : new decimal[] { };
+                Count = (int)base.FieldValue["count"];
+                Numer = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
                 
                 return true;
             }
@@ -75,10 +75,10 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string[] Name { get; set; }
+        public string Name { get; set; }
         public string Code { get; set; }
-        public int[] Count { get; set; }
-        public decimal[] Numer { get; set; }
+        public int Count { get; set; }
+        public decimal Numer { get; set; }
         
         //Табличні частини
         public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
@@ -154,7 +154,7 @@ namespace ConfTrade_v1_1
     class Tovary_Ceny_TablePart : DirectoryTablePart
     {
         public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
-             new string[] { "name", "cena" }) 
+             new string[] { "name", "cena", "isnew" }) 
         {
             Owner = owner;
             Records = new List<Tovary_Ceny_TablePartRecord>();
@@ -177,6 +177,7 @@ namespace ConfTrade_v1_1
 
                 record.Name = fieldValue["name"].ToString();
                 record.Cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
+                record.IsNew = (int)fieldValue["isnew"];
                 
                 Records.Add(record);
             }
@@ -205,6 +206,7 @@ namespace ConfTrade_v1_1
 
                     fieldValue.Add("name", record.Name);
                     fieldValue.Add("cena", record.Cena);
+                    fieldValue.Add("isnew", record.IsNew);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -228,19 +230,22 @@ namespace ConfTrade_v1_1
         {
             Name = "";
             Cena = 0;
+            IsNew = 0;
             
         }
         
         public Tovary_Ceny_TablePartRecord(
-            string _Name = "", decimal _Cena = 0)
+            string _Name = "", decimal _Cena = 0, int _IsNew = 0)
         {
             Name = _Name;
             Cena = _Cena;
+            IsNew = _IsNew;
             
         }
         
         public string Name { get; set; }
         public decimal Cena { get; set; }
+        public int IsNew { get; set; }
         
     }
       

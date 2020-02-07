@@ -9,9 +9,9 @@
       <NameInTable>name</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string[]</ConfType>
-        <DataType>ARRAY</DataType>
-        <UdtName>_text</UdtName>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -31,11 +31,10 @@
       <NameInTable>count</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>integer[]</ConfType>
+        <ConfType>integer</ConfType>
         <DataType>integer</DataType>
         <UdtName>int4</UdtName>
-        <Coincide>no</Coincide>
-        <DataTypeCreate>integer[]</DataTypeCreate>
+        <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -43,9 +42,9 @@
       <NameInTable>numer</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>numeric[]</ConfType>
-        <DataType>ARRAY</DataType>
-        <UdtName>_numeric</UdtName>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -73,6 +72,18 @@
           <DataType>numeric</DataType>
           <UdtName>numeric</UdtName>
           <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>IsNew</Name>
+        <NameInTable>isnew</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>integer</ConfType>
+          <DataType>boolean</DataType>
+          <UdtName>bool</UdtName>
+          <Coincide>no</Coincide>
+          <DataTypeCreate>integer</DataTypeCreate>
         </Type>
       </Control_Field>
     </Control_TabularParts>

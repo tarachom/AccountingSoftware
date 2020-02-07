@@ -24,9 +24,9 @@ namespace ConfTrade
 
             for (int i = 0; i < 10; i++)
             {
-                tovary_Objest.New();
-                tovary_Objest.Name = new string[] { "test", "test2", "test3" };
-                tovary_Objest.Save();
+                //tovary_Objest.New();
+                //tovary_Objest.Name = new string[] { "test", "test2", "test3" };
+                //tovary_Objest.Save();
             }
 
             Console.ReadLine();

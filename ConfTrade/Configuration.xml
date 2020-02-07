@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>07.02.2020 20:22:31</DateTimeSave>
+  <DateTimeSave>07.02.2020 23:09:57</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -13,7 +13,7 @@
         <Field>
           <Name>Name</Name>
           <NameInTable>name</NameInTable>
-          <Type>string[]</Type>
+          <Type>string</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
@@ -25,13 +25,13 @@
         <Field>
           <Name>Count</Name>
           <NameInTable>count</NameInTable>
-          <Type>integer[]</Type>
+          <Type>integer</Type>
           <Desc>Count</Desc>
         </Field>
         <Field>
           <Name>Numer</Name>
           <NameInTable>numer</NameInTable>
-          <Type>numeric[]</Type>
+          <Type>numeric</Type>
           <Desc>Numer</Desc>
         </Field>
       </Fields>
@@ -52,6 +52,12 @@
               <NameInTable>cena</NameInTable>
               <Type>numeric</Type>
               <Desc>Cena</Desc>
+            </Field>
+            <Field>
+              <Name>IsNew</Name>
+              <NameInTable>isnew</NameInTable>
+              <Type>integer</Type>
+              <Desc>isnew</Desc>
             </Field>
           </Fields>
         </TablePart>
