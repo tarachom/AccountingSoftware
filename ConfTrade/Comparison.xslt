@@ -95,7 +95,8 @@
             <IsExist>no</IsExist>
 
             <xsl:call-template name="FieldCreate">
-              <xsl:with-param name="ConfFieldName" select="$ConfFieldName" />
+              <xsl:with-param name="ConfFieldName" select="Name" />
+              <xsl:with-param name="ConfFieldNameInTable" select="$ConfFieldName" />
               <xsl:with-param name="ConfFieldType" select="Type" />
             </xsl:call-template>
 

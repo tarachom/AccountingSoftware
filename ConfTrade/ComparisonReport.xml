@@ -9,8 +9,8 @@
       <NameInTable>name</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <Coincide>yes</Coincide>
-        <ConfType>string</ConfType>
+        <Coincide>no</Coincide>
+        <ConfType>string[]</ConfType>
         <DataType>text</DataType>
         <UdtName>text</UdtName>
       </Type>
@@ -255,8 +255,8 @@
         <NameInTable>od_pointer</NameInTable>
         <IsExist>no</IsExist>
         <FieldCreate>
-          <Name>od_pointer</Name>
-          <NameInTable></NameInTable>
+          <Name>Od_Pointer</Name>
+          <NameInTable>od_pointer</NameInTable>
           <ConfType>pointer</ConfType>
           <DataType>uuid</DataType>
         </FieldCreate>
@@ -277,8 +277,8 @@
         <NameInTable>fullname</NameInTable>
         <IsExist>no</IsExist>
         <FieldCreate>
-          <Name>fullname</Name>
-          <NameInTable></NameInTable>
+          <Name>FullName</Name>
+          <NameInTable>fullname</NameInTable>
           <ConfType>string</ConfType>
           <DataType>text</DataType>
         </FieldCreate>
@@ -304,8 +304,8 @@
         <NameInTable>cena</NameInTable>
         <IsExist>no</IsExist>
         <FieldCreate>
-          <Name>cena</Name>
-          <NameInTable></NameInTable>
+          <Name>Cena</Name>
+          <NameInTable>cena</NameInTable>
           <ConfType>numeric</ConfType>
           <DataType>numeric</DataType>
         </FieldCreate>
@@ -376,8 +376,8 @@
       <NameInTable>test</NameInTable>
       <IsExist>no</IsExist>
       <FieldCreate>
-        <Name>test</Name>
-        <NameInTable></NameInTable>
+        <Name>Test</Name>
+        <NameInTable>test</NameInTable>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
       </FieldCreate>

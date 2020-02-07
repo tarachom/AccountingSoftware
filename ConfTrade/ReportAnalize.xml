@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <info>start</info>
+  <sql>BEGIN;</sql>
+  <sql>ALTER TABLE tovary_v1_1 RENAME name name_OLD; </sql>
+  <sql>ALTER TABLE tovary_v1_1 ADD COLUMN name text;</sql>
+  <sql>UPDATE tovary_v1_1 SET name = (SELECT array_agg(t.name_OLD) FROM tovary_v1_1 AS t WHERE t.uid = tovary_v1_1.uid);</sql>
+  <sql>COMMIT;</sql>
+  <info>stop</info>
+  <sql>ALTER TABLE tovary_ceny_tablepart_v1_1 ADD COLUMN od_pointer uuid;</sql>
+  <sql>ALTER TABLE tovary_ceny_tablepart_v1_1 ADD COLUMN fullname text;</sql>
+  <sql>ALTER TABLE tovary_od_tablepart_v1_1 ADD COLUMN cena numeric;</sql>
+  <sql>ALTER TABLE od_v1_1 ADD COLUMN test text;</sql>
+  <sql>CREATE TABLE newdir_v1_1 (uid uuid NOT NULL, name text, fullname text, test text, PRIMARY KEY(uid));</sql>
+  <sql>CREATE TABLE newdir_ceny_tablepart_v1_1 (owner uuid NOT NULL, name text, cena numeric);</sql>
+</root>

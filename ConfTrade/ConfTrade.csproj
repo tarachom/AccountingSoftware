@@ -57,12 +57,18 @@
     <Content Include="Configuration.xml" />
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />
+    <Content Include="ReportAnalize.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">
       <Project>{13640253-d4b3-45b9-b4e6-b87bc5785d26}</Project>
       <Name>AccountingSoftware</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ComparisonReportAnalize.xslt">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

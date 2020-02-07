@@ -46,6 +46,12 @@ namespace Configurator
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 
+			//SQL
+			Configuration.ComparisonGeneration(
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
 
