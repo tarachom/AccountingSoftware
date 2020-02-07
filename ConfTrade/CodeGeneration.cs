@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 07.02.2020 15:37:17
+ * Дата конфігурації: 07.02.2020 17:58:16
  *
  */
 
@@ -29,8 +29,8 @@ namespace ConfTrade_v1_1
         public Tovary_Objest() : base(Config.Kernel, "tovary_v1_1",
              new string[] { "name", "code", "description", "field1", "field2", "field3", "field4", "field5", "od2", "count", "num", "isupdate", "isupdate2", "date_add", "date_add3", "time_add", "datetime_add", "text_arr", "int_arr", "numeric_arr" }) 
         {
-            Name = new string[] { };
-            Code = "";
+            Name = 0;
+            Code = 0;
             Description = "";
             Field1 = "";
             Field2 = "";
@@ -46,7 +46,7 @@ namespace ConfTrade_v1_1
             Date_add3 = DateTime.MinValue;
             Time_add = DateTime.MinValue.TimeOfDay;
             Datetime_add = DateTime.MinValue;
-            Text_arr = new string[] { };
+            Text_arr = "";
             Int_arr = new int[] { };
             Numeric_arr = new decimal[] { };
             
@@ -60,8 +60,8 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                Name = (base.FieldValue["name"] != DBNull.Value) ? (string[])base.FieldValue["name"] : new string[] { };
-                Code = base.FieldValue["code"].ToString();
+                Name = (int)base.FieldValue["name"];
+                Code = (int)base.FieldValue["code"];
                 Description = base.FieldValue["description"].ToString();
                 Field1 = base.FieldValue["field1"].ToString();
                 Field2 = base.FieldValue["field2"].ToString();
@@ -77,7 +77,7 @@ namespace ConfTrade_v1_1
                 Date_add3 = (base.FieldValue["date_add3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["date_add3"].ToString()) : DateTime.MinValue;
                 Time_add = (base.FieldValue["time_add"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["time_add"].ToString()) : DateTime.MinValue.TimeOfDay;
                 Datetime_add = (base.FieldValue["datetime_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["datetime_add"].ToString()) : DateTime.MinValue;
-                Text_arr = (base.FieldValue["text_arr"] != DBNull.Value) ? (string[])base.FieldValue["text_arr"] : new string[] { };
+                Text_arr = base.FieldValue["text_arr"].ToString();
                 Int_arr = (base.FieldValue["int_arr"] != DBNull.Value) ? (int[])base.FieldValue["int_arr"] : new int[] { };
                 Numeric_arr = (base.FieldValue["numeric_arr"] != DBNull.Value) ? (decimal[])base.FieldValue["numeric_arr"] : new decimal[] { };
                 
@@ -124,8 +124,8 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string[] Name { get; set; }
-        public string Code { get; set; }
+        public int Name { get; set; }
+        public int Code { get; set; }
         public string Description { get; set; }
         public string Field1 { get; set; }
         public string Field2 { get; set; }
@@ -141,7 +141,7 @@ namespace ConfTrade_v1_1
         public DateTime Date_add3 { get; set; }
         public TimeSpan Time_add { get; set; }
         public DateTime Datetime_add { get; set; }
-        public string[] Text_arr { get; set; }
+        public string Text_arr { get; set; }
         public int[] Int_arr { get; set; }
         public decimal[] Numeric_arr { get; set; }
         

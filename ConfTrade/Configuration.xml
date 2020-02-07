@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>07.02.2020 15:37:17</DateTimeSave>
+  <DateTimeSave>07.02.2020 17:58:16</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -13,13 +13,13 @@
         <Field>
           <Name>Name</Name>
           <NameInTable>name</NameInTable>
-          <Type>string[]</Type>
+          <Type>integer</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
           <Name>Code</Name>
           <NameInTable>code</NameInTable>
-          <Type>string</Type>
+          <Type>integer</Type>
           <Desc>Code</Desc>
         </Field>
         <Field>
@@ -116,7 +116,7 @@
         <Field>
           <Name>Text_arr</Name>
           <NameInTable>text_arr</NameInTable>
-          <Type>string[]</Type>
+          <Type>string</Type>
           <Desc>text array test</Desc>
         </Field>
         <Field>

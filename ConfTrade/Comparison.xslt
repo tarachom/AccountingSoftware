@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
-  
+
   <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
   <msxsl:script implements-prefix="utils" language="C#">
     <![CDATA[
@@ -12,7 +12,7 @@
     ]]>
   </msxsl:script>
   -->
-  
+
   <xsl:template name="FieldsControl">
     <xsl:param name="InfoSchemaFieldList" />
     <xsl:param name="ConfigurationFieldList" />
@@ -36,47 +36,6 @@
               <xsl:variable name="InfoSchemaFieldDataType" select="$InfoSchemaFieldList[Name = $ConfFieldName]/DataType" />
               <xsl:variable name="InfoSchemaFieldUdtName" select="$InfoSchemaFieldList[Name = $ConfFieldName]/UdtName" />
 
-              <Coincide>
-                <xsl:choose>
-                  <xsl:when test="$ConfFieldType = 'string' and ($InfoSchemaFieldDataType = 'text' and $InfoSchemaFieldUdtName = 'text')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'string[]' and ($InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_text')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'integer' and ($InfoSchemaFieldDataType = 'integer' and $InfoSchemaFieldUdtName = 'int4')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'integer[]' and ($InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_int4')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'numeric' and ($InfoSchemaFieldDataType = 'numeric' and $InfoSchemaFieldUdtName = 'numeric')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'numeric[]' and ($InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_numeric')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'boolean' and ($InfoSchemaFieldDataType = 'boolean' and $InfoSchemaFieldUdtName = 'bool')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'date' and ($InfoSchemaFieldDataType = 'date' and $InfoSchemaFieldUdtName = 'date')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'time' and ($InfoSchemaFieldDataType = 'time without time zone' and $InfoSchemaFieldUdtName = 'time')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'datetime' and ($InfoSchemaFieldDataType = 'timestamp without time zone' and $InfoSchemaFieldUdtName = 'timestamp')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:when test="$ConfFieldType = 'pointer' and ($InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid')">
-                    <xsl:text>yes</xsl:text>
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:text>no</xsl:text>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </Coincide>
-
               <ConfType>
                 <xsl:value-of select="$ConfFieldType"/>
               </ConfType>
@@ -88,6 +47,138 @@
               <UdtName>
                 <xsl:value-of select="$InfoSchemaFieldUdtName"/>
               </UdtName>
+              
+              <xsl:if test="$ConfFieldType = 'string'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'text' and $InfoSchemaFieldUdtName = 'text'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>text</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'string[]'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_text'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>text[]</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'integer'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'integer' and $InfoSchemaFieldUdtName = 'int4'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>integer</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'integer[]'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_int4'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>integer[]</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'numeric'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'numeric' and $InfoSchemaFieldUdtName = 'numeric'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>numeric</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'numeric[]'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'ARRAY' and $InfoSchemaFieldUdtName = '_numeric'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>numeric[]</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'boolean'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'boolean' and $InfoSchemaFieldUdtName = 'bool'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>boolean</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'date'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'date' and $InfoSchemaFieldUdtName = 'date'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>date</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'time'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'time without time zone' and $InfoSchemaFieldUdtName = 'time'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>time without time zone</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'datetime'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'timestamp without time zone' and $InfoSchemaFieldUdtName = 'timestamp'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>timestamp without time zone</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'pointer'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>uuid</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
 
             </Type>
           </xsl:when>
@@ -121,7 +212,7 @@
       <NameInTable>
         <xsl:value-of select="$ConfFieldNameInTable"/>
       </NameInTable>
-      
+
       <ConfType>
         <xsl:value-of select="$ConfFieldType"/>
       </ConfType>

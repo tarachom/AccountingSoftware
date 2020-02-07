@@ -13,7 +13,7 @@ namespace AccountingSoftware
 		public void Open()
 		{
 			DataBase = new PostgreSQL();
-			DataBase.Open("Server=localhost;User Id=postgres;Password=525491;Database=ConfTrade;");
+			DataBase.Open("Server=localhost;User Id=postgres;Password=525491;Database=ConfTradeTest;");
 
 			Console.WriteLine("DataBase Open");
 
