@@ -12,9 +12,9 @@
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
-      <xsl:text> RENAME </xsl:text>
+      <xsl:text> RENAME COLUMN </xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
-      <xsl:text> </xsl:text>
+      <xsl:text> TO </xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
       <xsl:text>_OLD;</xsl:text>
     </sql>
@@ -53,9 +53,9 @@
                     <sql>
                       <xsl:text>ALTER TABLE </xsl:text>
                       <xsl:value-of select="$TableName"/>
-                      <xsl:text> RENAME </xsl:text>
+                      <xsl:text> RENAME COLUMN </xsl:text>
                       <xsl:value-of select="NameInTable"/>
-                      <xsl:text> </xsl:text>
+                      <xsl:text> TO </xsl:text>
                       <xsl:value-of select="NameInTable"/>
                       <xsl:text>_OLD;</xsl:text>
                     </sql>
@@ -121,9 +121,9 @@
                     <sql>
                       <xsl:text>ALTER TABLE </xsl:text>
                       <xsl:value-of select="$TableName"/>
-                      <xsl:text> RENAME </xsl:text>
+                      <xsl:text> RENAME COLUMN </xsl:text>
                       <xsl:value-of select="NameInTable"/>
-                      <xsl:text> </xsl:text>
+                      <xsl:text> TO </xsl:text>
                       <xsl:value-of select="NameInTable"/>
                       <xsl:text>_OLD;</xsl:text>
                     </sql>
@@ -198,9 +198,9 @@
                     <sql>
                       <xsl:text>ALTER TABLE </xsl:text>
                       <xsl:value-of select="$TableName"/>
-                      <xsl:text> RENAME </xsl:text>
+                      <xsl:text> RENAME COLUMN </xsl:text>
                       <xsl:value-of select="NameInTable"/>
-                      <xsl:text> </xsl:text>
+                      <xsl:text> TO </xsl:text>
                       <xsl:value-of select="NameInTable"/>
                       <xsl:text>_OLD;</xsl:text>
                     </sql>
@@ -347,6 +347,11 @@
                         </xsl:if>
                       </xsl:for-each>
                       <xsl:text>);</xsl:text>
+                    </sql>
+                    <sql>
+                      <xsl:text>CREATE INDEX ON </xsl:text>
+                      <xsl:value-of select="$TabularParts_TableName"/>
+                      <xsl:text> (owner);</xsl:text>
                     </sql>
                   </xsl:for-each>
 

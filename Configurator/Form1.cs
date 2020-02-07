@@ -32,7 +32,7 @@ namespace Configurator
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
 			//Comparison
-			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema("ConfTrade");
+			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema("ConfTradeTest");
 			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
 			//Code Generation
@@ -46,11 +46,20 @@ namespace Configurator
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 
-			//SQL
+			//Create SQL
 			Configuration.ComparisonGeneration(
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+
+			//Read SQL
+			List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+
+			//Execute
+			foreach (string sqlText in SqlList)
+			{
+				Kernel.DataBase.ExecuteSQL(sqlText);
+			}
 
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;

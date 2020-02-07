@@ -246,31 +246,6 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public ConfigurationInformationSchema SelectInformationSchema(string databaseName)
-		{
-			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
-
-			string query = "SELECT table_name, column_name, data_type, udt_name " +
-				           "FROM information_schema.columns " +
-						   "WHERE table_catalog = @table_catalog AND table_schema = 'public'";
-
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("table_catalog", databaseName));
-
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			while (reader.Read())
-			{
-				informationSchema.Append(
-					reader["table_name"].ToString().ToLower(),
-					reader["column_name"].ToString().ToLower(),
-					reader["data_type"].ToString(),
-					reader["udt_name"].ToString());
-			}
-			reader.Close();
-
-			return informationSchema;
-		}
-
 		public string SelectDirectoryView(DirectoryView directoryView)
 		{
 			string query = directoryView.QuerySelect.Construct();
@@ -308,6 +283,35 @@ namespace AccountingSoftware
 			return xml;
 		}
 
+		public ConfigurationInformationSchema SelectInformationSchema(string databaseName)
+		{
+			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
 
+			string query = "SELECT table_name, column_name, data_type, udt_name " +
+				           "FROM information_schema.columns " +
+						   "WHERE table_catalog = @table_catalog AND table_schema = 'public'";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("table_catalog", databaseName));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				informationSchema.Append(
+					reader["table_name"].ToString().ToLower(),
+					reader["column_name"].ToString().ToLower(),
+					reader["data_type"].ToString(),
+					reader["udt_name"].ToString());
+			}
+			reader.Close();
+
+			return informationSchema;
+		}
+
+		public int ExecuteSQL(string SqlQuery)
+		{
+			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
+			return nCommand.ExecuteNonQuery();
+		}
 	}
 }

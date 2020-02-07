@@ -1,2 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<InformationSchema />
+<InformationSchema>
+  <Table>
+    <Name>tovary_ceny_tablepart</Name>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>cena</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tovary</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>code</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>description</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+</InformationSchema>

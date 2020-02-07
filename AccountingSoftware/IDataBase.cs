@@ -24,6 +24,7 @@ namespace AccountingSoftware
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
 		ConfigurationInformationSchema SelectInformationSchema(string databaseName);
+		int ExecuteSQL(string SqlQuery);
 
 		string SelectDirectoryView(DirectoryView directoryView);
 	}

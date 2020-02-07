@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <sql>CREATE TABLE tovary_v1_1 (uid uuid NOT NULL, name integer, code integer, description text, field1 text, field2 text, field3 text, field4 text, field5 text, od2 uuid, count integer, num numeric, isupdate boolean, isupdate2 boolean, date_add date, date_add3 date, time_add time without time zone, datetime_add timestamp without time zone, text_arr text, int_arr integer[], numeric_arr numeric[], PRIMARY KEY(uid));</sql>
-  <sql>CREATE TABLE tovary_ceny_tablepart_v1_1 (owner uuid NOT NULL, name text, cena numeric, od_pointer uuid, name text, fullname text);</sql>
-  <sql>CREATE TABLE tovary_od_tablepart_v1_1 (owner uuid NOT NULL, name text, cena numeric, od_pointer uuid, name text, fullname text);</sql>
-  <sql>CREATE TABLE od_v1_1 (uid uuid NOT NULL, name text, fullname text, test text, PRIMARY KEY(uid));</sql>
-  <sql>CREATE TABLE newdir_v1_1 (uid uuid NOT NULL, name text, fullname text, test text, PRIMARY KEY(uid));</sql>
-  <sql>CREATE TABLE newdir_ceny_tablepart_v1_1 (owner uuid NOT NULL, name text, cena numeric);</sql>
+  <sql>BEGIN;</sql>
+  <sql>ALTER TABLE tovary RENAME COLUMN name TO name_OLD;</sql>
+  <sql>ALTER TABLE tovary ADD COLUMN name text[];</sql>
+  <sql>UPDATE tovary SET name = (SELECT array_agg(t.name_OLD) FROM tovary AS t WHERE t.uid = tovary.uid);</sql>
+  <sql>ALTER TABLE tovary DROP COLUMN name_OLD;</sql>
+  <sql>COMMIT;</sql>
 </root>

@@ -18,8 +18,16 @@ namespace ConfTrade
         {
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
-            
 
+
+            Conf.Tovary_Objest tovary_Objest = new Conf.Tovary_Objest();
+
+            for (int i = 0; i < 10; i++)
+            {
+                tovary_Objest.New();
+                tovary_Objest.Name = new string[] { "test", "test2", "test3" };
+                tovary_Objest.Save();
+            }
 
             Console.ReadLine();
         }
