@@ -13,9 +13,11 @@ namespace Configurator
 {
 	public partial class FieldForm : Form
 	{
-		public Action<ConfigurationObjectField, bool> CallBack { get; set; }
+		public Action<string, ConfigurationObjectField, bool> CallBack { get; set; }
 
 		public ConfigurationObjectField configurationObjectField { get; set; }
+
+		public string originalName { get; set; }
 
 		public bool IsNew { get; set; }
 
@@ -38,6 +40,8 @@ namespace Configurator
 			}
 			else
 			{
+				originalName = configurationObjectField.Name;
+
 				textBoxName.Text = configurationObjectField.Name;
 				textBoxNameInTable.Text = configurationObjectField.NameInTable;
 				textBoxDesc.Text = configurationObjectField.Desc;
@@ -62,8 +66,8 @@ namespace Configurator
 			configurationObjectField.NameInTable = textBoxNameInTable.Text;
 			configurationObjectField.Desc = textBoxDesc.Text;
 			configurationObjectField.Type = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
-			
-			CallBack.Invoke(configurationObjectField, IsNew);
+
+			CallBack.Invoke(originalName, configurationObjectField, IsNew);
 
 			this.Hide();
 		}

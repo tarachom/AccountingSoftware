@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 08.02.2020 17:34:29
+ * Дата конфігурації: 08.02.2020 20:56:06
  *
  */
 
@@ -27,16 +27,17 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer", "masiv" }) 
+             new string[] { "name", "code", "count", "numer", "masiv", "artikul" }) 
         {
-            Name = "";
-            Code = "";
-            Count = 0;
-            Numer = 0;
-            Masiv = "";
+            Назва = "";
+            Код = "";
+            Кількість = 0;
+            Номер = 0;
+            Масив = "";
+            Артикул = "";
             
             //Табличні частини
-            Ceny_TablePart = new Tovary_Ceny_TablePart(this);
+            Ціни_TablePart = new Tovary_Ціни_TablePart(this);
             
         }
         
@@ -44,11 +45,12 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                Name = base.FieldValue["name"].ToString();
-                Code = base.FieldValue["code"].ToString();
-                Count = (int)base.FieldValue["count"];
-                Numer = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
-                Masiv = base.FieldValue["masiv"].ToString();
+                Назва = base.FieldValue["name"].ToString();
+                Код = base.FieldValue["code"].ToString();
+                Кількість = (int)base.FieldValue["count"];
+                Номер = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
+                Масив = base.FieldValue["masiv"].ToString();
+                Артикул = base.FieldValue["artikul"].ToString();
                 
                 return true;
             }
@@ -58,11 +60,12 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
-            base.FieldValue["name"] = Name;
-            base.FieldValue["code"] = Code;
-            base.FieldValue["count"] = Count;
-            base.FieldValue["numer"] = Numer;
-            base.FieldValue["masiv"] = Masiv;
+            base.FieldValue["name"] = Назва;
+            base.FieldValue["code"] = Код;
+            base.FieldValue["count"] = Кількість;
+            base.FieldValue["numer"] = Номер;
+            base.FieldValue["masiv"] = Масив;
+            base.FieldValue["artikul"] = Артикул;
             
             BaseSave();
         }
@@ -78,14 +81,15 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public int Count { get; set; }
-        public decimal Numer { get; set; }
-        public string Masiv { get; set; }
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public int Кількість { get; set; }
+        public decimal Номер { get; set; }
+        public string Масив { get; set; }
+        public string Артикул { get; set; }
         
         //Табличні частини
-        public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
+        public Tovary_Ціни_TablePart Ціни_TablePart { get; set; }
         
     }
     
@@ -155,18 +159,18 @@ namespace ConfTrade_v1_1
     /// <summary>
     /// Таблична частина Ціни
     /// </summary>
-    class Tovary_Ceny_TablePart : DirectoryTablePart
+    class Tovary_Ціни_TablePart : DirectoryTablePart
     {
-        public Tovary_Ceny_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
+        public Tovary_Ціни_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
              new string[] { "name", "cena", "isnew" }) 
         {
             Owner = owner;
-            Records = new List<Tovary_Ceny_TablePartRecord>();
+            Records = new List<Tovary_Ціни_TablePartRecord>();
         }
         
         public Tovary_Objest Owner { get; private set; }
         
-        public List<Tovary_Ceny_TablePartRecord> Records { get; set; }
+        public List<Tovary_Ціни_TablePartRecord> Records { get; set; }
         
         public void Read()
         {
@@ -177,7 +181,7 @@ namespace ConfTrade_v1_1
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Tovary_Ceny_TablePartRecord record = new Tovary_Ceny_TablePartRecord();
+                Tovary_Ціни_TablePartRecord record = new Tovary_Ціни_TablePartRecord();
 
                 record.Name = fieldValue["name"].ToString();
                 record.Cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
@@ -204,7 +208,7 @@ namespace ConfTrade_v1_1
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Tovary_Ceny_TablePartRecord record in Records)
+                foreach (Tovary_Ціни_TablePartRecord record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -228,9 +232,9 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// Таблична частина Ціни
     /// </summary>
-    class Tovary_Ceny_TablePartRecord : DirectoryTablePartRecord
+    class Tovary_Ціни_TablePartRecord : DirectoryTablePartRecord
     {
-        public Tovary_Ceny_TablePartRecord()
+        public Tovary_Ціни_TablePartRecord()
         {
             Name = "";
             Cena = 0;
@@ -238,7 +242,7 @@ namespace ConfTrade_v1_1
             
         }
         
-        public Tovary_Ceny_TablePartRecord(
+        public Tovary_Ціни_TablePartRecord(
             string _Name = "", decimal _Cena = 0, int _IsNew = 0)
         {
             Name = _Name;
@@ -388,7 +392,7 @@ namespace ConfTrade_v1_1
         public test2_Objest() : base(Config.Kernel, "test2",
              new string[] { "name", "code", "desc" }) 
         {
-            name = "";
+            Name = "";
             Code = "";
             Desc = "";
             
@@ -400,7 +404,7 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                name = base.FieldValue["name"].ToString();
+                Name = base.FieldValue["name"].ToString();
                 Code = base.FieldValue["code"].ToString();
                 Desc = base.FieldValue["desc"].ToString();
                 
@@ -412,7 +416,7 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
-            base.FieldValue["name"] = name;
+            base.FieldValue["name"] = Name;
             base.FieldValue["code"] = Code;
             base.FieldValue["desc"] = Desc;
             
@@ -430,7 +434,7 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string name { get; set; }
+        public string Name { get; set; }
         public string Code { get; set; }
         public string Desc { get; set; }
         
@@ -512,9 +516,10 @@ namespace ConfTrade_v1_1
     class New_Objest : DirectoryObject
     {
         public New_Objest() : base(Config.Kernel, "new",
-             new string[] { "id" }) 
+             new string[] { "id", "name" }) 
         {
-            id = "";
+            Код = "";
+            Назва = "";
             
             //Табличні частини
             
@@ -524,7 +529,8 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
-                id = base.FieldValue["id"].ToString();
+                Код = base.FieldValue["id"].ToString();
+                Назва = base.FieldValue["name"].ToString();
                 
                 return true;
             }
@@ -534,7 +540,8 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
-            base.FieldValue["id"] = id;
+            base.FieldValue["id"] = Код;
+            base.FieldValue["name"] = Назва;
             
             BaseSave();
         }
@@ -550,7 +557,8 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
-        public string id { get; set; }
+        public string Код { get; set; }
+        public string Назва { get; set; }
         
         //Табличні частини
         
@@ -616,6 +624,144 @@ namespace ConfTrade_v1_1
         }
 
         public New_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "ТМЦ"
+    
+    /// <summary> 
+    /// Товаро-матеріальні цінності
+    /// </summary>
+    class ТМЦ_Objest : DirectoryObject
+    {
+        public ТМЦ_Objest() : base(Config.Kernel, "tmc",
+             new string[] { "name", "description", "od", "data_add", "base_cena", "autor" }) 
+        {
+            Назва = "";
+            Опис = "";
+            ОдиницяВиміру = new string[] { };
+            ДатаДобавлення = DateTime.MinValue;
+            ОсновнаЦіна = 0;
+            Автор = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["name"].ToString();
+                Опис = base.FieldValue["description"].ToString();
+                ОдиницяВиміру = (base.FieldValue["od"] != DBNull.Value) ? (string[])base.FieldValue["od"] : new string[] { };
+                ДатаДобавлення = (base.FieldValue["data_add"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["data_add"].ToString()) : DateTime.MinValue;
+                ОсновнаЦіна = (base.FieldValue["base_cena"] != DBNull.Value) ? (decimal)base.FieldValue["base_cena"] : 0;
+                Автор = base.FieldValue["autor"].ToString();
+                
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["name"] = Назва;
+            base.FieldValue["description"] = Опис;
+            base.FieldValue["od"] = ОдиницяВиміру;
+            base.FieldValue["data_add"] = ДатаДобавлення;
+            base.FieldValue["base_cena"] = ОсновнаЦіна;
+            base.FieldValue["autor"] = Автор;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public ТМЦ_Pointer GetDirectoryPointer()
+        {
+            ТМЦ_Pointer directoryPointer = new ТМЦ_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Опис { get; set; }
+        public string[] ОдиницяВиміру { get; set; }
+        public DateTime ДатаДобавлення { get; set; }
+        public decimal ОсновнаЦіна { get; set; }
+        public string Автор { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    /// <summary> 
+    /// Товаро-матеріальні цінності
+    /// </summary>
+    class ТМЦ_Pointer : DirectoryPointer
+    {
+        public ТМЦ_Pointer(object uid = null) : base(Config.Kernel, "tmc")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public ТМЦ_Objest GetDirectoryObject()
+        {
+            ТМЦ_Objest ТМЦObjestItem = new ТМЦ_Objest();
+            ТМЦObjestItem.Read(base.UnigueID);
+            return ТМЦObjestItem;
+        }
+    }
+    
+    /// <summary> 
+    /// Товаро-матеріальні цінності
+    /// </summary>
+    class ТМЦ_Select : DirectorySelect
+    {
+        public ТМЦ_Select() : base(Config.Kernel, "tmc") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new ТМЦ_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public ТМЦ_Pointer Current { get; private set; }
     }
     
       

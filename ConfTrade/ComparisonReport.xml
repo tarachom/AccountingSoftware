@@ -5,7 +5,7 @@
     <Table>tovary</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>Name</Name>
+      <Name>Назва</Name>
       <NameInTable>name</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -16,7 +16,7 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Code</Name>
+      <Name>Код</Name>
       <NameInTable>code</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -27,7 +27,7 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Count</Name>
+      <Name>Кількість</Name>
       <NameInTable>count</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -38,7 +38,7 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Numer</Name>
+      <Name>Номер</Name>
       <NameInTable>numer</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -49,7 +49,7 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Masiv</Name>
+      <Name>Масив</Name>
       <NameInTable>masiv</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -59,8 +59,19 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Артикул</Name>
+      <NameInTable>artikul</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
-      <Name>Ceny</Name>
+      <Name>Ціни</Name>
       <Table>tovary_ceny_tablepart</Table>
       <IsExist>yes</IsExist>
       <Control_Field>
@@ -130,37 +141,37 @@
     <Table>test2</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>name</Name>
+      <Name>Name</Name>
       <NameInTable>name</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>name</Name>
-        <NameInTable>name</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>Code</Name>
       <NameInTable>code</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Code</Name>
-        <NameInTable>code</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>Desc</Name>
       <NameInTable>desc</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Desc</Name>
-        <NameInTable>desc</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
   </Control_Directory>
   <Control_Directory>
@@ -168,8 +179,90 @@
     <Table>new</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>id</Name>
+      <Name>Код</Name>
       <NameInTable>id</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>name</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>ТМЦ</Name>
+    <Table>tmc</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>name</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Опис</Name>
+      <NameInTable>description</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ОдиницяВиміру</Name>
+      <NameInTable>od</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ДатаДобавлення</Name>
+      <NameInTable>data_add</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ОсновнаЦіна</Name>
+      <NameInTable>base_cena</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Автор</Name>
+      <NameInTable>autor</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>string</ConfType>

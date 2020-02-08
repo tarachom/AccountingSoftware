@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>08.02.2020 17:34:29</DateTimeSave>
+  <DateTimeSave>08.02.2020 20:56:06</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -11,32 +11,39 @@
       <Desc>Довідник Товари Desc</Desc>
       <Fields>
         <Field>
-          <Name>Name</Name>
+          <Name>Назва</Name>
           <NameInTable>name</NameInTable>
           <Type>string</Type>
           <Desc>Name</Desc>
         </Field>
         <Field>
-          <Name>Code</Name>
+          <Name>Код</Name>
           <NameInTable>code</NameInTable>
           <Type>string</Type>
           <Desc>Code</Desc>
         </Field>
         <Field>
-          <Name>Count</Name>
+          <Name>Кількість</Name>
           <NameInTable>count</NameInTable>
           <Type>integer</Type>
           <Desc>Count</Desc>
         </Field>
         <Field>
-          <Name>Numer</Name>
+          <Name>Номер</Name>
           <NameInTable>numer</NameInTable>
           <Type>numeric</Type>
           <Desc>Numer</Desc>
         </Field>
         <Field>
-          <Name>Masiv</Name>
+          <Name>Масив</Name>
           <NameInTable>masiv</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Артикул</Name>
+          <NameInTable>artikul</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>
@@ -44,7 +51,7 @@
       </Fields>
       <TabularParts>
         <TablePart>
-          <Name>Ceny</Name>
+          <Name>Ціни</Name>
           <Table>tovary_ceny_tablepart</Table>
           <Desc>Таблична частина Ціни</Desc>
           <Fields>
@@ -100,7 +107,7 @@
       <Desc>test2</Desc>
       <Fields>
         <Field>
-          <Name>name</Name>
+          <Name>Name</Name>
           <NameInTable>name</NameInTable>
           <Type>string</Type>
           <Desc>
@@ -130,10 +137,68 @@
       <Desc>new new</Desc>
       <Fields>
         <Field>
-          <Name>id</Name>
+          <Name>Код</Name>
           <NameInTable>id</NameInTable>
           <Type>string</Type>
           <Desc>id</Desc>
+        </Field>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>ТМЦ</Name>
+      <Table>tmc</Table>
+      <Desc>Товаро-матеріальні цінності</Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Опис</Name>
+          <NameInTable>description</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ОдиницяВиміру</Name>
+          <NameInTable>od</NameInTable>
+          <Type>string[]</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаДобавлення</Name>
+          <NameInTable>data_add</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ОсновнаЦіна</Name>
+          <NameInTable>base_cena</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Автор</Name>
+          <NameInTable>autor</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
       <TabularParts />

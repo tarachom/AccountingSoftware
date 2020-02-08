@@ -41,6 +41,10 @@ namespace Configurator
 				IsNewDirectory = false;
 
 				LoadFieldList();
+
+				LoadTabularPartsList();
+
+				LoadViewsList();
 			}
 		}
 
@@ -66,11 +70,23 @@ namespace Configurator
 			this.Hide();
 		}
 
-		void CallBack_Update(ConfigurationObjectField configurationObjectField, bool isNew)
+		void CallBack_Update(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
 		{
 			if (isNew)
 			{
 				ConfDirectory.AppendField(configurationObjectField);
+			}
+			else
+			{
+				if (originalName != configurationObjectField.Name)
+				{
+					ConfDirectory.Fields.Remove(originalName);
+					ConfDirectory.AppendField(configurationObjectField);
+				}
+				else
+				{
+					ConfDirectory.Fields[originalName] = configurationObjectField;
+				}
 			}
 
 			LoadFieldList();
@@ -79,9 +95,7 @@ namespace Configurator
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
 			FieldForm fieldForm = new FieldForm();
-		
 			fieldForm.CallBack = CallBack_Update;
-
 			fieldForm.Show();
 		}
 
@@ -92,6 +106,26 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationObjectField> configurationObjectField in ConfDirectory.Fields)
 			{
 				listBoxFields.Items.Add(configurationObjectField.Value.Name);
+			}
+		}
+
+		void LoadTabularPartsList()
+		{
+			listBoxTabularParts.Items.Clear();
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in ConfDirectory.TabularParts)
+			{
+				listBoxTabularParts.Items.Add(configurationObjectTablePart.Value.Name);
+			}
+		}
+
+		void LoadViewsList()
+		{
+			listBoxViews.Items.Clear();
+
+			foreach (KeyValuePair<string, ConfigurationObjectView> configurationObjectView in ConfDirectory.Views)
+			{
+				listBoxViews.Items.Add(configurationObjectView.Value.Name);
 			}
 		}
 

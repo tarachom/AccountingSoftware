@@ -19,6 +19,67 @@
     </Column>
   </Table>
   <Table>
+    <Name>test2</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>code</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>desc</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tmc</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>description</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>data_add</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>od</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_text</UdtName>
+    </Column>
+    <Column>
+      <Name>base_cena</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>autor</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tovary_ceny_tablepart</Name>
     <Column>
       <Name>owner</Name>
@@ -93,13 +154,10 @@
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
-  </Table>
-  <Table>
-    <Name>test2</Name>
     <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
+      <Name>artikul</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>
@@ -111,6 +169,17 @@
     </Column>
     <Column>
       <Name>id</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>
+          </Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
