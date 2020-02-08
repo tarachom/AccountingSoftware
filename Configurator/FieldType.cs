@@ -8,15 +8,23 @@ namespace Configurator
 {
 	class FieldType
 	{
-
 		public FieldType(string confTypeName, string viewTypeName)
 		{
 			ConfTypeName = confTypeName;
 			ViewTypeName = viewTypeName;
 		}
 
-		public static List<FieldType> DefaultList() {
+		public string ConfTypeName { get; set; }
 
+		public string ViewTypeName { get; set; }
+
+		public override string ToString()
+		{
+			return ViewTypeName;
+		}
+
+		public static List<FieldType> DefaultList()
+		{
 			List<FieldType> fieldTypes = new List<FieldType>();
 
 			fieldTypes.Add(new FieldType("string", "Текст"));
@@ -32,15 +40,6 @@ namespace Configurator
 			fieldTypes.Add(new FieldType("pointer", "Вказівник на елемент конфігурації"));
 
 			return fieldTypes;
-		}
-
-		public string ConfTypeName { get; set; }
-
-		public string ViewTypeName { get; set; }
-
-		public override string ToString()
-		{
-			return ViewTypeName;
 		}
 	}
 }
