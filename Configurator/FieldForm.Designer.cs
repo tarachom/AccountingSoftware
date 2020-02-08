@@ -38,7 +38,7 @@
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.label1 = new System.Windows.Forms.Label();
-			this.comboBoxType = new System.Windows.Forms.ComboBox();
+			this.comboBoxFieldType = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel2.SuspendLayout();
 			this.SuspendLayout();
@@ -135,13 +135,13 @@
 			this.label1.TabIndex = 13;
 			this.label1.Text = "Тип:";
 			// 
-			// comboBoxType
+			// comboBoxFieldType
 			// 
-			this.comboBoxType.FormattingEnabled = true;
-			this.comboBoxType.Location = new System.Drawing.Point(137, 90);
-			this.comboBoxType.Name = "comboBoxType";
-			this.comboBoxType.Size = new System.Drawing.Size(202, 21);
-			this.comboBoxType.TabIndex = 14;
+			this.comboBoxFieldType.FormattingEnabled = true;
+			this.comboBoxFieldType.Location = new System.Drawing.Point(137, 90);
+			this.comboBoxFieldType.Name = "comboBoxFieldType";
+			this.comboBoxFieldType.Size = new System.Drawing.Size(202, 21);
+			this.comboBoxFieldType.TabIndex = 14;
 			// 
 			// label2
 			// 
@@ -158,7 +158,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(560, 378);
 			this.Controls.Add(this.label2);
-			this.Controls.Add(this.comboBoxType);
+			this.Controls.Add(this.comboBoxFieldType);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.panel2);
 			this.Controls.Add(this.textBoxDesc);
@@ -188,7 +188,7 @@
 		private System.Windows.Forms.Button buttonSave;
 		private System.Windows.Forms.Panel panel2;
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.ComboBox comboBoxType;
+		private System.Windows.Forms.ComboBox comboBoxFieldType;
 		private System.Windows.Forms.Label label2;
 	}
 }

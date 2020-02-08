@@ -52,6 +52,7 @@
     <Compile Include="DirectoryForm.Designer.cs">
       <DependentUpon>DirectoryForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FieldType.cs" />
     <Compile Include="FieldForm.cs">
       <SubType>Form</SubType>
     </Compile>

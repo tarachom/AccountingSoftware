@@ -19,9 +19,12 @@ namespace Configurator
 
 		private void FieldForm_Load(object sender, EventArgs e)
 		{
+			foreach (FieldType fieldType in FieldType.DefaultList())
+				comboBoxFieldType.Items.Add(fieldType);
 
+			comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[0];
 		}
-
+		
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 
