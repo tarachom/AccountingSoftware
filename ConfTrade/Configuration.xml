@@ -3,12 +3,12 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>08.02.2020 13:51:16</DateTimeSave>
+  <DateTimeSave>08.02.2020 16:48:06</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
       <Table>tovary</Table>
-      <Desc>Довідник Товари</Desc>
+      <Desc>Довідник Товари Desc</Desc>
       <Fields>
         <Field>
           <Name>Name</Name>
@@ -33,6 +33,13 @@
           <NameInTable>numer</NameInTable>
           <Type>numeric</Type>
           <Desc>Numer</Desc>
+        </Field>
+        <Field>
+          <Name>Masiv</Name>
+          <NameInTable>masiv</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
       <TabularParts>
@@ -68,7 +75,22 @@
       <Name>test</Name>
       <Table>test</Table>
       <Desc>test</Desc>
-      <Fields />
+      <Fields>
+        <Field>
+          <Name>Count</Name>
+          <NameInTable>count</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Sum</Name>
+          <NameInTable>sum</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
       <TabularParts />
       <Views />
     </Directory>
@@ -77,6 +99,21 @@
       <Table>test2</Table>
       <Desc>test2</Desc>
       <Fields />
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>New</Name>
+      <Table>new</Table>
+      <Desc>new new</Desc>
+      <Fields>
+        <Field>
+          <Name>id</Name>
+          <NameInTable>id</NameInTable>
+          <Type>string</Type>
+          <Desc>id</Desc>
+        </Field>
+      </Fields>
       <TabularParts />
       <Views />
     </Directory>

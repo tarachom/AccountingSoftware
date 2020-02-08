@@ -34,27 +34,29 @@ namespace Configurator
 			}
 			else
 			{
-				//...
+				textBoxName.Text = ConfDirectory.Name;
+				textBoxTable.Text = ConfDirectory.Table;
+				textBoxDesc.Text = ConfDirectory.Desc;
 
 				IsNewDirectory = false;
+
+				LoadFieldList();
 			}
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			//...
+			ConfDirectory.Name = textBoxName.Text;
+			ConfDirectory.Table = textBoxTable.Text;
+			ConfDirectory.Desc = textBoxDesc.Text;
 
 			if (IsNewDirectory)
 			{
-				ConfDirectory.Name = textBoxName.Text;
-				ConfDirectory.Table = textBoxTable.Text;
-				ConfDirectory.Desc = textBoxDesc.Text;
-
 				Program.Kernel.Conf.AppendDirectory(ConfDirectory);
-
-				formConfiguration.S();
-				formConfiguration.LoadTree();
 			}
+			
+			formConfiguration.S();
+			formConfiguration.LoadTree();
 
 			this.Hide();
 		}
@@ -64,10 +66,45 @@ namespace Configurator
 			this.Hide();
 		}
 
+		void CallBack_Update(ConfigurationObjectField configurationObjectField, bool isNew)
+		{
+			if (isNew)
+			{
+				ConfDirectory.AppendField(configurationObjectField);
+			}
+
+			LoadFieldList();
+		}
+
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
 			FieldForm fieldForm = new FieldForm();
+		
+			fieldForm.CallBack = CallBack_Update;
+
 			fieldForm.Show();
+		}
+
+		void LoadFieldList()
+		{
+			listBoxFields.Items.Clear();
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> configurationObjectField in ConfDirectory.Fields)
+			{
+				listBoxFields.Items.Add(configurationObjectField.Key);
+			}
+		}
+
+		private void listBoxFields_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null)
+			{
+				FieldForm fieldForm = new FieldForm();
+				fieldForm.configurationObjectField = ConfDirectory.Fields[listBoxFields.SelectedItem.ToString()];
+				fieldForm.CallBack = CallBack_Update;
+
+				fieldForm.Show();
+			}
 		}
 	}
 }

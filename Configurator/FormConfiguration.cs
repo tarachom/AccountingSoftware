@@ -216,12 +216,17 @@ namespace Configurator
 
 		private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			
-
 			if (nodeSel != null)
-				MessageBox.Show(nodeSel.Name);
-			//if (e.Node.Tag != null)
-			//	MessageBox.Show(e.Node.Tag.ToString());
+			{
+				string directoryName = nodeSel.Name;
+
+				Configuration Conf = Program.Kernel.Conf;
+
+				DirectoryForm directoryForm = new DirectoryForm();
+				directoryForm.formConfiguration = this;
+				directoryForm.ConfDirectory = Conf.Directories[directoryName];
+				directoryForm.Show();				
+			}
 		}
 
 		private void addNewDirectiryToolStripMenuItem_Click(object sender, EventArgs e)

@@ -48,6 +48,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Masiv</Name>
+      <NameInTable>masiv</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Ceny</Name>
       <Table>tovary_ceny_tablepart</Table>
@@ -91,6 +102,28 @@
     <Name>test</Name>
     <Table>test</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Count</Name>
+      <NameInTable>count</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>integer</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Sum</Name>
+      <NameInTable>sum</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>test2</Name>
@@ -98,11 +131,19 @@
     <IsExist>yes</IsExist>
   </Control_Directory>
   <Control_Directory>
-    <Name>
-      </Name>
-    <Table>
-      </Table>
-    <IsExist>no</IsExist>
-    <TableCreate />
+    <Name>New</Name>
+    <Table>new</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>id</Name>
+      <NameInTable>id</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
 </root>

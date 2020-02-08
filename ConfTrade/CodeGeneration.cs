@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 08.02.2020 13:51:16
+ * Дата конфігурації: 08.02.2020 16:48:06
  *
  */
 
@@ -22,17 +22,18 @@ namespace ConfTrade_v1_1
     #region DIRECTORY "Tovary"
     
     /// <summary> 
-    /// Довідник Товари
+    /// Довідник Товари Desc
     /// </summary>
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer" }) 
+             new string[] { "name", "code", "count", "numer", "masiv" }) 
         {
             Name = "";
             Code = "";
             Count = 0;
             Numer = 0;
+            Masiv = "";
             
             //Табличні частини
             Ceny_TablePart = new Tovary_Ceny_TablePart(this);
@@ -47,6 +48,7 @@ namespace ConfTrade_v1_1
                 Code = base.FieldValue["code"].ToString();
                 Count = (int)base.FieldValue["count"];
                 Numer = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
+                Masiv = base.FieldValue["masiv"].ToString();
                 
                 return true;
             }
@@ -60,6 +62,7 @@ namespace ConfTrade_v1_1
             base.FieldValue["code"] = Code;
             base.FieldValue["count"] = Count;
             base.FieldValue["numer"] = Numer;
+            base.FieldValue["masiv"] = Masiv;
             
             BaseSave();
         }
@@ -79,6 +82,7 @@ namespace ConfTrade_v1_1
         public string Code { get; set; }
         public int Count { get; set; }
         public decimal Numer { get; set; }
+        public string Masiv { get; set; }
         
         //Табличні частини
         public Tovary_Ceny_TablePart Ceny_TablePart { get; set; }
@@ -86,7 +90,7 @@ namespace ConfTrade_v1_1
     }
     
     /// <summary> 
-    /// Довідник Товари
+    /// Довідник Товари Desc
     /// </summary>
     class Tovary_Pointer : DirectoryPointer
     {
@@ -104,7 +108,7 @@ namespace ConfTrade_v1_1
     }
     
     /// <summary> 
-    /// Довідник Товари
+    /// Довідник Товари Desc
     /// </summary>
     class Tovary_Select : DirectorySelect
     {
@@ -260,8 +264,10 @@ namespace ConfTrade_v1_1
     class test_Objest : DirectoryObject
     {
         public test_Objest() : base(Config.Kernel, "test",
-             new string[] {  }) 
+             new string[] { "count", "sum" }) 
         {
+            Count = 0;
+            Sum = 0;
             
             //Табличні частини
             
@@ -271,6 +277,8 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
+                Count = (int)base.FieldValue["count"];
+                Sum = (base.FieldValue["sum"] != DBNull.Value) ? (decimal)base.FieldValue["sum"] : 0;
                 
                 return true;
             }
@@ -280,6 +288,8 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
+            base.FieldValue["count"] = Count;
+            base.FieldValue["sum"] = Sum;
             
             BaseSave();
         }
@@ -295,6 +305,8 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
+        public int Count { get; set; }
+        public decimal Sum { get; set; }
         
         //Табличні частини
         
@@ -480,7 +492,123 @@ namespace ConfTrade_v1_1
     
     #endregion
     
+    #region DIRECTORY "New"
     
+    /// <summary> 
+    /// new new
+    /// </summary>
+    class New_Objest : DirectoryObject
+    {
+        public New_Objest() : base(Config.Kernel, "new",
+             new string[] { "id" }) 
+        {
+            id = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                id = base.FieldValue["id"].ToString();
+                
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["id"] = id;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public New_Pointer GetDirectoryPointer()
+        {
+            New_Pointer directoryPointer = new New_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string id { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    /// <summary> 
+    /// new new
+    /// </summary>
+    class New_Pointer : DirectoryPointer
+    {
+        public New_Pointer(object uid = null) : base(Config.Kernel, "new")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public New_Objest GetDirectoryObject()
+        {
+            New_Objest NewObjestItem = new New_Objest();
+            NewObjestItem.Read(base.UnigueID);
+            return NewObjestItem;
+        }
+    }
+    
+    /// <summary> 
+    /// new new
+    /// </summary>
+    class New_Select : DirectorySelect
+    {
+        public New_Select() : base(Config.Kernel, "new") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new New_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public New_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
     
 }
   
