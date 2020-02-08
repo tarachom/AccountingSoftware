@@ -1,2 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <sql>ALTER TABLE test2 ADD COLUMN name text;</sql>
+  <sql>ALTER TABLE test2 ADD COLUMN code text;</sql>
+  <sql>ALTER TABLE test2 ADD COLUMN desc text;</sql>
+</root>

@@ -12,21 +12,21 @@
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
-      <xsl:text> RENAME COLUMN </xsl:text>
+      <xsl:text> RENAME COLUMN "</xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
-      <xsl:text> TO </xsl:text>
+      <xsl:text>" TO "</xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
       <xsl:text>_old_</xsl:text>
       <xsl:value-of select="$KeyUID"/>
-      <xsl:text>;</xsl:text>
+      <xsl:text>";</xsl:text>
     </sql>
 
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
-      <xsl:text> ADD COLUMN </xsl:text>
+      <xsl:text> ADD COLUMN "</xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
-      <xsl:text> </xsl:text>
+      <xsl:text>" </xsl:text>
       <xsl:value-of select="$DataTypeCreate"/>
       <xsl:text>;</xsl:text>
     </sql>
@@ -280,9 +280,9 @@
             <sql>
               <xsl:text>ALTER TABLE </xsl:text>
               <xsl:value-of select="$TableName"/>
-              <xsl:text> ADD COLUMN </xsl:text>
+              <xsl:text> ADD COLUMN "</xsl:text>
               <xsl:value-of select="NameInTable"/>
-              <xsl:text> </xsl:text>
+              <xsl:text>" </xsl:text>
               <xsl:value-of select="DataType"/>
               <xsl:text>;</xsl:text>
             </sql>
@@ -332,8 +332,9 @@
                 <xsl:text> (</xsl:text>
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
                 <xsl:for-each select="FieldCreate">
+                  <xsl:text> "</xsl:text>
                   <xsl:value-of select="NameInTable"/>
-                  <xsl:text> </xsl:text>
+                  <xsl:text>" </xsl:text>
                   <xsl:value-of select="DataType"/>
                   <xsl:text>, </xsl:text>
                 </xsl:for-each>
@@ -357,8 +358,9 @@
                       <xsl:text> (</xsl:text>
                       <xsl:text>owner uuid NOT NULL, </xsl:text>
                       <xsl:for-each select="FieldCreate">
+                        <xsl:text> "</xsl:text>
                         <xsl:value-of select="NameInTable"/>
-                        <xsl:text> </xsl:text>
+                        <xsl:text>" </xsl:text>
                         <xsl:value-of select="DataType"/>
                         <xsl:if test="position() &lt; count(../FieldCreate)">
                           <xsl:text>, </xsl:text>

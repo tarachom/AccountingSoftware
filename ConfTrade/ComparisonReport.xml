@@ -129,6 +129,39 @@
     <Name>test2</Name>
     <Table>test2</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>name</Name>
+      <NameInTable>name</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>name</Name>
+        <NameInTable>name</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>Code</Name>
+      <NameInTable>code</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Code</Name>
+        <NameInTable>code</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>Desc</Name>
+      <NameInTable>desc</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Desc</Name>
+        <NameInTable>desc</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>New</Name>

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>08.02.2020 16:48:06</DateTimeSave>
+  <DateTimeSave>08.02.2020 17:34:29</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -98,7 +98,29 @@
       <Name>test2</Name>
       <Table>test2</Table>
       <Desc>test2</Desc>
-      <Fields />
+      <Fields>
+        <Field>
+          <Name>name</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Code</Name>
+          <NameInTable>code</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Desc</Name>
+          <NameInTable>desc</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
       <TabularParts />
       <Views />
     </Directory>

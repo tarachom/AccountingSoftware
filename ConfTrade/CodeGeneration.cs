@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 08.02.2020 16:48:06
+ * Дата конфігурації: 08.02.2020 17:34:29
  *
  */
 
@@ -386,8 +386,11 @@ namespace ConfTrade_v1_1
     class test2_Objest : DirectoryObject
     {
         public test2_Objest() : base(Config.Kernel, "test2",
-             new string[] {  }) 
+             new string[] { "name", "code", "desc" }) 
         {
+            name = "";
+            Code = "";
+            Desc = "";
             
             //Табличні частини
             
@@ -397,6 +400,9 @@ namespace ConfTrade_v1_1
         {
             if (BaseRead(uid))
             {
+                name = base.FieldValue["name"].ToString();
+                Code = base.FieldValue["code"].ToString();
+                Desc = base.FieldValue["desc"].ToString();
                 
                 return true;
             }
@@ -406,6 +412,9 @@ namespace ConfTrade_v1_1
         
         public void Save()
         {
+            base.FieldValue["name"] = name;
+            base.FieldValue["code"] = Code;
+            base.FieldValue["desc"] = Desc;
             
             BaseSave();
         }
@@ -421,6 +430,9 @@ namespace ConfTrade_v1_1
             return directoryPointer;
         }
         
+        public string name { get; set; }
+        public string Code { get; set; }
+        public string Desc { get; set; }
         
         //Табличні частини
         
