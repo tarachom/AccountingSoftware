@@ -70,6 +70,28 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Вказівник1</Name>
+      <NameInTable>pointer1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Вказівник2</Name>
+      <NameInTable>pointer2</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Вказівник2</Name>
+        <NameInTable>pointer2</NameInTable>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+      </FieldCreate>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Ціни</Name>
       <Table>tovary_ceny_tablepart</Table>

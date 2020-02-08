@@ -265,8 +265,9 @@
 			// textBoxDesc
 			// 
 			this.textBoxDesc.Location = new System.Drawing.Point(131, 83);
+			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(333, 20);
+			this.textBoxDesc.Size = new System.Drawing.Size(413, 62);
 			this.textBoxDesc.TabIndex = 5;
 			// 
 			// label5
@@ -282,7 +283,7 @@
 			// 
 			this.textBoxTable.Location = new System.Drawing.Point(131, 57);
 			this.textBoxTable.Name = "textBoxTable";
-			this.textBoxTable.Size = new System.Drawing.Size(333, 20);
+			this.textBoxTable.Size = new System.Drawing.Size(413, 20);
 			this.textBoxTable.TabIndex = 3;
 			// 
 			// label4
@@ -298,7 +299,7 @@
 			// 
 			this.textBoxName.Location = new System.Drawing.Point(131, 31);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(333, 20);
+			this.textBoxName.Size = new System.Drawing.Size(413, 20);
 			this.textBoxName.TabIndex = 1;
 			// 
 			// label3

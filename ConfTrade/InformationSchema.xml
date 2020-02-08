@@ -159,6 +159,11 @@
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
+    <Column>
+      <Name>pointer1</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
   </Table>
   <Table>
     <Name>new</Name>

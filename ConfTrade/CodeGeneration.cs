@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 08.02.2020 20:56:06
+ * Дата конфігурації: 08.02.2020 21:36:28
  *
  */
 
@@ -27,7 +27,7 @@ namespace ConfTrade_v1_1
     class Tovary_Objest : DirectoryObject
     {
         public Tovary_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer", "masiv", "artikul" }) 
+             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2" }) 
         {
             Назва = "";
             Код = "";
@@ -35,6 +35,8 @@ namespace ConfTrade_v1_1
             Номер = 0;
             Масив = "";
             Артикул = "";
+            Вказівник1 = new ТМЦ_Pointer();
+            Вказівник2 = new test2_Pointer();
             
             //Табличні частини
             Ціни_TablePart = new Tovary_Ціни_TablePart(this);
@@ -51,6 +53,8 @@ namespace ConfTrade_v1_1
                 Номер = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
                 Масив = base.FieldValue["masiv"].ToString();
                 Артикул = base.FieldValue["artikul"].ToString();
+                Вказівник1 = new ТМЦ_Pointer(base.FieldValue["pointer1"]);
+                Вказівник2 = new test2_Pointer(base.FieldValue["pointer2"]);
                 
                 return true;
             }
@@ -66,6 +70,8 @@ namespace ConfTrade_v1_1
             base.FieldValue["numer"] = Номер;
             base.FieldValue["masiv"] = Масив;
             base.FieldValue["artikul"] = Артикул;
+            base.FieldValue["pointer1"] = Вказівник1.UnigueID.UGuid;
+            base.FieldValue["pointer2"] = Вказівник2.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -87,6 +93,8 @@ namespace ConfTrade_v1_1
         public decimal Номер { get; set; }
         public string Масив { get; set; }
         public string Артикул { get; set; }
+        public ТМЦ_Pointer Вказівник1 { get; set; }
+        public test2_Pointer Вказівник2 { get; set; }
         
         //Табличні частини
         public Tovary_Ціни_TablePart Ціни_TablePart { get; set; }

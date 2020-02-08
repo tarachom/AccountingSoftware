@@ -28,10 +28,20 @@ namespace Configurator
 
 		private void FieldForm_Load(object sender, EventArgs e)
 		{
+			//Типи даних
 			foreach (FieldType fieldType in FieldType.DefaultList())
 				comboBoxFieldType.Items.Add(fieldType);
 
 			comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[0];
+
+			comboBoxPointer.Enabled = false;
+			comboBoxPointer.Items.Add("");
+
+			//Список довідників
+			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)
+			{
+				comboBoxPointer.Items.Add(directoryName);
+			}
 
 			if (configurationObjectField == null)
 			{
@@ -56,16 +66,37 @@ namespace Configurator
 					}
 				}
 
+				if (((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer")
+				{
+					for (int i = 0; i < comboBoxPointer.Items.Count; i++)
+					{
+						if (configurationObjectField.Pointer == comboBoxPointer.Items[i].ToString())
+						{
+							comboBoxPointer.SelectedItem = comboBoxPointer.Items[i];
+							break;
+						}
+					}
+				}
+
 				IsNew = false;
-			}			
+			}
 		}
-		
+
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 			configurationObjectField.Name = textBoxName.Text;
 			configurationObjectField.NameInTable = textBoxNameInTable.Text;
 			configurationObjectField.Desc = textBoxDesc.Text;
 			configurationObjectField.Type = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
+
+			if (((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer")
+			{
+				configurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+			}
+			else
+			{
+				configurationObjectField.Pointer = "";
+			}
 
 			CallBack.Invoke(originalName, configurationObjectField, IsNew);
 
@@ -75,6 +106,11 @@ namespace Configurator
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
 			this.Hide();
+		}
+
+		private void comboBoxFieldType_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			comboBoxPointer.Enabled = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer";
 		}
 	}
 }
