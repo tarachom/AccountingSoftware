@@ -1,8 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>booleanbool</info>
-  <sql>BEGIN;</sql>
-  <sql>ALTER TABLE tovary_ceny_tablepart RENAME COLUMN isnew TO isnew_old_07_02_2020_23_09_57;</sql>
-  <sql>ALTER TABLE tovary_ceny_tablepart ADD COLUMN isnew integer;</sql>
-  <sql>COMMIT;</sql>
+  <sql>CREATE TABLE 
+       (uid uuid NOT NULL, PRIMARY KEY(uid));</sql>
 </root>

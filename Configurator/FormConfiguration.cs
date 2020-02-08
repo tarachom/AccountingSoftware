@@ -18,21 +18,16 @@ namespace Configurator
 		{
 			InitializeComponent();
 		}
-		
-		private Kernel Kernel { get; set; }
 
-		private void FormConfiguration_Load(object sender, EventArgs e)
+		public void S()
 		{
-			Kernel = new Kernel();
-			Kernel.Open();
-
-			Configuration Conf = Kernel.Conf;
+			Configuration Conf = Program.Kernel.Conf;
 
 			//Save
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
 			//Comparison
-			ConfigurationInformationSchema informationSchema = Kernel.DataBase.SelectInformationSchema("ConfTradeTest");
+			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema("ConfTradeTest");
 			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
 			//Code Generation
@@ -58,8 +53,16 @@ namespace Configurator
 			//Execute
 			foreach (string sqlText in SqlList)
 			{
-				Kernel.DataBase.ExecuteSQL(sqlText);
+				Program.Kernel.DataBase.ExecuteSQL(sqlText);
 			}
+
+		}
+
+		public void LoadTree()
+		{
+			Configuration Conf = Program.Kernel.Conf;
+
+			treeConfiguration.Nodes.Clear();
 
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
 			rootNode.ImageIndex = 1;
@@ -70,10 +73,12 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
 			{
 				TreeNode directoryNode = directoriesNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
+				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
+				directoryNode.ContextMenuStrip = contextMenuStrip1;
 				directoryNode.ImageIndex = 1;
-				
+
 				//Поля
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields) 
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields)
 				{
 					directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name).ImageIndex = 1;
 				}
@@ -81,7 +86,7 @@ namespace Configurator
 				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
 				directoriTabularPartsNode.ImageIndex = 1;
 
-				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts) 
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts)
 				{
 					TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
 					directoriTablePartNode.ImageIndex = 1;
@@ -118,6 +123,16 @@ namespace Configurator
 
 			rootNode.Expand();
 			directoriesNode.Expand();
+		}
+
+		private void FormConfiguration_Load(object sender, EventArgs e)
+		{
+			Program.Kernel = new Kernel();
+			Program.Kernel.Open();
+
+			Configuration Conf = Program.Kernel.Conf;
+
+			LoadTree();
 
 			#region test
 
@@ -156,38 +171,81 @@ namespace Configurator
 
 			//-------------------------------------------------------
 
-			dataConfiguration.Columns.Add("Name", "NAME");
-			dataConfiguration.Columns.Add("Code", "CODE");
+			//dataConfiguration.Columns.Add("Name", "NAME");
+			//dataConfiguration.Columns.Add("Code", "CODE");
 
-			DataGridViewComboBoxColumn cbc = new DataGridViewComboBoxColumn();
-			cbc.Name = "List";
-			cbc.FlatStyle = FlatStyle.Flat;
-			cbc.Items.Add("10");
-			cbc.Items.Add("30");
-			cbc.Items.Add("80");
-			cbc.Items.Add("100");
-			dataConfiguration.Columns.Add(cbc);
+			//DataGridViewComboBoxColumn cbc = new DataGridViewComboBoxColumn();
+			//cbc.Name = "List";
+			//cbc.FlatStyle = FlatStyle.Flat;
+			//cbc.Items.Add("10");
+			//cbc.Items.Add("30");
+			//cbc.Items.Add("80");
+			//cbc.Items.Add("100");
+			//dataConfiguration.Columns.Add(cbc);
 
-			DataGridViewCheckBoxColumn cbbc = new DataGridViewCheckBoxColumn(false);
-			cbbc.Name = "Check";
-			dataConfiguration.Columns.Add(cbbc);
+			//DataGridViewCheckBoxColumn cbbc = new DataGridViewCheckBoxColumn(false);
+			//cbbc.Name = "Check";
+			//dataConfiguration.Columns.Add(cbbc);
 
-			DataGridViewTextBoxColumn tbc = new DataGridViewTextBoxColumn();
-			tbc.Name = "Text";
-			dataConfiguration.Columns.Add(tbc);
+			//DataGridViewTextBoxColumn tbc = new DataGridViewTextBoxColumn();
+			//tbc.Name = "Text";
+			//dataConfiguration.Columns.Add(tbc);
 
-			for (int i = 0; i < 5; i++)
-				dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
+			//for (int i = 0; i < 5; i++)
+			//	dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-		{			
-			
+		{
+			if (e.Node.Tag != null)
+				MessageBox.Show(e.Node.Tag.ToString());
 		}
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Kernel.Close();
+			Program.Kernel.Close();
 		}
+
+		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DirectoryForm directoryForm = new DirectoryForm();
+			directoryForm.formConfiguration = this;
+
+			directoryForm.Show();
+		}
+
+		private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			
+
+			if (nodeSel != null)
+				MessageBox.Show(nodeSel.Name);
+			//if (e.Node.Tag != null)
+			//	MessageBox.Show(e.Node.Tag.ToString());
+		}
+
+		private void addNewDirectiryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			addDirectoryToolStripMenuItem_Click(sender, e);
+		}
+
+		private void copyDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void deleteDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private TreeNode nodeSel { get; set; }
+
+		private void treeConfiguration_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			nodeSel = e.Node;
+		}
+
+		
 	}
 }

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 07.02.2020 23:09:57
+ * Дата конфігурації: 08.02.2020 13:51:16
  *
  */
 
@@ -251,6 +251,236 @@ namespace ConfTrade_v1_1
       
     
     #endregion
+    
+    #region DIRECTORY "test"
+    
+    /// <summary> 
+    /// test
+    /// </summary>
+    class test_Objest : DirectoryObject
+    {
+        public test_Objest() : base(Config.Kernel, "test",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public test_Pointer GetDirectoryPointer()
+        {
+            test_Pointer directoryPointer = new test_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        
+    }
+    
+    /// <summary> 
+    /// test
+    /// </summary>
+    class test_Pointer : DirectoryPointer
+    {
+        public test_Pointer(object uid = null) : base(Config.Kernel, "test")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public test_Objest GetDirectoryObject()
+        {
+            test_Objest testObjestItem = new test_Objest();
+            testObjestItem.Read(base.UnigueID);
+            return testObjestItem;
+        }
+    }
+    
+    /// <summary> 
+    /// test
+    /// </summary>
+    class test_Select : DirectorySelect
+    {
+        public test_Select() : base(Config.Kernel, "test") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new test_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public test_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "test2"
+    
+    /// <summary> 
+    /// test2
+    /// </summary>
+    class test2_Objest : DirectoryObject
+    {
+        public test2_Objest() : base(Config.Kernel, "test2",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public test2_Pointer GetDirectoryPointer()
+        {
+            test2_Pointer directoryPointer = new test2_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        
+    }
+    
+    /// <summary> 
+    /// test2
+    /// </summary>
+    class test2_Pointer : DirectoryPointer
+    {
+        public test2_Pointer(object uid = null) : base(Config.Kernel, "test2")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public test2_Objest GetDirectoryObject()
+        {
+            test2_Objest test2ObjestItem = new test2_Objest();
+            test2ObjestItem.Read(base.UnigueID);
+            return test2ObjestItem;
+        }
+    }
+    
+    /// <summary> 
+    /// test2
+    /// </summary>
+    class test2_Select : DirectorySelect
+    {
+        public test2_Select() : base(Config.Kernel, "test2") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new test2_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public test2_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    
     
 }
   

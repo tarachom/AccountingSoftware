@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using AccountingSoftware;
 
 namespace Configurator
 {
-	static class Program
+	public static class Program
 	{
 		/// <summary>
 		/// The main entry point for the application.
@@ -16,5 +17,7 @@ namespace Configurator
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new FormConfiguration());
 		}
+
+		public static Kernel Kernel { get; set; }
 	}
 }

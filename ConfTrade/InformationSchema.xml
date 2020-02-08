@@ -61,9 +61,30 @@
       <UdtName>numeric</UdtName>
     </Column>
     <Column>
-      <Name>isnew</Name>
+      <Name>isnew_old_07_02_2020_23_09_57</Name>
       <DataType>boolean</DataType>
       <UdtName>bool</UdtName>
+    </Column>
+    <Column>
+      <Name>isnew</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>test</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>test2</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
     </Column>
   </Table>
 </InformationSchema>
