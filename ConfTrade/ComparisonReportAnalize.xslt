@@ -39,11 +39,11 @@
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
-      <xsl:text> DROP COLUMN </xsl:text>
+      <xsl:text> DROP COLUMN "</xsl:text>
       <xsl:value-of select="$FieldNameInTable"/>
       <xsl:text>_old_</xsl:text>
       <xsl:value-of select="$KeyUID"/>
-      <xsl:text>;</xsl:text>
+      <xsl:text>";</xsl:text>
     </sql>
   </xsl:template>
 

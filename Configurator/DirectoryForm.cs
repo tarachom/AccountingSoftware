@@ -91,7 +91,7 @@ namespace Configurator
 
 			foreach (KeyValuePair<string, ConfigurationObjectField> configurationObjectField in ConfDirectory.Fields)
 			{
-				listBoxFields.Items.Add(configurationObjectField.Key);
+				listBoxFields.Items.Add(configurationObjectField.Value.Name);
 			}
 		}
 
