@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 13:43:26
+ * Дата конфігурації: 10.02.2020 14:55:35
  *
  */
 
@@ -36,7 +36,7 @@ namespace ConfTrade_v1_1
             Масив = new string[] { };
             Артикул = "";
             Вказівник1 = new ТМЦ_Pointer();
-            Вказівник2 = new Tovary_Pointer();
+            Вказівник2 = new Товари_Pointer();
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -55,7 +55,7 @@ namespace ConfTrade_v1_1
                 Масив = (base.FieldValue["masiv"] != DBNull.Value) ? (string[])base.FieldValue["masiv"] : new string[] { };
                 Артикул = base.FieldValue["artikul"].ToString();
                 Вказівник1 = new ТМЦ_Pointer(base.FieldValue["pointer1"]);
-                Вказівник2 = new Tovary_Pointer(base.FieldValue["pointer2"]);
+                Вказівник2 = new Товари_Pointer(base.FieldValue["pointer2"]);
                 
                 return true;
             }
@@ -95,7 +95,7 @@ namespace ConfTrade_v1_1
         public string[] Масив { get; set; }
         public string Артикул { get; set; }
         public ТМЦ_Pointer Вказівник1 { get; set; }
-        public Tovary_Pointer Вказівник2 { get; set; }
+        public Товари_Pointer Вказівник2 { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }

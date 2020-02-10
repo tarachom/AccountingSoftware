@@ -19,9 +19,6 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            Conf.Tovary_Ціни_TablePartRecord tovary_Ціни_TablePartRecord = new Conf.Tovary_Ціни_TablePartRecord(
-                "", 0m, 0, DateTime.Now);
-
             Conf.ТМЦ_Objest тМЦ_Objest = new Conf.ТМЦ_Objest();
             тМЦ_Objest.New();
             тМЦ_Objest.Назва = "Назва товару";

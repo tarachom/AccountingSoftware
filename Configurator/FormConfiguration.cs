@@ -156,8 +156,26 @@ namespace Configurator
 			{
 				if (originalName != configurationDirectories.Name)
 				{
-					Conf.Directories.Remove(originalName);
-					Conf.AppendDirectory(configurationDirectories);
+					List<string> ListPointers = Conf.SearchForPointers(originalName);
+					if (ListPointers.Count == 0)
+					{
+						Conf.Directories.Remove(originalName);
+						Conf.AppendDirectory(configurationDirectories);
+					}
+					else
+					{
+						string textListPointer = "Знайденно вказівники на довідник " + originalName + ":\n";
+
+						foreach (string item in ListPointers)
+							textListPointer += item + "\n";
+
+						textListPointer += "\nПерейменувати неможливо";
+
+						MessageBox.Show(textListPointer, "Знайденно вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+						configurationDirectories.Name = originalName;
+						Conf.Directories[originalName] = configurationDirectories;
+					}
 				}
 				else
 				{

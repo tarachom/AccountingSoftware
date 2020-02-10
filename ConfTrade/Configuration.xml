@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 13:43:26</DateTimeSave>
+  <DateTimeSave>10.02.2020 14:55:35</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -60,7 +60,7 @@
           <Name>Вказівник2</Name>
           <NameInTable>pointer2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Tovary</Pointer>
+          <Pointer>Товари</Pointer>
           <Desc>
           </Desc>
         </Field>
