@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//Довідник Вибірка ссилок
-	//
+	/// <summary>
+	/// Довідник Вибірка Вказівників
+	/// </summary>
 	public abstract class DirectorySelect
 	{
 		public DirectorySelect(Kernel kernel, string table)

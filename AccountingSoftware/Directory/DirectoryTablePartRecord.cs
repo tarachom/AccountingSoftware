@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//Довідник Запис табличної частини
-	//
+	/// <summary>
+	/// Довідник Запис табличної частини
+	/// </summary>
 	public abstract class DirectoryTablePartRecord
 	{
 

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Configurator
+namespace AccountingSoftware
 {
-	class FieldType
+	public class FieldType
 	{
 		public FieldType(string confTypeName, string viewTypeName)
 		{

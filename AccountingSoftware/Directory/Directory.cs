@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//Довідник
-	//
+	/// <summary>
+	/// Довідник
+	/// </summary>
 	public abstract class Directory
 	{
 		public string Name { get; set; }

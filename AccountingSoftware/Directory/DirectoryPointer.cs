@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//Довідник Вказівник - Ссилка на елемент довідника 
-	//
+	/// <summary>
+	/// Довідник Вказівник - Вказівник на елемент довідника 
+	/// </summary>
 	public class DirectoryPointer
 	{
 		public DirectoryPointer()

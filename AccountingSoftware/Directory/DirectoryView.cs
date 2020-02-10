@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Довідник Візуалізація для вибірки даних
+	/// </summary>
 	public abstract class DirectoryView
 	{
 		public DirectoryView(Kernel kernel, string table, string[] fieldsArray, string name)

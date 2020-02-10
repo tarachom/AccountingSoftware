@@ -68,6 +68,7 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
     <Compile Include="AccountingSoftware\Configuration\Old\FieldValue.cs" />
+    <Compile Include="AccountingSoftware\FieldType.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Query.cs" />
