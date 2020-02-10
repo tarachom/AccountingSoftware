@@ -33,5 +33,11 @@ namespace AccountingSoftware
 		public string Desc { get; set; }
 
 		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+
+		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
+		{
+			Fields.Add(field.Name, field);
+			return field;
+		}
 	}
 }

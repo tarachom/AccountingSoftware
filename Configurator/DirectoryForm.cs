@@ -70,7 +70,7 @@ namespace Configurator
 			this.Hide();
 		}
 
-		void CallBack_Update(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
+		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
 		{
 			if (isNew)
 			{
@@ -92,11 +92,40 @@ namespace Configurator
 			LoadFieldList();
 		}
 
+		void CallBack_Update_TablePart(string originalName, ConfigurationObjectTablePart configurationObjectTablePart, bool isNew)
+		{
+			if (isNew)
+			{
+				ConfDirectory.AppendTablePart(configurationObjectTablePart);
+			}
+			else
+			{
+				if (originalName != configurationObjectTablePart.Name)
+				{
+					ConfDirectory.TabularParts.Remove(originalName);
+					ConfDirectory.AppendTablePart(configurationObjectTablePart);
+				}
+				else
+				{
+					ConfDirectory.TabularParts[originalName] = configurationObjectTablePart;
+				}
+			}
+
+			LoadTabularPartsList();
+		}
+
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
 			FieldForm fieldForm = new FieldForm();
-			fieldForm.CallBack = CallBack_Update;
+			fieldForm.CallBack = CallBack_Update_Field;
 			fieldForm.Show();
+		}
+
+		private void buttonAddTablePart_Click(object sender, EventArgs e)
+		{
+			TablePartForm tablePartForm = new TablePartForm();
+			tablePartForm.CallBack = CallBack_Update_TablePart;
+			tablePartForm.Show();
 		}
 
 		void LoadFieldList()
@@ -135,9 +164,21 @@ namespace Configurator
 			{
 				FieldForm fieldForm = new FieldForm();
 				fieldForm.configurationObjectField = ConfDirectory.Fields[listBoxFields.SelectedItem.ToString()];
-				fieldForm.CallBack = CallBack_Update;
+				fieldForm.CallBack = CallBack_Update_Field;
 
 				fieldForm.Show();
+			}
+		}
+
+		private void listBoxTabularParts_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listBoxTabularParts.SelectedItem != null)
+			{
+				TablePartForm tablePartForm = new TablePartForm();
+				tablePartForm.ConfDirectoryTablePart = ConfDirectory.TabularParts[listBoxTabularParts.SelectedItem.ToString()];
+				tablePartForm.CallBack = CallBack_Update_TablePart;
+
+				tablePartForm.Show();
 			}
 		}
 	}

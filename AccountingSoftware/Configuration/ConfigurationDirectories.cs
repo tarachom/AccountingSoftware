@@ -37,5 +37,11 @@ namespace AccountingSoftware
 			Fields.Add(field.Name, field);
 			return field;
 		}
+
+		public ConfigurationObjectTablePart AppendTablePart(ConfigurationObjectTablePart tablePart)
+		{
+			TabularParts.Add(tablePart.Name, tablePart);
+			return tablePart;
+		}
 	}
 }

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TablePartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TablePartForm.Designer.cs">
+      <DependentUpon>TablePartForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DirectoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="TablePartForm.resx">
+      <DependentUpon>TablePartForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DirectoryForm.resx">
       <DependentUpon>DirectoryForm.cs</DependentUpon>
     </EmbeddedResource>

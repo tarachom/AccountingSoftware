@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>08.02.2020 21:36:28</DateTimeSave>
+  <DateTimeSave>10.02.2020 09:44:15</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -37,7 +37,7 @@
         <Field>
           <Name>Масив</Name>
           <NameInTable>masiv</NameInTable>
-          <Type>string</Type>
+          <Type>string[]</Type>
           <Desc>
           </Desc>
         </Field>
@@ -88,6 +88,29 @@
               <NameInTable>isnew</NameInTable>
               <Type>integer</Type>
               <Desc>isnew</Desc>
+            </Field>
+            <Field>
+              <Name>ДатаОбновлення</Name>
+              <NameInTable>date_update</NameInTable>
+              <Type>datetime</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ОдиниціВиміру</Name>
+          <Table>od_list</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Одиниця</Name>
+              <NameInTable>od_pointer</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>ОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
             </Field>
           </Fields>
         </TablePart>
@@ -165,6 +188,13 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Опис</Name>
+          <NameInTable>opys</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views />
@@ -212,6 +242,68 @@
         <Field>
           <Name>Автор</Name>
           <NameInTable>autor</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>Записки</Name>
+      <Table>zpysky_info</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>ДатаЗапису</Name>
+          <NameInTable>date_add</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Записка</Name>
+          <NameInTable>zapyska</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Сайт</Name>
+          <NameInTable>site</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>ОдиниціВиміру</Name>
+      <Table>od_vimir</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>code</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>КороткаНазва</Name>
+          <NameInTable>small_name</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>

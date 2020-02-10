@@ -53,9 +53,9 @@
       <NameInTable>masiv</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>string[]</ConfType>
+        <DataType>ARRAY</DataType>
+        <UdtName>_text</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -84,13 +84,13 @@
     <Control_Field>
       <Name>Вказівник2</Name>
       <NameInTable>pointer2</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Вказівник2</Name>
-        <NameInTable>pointer2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>pointer</ConfType>
         <DataType>uuid</DataType>
-      </FieldCreate>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>Ціни</Name>
@@ -129,6 +129,65 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+      <Control_Field>
+        <Name>ДатаОбновлення</Name>
+        <NameInTable>date_update</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>datetime</ConfType>
+          <DataType>timestamp without time zone</DataType>
+          <UdtName>timestamp</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Одиниця</Name>
+        <NameInTable>od_pointer</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+          <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>ОдиниціВиміру</Name>
+      <Table>od_list</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>Name</Name>
+          <NameInTable>name</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Cena</Name>
+          <NameInTable>cena</NameInTable>
+          <ConfType>numeric</ConfType>
+          <DataType>numeric</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>IsNew</Name>
+          <NameInTable>isnew</NameInTable>
+          <ConfType>integer</ConfType>
+          <DataType>integer</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>ДатаОбновлення</Name>
+          <NameInTable>date_update</NameInTable>
+          <ConfType>datetime</ConfType>
+          <DataType>timestamp without time zone</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Одиниця</Name>
+          <NameInTable>od_pointer</NameInTable>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+        </FieldCreate>
+      </TableCreate>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -222,6 +281,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Опис</Name>
+      <NameInTable>opys</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>ТМЦ</Name>
@@ -285,6 +355,82 @@
     <Control_Field>
       <Name>Автор</Name>
       <NameInTable>autor</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>Записки</Name>
+    <Table>zpysky_info</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>ДатаЗапису</Name>
+      <NameInTable>date_add</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Записка</Name>
+      <NameInTable>zapyska</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Сайт</Name>
+      <NameInTable>site</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>ОдиниціВиміру</Name>
+    <Table>od_vimir</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>name</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>code</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>КороткаНазва</Name>
+      <NameInTable>small_name</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>string</ConfType>

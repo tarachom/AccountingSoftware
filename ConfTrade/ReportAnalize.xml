@@ -1,4 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <sql>ALTER TABLE tovary ADD COLUMN "pointer2" uuid;</sql>
-</root>
+<root />

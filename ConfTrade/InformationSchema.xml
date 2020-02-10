@@ -19,6 +19,29 @@
     </Column>
   </Table>
   <Table>
+    <Name>od_vimir</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>code</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>small_name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>test2</Name>
     <Column>
       <Name>uid</Name>
@@ -80,34 +103,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tovary_ceny_tablepart</Name>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>name</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>cena</Name>
-      <DataType>numeric</DataType>
-      <UdtName>numeric</UdtName>
-    </Column>
-    <Column>
-      <Name>isnew_old_07_02_2020_23_09_57</Name>
-      <DataType>boolean</DataType>
-      <UdtName>bool</UdtName>
-    </Column>
-    <Column>
-      <Name>isnew</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tovary</Name>
     <Column>
       <Name>uid</Name>
@@ -150,17 +145,83 @@
       <UdtName>numeric</UdtName>
     </Column>
     <Column>
-      <Name>masiv</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
       <Name>artikul</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
     <Column>
       <Name>pointer1</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>pointer2</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>masiv</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>zpysky_info</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>date_add</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>zapyska</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>site</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tovary_ceny_tablepart</Name>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>cena</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>isnew_old_07_02_2020_23_09_57</Name>
+      <DataType>boolean</DataType>
+      <UdtName>bool</UdtName>
+    </Column>
+    <Column>
+      <Name>isnew</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>date_update</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>od_pointer</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
@@ -185,6 +246,11 @@
     </Column>
     <Column>
       <Name>name</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>opys</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
