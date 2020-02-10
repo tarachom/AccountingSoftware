@@ -32,7 +32,7 @@ namespace Configurator
 			comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[0];
 
 			comboBoxPointer.Enabled = false;
-			comboBoxPointer.Items.Add("");
+			//comboBoxPointer.Items.Add("");
 
 			//Список довідників
 			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)

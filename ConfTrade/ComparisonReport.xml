@@ -97,7 +97,7 @@
       <NameInTable>pointer3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>empty_pointer</ConfType>
+        <ConfType>pointer</ConfType>
         <DataType>uuid</DataType>
         <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
@@ -108,7 +108,7 @@
       <NameInTable>link_empty</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>empty_pointer</ConfType>
+        <ConfType>pointer</ConfType>
         <DataType>uuid</DataType>
         <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
@@ -196,6 +196,17 @@
         </Type>
       </Control_Field>
       <Control_Field>
+        <Name>NewDok</Name>
+        <NameInTable>new_doc</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+          <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
         <Name>Одиниця</Name>
         <NameInTable>od_pointer</NameInTable>
         <IsExist>yes</IsExist>
@@ -251,6 +262,12 @@
         <FieldCreate>
           <Name>ОдВиміру</Name>
           <NameInTable>pointer_od</NameInTable>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>NewDok</Name>
+          <NameInTable>new_doc</NameInTable>
           <ConfType>pointer</ConfType>
           <DataType>uuid</DataType>
         </FieldCreate>
@@ -466,5 +483,21 @@
         </FieldCreate>
       </TableCreate>
     </Control_TabularParts>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>НовийДокумент</Name>
+    <Table>new_document</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>name</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
 </root>

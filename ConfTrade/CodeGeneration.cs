@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 16:36:38
+ * Дата конфігурації: 10.02.2020 18:26:15
  *
  */
 
@@ -37,8 +37,8 @@ namespace ConfTrade_v1_1
             Артикул = "";
             Вказівник1 = new ТМЦ_Pointer();
             Вказівник2 = new Товари_Pointer();
-            Вказівник3 = new DirectoryEmptyPointer();
-            Вказівник4 = new DirectoryEmptyPointer();
+            Вказівник3 = new НовийДокумент_Pointer();
+            Вказівник4 = new НовийДокумент_Pointer();
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -58,8 +58,8 @@ namespace ConfTrade_v1_1
                 Артикул = base.FieldValue["artikul"].ToString();
                 Вказівник1 = new ТМЦ_Pointer(base.FieldValue["pointer1"]);
                 Вказівник2 = new Товари_Pointer(base.FieldValue["pointer2"]);
-                Вказівник3 = new DirectoryEmptyPointer();
-                Вказівник4 = new DirectoryEmptyPointer();
+                Вказівник3 = new НовийДокумент_Pointer(base.FieldValue["pointer3"]);
+                Вказівник4 = new НовийДокумент_Pointer(base.FieldValue["link_empty"]);
                 
                 return true;
             }
@@ -102,8 +102,8 @@ namespace ConfTrade_v1_1
         public string Артикул { get; set; }
         public ТМЦ_Pointer Вказівник1 { get; set; }
         public Товари_Pointer Вказівник2 { get; set; }
-        public DirectoryEmptyPointer Вказівник3 { get; set; }
-        public DirectoryEmptyPointer Вказівник4 { get; set; }
+        public НовийДокумент_Pointer Вказівник3 { get; set; }
+        public НовийДокумент_Pointer Вказівник4 { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }
@@ -180,7 +180,7 @@ namespace ConfTrade_v1_1
     class Товари_Ціни_TablePart : DirectoryTablePart
     {
         public Товари_Ціни_TablePart(Товари_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
-             new string[] { "name", "cena", "isnew", "date_update", "date_test", "times", "pointer_od" }) 
+             new string[] { "name", "cena", "isnew", "date_update", "date_test", "times", "pointer_od", "new_doc" }) 
         {
             Owner = owner;
             Records = new List<Товари_Ціни_TablePartRecord>();
@@ -208,6 +208,7 @@ namespace ConfTrade_v1_1
                 record.Дата = (fieldValue["date_test"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_test"].ToString()) : DateTime.MinValue;
                 record.Час = (fieldValue["times"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["times"].ToString()) : DateTime.MinValue.TimeOfDay;
                 record.ОдВиміру = new ОдиниціВиміру_Pointer(fieldValue["pointer_od"]);
+                record.NewDok = new НовийДокумент_Pointer(fieldValue["new_doc"]);
                 
                 Records.Add(record);
             }
@@ -241,6 +242,7 @@ namespace ConfTrade_v1_1
                     fieldValue.Add("date_test", record.Дата);
                     fieldValue.Add("times", record.Час);
                     fieldValue.Add("pointer_od", record.ОдВиміру.UnigueID.UGuid);
+                    fieldValue.Add("new_doc", record.NewDok.UnigueID.UGuid);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -269,11 +271,12 @@ namespace ConfTrade_v1_1
             Дата = DateTime.MinValue;
             Час = DateTime.MinValue.TimeOfDay;
             ОдВиміру = new ОдиниціВиміру_Pointer();
+            NewDok = new НовийДокумент_Pointer();
             
         }
         
         public Товари_Ціни_TablePartRecord(
-            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null, ОдиниціВиміру_Pointer _ОдВиміру = null)
+            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null, ОдиниціВиміру_Pointer _ОдВиміру = null, НовийДокумент_Pointer _NewDok = null)
         {
             Name = _Name;
             Cena = _Cena;
@@ -282,6 +285,7 @@ namespace ConfTrade_v1_1
             Дата = _Дата ?? DateTime.MinValue;
             Час = _Час ?? DateTime.MinValue.TimeOfDay;
             ОдВиміру = _ОдВиміру;
+            NewDok = _NewDok;
             
         }
         
@@ -292,6 +296,7 @@ namespace ConfTrade_v1_1
         public DateTime Дата { get; set; }
         public TimeSpan Час { get; set; }
         public ОдиниціВиміру_Pointer ОдВиміру { get; set; }
+        public НовийДокумент_Pointer NewDok { get; set; }
         
     }
       
@@ -1007,6 +1012,127 @@ namespace ConfTrade_v1_1
         public string Значення { get; set; }
         
     }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "НовийДокумент"
+    
+    /// <summary> 
+    /// 
+      
+    /// </summary>
+    class НовийДокумент_Objest : DirectoryObject
+    {
+        public НовийДокумент_Objest() : base(Config.Kernel, "new_document",
+             new string[] { "name" }) 
+        {
+            Назва = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["name"].ToString();
+                
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["name"] = Назва;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public НовийДокумент_Pointer GetDirectoryPointer()
+        {
+            НовийДокумент_Pointer directoryPointer = new НовийДокумент_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    /// <summary> 
+    /// 
+      
+    /// </summary>
+    class НовийДокумент_Pointer : DirectoryPointer
+    {
+        public НовийДокумент_Pointer(object uid = null) : base(Config.Kernel, "new_document")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public НовийДокумент_Objest GetDirectoryObject()
+        {
+            НовийДокумент_Objest НовийДокументObjestItem = new НовийДокумент_Objest();
+            НовийДокументObjestItem.Read(base.UnigueID);
+            return НовийДокументObjestItem;
+        }
+    }
+    
+    /// <summary> 
+    /// 
+      
+    /// </summary>
+    class НовийДокумент_Select : DirectorySelect
+    {
+        public НовийДокумент_Select() : base(Config.Kernel, "new_document") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new НовийДокумент_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public НовийДокумент_Pointer Current { get; private set; }
+    }
+    
       
     
     #endregion

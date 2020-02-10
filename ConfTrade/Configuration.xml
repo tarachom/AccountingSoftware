@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 16:36:38</DateTimeSave>
+  <DateTimeSave>10.02.2020 18:26:15</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -67,14 +67,16 @@
         <Field>
           <Name>Вказівник3</Name>
           <NameInTable>pointer3</NameInTable>
-          <Type>empty_pointer</Type>
+          <Type>pointer</Type>
+          <Pointer>НовийДокумент</Pointer>
           <Desc>
           </Desc>
         </Field>
         <Field>
           <Name>Вказівник4</Name>
           <NameInTable>link_empty</NameInTable>
-          <Type>empty_pointer</Type>
+          <Type>pointer</Type>
+          <Pointer>НовийДокумент</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -129,6 +131,14 @@
               <NameInTable>pointer_od</NameInTable>
               <Type>pointer</Type>
               <Pointer>ОдиниціВиміру</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>NewDok</Name>
+              <NameInTable>new_doc</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>НовийДокумент</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -315,6 +325,23 @@
           </Fields>
         </TablePart>
       </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>НовийДокумент</Name>
+      <Table>new_document</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>name</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
       <Views />
     </Directory>
   </Directories>

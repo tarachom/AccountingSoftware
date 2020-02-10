@@ -164,14 +164,14 @@ namespace Configurator
 					}
 					else
 					{
-						string textListPointer = "Знайденно вказівники на довідник " + originalName + ":\n";
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник \"" + originalName + "\":\n";
 
 						foreach (string item in ListPointers)
-							textListPointer += item + "\n";
+							textListPointer += " -> " + item + "\n";
 
 						textListPointer += "\nПерейменувати неможливо";
 
-						MessageBox.Show(textListPointer, "Знайденно вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
 						configurationDirectories.Name = originalName;
 						Conf.Directories[originalName] = configurationDirectories;
@@ -233,14 +233,14 @@ namespace Configurator
 				}
 				else
 				{
-					string textListPointer = "Знайденно вказівники на довідник " + directoryName + ":\n";
+					string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник \"" + directoryName + "\":\n";
 
 					foreach (string item in ListPointers)
-						textListPointer += item + "\n";
+						textListPointer += " -> " + item + "\n";
 
 					textListPointer += "\nВидалитити неможливо";
 
-					MessageBox.Show(textListPointer, "Знайденно вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
 		}

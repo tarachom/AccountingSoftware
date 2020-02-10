@@ -3,8 +3,6 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	//
-	//
 	public class ConfigurationObjectTablePart
 	{
 		public ConfigurationObjectTablePart()

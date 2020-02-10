@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
@@ -23,7 +22,7 @@ namespace AccountingSoftware
 		/// </summary>
 		/// <param name="uGuid">Унікальний ідентифікатор</param>
 		/// <param name="table">Таблиця задається у випадку составного типу</param>
-		public UnigueID(string uGuid, string table = "") //
+		public UnigueID(string uGuid, string table = "")
 		{
 			UGuid = Guid.Parse(uGuid);
 			Table = table;

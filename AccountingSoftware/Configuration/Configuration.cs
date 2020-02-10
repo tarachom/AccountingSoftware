@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
@@ -238,6 +238,8 @@ namespace AccountingSoftware
 
 		public static void Save(string pathToConf, Configuration Conf)
 		{
+			string pathToCopyConf = CopyConfigurationFile(pathToConf);
+
 			XmlDocument xmlConfDocument = new XmlDocument();
 			xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
@@ -249,6 +251,8 @@ namespace AccountingSoftware
 			SaveDirectories(Conf.Directories, xmlConfDocument, rootNode);
 
 			xmlConfDocument.Save(pathToConf);
+
+			ComparisonCopyAndNewConfigurationFile(pathToConf, pathToCopyConf);
 		}
 
 		private static void SaveConfigurationInfo(Configuration Conf, XmlDocument xmlConfDocument, XmlElement rootNode)
@@ -417,6 +421,34 @@ namespace AccountingSoftware
 					nodeField.AppendChild(nodeFieldNameInTable);
 				}
 			}
+		}
+
+		private static string CopyConfigurationFile(string pathToConf)
+		{
+			if (File.Exists(pathToConf))
+			{
+				string dirName = Path.GetDirectoryName(pathToConf);
+				string fileNewName = Path.GetFileNameWithoutExtension(pathToConf) + DateTime.Now.ToString("_dd_MM_yyyy_HH_mm_ss") + ".xml";
+				string pathToCopyConf = Path.Combine(dirName, fileNewName);
+				
+				File.Copy(pathToConf, pathToCopyConf);
+
+				return pathToCopyConf;
+			}
+			else
+				throw new FileNotFoundException(pathToConf);
+		}
+
+		private static void ComparisonCopyAndNewConfigurationFile(string pathToConf, string pathToCopyConf)
+		{
+			//1. Пошук видалених довідників
+			//..
+
+			//2. Видалення в базі таблиць видалених довідників
+			//..
+
+			//Видалення копії конфігурації
+			File.Delete(pathToCopyConf);
 		}
 
 		public static void Generation(string pathToConf, string pathToTemplate, string pathToSaveCode)
