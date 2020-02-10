@@ -131,7 +131,7 @@
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(10, 330);
+			this.panel2.Location = new System.Drawing.Point(10, 337);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(540, 38);
 			this.panel2.TabIndex = 12;
@@ -150,7 +150,7 @@
 			this.comboBoxFieldType.FormattingEnabled = true;
 			this.comboBoxFieldType.Location = new System.Drawing.Point(123, 139);
 			this.comboBoxFieldType.Name = "comboBoxFieldType";
-			this.comboBoxFieldType.Size = new System.Drawing.Size(202, 21);
+			this.comboBoxFieldType.Size = new System.Drawing.Size(308, 21);
 			this.comboBoxFieldType.TabIndex = 14;
 			this.comboBoxFieldType.SelectedIndexChanged += new System.EventHandler(this.comboBoxFieldType_SelectedIndexChanged);
 			// 
@@ -178,7 +178,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(10, 10);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(540, 320);
+			this.panel1.Size = new System.Drawing.Size(540, 327);
 			this.panel1.TabIndex = 16;
 			// 
 			// comboBoxPointer
@@ -195,7 +195,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(560, 378);
+			this.ClientSize = new System.Drawing.Size(560, 385);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
 			this.Name = "FieldForm";

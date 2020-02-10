@@ -71,7 +71,7 @@
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(0, 0);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(266, 389);
+			this.panel1.Size = new System.Drawing.Size(266, 302);
 			this.panel1.TabIndex = 1;
 			// 
 			// panel5
@@ -130,7 +130,7 @@
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(10, 399);
+			this.panel2.Location = new System.Drawing.Point(10, 312);
 			this.panel2.Name = "panel2";
 			this.panel2.Size = new System.Drawing.Size(817, 38);
 			this.panel2.TabIndex = 3;
@@ -166,7 +166,7 @@
 			this.splitContainer1.Panel2.Controls.Add(this.label4);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
 			this.splitContainer1.Panel2.Controls.Add(this.label3);
-			this.splitContainer1.Size = new System.Drawing.Size(817, 389);
+			this.splitContainer1.Size = new System.Drawing.Size(817, 302);
 			this.splitContainer1.SplitterDistance = 266;
 			this.splitContainer1.TabIndex = 4;
 			// 
@@ -229,7 +229,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(837, 447);
+			this.ClientSize = new System.Drawing.Size(837, 360);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
 			this.Name = "TablePartForm";
