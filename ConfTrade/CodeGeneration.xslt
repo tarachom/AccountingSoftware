@@ -36,6 +36,9 @@
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'empty_pointer'">
+        <xsl:text>DirectoryEmptyPointer</xsl:text>
+      </xsl:when>
     </xsl:choose>    
   </xsl:template>
   
@@ -74,6 +77,9 @@
         <xsl:value-of select="Pointer"/>
         <xsl:text>_Pointer()</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'empty_pointer'">
+        <xsl:text>new DirectoryEmptyPointer()</xsl:text>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 
@@ -108,6 +114,9 @@
         <xsl:text>null</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'pointer'">
+        <xsl:text>null</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>null</xsl:text>
       </xsl:when>
     </xsl:choose>
@@ -160,6 +169,9 @@
         <xsl:when test="Type = 'pointer'">
           <xsl:text>new </xsl:text><xsl:value-of select="Pointer"/>
           <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"])</xsl:text>
+        </xsl:when>
+        <xsl:when test="Type = 'empty_pointer'">
+          <xsl:text>new DirectoryEmptyPointer()</xsl:text>
         </xsl:when>
      </xsl:choose>
   </xsl:template>
@@ -239,6 +251,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer'">
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                </xsl:when>
+                <xsl:when test="Type = 'empty_pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;

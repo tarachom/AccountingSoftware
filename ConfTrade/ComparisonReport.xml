@@ -92,6 +92,28 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Вказівник3</Name>
+      <NameInTable>pointer3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>empty_pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Вказівник4</Name>
+      <NameInTable>link_empty</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>empty_pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Ціни</Name>
       <Table>tovary_ceny_tablepart</Table>

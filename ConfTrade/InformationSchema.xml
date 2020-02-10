@@ -217,6 +217,16 @@
       <DataType>ARRAY</DataType>
       <UdtName>_text</UdtName>
     </Column>
+    <Column>
+      <Name>pointer3</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>link_empty</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
   </Table>
   <Table>
     <Name>zpysky_info</Name>

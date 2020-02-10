@@ -19,6 +19,8 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
+            Conf.Товари_Objest товари_Objest = new Conf.Товари_Objest();
+
             Conf.ТМЦ_Objest тМЦ_Objest = new Conf.ТМЦ_Objest();
             тМЦ_Objest.New();
             тМЦ_Objest.Назва = "Назва товару";

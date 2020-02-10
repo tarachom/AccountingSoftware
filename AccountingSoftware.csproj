@@ -59,6 +59,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
+    <Compile Include="AccountingSoftware\Directory\DirectoryEmptyPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />

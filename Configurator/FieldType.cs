@@ -38,6 +38,7 @@ namespace Configurator
 			fieldTypes.Add(new FieldType("datetime", "Дата та час"));
 			fieldTypes.Add(new FieldType("time", "Час"));
 			fieldTypes.Add(new FieldType("pointer", "Вказівник на елемент конфігурації"));
+			fieldTypes.Add(new FieldType("empty_pointer", "Пустий вказівник"));
 
 			return fieldTypes;
 		}

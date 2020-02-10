@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 14:55:35
+ * Дата конфігурації: 10.02.2020 16:36:38
  *
  */
 
@@ -27,7 +27,7 @@ namespace ConfTrade_v1_1
     class Товари_Objest : DirectoryObject
     {
         public Товари_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2" }) 
+             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty" }) 
         {
             Назва = "";
             Код = "";
@@ -37,6 +37,8 @@ namespace ConfTrade_v1_1
             Артикул = "";
             Вказівник1 = new ТМЦ_Pointer();
             Вказівник2 = new Товари_Pointer();
+            Вказівник3 = new DirectoryEmptyPointer();
+            Вказівник4 = new DirectoryEmptyPointer();
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -56,6 +58,8 @@ namespace ConfTrade_v1_1
                 Артикул = base.FieldValue["artikul"].ToString();
                 Вказівник1 = new ТМЦ_Pointer(base.FieldValue["pointer1"]);
                 Вказівник2 = new Товари_Pointer(base.FieldValue["pointer2"]);
+                Вказівник3 = new DirectoryEmptyPointer();
+                Вказівник4 = new DirectoryEmptyPointer();
                 
                 return true;
             }
@@ -73,6 +77,8 @@ namespace ConfTrade_v1_1
             base.FieldValue["artikul"] = Артикул;
             base.FieldValue["pointer1"] = Вказівник1.UnigueID.UGuid;
             base.FieldValue["pointer2"] = Вказівник2.UnigueID.UGuid;
+            base.FieldValue["pointer3"] = Вказівник3.UnigueID.UGuid;
+            base.FieldValue["link_empty"] = Вказівник4.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -96,6 +102,8 @@ namespace ConfTrade_v1_1
         public string Артикул { get; set; }
         public ТМЦ_Pointer Вказівник1 { get; set; }
         public Товари_Pointer Вказівник2 { get; set; }
+        public DirectoryEmptyPointer Вказівник3 { get; set; }
+        public DirectoryEmptyPointer Вказівник4 { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }

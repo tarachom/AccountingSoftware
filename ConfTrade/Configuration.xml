@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 14:55:35</DateTimeSave>
+  <DateTimeSave>10.02.2020 16:36:38</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -61,6 +61,20 @@
           <NameInTable>pointer2</NameInTable>
           <Type>pointer</Type>
           <Pointer>Товари</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Вказівник3</Name>
+          <NameInTable>pointer3</NameInTable>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Вказівник4</Name>
+          <NameInTable>link_empty</NameInTable>
+          <Type>empty_pointer</Type>
           <Desc>
           </Desc>
         </Field>

@@ -167,8 +167,20 @@
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:if>
-
+              
               <xsl:if test="$ConfFieldType = 'pointer'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>uuid</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
+              <xsl:if test="$ConfFieldType = 'empty_pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
                     <Coincide>yes</Coincide>
@@ -250,6 +262,9 @@
             <xsl:text>timestamp without time zone</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'pointer'">
+            <xsl:text>uuid</xsl:text>
+          </xsl:when>
+          <xsl:when test="Type = 'empty_pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
         </xsl:choose>
