@@ -19,10 +19,10 @@ namespace Configurator
 			InitializeComponent();
 		}
 
-		public void S()
-		{
-			Configuration Conf = Program.Kernel.Conf;
+		public Configuration Conf { get; set; }
 
+		public void SaveConf()
+		{
 			//Save
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
@@ -60,8 +60,6 @@ namespace Configurator
 
 		public void LoadTree()
 		{
-			Configuration Conf = Program.Kernel.Conf;
-
 			treeConfiguration.Nodes.Clear();
 
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
@@ -80,7 +78,8 @@ namespace Configurator
 				//Поля
 				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields)
 				{
-					directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name).ImageIndex = 1;
+					directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + 
+						((ConfFields.Value.Type == "pointer") ? " -> " + ConfFields.Value.Pointer : "")).ImageIndex = 1;
 				}
 
 				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
@@ -94,7 +93,8 @@ namespace Configurator
 					//Поля
 					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
 					{
-						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name).ImageIndex = 1;
+						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name +
+							((ConfTablePartFields.Value.Type == "pointer") ? " -> " + ConfTablePartFields.Value.Pointer : "")).ImageIndex = 1;
 					}
 
 					//directoriTablePartNode.Expand();
@@ -130,7 +130,7 @@ namespace Configurator
 			Program.Kernel = new Kernel();
 			Program.Kernel.Open();
 
-			Configuration Conf = Program.Kernel.Conf;
+			Conf = Program.Kernel.Conf;
 
 			LoadTree();
 		}
@@ -148,8 +148,6 @@ namespace Configurator
 
 		void CallBack_Update_Directory(string originalName, ConfigurationDirectories configurationDirectories, bool isNew)
 		{
-			Configuration Conf = Program.Kernel.Conf;
-
 			if (isNew)
 			{
 				Conf.AppendDirectory(configurationDirectories);
@@ -208,9 +206,24 @@ namespace Configurator
 			if (nodeSel != null)
 			{
 				string directoryName = nodeSel.Name;
-				Program.Kernel.Conf.Directories.Remove(directoryName);
 
-				LoadTree();
+				List<string> ListPointers = Conf.SearchForPointers(directoryName);
+				if (ListPointers.Count == 0)
+				{
+					Conf.Directories.Remove(directoryName);
+					LoadTree();
+				}
+				else
+				{
+					string textListPointer = "Знайденно вказівники на довідник " + directoryName + ":\n";
+
+					foreach (string item in ListPointers)
+						textListPointer += item + "\n";
+
+					textListPointer += "\nВидалитити неможливо";
+
+					MessageBox.Show(textListPointer, "Знайденно вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 
@@ -223,7 +236,7 @@ namespace Configurator
 
 		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			S();
+			SaveConf();
 		}
 	}
 }

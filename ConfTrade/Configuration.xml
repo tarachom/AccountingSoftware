@@ -3,12 +3,12 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 12:36:12</DateTimeSave>
+  <DateTimeSave>10.02.2020 13:43:26</DateTimeSave>
   <Directories>
     <Directory>
-      <Name>Tovary</Name>
+      <Name>Товари</Name>
       <Table>tovary</Table>
-      <Desc>Довідник Товари Desc</Desc>
+      <Desc>Довідник Товари</Desc>
       <Fields>
         <Field>
           <Name>Назва</Name>
@@ -140,7 +140,7 @@
       <Views />
     </Directory>
     <Directory>
-      <Name>New</Name>
+      <Name>Новий</Name>
       <Table>new</Table>
       <Desc>new new</Desc>
       <Fields>

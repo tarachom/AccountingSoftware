@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 12:36:12
+ * Дата конфігурації: 10.02.2020 13:43:26
  *
  */
 
@@ -19,14 +19,14 @@ namespace ConfTrade_v1_1
         public static Kernel Kernel { get; set; }
     }
     
-    #region DIRECTORY "Tovary"
+    #region DIRECTORY "Товари"
     
     /// <summary> 
-    /// Довідник Товари Desc
+    /// Довідник Товари
     /// </summary>
-    class Tovary_Objest : DirectoryObject
+    class Товари_Objest : DirectoryObject
     {
-        public Tovary_Objest() : base(Config.Kernel, "tovary",
+        public Товари_Objest() : base(Config.Kernel, "tovary",
              new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2" }) 
         {
             Назва = "";
@@ -39,8 +39,8 @@ namespace ConfTrade_v1_1
             Вказівник2 = new Tovary_Pointer();
             
             //Табличні частини
-            Ціни_TablePart = new Tovary_Ціни_TablePart(this);
-            ОдиниціВиміру_TablePart = new Tovary_ОдиниціВиміру_TablePart(this);
+            Ціни_TablePart = new Товари_Ціни_TablePart(this);
+            ОдиниціВиміру_TablePart = new Товари_ОдиниціВиміру_TablePart(this);
             
         }
         
@@ -82,9 +82,9 @@ namespace ConfTrade_v1_1
             base.BaseDelete();
         }
         
-        public Tovary_Pointer GetDirectoryPointer()
+        public Товари_Pointer GetDirectoryPointer()
         {
-            Tovary_Pointer directoryPointer = new Tovary_Pointer(UnigueID.UGuid);
+            Товари_Pointer directoryPointer = new Товари_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
         
@@ -98,35 +98,35 @@ namespace ConfTrade_v1_1
         public Tovary_Pointer Вказівник2 { get; set; }
         
         //Табличні частини
-        public Tovary_Ціни_TablePart Ціни_TablePart { get; set; }
-        public Tovary_ОдиниціВиміру_TablePart ОдиниціВиміру_TablePart { get; set; }
+        public Товари_Ціни_TablePart Ціни_TablePart { get; set; }
+        public Товари_ОдиниціВиміру_TablePart ОдиниціВиміру_TablePart { get; set; }
         
     }
     
     /// <summary> 
-    /// Довідник Товари Desc
+    /// Довідник Товари
     /// </summary>
-    class Tovary_Pointer : DirectoryPointer
+    class Товари_Pointer : DirectoryPointer
     {
-        public Tovary_Pointer(object uid = null) : base(Config.Kernel, "tovary")
+        public Товари_Pointer(object uid = null) : base(Config.Kernel, "tovary")
         {
             if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
         }
 
-        public Tovary_Objest GetDirectoryObject()
+        public Товари_Objest GetDirectoryObject()
         {
-            Tovary_Objest TovaryObjestItem = new Tovary_Objest();
-            TovaryObjestItem.Read(base.UnigueID);
-            return TovaryObjestItem;
+            Товари_Objest ТовариObjestItem = new Товари_Objest();
+            ТовариObjestItem.Read(base.UnigueID);
+            return ТовариObjestItem;
         }
     }
     
     /// <summary> 
-    /// Довідник Товари Desc
+    /// Довідник Товари
     /// </summary>
-    class Tovary_Select : DirectorySelect
+    class Товари_Select : DirectorySelect
     {
-        public Tovary_Select() : base(Config.Kernel, "tovary") { }
+        public Товари_Select() : base(Config.Kernel, "tovary") { }
     
         public bool Select() 
         { 
@@ -151,7 +151,7 @@ namespace ConfTrade_v1_1
         {
             if (MoveToPosition())
             {
-                Current = new Tovary_Pointer();
+                Current = new Товари_Pointer();
                 Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
@@ -162,25 +162,25 @@ namespace ConfTrade_v1_1
             }
         }
 
-        public Tovary_Pointer Current { get; private set; }
+        public Товари_Pointer Current { get; private set; }
     }
     
       
     /// <summary>
     /// Таблична частина Ціни
     /// </summary>
-    class Tovary_Ціни_TablePart : DirectoryTablePart
+    class Товари_Ціни_TablePart : DirectoryTablePart
     {
-        public Tovary_Ціни_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
+        public Товари_Ціни_TablePart(Товари_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
              new string[] { "name", "cena", "isnew", "date_update", "date_test", "times", "pointer_od" }) 
         {
             Owner = owner;
-            Records = new List<Tovary_Ціни_TablePartRecord>();
+            Records = new List<Товари_Ціни_TablePartRecord>();
         }
         
-        public Tovary_Objest Owner { get; private set; }
+        public Товари_Objest Owner { get; private set; }
         
-        public List<Tovary_Ціни_TablePartRecord> Records { get; set; }
+        public List<Товари_Ціни_TablePartRecord> Records { get; set; }
         
         public void Read()
         {
@@ -191,7 +191,7 @@ namespace ConfTrade_v1_1
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Tovary_Ціни_TablePartRecord record = new Tovary_Ціни_TablePartRecord();
+                Товари_Ціни_TablePartRecord record = new Товари_Ціни_TablePartRecord();
 
                 record.Name = fieldValue["name"].ToString();
                 record.Cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
@@ -222,7 +222,7 @@ namespace ConfTrade_v1_1
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Tovary_Ціни_TablePartRecord record in Records)
+                foreach (Товари_Ціни_TablePartRecord record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -250,9 +250,9 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// Таблична частина Ціни
     /// </summary>
-    class Tovary_Ціни_TablePartRecord : DirectoryTablePartRecord
+    class Товари_Ціни_TablePartRecord : DirectoryTablePartRecord
     {
-        public Tovary_Ціни_TablePartRecord()
+        public Товари_Ціни_TablePartRecord()
         {
             Name = "";
             Cena = 0;
@@ -264,7 +264,7 @@ namespace ConfTrade_v1_1
             
         }
         
-        public Tovary_Ціни_TablePartRecord(
+        public Товари_Ціни_TablePartRecord(
             string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null, ОдиниціВиміру_Pointer _ОдВиміру = null)
         {
             Name = _Name;
@@ -291,18 +291,18 @@ namespace ConfTrade_v1_1
     /// 
           
     /// </summary>
-    class Tovary_ОдиниціВиміру_TablePart : DirectoryTablePart
+    class Товари_ОдиниціВиміру_TablePart : DirectoryTablePart
     {
-        public Tovary_ОдиниціВиміру_TablePart(Tovary_Objest owner) : base(Config.Kernel, "od_list",
+        public Товари_ОдиниціВиміру_TablePart(Товари_Objest owner) : base(Config.Kernel, "od_list",
              new string[] { "od_pointer" }) 
         {
             Owner = owner;
-            Records = new List<Tovary_ОдиниціВиміру_TablePartRecord>();
+            Records = new List<Товари_ОдиниціВиміру_TablePartRecord>();
         }
         
-        public Tovary_Objest Owner { get; private set; }
+        public Товари_Objest Owner { get; private set; }
         
-        public List<Tovary_ОдиниціВиміру_TablePartRecord> Records { get; set; }
+        public List<Товари_ОдиниціВиміру_TablePartRecord> Records { get; set; }
         
         public void Read()
         {
@@ -313,7 +313,7 @@ namespace ConfTrade_v1_1
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Tovary_ОдиниціВиміру_TablePartRecord record = new Tovary_ОдиниціВиміру_TablePartRecord();
+                Товари_ОдиниціВиміру_TablePartRecord record = new Товари_ОдиниціВиміру_TablePartRecord();
 
                 record.Одиниця = new ОдиниціВиміру_Pointer(fieldValue["od_pointer"]);
                 
@@ -338,7 +338,7 @@ namespace ConfTrade_v1_1
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Tovary_ОдиниціВиміру_TablePartRecord record in Records)
+                foreach (Товари_ОдиниціВиміру_TablePartRecord record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -361,15 +361,15 @@ namespace ConfTrade_v1_1
     /// 
           
     /// </summary>
-    class Tovary_ОдиниціВиміру_TablePartRecord : DirectoryTablePartRecord
+    class Товари_ОдиниціВиміру_TablePartRecord : DirectoryTablePartRecord
     {
-        public Tovary_ОдиниціВиміру_TablePartRecord()
+        public Товари_ОдиниціВиміру_TablePartRecord()
         {
             Одиниця = new ОдиниціВиміру_Pointer();
             
         }
         
-        public Tovary_ОдиниціВиміру_TablePartRecord(
+        public Товари_ОдиниціВиміру_TablePartRecord(
             ОдиниціВиміру_Pointer _Одиниця = null)
         {
             Одиниця = _Одиниця;
@@ -383,14 +383,14 @@ namespace ConfTrade_v1_1
     
     #endregion
     
-    #region DIRECTORY "New"
+    #region DIRECTORY "Новий"
     
     /// <summary> 
     /// new new
     /// </summary>
-    class New_Objest : DirectoryObject
+    class Новий_Objest : DirectoryObject
     {
-        public New_Objest() : base(Config.Kernel, "new",
+        public Новий_Objest() : base(Config.Kernel, "new",
              new string[] { "id", "name", "opys" }) 
         {
             Код = "";
@@ -429,9 +429,9 @@ namespace ConfTrade_v1_1
             base.BaseDelete();
         }
         
-        public New_Pointer GetDirectoryPointer()
+        public Новий_Pointer GetDirectoryPointer()
         {
-            New_Pointer directoryPointer = new New_Pointer(UnigueID.UGuid);
+            Новий_Pointer directoryPointer = new Новий_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
         
@@ -446,27 +446,27 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// new new
     /// </summary>
-    class New_Pointer : DirectoryPointer
+    class Новий_Pointer : DirectoryPointer
     {
-        public New_Pointer(object uid = null) : base(Config.Kernel, "new")
+        public Новий_Pointer(object uid = null) : base(Config.Kernel, "new")
         {
             if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
         }
 
-        public New_Objest GetDirectoryObject()
+        public Новий_Objest GetDirectoryObject()
         {
-            New_Objest NewObjestItem = new New_Objest();
-            NewObjestItem.Read(base.UnigueID);
-            return NewObjestItem;
+            Новий_Objest НовийObjestItem = new Новий_Objest();
+            НовийObjestItem.Read(base.UnigueID);
+            return НовийObjestItem;
         }
     }
     
     /// <summary> 
     /// new new
     /// </summary>
-    class New_Select : DirectorySelect
+    class Новий_Select : DirectorySelect
     {
-        public New_Select() : base(Config.Kernel, "new") { }
+        public Новий_Select() : base(Config.Kernel, "new") { }
     
         public bool Select() 
         { 
@@ -491,7 +491,7 @@ namespace ConfTrade_v1_1
         {
             if (MoveToPosition())
             {
-                Current = new New_Pointer();
+                Current = new Новий_Pointer();
                 Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
@@ -502,7 +502,7 @@ namespace ConfTrade_v1_1
             }
         }
 
-        public New_Pointer Current { get; private set; }
+        public Новий_Pointer Current { get; private set; }
     }
     
       

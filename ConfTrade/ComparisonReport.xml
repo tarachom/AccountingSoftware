@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Control_Directory>
-    <Name>Tovary</Name>
+    <Name>Товари</Name>
     <Table>tovary</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
@@ -242,7 +242,7 @@
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
-    <Name>New</Name>
+    <Name>Новий</Name>
     <Table>new</Table>
     <IsExist>yes</IsExist>
     <Control_Field>

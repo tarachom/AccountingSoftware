@@ -44,7 +44,7 @@ namespace AccountingSoftware
 			return Directory;
 		}
 
-		public List<string> SearchForPointers(string SearchDirectoryName)
+		public List<string> SearchForPointers(string searchDirectoryName)
 		{
 			List<string> ListPointer = new List<string>();
 
@@ -56,7 +56,7 @@ namespace AccountingSoftware
 				{
 					if (directoryField.Type == "pointer")
 					{
-						if (directoryField.Pointer == SearchDirectoryName)
+						if (directoryField.Pointer == searchDirectoryName)
 						{
 							//pointer
 							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
@@ -72,7 +72,7 @@ namespace AccountingSoftware
 					{
 						if (tablePartField.Type == "pointer")
 						{
-							if (tablePartField.Pointer == SearchDirectoryName)
+							if (tablePartField.Pointer == searchDirectoryName)
 							{
 								//pointer
 								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
