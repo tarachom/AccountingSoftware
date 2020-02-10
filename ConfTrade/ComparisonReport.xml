@@ -143,24 +143,35 @@
       <Control_Field>
         <Name>Дата</Name>
         <NameInTable>date_test</NameInTable>
-        <IsExist>no</IsExist>
-        <FieldCreate>
-          <Name>Дата</Name>
-          <NameInTable>date_test</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>date</ConfType>
           <DataType>date</DataType>
-        </FieldCreate>
+          <UdtName>date</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
       </Control_Field>
       <Control_Field>
         <Name>Час</Name>
         <NameInTable>times</NameInTable>
-        <IsExist>no</IsExist>
-        <FieldCreate>
-          <Name>Час</Name>
-          <NameInTable>times</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>time</ConfType>
           <DataType>time without time zone</DataType>
-        </FieldCreate>
+          <UdtName>time</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>ОдВиміру</Name>
+        <NameInTable>pointer_od</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+          <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
       </Control_Field>
       <Control_Field>
         <Name>Одиниця</Name>
@@ -214,6 +225,12 @@
           <NameInTable>times</NameInTable>
           <ConfType>time</ConfType>
           <DataType>time without time zone</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>ОдВиміру</Name>
+          <NameInTable>pointer_od</NameInTable>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
         </FieldCreate>
         <FieldCreate>
           <Name>Одиниця</Name>
@@ -473,5 +490,24 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_TabularParts>
+      <Name>Історія</Name>
+      <Table>history</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>ДатаЗапису</Name>
+          <NameInTable>date_save</NameInTable>
+          <ConfType>datetime</ConfType>
+          <DataType>timestamp without time zone</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Значення</Name>
+          <NameInTable>value</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </TableCreate>
+    </Control_TabularParts>
   </Control_Directory>
 </root>

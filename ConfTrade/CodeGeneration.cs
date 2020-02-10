@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 10:25:30
+ * Дата конфігурації: 10.02.2020 10:34:49
  *
  */
 
@@ -172,7 +172,7 @@ namespace ConfTrade_v1_1
     class Tovary_Ціни_TablePart : DirectoryTablePart
     {
         public Tovary_Ціни_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
-             new string[] { "name", "cena", "isnew", "date_update", "date_test", "times" }) 
+             new string[] { "name", "cena", "isnew", "date_update", "date_test", "times", "pointer_od" }) 
         {
             Owner = owner;
             Records = new List<Tovary_Ціни_TablePartRecord>();
@@ -199,6 +199,7 @@ namespace ConfTrade_v1_1
                 record.ДатаОбновлення = (fieldValue["date_update"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_update"].ToString()) : DateTime.MinValue;
                 record.Дата = (fieldValue["date_test"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_test"].ToString()) : DateTime.MinValue;
                 record.Час = (fieldValue["times"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["times"].ToString()) : DateTime.MinValue.TimeOfDay;
+                record.ОдВиміру = new ОдиниціВиміру_Pointer(fieldValue["pointer_od"]);
                 
                 Records.Add(record);
             }
@@ -231,6 +232,7 @@ namespace ConfTrade_v1_1
                     fieldValue.Add("date_update", record.ДатаОбновлення);
                     fieldValue.Add("date_test", record.Дата);
                     fieldValue.Add("times", record.Час);
+                    fieldValue.Add("pointer_od", record.ОдВиміру.UnigueID.UGuid);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -258,11 +260,12 @@ namespace ConfTrade_v1_1
             ДатаОбновлення = DateTime.MinValue;
             Дата = DateTime.MinValue;
             Час = DateTime.MinValue.TimeOfDay;
+            ОдВиміру = new ОдиниціВиміру_Pointer();
             
         }
         
         public Tovary_Ціни_TablePartRecord(
-            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null)
+            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null, ОдиниціВиміру_Pointer _ОдВиміру = null)
         {
             Name = _Name;
             Cena = _Cena;
@@ -270,6 +273,7 @@ namespace ConfTrade_v1_1
             ДатаОбновлення = _ДатаОбновлення ?? DateTime.MinValue;
             Дата = _Дата ?? DateTime.MinValue;
             Час = _Час ?? DateTime.MinValue.TimeOfDay;
+            ОдВиміру = _ОдВиміру;
             
         }
         
@@ -279,6 +283,7 @@ namespace ConfTrade_v1_1
         public DateTime ДатаОбновлення { get; set; }
         public DateTime Дата { get; set; }
         public TimeSpan Час { get; set; }
+        public ОдиниціВиміру_Pointer ОдВиміру { get; set; }
         
     }
       
@@ -1035,6 +1040,7 @@ namespace ConfTrade_v1_1
             КороткаНазва = "";
             
             //Табличні частини
+            Історія_TablePart = new ОдиниціВиміру_Історія_TablePart(this);
             
         }
         
@@ -1077,6 +1083,7 @@ namespace ConfTrade_v1_1
         public string КороткаНазва { get; set; }
         
         //Табличні частини
+        public ОдиниціВиміру_Історія_TablePart Історія_TablePart { get; set; }
         
     }
     
@@ -1144,6 +1151,102 @@ namespace ConfTrade_v1_1
         public ОдиниціВиміру_Pointer Current { get; private set; }
     }
     
+      
+    /// <summary>
+    /// Історія
+    /// </summary>
+    class ОдиниціВиміру_Історія_TablePart : DirectoryTablePart
+    {
+        public ОдиниціВиміру_Історія_TablePart(ОдиниціВиміру_Objest owner) : base(Config.Kernel, "history",
+             new string[] { "date_save", "value" }) 
+        {
+            Owner = owner;
+            Records = new List<ОдиниціВиміру_Історія_TablePartRecord>();
+        }
+        
+        public ОдиниціВиміру_Objest Owner { get; private set; }
+        
+        public List<ОдиниціВиміру_Історія_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.FieldValueList.Clear();
+
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                ОдиниціВиміру_Історія_TablePartRecord record = new ОдиниціВиміру_Історія_TablePartRecord();
+
+                record.ДатаЗапису = (fieldValue["date_save"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_save"].ToString()) : DateTime.MinValue;
+                record.Значення = fieldValue["value"].ToString();
+                
+                Records.Add(record);
+            }
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Перед записом колекції, попередні записи видаляються з бази даних.
+        /// Щоб не видаляти треба поставити clear_all_before_save = false.
+        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// </param>
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (ОдиниціВиміру_Історія_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("date_save", record.ДатаЗапису);
+                    fieldValue.Add("value", record.Значення);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Clear()
+        {
+            base.BaseDelete(Owner.UnigueID);
+        }
+    }
+    
+    /// <summary> 
+    /// Історія
+    /// </summary>
+    class ОдиниціВиміру_Історія_TablePartRecord : DirectoryTablePartRecord
+    {
+        public ОдиниціВиміру_Історія_TablePartRecord()
+        {
+            ДатаЗапису = DateTime.MinValue;
+            Значення = "";
+            
+        }
+        
+        public ОдиниціВиміру_Історія_TablePartRecord(
+            DateTime?  _ДатаЗапису = null, string _Значення = "")
+        {
+            ДатаЗапису = _ДатаЗапису ?? DateTime.MinValue;
+            Значення = _Значення;
+            
+        }
+        
+        public DateTime ДатаЗапису { get; set; }
+        public string Значення { get; set; }
+        
+    }
       
     
     #endregion

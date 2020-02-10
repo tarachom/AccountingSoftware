@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 10:25:30</DateTimeSave>
+  <DateTimeSave>10.02.2020 10:34:49</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -107,6 +107,14 @@
               <Name>Час</Name>
               <NameInTable>times</NameInTable>
               <Type>time</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>ОдВиміру</Name>
+              <NameInTable>pointer_od</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>ОдиниціВиміру</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -323,7 +331,29 @@
           </Desc>
         </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>Історія</Name>
+          <Table>history</Table>
+          <Desc>Історія</Desc>
+          <Fields>
+            <Field>
+              <Name>ДатаЗапису</Name>
+              <NameInTable>date_save</NameInTable>
+              <Type>datetime</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Значення</Name>
+              <NameInTable>value</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views />
     </Directory>
   </Directories>

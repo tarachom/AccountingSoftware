@@ -1,5 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <sql>ALTER TABLE tovary_ceny_tablepart ADD COLUMN "date_test" date;</sql>
-  <sql>ALTER TABLE tovary_ceny_tablepart ADD COLUMN "times" time without time zone;</sql>
-</root>
+<root />
