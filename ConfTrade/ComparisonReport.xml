@@ -141,6 +141,28 @@
         </Type>
       </Control_Field>
       <Control_Field>
+        <Name>Дата</Name>
+        <NameInTable>date_test</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>Дата</Name>
+          <NameInTable>date_test</NameInTable>
+          <ConfType>date</ConfType>
+          <DataType>date</DataType>
+        </FieldCreate>
+      </Control_Field>
+      <Control_Field>
+        <Name>Час</Name>
+        <NameInTable>times</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>Час</Name>
+          <NameInTable>times</NameInTable>
+          <ConfType>time</ConfType>
+          <DataType>time without time zone</DataType>
+        </FieldCreate>
+      </Control_Field>
+      <Control_Field>
         <Name>Одиниця</Name>
         <NameInTable>od_pointer</NameInTable>
         <IsExist>yes</IsExist>
@@ -180,6 +202,18 @@
           <NameInTable>date_update</NameInTable>
           <ConfType>datetime</ConfType>
           <DataType>timestamp without time zone</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Дата</Name>
+          <NameInTable>date_test</NameInTable>
+          <ConfType>date</ConfType>
+          <DataType>date</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Час</Name>
+          <NameInTable>times</NameInTable>
+          <ConfType>time</ConfType>
+          <DataType>time without time zone</DataType>
         </FieldCreate>
         <FieldCreate>
           <Name>Одиниця</Name>

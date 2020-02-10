@@ -251,6 +251,9 @@ namespace Configurator
 			nodeSel = e.Node;
 		}
 
-		
+		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			S();
+		}
 	}
 }

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 09:44:15</DateTimeSave>
+  <DateTimeSave>10.02.2020 10:25:30</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -93,6 +93,20 @@
               <Name>ДатаОбновлення</Name>
               <NameInTable>date_update</NameInTable>
               <Type>datetime</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Дата</Name>
+              <NameInTable>date_test</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Час</Name>
+              <NameInTable>times</NameInTable>
+              <Type>time</Type>
               <Desc>
               </Desc>
             </Field>

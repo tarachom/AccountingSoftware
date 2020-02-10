@@ -40,8 +40,9 @@
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -188,7 +189,8 @@
 			// DirectoryToolStripMenuItem
 			// 
 			this.DirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addDirectoryToolStripMenuItem});
+            this.addDirectoryToolStripMenuItem,
+            this.saveConfigurationToolStripMenuItem});
 			this.DirectoryToolStripMenuItem.Name = "DirectoryToolStripMenuItem";
 			this.DirectoryToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
 			this.DirectoryToolStripMenuItem.Text = "Довідники";
@@ -208,35 +210,42 @@
             this.copyDirectoryToolStripMenuItem,
             this.deleteDirectoryToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(181, 114);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(151, 92);
 			// 
 			// openDirectoryToolStripMenuItem
 			// 
 			this.openDirectoryToolStripMenuItem.Name = "openDirectoryToolStripMenuItem";
-			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.openDirectoryToolStripMenuItem.Text = "Відкрити";
 			this.openDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryToolStripMenuItem_Click);
 			// 
 			// addNewDirectiryToolStripMenuItem
 			// 
 			this.addNewDirectiryToolStripMenuItem.Name = "addNewDirectiryToolStripMenuItem";
-			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.addNewDirectiryToolStripMenuItem.Text = "Додати новий";
 			this.addNewDirectiryToolStripMenuItem.Click += new System.EventHandler(this.addNewDirectiryToolStripMenuItem_Click);
-			// 
-			// deleteDirectoryToolStripMenuItem
-			// 
-			this.deleteDirectoryToolStripMenuItem.Name = "deleteDirectoryToolStripMenuItem";
-			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
-			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
 			// 
 			// copyDirectoryToolStripMenuItem
 			// 
 			this.copyDirectoryToolStripMenuItem.Name = "copyDirectoryToolStripMenuItem";
-			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.copyDirectoryToolStripMenuItem.Text = "Скопіювати";
 			this.copyDirectoryToolStripMenuItem.Click += new System.EventHandler(this.copyDirectoryToolStripMenuItem_Click);
+			// 
+			// deleteDirectoryToolStripMenuItem
+			// 
+			this.deleteDirectoryToolStripMenuItem.Name = "deleteDirectoryToolStripMenuItem";
+			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
+			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
+			// 
+			// saveConfigurationToolStripMenuItem
+			// 
+			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
+			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.saveConfigurationToolStripMenuItem.Text = "SaveConfiguration";
+			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
 			// FormConfiguration
 			// 
@@ -278,6 +287,7 @@
 		private System.Windows.Forms.ToolStripMenuItem addNewDirectiryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem copyDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deleteDirectoryToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
 	}
 }
 

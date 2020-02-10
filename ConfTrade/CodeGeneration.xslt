@@ -102,10 +102,10 @@
         <xsl:text>false</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'time'">
-        <xsl:text>DateTime.MinValue.TimeOfDay</xsl:text>
+        <xsl:text>null</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'date' or Type = 'datetime'">
-        <xsl:text>DateTime.MinValue</xsl:text>
+        <xsl:text>null</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'pointer'">
         <xsl:text>null</xsl:text>
@@ -444,6 +444,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             <xsl:for-each select="Fields/Field">
               <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
               <xsl:call-template name="FieldType" />
+              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+                   <xsl:text>? </xsl:text>    
+              </xsl:if>
               <xsl:text> _</xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:text> = </xsl:text>
@@ -453,7 +456,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             <xsl:for-each select="Fields/Field">
               <xsl:value-of select="Name"/>
               <xsl:text> = _</xsl:text>
-              <xsl:value-of select="Name"/>;
+              <xsl:value-of select="Name"/>
+              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+                   <xsl:text> ?? </xsl:text>
+                   <xsl:call-template name="DefaultFieldValue" />
+              </xsl:if>;
             </xsl:for-each>
         }
         

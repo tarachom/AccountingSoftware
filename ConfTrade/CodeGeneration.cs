@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 09:44:15
+ * Дата конфігурації: 10.02.2020 10:25:30
  *
  */
 
@@ -172,7 +172,7 @@ namespace ConfTrade_v1_1
     class Tovary_Ціни_TablePart : DirectoryTablePart
     {
         public Tovary_Ціни_TablePart(Tovary_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
-             new string[] { "name", "cena", "isnew", "date_update" }) 
+             new string[] { "name", "cena", "isnew", "date_update", "date_test", "times" }) 
         {
             Owner = owner;
             Records = new List<Tovary_Ціни_TablePartRecord>();
@@ -197,6 +197,8 @@ namespace ConfTrade_v1_1
                 record.Cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
                 record.IsNew = (int)fieldValue["isnew"];
                 record.ДатаОбновлення = (fieldValue["date_update"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_update"].ToString()) : DateTime.MinValue;
+                record.Дата = (fieldValue["date_test"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_test"].ToString()) : DateTime.MinValue;
+                record.Час = (fieldValue["times"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["times"].ToString()) : DateTime.MinValue.TimeOfDay;
                 
                 Records.Add(record);
             }
@@ -227,6 +229,8 @@ namespace ConfTrade_v1_1
                     fieldValue.Add("cena", record.Cena);
                     fieldValue.Add("isnew", record.IsNew);
                     fieldValue.Add("date_update", record.ДатаОбновлення);
+                    fieldValue.Add("date_test", record.Дата);
+                    fieldValue.Add("times", record.Час);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -252,16 +256,20 @@ namespace ConfTrade_v1_1
             Cena = 0;
             IsNew = 0;
             ДатаОбновлення = DateTime.MinValue;
+            Дата = DateTime.MinValue;
+            Час = DateTime.MinValue.TimeOfDay;
             
         }
         
         public Tovary_Ціни_TablePartRecord(
-            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime? _ДатаОбновлення = null)
+            string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null)
         {
             Name = _Name;
             Cena = _Cena;
             IsNew = _IsNew;
             ДатаОбновлення = _ДатаОбновлення ?? DateTime.MinValue;
+            Дата = _Дата ?? DateTime.MinValue;
+            Час = _Час ?? DateTime.MinValue.TimeOfDay;
             
         }
         
@@ -269,6 +277,8 @@ namespace ConfTrade_v1_1
         public decimal Cena { get; set; }
         public int IsNew { get; set; }
         public DateTime ДатаОбновлення { get; set; }
+        public DateTime Дата { get; set; }
+        public TimeSpan Час { get; set; }
         
     }
       
