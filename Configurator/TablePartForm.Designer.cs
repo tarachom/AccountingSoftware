@@ -172,6 +172,8 @@
 			// 
 			// textBoxDesc
 			// 
+			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxDesc.Location = new System.Drawing.Point(131, 83);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
@@ -189,6 +191,8 @@
 			// 
 			// textBoxTable
 			// 
+			this.textBoxTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxTable.Location = new System.Drawing.Point(131, 57);
 			this.textBoxTable.Name = "textBoxTable";
 			this.textBoxTable.Size = new System.Drawing.Size(413, 20);
@@ -205,6 +209,8 @@
 			// 
 			// textBoxName
 			// 
+			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxName.Location = new System.Drawing.Point(131, 31);
 			this.textBoxName.Name = "textBoxName";
 			this.textBoxName.Size = new System.Drawing.Size(413, 20);
@@ -228,7 +234,7 @@
 			this.Controls.Add(this.panel2);
 			this.Name = "TablePartForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "DirectoryForm";
+			this.Text = "Таблична частина";
 			this.Load += new System.EventHandler(this.DirectoryForm_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);

@@ -14,11 +14,8 @@ namespace Configurator
 	public partial class FieldForm : Form
 	{
 		public Action<string, ConfigurationObjectField, bool> CallBack { get; set; }
-
 		public ConfigurationObjectField configurationObjectField { get; set; }
-
-		public string originalName { get; set; }
-
+		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
 
 		public FieldForm()
@@ -50,7 +47,7 @@ namespace Configurator
 			}
 			else
 			{
-				originalName = configurationObjectField.Name;
+				OriginalName = configurationObjectField.Name;
 
 				textBoxName.Text = configurationObjectField.Name;
 				textBoxNameInTable.Text = configurationObjectField.NameInTable;
@@ -98,7 +95,7 @@ namespace Configurator
 				configurationObjectField.Pointer = "";
 			}
 
-			CallBack.Invoke(originalName, configurationObjectField, IsNew);
+			CallBack.Invoke(OriginalName, configurationObjectField, IsNew);
 
 			this.Hide();
 		}

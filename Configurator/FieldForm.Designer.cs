@@ -48,6 +48,8 @@
 			// 
 			// textBoxDesc
 			// 
+			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxDesc.Location = new System.Drawing.Point(123, 70);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
@@ -65,6 +67,8 @@
 			// 
 			// textBoxNameInTable
 			// 
+			this.textBoxNameInTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxNameInTable.Location = new System.Drawing.Point(123, 44);
 			this.textBoxNameInTable.Name = "textBoxNameInTable";
 			this.textBoxNameInTable.Size = new System.Drawing.Size(414, 20);
@@ -81,6 +85,8 @@
 			// 
 			// textBoxName
 			// 
+			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxName.Location = new System.Drawing.Point(123, 18);
 			this.textBoxName.Name = "textBoxName";
 			this.textBoxName.Size = new System.Drawing.Size(414, 20);
@@ -177,6 +183,8 @@
 			// 
 			// comboBoxPointer
 			// 
+			this.comboBoxPointer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.comboBoxPointer.FormattingEnabled = true;
 			this.comboBoxPointer.Location = new System.Drawing.Point(123, 167);
 			this.comboBoxPointer.Name = "comboBoxPointer";
@@ -192,7 +200,7 @@
 			this.Controls.Add(this.panel2);
 			this.Name = "FieldForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "FieldForm";
+			this.Text = "Поле";
 			this.Load += new System.EventHandler(this.FieldForm_Load);
 			this.panel2.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);

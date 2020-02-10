@@ -18,10 +18,9 @@ namespace Configurator
 			InitializeComponent();
 		}
 
-		public FormConfiguration formConfiguration { get; set; }
-
+		public Action<string, ConfigurationDirectories, bool> CallBack { get; set; }
 		public ConfigurationDirectories ConfDirectory { get; set; }
-
+		public string OriginalName { get; set; }
 		public bool IsNewDirectory { get; set; }
 
 		private void DirectoryForm_Load(object sender, EventArgs e)
@@ -34,6 +33,8 @@ namespace Configurator
 			}
 			else
 			{
+				OriginalName = ConfDirectory.Name;
+
 				textBoxName.Text = ConfDirectory.Name;
 				textBoxTable.Text = ConfDirectory.Table;
 				textBoxDesc.Text = ConfDirectory.Desc;
@@ -54,13 +55,7 @@ namespace Configurator
 			ConfDirectory.Table = textBoxTable.Text;
 			ConfDirectory.Desc = textBoxDesc.Text;
 
-			if (IsNewDirectory)
-			{
-				Program.Kernel.Conf.AppendDirectory(ConfDirectory);
-			}
-			
-			formConfiguration.S();
-			formConfiguration.LoadTree();
+			CallBack.Invoke(OriginalName, ConfDirectory, IsNewDirectory);
 
 			this.Hide();
 		}

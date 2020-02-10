@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 10:34:49</DateTimeSave>
+  <DateTimeSave>10.02.2020 12:36:12</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Tovary</Name>
@@ -60,7 +60,7 @@
           <Name>Вказівник2</Name>
           <NameInTable>pointer2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>test2</Pointer>
+          <Pointer>Tovary</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -137,59 +137,6 @@
           </Fields>
         </TablePart>
       </TabularParts>
-      <Views />
-    </Directory>
-    <Directory>
-      <Name>test</Name>
-      <Table>test</Table>
-      <Desc>test</Desc>
-      <Fields>
-        <Field>
-          <Name>Count</Name>
-          <NameInTable>count</NameInTable>
-          <Type>integer</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Sum</Name>
-          <NameInTable>sum</NameInTable>
-          <Type>numeric</Type>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <Views />
-    </Directory>
-    <Directory>
-      <Name>test2</Name>
-      <Table>test2</Table>
-      <Desc>test2</Desc>
-      <Fields>
-        <Field>
-          <Name>Name</Name>
-          <NameInTable>name</NameInTable>
-          <Type>string</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Code</Name>
-          <NameInTable>code</NameInTable>
-          <Type>string</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Desc</Name>
-          <NameInTable>desc</NameInTable>
-          <Type>string</Type>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
       <Views />
     </Directory>
     <Directory>

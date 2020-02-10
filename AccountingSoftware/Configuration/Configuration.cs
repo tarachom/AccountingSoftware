@@ -44,6 +44,47 @@ namespace AccountingSoftware
 			return Directory;
 		}
 
+		public List<string> SearchForPointers(string SearchDirectoryName)
+		{
+			List<string> ListPointer = new List<string>();
+
+			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на цей довідник
+			foreach (ConfigurationDirectories directoryItem in Directories.Values)
+			{
+				//Поля довідника
+				foreach (ConfigurationObjectField directoryField in directoryItem.Fields.Values)
+				{
+					if (directoryField.Type == "pointer")
+					{
+						if (directoryField.Pointer == SearchDirectoryName)
+						{
+							//pointer
+							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
+						}
+					}
+				}
+
+				//Табличні частини
+				foreach (ConfigurationObjectTablePart directoryTablePart in directoryItem.TabularParts.Values)
+				{
+					//Поля табличної частини
+					foreach (ConfigurationObjectField tablePartField in directoryTablePart.Fields.Values)
+					{
+						if (tablePartField.Type == "pointer")
+						{
+							if (tablePartField.Pointer == SearchDirectoryName)
+							{
+								//pointer
+								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
+							}
+						}
+					}
+				}
+			}
+
+			return ListPointer;
+		}
+
 		public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
 		{
 			XmlDocument xmlComparisonDocument = new XmlDocument();

@@ -118,7 +118,7 @@ namespace Configurator
 				}
 
 				//directoriTabularPartsNode.Expand();
-				directoryNode.Expand();
+				//directoryNode.Expand();
 			}
 
 			rootNode.Expand();
@@ -133,66 +133,6 @@ namespace Configurator
 			Configuration Conf = Program.Kernel.Conf;
 
 			LoadTree();
-
-			#region test
-
-			/*
-			ConfigurationDirectories TmcDirectory = new ConfigurationDirectories();
-			TmcDirectory.Name = "TMC3";
-			TmcDirectory.Desc = "TMC 2";
-
-			ConfigurationObjectField TmcDirectoryField1 = new ConfigurationObjectField();
-			TmcDirectoryField1.Name = "Code";
-			TmcDirectoryField1.Type = "string";
-			TmcDirectoryField1.Desc = "Code";
-
-			ConfigurationObjectField TmcDirectoryField2 = new ConfigurationObjectField();
-			TmcDirectoryField2.Name = "Name";
-			TmcDirectoryField2.Type = "string";
-			TmcDirectoryField2.Desc = "Name";
-
-			TmcDirectory.Fields.Add(TmcDirectoryField1.Name, TmcDirectoryField1);
-			TmcDirectory.Fields.Add(TmcDirectoryField2.Name, TmcDirectoryField2);
-			*/
-
-
-			//ConfigurationDirectories tmc6 = Conf.AppendDirectory(new ConfigurationDirectories("TMC6", "Desc"));
-			//ConfigurationObjectField fieldName = tmc6.AppendField(new ConfigurationObjectField("Name", "Desc", "string"));
-			//tmc6.AppendField(new ConfigurationObjectField("Code", "Desc", "string"));
-
-
-			//Conf.Directories["TMC6"].TabularParts.Add("Od", new ConfigurationObjectTablePart("Od"));
-			//Conf.Directories["TMC6"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
-
-			//Conf.Directories["Tovary"].TabularParts.Add("Od", new ConfigurationObjectTablePart("Od"));
-			//Conf.Directories["Tovary"].TabularParts["Od"].Fields.Add("Name", new ConfigurationObjectField("Name"));
-
-			#endregion
-
-			//-------------------------------------------------------
-
-			//dataConfiguration.Columns.Add("Name", "NAME");
-			//dataConfiguration.Columns.Add("Code", "CODE");
-
-			//DataGridViewComboBoxColumn cbc = new DataGridViewComboBoxColumn();
-			//cbc.Name = "List";
-			//cbc.FlatStyle = FlatStyle.Flat;
-			//cbc.Items.Add("10");
-			//cbc.Items.Add("30");
-			//cbc.Items.Add("80");
-			//cbc.Items.Add("100");
-			//dataConfiguration.Columns.Add(cbc);
-
-			//DataGridViewCheckBoxColumn cbbc = new DataGridViewCheckBoxColumn(false);
-			//cbbc.Name = "Check";
-			//dataConfiguration.Columns.Add(cbbc);
-
-			//DataGridViewTextBoxColumn tbc = new DataGridViewTextBoxColumn();
-			//tbc.Name = "Text";
-			//dataConfiguration.Columns.Add(tbc);
-
-			//for (int i = 0; i < 5; i++)
-			//	dataConfiguration.Rows.Add(new object[] { "10", "32", "30", true, "" });
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -206,10 +146,34 @@ namespace Configurator
 			Program.Kernel.Close();
 		}
 
+		void CallBack_Update_Directory(string originalName, ConfigurationDirectories configurationDirectories, bool isNew)
+		{
+			Configuration Conf = Program.Kernel.Conf;
+
+			if (isNew)
+			{
+				Conf.AppendDirectory(configurationDirectories);
+			}
+			else
+			{
+				if (originalName != configurationDirectories.Name)
+				{
+					Conf.Directories.Remove(originalName);
+					Conf.AppendDirectory(configurationDirectories);
+				}
+				else
+				{
+					Conf.Directories[originalName] = configurationDirectories;
+				}
+			}
+
+			LoadTree();
+		}
+
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
-			directoryForm.formConfiguration = this;
+			directoryForm.CallBack = CallBack_Update_Directory;
 
 			directoryForm.Show();
 		}
@@ -223,8 +187,8 @@ namespace Configurator
 				Configuration Conf = Program.Kernel.Conf;
 
 				DirectoryForm directoryForm = new DirectoryForm();
-				directoryForm.formConfiguration = this;
 				directoryForm.ConfDirectory = Conf.Directories[directoryName];
+				directoryForm.CallBack = CallBack_Update_Directory;
 				directoryForm.Show();				
 			}
 		}
@@ -241,7 +205,13 @@ namespace Configurator
 
 		private void deleteDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (nodeSel != null)
+			{
+				string directoryName = nodeSel.Name;
+				Program.Kernel.Conf.Directories.Remove(directoryName);
 
+				LoadTree();
+			}
 		}
 
 		private TreeNode nodeSel { get; set; }
