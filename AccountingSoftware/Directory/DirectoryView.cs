@@ -17,11 +17,13 @@ namespace AccountingSoftware
 			Name = name;
 
 			Alias = new Dictionary<string, string>();
+			AliasRevers = new Dictionary<string, string>();
 			QuerySelect = new Query(table);
 
 			for (int i = 0; i < fieldsNameInTableArray.Length; i++)
 			{
 				Alias.Add(fieldsNameInTableArray[i], fieldsNameArray[i]);
+				AliasRevers.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
 				QuerySelect.Field.Add(fieldsNameInTableArray[i]);
 			}				
 		}
@@ -34,10 +36,13 @@ namespace AccountingSoftware
 		private string[] FieldsNameArray { get; set; }
 
 		public Dictionary<string, string> Alias { get; }
+		public Dictionary<string, string> AliasRevers { get; }
 
 		public string Name { get; } 
 
 		public Query QuerySelect { get; set; }
+
+		public string TempTableName { get; set; }
 
 		public string Read()
 		{

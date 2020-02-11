@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>11.02.2020 16:56:54</DateTimeSave>
+  <DateTimeSave>11.02.2020 19:51:34</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -77,6 +77,14 @@
           <NameInTable>link_empty</NameInTable>
           <Type>pointer</Type>
           <Pointer>НовийДокумент</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>od2</Name>
+          <NameInTable>od2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>ОдиниціВиміру</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -173,8 +181,12 @@
               <NameInTable>name</NameInTable>
             </Field>
             <Field>
-              <Name>Ціна</Name>
+              <Name>Код</Name>
               <NameInTable>code</NameInTable>
+            </Field>
+            <Field>
+              <Name>Одиниця</Name>
+              <NameInTable>od2</NameInTable>
             </Field>
           </Fields>
           <Where />
@@ -364,7 +376,25 @@
           </Fields>
         </TablePart>
       </TabularParts>
-      <Views />
+      <Views>
+        <View>
+          <Name>Вибірка</Name>
+          <Table>od_vimir</Table>
+          <PrimaryField>uid</PrimaryField>
+          <Desc>Візуалізація 1</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>name</NameInTable>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>code</NameInTable>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
+      </Views>
     </Directory>
     <Directory>
       <Name>НовийДокумент</Name>

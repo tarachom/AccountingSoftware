@@ -20,7 +20,11 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
-		private string Table { get; set; }
+		public string Table { get; set; } //!!
+
+		public string TempTable { get; set; }
+
+		public bool CreateTempTable { get; set; }
 
 		public string PrimaryField { get; set; } //!!!
 
@@ -59,6 +63,14 @@ namespace AccountingSoftware
 		public string Construct()
 		{
 			StringBuilder sb = new StringBuilder();
+
+			if (CreateTempTable == true) 
+			{
+				TempTable = "tmp_" + Guid.NewGuid().ToString().Replace("-", "");
+				sb.AppendLine("CREATE TEMP TABLE " + TempTable);
+				sb.AppendLine(" AS ");
+			}
+
 			sb.Append("SELECT " + PrimaryField);
 			 
 			if (Field.Count > 0)
@@ -89,11 +101,21 @@ namespace AccountingSoftware
 					switch (field.Comparison)
 					{
 						case Comparison.EQ:
-							sb.Append(" = @" + field.Name + " ");
+							{
+								if (field.UsingSQLToValue)
+								    sb.Append(" = (" + field.Value + ") ");
+								else
+									sb.Append(" = @" + field.Name + " ");
+							}
 							break;
 
 						case Comparison.IN:
-							sb.Append(" IN (@" + field.Name + ") ");
+							{
+								if (field.UsingSQLToValue)
+									sb.Append(" IN (" + field.Value + ") ");
+								else
+									sb.Append(" IN (@" + field.Name + ") ");
+							}
 							break;
 
 						default:
@@ -150,11 +172,12 @@ namespace AccountingSoftware
 	//Tuple<string, Comparison, string, Comparison>
 	public class Where
 	{
-		public Where(string name, Comparison comparison, object value, Comparison comparisonNext = Comparison.Empty)
+		public Where(string name, Comparison comparison, object value, bool usingSQLToValue = false, Comparison comparisonNext = Comparison.Empty)
 		{
 			Name = name;
 			Comparison = comparison;
 			Value = value;
+			UsingSQLToValue = usingSQLToValue;
 			ComparisonNext = comparisonNext;
 		}
 
@@ -165,6 +188,8 @@ namespace AccountingSoftware
 		public Comparison Comparison { get; set; }
 
 		public Comparison ComparisonNext { get; set; }
+
+		public bool UsingSQLToValue { get; set; }
 	}
 
 	public enum Comparison

@@ -253,13 +253,26 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (directoryView.QuerySelect.Where.Count > 0)
+			foreach (Where field in directoryView.QuerySelect.Where)
 			{
-				foreach (Where field in directoryView.QuerySelect.Where)
+				if (field.UsingSQLToValue == false)
 				{
 					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
 					Console.WriteLine(field.Name + " = " + field.Value);
 				}
+			}
+
+			if (directoryView.QuerySelect.CreateTempTable == true)
+			{
+				NpgsqlDataReader reader2 = nCommand.ExecuteReader();
+				reader2.Close();
+				directoryView.QuerySelect.Table = directoryView.QuerySelect.TempTable;
+
+				directoryView.QuerySelect.CreateTempTable = false;
+				query = directoryView.QuerySelect.Construct();
+				nCommand = new NpgsqlCommand(query, Connection);
+				Console.WriteLine("------------------------------------");
+				Console.WriteLine(query);
 			}
 
 			string xml = "<" + directoryView.Name + ">\n";

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 11.02.2020 16:56:54
+ * Дата конфігурації: 11.02.2020 19:51:34
  *
  */
 
@@ -27,7 +27,7 @@ namespace ConfTrade_v1_1
     class Товари_Objest : DirectoryObject
     {
         public Товари_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty" }) 
+             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty", "od2" }) 
         {
             Назва = "";
             Код = "";
@@ -39,6 +39,7 @@ namespace ConfTrade_v1_1
             Вказівник2 = new Товари_Pointer();
             Вказівник3 = new НовийДокумент_Pointer();
             Вказівник4 = new НовийДокумент_Pointer();
+            od2 = new ОдиниціВиміру_Pointer();
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -60,6 +61,7 @@ namespace ConfTrade_v1_1
                 Вказівник2 = new Товари_Pointer(base.FieldValue["pointer2"]);
                 Вказівник3 = new НовийДокумент_Pointer(base.FieldValue["pointer3"]);
                 Вказівник4 = new НовийДокумент_Pointer(base.FieldValue["link_empty"]);
+                od2 = new ОдиниціВиміру_Pointer(base.FieldValue["od2"]);
                 
                 return true;
             }
@@ -79,6 +81,7 @@ namespace ConfTrade_v1_1
             base.FieldValue["pointer2"] = Вказівник2.UnigueID.UGuid;
             base.FieldValue["pointer3"] = Вказівник3.UnigueID.UGuid;
             base.FieldValue["link_empty"] = Вказівник4.UnigueID.UGuid;
+            base.FieldValue["od2"] = od2.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -104,6 +107,7 @@ namespace ConfTrade_v1_1
         public Товари_Pointer Вказівник2 { get; set; }
         public НовийДокумент_Pointer Вказівник3 { get; set; }
         public НовийДокумент_Pointer Вказівник4 { get; set; }
+        public ОдиниціВиміру_Pointer od2 { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }
@@ -399,8 +403,8 @@ namespace ConfTrade_v1_1
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code" },
-             new string[] { "Назва", "Ціна" },
+             new string[] { "name", "code", "od2" },
+             new string[] { "Назва", "Код", "Одиниця" },
              "Товари_ВибіркаТовари")
         {
             base.QuerySelect.PrimaryField = "uid";
@@ -1048,6 +1052,24 @@ namespace ConfTrade_v1_1
         
         public DateTime ДатаЗапису { get; set; }
         public string Значення { get; set; }
+        
+    }
+        
+    /// <summary> 
+    /// Візуалізація 1
+    /// </summary>
+    class ОдиниціВиміру_Вибірка_View : DirectoryView
+    {
+        public ОдиниціВиміру_Вибірка_View() : base(Config.Kernel, "od_vimir", 
+             new string[] { "name", "code" },
+             new string[] { "Назва", "Код" },
+             "ОдиниціВиміру_Вибірка")
+        {
+            base.QuerySelect.PrimaryField = "uid";
+            
+            
+        }
+        
         
     }
       
