@@ -264,14 +264,11 @@ namespace AccountingSoftware
 
 			if (directoryView.QuerySelect.CreateTempTable == true)
 			{
-				NpgsqlDataReader reader2 = nCommand.ExecuteReader();
-				reader2.Close();
-				directoryView.QuerySelect.Table = directoryView.QuerySelect.TempTable;
+				nCommand.ExecuteNonQuery();
 
-				directoryView.QuerySelect.CreateTempTable = false;
-				query = directoryView.QuerySelect.Construct();
+				query = "SELECT * FROM " + directoryView.QuerySelect.TempTable;
 				nCommand = new NpgsqlCommand(query, Connection);
-				Console.WriteLine("------------------------------------");
+
 				Console.WriteLine(query);
 			}
 

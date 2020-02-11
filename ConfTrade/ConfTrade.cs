@@ -41,17 +41,21 @@ namespace ConfTrade
 			одиниціВиміру_Objest.Save();
 			*/
 
+			Conf.Config.Kernel.DataBase.BeginTransaction();
+
 			Conf.Товари_ВибіркаТовари_View v = new Conf.Товари_ВибіркаТовари_View();
-			//v.QuerySelect.Where.Add(new Where(v.AliasRevers["Одиниця"], Comparison.EQ, " NOT NULL ", true));
+			v.QuerySelect.Where.Add(new Where(v.AliasRevers["Одиниця"], Comparison.NOTNULL, "", true));
 			v.QuerySelect.Limit = 5;
 			v.QuerySelect.CreateTempTable = true;
 			Console.WriteLine(v.Read());
-			Console.WriteLine(v.QuerySelect.TempTable);
 
 			Conf.ОдиниціВиміру_Вибірка_View od = new Conf.ОдиниціВиміру_Вибірка_View();
+			od.QuerySelect.CreateTempTable = true;
 			od.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT distinct od2 FROM " + v.QuerySelect.TempTable, true));
 
 			Console.WriteLine(od.Read());
+
+			Conf.Config.Kernel.DataBase.CommitTransaction();
 
 			Console.ReadLine();
 		}

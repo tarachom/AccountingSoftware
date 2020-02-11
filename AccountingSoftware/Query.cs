@@ -67,8 +67,8 @@ namespace AccountingSoftware
 			if (CreateTempTable == true) 
 			{
 				TempTable = "tmp_" + Guid.NewGuid().ToString().Replace("-", "");
-				sb.AppendLine("CREATE TEMP TABLE " + TempTable);
-				sb.AppendLine(" AS ");
+				sb.AppendLine("CREATE TEMP TABLE " + TempTable + " ON COMMIT DROP");
+				sb.AppendLine("AS ");
 			}
 
 			sb.Append("SELECT " + PrimaryField);
@@ -103,7 +103,7 @@ namespace AccountingSoftware
 						case Comparison.EQ:
 							{
 								if (field.UsingSQLToValue)
-								    sb.Append(" = (" + field.Value + ") ");
+								    sb.Append(" = " + field.Value + " ");
 								else
 									sb.Append(" = @" + field.Name + " ");
 							}
@@ -118,8 +118,22 @@ namespace AccountingSoftware
 							}
 							break;
 
+						case Comparison.NOT:
+							{
+								if (field.UsingSQLToValue)
+									sb.Append(" != " + field.Value + " ");
+								else
+									sb.Append(" != @" + field.Name + " ");
+							}
+							break;
+
 						default:
-							sb.Append(" " + field.Comparison + "  @" + field.Name + " ");
+							{
+								if (field.UsingSQLToValue)
+									sb.Append(" " + field.Comparison + " " + field.Value + " ");
+								else
+									sb.Append(" " + field.Comparison + "  @" + field.Name + " ");
+							}
 							break;
 					}
 
@@ -217,6 +231,9 @@ namespace AccountingSoftware
 		/// >
 		/// </summary>
 		QT,
+
+		ISNULL,
+		NOTNULL,
 
 		/// <summary>
 		/// Пустий
