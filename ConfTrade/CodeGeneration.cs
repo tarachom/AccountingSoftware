@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.02.2020 18:26:15
+ * Дата конфігурації: 11.02.2020 16:56:54
  *
  */
 
@@ -52,7 +52,7 @@ namespace ConfTrade_v1_1
             {
                 Назва = base.FieldValue["name"].ToString();
                 Код = base.FieldValue["code"].ToString();
-                Кількість = (int)base.FieldValue["count"];
+                Кількість = (base.FieldValue["count"] != DBNull.Value) ? (int)base.FieldValue["count"] : 0;
                 Номер = (base.FieldValue["numer"] != DBNull.Value) ? (decimal)base.FieldValue["numer"] : 0;
                 Масив = (base.FieldValue["masiv"] != DBNull.Value) ? (string[])base.FieldValue["masiv"] : new string[] { };
                 Артикул = base.FieldValue["artikul"].ToString();
@@ -132,7 +132,7 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// Довідник Товари
     /// </summary>
-    class Товари_Select : DirectorySelect
+    class Товари_Select : DirectorySelect, IDisposable
     {
         public Товари_Select() : base(Config.Kernel, "tovary") { }
     
@@ -203,7 +203,7 @@ namespace ConfTrade_v1_1
 
                 record.Name = fieldValue["name"].ToString();
                 record.Cena = (fieldValue["cena"] != DBNull.Value) ? (decimal)fieldValue["cena"] : 0;
-                record.IsNew = (int)fieldValue["isnew"];
+                record.IsNew = (fieldValue["isnew"] != DBNull.Value) ? (int)fieldValue["isnew"] : 0;
                 record.ДатаОбновлення = (fieldValue["date_update"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_update"].ToString()) : DateTime.MinValue;
                 record.Дата = (fieldValue["date_test"] != DBNull.Value) ? DateTime.Parse(fieldValue["date_test"].ToString()) : DateTime.MinValue;
                 record.Час = (fieldValue["times"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["times"].ToString()) : DateTime.MinValue.TimeOfDay;
@@ -392,6 +392,44 @@ namespace ConfTrade_v1_1
         public ОдиниціВиміру_Pointer Одиниця { get; set; }
         
     }
+        
+    /// <summary> 
+    /// Візуалізація 1
+    /// </summary>
+    class Товари_ВибіркаТовари_View : DirectoryView
+    {
+        public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
+             new string[] { "name", "code" },
+             new string[] { "Назва", "Ціна" },
+             "Товари_ВибіркаТовари")
+        {
+            base.QuerySelect.PrimaryField = "uid";
+            
+            
+        }
+        
+        
+    }
+        
+    /// <summary> 
+    /// Візуалізація Табличної частини Ціни елементу довідника
+    /// </summary>
+    class Товари_ВибіркаЦіни_View : DirectoryView
+    {
+        public Товари_ВибіркаЦіни_View() : base(Config.Kernel, "tovary_ceny_tablepart", 
+             new string[] { "name", "cena" },
+             new string[] { "Назва", "Ціна" },
+             "Товари_ВибіркаЦіни")
+        {
+            base.QuerySelect.PrimaryField = "owner";
+            
+            Where_owner = new Where("owner", Comparison.EQ, null);
+              base.QuerySelect.Where.Add(Where_owner);
+            
+        }
+        
+        public Where Where_owner { get; set; }
+    }
       
     
     #endregion
@@ -477,7 +515,7 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// new new
     /// </summary>
-    class Новий_Select : DirectorySelect
+    class Новий_Select : DirectorySelect, IDisposable
     {
         public Новий_Select() : base(Config.Kernel, "new") { }
     
@@ -615,7 +653,7 @@ namespace ConfTrade_v1_1
     /// <summary> 
     /// Товаро-матеріальні цінності
     /// </summary>
-    class ТМЦ_Select : DirectorySelect
+    class ТМЦ_Select : DirectorySelect, IDisposable
     {
         public ТМЦ_Select() : base(Config.Kernel, "tmc") { }
     
@@ -744,7 +782,7 @@ namespace ConfTrade_v1_1
     /// 
       
     /// </summary>
-    class Записки_Select : DirectorySelect
+    class Записки_Select : DirectorySelect, IDisposable
     {
         public Записки_Select() : base(Config.Kernel, "zpysky_info") { }
     
@@ -875,7 +913,7 @@ namespace ConfTrade_v1_1
     /// 
       
     /// </summary>
-    class ОдиниціВиміру_Select : DirectorySelect
+    class ОдиниціВиміру_Select : DirectorySelect, IDisposable
     {
         public ОдиниціВиміру_Select() : base(Config.Kernel, "od_vimir") { }
     
@@ -1092,7 +1130,7 @@ namespace ConfTrade_v1_1
     /// 
       
     /// </summary>
-    class НовийДокумент_Select : DirectorySelect
+    class НовийДокумент_Select : DirectorySelect, IDisposable
     {
         public НовийДокумент_Select() : base(Config.Kernel, "new_document") { }
     

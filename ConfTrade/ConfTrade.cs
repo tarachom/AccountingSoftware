@@ -19,16 +19,22 @@ namespace ConfTrade
             Conf.Config.Kernel = new Kernel();
             Conf.Config.Kernel.Open();
 
-            //Conf.Товари_Objest товари_Objest = new Conf.Товари_Objest();
+            using (Conf.Товари_Select s = new Conf.Товари_Select())
+            {
+                s.Select();
 
-            //Conf.ТМЦ_Objest тМЦ_Objest = new Conf.ТМЦ_Objest();
-            //тМЦ_Objest.New();
-            //тМЦ_Objest.Назва = "Назва товару";
-            //тМЦ_Objest.Опис = "Опис товару";
-            //тМЦ_Objest.ДатаДобавлення = DateTime.Now;
-            //тМЦ_Objest.ОдиницяВиміру = new string[] { "шт.", "кг." };
-            //тМЦ_Objest.ОсновнаЦіна = 15.45m;
-            //тМЦ_Objest.Save();
+                while (s.MoveNext())
+                {
+                    Conf.Товари_Objest o = s.Current.GetDirectoryObject();
+                    o.Назва = "Товар " + new Random().Next(1000).ToString();
+                    o.Код = "Код " + new Random().Next(1000).ToString();
+                    o.Save();
+                }
+            }
+
+            Conf.Товари_ВибіркаТовари_View v = new Conf.Товари_ВибіркаТовари_View();
+            Console.WriteLine(v.Read());
+            
 
             Console.ReadLine();
         }

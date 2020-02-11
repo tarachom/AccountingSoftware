@@ -1,3 +1,18 @@
 
 + Мождивість задавати пустий вказівник.
 Для пустого вказівника не треба генерувати класи, просто null
+
++ Можливо треба додати до DirectorySelect можливість закриття вибірки Close()
+
+            Conf.Товари_Select s = new Conf.Товари_Select();
+            s.Select();
+
+            while (s.MoveNext())
+            {
+                Conf.Товари_Objest o = s.Current.GetDirectoryObject();
+                o.Назва = "Товар " + new Random().ToString();
+                o.Код = "Код " + new Random().ToString();
+                o.Save();
+            }
+
+            ... s.Close();

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.02.2020 18:26:15</DateTimeSave>
+  <DateTimeSave>11.02.2020 16:56:54</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -161,7 +161,46 @@
           </Fields>
         </TablePart>
       </TabularParts>
-      <Views />
+      <Views>
+        <View>
+          <Name>ВибіркаТовари</Name>
+          <Table>tovary</Table>
+          <PrimaryField>uid</PrimaryField>
+          <Desc>Візуалізація 1</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>name</NameInTable>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>code</NameInTable>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
+        <View>
+          <Name>ВибіркаЦіни</Name>
+          <Table>tovary_ceny_tablepart</Table>
+          <PrimaryField>owner</PrimaryField>
+          <Desc>Візуалізація Табличної частини Ціни елементу довідника</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>name</NameInTable>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>cena</NameInTable>
+            </Field>
+          </Fields>
+          <Where>
+            <Field>
+              <NameInTable>owner</NameInTable>
+            </Field>
+          </Where>
+        </View>
+      </Views>
     </Directory>
     <Directory>
       <Name>Новий</Name>

@@ -269,9 +269,12 @@ namespace AccountingSoftware
 			{
 				xml += "  <row>\n";
 
+				xml += "    <" + directoryView.QuerySelect.PrimaryField + ">" + reader["uid"].ToString() + 
+					"</" + directoryView.QuerySelect.PrimaryField + ">\n";
+
 				foreach (string field in directoryView.QuerySelect.Field)
 				{
-					xml += "    <" + field + ">" + reader[field] + "</" + field + ">\n";
+					xml += "    <" + directoryView.Alias[field] + ">" + reader[field].ToString() + "</" + directoryView.Alias[field] + ">\n";
 				}
 
 				xml += "  </row>\n";

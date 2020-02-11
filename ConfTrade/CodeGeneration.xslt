@@ -135,8 +135,10 @@
           <xsl:text>(string[])</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
           <xsl:text> : new string[] { }</xsl:text>
         </xsl:when>
-        <xsl:when test="Type = 'integer'">
+       <xsl:when test="Type = 'integer'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(int)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+          <xsl:text> : 0</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'integer[]'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -308,7 +310,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     /// &lt;summary&gt; 
     /// <xsl:value-of select="Desc"/>
     /// &lt;/summary&gt;
-    class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
+    class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
     
@@ -498,12 +500,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     class <xsl:value-of select="$ViewsFullName"/>_View : DirectoryView
     {
         public <xsl:value-of select="$ViewsFullName"/>_View() : base(Config.Kernel, "<xsl:value-of select="Table"/>", 
-            <xsl:text>new string[] { </xsl:text>
+             <xsl:text>new string[] { </xsl:text>
              <xsl:for-each select="Fields/Field">
                <xsl:if test="position() != 1">
                  <xsl:text>, </xsl:text>
                </xsl:if>
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each> },
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
              </xsl:for-each> },
              "<xsl:value-of select="$ViewsFullName"/>")
         {

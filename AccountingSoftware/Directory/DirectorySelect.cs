@@ -74,5 +74,10 @@ namespace AccountingSoftware
 
 			return Count() > 0;
 		}
+
+		public void Dispose()
+		{
+			//...
+		}
 	}
 }
