@@ -67,7 +67,7 @@ namespace AccountingSoftware
 			if (CreateTempTable == true) 
 			{
 				TempTable = "tmp_" + Guid.NewGuid().ToString().Replace("-", "");
-				sb.AppendLine("CREATE TEMP TABLE " + TempTable + " ON COMMIT DROP");
+				sb.AppendLine("CREATE TEMP TABLE " + TempTable /*+ " ON COMMIT DROP"*/);
 				sb.AppendLine("AS ");
 			}
 

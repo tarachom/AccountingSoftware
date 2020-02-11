@@ -18,12 +18,14 @@ namespace AccountingSoftware
 
 			Alias = new Dictionary<string, string>();
 			AliasRevers = new Dictionary<string, string>();
+
 			QuerySelect = new Query(table);
 
 			for (int i = 0; i < fieldsNameInTableArray.Length; i++)
 			{
-				Alias.Add(fieldsNameInTableArray[i], fieldsNameArray[i]);
-				AliasRevers.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
+				Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
+				AliasRevers.Add(fieldsNameInTableArray[i], fieldsNameArray[i]);
+				
 				QuerySelect.Field.Add(fieldsNameInTableArray[i]);
 			}				
 		}

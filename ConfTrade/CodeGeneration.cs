@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 11.02.2020 19:51:34
+ * Дата конфігурації: 11.02.2020 22:55:03
  *
  */
 
@@ -226,7 +226,7 @@ namespace ConfTrade_v1_1
         /// Щоб не видаляти треба поставити clear_all_before_save = false.
         /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
         /// </param>
-        public void Save(bool clear_all_before_save = true) 
+        public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
             {
@@ -288,8 +288,8 @@ namespace ConfTrade_v1_1
             ДатаОбновлення = _ДатаОбновлення ?? DateTime.MinValue;
             Дата = _Дата ?? DateTime.MinValue;
             Час = _Час ?? DateTime.MinValue.TimeOfDay;
-            ОдВиміру = _ОдВиміру;
-            NewDok = _NewDok;
+            ОдВиміру = _ОдВиміру ?? new ОдиниціВиміру_Pointer();
+            NewDok = _NewDok ?? new НовийДокумент_Pointer();
             
         }
         
@@ -346,7 +346,7 @@ namespace ConfTrade_v1_1
         /// Щоб не видаляти треба поставити clear_all_before_save = false.
         /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
         /// </param>
-        public void Save(bool clear_all_before_save = true) 
+        public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
             {
@@ -389,7 +389,7 @@ namespace ConfTrade_v1_1
         public Товари_ОдиниціВиміру_TablePartRecord(
             ОдиниціВиміру_Pointer _Одиниця = null)
         {
-            Одиниця = _Одиниця;
+            Одиниця = _Одиниця ?? new ОдиниціВиміру_Pointer();
             
         }
         
@@ -412,7 +412,6 @@ namespace ConfTrade_v1_1
             
         }
         
-        
     }
         
     /// <summary> 
@@ -427,12 +426,9 @@ namespace ConfTrade_v1_1
         {
             base.QuerySelect.PrimaryField = "owner";
             
-            Where_owner = new Where("owner", Comparison.EQ, null);
-              base.QuerySelect.Where.Add(Where_owner);
             
         }
         
-        public Where Where_owner { get; set; }
     }
       
     
@@ -1001,7 +997,7 @@ namespace ConfTrade_v1_1
         /// Щоб не видаляти треба поставити clear_all_before_save = false.
         /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
         /// </param>
-        public void Save(bool clear_all_before_save = true) 
+        public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
             {
@@ -1069,7 +1065,6 @@ namespace ConfTrade_v1_1
             
             
         }
-        
         
     }
       

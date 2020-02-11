@@ -407,7 +407,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         /// Щоб не видаляти треба поставити clear_all_before_save = false.
         /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
         /// &lt;/param&gt;
-        public void Save(bool clear_all_before_save = true) 
+        public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
             {
@@ -425,6 +425,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:choose>
                         <xsl:when test="Type = 'pointer'">
+                          <xsl:text>.UnigueID.UGuid</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="Type = 'empty_pointer'">
                           <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>
                       </xsl:choose>
@@ -474,7 +477,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
               <xsl:value-of select="Name"/>
               <xsl:text> = _</xsl:text>
               <xsl:value-of select="Name"/>
-              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'pointer' or Type = 'empty_pointer'">
                    <xsl:text> ?? </xsl:text>
                    <xsl:call-template name="DefaultFieldValue" />
               </xsl:if>;
@@ -518,15 +521,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         {
             base.QuerySelect.PrimaryField = "<xsl:value-of select="PrimaryField"/>";
             
+            <!--
             <xsl:for-each select="Where/Field">
               <xsl:text>Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text> = new Where("</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", Comparison.EQ, null)</xsl:text>;
               <xsl:text>base.QuerySelect.Where.Add(Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>)</xsl:text>;
             </xsl:for-each>
+            -->
         }
-        
+        <!--
         <xsl:for-each select="Where/Field">
           <xsl:text>public Where Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text> { get; set; }</xsl:text>
         </xsl:for-each>
+        -->
     }
       </xsl:for-each> <!-- Views -->
     
