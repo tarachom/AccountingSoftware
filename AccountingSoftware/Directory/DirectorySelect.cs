@@ -77,7 +77,11 @@ namespace AccountingSoftware
 
 		public void Dispose()
 		{
-			//...
+			QuerySelect = null;
+			Kernel = null;
+			DirectoryPointerPosition = null;
+			BaseSelectList = null;
+			Position = 0;
 		}
 	}
 }

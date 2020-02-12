@@ -38,10 +38,18 @@ namespace AccountingSoftware
 			IsNew = true;
 		}
 
+		protected void BaseClear()
+		{
+			foreach (string key in FieldValue.Keys)
+				FieldValue[key] = null;
+		}
+
 		protected bool BaseRead(UnigueID uid)
 		{
 			if (uid == null || uid.UGuid == Guid.Empty)
 				return false;
+
+			BaseClear();
 
 			if (Kernel.DataBase.SelectDirectoryObject(this, uid, Table, FieldArray, FieldValue))
 			{
@@ -62,11 +70,15 @@ namespace AccountingSoftware
 			{
 				Kernel.DataBase.SaveDirectoryObject(this, Table, FieldArray, FieldValue);
 			}
+
+			BaseClear();
 		}
 
 		protected void BaseDelete()
 		{
 			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
+
+			BaseClear();
 		}
 	}
 }

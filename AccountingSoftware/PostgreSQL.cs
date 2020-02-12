@@ -116,17 +116,16 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
 
-			bool isSelectDirectoryObject = false;
-
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
+
+			bool isSelectDirectoryObject = reader.HasRows;
+
 			while (reader.Read())
 			{
 				foreach (string field in fieldArray)
 				{
 					fieldValue[field] = reader[field];
 				}
-
-				isSelectDirectoryObject = true;
 			}
 			reader.Close();
 

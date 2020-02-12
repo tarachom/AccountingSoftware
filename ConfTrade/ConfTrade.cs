@@ -19,6 +19,8 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
+
+
 			/*
 			using (Conf.Товари_Select s = new Conf.Товари_Select())
 			{
@@ -33,7 +35,6 @@ namespace ConfTrade
 				}
 			}
 
-
 			Conf.ОдиниціВиміру_Objest одиниціВиміру_Objest = new Conf.ОдиниціВиміру_Objest();
 			одиниціВиміру_Objest.New();
 			одиниціВиміру_Objest.Назва = "Назва 2";
@@ -43,11 +44,13 @@ namespace ConfTrade
 
 			//Conf.Config.Kernel.DataBase.BeginTransaction();
 
+			/*
 			Conf.Товари_ВибіркаТовари_View v = new Conf.Товари_ВибіркаТовари_View();
 			v.QuerySelect.Where.Add(new Where(v.Alias["Одиниця"], Comparison.NOTNULL, "", true));
 			v.QuerySelect.Limit = 1;
 			v.QuerySelect.CreateTempTable = true;
 			Console.WriteLine(v.Read());
+			*/
 
 			//Conf.Товари_Select sel = new Conf.Товари_Select();
 			//sel.QuerySelect.Table = v.QuerySelect.TempTable;
@@ -59,6 +62,7 @@ namespace ConfTrade
 			//	товари_Objest.Ціни_TablePart.Save(false);
 			//}
 
+			/*
 			Conf.ОдиниціВиміру_Вибірка_View od = new Conf.ОдиниціВиміру_Вибірка_View();
 			od.QuerySelect.CreateTempTable = true;
 			od.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + v.Alias["Одиниця"] + " FROM " + v.QuerySelect.TempTable, true));
@@ -67,6 +71,7 @@ namespace ConfTrade
 			Conf.Товари_ВибіркаЦіни_View ceny = new Conf.Товари_ВибіркаЦіни_View();
 			ceny.QuerySelect.Where.Add(new Where("owner", Comparison.EQ, "(SELECT uid FROM " + v.QuerySelect.TempTable + ")", true));
 			Console.WriteLine(ceny.Read());
+			*/
 
 			//Conf.Config.Kernel.DataBase.CommitTransaction();
 

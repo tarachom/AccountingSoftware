@@ -216,7 +216,6 @@
     <xsl:param name="ConfFieldType" />
 
     <FieldCreate>
-
       <Name>
         <xsl:value-of select="$ConfFieldName"/>
       </Name>
@@ -269,7 +268,6 @@
           </xsl:when>
         </xsl:choose>
       </DataType>
-
     </FieldCreate>
 
   </xsl:template>

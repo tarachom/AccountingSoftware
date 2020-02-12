@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 11.02.2020 22:55:03
+ * Дата конфігурації: 12.02.2020 09:18:10
  *
  */
 
@@ -63,6 +63,7 @@ namespace ConfTrade_v1_1
                 Вказівник4 = new НовийДокумент_Pointer(base.FieldValue["link_empty"]);
                 od2 = new ОдиниціВиміру_Pointer(base.FieldValue["od2"]);
                 
+                BaseClear();
                 return true;
             }
             else
@@ -197,8 +198,6 @@ namespace ConfTrade_v1_1
         public void Read()
         {
             Records.Clear();
-            base.FieldValueList.Clear();
-
             base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
@@ -216,6 +215,8 @@ namespace ConfTrade_v1_1
                 
                 Records.Add(record);
             }
+            
+            base.BaseClear();
         }
         
         /// <summary>
@@ -255,9 +256,11 @@ namespace ConfTrade_v1_1
             }
         }
         
-        public void Clear()
+        public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
     }
     
@@ -324,8 +327,6 @@ namespace ConfTrade_v1_1
         public void Read()
         {
             Records.Clear();
-            base.FieldValueList.Clear();
-
             base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
@@ -336,6 +337,8 @@ namespace ConfTrade_v1_1
                 
                 Records.Add(record);
             }
+            
+            base.BaseClear();
         }
         
         /// <summary>
@@ -368,9 +371,11 @@ namespace ConfTrade_v1_1
             }
         }
         
-        public void Clear()
+        public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
     }
     
@@ -460,6 +465,7 @@ namespace ConfTrade_v1_1
                 Назва = base.FieldValue["name"].ToString();
                 Опис = base.FieldValue["opys"].ToString();
                 
+                BaseClear();
                 return true;
             }
             else
@@ -592,6 +598,7 @@ namespace ConfTrade_v1_1
                 ОсновнаЦіна = (base.FieldValue["base_cena"] != DBNull.Value) ? (decimal)base.FieldValue["base_cena"] : 0;
                 Автор = base.FieldValue["autor"].ToString();
                 
+                BaseClear();
                 return true;
             }
             else
@@ -725,6 +732,7 @@ namespace ConfTrade_v1_1
                 Записка = base.FieldValue["zapyska"].ToString();
                 Сайт = base.FieldValue["site"].ToString();
                 
+                BaseClear();
                 return true;
             }
             else
@@ -855,6 +863,7 @@ namespace ConfTrade_v1_1
                 Код = base.FieldValue["code"].ToString();
                 КороткаНазва = base.FieldValue["small_name"].ToString();
                 
+                BaseClear();
                 return true;
             }
             else
@@ -974,8 +983,6 @@ namespace ConfTrade_v1_1
         public void Read()
         {
             Records.Clear();
-            base.FieldValueList.Clear();
-
             base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
@@ -987,6 +994,8 @@ namespace ConfTrade_v1_1
                 
                 Records.Add(record);
             }
+            
+            base.BaseClear();
         }
         
         /// <summary>
@@ -1020,9 +1029,11 @@ namespace ConfTrade_v1_1
             }
         }
         
-        public void Clear()
+        public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
     }
     
@@ -1094,6 +1105,7 @@ namespace ConfTrade_v1_1
             {
                 Назва = base.FieldValue["name"].ToString();
                 
+                BaseClear();
                 return true;
             }
             else

@@ -12,8 +12,8 @@ namespace AccountingSoftware
 		{
 			Table = table;
 			Kernel = kernel;
-			FieldsNameInTableArray = fieldsNameInTableArray;
-			FieldsNameArray = fieldsNameArray;
+			//FieldsNameInTableArray = fieldsNameInTableArray;
+			//FieldsNameArray = fieldsNameArray;
 			Name = name;
 
 			Alias = new Dictionary<string, string>();
@@ -34,8 +34,8 @@ namespace AccountingSoftware
 
 		private string Table { get; set; }
 
-		private string[] FieldsNameInTableArray { get; set; }
-		private string[] FieldsNameArray { get; set; }
+		//private string[] FieldsNameInTableArray { get; set; }
+		//private string[] FieldsNameArray { get; set; }
 
 		public Dictionary<string, string> Alias { get; }
 		public Dictionary<string, string> AliasRevers { get; }
@@ -43,8 +43,6 @@ namespace AccountingSoftware
 		public string Name { get; } 
 
 		public Query QuerySelect { get; set; }
-
-		public string TempTableName { get; set; }
 
 		public string Read()
 		{

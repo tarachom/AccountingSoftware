@@ -240,6 +240,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                     <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
                   </xsl:call-template>;
                 </xsl:for-each>
+                BaseClear();
                 return true;
             }
             else
@@ -379,8 +380,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         public void Read()
         {
             Records.Clear();
-            base.FieldValueList.Clear();
-
             base.BaseRead(Owner.UnigueID);
 
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
@@ -397,6 +396,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 </xsl:for-each>
                 Records.Add(record);
             }
+            
+            base.BaseClear();
         }
         
         /// &lt;summary&gt;
@@ -440,9 +441,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             }
         }
         
-        public void Clear()
+        public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
     }
     

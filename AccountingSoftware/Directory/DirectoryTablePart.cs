@@ -25,26 +25,30 @@ namespace AccountingSoftware
 
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		protected void BaseClear()
+		{
+			FieldValueList.Clear();
+		}
+
 		protected void BaseRead(UnigueID ownerUnigueID)
 		{
+			BaseClear();
+
 			Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 
 		protected void BaseBeginTransaction()
 		{
-			Console.WriteLine("Begin");
 			Kernel.DataBase.BeginTransaction();
 		}
 
 		protected void BaseCommitTransaction()
 		{
-			Console.WriteLine("Commit");
 			Kernel.DataBase.CommitTransaction();
 		}
 
 		protected void BaseRollbackTransaction()
 		{
-			Console.WriteLine("Rollback");
 			Kernel.DataBase.RollbackTransaction();
 		}
 
