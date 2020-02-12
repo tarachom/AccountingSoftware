@@ -27,7 +27,7 @@ namespace Configurator
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
 			//Comparison
-			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema("ConfTradeTest");
+			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
 			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
 			//Code Generation

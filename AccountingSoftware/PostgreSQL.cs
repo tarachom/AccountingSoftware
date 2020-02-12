@@ -295,16 +295,52 @@ namespace AccountingSoftware
 			return xml;
 		}
 
-		public ConfigurationInformationSchema SelectInformationSchema(string databaseName)
+		public bool IfExistsTable(string tableName)
+		{
+			string query = "SELECT table_name " +
+						   "FROM information_schema.tables " +
+						   "WHERE table_schema = 'public' AND table_type = 'BASE TABLE' AND table_name = @table_name";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("table_name", tableName));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+
+			bool ifExists = reader.HasRows;
+
+			reader.Close();
+
+			return ifExists;
+		}
+
+		public bool IfExistsColumn(string tableName, string columnName)
+		{
+			string query = "SELECT column_name" +
+						   "FROM information_schema.columns " +
+						   "WHERE table_schema = 'public' AND table_name = @table_name AND column_name = @column_name";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("table_name", tableName));
+			nCommand.Parameters.Add(new NpgsqlParameter("column_name", columnName));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+
+			bool ifExists = reader.HasRows;
+
+			reader.Close();
+
+			return ifExists;
+		}
+
+		public ConfigurationInformationSchema SelectInformationSchema()
 		{
 			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
 
 			string query = "SELECT table_name, column_name, data_type, udt_name " +
 				           "FROM information_schema.columns " +
-						   "WHERE table_catalog = @table_catalog AND table_schema = 'public'";
+						   "WHERE table_schema = 'public'";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("table_catalog", databaseName));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())

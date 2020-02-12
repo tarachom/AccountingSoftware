@@ -177,6 +177,16 @@
         </xsl:when>
      </xsl:choose>
   </xsl:template>
+
+  <!-- Документування коду -->
+  <xsl:template name="CommentSummary">
+    <xsl:if test="normalize-space(Desc) != ''">
+    <xsl:text>///&lt;summary</xsl:text>&gt;
+    <xsl:text>///</xsl:text>
+    <xsl:value-of select="normalize-space(Desc)"/>.
+    <xsl:text>///&lt;/summary&gt;</xsl:text>
+    </xsl:if>
+  </xsl:template>
   
   <xsl:template match="/">
 
@@ -198,13 +208,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public static Kernel Kernel { get; set; }
     }
+}
+
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
+{
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     
-    /// &lt;summary&gt; 
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -290,9 +302,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         </xsl:for-each>
     }
     
-    /// &lt;summary&gt; 
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
@@ -308,9 +318,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         }
     }
     
-    /// &lt;summary&gt; 
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
@@ -355,9 +363,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
       <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
-    /// &lt;summary&gt;
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+    
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -404,9 +411,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         /// Зберегти колекцію Records в базу.
         /// &lt;/summary&gt;
         /// &lt;param name="clear_all_before_save"&gt;
-        /// Перед записом колекції, попередні записи видаляються з бази даних.
-        /// Щоб не видаляти треба поставити clear_all_before_save = false.
-        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
         /// &lt;/param&gt;
         public void Save(bool clear_all_before_save /*= true*/) 
         {
@@ -449,9 +454,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
         }
     }
     
-    /// &lt;summary&gt; 
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DirectoryTablePartRecord
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord()
@@ -499,10 +502,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
       
       <xsl:for-each select="Views/View"> <!-- Views -->
         <xsl:variable name="ViewsName" select="Name"/>
-        <xsl:variable name="ViewsFullName" select="concat($DirectoryName, '_', $ViewsName)"/>  
-    /// &lt;summary&gt; 
-    /// <xsl:value-of select="Desc"/>
-    /// &lt;/summary&gt;
+        <xsl:variable name="ViewsFullName" select="concat($DirectoryName, '_', $ViewsName)"/>
+    
+    <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$ViewsFullName"/>_View : DirectoryView
     {
         public <xsl:value-of select="$ViewsFullName"/>_View() : base(Config.Kernel, "<xsl:value-of select="Table"/>", 
@@ -541,6 +543,21 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     
     #endregion
     </xsl:for-each>
+}
+
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Document
+{
+
+}
+
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Journal
+{
+
+}
+
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Register
+{
+
 }
   </xsl:template>
 </xsl:stylesheet>

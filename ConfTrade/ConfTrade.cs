@@ -8,6 +8,7 @@ using System.Xml.Xsl;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
+using Довідники = ConfTrade_v1_1.Directory;
 
 //Конфігурація Торгівля
 namespace ConfTrade
@@ -44,8 +45,8 @@ namespace ConfTrade
 
 			//Conf.Config.Kernel.DataBase.BeginTransaction();
 
-			
-			Conf.Товари_ВибіркаТовари_View v = new Conf.Товари_ВибіркаТовари_View();
+
+			Довідники.Товари_ВибіркаТовари_View v = new Довідники.Товари_ВибіркаТовари_View();
 			v.QuerySelect.Where.Add(new Where(v.Alias["Одиниця"], Comparison.NOTNULL, "", true));
 			v.QuerySelect.Limit = 1;
 			v.QuerySelect.CreateTempTable = true;
@@ -62,13 +63,13 @@ namespace ConfTrade
 			//	товари_Objest.Ціни_TablePart.Save(false);
 			//}
 
-			
-			Conf.ОдиниціВиміру_Вибірка_View od = new Conf.ОдиниціВиміру_Вибірка_View();
+
+			Довідники.ОдиниціВиміру_Вибірка_View od = new Довідники.ОдиниціВиміру_Вибірка_View();
 			od.QuerySelect.CreateTempTable = true;
 			od.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + v.Alias["Одиниця"] + " FROM " + v.QuerySelect.TempTable, true));
 			Console.WriteLine(od.Read());
 
-			Conf.Товари_ВибіркаЦіни_View ceny = new Conf.Товари_ВибіркаЦіни_View();
+			Довідники.Товари_ВибіркаЦіни_View ceny = new Довідники.Товари_ВибіркаЦіни_View();
 			ceny.QuerySelect.Where.Add(new Where("owner", Comparison.EQ, "(SELECT uid FROM " + v.QuerySelect.TempTable + ")", true));
 			Console.WriteLine(ceny.Read());
 			/**/

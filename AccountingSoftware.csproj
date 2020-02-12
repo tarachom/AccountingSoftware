@@ -76,6 +76,7 @@
     <Compile Include="AccountingSoftware\Document\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
     <Compile Include="AccountingSoftware\UnigueID.cs" />
+    <None Include="back_up\XmlSerialization.cs_" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

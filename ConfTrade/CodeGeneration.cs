@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 12.02.2020 09:18:10
+ * Дата конфігурації: 12.02.2020 17:30:28
  *
  */
 
@@ -18,12 +18,16 @@ namespace ConfTrade_v1_1
     {
         public static Kernel Kernel { get; set; }
     }
+}
+
+namespace ConfTrade_v1_1.Directory
+{
     
     #region DIRECTORY "Товари"
     
-    /// <summary> 
-    /// Довідник Товари
-    /// </summary>
+    ///<summary>
+    ///Довідник Товари.
+    ///</summary>
     class Товари_Objest : DirectoryObject
     {
         public Товари_Objest() : base(Config.Kernel, "tovary",
@@ -116,9 +120,9 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// Довідник Товари
-    /// </summary>
+    ///<summary>
+    ///Довідник Товари.
+    ///</summary>
     class Товари_Pointer : DirectoryPointer
     {
         public Товари_Pointer(object uid = null) : base(Config.Kernel, "tovary")
@@ -134,9 +138,9 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// Довідник Товари
-    /// </summary>
+    ///<summary>
+    ///Довідник Товари.
+    ///</summary>
     class Товари_Select : DirectorySelect, IDisposable
     {
         public Товари_Select() : base(Config.Kernel, "tovary") { }
@@ -178,10 +182,9 @@ namespace ConfTrade_v1_1
         public Товари_Pointer Current { get; private set; }
     }
     
-      
-    /// <summary>
-    /// Таблична частина Ціни
-    /// </summary>
+      ///<summary>
+    ///Таблична частина Ціни.
+    ///</summary>
     class Товари_Ціни_TablePart : DirectoryTablePart
     {
         public Товари_Ціни_TablePart(Товари_Objest owner) : base(Config.Kernel, "tovary_ceny_tablepart",
@@ -223,9 +226,7 @@ namespace ConfTrade_v1_1
         /// Зберегти колекцію Records в базу.
         /// </summary>
         /// <param name="clear_all_before_save">
-        /// Перед записом колекції, попередні записи видаляються з бази даних.
-        /// Щоб не видаляти треба поставити clear_all_before_save = false.
-        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
         /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
@@ -264,9 +265,9 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// Таблична частина Ціни
-    /// </summary>
+    ///<summary>
+    ///Таблична частина Ціни.
+    ///</summary>
     class Товари_Ціни_TablePartRecord : DirectoryTablePartRecord
     {
         public Товари_Ціни_TablePartRecord()
@@ -307,10 +308,6 @@ namespace ConfTrade_v1_1
         
     }
       
-    /// <summary>
-    /// 
-          
-    /// </summary>
     class Товари_ОдиниціВиміру_TablePart : DirectoryTablePart
     {
         public Товари_ОдиниціВиміру_TablePart(Товари_Objest owner) : base(Config.Kernel, "od_list",
@@ -345,9 +342,7 @@ namespace ConfTrade_v1_1
         /// Зберегти колекцію Records в базу.
         /// </summary>
         /// <param name="clear_all_before_save">
-        /// Перед записом колекції, попередні записи видаляються з бази даних.
-        /// Щоб не видаляти треба поставити clear_all_before_save = false.
-        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
         /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
@@ -379,10 +374,7 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// 
-          
-    /// </summary>
+    
     class Товари_ОдиниціВиміру_TablePartRecord : DirectoryTablePartRecord
     {
         public Товари_ОдиниціВиміру_TablePartRecord()
@@ -401,10 +393,9 @@ namespace ConfTrade_v1_1
         public ОдиниціВиміру_Pointer Одиниця { get; set; }
         
     }
-        
-    /// <summary> 
-    /// Візуалізація 1
-    /// </summary>
+      ///<summary>
+    ///Візуалізація 1.
+    ///</summary>
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
@@ -418,10 +409,9 @@ namespace ConfTrade_v1_1
         }
         
     }
-        
-    /// <summary> 
-    /// Візуалізація Табличної частини Ціни елементу довідника
-    /// </summary>
+      ///<summary>
+    ///Візуалізація Табличної частини Ціни елементу довідника.
+    ///</summary>
     class Товари_ВибіркаЦіни_View : DirectoryView
     {
         public Товари_ВибіркаЦіни_View() : base(Config.Kernel, "tovary_ceny_tablepart", 
@@ -441,9 +431,9 @@ namespace ConfTrade_v1_1
     
     #region DIRECTORY "Новий"
     
-    /// <summary> 
-    /// new new
-    /// </summary>
+    ///<summary>
+    ///new new.
+    ///</summary>
     class Новий_Objest : DirectoryObject
     {
         public Новий_Objest() : base(Config.Kernel, "new",
@@ -500,9 +490,9 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// new new
-    /// </summary>
+    ///<summary>
+    ///new new.
+    ///</summary>
     class Новий_Pointer : DirectoryPointer
     {
         public Новий_Pointer(object uid = null) : base(Config.Kernel, "new")
@@ -518,9 +508,9 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// new new
-    /// </summary>
+    ///<summary>
+    ///new new.
+    ///</summary>
     class Новий_Select : DirectorySelect, IDisposable
     {
         public Новий_Select() : base(Config.Kernel, "new") { }
@@ -568,9 +558,9 @@ namespace ConfTrade_v1_1
     
     #region DIRECTORY "ТМЦ"
     
-    /// <summary> 
-    /// Товаро-матеріальні цінності
-    /// </summary>
+    ///<summary>
+    ///Товаро-матеріальні цінності.
+    ///</summary>
     class ТМЦ_Objest : DirectoryObject
     {
         public ТМЦ_Objest() : base(Config.Kernel, "tmc",
@@ -639,9 +629,9 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// Товаро-матеріальні цінності
-    /// </summary>
+    ///<summary>
+    ///Товаро-матеріальні цінності.
+    ///</summary>
     class ТМЦ_Pointer : DirectoryPointer
     {
         public ТМЦ_Pointer(object uid = null) : base(Config.Kernel, "tmc")
@@ -657,9 +647,9 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// Товаро-матеріальні цінності
-    /// </summary>
+    ///<summary>
+    ///Товаро-матеріальні цінності.
+    ///</summary>
     class ТМЦ_Select : DirectorySelect, IDisposable
     {
         public ТМЦ_Select() : base(Config.Kernel, "tmc") { }
@@ -707,10 +697,7 @@ namespace ConfTrade_v1_1
     
     #region DIRECTORY "Записки"
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class Записки_Objest : DirectoryObject
     {
         public Записки_Objest() : base(Config.Kernel, "zpysky_info",
@@ -767,10 +754,7 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class Записки_Pointer : DirectoryPointer
     {
         public Записки_Pointer(object uid = null) : base(Config.Kernel, "zpysky_info")
@@ -786,10 +770,7 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class Записки_Select : DirectorySelect, IDisposable
     {
         public Записки_Select() : base(Config.Kernel, "zpysky_info") { }
@@ -837,10 +818,7 @@ namespace ConfTrade_v1_1
     
     #region DIRECTORY "ОдиниціВиміру"
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class ОдиниціВиміру_Objest : DirectoryObject
     {
         public ОдиниціВиміру_Objest() : base(Config.Kernel, "od_vimir",
@@ -899,10 +877,7 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class ОдиниціВиміру_Pointer : DirectoryPointer
     {
         public ОдиниціВиміру_Pointer(object uid = null) : base(Config.Kernel, "od_vimir")
@@ -918,10 +893,7 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class ОдиниціВиміру_Select : DirectorySelect, IDisposable
     {
         public ОдиниціВиміру_Select() : base(Config.Kernel, "od_vimir") { }
@@ -963,10 +935,9 @@ namespace ConfTrade_v1_1
         public ОдиниціВиміру_Pointer Current { get; private set; }
     }
     
-      
-    /// <summary>
-    /// Історія
-    /// </summary>
+      ///<summary>
+    ///Історія.
+    ///</summary>
     class ОдиниціВиміру_Історія_TablePart : DirectoryTablePart
     {
         public ОдиниціВиміру_Історія_TablePart(ОдиниціВиміру_Objest owner) : base(Config.Kernel, "history",
@@ -1002,9 +973,7 @@ namespace ConfTrade_v1_1
         /// Зберегти колекцію Records в базу.
         /// </summary>
         /// <param name="clear_all_before_save">
-        /// Перед записом колекції, попередні записи видаляються з бази даних.
-        /// Щоб не видаляти треба поставити clear_all_before_save = false.
-        /// Це корисно коли потрібно добавити нові записи без зчитування всієї колекції.
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
         /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
@@ -1037,9 +1006,9 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// Історія
-    /// </summary>
+    ///<summary>
+    ///Історія.
+    ///</summary>
     class ОдиниціВиміру_Історія_TablePartRecord : DirectoryTablePartRecord
     {
         public ОдиниціВиміру_Історія_TablePartRecord()
@@ -1061,10 +1030,9 @@ namespace ConfTrade_v1_1
         public string Значення { get; set; }
         
     }
-        
-    /// <summary> 
-    /// Візуалізація 1
-    /// </summary>
+      ///<summary>
+    ///Візуалізація 1.
+    ///</summary>
     class ОдиниціВиміру_Вибірка_View : DirectoryView
     {
         public ОдиниціВиміру_Вибірка_View() : base(Config.Kernel, "od_vimir", 
@@ -1084,10 +1052,7 @@ namespace ConfTrade_v1_1
     
     #region DIRECTORY "НовийДокумент"
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class НовийДокумент_Objest : DirectoryObject
     {
         public НовийДокумент_Objest() : base(Config.Kernel, "new_document",
@@ -1136,10 +1101,7 @@ namespace ConfTrade_v1_1
         
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class НовийДокумент_Pointer : DirectoryPointer
     {
         public НовийДокумент_Pointer(object uid = null) : base(Config.Kernel, "new_document")
@@ -1155,10 +1117,7 @@ namespace ConfTrade_v1_1
         }
     }
     
-    /// <summary> 
-    /// 
-      
-    /// </summary>
+    
     class НовийДокумент_Select : DirectorySelect, IDisposable
     {
         public НовийДокумент_Select() : base(Config.Kernel, "new_document") { }
@@ -1204,5 +1163,20 @@ namespace ConfTrade_v1_1
     
     #endregion
     
+}
+
+namespace ConfTrade_v1_1.Document
+{
+
+}
+
+namespace ConfTrade_v1_1.Journal
+{
+
+}
+
+namespace ConfTrade_v1_1.Register
+{
+
 }
   
