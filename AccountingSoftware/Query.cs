@@ -22,10 +22,19 @@ namespace AccountingSoftware
 		/// </summary>
 		public string Table { get; set; } //!!
 
+		/// <summary>
+		/// Назва тимчасової таблиці
+		/// </summary>
 		public string TempTable { get; set; }
 
+		/// <summary>
+		/// Створити тимчасову таблицю на основі запиту
+		/// </summary>
 		public bool CreateTempTable { get; set; }
 
+		/// <summary>
+		/// Первинний ключ
+		/// </summary>
 		public string PrimaryField { get; set; } //!!!
 
 		/// <summary>
@@ -72,7 +81,7 @@ namespace AccountingSoftware
 			}
 
 			sb.Append("SELECT " + PrimaryField);
-			 
+
 			if (Field.Count > 0)
 			{
 				foreach (string field in Field)
@@ -124,6 +133,14 @@ namespace AccountingSoftware
 									sb.Append(" != " + field.Value + " ");
 								else
 									sb.Append(" != @" + field.Name + " ");
+							}
+							break;
+
+						case Comparison.ISNULL:
+						case Comparison.NOTNULL:
+							{
+								if (field.UsingSQLToValue)
+									sb.Append(" " + field.Comparison + " ");
 							}
 							break;
 
