@@ -20,8 +20,6 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
-
-
 			/*
 			using (Conf.Товари_Select s = new Conf.Товари_Select())
 			{
@@ -45,12 +43,17 @@ namespace ConfTrade
 
 			//Conf.Config.Kernel.DataBase.BeginTransaction();
 
+			System.IO.StringWriter stringWriter = new System.IO.StringWriter();
+			stringWriter.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+			stringWriter.WriteLine("<root>");
+
 
 			Довідники.Товари_ВибіркаТовари_View v = new Довідники.Товари_ВибіркаТовари_View();
 			v.QuerySelect.Where.Add(new Where(v.Alias["Одиниця"], Comparison.NOTNULL, "", true));
-			v.QuerySelect.Limit = 1;
+			//v.QuerySelect.Limit = 1;
 			v.QuerySelect.CreateTempTable = true;
-			Console.WriteLine(v.Read());
+			stringWriter.Write(v.Read());
+
 			/**/
 
 			//Conf.Товари_Select sel = new Conf.Товари_Select();
@@ -67,14 +70,21 @@ namespace ConfTrade
 			Довідники.ОдиниціВиміру_Вибірка_View od = new Довідники.ОдиниціВиміру_Вибірка_View();
 			od.QuerySelect.CreateTempTable = true;
 			od.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + v.Alias["Одиниця"] + " FROM " + v.QuerySelect.TempTable, true));
-			Console.WriteLine(od.Read());
+			stringWriter.Write(od.Read());
 
-			Довідники.Товари_ВибіркаЦіни_View ceny = new Довідники.Товари_ВибіркаЦіни_View();
-			ceny.QuerySelect.Where.Add(new Where("owner", Comparison.EQ, "(SELECT uid FROM " + v.QuerySelect.TempTable + ")", true));
-			Console.WriteLine(ceny.Read());
+			//Довідники.Товари_ВибіркаЦіни_View ceny = new Довідники.Товари_ВибіркаЦіни_View();
+			//ceny.QuerySelect.Where.Add(new Where("owner", Comparison.EQ, "(SELECT uid FROM " + v.QuerySelect.TempTable + ")", true));
+			//stringWriter.Write(ceny.Read());
 			/**/
 
-			//Conf.Config.Kernel.DataBase.CommitTransaction();
+			stringWriter.WriteLine("</root>");
+
+			System.IO.File.WriteAllText(@"D:\xml.txt", stringWriter.ToString());
+
+			XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+			xslCompiledTransform.Load(@"D:\VS\Project\AccountingSoftware\ConfTrade\XSLTFile1.xslt");
+
+			xslCompiledTransform.Transform(@"D:\xml.txt", @"D:\html.txt");
 
 			Console.ReadLine();
 		}

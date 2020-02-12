@@ -60,6 +60,7 @@
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />
     <Content Include="ReportAnalize.xml" />
+    <Content Include="XSLTFile1.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">

@@ -315,7 +315,7 @@ namespace AccountingSoftware
 
 		public bool IfExistsColumn(string tableName, string columnName)
 		{
-			string query = "SELECT column_name" +
+			string query = "SELECT column_name " +
 						   "FROM information_schema.columns " +
 						   "WHERE table_schema = 'public' AND table_name = @table_name AND column_name = @column_name";
 
