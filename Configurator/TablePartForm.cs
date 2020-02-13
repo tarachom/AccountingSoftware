@@ -25,7 +25,7 @@ namespace Configurator
 		public bool IsNewDirectoryTablePart { get; set; }
 		public string OriginalName { get; set; }
 
-		private void DirectoryForm_Load(object sender, EventArgs e)
+		private void TablePartForm_Load(object sender, EventArgs e)
 		{
 			if (ConfDirectoryTablePart == null)
 			{

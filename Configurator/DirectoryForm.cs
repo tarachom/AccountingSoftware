@@ -210,5 +210,26 @@ namespace Configurator
 				tablePartForm.Show();
 			}
 		}
+
+		private void listBoxViews_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listBoxViews.SelectedItem != null)
+			{
+				ViewForm viewForm = new ViewForm();
+				viewForm.ConfView = ConfDirectory.Views[listBoxViews.SelectedItem.ToString()];
+				viewForm.ConfDirectory = ConfDirectory;
+				//viewForm.CallBack = CallBack_Update_TablePart;
+				//viewForm.CallBack_IsExistTablePartName = CallBack_IsExistTablePartName;
+
+				viewForm.Show();
+			}
+		}
+
+		private void buttonAddView_Click(object sender, EventArgs e)
+		{
+			ViewForm viewForm = new ViewForm();
+			viewForm.ConfDirectory = ConfDirectory;
+			viewForm.Show();
+		}
 	}
 }
