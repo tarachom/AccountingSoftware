@@ -18,6 +18,8 @@ namespace AccountingSoftware
 			Documents = new Dictionary<string, ConfigurationDocuments>();
 			Enums = new Dictionary<string, ConfigurationEnums>();
 			Registers = new Dictionary<string, ConfigurationRegisters>();
+
+			ReservedUnigueTableName = new List<string>();
 		}
 
 		public string Name { get; set; }
@@ -83,6 +85,128 @@ namespace AccountingSoftware
 			}
 
 			return ListPointer;
+		}
+
+		private List<string> ReservedUnigueTableName { get; set; }
+
+		public static void WriteLog(string txt)
+		{
+			File.AppendAllText(@"D:\log.txt", txt + "\n");
+		}
+
+		public static string GetNewUnigueTableName(Kernel Kernel)
+		{
+			string[] mas = new string[] { "a", "b", "c", "d", "e", "f" };
+			bool noExistInReserved = false;
+			bool noExistInBase = false;
+			bool noExistInCong = false;
+			string tabNewName = "";
+
+			for (int j = 0; j < mas.Length; j++)
+			{
+				for (int i = 1; i < 10; i++)
+				{
+					tabNewName = "tab_" + mas[j] + i.ToString();
+					if (!Kernel.Conf.ReservedUnigueTableName.Contains(tabNewName))
+					{
+						noExistInReserved = true;
+					}
+					else
+						continue;
+
+					if (!Kernel.DataBase.IfExistsTable(tabNewName))
+					{
+						noExistInBase = true;
+					}
+					else
+						continue;
+
+					noExistInCong = true;
+
+					foreach (ConfigurationDirectories directoryItem in Kernel.Conf.Directories.Values)
+					{
+						if (directoryItem.Table == tabNewName)
+						{
+							noExistInCong = false;
+							WriteLog("noExistInCong = false;");
+							break;
+						}
+
+						foreach (ConfigurationObjectTablePart directoryTablePart in directoryItem.TabularParts.Values)
+						{
+							if (directoryTablePart.Table == tabNewName)
+							{
+								noExistInCong = false;
+								WriteLog("noExistInCong = false;");
+								break;
+							}
+						}
+
+						if (!noExistInCong)
+						{
+							WriteLog("!noExistInCong");
+							break;
+						}
+					}
+
+					if (noExistInReserved && noExistInBase && noExistInCong)
+					{
+						break;
+					}
+				}
+
+				if (noExistInReserved && noExistInBase && noExistInCong)
+				{
+					break;
+				}
+			}
+
+			Kernel.Conf.ReservedUnigueTableName.Add(tabNewName);
+
+			return tabNewName;
+		}
+
+		public static List<string> ValidateConfigurationObjectName(Kernel Kernel, ref string configurationObjectName)
+		{
+			List<string> errorList = new List<string>();
+
+			configurationObjectName = configurationObjectName.Trim();
+
+			if (String.IsNullOrWhiteSpace(configurationObjectName))
+			{
+				errorList.Add("Назва не задана");
+				return errorList;
+			}
+
+			string allovChar = "abcdefghijklnmopqrstuvwxyz_";
+			string allovNum = "0123456789";
+			string allovCharCyrillic = "";
+			string allovAll = allovChar + allovNum + allovCharCyrillic;
+
+			string configurationObjectModificeName = "";
+
+			for (int i = 0; i < configurationObjectName.Length; i++)
+			{
+				string checkChar = configurationObjectName.Substring(i, 1);
+				WriteLog(i.ToString() + " " + checkChar);
+
+				if (allovAll.IndexOf(checkChar) >= 0)
+				{
+					if (i == 0 && allovNum.IndexOf(checkChar) >= 0)
+					{
+						errorList.Add("Назва має починатися з букви");
+						WriteLog("allovNum.IndexOf(checkChar) " + allovNum.IndexOf(checkChar));
+					}
+					
+					configurationObjectModificeName += checkChar;
+				}
+				else
+					errorList.Add("Недопустимий символ: " + checkChar);
+			}
+
+			configurationObjectName = configurationObjectModificeName;
+
+			return errorList;
 		}
 
 		public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)

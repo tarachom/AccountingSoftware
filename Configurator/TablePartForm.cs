@@ -28,6 +28,9 @@ namespace Configurator
 			if (ConfDirectoryTablePart == null)
 			{
 				ConfDirectoryTablePart = new ConfigurationObjectTablePart();
+
+				textBoxTable.Text = textBoxName.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
+
 				IsNewDirectoryTablePart = true;
 			}
 			else
