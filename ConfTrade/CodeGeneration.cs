@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.02.2020 17:26:46
+ * Дата конфігурації: 13.02.2020 18:39:58
  *
  */
 
@@ -1169,10 +1169,11 @@ namespace ConfTrade_v1_1.Directory
     class aaa_Objest : DirectoryObject
     {
         public aaa_Objest() : base(Config.Kernel, "tab_b2",
-             new string[] { "as", "asd" }) 
+             new string[] { "as", "asd", "col_a01" }) 
         {
             a1 = "";
             a2 = "";
+            werqwer = "";
             
             //Табличні частини
             aaa_TablePart = new aaa_aaa_TablePart(this);
@@ -1187,6 +1188,7 @@ namespace ConfTrade_v1_1.Directory
             {
                 a1 = base.FieldValue["as"].ToString();
                 a2 = base.FieldValue["asd"].ToString();
+                werqwer = base.FieldValue["col_a01"].ToString();
                 
                 BaseClear();
                 return true;
@@ -1199,6 +1201,7 @@ namespace ConfTrade_v1_1.Directory
         {
             base.FieldValue["as"] = a1;
             base.FieldValue["asd"] = a2;
+            base.FieldValue["col_a01"] = werqwer;
             
             BaseSave();
         }
@@ -1216,6 +1219,7 @@ namespace ConfTrade_v1_1.Directory
         
         public string a1 { get; set; }
         public string a2 { get; set; }
+        public string werqwer { get; set; }
         
         //Табличні частини
         public aaa_aaa_TablePart aaa_TablePart { get; set; }
@@ -2121,8 +2125,11 @@ namespace ConfTrade_v1_1.Directory
     class dddd_Objest : DirectoryObject
     {
         public dddd_Objest() : base(Config.Kernel, "tab_c3",
-             new string[] {  }) 
+             new string[] { "col_a01", "col_a02", "col_a03" }) 
         {
+            werwqer = "";
+            werqwerq = "";
+            werwer = "";
             
             //Табличні частини
             dddd_TablePart = new dddd_dddd_TablePart(this);
@@ -2133,6 +2140,9 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
+                werwqer = base.FieldValue["col_a01"].ToString();
+                werqwerq = base.FieldValue["col_a02"].ToString();
+                werwer = base.FieldValue["col_a03"].ToString();
                 
                 BaseClear();
                 return true;
@@ -2143,6 +2153,9 @@ namespace ConfTrade_v1_1.Directory
         
         public void Save()
         {
+            base.FieldValue["col_a01"] = werwqer;
+            base.FieldValue["col_a02"] = werqwerq;
+            base.FieldValue["col_a03"] = werwer;
             
             BaseSave();
         }
@@ -2158,6 +2171,9 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
+        public string werwqer { get; set; }
+        public string werqwerq { get; set; }
+        public string werwer { get; set; }
         
         //Табличні частини
         public dddd_dddd_TablePart dddd_TablePart { get; set; }
@@ -2318,8 +2334,10 @@ namespace ConfTrade_v1_1.Directory
     class werwer_Objest : DirectoryObject
     {
         public werwer_Objest() : base(Config.Kernel, "tab_a01",
-             new string[] {  }) 
+             new string[] { "col_a01", "col_a02" }) 
         {
+            erwerqwe = "";
+            wrwerqwer = "";
             
             //Табличні частини
             werwe_TablePart = new werwer_werwe_TablePart(this);
@@ -2330,6 +2348,8 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
+                erwerqwe = base.FieldValue["col_a01"].ToString();
+                wrwerqwer = base.FieldValue["col_a02"].ToString();
                 
                 BaseClear();
                 return true;
@@ -2340,6 +2360,8 @@ namespace ConfTrade_v1_1.Directory
         
         public void Save()
         {
+            base.FieldValue["col_a01"] = erwerqwe;
+            base.FieldValue["col_a02"] = wrwerqwer;
             
             BaseSave();
         }
@@ -2355,6 +2377,8 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
+        public string erwerqwe { get; set; }
+        public string wrwerqwer { get; set; }
         
         //Табличні частини
         public werwer_werwe_TablePart werwe_TablePart { get; set; }
@@ -2710,6 +2734,385 @@ namespace ConfTrade_v1_1.Directory
         }
 
         public dfsdfs_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "werw1"
+    
+    
+    class werw1_Objest : DirectoryObject
+    {
+        public werw1_Objest() : base(Config.Kernel, "tab_a05",
+             new string[] { "col_a01", "col_a02" }) 
+        {
+            werqwerq = "";
+            werqwerqw = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                werqwerq = base.FieldValue["col_a01"].ToString();
+                werqwerqw = base.FieldValue["col_a02"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a01"] = werqwerq;
+            base.FieldValue["col_a02"] = werqwerqw;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public werw1_Pointer GetDirectoryPointer()
+        {
+            werw1_Pointer directoryPointer = new werw1_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string werqwerq { get; set; }
+        public string werqwerqw { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class werw1_Pointer : DirectoryPointer
+    {
+        public werw1_Pointer(object uid = null) : base(Config.Kernel, "tab_a05")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public werw1_Objest GetDirectoryObject()
+        {
+            werw1_Objest werw1ObjestItem = new werw1_Objest();
+            werw1ObjestItem.Read(base.UnigueID);
+            return werw1ObjestItem;
+        }
+    }
+    
+    
+    class werw1_Select : DirectorySelect, IDisposable
+    {
+        public werw1_Select() : base(Config.Kernel, "tab_a05") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new werw1_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public werw1_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "dfasdfa"
+    
+    
+    class dfasdfa_Objest : DirectoryObject
+    {
+        public dfasdfa_Objest() : base(Config.Kernel, "tab_a07",
+             new string[] { "col_a3", "col_a1", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3" }) 
+        {
+            erter = "";
+            ertwertw = "";
+            ertwertwsdfas = "";
+            sdfsdf = "";
+            sdfasdfa = "";
+            fasdfa = "";
+            sdfasda = "";
+            sdfasdfaf = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                erter = base.FieldValue["col_a3"].ToString();
+                ertwertw = base.FieldValue["col_a1"].ToString();
+                ertwertwsdfas = base.FieldValue["col_a7"].ToString();
+                sdfsdf = base.FieldValue["col_a8"].ToString();
+                sdfasdfa = base.FieldValue["col_a9"].ToString();
+                fasdfa = base.FieldValue["col_b1"].ToString();
+                sdfasda = base.FieldValue["col_b2"].ToString();
+                sdfasdfaf = base.FieldValue["col_b3"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a3"] = erter;
+            base.FieldValue["col_a1"] = ertwertw;
+            base.FieldValue["col_a7"] = ertwertwsdfas;
+            base.FieldValue["col_a8"] = sdfsdf;
+            base.FieldValue["col_a9"] = sdfasdfa;
+            base.FieldValue["col_b1"] = fasdfa;
+            base.FieldValue["col_b2"] = sdfasda;
+            base.FieldValue["col_b3"] = sdfasdfaf;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public dfasdfa_Pointer GetDirectoryPointer()
+        {
+            dfasdfa_Pointer directoryPointer = new dfasdfa_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string erter { get; set; }
+        public string ertwertw { get; set; }
+        public string ertwertwsdfas { get; set; }
+        public string sdfsdf { get; set; }
+        public string sdfasdfa { get; set; }
+        public string fasdfa { get; set; }
+        public string sdfasda { get; set; }
+        public string sdfasdfaf { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class dfasdfa_Pointer : DirectoryPointer
+    {
+        public dfasdfa_Pointer(object uid = null) : base(Config.Kernel, "tab_a07")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public dfasdfa_Objest GetDirectoryObject()
+        {
+            dfasdfa_Objest dfasdfaObjestItem = new dfasdfa_Objest();
+            dfasdfaObjestItem.Read(base.UnigueID);
+            return dfasdfaObjestItem;
+        }
+    }
+    
+    
+    class dfasdfa_Select : DirectorySelect, IDisposable
+    {
+        public dfasdfa_Select() : base(Config.Kernel, "tab_a07") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new dfasdfa_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public dfasdfa_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "sdfasdf"
+    
+    
+    class sdfasdf_Objest : DirectoryObject
+    {
+        public sdfasdf_Objest() : base(Config.Kernel, "tab_a06",
+             new string[] { "col_a4", "col_a2", "col_a6" }) 
+        {
+            retert = "";
+            ertwert = "";
+            ertwertw = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                retert = base.FieldValue["col_a4"].ToString();
+                ertwert = base.FieldValue["col_a2"].ToString();
+                ertwertw = base.FieldValue["col_a6"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a4"] = retert;
+            base.FieldValue["col_a2"] = ertwert;
+            base.FieldValue["col_a6"] = ertwertw;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public sdfasdf_Pointer GetDirectoryPointer()
+        {
+            sdfasdf_Pointer directoryPointer = new sdfasdf_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string retert { get; set; }
+        public string ertwert { get; set; }
+        public string ertwertw { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class sdfasdf_Pointer : DirectoryPointer
+    {
+        public sdfasdf_Pointer(object uid = null) : base(Config.Kernel, "tab_a06")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public sdfasdf_Objest GetDirectoryObject()
+        {
+            sdfasdf_Objest sdfasdfObjestItem = new sdfasdf_Objest();
+            sdfasdfObjestItem.Read(base.UnigueID);
+            return sdfasdfObjestItem;
+        }
+    }
+    
+    
+    class sdfasdf_Select : DirectorySelect, IDisposable
+    {
+        public sdfasdf_Select() : base(Config.Kernel, "tab_a06") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new sdfasdf_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public sdfasdf_Pointer Current { get; private set; }
     }
     
       

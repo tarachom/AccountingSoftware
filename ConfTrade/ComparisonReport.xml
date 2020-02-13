@@ -459,24 +459,35 @@
     <Control_Field>
       <Name>a1</Name>
       <NameInTable>as</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>a1</Name>
-        <NameInTable>as</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_Field>
       <Name>a2</Name>
       <NameInTable>asd</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>a2</Name>
-        <NameInTable>asd</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwer</Name>
+      <NameInTable>col_a01</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>aaa</Name>
@@ -638,6 +649,39 @@
     <Name>dddd</Name>
     <Table>tab_c3</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>werwqer</Name>
+      <NameInTable>col_a01</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwerq</Name>
+      <NameInTable>col_a02</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werwer</Name>
+      <NameInTable>col_a03</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>dddd</Name>
       <Table>tab_c4</Table>
@@ -659,6 +703,28 @@
     <Name>werwer</Name>
     <Table>tab_a01</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>erwerqwe</Name>
+      <NameInTable>col_a01</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>wrwerqwer</Name>
+      <NameInTable>col_a02</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>werwe</Name>
       <Table>tab_a02</Table>
@@ -674,5 +740,112 @@
     <Name>dfsdfs</Name>
     <Table>tab_a03</Table>
     <IsExist>yes</IsExist>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>werw1</Name>
+    <Table>tab_a05</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>werqwerq</Name>
+      <NameInTable>col_a01</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwerqw</Name>
+      <NameInTable>col_a02</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>dfasdfa</Name>
+    <Table>tab_a07</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>erter</Name>
+        <NameInTable>col_a3</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>ertwertw</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>ertwertwsdfas</Name>
+        <NameInTable>col_a7</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>sdfsdf</Name>
+        <NameInTable>col_a8</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>sdfasdfa</Name>
+        <NameInTable>col_a9</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>fasdfa</Name>
+        <NameInTable>col_b1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>sdfasda</Name>
+        <NameInTable>col_b2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>sdfasdfaf</Name>
+        <NameInTable>col_b3</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>sdfasdf</Name>
+    <Table>tab_a06</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>retert</Name>
+        <NameInTable>col_a4</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>ertwert</Name>
+        <NameInTable>col_a2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>ertwertw</Name>
+        <NameInTable>col_a6</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
   </Control_Directory>
 </root>

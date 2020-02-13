@@ -17,6 +17,7 @@ namespace Configurator
 		public ConfigurationObjectField configurationObjectField { get; set; }
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
+		public string NewNameInTable { get; set; }
 
 		public FieldForm()
 		{
@@ -30,9 +31,7 @@ namespace Configurator
 				comboBoxFieldType.Items.Add(fieldType);
 
 			comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[0];
-
 			comboBoxPointer.Enabled = false;
-			//comboBoxPointer.Items.Add("");
 
 			//Список довідників
 			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)
@@ -43,6 +42,8 @@ namespace Configurator
 			if (configurationObjectField == null)
 			{
 				configurationObjectField = new ConfigurationObjectField();
+				textBoxNameInTable.Text = NewNameInTable;
+
 				IsNew = true;
 			}
 			else

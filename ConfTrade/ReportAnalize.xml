@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <sql>ALTER TABLE tab_b2 ADD COLUMN "as" text;</sql>
-  <sql>ALTER TABLE tab_b2 ADD COLUMN "asd" text;</sql>
+  <sql>CREATE TABLE tab_a07 (uid uuid NOT NULL,  "col_a3" text,  "col_a1" text,  "col_a7" text,  "col_a8" text,  "col_a9" text,  "col_b1" text,  "col_b2" text,  "col_b3" text, PRIMARY KEY(uid));</sql>
+  <sql>CREATE TABLE tab_a06 (uid uuid NOT NULL,  "col_a4" text,  "col_a2" text,  "col_a6" text, PRIMARY KEY(uid));</sql>
 </root>

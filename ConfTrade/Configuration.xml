@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.02.2020 17:26:46</DateTimeSave>
+  <DateTimeSave>13.02.2020 18:39:58</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -433,6 +433,13 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>werqwer</Name>
+          <NameInTable>col_a01</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -589,7 +596,29 @@
       <Table>tab_c3</Table>
       <Desc>
       </Desc>
-      <Fields />
+      <Fields>
+        <Field>
+          <Name>werwqer</Name>
+          <NameInTable>col_a01</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwerq</Name>
+          <NameInTable>col_a02</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werwer</Name>
+          <NameInTable>col_a03</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
       <TabularParts>
         <TablePart>
           <Name>dddd</Name>
@@ -614,7 +643,22 @@
       <Table>tab_a01</Table>
       <Desc>
       </Desc>
-      <Fields />
+      <Fields>
+        <Field>
+          <Name>erwerqwe</Name>
+          <NameInTable>col_a01</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>wrwerqwer</Name>
+          <NameInTable>col_a02</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
       <TabularParts>
         <TablePart>
           <Name>werwe</Name>
@@ -641,6 +685,127 @@
       <Desc>
       </Desc>
       <Fields />
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>werw1</Name>
+      <Table>tab_a05</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>werqwerq</Name>
+          <NameInTable>col_a01</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwerqw</Name>
+          <NameInTable>col_a02</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>dfasdfa</Name>
+      <Table>tab_a07</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>erter</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ertwertw</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ertwertwsdfas</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfsdf</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdfa</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>fasdfa</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasda</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdfaf</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>sdfasdf</Name>
+      <Table>tab_a06</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>retert</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ertwert</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ertwertw</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
       <TabularParts />
       <Views />
     </Directory>

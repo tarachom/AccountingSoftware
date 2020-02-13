@@ -20,6 +20,7 @@ namespace AccountingSoftware
 			Registers = new Dictionary<string, ConfigurationRegisters>();
 
 			ReservedUnigueTableName = new List<string>();
+			ReservedUnigueColumnName = new Dictionary<string, List<string>>();
 		}
 
 		public string Name { get; set; }
@@ -88,10 +89,71 @@ namespace AccountingSoftware
 		}
 
 		private List<string> ReservedUnigueTableName { get; set; }
+		private Dictionary<string, List<string>> ReservedUnigueColumnName { get; set; }
 
 		public static void WriteLog(string txt)
 		{
 			File.AppendAllText(@"D:\log.txt", txt + "\n");
+		}
+
+		public static string GetNewUnigueColumnName(Kernel Kernel, string table, Dictionary<string, ConfigurationObjectField> Fields)
+		{
+			string[] mas = new string[]
+			{
+				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
+				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+			};
+
+			bool noExistInReserved = false;
+			bool noExistInConf = false;
+			string columnNewName = "";
+
+			if (String.IsNullOrWhiteSpace(table)) {
+				table = "0";
+			}
+
+			if (!Kernel.Conf.ReservedUnigueColumnName.ContainsKey(table))
+				Kernel.Conf.ReservedUnigueColumnName.Add(table, new List<string>());
+
+			for (int j = 0; j < mas.Length; j++)
+			{
+				for (int i = 1; i < 10; i++)
+				{
+					columnNewName = "col_" + mas[j] + i.ToString();
+
+					if (!Kernel.Conf.ReservedUnigueColumnName[table].Contains(columnNewName))
+					{
+						noExistInReserved = true;
+					}
+					else
+						continue;
+
+					noExistInConf = true;
+
+					foreach (ConfigurationObjectField configurationObjectField in Fields.Values)
+					{
+						if (configurationObjectField.NameInTable == columnNewName)
+						{
+							noExistInConf = false;
+							break;
+						}
+					}
+
+					if (noExistInReserved && noExistInConf) 
+					{
+						break;
+					}
+				}
+
+				if (noExistInReserved && noExistInConf)
+				{
+					break;
+				}
+			}
+
+			Kernel.Conf.ReservedUnigueColumnName[table].Add(columnNewName);
+
+			return columnNewName;
 		}
 
 		public static string GetNewUnigueTableName(Kernel Kernel)
@@ -104,7 +166,7 @@ namespace AccountingSoftware
 
 			bool noExistInReserved = false;
 			bool noExistInBase = false;
-			bool noExistInCong = false;
+			bool noExistInConf = false;
 			string tabNewName = "";
 
 			for (int j = 0; j < mas.Length; j++)
@@ -112,6 +174,7 @@ namespace AccountingSoftware
 				for (int i = 1; i < 100; i++)
 				{
 					tabNewName = "tab_" + mas[j] + (i < 10 ? "0" : "") + i.ToString();
+
 					if (!Kernel.Conf.ReservedUnigueTableName.Contains(tabNewName))
 					{
 						noExistInReserved = true;
@@ -126,14 +189,13 @@ namespace AccountingSoftware
 					else
 						continue;
 
-					noExistInCong = true;
+					noExistInConf = true;
 
 					foreach (ConfigurationDirectories directoryItem in Kernel.Conf.Directories.Values)
 					{
 						if (directoryItem.Table == tabNewName)
 						{
-							noExistInCong = false;
-							WriteLog("noExistInCong = false;");
+							noExistInConf = false;
 							break;
 						}
 
@@ -141,26 +203,24 @@ namespace AccountingSoftware
 						{
 							if (directoryTablePart.Table == tabNewName)
 							{
-								noExistInCong = false;
-								WriteLog("noExistInCong = false;");
+								noExistInConf = false;
 								break;
 							}
 						}
 
-						if (!noExistInCong)
+						if (!noExistInConf)
 						{
-							WriteLog("!noExistInCong");
 							break;
 						}
 					}
 
-					if (noExistInReserved && noExistInBase && noExistInCong)
+					if (noExistInReserved && noExistInBase && noExistInConf)
 					{
 						break;
 					}
 				}
 
-				if (noExistInReserved && noExistInBase && noExistInCong)
+				if (noExistInReserved && noExistInBase && noExistInConf)
 				{
 					break;
 				}
@@ -194,24 +254,21 @@ namespace AccountingSoftware
 			{
 				string checkChar = configurationObjectName.Substring(i, 1);
 				string checkCharLover = checkChar.ToLower();
-				WriteLog(i.ToString() + " " + checkChar);
 
 				if (allovAll.IndexOf(checkCharLover) >= 0)
 				{
 					if (i == 0 && allovNum.IndexOf(checkCharLover) >= 0)
 					{
-						errorList += "Назва має починатися з букви";
-						WriteLog("allovNum.IndexOf(checkChar) " + allovNum.IndexOf(checkCharLover));
+						errorList += "Назва має починатися з букви\n";
 					}
 
 					configurationObjectModificeName += checkChar;
 				}
 				else
-					errorList += "Недопустимий символ: " + "'" + checkChar + "'";
+					errorList += "Недопустимий символ: " + "[" + checkChar + "]\n";
 			}
 
 			configurationObjectName = configurationObjectModificeName;
-
 			return errorList;
 		}
 

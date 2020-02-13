@@ -28,9 +28,7 @@ namespace Configurator
 			if (ConfDirectory == null)
 			{
 				ConfDirectory = new ConfigurationDirectories();
-
 				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
-
 				IsNewDirectory = true;
 			}
 			else
@@ -126,6 +124,7 @@ namespace Configurator
 		{
 			FieldForm fieldForm = new FieldForm();
 			fieldForm.CallBack = CallBack_Update_Field;
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
 			fieldForm.Show();
 		}
 
