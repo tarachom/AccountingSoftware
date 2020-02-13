@@ -14,6 +14,8 @@ namespace Configurator
 	public partial class FieldForm : Form
 	{
 		public Action<string, ConfigurationObjectField, bool> CallBack { get; set; }
+		public Func<string, Boolean> CallBack_IsExistFieldName { get; set; }
+
 		public ConfigurationObjectField configurationObjectField { get; set; }
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
@@ -92,6 +94,13 @@ namespace Configurator
 
 				return;
 			}
+
+			if (IsNew || OriginalName != name)
+				if (CallBack_IsExistFieldName(name))
+				{
+					MessageBox.Show("Назва поля не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 
 			configurationObjectField.Name = textBoxName.Text;
 			configurationObjectField.NameInTable = textBoxNameInTable.Text;

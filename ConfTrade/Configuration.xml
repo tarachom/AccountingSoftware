@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.02.2020 18:39:58</DateTimeSave>
+  <DateTimeSave>13.02.2020 20:45:04</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -414,22 +414,24 @@
       <Views />
     </Directory>
     <Directory>
-      <Name>aaa</Name>
+      <Name>AAA</Name>
       <Table>tab_b2</Table>
       <Desc>
       </Desc>
       <Fields>
         <Field>
-          <Name>a1</Name>
+          <Name>A2</Name>
           <NameInTable>as</NameInTable>
-          <Type>string</Type>
+          <Type>pointer</Type>
+          <Pointer>bbb</Pointer>
           <Desc>
           </Desc>
         </Field>
         <Field>
           <Name>a2</Name>
           <NameInTable>asd</NameInTable>
-          <Type>string</Type>
+          <Type>pointer</Type>
+          <Pointer>bbb</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -440,17 +442,25 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>A11</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>ccc</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>A1</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
-          <Name>aaa</Name>
-          <Table>tab_b3</Table>
-          <Desc>
-          </Desc>
-          <Fields />
-        </TablePart>
-        <TablePart>
-          <Name>bbb</Name>
+          <Name>CCC</Name>
           <Table>tab_b4</Table>
           <Desc>
           </Desc>
@@ -472,8 +482,15 @@
           </Fields>
         </TablePart>
         <TablePart>
-          <Name>ccc</Name>
+          <Name>bbb</Name>
           <Table>tab_b5</Table>
+          <Desc>
+          </Desc>
+          <Fields />
+        </TablePart>
+        <TablePart>
+          <Name>cccw</Name>
+          <Table>tab_a09</Table>
           <Desc>
           </Desc>
           <Fields />
@@ -676,7 +693,23 @@
       <Desc>
       </Desc>
       <Fields />
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>werw</Name>
+          <Table>tab_a10</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werwe</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views />
     </Directory>
     <Directory>
@@ -704,6 +737,27 @@
         <Field>
           <Name>werqwerqw</Name>
           <NameInTable>col_a02</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>w</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ww</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>wwwe</Name>
+          <NameInTable>col_a3</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>
@@ -774,6 +828,34 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>еуіе</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>уек</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>test</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>test2</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views />
@@ -807,6 +889,174 @@
         </Field>
       </Fields>
       <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>aaa</Name>
+      <Table>tab_a08</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>a</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>b</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>c</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>wreqw</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwe</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werq</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwee</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwer</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwerq</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>erqwerq</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>werqwerw</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>werqw</Name>
+          <Table>tab_a11</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werqwerq</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>werqwe</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>werqwerqwe</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>sdfas</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>w</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>werqwe</Name>
+          <Table>tab_a12</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werwqe</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>xfgasd</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>wer</Name>
+          <Table>tab_a13</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werw</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views />
     </Directory>
   </Directories>

@@ -221,15 +221,18 @@
     <Control_TabularParts>
       <Name>ОдиниціВиміру</Name>
       <Table>od_list</Table>
-      <IsExist>no</IsExist>
-      <TableCreate>
-        <FieldCreate>
-          <Name>Одиниця</Name>
-          <NameInTable>od_pointer</NameInTable>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>Одиниця</Name>
+        <NameInTable>od_pointer</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>pointer</ConfType>
           <DataType>uuid</DataType>
-        </FieldCreate>
-      </TableCreate>
+          <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -419,21 +422,29 @@
     <Control_TabularParts>
       <Name>Історія</Name>
       <Table>history</Table>
-      <IsExist>no</IsExist>
-      <TableCreate>
-        <FieldCreate>
-          <Name>ДатаЗапису</Name>
-          <NameInTable>date_save</NameInTable>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>ДатаЗапису</Name>
+        <NameInTable>date_save</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>datetime</ConfType>
           <DataType>timestamp without time zone</DataType>
-        </FieldCreate>
-        <FieldCreate>
-          <Name>Значення</Name>
-          <NameInTable>value</NameInTable>
+          <UdtName>timestamp</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Значення</Name>
+        <NameInTable>value</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>string</ConfType>
           <DataType>text</DataType>
-        </FieldCreate>
-      </TableCreate>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -453,17 +464,17 @@
     </Control_Field>
   </Control_Directory>
   <Control_Directory>
-    <Name>aaa</Name>
+    <Name>AAA</Name>
     <Table>tab_b2</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>a1</Name>
+      <Name>A2</Name>
       <NameInTable>as</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -472,10 +483,11 @@
       <NameInTable>asd</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
+        <ConfType>pointer</ConfType>
         <DataType>text</DataType>
         <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
+        <Coincide>no</Coincide>
+        <DataTypeCreate>uuid</DataTypeCreate>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -489,13 +501,30 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
-    <Control_TabularParts>
-      <Name>aaa</Name>
-      <Table>tab_b3</Table>
+    <Control_Field>
+      <Name>A11</Name>
+      <NameInTable>col_a1</NameInTable>
       <IsExist>yes</IsExist>
-    </Control_TabularParts>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>A1</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
-      <Name>bbb</Name>
+      <Name>CCC</Name>
       <Table>tab_b4</Table>
       <IsExist>yes</IsExist>
       <Control_Field>
@@ -522,8 +551,13 @@
       </Control_Field>
     </Control_TabularParts>
     <Control_TabularParts>
-      <Name>ccc</Name>
+      <Name>bbb</Name>
       <Table>tab_b5</Table>
+      <IsExist>yes</IsExist>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>cccw</Name>
+      <Table>tab_a09</Table>
       <IsExist>yes</IsExist>
     </Control_TabularParts>
   </Control_Directory>
@@ -735,6 +769,22 @@
     <Name>sdfsdfs</Name>
     <Table>tab_a04</Table>
     <IsExist>yes</IsExist>
+    <Control_TabularParts>
+      <Name>werw</Name>
+      <Table>tab_a10</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>werwe</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
     <Name>dfsdfs</Name>
@@ -767,85 +817,442 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>w</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ww</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>wwwe</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>dfasdfa</Name>
     <Table>tab_a07</Table>
-    <IsExist>no</IsExist>
-    <TableCreate>
-      <FieldCreate>
-        <Name>erter</Name>
-        <NameInTable>col_a3</NameInTable>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>erter</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>ertwertw</Name>
-        <NameInTable>col_a1</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ertwertw</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>ertwertwsdfas</Name>
-        <NameInTable>col_a7</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ertwertwsdfas</Name>
+      <NameInTable>col_a7</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>sdfsdf</Name>
-        <NameInTable>col_a8</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>sdfsdf</Name>
+      <NameInTable>col_a8</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>sdfasdfa</Name>
-        <NameInTable>col_a9</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>sdfasdfa</Name>
+      <NameInTable>col_a9</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>fasdfa</Name>
-        <NameInTable>col_b1</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>fasdfa</Name>
+      <NameInTable>col_b1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>sdfasda</Name>
-        <NameInTable>col_b2</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>sdfasda</Name>
+      <NameInTable>col_b2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>sdfasdfaf</Name>
-        <NameInTable>col_b3</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>sdfasdfaf</Name>
+      <NameInTable>col_b3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-    </TableCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>еуіе</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>уек</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>test</Name>
+      <NameInTable>col_a5</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>test2</Name>
+      <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
   <Control_Directory>
     <Name>sdfasdf</Name>
     <Table>tab_a06</Table>
-    <IsExist>no</IsExist>
-    <TableCreate>
-      <FieldCreate>
-        <Name>retert</Name>
-        <NameInTable>col_a4</NameInTable>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>retert</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>ertwert</Name>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ertwert</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ertwertw</Name>
+      <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>aaa</Name>
+    <Table>tab_a08</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>a</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>b</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>c</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>wreqw</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwe</Name>
+      <NameInTable>col_a5</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werq</Name>
+      <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwee</Name>
+      <NameInTable>col_a7</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwer</Name>
+      <NameInTable>col_a8</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwerq</Name>
+      <NameInTable>col_a9</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>erqwerq</Name>
+      <NameInTable>col_b1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwerw</Name>
+      <NameInTable>col_b2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>werqw</Name>
+      <Table>tab_a11</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>werqwerq</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>werqwe</Name>
         <NameInTable>col_a2</NameInTable>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>ertwertw</Name>
-        <NameInTable>col_a6</NameInTable>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-      </FieldCreate>
-    </TableCreate>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>werqwerqwe</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>sdfas</Name>
+        <NameInTable>col_a4</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>w</Name>
+        <NameInTable>col_a5</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>werqwe</Name>
+      <Table>tab_a12</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>werwqe</Name>
+        <NameInTable>col_a4</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>xfgasd</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>wer</Name>
+      <Table>tab_a13</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>werw</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Directory>
 </root>

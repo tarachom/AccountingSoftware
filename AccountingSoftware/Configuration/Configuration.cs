@@ -41,6 +41,10 @@ namespace AccountingSoftware
 
 		public Dictionary<string, ConfigurationRegisters> Registers { get; set; }
 
+		private List<string> ReservedUnigueTableName { get; set; }
+
+		private Dictionary<string, List<string>> ReservedUnigueColumnName { get; set; }
+
 		public ConfigurationDirectories AppendDirectory(ConfigurationDirectories Directory)
 		{
 			Directories.Add(Directory.Name, Directory);
@@ -87,9 +91,6 @@ namespace AccountingSoftware
 
 			return ListPointer;
 		}
-
-		private List<string> ReservedUnigueTableName { get; set; }
-		private Dictionary<string, List<string>> ReservedUnigueColumnName { get; set; }
 
 		public static void WriteLog(string txt)
 		{

@@ -19,6 +19,8 @@ namespace Configurator
 		}
 
 		public Action<string, ConfigurationObjectTablePart, bool> CallBack { get; set; }
+		public Func<string, Boolean> CallBack_IsExistTablePartName { get; set; }
+
 		public ConfigurationObjectTablePart ConfDirectoryTablePart { get; set; }
 		public bool IsNewDirectoryTablePart { get; set; }
 		public string OriginalName { get; set; }
@@ -59,6 +61,13 @@ namespace Configurator
 				return;
 			}
 
+			if (IsNewDirectoryTablePart || OriginalName != name)
+				if (CallBack_IsExistTablePartName(name))
+				{
+					MessageBox.Show("Назва табличної частини не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+
 			ConfDirectoryTablePart.Name = textBoxName.Text;
 			ConfDirectoryTablePart.Table = textBoxTable.Text;
 			ConfDirectoryTablePart.Desc = textBoxDesc.Text;
@@ -71,6 +80,11 @@ namespace Configurator
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
 			this.Hide();
+		}
+
+		bool CallBack_IsExistFieldName(string name)
+		{
+			return ConfDirectoryTablePart.Fields.ContainsKey(name);
 		}
 
 		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
@@ -99,6 +113,8 @@ namespace Configurator
 		{
 			FieldForm fieldForm = new FieldForm();
 			fieldForm.CallBack = CallBack_Update_Field;
+			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectoryTablePart.Table, ConfDirectoryTablePart.Fields);
 			fieldForm.Show();
 		}
 
@@ -119,7 +135,7 @@ namespace Configurator
 				FieldForm fieldForm = new FieldForm();
 				fieldForm.configurationObjectField = ConfDirectoryTablePart.Fields[listBoxFields.SelectedItem.ToString()];
 				fieldForm.CallBack = CallBack_Update_Field;
-
+				fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
 				fieldForm.Show();
 			}
 		}

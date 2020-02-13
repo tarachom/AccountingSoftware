@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <sql>CREATE TABLE tab_a07 (uid uuid NOT NULL,  "col_a3" text,  "col_a1" text,  "col_a7" text,  "col_a8" text,  "col_a9" text,  "col_b1" text,  "col_b2" text,  "col_b3" text, PRIMARY KEY(uid));</sql>
-  <sql>CREATE TABLE tab_a06 (uid uuid NOT NULL,  "col_a4" text,  "col_a2" text,  "col_a6" text, PRIMARY KEY(uid));</sql>
+  <info>texttext</info>
+  <sql>BEGIN;</sql>
+  <sql>ALTER TABLE tab_b2 RENAME COLUMN "asd" TO "asd_old_13_02_2020_20_45_04";</sql>
+  <sql>ALTER TABLE tab_b2 ADD COLUMN "asd" uuid;</sql>
+  <sql>COMMIT;</sql>
 </root>

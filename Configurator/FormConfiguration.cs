@@ -146,6 +146,11 @@ namespace Configurator
 			Program.Kernel.Close();
 		}
 
+		bool CallBack_IsExistDirectoryName(string name)
+		{
+			return Conf.Directories.ContainsKey(name);
+		}
+
 		void CallBack_Update_Directory(string originalName, ConfigurationDirectories configurationDirectories, bool isNew)
 		{
 			if (isNew)
@@ -190,7 +195,7 @@ namespace Configurator
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
 			directoryForm.CallBack = CallBack_Update_Directory;
-
+			directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
 			directoryForm.Show();
 		}
 
@@ -205,6 +210,7 @@ namespace Configurator
 				DirectoryForm directoryForm = new DirectoryForm();
 				directoryForm.ConfDirectory = Conf.Directories[directoryName];
 				directoryForm.CallBack = CallBack_Update_Directory;
+				directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
 				directoryForm.Show();				
 			}
 		}
