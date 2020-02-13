@@ -261,6 +261,7 @@
 			this.listBoxAllFields.Name = "listBoxAllFields";
 			this.listBoxAllFields.Size = new System.Drawing.Size(246, 236);
 			this.listBoxAllFields.TabIndex = 1;
+			this.listBoxAllFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAllFields_MouseDoubleClick);
 			// 
 			// splitContainer2
 			// 

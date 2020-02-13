@@ -484,10 +484,9 @@
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>pointer</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>no</Coincide>
-        <DataTypeCreate>uuid</DataTypeCreate>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>

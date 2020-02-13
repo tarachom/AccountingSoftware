@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.02.2020 20:45:04</DateTimeSave>
+  <DateTimeSave>13.02.2020 22:37:54</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -187,6 +187,38 @@
             <Field>
               <Name>Одиниця</Name>
               <NameInTable>od2</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник4</Name>
+              <NameInTable>link_empty</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник3</Name>
+              <NameInTable>pointer3</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник2</Name>
+              <NameInTable>pointer2</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник1</Name>
+              <NameInTable>pointer1</NameInTable>
+            </Field>
+            <Field>
+              <Name>Масив</Name>
+              <NameInTable>masiv</NameInTable>
+            </Field>
+            <Field>
+              <Name>Кількість</Name>
+              <NameInTable>count</NameInTable>
+            </Field>
+            <Field>
+              <Name>od2</Name>
+              <NameInTable>od2</NameInTable>
+            </Field>
+            <Field>
+              <Name>Артикул</Name>
+              <NameInTable>artikul</NameInTable>
             </Field>
           </Fields>
           <Where />

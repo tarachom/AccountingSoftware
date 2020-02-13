@@ -1,8 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>texttext</info>
-  <sql>BEGIN;</sql>
-  <sql>ALTER TABLE tab_b2 RENAME COLUMN "asd" TO "asd_old_13_02_2020_20_45_04";</sql>
-  <sql>ALTER TABLE tab_b2 ADD COLUMN "asd" uuid;</sql>
-  <sql>COMMIT;</sql>
-</root>
+<root />

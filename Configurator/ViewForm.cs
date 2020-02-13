@@ -126,7 +126,7 @@ namespace Configurator
 
 			foreach (KeyValuePair<string, string> configurationObjectView in ConfView.Fields)
 			{
-				listBoxFields.Items.Add(configurationObjectView.Key);
+				listBoxFields.Items.Add(configurationObjectView.Key + " -> " + configurationObjectView.Value);
 			}
 		}
 
@@ -150,6 +150,18 @@ namespace Configurator
 			//	fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
 			//	fieldForm.Show();
 			//}
+		}
+
+		private void listBoxAllFields_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listBoxAllFields.SelectedItem != null)
+			{
+				ConfView.Fields.Add(
+					ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].Name,
+					ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].NameInTable);
+
+				LoadFieldList();
+			}
 		}
 	}
 }

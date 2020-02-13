@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.02.2020 20:45:04
+ * Дата конфігурації: 13.02.2020 22:37:54
  *
  */
 
@@ -399,8 +399,8 @@ namespace ConfTrade_v1_1.Directory
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code", "od2" },
-             new string[] { "Назва", "Код", "Одиниця" },
+             new string[] { "name", "code", "od2", "link_empty", "pointer3", "pointer2", "pointer1", "masiv", "count", "od2", "artikul" },
+             new string[] { "Назва", "Код", "Одиниця", "Вказівник4", "Вказівник3", "Вказівник2", "Вказівник1", "Масив", "Кількість", "od2", "Артикул" },
              "Товари_ВибіркаТовари")
         {
             base.QuerySelect.PrimaryField = "uid";
