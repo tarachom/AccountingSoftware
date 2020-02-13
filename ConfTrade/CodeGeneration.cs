@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 12.02.2020 17:30:28
+ * Дата конфігурації: 13.02.2020 17:26:46
  *
  */
 
@@ -283,6 +283,7 @@ namespace ConfTrade_v1_1.Directory
             
         }
         
+        
         public Товари_Ціни_TablePartRecord(
             string _Name = "", decimal _Cena = 0, int _IsNew = 0, DateTime?  _ДатаОбновлення = null, DateTime?  _Дата = null, TimeSpan?  _Час = null, ОдиниціВиміру_Pointer _ОдВиміру = null, НовийДокумент_Pointer _NewDok = null)
         {
@@ -296,7 +297,6 @@ namespace ConfTrade_v1_1.Directory
             NewDok = _NewDok ?? new НовийДокумент_Pointer();
             
         }
-        
         public string Name { get; set; }
         public decimal Cena { get; set; }
         public int IsNew { get; set; }
@@ -383,13 +383,13 @@ namespace ConfTrade_v1_1.Directory
             
         }
         
+        
         public Товари_ОдиниціВиміру_TablePartRecord(
             ОдиниціВиміру_Pointer _Одиниця = null)
         {
             Одиниця = _Одиниця ?? new ОдиниціВиміру_Pointer();
             
         }
-        
         public ОдиниціВиміру_Pointer Одиниця { get; set; }
         
     }
@@ -1018,6 +1018,7 @@ namespace ConfTrade_v1_1.Directory
             
         }
         
+        
         public ОдиниціВиміру_Історія_TablePartRecord(
             DateTime?  _ДатаЗапису = null, string _Значення = "")
         {
@@ -1025,7 +1026,6 @@ namespace ConfTrade_v1_1.Directory
             Значення = _Значення;
             
         }
-        
         public DateTime ДатаЗапису { get; set; }
         public string Значення { get; set; }
         
@@ -1157,6 +1157,1559 @@ namespace ConfTrade_v1_1.Directory
         }
 
         public НовийДокумент_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "aaa"
+    
+    
+    class aaa_Objest : DirectoryObject
+    {
+        public aaa_Objest() : base(Config.Kernel, "tab_b2",
+             new string[] { "as", "asd" }) 
+        {
+            a1 = "";
+            a2 = "";
+            
+            //Табличні частини
+            aaa_TablePart = new aaa_aaa_TablePart(this);
+            bbb_TablePart = new aaa_bbb_TablePart(this);
+            ccc_TablePart = new aaa_ccc_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                a1 = base.FieldValue["as"].ToString();
+                a2 = base.FieldValue["asd"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["as"] = a1;
+            base.FieldValue["asd"] = a2;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public aaa_Pointer GetDirectoryPointer()
+        {
+            aaa_Pointer directoryPointer = new aaa_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string a1 { get; set; }
+        public string a2 { get; set; }
+        
+        //Табличні частини
+        public aaa_aaa_TablePart aaa_TablePart { get; set; }
+        public aaa_bbb_TablePart bbb_TablePart { get; set; }
+        public aaa_ccc_TablePart ccc_TablePart { get; set; }
+        
+    }
+    
+    
+    class aaa_Pointer : DirectoryPointer
+    {
+        public aaa_Pointer(object uid = null) : base(Config.Kernel, "tab_b2")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public aaa_Objest GetDirectoryObject()
+        {
+            aaa_Objest aaaObjestItem = new aaa_Objest();
+            aaaObjestItem.Read(base.UnigueID);
+            return aaaObjestItem;
+        }
+    }
+    
+    
+    class aaa_Select : DirectorySelect, IDisposable
+    {
+        public aaa_Select() : base(Config.Kernel, "tab_b2") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new aaa_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public aaa_Pointer Current { get; private set; }
+    }
+    
+      
+    class aaa_aaa_TablePart : DirectoryTablePart
+    {
+        public aaa_aaa_TablePart(aaa_Objest owner) : base(Config.Kernel, "tab_b3",
+             new string[] {  }) 
+        {
+            Owner = owner;
+            Records = new List<aaa_aaa_TablePartRecord>();
+        }
+        
+        public aaa_Objest Owner { get; private set; }
+        
+        public List<aaa_aaa_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                aaa_aaa_TablePartRecord record = new aaa_aaa_TablePartRecord();
+
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (aaa_aaa_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class aaa_aaa_TablePartRecord : DirectoryTablePartRecord
+    {
+        public aaa_aaa_TablePartRecord()
+        {
+            
+        }
+        
+        
+    }
+      
+    class aaa_bbb_TablePart : DirectoryTablePart
+    {
+        public aaa_bbb_TablePart(aaa_Objest owner) : base(Config.Kernel, "tab_b4",
+             new string[] { "aaa", "bbb" }) 
+        {
+            Owner = owner;
+            Records = new List<aaa_bbb_TablePartRecord>();
+        }
+        
+        public aaa_Objest Owner { get; private set; }
+        
+        public List<aaa_bbb_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                aaa_bbb_TablePartRecord record = new aaa_bbb_TablePartRecord();
+
+                record.aaa = fieldValue["aaa"].ToString();
+                record.bbbb = fieldValue["bbb"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (aaa_bbb_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("aaa", record.aaa);
+                    fieldValue.Add("bbb", record.bbbb);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class aaa_bbb_TablePartRecord : DirectoryTablePartRecord
+    {
+        public aaa_bbb_TablePartRecord()
+        {
+            aaa = "";
+            bbbb = "";
+            
+        }
+        
+        
+        public aaa_bbb_TablePartRecord(
+            string _aaa = "", string _bbbb = "")
+        {
+            aaa = _aaa;
+            bbbb = _bbbb;
+            
+        }
+        public string aaa { get; set; }
+        public string bbbb { get; set; }
+        
+    }
+      
+    class aaa_ccc_TablePart : DirectoryTablePart
+    {
+        public aaa_ccc_TablePart(aaa_Objest owner) : base(Config.Kernel, "tab_b5",
+             new string[] {  }) 
+        {
+            Owner = owner;
+            Records = new List<aaa_ccc_TablePartRecord>();
+        }
+        
+        public aaa_Objest Owner { get; private set; }
+        
+        public List<aaa_ccc_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                aaa_ccc_TablePartRecord record = new aaa_ccc_TablePartRecord();
+
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (aaa_ccc_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class aaa_ccc_TablePartRecord : DirectoryTablePartRecord
+    {
+        public aaa_ccc_TablePartRecord()
+        {
+            
+        }
+        
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "bbb"
+    
+    
+    class bbb_Objest : DirectoryObject
+    {
+        public bbb_Objest() : base(Config.Kernel, "tab_b6",
+             new string[] { "aaa" }) 
+        {
+            aaa = "";
+            
+            //Табличні частини
+            aaa_TablePart = new bbb_aaa_TablePart(this);
+            bbb_TablePart = new bbb_bbb_TablePart(this);
+            ccc_TablePart = new bbb_ccc_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                aaa = base.FieldValue["aaa"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["aaa"] = aaa;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public bbb_Pointer GetDirectoryPointer()
+        {
+            bbb_Pointer directoryPointer = new bbb_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string aaa { get; set; }
+        
+        //Табличні частини
+        public bbb_aaa_TablePart aaa_TablePart { get; set; }
+        public bbb_bbb_TablePart bbb_TablePart { get; set; }
+        public bbb_ccc_TablePart ccc_TablePart { get; set; }
+        
+    }
+    
+    
+    class bbb_Pointer : DirectoryPointer
+    {
+        public bbb_Pointer(object uid = null) : base(Config.Kernel, "tab_b6")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public bbb_Objest GetDirectoryObject()
+        {
+            bbb_Objest bbbObjestItem = new bbb_Objest();
+            bbbObjestItem.Read(base.UnigueID);
+            return bbbObjestItem;
+        }
+    }
+    
+    
+    class bbb_Select : DirectorySelect, IDisposable
+    {
+        public bbb_Select() : base(Config.Kernel, "tab_b6") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new bbb_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public bbb_Pointer Current { get; private set; }
+    }
+    
+      
+    class bbb_aaa_TablePart : DirectoryTablePart
+    {
+        public bbb_aaa_TablePart(bbb_Objest owner) : base(Config.Kernel, "tab_b7",
+             new string[] { "aaa", "bbb" }) 
+        {
+            Owner = owner;
+            Records = new List<bbb_aaa_TablePartRecord>();
+        }
+        
+        public bbb_Objest Owner { get; private set; }
+        
+        public List<bbb_aaa_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                bbb_aaa_TablePartRecord record = new bbb_aaa_TablePartRecord();
+
+                record.aaa = fieldValue["aaa"].ToString();
+                record.bbb = fieldValue["bbb"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (bbb_aaa_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("aaa", record.aaa);
+                    fieldValue.Add("bbb", record.bbb);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class bbb_aaa_TablePartRecord : DirectoryTablePartRecord
+    {
+        public bbb_aaa_TablePartRecord()
+        {
+            aaa = "";
+            bbb = "";
+            
+        }
+        
+        
+        public bbb_aaa_TablePartRecord(
+            string _aaa = "", string _bbb = "")
+        {
+            aaa = _aaa;
+            bbb = _bbb;
+            
+        }
+        public string aaa { get; set; }
+        public string bbb { get; set; }
+        
+    }
+      
+    class bbb_bbb_TablePart : DirectoryTablePart
+    {
+        public bbb_bbb_TablePart(bbb_Objest owner) : base(Config.Kernel, "tab_b8",
+             new string[] { "fff" }) 
+        {
+            Owner = owner;
+            Records = new List<bbb_bbb_TablePartRecord>();
+        }
+        
+        public bbb_Objest Owner { get; private set; }
+        
+        public List<bbb_bbb_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                bbb_bbb_TablePartRecord record = new bbb_bbb_TablePartRecord();
+
+                record.fff = fieldValue["fff"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (bbb_bbb_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("fff", record.fff);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class bbb_bbb_TablePartRecord : DirectoryTablePartRecord
+    {
+        public bbb_bbb_TablePartRecord()
+        {
+            fff = "";
+            
+        }
+        
+        
+        public bbb_bbb_TablePartRecord(
+            string _fff = "")
+        {
+            fff = _fff;
+            
+        }
+        public string fff { get; set; }
+        
+    }
+      
+    class bbb_ccc_TablePart : DirectoryTablePart
+    {
+        public bbb_ccc_TablePart(bbb_Objest owner) : base(Config.Kernel, "tab_b9",
+             new string[] { "aaa", "bbb" }) 
+        {
+            Owner = owner;
+            Records = new List<bbb_ccc_TablePartRecord>();
+        }
+        
+        public bbb_Objest Owner { get; private set; }
+        
+        public List<bbb_ccc_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                bbb_ccc_TablePartRecord record = new bbb_ccc_TablePartRecord();
+
+                record.aaa = fieldValue["aaa"].ToString();
+                record.bbb = fieldValue["bbb"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (bbb_ccc_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("aaa", record.aaa);
+                    fieldValue.Add("bbb", record.bbb);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class bbb_ccc_TablePartRecord : DirectoryTablePartRecord
+    {
+        public bbb_ccc_TablePartRecord()
+        {
+            aaa = "";
+            bbb = "";
+            
+        }
+        
+        
+        public bbb_ccc_TablePartRecord(
+            string _aaa = "", string _bbb = "")
+        {
+            aaa = _aaa;
+            bbb = _bbb;
+            
+        }
+        public string aaa { get; set; }
+        public string bbb { get; set; }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "ccc"
+    
+    
+    class ccc_Objest : DirectoryObject
+    {
+        public ccc_Objest() : base(Config.Kernel, "tab_c1",
+             new string[] { "aaa" }) 
+        {
+            aaa = "";
+            
+            //Табличні частини
+            aaa_TablePart = new ccc_aaa_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                aaa = base.FieldValue["aaa"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["aaa"] = aaa;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public ccc_Pointer GetDirectoryPointer()
+        {
+            ccc_Pointer directoryPointer = new ccc_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string aaa { get; set; }
+        
+        //Табличні частини
+        public ccc_aaa_TablePart aaa_TablePart { get; set; }
+        
+    }
+    
+    
+    class ccc_Pointer : DirectoryPointer
+    {
+        public ccc_Pointer(object uid = null) : base(Config.Kernel, "tab_c1")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public ccc_Objest GetDirectoryObject()
+        {
+            ccc_Objest cccObjestItem = new ccc_Objest();
+            cccObjestItem.Read(base.UnigueID);
+            return cccObjestItem;
+        }
+    }
+    
+    
+    class ccc_Select : DirectorySelect, IDisposable
+    {
+        public ccc_Select() : base(Config.Kernel, "tab_c1") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new ccc_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public ccc_Pointer Current { get; private set; }
+    }
+    
+      
+    class ccc_aaa_TablePart : DirectoryTablePart
+    {
+        public ccc_aaa_TablePart(ccc_Objest owner) : base(Config.Kernel, "tab_c2",
+             new string[] { "aaa" }) 
+        {
+            Owner = owner;
+            Records = new List<ccc_aaa_TablePartRecord>();
+        }
+        
+        public ccc_Objest Owner { get; private set; }
+        
+        public List<ccc_aaa_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                ccc_aaa_TablePartRecord record = new ccc_aaa_TablePartRecord();
+
+                record.aaa = fieldValue["aaa"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (ccc_aaa_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("aaa", record.aaa);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class ccc_aaa_TablePartRecord : DirectoryTablePartRecord
+    {
+        public ccc_aaa_TablePartRecord()
+        {
+            aaa = "";
+            
+        }
+        
+        
+        public ccc_aaa_TablePartRecord(
+            string _aaa = "")
+        {
+            aaa = _aaa;
+            
+        }
+        public string aaa { get; set; }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "dddd"
+    
+    
+    class dddd_Objest : DirectoryObject
+    {
+        public dddd_Objest() : base(Config.Kernel, "tab_c3",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            dddd_TablePart = new dddd_dddd_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public dddd_Pointer GetDirectoryPointer()
+        {
+            dddd_Pointer directoryPointer = new dddd_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        public dddd_dddd_TablePart dddd_TablePart { get; set; }
+        
+    }
+    
+    
+    class dddd_Pointer : DirectoryPointer
+    {
+        public dddd_Pointer(object uid = null) : base(Config.Kernel, "tab_c3")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public dddd_Objest GetDirectoryObject()
+        {
+            dddd_Objest ddddObjestItem = new dddd_Objest();
+            ddddObjestItem.Read(base.UnigueID);
+            return ddddObjestItem;
+        }
+    }
+    
+    
+    class dddd_Select : DirectorySelect, IDisposable
+    {
+        public dddd_Select() : base(Config.Kernel, "tab_c3") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new dddd_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public dddd_Pointer Current { get; private set; }
+    }
+    
+      
+    class dddd_dddd_TablePart : DirectoryTablePart
+    {
+        public dddd_dddd_TablePart(dddd_Objest owner) : base(Config.Kernel, "tab_c4",
+             new string[] { "dddd" }) 
+        {
+            Owner = owner;
+            Records = new List<dddd_dddd_TablePartRecord>();
+        }
+        
+        public dddd_Objest Owner { get; private set; }
+        
+        public List<dddd_dddd_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                dddd_dddd_TablePartRecord record = new dddd_dddd_TablePartRecord();
+
+                record.dddd = fieldValue["dddd"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (dddd_dddd_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("dddd", record.dddd);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class dddd_dddd_TablePartRecord : DirectoryTablePartRecord
+    {
+        public dddd_dddd_TablePartRecord()
+        {
+            dddd = "";
+            
+        }
+        
+        
+        public dddd_dddd_TablePartRecord(
+            string _dddd = "")
+        {
+            dddd = _dddd;
+            
+        }
+        public string dddd { get; set; }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "werwer"
+    
+    
+    class werwer_Objest : DirectoryObject
+    {
+        public werwer_Objest() : base(Config.Kernel, "tab_a01",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            werwe_TablePart = new werwer_werwe_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public werwer_Pointer GetDirectoryPointer()
+        {
+            werwer_Pointer directoryPointer = new werwer_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        public werwer_werwe_TablePart werwe_TablePart { get; set; }
+        
+    }
+    
+    
+    class werwer_Pointer : DirectoryPointer
+    {
+        public werwer_Pointer(object uid = null) : base(Config.Kernel, "tab_a01")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public werwer_Objest GetDirectoryObject()
+        {
+            werwer_Objest werwerObjestItem = new werwer_Objest();
+            werwerObjestItem.Read(base.UnigueID);
+            return werwerObjestItem;
+        }
+    }
+    
+    
+    class werwer_Select : DirectorySelect, IDisposable
+    {
+        public werwer_Select() : base(Config.Kernel, "tab_a01") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new werwer_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public werwer_Pointer Current { get; private set; }
+    }
+    
+      
+    class werwer_werwe_TablePart : DirectoryTablePart
+    {
+        public werwer_werwe_TablePart(werwer_Objest owner) : base(Config.Kernel, "tab_a02",
+             new string[] {  }) 
+        {
+            Owner = owner;
+            Records = new List<werwer_werwe_TablePartRecord>();
+        }
+        
+        public werwer_Objest Owner { get; private set; }
+        
+        public List<werwer_werwe_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                werwer_werwe_TablePartRecord record = new werwer_werwe_TablePartRecord();
+
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (werwer_werwe_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class werwer_werwe_TablePartRecord : DirectoryTablePartRecord
+    {
+        public werwer_werwe_TablePartRecord()
+        {
+            
+        }
+        
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "sdfsdfs"
+    
+    
+    class sdfsdfs_Objest : DirectoryObject
+    {
+        public sdfsdfs_Objest() : base(Config.Kernel, "tab_a04",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public sdfsdfs_Pointer GetDirectoryPointer()
+        {
+            sdfsdfs_Pointer directoryPointer = new sdfsdfs_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class sdfsdfs_Pointer : DirectoryPointer
+    {
+        public sdfsdfs_Pointer(object uid = null) : base(Config.Kernel, "tab_a04")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public sdfsdfs_Objest GetDirectoryObject()
+        {
+            sdfsdfs_Objest sdfsdfsObjestItem = new sdfsdfs_Objest();
+            sdfsdfsObjestItem.Read(base.UnigueID);
+            return sdfsdfsObjestItem;
+        }
+    }
+    
+    
+    class sdfsdfs_Select : DirectorySelect, IDisposable
+    {
+        public sdfsdfs_Select() : base(Config.Kernel, "tab_a04") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new sdfsdfs_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public sdfsdfs_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DIRECTORY "dfsdfs"
+    
+    
+    class dfsdfs_Objest : DirectoryObject
+    {
+        public dfsdfs_Objest() : base(Config.Kernel, "tab_a03",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public dfsdfs_Pointer GetDirectoryPointer()
+        {
+            dfsdfs_Pointer directoryPointer = new dfsdfs_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class dfsdfs_Pointer : DirectoryPointer
+    {
+        public dfsdfs_Pointer(object uid = null) : base(Config.Kernel, "tab_a03")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public dfsdfs_Objest GetDirectoryObject()
+        {
+            dfsdfs_Objest dfsdfsObjestItem = new dfsdfs_Objest();
+            dfsdfsObjestItem.Read(base.UnigueID);
+            return dfsdfsObjestItem;
+        }
+    }
+    
+    
+    class dfsdfs_Select : DirectorySelect, IDisposable
+    {
+        public dfsdfs_Select() : base(Config.Kernel, "tab_a03") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new dfsdfs_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public dfsdfs_Pointer Current { get; private set; }
     }
     
       

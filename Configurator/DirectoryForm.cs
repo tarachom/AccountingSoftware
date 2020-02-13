@@ -29,9 +29,7 @@ namespace Configurator
 			{
 				ConfDirectory = new ConfigurationDirectories();
 
-				textBoxTable.Text = textBoxName.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
-
-				
+				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
 
 				IsNewDirectory = true;
 			}
@@ -56,17 +54,13 @@ namespace Configurator
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
 			string name = textBoxName.Text;
+			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
 
-			List<string> errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
-			if (errorList.Count > 0)
+			if (errorList.Length > 0)
 			{
-				string errorMessage = "";
-				foreach (string message in errorList)
-					errorMessage += message;
-
 				textBoxName.Text = name;
+				MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-				MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
 

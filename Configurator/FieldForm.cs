@@ -81,6 +81,17 @@ namespace Configurator
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
+			string name = textBoxName.Text;
+			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
+
+			if (errorList.Length > 0)
+			{
+				textBoxName.Text = name;
+				MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+				return;
+			}
+
 			configurationObjectField.Name = textBoxName.Text;
 			configurationObjectField.NameInTable = textBoxNameInTable.Text;
 			configurationObjectField.Desc = textBoxDesc.Text;

@@ -466,6 +466,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
             </xsl:for-each>
         }
         
+        <xsl:if test="count(Fields/Field) > 0">
         public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord(
             <xsl:for-each select="Fields/Field">
               <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
@@ -489,6 +490,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
               </xsl:if>;
             </xsl:for-each>
         }
+        </xsl:if>
         
         <xsl:for-each select="Fields/Field">
           <xsl:text>public </xsl:text>

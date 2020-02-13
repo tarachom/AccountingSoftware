@@ -96,7 +96,12 @@ namespace AccountingSoftware
 
 		public static string GetNewUnigueTableName(Kernel Kernel)
 		{
-			string[] mas = new string[] { "a", "b", "c", "d", "e", "f" };
+			string[] mas = new string[] 
+			{
+				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
+				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" 
+			};
+
 			bool noExistInReserved = false;
 			bool noExistInBase = false;
 			bool noExistInCong = false;
@@ -104,9 +109,9 @@ namespace AccountingSoftware
 
 			for (int j = 0; j < mas.Length; j++)
 			{
-				for (int i = 1; i < 10; i++)
+				for (int i = 1; i < 100; i++)
 				{
-					tabNewName = "tab_" + mas[j] + i.ToString();
+					tabNewName = "tab_" + mas[j] + (i < 10 ? "0" : "") + i.ToString();
 					if (!Kernel.Conf.ReservedUnigueTableName.Contains(tabNewName))
 					{
 						noExistInReserved = true;
@@ -166,21 +171,21 @@ namespace AccountingSoftware
 			return tabNewName;
 		}
 
-		public static List<string> ValidateConfigurationObjectName(Kernel Kernel, ref string configurationObjectName)
+		public static string ValidateConfigurationObjectName(Kernel Kernel, ref string configurationObjectName)
 		{
-			List<string> errorList = new List<string>();
+			string errorList = "";
 
 			configurationObjectName = configurationObjectName.Trim();
 
 			if (String.IsNullOrWhiteSpace(configurationObjectName))
 			{
-				errorList.Add("Назва не задана");
+				errorList += "Назва не задана";
 				return errorList;
 			}
 
 			string allovChar = "abcdefghijklnmopqrstuvwxyz_";
 			string allovNum = "0123456789";
-			string allovCharCyrillic = "";
+			string allovCharCyrillic = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя"; //"АБВГДЕЄЖЗИІЇКЛМНОПРСТУФХЦЧШЩЪЫЭЮЯЬ";
 			string allovAll = allovChar + allovNum + allovCharCyrillic;
 
 			string configurationObjectModificeName = "";
@@ -188,20 +193,21 @@ namespace AccountingSoftware
 			for (int i = 0; i < configurationObjectName.Length; i++)
 			{
 				string checkChar = configurationObjectName.Substring(i, 1);
+				string checkCharLover = checkChar.ToLower();
 				WriteLog(i.ToString() + " " + checkChar);
 
-				if (allovAll.IndexOf(checkChar) >= 0)
+				if (allovAll.IndexOf(checkCharLover) >= 0)
 				{
-					if (i == 0 && allovNum.IndexOf(checkChar) >= 0)
+					if (i == 0 && allovNum.IndexOf(checkCharLover) >= 0)
 					{
-						errorList.Add("Назва має починатися з букви");
-						WriteLog("allovNum.IndexOf(checkChar) " + allovNum.IndexOf(checkChar));
+						errorList += "Назва має починатися з букви";
+						WriteLog("allovNum.IndexOf(checkChar) " + allovNum.IndexOf(checkCharLover));
 					}
-					
+
 					configurationObjectModificeName += checkChar;
 				}
 				else
-					errorList.Add("Недопустимий символ: " + checkChar);
+					errorList += "Недопустимий символ: " + "'" + checkChar + "'";
 			}
 
 			configurationObjectName = configurationObjectModificeName;
@@ -554,7 +560,7 @@ namespace AccountingSoftware
 				string dirName = Path.GetDirectoryName(pathToConf);
 				string fileNewName = Path.GetFileNameWithoutExtension(pathToConf) + DateTime.Now.ToString("_dd_MM_yyyy_HH_mm_ss") + ".xml";
 				string pathToCopyConf = Path.Combine(dirName, fileNewName);
-				
+
 				File.Copy(pathToConf, pathToCopyConf);
 
 				return pathToCopyConf;

@@ -356,15 +356,12 @@
                       <xsl:text>CREATE TABLE </xsl:text>
                       <xsl:value-of select="$TabularParts_TableName"/>
                       <xsl:text> (</xsl:text>
-                      <xsl:text>owner uuid NOT NULL, </xsl:text>
+                      <xsl:text>owner uuid NOT NULL</xsl:text>
                       <xsl:for-each select="FieldCreate">
-                        <xsl:text> "</xsl:text>
+                        <xsl:text>, "</xsl:text>
                         <xsl:value-of select="NameInTable"/>
                         <xsl:text>" </xsl:text>
                         <xsl:value-of select="DataType"/>
-                        <xsl:if test="position() &lt; count(../FieldCreate)">
-                          <xsl:text>, </xsl:text>
-                        </xsl:if>
                       </xsl:for-each>
                       <xsl:text>);</xsl:text>
                     </sql>

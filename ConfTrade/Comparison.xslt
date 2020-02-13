@@ -196,7 +196,7 @@
           </xsl:when>
           <xsl:otherwise>
             <IsExist>no</IsExist>
-
+            
             <xsl:call-template name="FieldCreate">
               <xsl:with-param name="ConfFieldName" select="Name" />
               <xsl:with-param name="ConfFieldNameInTable" select="$ConfFieldName" />
@@ -293,7 +293,7 @@
             <IsExist>yes</IsExist>
 
             <xsl:call-template name="FieldsControl">
-              <xsl:with-param name="ConfigurationFieldList" select="$ConfigurationTablePartList/Fields/Field" />
+              <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
               <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfTablePartTable]/Column" />
             </xsl:call-template>
 
@@ -303,7 +303,7 @@
 
             <TableCreate>
 
-              <xsl:for-each select="$ConfigurationTablePartList/Fields/Field">
+              <xsl:for-each select="Fields/Field">
                 <xsl:call-template name="FieldCreate">
                   <xsl:with-param name="ConfFieldName" select="Name" />
                   <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />

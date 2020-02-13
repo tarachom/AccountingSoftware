@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>12.02.2020 17:30:28</DateTimeSave>
+  <DateTimeSave>13.02.2020 17:26:46</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -410,6 +410,237 @@
           </Desc>
         </Field>
       </Fields>
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>aaa</Name>
+      <Table>tab_b2</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>a1</Name>
+          <NameInTable>as</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>a2</Name>
+          <NameInTable>asd</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>aaa</Name>
+          <Table>tab_b3</Table>
+          <Desc>
+          </Desc>
+          <Fields />
+        </TablePart>
+        <TablePart>
+          <Name>bbb</Name>
+          <Table>tab_b4</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>aaa</Name>
+              <NameInTable>aaa</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>bbbb</Name>
+              <NameInTable>bbb</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ccc</Name>
+          <Table>tab_b5</Table>
+          <Desc>
+          </Desc>
+          <Fields />
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>bbb</Name>
+      <Table>tab_b6</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>aaa</Name>
+          <NameInTable>aaa</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>aaa</Name>
+          <Table>tab_b7</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>aaa</Name>
+              <NameInTable>aaa</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>bbb</Name>
+              <NameInTable>bbb</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>bbb</Name>
+          <Table>tab_b8</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>fff</Name>
+              <NameInTable>fff</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ccc</Name>
+          <Table>tab_b9</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>aaa</Name>
+              <NameInTable>aaa</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>bbb</Name>
+              <NameInTable>bbb</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>ccc</Name>
+      <Table>tab_c1</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>aaa</Name>
+          <NameInTable>aaa</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>aaa</Name>
+          <Table>tab_c2</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>aaa</Name>
+              <NameInTable>aaa</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>dddd</Name>
+      <Table>tab_c3</Table>
+      <Desc>
+      </Desc>
+      <Fields />
+      <TabularParts>
+        <TablePart>
+          <Name>dddd</Name>
+          <Table>tab_c4</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>dddd</Name>
+              <NameInTable>dddd</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>werwer</Name>
+      <Table>tab_a01</Table>
+      <Desc>
+      </Desc>
+      <Fields />
+      <TabularParts>
+        <TablePart>
+          <Name>werwe</Name>
+          <Table>tab_a02</Table>
+          <Desc>
+          </Desc>
+          <Fields />
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>sdfsdfs</Name>
+      <Table>tab_a04</Table>
+      <Desc>
+      </Desc>
+      <Fields />
+      <TabularParts />
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>dfsdfs</Name>
+      <Table>tab_a03</Table>
+      <Desc>
+      </Desc>
+      <Fields />
       <TabularParts />
       <Views />
     </Directory>
