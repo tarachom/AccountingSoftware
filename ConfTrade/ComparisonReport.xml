@@ -125,6 +125,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Флаг</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Флаг</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>boolean</ConfType>
+        <DataType>boolean</DataType>
+      </FieldCreate>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Ціни</Name>
       <Table>tovary_ceny_tablepart</Table>

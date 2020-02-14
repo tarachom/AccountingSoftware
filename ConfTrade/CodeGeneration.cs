@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 14.02.2020 12:04:02
+ * Дата конфігурації: 14.02.2020 12:41:06
  *
  */
 
@@ -31,7 +31,7 @@ namespace ConfTrade_v1_1.Directory
     class Товари_Objest : DirectoryObject
     {
         public Товари_Objest() : base(Config.Kernel, "tovary",
-             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty", "od2" }) 
+             new string[] { "name", "code", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty", "od2", "col_a1" }) 
         {
             Назва = "";
             Код = "";
@@ -44,6 +44,7 @@ namespace ConfTrade_v1_1.Directory
             Вказівник3 = new НовийДокумент_Pointer();
             Вказівник4 = new НовийДокумент_Pointer();
             od2 = new ОдиниціВиміру_Pointer();
+            Флаг = false;
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -66,6 +67,7 @@ namespace ConfTrade_v1_1.Directory
                 Вказівник3 = new НовийДокумент_Pointer(base.FieldValue["pointer3"]);
                 Вказівник4 = new НовийДокумент_Pointer(base.FieldValue["link_empty"]);
                 od2 = new ОдиниціВиміру_Pointer(base.FieldValue["od2"]);
+                Флаг = (bool)base.FieldValue["col_a1"];
                 
                 BaseClear();
                 return true;
@@ -87,6 +89,7 @@ namespace ConfTrade_v1_1.Directory
             base.FieldValue["pointer3"] = Вказівник3.UnigueID.UGuid;
             base.FieldValue["link_empty"] = Вказівник4.UnigueID.UGuid;
             base.FieldValue["od2"] = od2.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = Флаг;
             
             BaseSave();
         }
@@ -113,6 +116,7 @@ namespace ConfTrade_v1_1.Directory
         public НовийДокумент_Pointer Вказівник3 { get; set; }
         public НовийДокумент_Pointer Вказівник4 { get; set; }
         public ОдиниціВиміру_Pointer od2 { get; set; }
+        public bool Флаг { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }
@@ -425,9 +429,9 @@ namespace ConfTrade_v1_1.Directory
     class Товари_Візуалізація3_View : DirectoryView
     {
         public Товари_Візуалізація3_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code", "count", "numer", "masiv" },
-             new string[] { "Назва", "Код", "Кількість", "Номер", "Масив" },
-             new string[] { "string", "string", "integer", "numeric", "string[]" },
+             new string[] { "name", "code", "count", "numer", "masiv", "col_a1" },
+             new string[] { "Назва", "Код", "Кількість", "Номер", "Масив", "Флаг" },
+             new string[] { "string", "string", "integer", "numeric", "string[]", "boolean" },
              "Товари_Візуалізація3")
         {
             

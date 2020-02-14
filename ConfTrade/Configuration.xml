@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>14.02.2020 12:04:02</DateTimeSave>
+  <DateTimeSave>14.02.2020 12:41:06</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -85,6 +85,13 @@
           <NameInTable>od2</NameInTable>
           <Type>pointer</Type>
           <Pointer>ОдиниціВиміру</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Флаг</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>boolean</Type>
           <Desc>
           </Desc>
         </Field>
@@ -247,6 +254,11 @@
               <Name>Масив</Name>
               <NameInTable>masiv</NameInTable>
               <Type>string[]</Type>
+            </Field>
+            <Field>
+              <Name>Флаг</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>boolean</Type>
             </Field>
           </Fields>
           <Where />

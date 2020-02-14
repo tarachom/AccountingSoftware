@@ -288,13 +288,13 @@ namespace AccountingSoftware
 						case "string[]":
 							{
 								string[] mas = (string[])reader[field];
-								foreach (string elem in mas) xml += "<elem>" + elem + "</elem>\n";
+								foreach (string elem in mas) xml += "<elem><![CDATA[" + elem + "]]></elem>";
 								break;
 							}
 						case "integer[]":
 							{
 								int[] mas = (int[])reader[field];
-								foreach (int elem in mas) xml += "<elem>" + elem.ToString() + "</elem>\n";
+								foreach (int elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
 								break;
 							}
 						case "numeric[]":
@@ -303,9 +303,21 @@ namespace AccountingSoftware
 								foreach (decimal elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
 								break;
 							}
-						default:
+						case "integer":
+						case "numeric":
+						case "boolean":
+						case "date":
+						case "datetime":
+						case "time":
+						case "pointer":
+						case "empty_pointer":
 							{
 								xml += reader[field].ToString();
+								break;
+							}
+						default:
+							{
+								xml += "<![CDATA[" + reader[field].ToString() + "]]>";
 								break;
 							}
 					}
