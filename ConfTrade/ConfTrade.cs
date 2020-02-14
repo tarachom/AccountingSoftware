@@ -21,7 +21,7 @@ namespace ConfTrade
 	public class ConfTrade
 	{
 		public static readonly object readonly_lock = new object();
-		
+
 		AutoResetEvent autoResetEvent = new AutoResetEvent(false);
 
 		public static List<HttpListenerContext> listHttpContext { get; set; }
@@ -85,18 +85,36 @@ namespace ConfTrade
 					HttpListenerRequest request = context.Request;
 					Console.WriteLine(" ->");
 
+					Console.WriteLine(context.Request.Headers.Count);
+
+					Console.WriteLine(context.Request.ProtocolVersion);
+					Console.WriteLine(context.Request.Url.LocalPath);
+
+					//foreach (string key in context.Request.Headers.AllKeys)
+					//{
+					//	Console.WriteLine(key + " = " + context.Request.Headers[key]);
+					//}
+
 					bool isExist = false;
 
 					foreach (string key in request.QueryString.AllKeys)
 					{
 						Console.WriteLine(key + " = " + request.QueryString[key].ToString());
 
-						if (key == "cmd") {
+						if (key == "cmd")
+						{
 							isExist = true;
 						}
 					}
 
-					if (!isExist) {
+					if (!isExist)
+					{
+						context.Response.Close();
+						continue;
+					}
+
+					if (!(context.Request.Url.LocalPath == "/"))
+					{
 						context.Response.Close();
 						continue;
 					}
@@ -151,7 +169,7 @@ namespace ConfTrade
 					{
 						Console.WriteLine(e.Message);
 					}
-					
+
 					try
 					{
 						output.Close();
