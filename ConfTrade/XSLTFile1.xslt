@@ -21,31 +21,58 @@
 
   <xsl:template match="/">
 
-    <table>
+    <html>
+      <title>HTML Tutorial</title>
+      <body>
 
-      <xsl:for-each select="root/Товари_ВибіркаТовари/row">
+        <table border="1">
 
-        <tr>
-          <td>
-            <xsl:value-of select="uid"/>
-          </td>
-          <td>
-            <xsl:value-of select="Назва"/>
-          </td>
-          <td>
-            <xsl:value-of select="Код"/>
-          </td>
-          <td>
-            <xsl:call-template name="GetNameOd">
-              <xsl:with-param name="list" select="/root/ОдиниціВиміру_Вибірка" />
-              <xsl:with-param name="uid" select="Одиниця" />
-            </xsl:call-template>
-          </td>
-        </tr>
+          <xsl:for-each select="Записи_Вибірка/row">
 
-      </xsl:for-each>
+            <tr>
+              <td>
+                <xsl:value-of select="uid"/>
+              </td>
+              <td>
+                <xsl:value-of select="Запис"/>
+              </td>
+              <td>
+                <xsl:value-of select="Товар"/>
+              </td>
+              <td>
+                <xsl:value-of select="Документ"/>
+              </td>
+            </tr>
 
-    </table>
+          </xsl:for-each>
+
+        </table>
+
+        <table border="1">
+
+          <xsl:for-each select="Товари_Візуалізація3/row">
+
+            <tr>
+              <td>
+                <xsl:value-of select="uid"/>
+              </td>
+              <td>
+                <xsl:value-of select="Назва"/>
+              </td>
+              <td>
+                <xsl:value-of select="Код"/>
+              </td>
+              <td>
+                <xsl:value-of select="Кількість"/>
+              </td>
+            </tr>
+
+          </xsl:for-each>
+
+        </table>
+        
+      </body>
+    </html>
 
   </xsl:template>
 

@@ -115,7 +115,7 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>od2</Name>
+      <Name>Одиниця</Name>
       <NameInTable>od2</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
@@ -126,15 +126,15 @@
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>Флаг</Name>
+      <Name>Флаг2</Name>
       <NameInTable>col_a1</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Флаг</Name>
-        <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>boolean</ConfType>
         <DataType>boolean</DataType>
-      </FieldCreate>
+        <UdtName>bool</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>Ціни</Name>
@@ -576,5 +576,65 @@
         </Type>
       </Control_Field>
     </Control_TabularParts>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>Записи</Name>
+    <Table>tab_a01</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Дата</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>date</ConfType>
+        <DataType>date</DataType>
+        <UdtName>date</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Запис</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Час</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>time</ConfType>
+        <DataType>time without time zone</DataType>
+        <UdtName>time</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Товар</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>НовийДокумент</Name>
+      <NameInTable>col_a5</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
 </root>

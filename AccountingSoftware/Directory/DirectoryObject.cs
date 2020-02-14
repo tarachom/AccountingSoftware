@@ -40,8 +40,8 @@ namespace AccountingSoftware
 
 		protected void BaseClear()
 		{
-			foreach (string key in FieldValue.Keys)
-				FieldValue[key] = null;
+			foreach (string field in FieldArray)
+				FieldValue[field] = null;
 		}
 
 		protected bool BaseRead(UnigueID uid)

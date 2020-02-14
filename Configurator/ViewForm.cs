@@ -91,7 +91,7 @@ namespace Configurator
 
 			foreach (KeyValuePair<string, string> configurationObjectView in ConfView.Fields)
 			{
-				listBoxFields.Items.Add(configurationObjectView.Key);
+				listBoxFields.Items.Add(configurationObjectView);
 			}
 		}
 
@@ -101,7 +101,9 @@ namespace Configurator
 
 			foreach (KeyValuePair<string, ConfigurationObjectField> configurationObjectField in ConfDirectory.Fields)
 			{
-				listBoxAllFields.Items.Add(configurationObjectField.Value.Name);
+				listBoxAllFields.Items.Add(
+					new KeyValuePair<string, string>(
+						configurationObjectField.Value.Name, configurationObjectField.Value.NameInTable));
 			}
 		}
 
@@ -121,10 +123,12 @@ namespace Configurator
 		{
 			if (listBoxAllFields.SelectedItem != null)
 			{
-				if (!ConfView.Fields.ContainsKey(listBoxAllFields.SelectedItem.ToString()))
+				string fieldName = ((KeyValuePair<string, string>)listBoxAllFields.SelectedItem).Key;
+
+				if (!ConfView.Fields.ContainsKey(fieldName))
 					ConfView.Fields.Add(
-						ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].Name,
-						ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].NameInTable);
+						ConfDirectory.Fields[fieldName].Name,
+						ConfDirectory.Fields[fieldName].NameInTable);
 
 				LoadFieldList();
 			}
@@ -143,7 +147,7 @@ namespace Configurator
 				{
 					int selectIndex = listBoxFields.SelectedIndex;
 
-					ConfView.Fields.Remove(listBoxFields.SelectedItem.ToString());
+					ConfView.Fields.Remove(((KeyValuePair<string, string>)listBoxFields.SelectedItem).Key);
 					LoadFieldList();
 
 					if (selectIndex >= listBoxFields.Items.Count)
@@ -164,7 +168,8 @@ namespace Configurator
 		{
 			for (int i = 0; i < listBoxAllFields.Items.Count; i++)
 			{
-				string fieldName = listBoxAllFields.Items[i].ToString();
+				string fieldName = ((KeyValuePair<string, string>)listBoxAllFields.Items[i]).Key;
+
 				if (!ConfView.Fields.ContainsKey(fieldName))
 					ConfView.Fields.Add(
 						ConfDirectory.Fields[fieldName].Name,

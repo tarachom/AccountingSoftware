@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 14.02.2020 12:41:06
+ * Дата конфігурації: 14.02.2020 14:05:43
  *
  */
 
@@ -43,8 +43,8 @@ namespace ConfTrade_v1_1.Directory
             Вказівник2 = new Товари_Pointer();
             Вказівник3 = new НовийДокумент_Pointer();
             Вказівник4 = new НовийДокумент_Pointer();
-            od2 = new ОдиниціВиміру_Pointer();
-            Флаг = false;
+            Одиниця = new ОдиниціВиміру_Pointer();
+            Флаг2 = false;
             
             //Табличні частини
             Ціни_TablePart = new Товари_Ціни_TablePart(this);
@@ -66,8 +66,8 @@ namespace ConfTrade_v1_1.Directory
                 Вказівник2 = new Товари_Pointer(base.FieldValue["pointer2"]);
                 Вказівник3 = new НовийДокумент_Pointer(base.FieldValue["pointer3"]);
                 Вказівник4 = new НовийДокумент_Pointer(base.FieldValue["link_empty"]);
-                od2 = new ОдиниціВиміру_Pointer(base.FieldValue["od2"]);
-                Флаг = (bool)base.FieldValue["col_a1"];
+                Одиниця = new ОдиниціВиміру_Pointer(base.FieldValue["od2"]);
+                Флаг2 = (bool)base.FieldValue["col_a1"];
                 
                 BaseClear();
                 return true;
@@ -88,8 +88,8 @@ namespace ConfTrade_v1_1.Directory
             base.FieldValue["pointer2"] = Вказівник2.UnigueID.UGuid;
             base.FieldValue["pointer3"] = Вказівник3.UnigueID.UGuid;
             base.FieldValue["link_empty"] = Вказівник4.UnigueID.UGuid;
-            base.FieldValue["od2"] = od2.UnigueID.UGuid;
-            base.FieldValue["col_a1"] = Флаг;
+            base.FieldValue["od2"] = Одиниця.UnigueID.UGuid;
+            base.FieldValue["col_a1"] = Флаг2;
             
             BaseSave();
         }
@@ -115,8 +115,8 @@ namespace ConfTrade_v1_1.Directory
         public Товари_Pointer Вказівник2 { get; set; }
         public НовийДокумент_Pointer Вказівник3 { get; set; }
         public НовийДокумент_Pointer Вказівник4 { get; set; }
-        public ОдиниціВиміру_Pointer od2 { get; set; }
-        public bool Флаг { get; set; }
+        public ОдиниціВиміру_Pointer Одиниця { get; set; }
+        public bool Флаг2 { get; set; }
         
         //Табличні частини
         public Товари_Ціни_TablePart Ціни_TablePart { get; set; }
@@ -403,9 +403,9 @@ namespace ConfTrade_v1_1.Directory
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
-             new string[] { "od2", "code", "name" },
-             new string[] { "od2", "Код", "Назва" },
-             new string[] { "pointer", "string", "string" },
+             new string[] { "od2", "code", "name", "od2" },
+             new string[] { "od2", "Код", "Назва", "Одиниця" },
+             new string[] { "pointer", "string", "string", "pointer" },
              "Товари_ВибіркаТовари")
         {
             
@@ -429,9 +429,9 @@ namespace ConfTrade_v1_1.Directory
     class Товари_Візуалізація3_View : DirectoryView
     {
         public Товари_Візуалізація3_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code", "count", "numer", "masiv", "col_a1" },
-             new string[] { "Назва", "Код", "Кількість", "Номер", "Масив", "Флаг" },
-             new string[] { "string", "string", "integer", "numeric", "string[]", "boolean" },
+             new string[] { "name", "code", "count", "numer", "masiv", "col_a1", "od2" },
+             new string[] { "Назва", "Код", "Кількість", "Номер", "Масив", "Флаг", "Одиниця" },
+             new string[] { "string", "string", "integer", "numeric", "string[]", "boolean", "pointer" },
              "Товари_Візуалізація3")
         {
             
@@ -1480,6 +1480,148 @@ namespace ConfTrade_v1_1.Directory
         }
         public string Назва { get; set; }
         public string Код { get; set; }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "Записи"
+    
+    
+    class Записи_Objest : DirectoryObject
+    {
+        public Записи_Objest() : base(Config.Kernel, "tab_a01",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
+        {
+            Дата = DateTime.MinValue;
+            Запис = "";
+            Час = DateTime.MinValue.TimeOfDay;
+            Товар = new Товари_Pointer();
+            НовийДокумент = new НовийДокумент_Pointer();
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Дата = (base.FieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a1"].ToString()) : DateTime.MinValue;
+                Запис = base.FieldValue["col_a2"].ToString();
+                Час = (base.FieldValue["col_a3"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_a3"].ToString()) : DateTime.MinValue.TimeOfDay;
+                Товар = new Товари_Pointer(base.FieldValue["col_a4"]);
+                НовийДокумент = new НовийДокумент_Pointer(base.FieldValue["col_a5"]);
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Дата;
+            base.FieldValue["col_a2"] = Запис;
+            base.FieldValue["col_a3"] = Час;
+            base.FieldValue["col_a4"] = Товар.UnigueID.UGuid;
+            base.FieldValue["col_a5"] = НовийДокумент.UnigueID.UGuid;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public Записи_Pointer GetDirectoryPointer()
+        {
+            Записи_Pointer directoryPointer = new Записи_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public DateTime Дата { get; set; }
+        public string Запис { get; set; }
+        public TimeSpan Час { get; set; }
+        public Товари_Pointer Товар { get; set; }
+        public НовийДокумент_Pointer НовийДокумент { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class Записи_Pointer : DirectoryPointer
+    {
+        public Записи_Pointer(object uid = null) : base(Config.Kernel, "tab_a01")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public Записи_Objest GetDirectoryObject()
+        {
+            Записи_Objest ЗаписиObjestItem = new Записи_Objest();
+            ЗаписиObjestItem.Read(base.UnigueID);
+            return ЗаписиObjestItem;
+        }
+    }
+    
+    
+    class Записи_Select : DirectorySelect, IDisposable
+    {
+        public Записи_Select() : base(Config.Kernel, "tab_a01") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new Записи_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public Записи_Pointer Current { get; private set; }
+    }
+    
+      
+    class Записи_Вибірка_View : DirectoryView
+    {
+        public Записи_Вибірка_View() : base(Config.Kernel, "tab_a01", 
+             new string[] { "col_a1", "col_a2", "col_a4", "col_a5" },
+             new string[] { "Дата", "Запис", "Товар", "Документ" },
+             new string[] { "date", "string", "pointer", "pointer" },
+             "Записи_Вибірка")
+        {
+            
+        }
         
     }
       

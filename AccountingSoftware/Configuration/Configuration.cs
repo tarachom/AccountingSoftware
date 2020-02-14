@@ -591,11 +591,16 @@ namespace AccountingSoftware
 					nodeFieldNameInTable.InnerText = field.Value;
 					nodeField.AppendChild(nodeFieldNameInTable);
 
-					if (confDirectory.Fields.ContainsKey(field.Key)) 
+					foreach (ConfigurationObjectField configurationObjectField in confDirectory.Fields.Values)
 					{
-						XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
-						nodeFieldType.InnerText = confDirectory.Fields[field.Key].Type;
-						nodeField.AppendChild(nodeFieldType);
+						if (configurationObjectField.NameInTable == field.Value)
+						{
+							XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
+							nodeFieldType.InnerText = configurationObjectField.Type;
+							nodeField.AppendChild(nodeFieldType);
+
+							break;
+						}
 					}
 				}
 

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>14.02.2020 12:41:06</DateTimeSave>
+  <DateTimeSave>14.02.2020 14:05:43</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -81,7 +81,7 @@
           </Desc>
         </Field>
         <Field>
-          <Name>od2</Name>
+          <Name>Одиниця</Name>
           <NameInTable>od2</NameInTable>
           <Type>pointer</Type>
           <Pointer>ОдиниціВиміру</Pointer>
@@ -89,7 +89,7 @@
           </Desc>
         </Field>
         <Field>
-          <Name>Флаг</Name>
+          <Name>Флаг2</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>boolean</Type>
           <Desc>
@@ -197,6 +197,11 @@
               <NameInTable>name</NameInTable>
               <Type>string</Type>
             </Field>
+            <Field>
+              <Name>Одиниця</Name>
+              <NameInTable>od2</NameInTable>
+              <Type>pointer</Type>
+            </Field>
           </Fields>
           <Where />
         </View>
@@ -259,6 +264,11 @@
               <Name>Флаг</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>Одиниця</Name>
+              <NameInTable>od2</NameInTable>
+              <Type>pointer</Type>
             </Field>
           </Fields>
           <Where />
@@ -547,6 +557,83 @@
         </TablePart>
       </TabularParts>
       <Views />
+    </Directory>
+    <Directory>
+      <Name>Записи</Name>
+      <Table>tab_a01</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Дата</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Запис</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Час</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>time</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Товар</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Товари</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НовийДокумент</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>НовийДокумент</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Вибірка</Name>
+          <Table>tab_a01</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Дата</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+            </Field>
+            <Field>
+              <Name>Запис</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Товар</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+            </Field>
+            <Field>
+              <Name>Документ</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>pointer</Type>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
+      </Views>
     </Directory>
   </Directories>
 </Configuration>
