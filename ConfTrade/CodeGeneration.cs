@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 14.02.2020 11:48:22
+ * Дата конфігурації: 14.02.2020 12:04:02
  *
  */
 
@@ -399,9 +399,9 @@ namespace ConfTrade_v1_1.Directory
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code", "od2" },
-             new string[] { "Назва", "Код", "Одиниця" },
-             new string[] { "", "", "" },
+             new string[] { "od2", "code", "name" },
+             new string[] { "od2", "Код", "Назва" },
+             new string[] { "pointer", "string", "string" },
              "Товари_ВибіркаТовари")
         {
             
@@ -414,7 +414,7 @@ namespace ConfTrade_v1_1.Directory
         public Товари_Візуалізація2_View() : base(Config.Kernel, "tovary", 
              new string[] { "name", "code", "count" },
              new string[] { "Назва", "Код", "Кількість" },
-             new string[] { "", "", "" },
+             new string[] { "string", "string", "integer" },
              "Товари_Візуалізація2")
         {
             
@@ -427,7 +427,7 @@ namespace ConfTrade_v1_1.Directory
         public Товари_Візуалізація3_View() : base(Config.Kernel, "tovary", 
              new string[] { "name", "code", "count", "numer", "masiv" },
              new string[] { "Назва", "Код", "Кількість", "Номер", "Масив" },
-             new string[] { "", "", "", "", "" },
+             new string[] { "string", "string", "integer", "numeric", "string[]" },
              "Товари_Візуалізація3")
         {
             
@@ -1047,7 +1047,7 @@ namespace ConfTrade_v1_1.Directory
         public ОдиниціВиміру_Вибірка_View() : base(Config.Kernel, "od_vimir", 
              new string[] { "name", "code" },
              new string[] { "Назва", "Код" },
-             new string[] { "", "" },
+             new string[] { "string", "string" },
              "ОдиниціВиміру_Вибірка")
         {
             

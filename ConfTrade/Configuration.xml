@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>14.02.2020 11:48:22</DateTimeSave>
+  <DateTimeSave>14.02.2020 12:04:02</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -176,16 +176,19 @@
           <Desc>Візуалізація 1</Desc>
           <Fields>
             <Field>
-              <Name>Назва</Name>
-              <NameInTable>name</NameInTable>
+              <Name>od2</Name>
+              <NameInTable>od2</NameInTable>
+              <Type>pointer</Type>
             </Field>
             <Field>
               <Name>Код</Name>
               <NameInTable>code</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
-              <Name>Одиниця</Name>
-              <NameInTable>od2</NameInTable>
+              <Name>Назва</Name>
+              <NameInTable>name</NameInTable>
+              <Type>string</Type>
             </Field>
           </Fields>
           <Where />
@@ -199,14 +202,17 @@
             <Field>
               <Name>Назва</Name>
               <NameInTable>name</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
               <Name>Код</Name>
               <NameInTable>code</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
               <Name>Кількість</Name>
               <NameInTable>count</NameInTable>
+              <Type>integer</Type>
             </Field>
           </Fields>
           <Where />
@@ -220,22 +226,27 @@
             <Field>
               <Name>Назва</Name>
               <NameInTable>name</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
               <Name>Код</Name>
               <NameInTable>code</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
               <Name>Кількість</Name>
               <NameInTable>count</NameInTable>
+              <Type>integer</Type>
             </Field>
             <Field>
               <Name>Номер</Name>
               <NameInTable>numer</NameInTable>
+              <Type>numeric</Type>
             </Field>
             <Field>
               <Name>Масив</Name>
               <NameInTable>masiv</NameInTable>
+              <Type>string[]</Type>
             </Field>
           </Fields>
           <Where />
@@ -413,10 +424,12 @@
             <Field>
               <Name>Назва</Name>
               <NameInTable>name</NameInTable>
+              <Type>string</Type>
             </Field>
             <Field>
               <Name>Код</Name>
               <NameInTable>code</NameInTable>
+              <Type>string</Type>
             </Field>
           </Fields>
           <Where />

@@ -13,11 +13,12 @@ namespace AccountingSoftware
 		{
 			Table = table;
 			Kernel = kernel;
-			FieldTypeArray = fieldsTypeArray;
+			//FieldTypeArray = fieldsTypeArray;
 			Name = name;
 
 			Alias = new Dictionary<string, string>();
 			AliasRevers = new Dictionary<string, string>();
+			AliasFieldType = new Dictionary<string, string>();
 
 			QuerySelect = new Query(table);
 
@@ -25,7 +26,7 @@ namespace AccountingSoftware
 			{
 				Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
 				AliasRevers.Add(fieldsNameInTableArray[i], fieldsNameArray[i]);
-				
+				AliasFieldType.Add(fieldsNameInTableArray[i], fieldsTypeArray[i]);
 				QuerySelect.Field.Add(fieldsNameInTableArray[i]);
 			}				
 		}
@@ -34,10 +35,11 @@ namespace AccountingSoftware
 
 		private string Table { get; set; }
 
-		private string[] FieldTypeArray { get; set; }
+		//public string[] FieldTypeArray { get; set; }
 
 		public Dictionary<string, string> Alias { get; }
 		public Dictionary<string, string> AliasRevers { get; }
+		public Dictionary<string, string> AliasFieldType { get; }
 
 		public string Name { get; } 
 

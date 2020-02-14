@@ -278,10 +278,39 @@ namespace AccountingSoftware
 			{
 				xml += "  <row>\n";
 				xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
-
+				
 				foreach (string field in directoryView.QuerySelect.Field)
 				{
-					xml += "    <" + directoryView.AliasRevers[field] + ">" + reader[field].ToString() + "</" + directoryView.AliasRevers[field] + ">\n";
+					xml += "    <" + directoryView.AliasRevers[field] + ">";
+
+					switch (directoryView.AliasFieldType[field])
+					{
+						case "string[]":
+							{
+								string[] mas = (string[])reader[field];
+								foreach (string elem in mas) xml += "<elem>" + elem + "</elem>\n";
+								break;
+							}
+						case "integer[]":
+							{
+								int[] mas = (int[])reader[field];
+								foreach (int elem in mas) xml += "<elem>" + elem.ToString() + "</elem>\n";
+								break;
+							}
+						case "numeric[]":
+							{
+								decimal[] mas = (decimal[])reader[field];
+								foreach (decimal elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
+								break;
+							}
+						default:
+							{
+								xml += reader[field].ToString();
+								break;
+							}
+					}
+					
+					xml += "</" + directoryView.AliasRevers[field] + ">\n";
 				}
 
 				xml += "  </row>\n";

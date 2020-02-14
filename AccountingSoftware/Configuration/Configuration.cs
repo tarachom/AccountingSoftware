@@ -487,7 +487,7 @@ namespace AccountingSoftware
 
 				SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
 
-				SaveViews(ConfDirectory.Value.Views, xmlConfDocument, nodeDirectory);
+				SaveViews(ConfDirectory.Value.Views, ConfDirectory.Value, xmlConfDocument, nodeDirectory);
 			}
 		}
 
@@ -552,7 +552,8 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, XmlDocument xmlConfDocument, XmlElement rootNode)
+		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, 
+			ConfigurationDirectories confDirectory, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
 			XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
 			rootNode.AppendChild(nodeViews);
@@ -589,6 +590,13 @@ namespace AccountingSoftware
 					XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
 					nodeFieldNameInTable.InnerText = field.Value;
 					nodeField.AppendChild(nodeFieldNameInTable);
+
+					if (confDirectory.Fields.ContainsKey(field.Key)) 
+					{
+						XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
+						nodeFieldType.InnerText = confDirectory.Fields[field.Key].Type;
+						nodeField.AppendChild(nodeFieldType);
+					}
 				}
 
 				XmlElement nodeWhere = xmlConfDocument.CreateElement("Where");
