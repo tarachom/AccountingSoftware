@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfTradeFunction.cs" />
     <Compile Include="CodeGeneration.cs" />
     <Compile Include="ConfTrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
