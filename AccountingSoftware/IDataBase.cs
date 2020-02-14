@@ -23,11 +23,13 @@ namespace AccountingSoftware
 		void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
+		void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory);
 		ConfigurationInformationSchema SelectInformationSchema();
 		bool IfExistsTable(string tableName);
 		bool IfExistsColumn(string tableName, string columnName);
 		int ExecuteSQL(string SqlQuery);
 
 		string SelectDirectoryView(DirectoryView directoryView);
+		
 	}
 }

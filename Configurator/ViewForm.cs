@@ -111,22 +111,13 @@ namespace Configurator
 		//	LoadFieldList();
 		//}
 
-		private void buttonAddField_Click(object sender, EventArgs e)
-		{
-			//FieldForm fieldForm = new FieldForm();
-			//fieldForm.CallBack = CallBack_Update_Field;
-			//fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			//fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectoryTablePart.Table, ConfDirectoryTablePart.Fields);
-			//fieldForm.Show();
-		}
-
 		void LoadFieldList()
 		{
 			listBoxFields.Items.Clear();
 
 			foreach (KeyValuePair<string, string> configurationObjectView in ConfView.Fields)
 			{
-				listBoxFields.Items.Add(configurationObjectView.Key + " -> " + configurationObjectView.Value);
+				listBoxFields.Items.Add(configurationObjectView.Key);
 			}
 		}
 
@@ -152,16 +143,66 @@ namespace Configurator
 			//}
 		}
 
-		private void listBoxAllFields_MouseDoubleClick(object sender, MouseEventArgs e)
+		private void AddField()
 		{
 			if (listBoxAllFields.SelectedItem != null)
 			{
-				ConfView.Fields.Add(
-					ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].Name,
-					ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].NameInTable);
+				if (!ConfView.Fields.ContainsKey(listBoxAllFields.SelectedItem.ToString()))
+					ConfView.Fields.Add(
+						ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].Name,
+						ConfDirectory.Fields[listBoxAllFields.SelectedItem.ToString()].NameInTable);
 
 				LoadFieldList();
 			}
+		}
+
+		private void listBoxAllFields_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			AddField();
+		}
+
+		private void listBoxFields_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					int selectIndex = listBoxFields.SelectedIndex;
+
+					ConfView.Fields.Remove(listBoxFields.SelectedItem.ToString());
+					LoadFieldList();
+
+					if (selectIndex >= listBoxFields.Items.Count)
+						selectIndex = listBoxFields.Items.Count - 1;
+
+					listBoxFields.SelectedIndex = selectIndex;
+				}
+			}
+		}
+
+		private void listBoxAllFields_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyData == Keys.Enter)
+				AddField();
+		}
+
+		private void buttonAddField_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void buttonAddAllField_Click(object sender, EventArgs e)
+		{
+			for (int i = 0; i < listBoxAllFields.Items.Count; i++)
+			{
+				string fieldName = listBoxAllFields.Items[i].ToString();
+				if (!ConfView.Fields.ContainsKey(fieldName))
+					ConfView.Fields.Add(
+						ConfDirectory.Fields[fieldName].Name,
+						ConfDirectory.Fields[fieldName].NameInTable);
+			}
+
+			LoadFieldList();
 		}
 	}
 }

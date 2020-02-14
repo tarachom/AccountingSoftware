@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.02.2020 22:37:54
+ * Дата конфігурації: 14.02.2020 08:09:52
  *
  */
 
@@ -399,8 +399,8 @@ namespace ConfTrade_v1_1.Directory
     class Товари_ВибіркаТовари_View : DirectoryView
     {
         public Товари_ВибіркаТовари_View() : base(Config.Kernel, "tovary", 
-             new string[] { "name", "code", "od2", "link_empty", "pointer3", "pointer2", "pointer1", "masiv", "count", "od2", "artikul" },
-             new string[] { "Назва", "Код", "Одиниця", "Вказівник4", "Вказівник3", "Вказівник2", "Вказівник1", "Масив", "Кількість", "od2", "Артикул" },
+             new string[] { "name", "code", "od2", "count", "numer", "masiv", "artikul", "pointer1", "pointer2", "pointer3", "link_empty", "od2" },
+             new string[] { "Назва", "Код", "Одиниця", "Кількість", "Номер", "Масив", "Артикул", "Вказівник1", "Вказівник2", "Вказівник3", "Вказівник4", "od2" },
              "Товари_ВибіркаТовари")
         {
             base.QuerySelect.PrimaryField = "uid";
@@ -3679,6 +3679,317 @@ namespace ConfTrade_v1_1.Directory
             
         }
         public string werw { get; set; }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "Довідник"
+    
+    
+    class Довідник_Objest : DirectoryObject
+    {
+        public Довідник_Objest() : base(Config.Kernel, "tab_a14",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
+        {
+            Назва = "";
+            Код = "";
+            Опис = "";
+            Опис2 = "";
+            
+            //Табличні частини
+            ТабЧастина1_TablePart = new Довідник_ТабЧастина1_TablePart(this);
+            ТабЧастина2_TablePart = new Довідник_ТабЧастина2_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                Опис = base.FieldValue["col_a3"].ToString();
+                Опис2 = base.FieldValue["col_a4"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = Опис;
+            base.FieldValue["col_a4"] = Опис2;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public Довідник_Pointer GetDirectoryPointer()
+        {
+            Довідник_Pointer directoryPointer = new Довідник_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public string Опис { get; set; }
+        public string Опис2 { get; set; }
+        
+        //Табличні частини
+        public Довідник_ТабЧастина1_TablePart ТабЧастина1_TablePart { get; set; }
+        public Довідник_ТабЧастина2_TablePart ТабЧастина2_TablePart { get; set; }
+        
+    }
+    
+    
+    class Довідник_Pointer : DirectoryPointer
+    {
+        public Довідник_Pointer(object uid = null) : base(Config.Kernel, "tab_a14")
+        {
+            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+        }
+
+        public Довідник_Objest GetDirectoryObject()
+        {
+            Довідник_Objest ДовідникObjestItem = new Довідник_Objest();
+            ДовідникObjestItem.Read(base.UnigueID);
+            return ДовідникObjestItem;
+        }
+    }
+    
+    
+    class Довідник_Select : DirectorySelect, IDisposable
+    {
+        public Довідник_Select() : base(Config.Kernel, "tab_a14") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new Довідник_Pointer();
+                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public Довідник_Pointer Current { get; private set; }
+    }
+    
+      
+    class Довідник_ТабЧастина1_TablePart : DirectoryTablePart
+    {
+        public Довідник_ТабЧастина1_TablePart(Довідник_Objest owner) : base(Config.Kernel, "tab_a15",
+             new string[] { "col_a4", "col_a5" }) 
+        {
+            Owner = owner;
+            Records = new List<Довідник_ТабЧастина1_TablePartRecord>();
+        }
+        
+        public Довідник_Objest Owner { get; private set; }
+        
+        public List<Довідник_ТабЧастина1_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Довідник_ТабЧастина1_TablePartRecord record = new Довідник_ТабЧастина1_TablePartRecord();
+
+                record.Назва = fieldValue["col_a4"].ToString();
+                record.Код = fieldValue["col_a5"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Довідник_ТабЧастина1_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a4", record.Назва);
+                    fieldValue.Add("col_a5", record.Код);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Довідник_ТабЧастина1_TablePartRecord : DirectoryTablePartRecord
+    {
+        public Довідник_ТабЧастина1_TablePartRecord()
+        {
+            Назва = "";
+            Код = "";
+            
+        }
+        
+        
+        public Довідник_ТабЧастина1_TablePartRecord(
+            string _Назва = "", string _Код = "")
+        {
+            Назва = _Назва;
+            Код = _Код;
+            
+        }
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        
+    }
+      
+    class Довідник_ТабЧастина2_TablePart : DirectoryTablePart
+    {
+        public Довідник_ТабЧастина2_TablePart(Довідник_Objest owner) : base(Config.Kernel, "tab_a16",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            Owner = owner;
+            Records = new List<Довідник_ТабЧастина2_TablePartRecord>();
+        }
+        
+        public Довідник_Objest Owner { get; private set; }
+        
+        public List<Довідник_ТабЧастина2_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Довідник_ТабЧастина2_TablePartRecord record = new Довідник_ТабЧастина2_TablePartRecord();
+
+                record.Назва = fieldValue["col_a1"].ToString();
+                record.Код = fieldValue["col_a2"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Довідник_ТабЧастина2_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Назва);
+                    fieldValue.Add("col_a2", record.Код);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Довідник_ТабЧастина2_TablePartRecord : DirectoryTablePartRecord
+    {
+        public Довідник_ТабЧастина2_TablePartRecord()
+        {
+            Назва = "";
+            Код = "";
+            
+        }
+        
+        
+        public Довідник_ТабЧастина2_TablePartRecord(
+            string _Назва = "", string _Код = "")
+        {
+            Назва = _Назва;
+            Код = _Код;
+            
+        }
+        public string Назва { get; set; }
+        public string Код { get; set; }
         
     }
       

@@ -296,33 +296,6 @@
 
   </xsl:template>
 
-  <xsl:template name="CreateTablePart">
-    <xsl:param name="TabularParts_TableName" />
-    <xsl:param name="FieldCreate" />
-
-    <xsl:for-each select="TableCreate">
-      <sql>
-        <xsl:text>CREATE TABLE </xsl:text>
-        <xsl:value-of select="$TabularParts_TableName"/>
-        <xsl:text> (</xsl:text>
-        <xsl:text>owner uuid NOT NULL</xsl:text>
-        <xsl:for-each select="$FieldCreate">
-          <xsl:text>, "</xsl:text>
-          <xsl:value-of select="NameInTable"/>
-          <xsl:text>" </xsl:text>
-          <xsl:value-of select="DataType"/>
-        </xsl:for-each>
-        <xsl:text>);</xsl:text>
-      </sql>
-      <sql>
-        <xsl:text>CREATE INDEX ON </xsl:text>
-        <xsl:value-of select="$TabularParts_TableName"/>
-        <xsl:text> (owner);</xsl:text>
-      </sql>
-    </xsl:for-each>
-
-  </xsl:template>
-
   <xsl:template match="/">
 
     <root>
@@ -338,30 +311,6 @@
               <xsl:with-param name="Control_Field" select="Control_Field" />
               <xsl:with-param name="TableName" select="$TableName" />
             </xsl:call-template>
-
-            <xsl:for-each select="Control_TabularParts">
-              <xsl:variable name="TabularParts_TableName" select="Table" />
-
-              <xsl:choose>
-                <xsl:when test="IsExist = 'yes'">
-
-                  <xsl:call-template name="Template_Control_Field">
-                    <xsl:with-param name="Control_Field" select="Control_Field" />
-                    <xsl:with-param name="TableName" select="$TabularParts_TableName" />
-                  </xsl:call-template>
-
-                </xsl:when>
-                <xsl:when test="IsExist = 'no'">
-
-                  <xsl:call-template name="CreateTablePart">
-                    <xsl:with-param name="TabularParts_TableName" select="$TabularParts_TableName" />
-                    <xsl:with-param name="FieldCreate" select="FieldCreate" />
-                  </xsl:call-template>
-
-                </xsl:when>
-              </xsl:choose>
-
-            </xsl:for-each>
 
           </xsl:when>
           <xsl:when test="IsExist = 'no'">
@@ -383,28 +332,49 @@
               </sql>
             </xsl:for-each>
 
-            <xsl:for-each select="Control_TabularParts">
-              <xsl:variable name="TabularParts_TableName" select="Table" />
-
-              <xsl:choose>
-                <xsl:when test="IsExist = 'yes'">
-                  <ERROR>TabularParts IsExist = 'yes'</ERROR>
-                </xsl:when>
-                <xsl:when test="IsExist = 'no'">
-
-                  <xsl:call-template name="CreateTablePart">
-                    <xsl:with-param name="TabularParts_TableName" select="$TabularParts_TableName" />
-                    <xsl:with-param name="FieldCreate" select="FieldCreate" />
-                  </xsl:call-template>
-
-                </xsl:when>
-              </xsl:choose>
-
-            </xsl:for-each>
-
           </xsl:when>
         </xsl:choose>
 
+        <xsl:for-each select="Control_TabularParts">
+          <xsl:variable name="TabularParts_TableName" select="Table" />
+
+          <xsl:choose>
+            <xsl:when test="IsExist = 'yes'">
+
+              <xsl:call-template name="Template_Control_Field">
+                <xsl:with-param name="Control_Field" select="Control_Field" />
+                <xsl:with-param name="TableName" select="$TabularParts_TableName" />
+              </xsl:call-template>
+
+            </xsl:when>
+            <xsl:when test="IsExist = 'no'">
+
+              <xsl:for-each select="TableCreate">
+                <sql>
+                  <xsl:text>CREATE TABLE </xsl:text>
+                  <xsl:value-of select="$TabularParts_TableName"/>
+                  <xsl:text> (</xsl:text>
+                  <xsl:text>owner uuid NOT NULL</xsl:text>
+                  <xsl:for-each select="FieldCreate">
+                    <xsl:text>, "</xsl:text>
+                    <xsl:value-of select="NameInTable"/>
+                    <xsl:text>" </xsl:text>
+                    <xsl:value-of select="DataType"/>
+                  </xsl:for-each>
+                  <xsl:text>);</xsl:text>
+                </sql>
+                <sql>
+                  <xsl:text>CREATE INDEX ON </xsl:text>
+                  <xsl:value-of select="$TabularParts_TableName"/>
+                  <xsl:text> (owner);</xsl:text>
+                </sql>
+              </xsl:for-each>
+
+            </xsl:when>
+          </xsl:choose>
+
+        </xsl:for-each>
+        
       </xsl:for-each>
 
     </root>

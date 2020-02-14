@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.02.2020 22:37:54</DateTimeSave>
+  <DateTimeSave>14.02.2020 08:09:52</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Товари</Name>
@@ -189,36 +189,40 @@
               <NameInTable>od2</NameInTable>
             </Field>
             <Field>
-              <Name>Вказівник4</Name>
-              <NameInTable>link_empty</NameInTable>
+              <Name>Кількість</Name>
+              <NameInTable>count</NameInTable>
             </Field>
             <Field>
-              <Name>Вказівник3</Name>
-              <NameInTable>pointer3</NameInTable>
-            </Field>
-            <Field>
-              <Name>Вказівник2</Name>
-              <NameInTable>pointer2</NameInTable>
-            </Field>
-            <Field>
-              <Name>Вказівник1</Name>
-              <NameInTable>pointer1</NameInTable>
+              <Name>Номер</Name>
+              <NameInTable>numer</NameInTable>
             </Field>
             <Field>
               <Name>Масив</Name>
               <NameInTable>masiv</NameInTable>
             </Field>
             <Field>
-              <Name>Кількість</Name>
-              <NameInTable>count</NameInTable>
+              <Name>Артикул</Name>
+              <NameInTable>artikul</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник1</Name>
+              <NameInTable>pointer1</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник2</Name>
+              <NameInTable>pointer2</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник3</Name>
+              <NameInTable>pointer3</NameInTable>
+            </Field>
+            <Field>
+              <Name>Вказівник4</Name>
+              <NameInTable>link_empty</NameInTable>
             </Field>
             <Field>
               <Name>od2</Name>
               <NameInTable>od2</NameInTable>
-            </Field>
-            <Field>
-              <Name>Артикул</Name>
-              <NameInTable>artikul</NameInTable>
             </Field>
           </Fields>
           <Where />
@@ -1082,6 +1086,89 @@
             <Field>
               <Name>werw</Name>
               <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views />
+    </Directory>
+    <Directory>
+      <Name>Довідник</Name>
+      <Table>tab_a14</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Опис</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Опис2</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>ТабЧастина1</Name>
+          <Table>tab_a15</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>ТабЧастина2</Name>
+          <Table>tab_a16</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
               <Desc>
               </Desc>

@@ -31,35 +31,36 @@
 			this.listBoxFields = new System.Windows.Forms.ListBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel5 = new System.Windows.Forms.Panel();
+			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.listBoxAllFields = new System.Windows.Forms.ListBox();
 			this.panel4 = new System.Windows.Forms.Panel();
-			this.buttonAddField = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.textBoxPrimaryField = new System.Windows.Forms.TextBox();
+			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxTable = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.textBoxPrimaryField = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
-			this.listBoxAllFields = new System.Windows.Forms.ListBox();
-			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+			this.buttonAddAllField = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+			this.splitContainer2.Panel1.SuspendLayout();
+			this.splitContainer2.Panel2.SuspendLayout();
+			this.splitContainer2.SuspendLayout();
 			this.panel4.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-			this.splitContainer2.Panel1.SuspendLayout();
-			this.splitContainer2.Panel2.SuspendLayout();
-			this.splitContainer2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listBoxFields
@@ -70,6 +71,7 @@
 			this.listBoxFields.Name = "listBoxFields";
 			this.listBoxFields.Size = new System.Drawing.Size(250, 236);
 			this.listBoxFields.TabIndex = 0;
+			this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
 			this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
 			// 
 			// panel1
@@ -91,9 +93,38 @@
 			this.panel5.Size = new System.Drawing.Size(500, 236);
 			this.panel5.TabIndex = 2;
 			// 
+			// splitContainer2
+			// 
+			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+			this.splitContainer2.Name = "splitContainer2";
+			// 
+			// splitContainer2.Panel1
+			// 
+			this.splitContainer2.Panel1.Controls.Add(this.listBoxFields);
+			// 
+			// splitContainer2.Panel2
+			// 
+			this.splitContainer2.Panel2.Controls.Add(this.listBoxAllFields);
+			this.splitContainer2.Size = new System.Drawing.Size(500, 236);
+			this.splitContainer2.SplitterDistance = 250;
+			this.splitContainer2.TabIndex = 0;
+			// 
+			// listBoxAllFields
+			// 
+			this.listBoxAllFields.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listBoxAllFields.FormattingEnabled = true;
+			this.listBoxAllFields.Location = new System.Drawing.Point(0, 0);
+			this.listBoxAllFields.Name = "listBoxAllFields";
+			this.listBoxAllFields.Size = new System.Drawing.Size(246, 236);
+			this.listBoxAllFields.TabIndex = 1;
+			this.listBoxAllFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxAllFields_KeyDown);
+			this.listBoxAllFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAllFields_MouseDoubleClick);
+			// 
 			// panel4
 			// 
-			this.panel4.Controls.Add(this.buttonAddField);
+			this.panel4.Controls.Add(this.buttonAddAllField);
+			this.panel4.Controls.Add(this.label6);
 			this.panel4.Controls.Add(this.label1);
 			this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.panel4.Location = new System.Drawing.Point(0, 0);
@@ -101,15 +132,14 @@
 			this.panel4.Size = new System.Drawing.Size(500, 30);
 			this.panel4.TabIndex = 3;
 			// 
-			// buttonAddField
+			// label6
 			// 
-			this.buttonAddField.Location = new System.Drawing.Point(44, 4);
-			this.buttonAddField.Name = "buttonAddField";
-			this.buttonAddField.Size = new System.Drawing.Size(55, 23);
-			this.buttonAddField.TabIndex = 7;
-			this.buttonAddField.Text = "Додати";
-			this.buttonAddField.UseVisualStyleBackColor = true;
-			this.buttonAddField.Click += new System.EventHandler(this.buttonAddField_Click);
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(251, 9);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(79, 13);
+			this.label6.TabIndex = 3;
+			this.label6.Text = "Доступні поля";
 			// 
 			// label1
 			// 
@@ -180,6 +210,24 @@
 			this.splitContainer1.SplitterDistance = 500;
 			this.splitContainer1.TabIndex = 4;
 			// 
+			// textBoxPrimaryField
+			// 
+			this.textBoxPrimaryField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBoxPrimaryField.Location = new System.Drawing.Point(131, 83);
+			this.textBoxPrimaryField.Name = "textBoxPrimaryField";
+			this.textBoxPrimaryField.Size = new System.Drawing.Size(295, 20);
+			this.textBoxPrimaryField.TabIndex = 7;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(11, 86);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(94, 13);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Первинний ключ:";
+			// 
 			// textBoxDesc
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -235,50 +283,15 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// textBoxPrimaryField
+			// buttonAddAllField
 			// 
-			this.textBoxPrimaryField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxPrimaryField.Location = new System.Drawing.Point(131, 83);
-			this.textBoxPrimaryField.Name = "textBoxPrimaryField";
-			this.textBoxPrimaryField.Size = new System.Drawing.Size(295, 20);
-			this.textBoxPrimaryField.TabIndex = 7;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(11, 86);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(94, 13);
-			this.label2.TabIndex = 6;
-			this.label2.Text = "Первинний ключ:";
-			// 
-			// listBoxAllFields
-			// 
-			this.listBoxAllFields.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.listBoxAllFields.FormattingEnabled = true;
-			this.listBoxAllFields.Location = new System.Drawing.Point(0, 0);
-			this.listBoxAllFields.Name = "listBoxAllFields";
-			this.listBoxAllFields.Size = new System.Drawing.Size(246, 236);
-			this.listBoxAllFields.TabIndex = 1;
-			this.listBoxAllFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxAllFields_MouseDoubleClick);
-			// 
-			// splitContainer2
-			// 
-			this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-			this.splitContainer2.Name = "splitContainer2";
-			// 
-			// splitContainer2.Panel1
-			// 
-			this.splitContainer2.Panel1.Controls.Add(this.listBoxFields);
-			// 
-			// splitContainer2.Panel2
-			// 
-			this.splitContainer2.Panel2.Controls.Add(this.listBoxAllFields);
-			this.splitContainer2.Size = new System.Drawing.Size(500, 236);
-			this.splitContainer2.SplitterDistance = 250;
-			this.splitContainer2.TabIndex = 0;
+			this.buttonAddAllField.Location = new System.Drawing.Point(421, 4);
+			this.buttonAddAllField.Name = "buttonAddAllField";
+			this.buttonAddAllField.Size = new System.Drawing.Size(76, 23);
+			this.buttonAddAllField.TabIndex = 8;
+			this.buttonAddAllField.Text = "Додати всі";
+			this.buttonAddAllField.UseVisualStyleBackColor = true;
+			this.buttonAddAllField.Click += new System.EventHandler(this.buttonAddAllField_Click);
 			// 
 			// ViewForm
 			// 
@@ -293,6 +306,10 @@
 			this.Load += new System.EventHandler(this.ViewForm_Load);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
+			this.splitContainer2.Panel1.ResumeLayout(false);
+			this.splitContainer2.Panel2.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+			this.splitContainer2.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
 			this.panel4.PerformLayout();
 			this.panel2.ResumeLayout(false);
@@ -301,10 +318,6 @@
 			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			this.splitContainer2.Panel1.ResumeLayout(false);
-			this.splitContainer2.Panel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-			this.splitContainer2.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -326,10 +339,11 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox textBoxTable;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.Button buttonAddField;
 		private System.Windows.Forms.TextBox textBoxPrimaryField;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.ListBox listBoxAllFields;
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Button buttonAddAllField;
 	}
 }

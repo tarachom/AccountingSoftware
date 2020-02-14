@@ -231,22 +231,27 @@ namespace Configurator
 			{
 				string directoryName = nodeSel.Name;
 
-				List<string> ListPointers = Conf.SearchForPointers(directoryName);
-				if (ListPointers.Count == 0)
+				if (Conf.Directories.ContainsKey(directoryName))
 				{
-					Conf.Directories.Remove(directoryName);
-					LoadTree();
-				}
-				else
-				{
-					string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник \"" + directoryName + "\":\n";
+					List<string> ListPointers = Conf.SearchForPointers(directoryName);
+					if (ListPointers.Count == 0)
+					{
+						Program.Kernel.DataBase.DeleteConfigurationDirectory(Conf.Directories[directoryName]);
 
-					foreach (string item in ListPointers)
-						textListPointer += " -> " + item + "\n";
+						Conf.Directories.Remove(directoryName);
+						LoadTree();
+					}
+					else
+					{
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник \"" + directoryName + "\":\n";
 
-					textListPointer += "\nВидалитити неможливо";
+						foreach (string item in ListPointers)
+							textListPointer += " -> " + item + "\n";
 
-					MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						textListPointer += "\nВидалитити неможливо";
+
+						MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
 				}
 			}
 		}

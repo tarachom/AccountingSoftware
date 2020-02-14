@@ -1,2 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <sql>ALTER TABLE tab_a14 ADD COLUMN "col_a4" text;</sql>
+  <sql>CREATE TABLE tab_a16 (owner uuid NOT NULL, "col_a1" text, "col_a2" text);</sql>
+  <sql>CREATE INDEX ON tab_a16 (owner);</sql>
+</root>

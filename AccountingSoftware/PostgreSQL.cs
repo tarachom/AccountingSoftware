@@ -295,6 +295,26 @@ namespace AccountingSoftware
 			return xml;
 		}
 
+		public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
+		{
+			BeginTransaction();
+
+			string SqlQuery = "DROP TABLE " + configurationDirectory.Table;
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
+			nCommand.ExecuteNonQuery();
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts) 
+			{
+				SqlQuery = "DROP TABLE " + configurationObjectTablePart.Value.Table;
+
+				nCommand = new NpgsqlCommand(SqlQuery, Connection);
+				nCommand.ExecuteNonQuery();
+			}
+
+			CommitTransaction();
+		}
+
 		public bool IfExistsTable(string tableName)
 		{
 			string query = "SELECT table_name " +
