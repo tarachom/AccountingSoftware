@@ -8,12 +8,12 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DirectoryView
 	{
-		public DirectoryView(Kernel kernel, string table, string[] fieldsNameInTableArray, string[] fieldsNameArray, string name)
+		public DirectoryView(Kernel kernel, string table, string[] fieldsNameInTableArray, 
+			string[] fieldsNameArray, string[] fieldsTypeArray, string name)
 		{
 			Table = table;
 			Kernel = kernel;
-			//FieldsNameInTableArray = fieldsNameInTableArray;
-			//FieldsNameArray = fieldsNameArray;
+			FieldTypeArray = fieldsTypeArray;
 			Name = name;
 
 			Alias = new Dictionary<string, string>();
@@ -34,8 +34,7 @@ namespace AccountingSoftware
 
 		private string Table { get; set; }
 
-		//private string[] FieldsNameInTableArray { get; set; }
-		//private string[] FieldsNameArray { get; set; }
+		private string[] FieldTypeArray { get; set; }
 
 		public Dictionary<string, string> Alias { get; }
 		public Dictionary<string, string> AliasRevers { get; }

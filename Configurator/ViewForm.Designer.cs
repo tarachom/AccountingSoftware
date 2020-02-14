@@ -34,21 +34,19 @@
 			this.splitContainer2 = new System.Windows.Forms.SplitContainer();
 			this.listBoxAllFields = new System.Windows.Forms.ListBox();
 			this.panel4 = new System.Windows.Forms.Panel();
+			this.buttonAddAllField = new System.Windows.Forms.Button();
 			this.label6 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.textBoxPrimaryField = new System.Windows.Forms.TextBox();
-			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxTable = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.buttonAddAllField = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
@@ -132,6 +130,16 @@
 			this.panel4.Size = new System.Drawing.Size(500, 30);
 			this.panel4.TabIndex = 3;
 			// 
+			// buttonAddAllField
+			// 
+			this.buttonAddAllField.Location = new System.Drawing.Point(421, 4);
+			this.buttonAddAllField.Name = "buttonAddAllField";
+			this.buttonAddAllField.Size = new System.Drawing.Size(76, 23);
+			this.buttonAddAllField.TabIndex = 8;
+			this.buttonAddAllField.Text = "Додати всі";
+			this.buttonAddAllField.UseVisualStyleBackColor = true;
+			this.buttonAddAllField.Click += new System.EventHandler(this.buttonAddAllField_Click);
+			// 
 			// label6
 			// 
 			this.label6.AutoSize = true;
@@ -198,8 +206,6 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.textBoxPrimaryField);
-			this.splitContainer1.Panel2.Controls.Add(this.label2);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
 			this.splitContainer1.Panel2.Controls.Add(this.label5);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxTable);
@@ -210,29 +216,11 @@
 			this.splitContainer1.SplitterDistance = 500;
 			this.splitContainer1.TabIndex = 4;
 			// 
-			// textBoxPrimaryField
-			// 
-			this.textBoxPrimaryField.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxPrimaryField.Location = new System.Drawing.Point(131, 83);
-			this.textBoxPrimaryField.Name = "textBoxPrimaryField";
-			this.textBoxPrimaryField.Size = new System.Drawing.Size(295, 20);
-			this.textBoxPrimaryField.TabIndex = 7;
-			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(11, 86);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(94, 13);
-			this.label2.TabIndex = 6;
-			this.label2.Text = "Первинний ключ:";
-			// 
 			// textBoxDesc
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(131, 109);
+			this.textBoxDesc.Location = new System.Drawing.Point(131, 83);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
 			this.textBoxDesc.Size = new System.Drawing.Size(295, 62);
@@ -241,7 +229,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(11, 112);
+			this.label5.Location = new System.Drawing.Point(11, 86);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(36, 13);
 			this.label5.TabIndex = 4;
@@ -282,16 +270,6 @@
 			this.label3.Size = new System.Drawing.Size(42, 13);
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
-			// 
-			// buttonAddAllField
-			// 
-			this.buttonAddAllField.Location = new System.Drawing.Point(421, 4);
-			this.buttonAddAllField.Name = "buttonAddAllField";
-			this.buttonAddAllField.Size = new System.Drawing.Size(76, 23);
-			this.buttonAddAllField.TabIndex = 8;
-			this.buttonAddAllField.Text = "Додати всі";
-			this.buttonAddAllField.UseVisualStyleBackColor = true;
-			this.buttonAddAllField.Click += new System.EventHandler(this.buttonAddAllField_Click);
 			// 
 			// ViewForm
 			// 
@@ -339,8 +317,6 @@
 		private System.Windows.Forms.Label label5;
 		private System.Windows.Forms.TextBox textBoxTable;
 		private System.Windows.Forms.Label label4;
-		private System.Windows.Forms.TextBox textBoxPrimaryField;
-		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.SplitContainer splitContainer2;
 		private System.Windows.Forms.ListBox listBoxAllFields;
 		private System.Windows.Forms.Label label6;

@@ -43,5 +43,11 @@ namespace AccountingSoftware
 			TabularParts.Add(tablePart.Name, tablePart);
 			return tablePart;
 		}
+
+		public ConfigurationObjectView AppendView(ConfigurationObjectView view)
+		{
+			Views.Add(view.Name, view);
+			return view;
+		}
 	}
 }

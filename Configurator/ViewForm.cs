@@ -18,8 +18,8 @@ namespace Configurator
 			InitializeComponent();
 		}
 
-		public Action<string, ConfigurationObjectTablePart, bool> CallBack { get; set; }
-		//public Func<string, Boolean> CallBack_IsExistTablePartName { get; set; }
+		public Action<string, ConfigurationObjectView, bool> CallBack { get; set; }
+		public Func<string, Boolean> CallBack_IsExistView { get; set; }
 
 		public ConfigurationDirectories ConfDirectory { get; set; }
 		public ConfigurationObjectView ConfView { get; set; }
@@ -31,6 +31,9 @@ namespace Configurator
 			if (ConfView == null)
 			{
 				ConfView = new ConfigurationObjectView();
+
+				textBoxTable.Text = ConfDirectory.Table;
+
 				IsNewView = true;
 			}
 			else
@@ -39,7 +42,6 @@ namespace Configurator
 
 				textBoxName.Text = ConfView.Name;
 				textBoxTable.Text = ConfView.Table;
-				textBoxPrimaryField.Text = ConfView.PrimaryField;
 				textBoxDesc.Text = ConfView.Desc;
 				IsNewView = false;
 
@@ -51,30 +53,29 @@ namespace Configurator
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			//string name = textBoxName.Text;
-			//string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
+			string name = textBoxName.Text;
+			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
 
-			//if (errorList.Length > 0)
-			//{
-			//	textBoxName.Text = name;
-			//	MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			if (errorList.Length > 0)
+			{
+				textBoxName.Text = name;
+				MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-			//	return;
-			//}
+				return;
+			}
 
-			//if (IsNewDirectoryTablePart || OriginalName != name)
-			//	if (CallBack_IsExistTablePartName(name))
-			//	{
-			//		MessageBox.Show("Назва табличної частини не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//		return;
-			//	}
+			if (IsNewView || OriginalName != name)
+				if (CallBack_IsExistView(name))
+				{
+					MessageBox.Show("Назва візуалізації не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 
 			ConfView.Name = textBoxName.Text;
 			ConfView.Table = textBoxTable.Text;
-			ConfView.PrimaryField = textBoxPrimaryField.Text;
 			ConfView.Desc = textBoxDesc.Text;
 
-			//CallBack.Invoke(OriginalName, ConfDirectoryTablePart, IsNewDirectoryTablePart);
+			CallBack.Invoke(OriginalName, ConfView, IsNewView);
 
 			this.Hide();
 		}
@@ -83,33 +84,6 @@ namespace Configurator
 		{
 			this.Hide();
 		}
-
-		//bool CallBack_IsExistFieldName(string name)
-		//{
-		//	return ConfDirectoryTablePart.Fields.ContainsKey(name);
-		//}
-
-		//void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
-		//{
-		//	if (isNew)
-		//	{
-		//		ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//	}
-		//	else
-		//	{
-		//		if (originalName != configurationObjectField.Name)
-		//		{
-		//			ConfDirectoryTablePart.Fields.Remove(originalName);
-		//			ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//		}
-		//		else
-		//		{
-		//			ConfDirectoryTablePart.Fields[originalName] = configurationObjectField;
-		//		}
-		//	}
-
-		//	LoadFieldList();
-		//}
 
 		void LoadFieldList()
 		{
@@ -184,11 +158,6 @@ namespace Configurator
 		{
 			if (e.KeyData == Keys.Enter)
 				AddField();
-		}
-
-		private void buttonAddField_Click(object sender, EventArgs e)
-		{
-
 		}
 
 		private void buttonAddAllField_Click(object sender, EventArgs e)

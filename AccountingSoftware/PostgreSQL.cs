@@ -277,9 +277,7 @@ namespace AccountingSoftware
 			while (reader.Read())
 			{
 				xml += "  <row>\n";
-
-				xml += "    <" + directoryView.QuerySelect.PrimaryField + ">" + reader[directoryView.QuerySelect.PrimaryField].ToString() + 
-					"</" + directoryView.QuerySelect.PrimaryField + ">\n";
+				xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
 
 				foreach (string field in directoryView.QuerySelect.Field)
 				{
@@ -298,15 +296,15 @@ namespace AccountingSoftware
 		public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
 		{
 			BeginTransaction();
-
-			string SqlQuery = "DROP TABLE " + configurationDirectory.Table;
+			string baseQuery = "DROP TABLE IF EXISTS ";
+			string SqlQuery = baseQuery + configurationDirectory.Table;
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
 			nCommand.ExecuteNonQuery();
 
 			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts) 
 			{
-				SqlQuery = "DROP TABLE " + configurationObjectTablePart.Value.Table;
+				SqlQuery = baseQuery + configurationObjectTablePart.Value.Table;
 
 				nCommand = new NpgsqlCommand(SqlQuery, Connection);
 				nCommand.ExecuteNonQuery();

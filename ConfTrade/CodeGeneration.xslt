@@ -524,10 +524,18 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
                </xsl:if>
                <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
              </xsl:for-each> },
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Type"/><xsl:text>"</xsl:text>
+             </xsl:for-each> },
              "<xsl:value-of select="$ViewsFullName"/>")
         {
+            <!--
             base.QuerySelect.PrimaryField = "<xsl:value-of select="PrimaryField"/>";
-            
+            -->
             <!--
             <xsl:for-each select="Where/Field">
               <xsl:text>Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text> = new Where("</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", Comparison.EQ, null)</xsl:text>;

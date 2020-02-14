@@ -398,10 +398,9 @@ namespace AccountingSoftware
 			{
 				string nameView = viewNodes.Current.SelectSingleNode("Name").Value;
 				string tableView = viewNodes.Current.SelectSingleNode("Table").Value;
-				string primaryField = viewNodes.Current.SelectSingleNode("PrimaryField").Value;
 				string descView = viewNodes.Current.SelectSingleNode("Desc").Value;
 
-				ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, tableView, primaryField, descView);
+				ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, tableView, descView);
 
 				views.Add(ConfObjectView.Name, ConfObjectView);
 
@@ -570,10 +569,6 @@ namespace AccountingSoftware
 				XmlElement nodeViewTable = xmlConfDocument.CreateElement("Table");
 				nodeViewTable.InnerText = view.Value.Table;
 				nodeView.AppendChild(nodeViewTable);
-
-				XmlElement nodeeViewPrimary = xmlConfDocument.CreateElement("PrimaryField");
-				nodeeViewPrimary.InnerText = view.Value.PrimaryField;
-				nodeView.AppendChild(nodeeViewPrimary);
 
 				XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
 				nodeTablePartDesc.InnerText = view.Value.Desc;

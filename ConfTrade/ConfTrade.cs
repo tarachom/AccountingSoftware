@@ -20,6 +20,12 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
+			Довідники.Товари_Візуалізація3_View товари_Візуалізація3_View = new Довідники.Товари_Візуалізація3_View();
+			товари_Візуалізація3_View.QuerySelect.CreateTempTable = true;
+			Console.WriteLine( товари_Візуалізація3_View.Read());
+
+			Console.ReadLine();
+
 			/*
 			using (Conf.Товари_Select s = new Conf.Товари_Select())
 			{

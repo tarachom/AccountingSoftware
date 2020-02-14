@@ -139,6 +139,33 @@ namespace Configurator
 			LoadTabularPartsList();
 		}
 
+		bool CallBack_IsExistView(string name)
+		{
+			return ConfDirectory.Views.ContainsKey(name);
+		}
+
+		void CallBack_Update_View(string originalName, ConfigurationObjectView configurationObjectView, bool isNew)
+		{
+			if (isNew)
+			{
+				ConfDirectory.AppendView(configurationObjectView);
+			}
+			else
+			{
+				if (originalName != configurationObjectView.Name)
+				{
+					ConfDirectory.Views.Remove(originalName);
+					ConfDirectory.AppendView(configurationObjectView);
+				}
+				else
+				{
+					ConfDirectory.Views[originalName] = configurationObjectView;
+				}
+			}
+
+			LoadViewsList();
+		}
+
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
 			FieldForm fieldForm = new FieldForm();
@@ -154,6 +181,15 @@ namespace Configurator
 			tablePartForm.CallBack = CallBack_Update_TablePart;
 			tablePartForm.CallBack_IsExistTablePartName = CallBack_IsExistTablePartName;
 			tablePartForm.Show();
+		}
+
+		private void buttonAddView_Click(object sender, EventArgs e)
+		{
+			ViewForm viewForm = new ViewForm();
+			viewForm.ConfDirectory = ConfDirectory;
+			viewForm.CallBack = CallBack_Update_View;
+			viewForm.CallBack_IsExistView = CallBack_IsExistView;
+			viewForm.Show();
 		}
 
 		void LoadFieldList()
@@ -218,18 +254,11 @@ namespace Configurator
 				ViewForm viewForm = new ViewForm();
 				viewForm.ConfView = ConfDirectory.Views[listBoxViews.SelectedItem.ToString()];
 				viewForm.ConfDirectory = ConfDirectory;
-				//viewForm.CallBack = CallBack_Update_TablePart;
-				//viewForm.CallBack_IsExistTablePartName = CallBack_IsExistTablePartName;
+				viewForm.CallBack = CallBack_Update_View;
+				viewForm.CallBack_IsExistView = CallBack_IsExistView;
 
 				viewForm.Show();
 			}
-		}
-
-		private void buttonAddView_Click(object sender, EventArgs e)
-		{
-			ViewForm viewForm = new ViewForm();
-			viewForm.ConfDirectory = ConfDirectory;
-			viewForm.Show();
-		}
+		}		
 	}
 }

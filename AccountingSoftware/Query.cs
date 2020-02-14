@@ -14,7 +14,7 @@ namespace AccountingSoftware
 
 			Table = table;
 
-			PrimaryField = "uid"; //!!!
+			//PrimaryField = "uid"; //!!!
 		}
 
 		/// <summary>
@@ -35,7 +35,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Первинний ключ
 		/// </summary>
-		public string PrimaryField { get; set; } //!!!
+		//public string PrimaryField { get; set; } //!!!
 
 		/// <summary>
 		/// Які поля вибирати
@@ -80,7 +80,7 @@ namespace AccountingSoftware
 				sb.AppendLine("AS ");
 			}
 
-			sb.Append("SELECT " + PrimaryField);
+			sb.Append("SELECT uid ");
 
 			if (Field.Count > 0)
 			{
