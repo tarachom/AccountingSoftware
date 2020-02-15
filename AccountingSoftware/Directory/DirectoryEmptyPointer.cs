@@ -14,5 +14,10 @@ namespace AccountingSoftware
 		}
 
 		public UnigueID UnigueID { get; private set; }
+
+		public override string ToString()
+		{
+			return UnigueID.UGuid.ToString();
+		}
 	}
 }
