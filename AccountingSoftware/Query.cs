@@ -13,14 +13,12 @@ namespace AccountingSoftware
 			Order = new Dictionary<string, SelectOrder>();
 
 			Table = table;
-
-			//PrimaryField = "uid"; //!!!
 		}
 
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
-		public string Table { get; set; } //!!
+		public string Table { get; set; }
 
 		/// <summary>
 		/// Назва тимчасової таблиці
@@ -31,11 +29,6 @@ namespace AccountingSoftware
 		/// Створити тимчасову таблицю на основі запиту
 		/// </summary>
 		public bool CreateTempTable { get; set; }
-
-		/// <summary>
-		/// Первинний ключ
-		/// </summary>
-		//public string PrimaryField { get; set; } //!!!
 
 		/// <summary>
 		/// Які поля вибирати

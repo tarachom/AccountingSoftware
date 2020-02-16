@@ -11,7 +11,7 @@ namespace AccountingSoftware
 		/// <param name="table">Таблиця задається у випадку составного типу {1111, table1} або {1111, table2}.
 		/// Составний тип використовується у випадку коли в одне поле можна записати елементи з різних довідників, і
 		/// потрібно вказувати який саме довідник використаний.</param>
-		public UnigueID(Guid uGuid, string table = "") //
+		public UnigueID(Guid uGuid, string table = "")
 		{
 			UGuid = uGuid;
 			Table = table;

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>15.02.2020 20:25:08</DateTimeSave>
+  <DateTimeSave>16.02.2020 18:22:57</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -827,6 +827,14 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Група</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Групи_МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -1177,12 +1185,34 @@
           <Name>Група</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>ГрупиНоменклатура</Pointer>
+          <Pointer>Групи_Номенклатура</Pointer>
           <Desc>
           </Desc>
         </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>СтавкаНДС</Name>
+          <Table>tab_a14</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Дата</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СтавкаНДС</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>empty_pointer</Type>
+              <Desc>Ставка НДС. Перечисление</Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views>
         <View>
           <Name>Список</Name>
@@ -2198,7 +2228,7 @@
       </Views>
     </Directory>
     <Directory>
-      <Name>ГрупиНоменклатура</Name>
+      <Name>Групи_Номенклатура</Name>
       <Table>tab_a01</Table>
       <Desc>
       </Desc>
@@ -2214,7 +2244,14 @@
           <Name>Родитель</Name>
           <NameInTable>col_a2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>ГрупиНоменклатура</Pointer>
+          <Pointer>Групи_Номенклатура</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
           <Desc>
           </Desc>
         </Field>
@@ -2235,6 +2272,63 @@
             <Field>
               <Name>Родитель</Name>
               <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>Групи_МестаХранения</Name>
+      <Table>tab_a15</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Родитель</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a15</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Родитель</Name>
+              <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
             </Field>
           </Fields>
