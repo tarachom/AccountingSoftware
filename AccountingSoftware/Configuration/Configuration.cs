@@ -31,15 +31,15 @@ namespace AccountingSoftware
 
 		public string PathToXmlFileConfiguration { get; set; }
 
-		public Dictionary<string, ConfigurationConstants> Constants { get; set; }
+		public Dictionary<string, ConfigurationConstants> Constants { get; }
 
-		public Dictionary<string, ConfigurationDirectories> Directories { get; set; }
+		public Dictionary<string, ConfigurationDirectories> Directories { get; }
 
-		public Dictionary<string, ConfigurationDocuments> Documents { get; set; }
+		public Dictionary<string, ConfigurationDocuments> Documents { get; }
 
-		public Dictionary<string, ConfigurationEnums> Enums { get; set; }
+		public Dictionary<string, ConfigurationEnums> Enums { get; }
 
-		public Dictionary<string, ConfigurationRegisters> Registers { get; set; }
+		public Dictionary<string, ConfigurationRegisters> Registers { get; }
 
 		private List<string> ReservedUnigueTableName { get; set; }
 

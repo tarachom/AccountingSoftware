@@ -7,30 +7,23 @@ namespace AccountingSoftware
 	{
 		public ConfigurationDirectories()
 		{
-			Init();
-		}
-
-		public ConfigurationDirectories(string name, string table, string desc = "")
-		{
-			Init();
-
-			base.Name = name;
-			base.Table = table;
-			base.Desc = desc;
-		}
-
-		private void Init()
-		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 			Views = new Dictionary<string, ConfigurationObjectView>();
 		}
 
-		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public ConfigurationDirectories(string name, string table, string desc = "") : this()
+		{
+			Name = name;
+			Table = table;
+			Desc = desc;
+		}
 
-		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
-		public Dictionary<string, ConfigurationObjectView> Views { get; set; }
+		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
+
+		public Dictionary<string, ConfigurationObjectView> Views { get; }
 
 		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
 		{

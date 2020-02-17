@@ -8,10 +8,7 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationObjectField
 	{
-		public ConfigurationObjectField()
-		{
-
-		}
+		public ConfigurationObjectField() { /*..*/ }
 
 		/// <summary>
 		/// Поле

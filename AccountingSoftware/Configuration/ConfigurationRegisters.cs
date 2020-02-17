@@ -10,6 +10,6 @@ namespace AccountingSoftware
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 		}
 
-		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 	}
 }

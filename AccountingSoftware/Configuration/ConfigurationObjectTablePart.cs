@@ -3,34 +3,21 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	public class ConfigurationObjectTablePart
+	public class ConfigurationObjectTablePart : ConfigurationObject
 	{
 		public ConfigurationObjectTablePart()
 		{
-			Init();
+			Fields = new Dictionary<string, ConfigurationObjectField>();
 		}
 
-		public ConfigurationObjectTablePart(string name, string table, string desc = "")
+		public ConfigurationObjectTablePart(string name, string table, string desc = "") : this()
 		{
-			Init();
-
 			Name = name;
 			Table = table;
 			Desc = desc;
 		}
 
-		private void Init()
-		{
-			Fields = new Dictionary<string, ConfigurationObjectField>();
-		}
-
-		public string Name { get; set; }
-
-		public string Table { get; set; }
-
-		public string Desc { get; set; }
-
-		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
 		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
 		{

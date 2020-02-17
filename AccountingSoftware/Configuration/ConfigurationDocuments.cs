@@ -11,8 +11,15 @@ namespace AccountingSoftware
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
-		public Dictionary<string, ConfigurationObjectField> Fields { get; set; }
+		public ConfigurationDocuments(string name, string table, string desc = "") : this()
+		{
+			Name = name;
+			Table = table;
+			Desc = desc;
+		}
 
-		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; set; }
+		public Dictionary<string, ConfigurationObjectField> Fields { get; }
+
+		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
 	}
 }

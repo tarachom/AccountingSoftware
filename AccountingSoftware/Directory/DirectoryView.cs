@@ -35,8 +35,6 @@ namespace AccountingSoftware
 
 		private string Table { get; set; }
 
-		//public string[] FieldTypeArray { get; set; }
-
 		public Dictionary<string, string> Alias { get; }
 		public Dictionary<string, string> AliasRevers { get; }
 		public Dictionary<string, string> AliasFieldType { get; }

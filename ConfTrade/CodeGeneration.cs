@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 16.02.2020 18:22:57
+ * Дата конфігурації: 17.02.2020 10:56:31
  *
  */
 
@@ -93,15 +93,16 @@ namespace ConfTrade_v1_1.Directory
     }
     
     
-    class Валюти_Pointer : DirectoryPointer
-    {
-        public Валюти_Pointer(object uid = null) : base(Config.Kernel, "tab_a02")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Валюти_Pointer : DirectoryPointer {
+        public Валюти_Pointer(object uid = null) : base(Config.Kernel, "tab_a02") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Валюти_Objest GetDirectoryObject()
-        {
+        
+        public Валюти_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a02") {
+            base.Init(uid, fields);
+        }
+        
+        public Валюти_Objest GetDirectoryObject() {
             Валюти_Objest ВалютиObjestItem = new Валюти_Objest();
             ВалютиObjestItem.Read(base.UnigueID);
             return ВалютиObjestItem;
@@ -136,8 +137,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Валюти_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -339,15 +339,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Единицы измерения товара.
     ///</summary>
-    class Единици_Pointer : DirectoryPointer
-    {
-        public Единици_Pointer(object uid = null) : base(Config.Kernel, "tab_a04")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Единици_Pointer : DirectoryPointer {
+        public Единици_Pointer(object uid = null) : base(Config.Kernel, "tab_a04") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Единици_Objest GetDirectoryObject()
-        {
+        
+        public Единици_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a04") {
+            base.Init(uid, fields);
+        }
+        
+        public Единици_Objest GetDirectoryObject() {
             Единици_Objest ЕдинициObjestItem = new Единици_Objest();
             ЕдинициObjestItem.Read(base.UnigueID);
             return ЕдинициObjestItem;
@@ -384,8 +385,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Единици_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Единици_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -483,15 +483,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Классификатор единиц измерений.
     ///</summary>
-    class КлассификаторЕдИзм_Pointer : DirectoryPointer
-    {
-        public КлассификаторЕдИзм_Pointer(object uid = null) : base(Config.Kernel, "tab_a05")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class КлассификаторЕдИзм_Pointer : DirectoryPointer {
+        public КлассификаторЕдИзм_Pointer(object uid = null) : base(Config.Kernel, "tab_a05") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public КлассификаторЕдИзм_Objest GetDirectoryObject()
-        {
+        
+        public КлассификаторЕдИзм_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a05") {
+            base.Init(uid, fields);
+        }
+        
+        public КлассификаторЕдИзм_Objest GetDirectoryObject() {
             КлассификаторЕдИзм_Objest КлассификаторЕдИзмObjestItem = new КлассификаторЕдИзм_Objest();
             КлассификаторЕдИзмObjestItem.Read(base.UnigueID);
             return КлассификаторЕдИзмObjestItem;
@@ -528,8 +529,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new КлассификаторЕдИзм_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new КлассификаторЕдИзм_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -623,15 +623,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Категории товаров и контрагентов.
     ///</summary>
-    class Категории_Pointer : DirectoryPointer
-    {
-        public Категории_Pointer(object uid = null) : base(Config.Kernel, "tab_a06")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Категории_Pointer : DirectoryPointer {
+        public Категории_Pointer(object uid = null) : base(Config.Kernel, "tab_a06") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Категории_Objest GetDirectoryObject()
-        {
+        
+        public Категории_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a06") {
+            base.Init(uid, fields);
+        }
+        
+        public Категории_Objest GetDirectoryObject() {
             Категории_Objest КатегорииObjestItem = new Категории_Objest();
             КатегорииObjestItem.Read(base.UnigueID);
             return КатегорииObjestItem;
@@ -668,8 +669,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Категории_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Категории_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -763,15 +763,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Категории контрагентов.
     ///</summary>
-    class КатегорииКонтрагентов_Pointer : DirectoryPointer
-    {
-        public КатегорииКонтрагентов_Pointer(object uid = null) : base(Config.Kernel, "tab_a07")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class КатегорииКонтрагентов_Pointer : DirectoryPointer {
+        public КатегорииКонтрагентов_Pointer(object uid = null) : base(Config.Kernel, "tab_a07") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public КатегорииКонтрагентов_Objest GetDirectoryObject()
-        {
+        
+        public КатегорииКонтрагентов_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a07") {
+            base.Init(uid, fields);
+        }
+        
+        public КатегорииКонтрагентов_Objest GetDirectoryObject() {
             КатегорииКонтрагентов_Objest КатегорииКонтрагентовObjestItem = new КатегорииКонтрагентов_Objest();
             КатегорииКонтрагентовObjestItem.Read(base.UnigueID);
             return КатегорииКонтрагентовObjestItem;
@@ -808,8 +809,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new КатегорииКонтрагентов_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new КатегорииКонтрагентов_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -903,15 +903,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///КатегорииТоваров.
     ///</summary>
-    class КатегорииТоваров_Pointer : DirectoryPointer
-    {
-        public КатегорииТоваров_Pointer(object uid = null) : base(Config.Kernel, "tab_a08")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class КатегорииТоваров_Pointer : DirectoryPointer {
+        public КатегорииТоваров_Pointer(object uid = null) : base(Config.Kernel, "tab_a08") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public КатегорииТоваров_Objest GetDirectoryObject()
-        {
+        
+        public КатегорииТоваров_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a08") {
+            base.Init(uid, fields);
+        }
+        
+        public КатегорииТоваров_Objest GetDirectoryObject() {
             КатегорииТоваров_Objest КатегорииТоваровObjestItem = new КатегорииТоваров_Objest();
             КатегорииТоваровObjestItem.Read(base.UnigueID);
             return КатегорииТоваровObjestItem;
@@ -948,8 +949,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new КатегорииТоваров_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new КатегорииТоваров_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -1047,15 +1047,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Типы цен.
     ///</summary>
-    class КатегорииЦен_Pointer : DirectoryPointer
-    {
-        public КатегорииЦен_Pointer(object uid = null) : base(Config.Kernel, "tab_a09")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class КатегорииЦен_Pointer : DirectoryPointer {
+        public КатегорииЦен_Pointer(object uid = null) : base(Config.Kernel, "tab_a09") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public КатегорииЦен_Objest GetDirectoryObject()
-        {
+        
+        public КатегорииЦен_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a09") {
+            base.Init(uid, fields);
+        }
+        
+        public КатегорииЦен_Objest GetDirectoryObject() {
             КатегорииЦен_Objest КатегорииЦенObjestItem = new КатегорииЦен_Objest();
             КатегорииЦенObjestItem.Read(base.UnigueID);
             return КатегорииЦенObjestItem;
@@ -1092,8 +1093,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new КатегорииЦен_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new КатегорииЦен_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -1191,15 +1191,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Классификатор кодов для НН.
     ///</summary>
-    class КодиУКТВЕД_Pointer : DirectoryPointer
-    {
-        public КодиУКТВЕД_Pointer(object uid = null) : base(Config.Kernel, "tab_a10")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class КодиУКТВЕД_Pointer : DirectoryPointer {
+        public КодиУКТВЕД_Pointer(object uid = null) : base(Config.Kernel, "tab_a10") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public КодиУКТВЕД_Objest GetDirectoryObject()
-        {
+        
+        public КодиУКТВЕД_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a10") {
+            base.Init(uid, fields);
+        }
+        
+        public КодиУКТВЕД_Objest GetDirectoryObject() {
             КодиУКТВЕД_Objest КодиУКТВЕДObjestItem = new КодиУКТВЕД_Objest();
             КодиУКТВЕДObjestItem.Read(base.UnigueID);
             return КодиУКТВЕДObjestItem;
@@ -1236,8 +1237,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new КодиУКТВЕД_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new КодиУКТВЕД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -1335,15 +1335,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Состав наборов.
     ///</summary>
-    class Комплектация_Pointer : DirectoryPointer
-    {
-        public Комплектация_Pointer(object uid = null) : base(Config.Kernel, "tab_a11")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Комплектация_Pointer : DirectoryPointer {
+        public Комплектация_Pointer(object uid = null) : base(Config.Kernel, "tab_a11") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Комплектация_Objest GetDirectoryObject()
-        {
+        
+        public Комплектация_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a11") {
+            base.Init(uid, fields);
+        }
+        
+        public Комплектация_Objest GetDirectoryObject() {
             Комплектация_Objest КомплектацияObjestItem = new Комплектация_Objest();
             КомплектацияObjestItem.Read(base.UnigueID);
             return КомплектацияObjestItem;
@@ -1380,8 +1381,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Комплектация_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Комплектация_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -1583,15 +1583,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Поставщики и покупатели.
     ///</summary>
-    class Контрагенти_Pointer : DirectoryPointer
-    {
-        public Контрагенти_Pointer(object uid = null) : base(Config.Kernel, "tab_a12")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Контрагенти_Pointer : DirectoryPointer {
+        public Контрагенти_Pointer(object uid = null) : base(Config.Kernel, "tab_a12") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Контрагенти_Objest GetDirectoryObject()
-        {
+        
+        public Контрагенти_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a12") {
+            base.Init(uid, fields);
+        }
+        
+        public Контрагенти_Objest GetDirectoryObject() {
             Контрагенти_Objest КонтрагентиObjestItem = new Контрагенти_Objest();
             КонтрагентиObjestItem.Read(base.UnigueID);
             return КонтрагентиObjestItem;
@@ -1628,8 +1629,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Контрагенти_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -2099,15 +2099,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Склады или МОЛ.
     ///</summary>
-    class МестаХранения_Pointer : DirectoryPointer
-    {
-        public МестаХранения_Pointer(object uid = null) : base(Config.Kernel, "tab_a20")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class МестаХранения_Pointer : DirectoryPointer {
+        public МестаХранения_Pointer(object uid = null) : base(Config.Kernel, "tab_a20") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public МестаХранения_Objest GetDirectoryObject()
-        {
+        
+        public МестаХранения_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a20") {
+            base.Init(uid, fields);
+        }
+        
+        public МестаХранения_Objest GetDirectoryObject() {
             МестаХранения_Objest МестаХраненияObjestItem = new МестаХранения_Objest();
             МестаХраненияObjestItem.Read(base.UnigueID);
             return МестаХраненияObjestItem;
@@ -2144,8 +2145,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new МестаХранения_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -2259,15 +2259,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Содержит список налоговых инспекций.
     ///</summary>
-    class НалоговиеИнспекции_Pointer : DirectoryPointer
-    {
-        public НалоговиеИнспекции_Pointer(object uid = null) : base(Config.Kernel, "tab_a21")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class НалоговиеИнспекции_Pointer : DirectoryPointer {
+        public НалоговиеИнспекции_Pointer(object uid = null) : base(Config.Kernel, "tab_a21") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public НалоговиеИнспекции_Objest GetDirectoryObject()
-        {
+        
+        public НалоговиеИнспекции_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a21") {
+            base.Init(uid, fields);
+        }
+        
+        public НалоговиеИнспекции_Objest GetDirectoryObject() {
             НалоговиеИнспекции_Objest НалоговиеИнспекцииObjestItem = new НалоговиеИнспекции_Objest();
             НалоговиеИнспекцииObjestItem.Read(base.UnigueID);
             return НалоговиеИнспекцииObjestItem;
@@ -2304,8 +2305,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new НалоговиеИнспекции_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new НалоговиеИнспекции_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -2435,15 +2435,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Банковские счета.
     ///</summary>
-    class НашиДенежниеСчета_Pointer : DirectoryPointer
-    {
-        public НашиДенежниеСчета_Pointer(object uid = null) : base(Config.Kernel, "tab_a22")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class НашиДенежниеСчета_Pointer : DirectoryPointer {
+        public НашиДенежниеСчета_Pointer(object uid = null) : base(Config.Kernel, "tab_a22") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public НашиДенежниеСчета_Objest GetDirectoryObject()
-        {
+        
+        public НашиДенежниеСчета_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a22") {
+            base.Init(uid, fields);
+        }
+        
+        public НашиДенежниеСчета_Objest GetDirectoryObject() {
             НашиДенежниеСчета_Objest НашиДенежниеСчетаObjestItem = new НашиДенежниеСчета_Objest();
             НашиДенежниеСчетаObjestItem.Read(base.UnigueID);
             return НашиДенежниеСчетаObjestItem;
@@ -2480,8 +2481,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new НашиДенежниеСчета_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new НашиДенежниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -2661,15 +2661,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Товары, услуги, наборы.
     ///</summary>
-    class Номенклатура_Pointer : DirectoryPointer
-    {
-        public Номенклатура_Pointer(object uid = null) : base(Config.Kernel, "tab_a23")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Номенклатура_Pointer : DirectoryPointer {
+        public Номенклатура_Pointer(object uid = null) : base(Config.Kernel, "tab_a23") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Номенклатура_Objest GetDirectoryObject()
-        {
+        
+        public Номенклатура_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a23") {
+            base.Init(uid, fields);
+        }
+        
+        public Номенклатура_Objest GetDirectoryObject() {
             Номенклатура_Objest НоменклатураObjestItem = new Номенклатура_Objest();
             НоменклатураObjestItem.Read(base.UnigueID);
             return НоменклатураObjestItem;
@@ -2706,8 +2707,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Номенклатура_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -2896,15 +2896,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Номера ГТД.
     ///</summary>
-    class НомераГТД_Pointer : DirectoryPointer
-    {
-        public НомераГТД_Pointer(object uid = null) : base(Config.Kernel, "tab_a24")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class НомераГТД_Pointer : DirectoryPointer {
+        public НомераГТД_Pointer(object uid = null) : base(Config.Kernel, "tab_a24") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public НомераГТД_Objest GetDirectoryObject()
-        {
+        
+        public НомераГТД_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a24") {
+            base.Init(uid, fields);
+        }
+        
+        public НомераГТД_Objest GetDirectoryObject() {
             НомераГТД_Objest НомераГТДObjestItem = new НомераГТД_Objest();
             НомераГТДObjestItem.Read(base.UnigueID);
             return НомераГТДObjestItem;
@@ -2941,8 +2942,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new НомераГТД_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new НомераГТД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3044,15 +3044,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Пользователи.
     ///</summary>
-    class Пользователи_Pointer : DirectoryPointer
-    {
-        public Пользователи_Pointer(object uid = null) : base(Config.Kernel, "tab_a25")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Пользователи_Pointer : DirectoryPointer {
+        public Пользователи_Pointer(object uid = null) : base(Config.Kernel, "tab_a25") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Пользователи_Objest GetDirectoryObject()
-        {
+        
+        public Пользователи_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a25") {
+            base.Init(uid, fields);
+        }
+        
+        public Пользователи_Objest GetDirectoryObject() {
             Пользователи_Objest ПользователиObjestItem = new Пользователи_Objest();
             ПользователиObjestItem.Read(base.UnigueID);
             return ПользователиObjestItem;
@@ -3089,8 +3090,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Пользователи_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Пользователи_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3184,15 +3184,16 @@ namespace ConfTrade_v1_1.Directory
     }
     
     
-    class Прайс_лист_Pointer : DirectoryPointer
-    {
-        public Прайс_лист_Pointer(object uid = null) : base(Config.Kernel, "tab_a26")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Прайс_лист_Pointer : DirectoryPointer {
+        public Прайс_лист_Pointer(object uid = null) : base(Config.Kernel, "tab_a26") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Прайс_лист_Objest GetDirectoryObject()
-        {
+        
+        public Прайс_лист_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a26") {
+            base.Init(uid, fields);
+        }
+        
+        public Прайс_лист_Objest GetDirectoryObject() {
             Прайс_лист_Objest Прайс_листObjestItem = new Прайс_лист_Objest();
             Прайс_листObjestItem.Read(base.UnigueID);
             return Прайс_листObjestItem;
@@ -3227,8 +3228,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Прайс_лист_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Прайс_лист_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3334,15 +3334,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Расчетные счета контрагентов.
     ///</summary>
-    class РасчетниеСчета_Pointer : DirectoryPointer
-    {
-        public РасчетниеСчета_Pointer(object uid = null) : base(Config.Kernel, "tab_a27")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class РасчетниеСчета_Pointer : DirectoryPointer {
+        public РасчетниеСчета_Pointer(object uid = null) : base(Config.Kernel, "tab_a27") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public РасчетниеСчета_Objest GetDirectoryObject()
-        {
+        
+        public РасчетниеСчета_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a27") {
+            base.Init(uid, fields);
+        }
+        
+        public РасчетниеСчета_Objest GetDirectoryObject() {
             РасчетниеСчета_Objest РасчетниеСчетаObjestItem = new РасчетниеСчета_Objest();
             РасчетниеСчетаObjestItem.Read(base.UnigueID);
             return РасчетниеСчетаObjestItem;
@@ -3379,8 +3380,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new РасчетниеСчета_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new РасчетниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3474,15 +3474,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Содержит переводы ключевых слов и фраз с русского на украинский язык.
     ///</summary>
-    class Словарь_Pointer : DirectoryPointer
-    {
-        public Словарь_Pointer(object uid = null) : base(Config.Kernel, "tab_a28")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Словарь_Pointer : DirectoryPointer {
+        public Словарь_Pointer(object uid = null) : base(Config.Kernel, "tab_a28") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Словарь_Objest GetDirectoryObject()
-        {
+        
+        public Словарь_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a28") {
+            base.Init(uid, fields);
+        }
+        
+        public Словарь_Objest GetDirectoryObject() {
             Словарь_Objest СловарьObjestItem = new Словарь_Objest();
             СловарьObjestItem.Read(base.UnigueID);
             return СловарьObjestItem;
@@ -3519,8 +3520,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Словарь_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Словарь_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3634,15 +3634,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Сотрудники.
     ///</summary>
-    class Сотрудники_Pointer : DirectoryPointer
-    {
-        public Сотрудники_Pointer(object uid = null) : base(Config.Kernel, "tab_a29")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Сотрудники_Pointer : DirectoryPointer {
+        public Сотрудники_Pointer(object uid = null) : base(Config.Kernel, "tab_a29") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Сотрудники_Objest GetDirectoryObject()
-        {
+        
+        public Сотрудники_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a29") {
+            base.Init(uid, fields);
+        }
+        
+        public Сотрудники_Objest GetDirectoryObject() {
             Сотрудники_Objest СотрудникиObjestItem = new Сотрудники_Objest();
             СотрудникиObjestItem.Read(base.UnigueID);
             return СотрудникиObjestItem;
@@ -3679,8 +3680,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Сотрудники_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Сотрудники_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -3778,15 +3778,16 @@ namespace ConfTrade_v1_1.Directory
     }
     
     
-    class ТорговоеОборудование_Pointer : DirectoryPointer
-    {
-        public ТорговоеОборудование_Pointer(object uid = null) : base(Config.Kernel, "tab_a30")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class ТорговоеОборудование_Pointer : DirectoryPointer {
+        public ТорговоеОборудование_Pointer(object uid = null) : base(Config.Kernel, "tab_a30") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public ТорговоеОборудование_Objest GetDirectoryObject()
-        {
+        
+        public ТорговоеОборудование_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a30") {
+            base.Init(uid, fields);
+        }
+        
+        public ТорговоеОборудование_Objest GetDirectoryObject() {
             ТорговоеОборудование_Objest ТорговоеОборудованиеObjestItem = new ТорговоеОборудование_Objest();
             ТорговоеОборудованиеObjestItem.Read(base.UnigueID);
             return ТорговоеОборудованиеObjestItem;
@@ -3821,8 +3822,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new ТорговоеОборудование_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new ТорговоеОборудование_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -4014,15 +4014,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Справочник собственных фирм.
     ///</summary>
-    class Фирми_Pointer : DirectoryPointer
-    {
-        public Фирми_Pointer(object uid = null) : base(Config.Kernel, "tab_a31")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Фирми_Pointer : DirectoryPointer {
+        public Фирми_Pointer(object uid = null) : base(Config.Kernel, "tab_a31") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Фирми_Objest GetDirectoryObject()
-        {
+        
+        public Фирми_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a31") {
+            base.Init(uid, fields);
+        }
+        
+        public Фирми_Objest GetDirectoryObject() {
             Фирми_Objest ФирмиObjestItem = new Фирми_Objest();
             ФирмиObjestItem.Read(base.UnigueID);
             return ФирмиObjestItem;
@@ -4059,8 +4060,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Фирми_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Фирми_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -5181,15 +5181,16 @@ namespace ConfTrade_v1_1.Directory
     ///<summary>
     ///Цены товаров.
     ///</summary>
-    class Цени_Pointer : DirectoryPointer
-    {
-        public Цени_Pointer(object uid = null) : base(Config.Kernel, "tab_a43")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Цени_Pointer : DirectoryPointer {
+        public Цени_Pointer(object uid = null) : base(Config.Kernel, "tab_a43") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Цени_Objest GetDirectoryObject()
-        {
+        
+        public Цени_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a43") {
+            base.Init(uid, fields);
+        }
+        
+        public Цени_Objest GetDirectoryObject() {
             Цени_Objest ЦениObjestItem = new Цени_Objest();
             ЦениObjestItem.Read(base.UnigueID);
             return ЦениObjestItem;
@@ -5226,8 +5227,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Цени_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Цени_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -5590,15 +5590,16 @@ namespace ConfTrade_v1_1.Directory
     }
     
     
-    class Групи_Номенклатура_Pointer : DirectoryPointer
-    {
-        public Групи_Номенклатура_Pointer(object uid = null) : base(Config.Kernel, "tab_a01")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Групи_Номенклатура_Pointer : DirectoryPointer {
+        public Групи_Номенклатура_Pointer(object uid = null) : base(Config.Kernel, "tab_a01") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Групи_Номенклатура_Objest GetDirectoryObject()
-        {
+        
+        public Групи_Номенклатура_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a01") {
+            base.Init(uid, fields);
+        }
+        
+        public Групи_Номенклатура_Objest GetDirectoryObject() {
             Групи_Номенклатура_Objest Групи_НоменклатураObjestItem = new Групи_Номенклатура_Objest();
             Групи_НоменклатураObjestItem.Read(base.UnigueID);
             return Групи_НоменклатураObjestItem;
@@ -5633,8 +5634,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Групи_Номенклатура_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Групи_Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else
@@ -5724,15 +5724,16 @@ namespace ConfTrade_v1_1.Directory
     }
     
     
-    class Групи_МестаХранения_Pointer : DirectoryPointer
-    {
-        public Групи_МестаХранения_Pointer(object uid = null) : base(Config.Kernel, "tab_a15")
-        {
-            if (uid != null && uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+    class Групи_МестаХранения_Pointer : DirectoryPointer {
+        public Групи_МестаХранения_Pointer(object uid = null) : base(Config.Kernel, "tab_a15") {
+            base.Init(new UnigueID(uid), null);
         }
-
-        public Групи_МестаХранения_Objest GetDirectoryObject()
-        {
+        
+        public Групи_МестаХранения_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a15") {
+            base.Init(uid, fields);
+        }
+        
+        public Групи_МестаХранения_Objest GetDirectoryObject() {
             Групи_МестаХранения_Objest Групи_МестаХраненияObjestItem = new Групи_МестаХранения_Objest();
             Групи_МестаХраненияObjestItem.Read(base.UnigueID);
             return Групи_МестаХраненияObjestItem;
@@ -5767,8 +5768,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (MoveToPosition())
             {
-                Current = new Групи_МестаХранения_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new Групи_МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else

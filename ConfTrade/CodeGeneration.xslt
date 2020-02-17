@@ -307,9 +307,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
-            if (uid != null &amp;&amp; uid != DBNull.Value) base.Init(new UnigueID((Guid)uid), null);
+            base.Init(new UnigueID(uid), null);
         }
-
+        
+        public <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        {
+            base.Init(uid, fields);
+        } 
+        
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
@@ -346,8 +351,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
         {
             if (MoveToPosition())
             {
-                Current = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-                Current.Init(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
                 return true;
             }
             else

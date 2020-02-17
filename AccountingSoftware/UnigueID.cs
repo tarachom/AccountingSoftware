@@ -17,6 +17,20 @@ namespace AccountingSoftware
 			Table = table;
 		}
 
+		public UnigueID(object uGuid, string table = "")
+		{
+			if (uGuid != null && uGuid != DBNull.Value)
+			{
+				UGuid = (Guid)uGuid;
+			}
+			else
+			{
+				UGuid = Guid.Empty;
+			}
+
+			Table = table;
+		}
+
 		/// <summary>
 		/// Унікальний ідентифікатор у формі тексту. Використовується Guid.Parse(uGuid).
 		/// </summary>
