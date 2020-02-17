@@ -22,41 +22,12 @@
   <xsl:template match="/">
 
     <html>
-      <title>HTML Tutorial</title>
+      <title>HTML</title>
       <body>
 
         <table border="1">
 
-          <xsl:for-each select="Записи_Вибірка/row">
-
-            <tr>
-              <td>
-                <xsl:value-of select="uid"/>
-              </td>
-              <td>
-                <xsl:value-of select="Запис"/>
-              </td>
-              <td>
-                <xsl:value-of select="Товар"/>
-              </td>
-              <td>
-                <xsl:value-of select="Документ"/>
-                
-                <xsl:call-template name="GetNameOd">
-                  <xsl:with-param name="list"></xsl:with-param>
-                  <xsl:with-param name="uid" select="" />
-                </xsl:call-template>
-                
-              </td>
-            </tr>
-
-          </xsl:for-each>
-
-        </table>
-
-        <table border="1">
-
-          <xsl:for-each select="Товари_Візуалізація3/row">
+          <xsl:for-each select="root/Номенклатура_Список2/row">
 
             <tr>
               <td>
@@ -69,7 +40,7 @@
                 <xsl:value-of select="Код"/>
               </td>
               <td>
-                <xsl:value-of select="Кількість"/>
+                <xsl:value-of select="ВалютаУчета"/>                
               </td>
             </tr>
 

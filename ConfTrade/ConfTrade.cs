@@ -30,6 +30,8 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
+			Run4();
+
 			listHttpContext = new List<HttpListenerContext>();
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
@@ -148,15 +150,15 @@ namespace ConfTrade
 
 					Stream output = response.OutputStream;
 
-					string res = Run2();
+					string res = Run();
+
+					//Console.WriteLine(res);
 
 					StringReader sr = new StringReader(res);
 					XmlReader xr = XmlReader.Create(sr);
 
-					//Console.WriteLine(res);
-
 					XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
-					xslCompiledTransform.Load(@"../../XSLTFile1.xslt");
+					xslCompiledTransform.Load(@"../../Номенклатура_Список2.xslt");
 
 					XsltArgumentList xsltArgumentList = new XsltArgumentList();
 

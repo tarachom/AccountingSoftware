@@ -49,6 +49,7 @@
     <Compile Include="CodeGeneration.cs" />
     <Compile Include="ConfTrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Номенклатура_Список2.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeGeneration.xslt">
@@ -57,10 +58,12 @@
     <Content Include="Comparison.xslt" />
     <Content Include="ComparisonReport.xml" />
     <Content Include="Configuration.xml" />
+    <Content Include="Include.xslt" />
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />
     <Content Include="ReportAnalize.xml" />
     <Content Include="XSLTFile1.xslt" />
+    <Content Include="Номенклатура_Список2.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">

@@ -14,13 +14,22 @@ namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
-		static string Run()
+		static string Run4()
 		{
+			Довідники.Валюти_Objest валюти_Objest = new Довідники.Валюти_Objest();
+			валюти_Objest.New();
+			валюти_Objest.Назва = "Долар";
+			валюти_Objest.Код = "0002";
+			валюти_Objest.Save();
+			
+
+
 			Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
 			номенклатура_Objest.New();
-			номенклатура_Objest.Назва = "Товар 1";
-			номенклатура_Objest.ПолнНаименование = "Товар 1 повна назва";
-			номенклатура_Objest.Код = "1";
+			номенклатура_Objest.Назва = "Товар 2";
+			номенклатура_Objest.ПолнНаименование = "Товар 2 повна назва";
+			номенклатура_Objest.Код = "2";
+			номенклатура_Objest.ВалютаУчета = валюти_Objest.GetDirectoryPointer();
 			номенклатура_Objest.Save();
 
 			return "";
@@ -56,7 +65,9 @@ namespace ConfTrade
 		    классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
 				new Where("owner", Comparison.EQ, "(SELECT uid FROM " + валюти_Список_View.QuerySelect.TempTable + ")", true));
 
-			классификаторЕдИзм_Список_View.Read()
+			классификаторЕдИзм_Список_View.Read();
+
+			return "";
 		}
 	}
 }
