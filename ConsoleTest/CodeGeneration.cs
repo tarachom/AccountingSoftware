@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 17.02.2020 17:49:54
+ * Дата конфігурації: 17.02.2020 15:56:23
  *
  */
 
@@ -2884,9 +2884,9 @@ namespace ConfTrade_v1_1.Directory
     class Номенклатура_Список_View : DirectoryView
     {
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a23", 
-             new string[] { "col_a1", "col_a2", "col_d3" },
-             new string[] { "Назва", "Код", "ВалютаУчета" },
-             new string[] { "string", "string", "pointer" },
+             new string[] { "col_a1", "col_a2", "col_c7" },
+             new string[] { "Назва", "Код", "ВидТовара" },
+             new string[] { "string", "string", "empty_pointer" },
              "Номенклатура_Список")
         {
             

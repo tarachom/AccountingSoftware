@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeGeneration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -82,7 +83,10 @@
     <Content Include="XSLT\Цени_Список.xslt" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CSharp\" />
+    <ProjectReference Include="..\AccountingSoftware.csproj">
+      <Project>{13640253-d4b3-45b9-b4e6-b87bc5785d26}</Project>
+      <Name>AccountingSoftware</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

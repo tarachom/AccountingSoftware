@@ -48,8 +48,15 @@ namespace ConfTrade
 
 		static string Run3()
 		{
-			//Довідники
-			return "";
+			Довідники.Валюти_Список_View валюти_Список_View = new Довідники.Валюти_Список_View();
+			валюти_Список_View.QuerySelect.CreateTempTable = true;
+			валюти_Список_View.Read();
+
+			Довідники.КлассификаторЕдИзм_Список_View классификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
+		    классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
+				new Where("owner", Comparison.EQ, "(SELECT uid FROM " + валюти_Список_View.QuerySelect.TempTable + ")", true));
+
+			классификаторЕдИзм_Список_View.Read()
 		}
 	}
 }

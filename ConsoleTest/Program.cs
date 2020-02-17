@@ -12,12 +12,15 @@ using System.IO;
 
 namespace ConsoleTest
 {
-	class Program
+	partial class Program
 	{
 		static void Main(string[] args)
 		{
-			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-			xsltCodeGnerator.Load("../../CreateTemplate.xslt");
+			XslCompiledTransform xsltTemplateGenerator = new XslCompiledTransform();
+			xsltTemplateGenerator.Load("../../CreateTemplate.xslt");
+
+			XslCompiledTransform xsltCodeGenerator = new XslCompiledTransform();
+			xsltCodeGenerator.Load("../../CreateFunctionCode.xslt");
 
 			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
@@ -41,10 +44,21 @@ namespace ConsoleTest
 					xsltArgumentList.AddParam("DirectoryName", "", directoryName);
 
 					FileStream stream = new FileStream(filename, mode);
-					xsltCodeGnerator.Transform(nodeView.Current, xsltArgumentList, stream);
+					xsltTemplateGenerator.Transform(nodeView.Current, xsltArgumentList, stream);
 					stream.Close();
+
+					//------------------
+
+					string filename2 = "../../CSharp/" + directoryName + "_" + viewName + ".cs";
+					FileMode mode2 = File.Exists(filename2) ? FileMode.Truncate : FileMode.Create;
+					FileStream stream2 = new FileStream(filename2, mode2);
+					xsltCodeGenerator.Transform(nodeView.Current, xsltArgumentList, stream2);
+					stream2.Close();
+
 				}
 			}
+
+			
 
 			//xsltCodeGnerator.Transform(@"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml", "../../Result.xslt");
 

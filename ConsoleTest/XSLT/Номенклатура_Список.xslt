@@ -11,7 +11,7 @@
       <tr>
     <td><xsl:value-of select="Назва"/></td>
     <td><xsl:value-of select="Код"/></td>
-    <td><xsl:value-of select="ВидТовара"/></td>
+    <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list">Валюти_Список</xsl:with-param><xsl:with-param name="uid" select="ВалютаУчета" /></xsl:call-template></td>
   </tr>
       </xsl:for-each>
       </table>
