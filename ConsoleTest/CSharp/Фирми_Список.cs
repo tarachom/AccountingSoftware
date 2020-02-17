@@ -22,9 +22,9 @@ namespace ConfTrade
             
             Довідники.Сотрудники_Список_View m_Сотрудники_Список_View = new Довідники.Сотрудники_Список_View();
             m_Сотрудники_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_e4 */ 
-                "(SELECT DISTINCT " + m_Фирми_Список_View.Alias["Руководитель"] + 
-                " FROM " + m_Фирми_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_e4 */ 
+                "SELECT DISTINCT " + m_Фирми_Список_View.Alias["Руководитель"] + 
+                " FROM " + m_Фирми_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_Сотрудники_Список_View.Read());
                 

@@ -33,9 +33,9 @@ namespace ConfTrade
                   <xsl:variable name="FullFieldViewName" select="concat(Pointer, '_Список_View')" />
             Довідники.<xsl:value-of select="$FullFieldViewName" /> m_<xsl:value-of select="$FullFieldViewName" /> = new Довідники.<xsl:value-of select="$FullFieldViewName" />();
             m_<xsl:value-of select="$FullFieldViewName" />.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* <xsl:value-of select="NameInTable" /> */ 
-                "(SELECT DISTINCT " + m_<xsl:value-of select="$FullViewName" />.Alias["<xsl:value-of select="Name" />"] + 
-                " FROM " + m_<xsl:value-of select="$FullViewName" />.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* <xsl:value-of select="NameInTable" /> */ 
+                "SELECT DISTINCT " + m_<xsl:value-of select="$FullViewName" />.Alias["<xsl:value-of select="Name" />"] + 
+                " FROM " + m_<xsl:value-of select="$FullViewName" />.QuerySelect.TempTable, true));
                 
             sb.Append(m_<xsl:value-of select="$FullFieldViewName" />.Read());
                 </xsl:when>

@@ -22,9 +22,9 @@ namespace ConfTrade
             
             Довідники.Валюти_Список_View m_Валюти_Список_View = new Довідники.Валюти_Список_View();
             m_Валюти_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_d3 */ 
-                "(SELECT DISTINCT " + m_Номенклатура_Список_View.Alias["ВалютаУчета"] + 
-                " FROM " + m_Номенклатура_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_d3 */ 
+                "SELECT DISTINCT " + m_Номенклатура_Список_View.Alias["ВалютаУчета"] + 
+                " FROM " + m_Номенклатура_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_Валюти_Список_View.Read());
                 

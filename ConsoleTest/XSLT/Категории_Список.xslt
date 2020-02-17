@@ -6,13 +6,18 @@
 
    <xsl:template match="/">
 
-    <table>
-      <xsl:for-each select="Категории_Список/Field">
+    <html>
+  <title>HTML</title>
+  <body>
+    <table border="1">
+      <xsl:for-each select="root/Категории_Список/row">
       <tr>
-    <td><xsl:value-of select="Назва"/></td>
-  </tr>
+        <td><xsl:value-of select="Назва"/></td>
+      </tr>
       </xsl:for-each>
       </table>
+  </body>
+</html>
 
    </xsl:template>
 </xsl:stylesheet>

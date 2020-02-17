@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 17.02.2020 17:49:54
+ * Дата конфігурації: 17.02.2020 21:18:35
  *
  */
 
@@ -2897,9 +2897,9 @@ namespace ConfTrade_v1_1.Directory
     class Номенклатура_Список2_View : DirectoryView
     {
         public Номенклатура_Список2_View() : base(Config.Kernel, "tab_a23", 
-             new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_a1", "col_a2", "col_a3" },
-             new string[] { "ПолнНаименование", "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ЕдиницаПоУмолчанию", "ВалютаУчета", "УчетнаяЦена", "МинимальнийОстаток", "СтавкаНДС", "СтатьяИздержекУслуги", "ТипТовара", "ТорговаяНаценка", "ШтрихКод", "Комментарий", "Транспорт", "УслугиНаСебестоимость", "ЛьготаНДС", "КодЛьготи", "КвоДляНН", "КодУКТВЕД", "Назва", "Код", "Група" },
-             new string[] { "string", "empty_pointer", "string", "pointer", "numeric", "pointer", "pointer", "numeric", "numeric", "empty_pointer", "empty_pointer", "empty_pointer", "numeric", "integer", "string", "boolean", "boolean", "integer", "string", "string", "pointer", "string", "string", "pointer" },
+             new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d3", "col_a1", "col_a2", "col_a3" },
+             new string[] { "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ВалютаУчета", "Назва", "Код", "Група" },
+             new string[] { "empty_pointer", "string", "pointer", "numeric", "pointer", "string", "string", "pointer" },
              "Номенклатура_Список2")
         {
             

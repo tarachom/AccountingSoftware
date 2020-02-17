@@ -22,9 +22,9 @@ namespace ConfTrade
             
             Довідники.КлассификаторЕдИзм_Список_View m_КлассификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
             m_КлассификаторЕдИзм_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_a9 */ 
-                "(SELECT DISTINCT " + m_Единици_Список_View.Alias["Единица"] + 
-                " FROM " + m_Единици_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_a9 */ 
+                "SELECT DISTINCT " + m_Единици_Список_View.Alias["Единица"] + 
+                " FROM " + m_Единици_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_КлассификаторЕдИзм_Список_View.Read());
                 

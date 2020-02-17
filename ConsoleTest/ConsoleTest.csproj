@@ -44,6 +44,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeGeneration.cs" />
+    <None Include="CSharp\Валюти_Список.cs" />
+    <None Include="CSharp\Групи_МестаХранения_Список.cs" />
+    <None Include="CSharp\Групи_Номенклатура_Список.cs" />
+    <None Include="CSharp\Единици_Список.cs" />
+    <None Include="CSharp\Категории_Список.cs" />
+    <None Include="CSharp\КатегорииКонтрагентов_Список.cs" />
+    <None Include="CSharp\КатегорииТоваров_Список.cs" />
+    <None Include="CSharp\КатегорииЦен_Список.cs" />
+    <None Include="CSharp\КлассификаторЕдИзм_Список.cs" />
+    <None Include="CSharp\КлассификаторЕдИзм_Список2.cs" />
+    <None Include="CSharp\КодиУКТВЕД_Список.cs" />
+    <None Include="CSharp\Комплектация_Список.cs" />
+    <None Include="CSharp\Контрагенти_Список.cs" />
+    <None Include="CSharp\МестаХранения_Список.cs" />
+    <None Include="CSharp\НалоговиеИнспекции_Список.cs" />
+    <None Include="CSharp\НашиДенежниеСчета_Список.cs" />
+    <None Include="CSharp\Номенклатура_Список.cs" />
+    <None Include="CSharp\Номенклатура_Список2.cs" />
+    <None Include="CSharp\НомераГТД_Список.cs" />
+    <None Include="CSharp\Пользователи_Список.cs" />
+    <None Include="CSharp\Прайс_лист_Список.cs" />
+    <None Include="CSharp\РасчетниеСчета_Список.cs" />
+    <None Include="CSharp\Словарь_Список.cs" />
+    <None Include="CSharp\Сотрудники_Список.cs" />
+    <None Include="CSharp\ТорговоеОборудование_Список.cs" />
+    <None Include="CSharp\Фирми_Список.cs" />
+    <None Include="CSharp\Цени_Список.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

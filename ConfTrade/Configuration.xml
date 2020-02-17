@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>17.02.2020 17:49:54</DateTimeSave>
+  <DateTimeSave>17.02.2020 21:18:35</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -1276,11 +1276,6 @@
           </Desc>
           <Fields>
             <Field>
-              <Name>ПолнНаименование</Name>
-              <NameInTable>col_c6</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
               <Name>ВидТовара</Name>
               <NameInTable>col_c7</NameInTable>
               <Type>empty_pointer</Type>
@@ -1302,87 +1297,10 @@
               <Type>numeric</Type>
             </Field>
             <Field>
-              <Name>ЕдиницаПоУмолчанию</Name>
-              <NameInTable>col_d2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Единици</Pointer>
-            </Field>
-            <Field>
               <Name>ВалютаУчета</Name>
               <NameInTable>col_d3</NameInTable>
               <Type>pointer</Type>
               <Pointer>Валюти</Pointer>
-            </Field>
-            <Field>
-              <Name>УчетнаяЦена</Name>
-              <NameInTable>col_d4</NameInTable>
-              <Type>numeric</Type>
-            </Field>
-            <Field>
-              <Name>МинимальнийОстаток</Name>
-              <NameInTable>col_d5</NameInTable>
-              <Type>numeric</Type>
-            </Field>
-            <Field>
-              <Name>СтавкаНДС</Name>
-              <NameInTable>col_d6</NameInTable>
-              <Type>empty_pointer</Type>
-            </Field>
-            <Field>
-              <Name>СтатьяИздержекУслуги</Name>
-              <NameInTable>col_d7</NameInTable>
-              <Type>empty_pointer</Type>
-            </Field>
-            <Field>
-              <Name>ТипТовара</Name>
-              <NameInTable>col_d8</NameInTable>
-              <Type>empty_pointer</Type>
-            </Field>
-            <Field>
-              <Name>ТорговаяНаценка</Name>
-              <NameInTable>col_d9</NameInTable>
-              <Type>numeric</Type>
-            </Field>
-            <Field>
-              <Name>ШтрихКод</Name>
-              <NameInTable>col_e1</NameInTable>
-              <Type>integer</Type>
-            </Field>
-            <Field>
-              <Name>Комментарий</Name>
-              <NameInTable>col_e2</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Транспорт</Name>
-              <NameInTable>col_e3</NameInTable>
-              <Type>boolean</Type>
-            </Field>
-            <Field>
-              <Name>УслугиНаСебестоимость</Name>
-              <NameInTable>col_e4</NameInTable>
-              <Type>boolean</Type>
-            </Field>
-            <Field>
-              <Name>ЛьготаНДС</Name>
-              <NameInTable>col_e5</NameInTable>
-              <Type>integer</Type>
-            </Field>
-            <Field>
-              <Name>КодЛьготи</Name>
-              <NameInTable>col_e6</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>КвоДляНН</Name>
-              <NameInTable>col_e7</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>КодУКТВЕД</Name>
-              <NameInTable>col_e8</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>КодиУКТВЕД</Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>

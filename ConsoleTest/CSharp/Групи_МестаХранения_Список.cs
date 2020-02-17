@@ -22,9 +22,9 @@ namespace ConfTrade
             
             Довідники.МестаХранения_Список_View m_МестаХранения_Список_View = new Довідники.МестаХранения_Список_View();
             m_МестаХранения_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_a3 */ 
-                "(SELECT DISTINCT " + m_Групи_МестаХранения_Список_View.Alias["Родитель"] + 
-                " FROM " + m_Групи_МестаХранения_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_a3 */ 
+                "SELECT DISTINCT " + m_Групи_МестаХранения_Список_View.Alias["Родитель"] + 
+                " FROM " + m_Групи_МестаХранения_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_МестаХранения_Список_View.Read());
                 

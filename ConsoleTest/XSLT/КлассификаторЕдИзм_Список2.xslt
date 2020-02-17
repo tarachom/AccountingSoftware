@@ -6,16 +6,21 @@
 
    <xsl:template match="/">
 
-    <table>
-      <xsl:for-each select="КлассификаторЕдИзм_Список2/Field">
+    <html>
+  <title>HTML</title>
+  <body>
+    <table border="1">
+      <xsl:for-each select="root/КлассификаторЕдИзм_Список2/row">
       <tr>
-    <td><xsl:value-of select="ПолнНаименование"/></td>
-    <td><xsl:value-of select="КодЕдИзмерения"/></td>
-    <td><xsl:value-of select="Назва"/></td>
-    <td><xsl:value-of select="Код"/></td>
-  </tr>
+        <td><xsl:value-of select="ПолнНаименование"/></td>
+        <td><xsl:value-of select="КодЕдИзмерения"/></td>
+        <td><xsl:value-of select="Назва"/></td>
+        <td><xsl:value-of select="Код"/></td>
+      </tr>
       </xsl:for-each>
       </table>
+  </body>
+</html>
 
    </xsl:template>
 </xsl:stylesheet>

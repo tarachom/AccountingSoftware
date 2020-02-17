@@ -22,9 +22,9 @@ namespace ConfTrade
             
             Довідники.Групи_Номенклатура_Список_View m_Групи_Номенклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
             m_Групи_Номенклатура_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_a2 */ 
-                "(SELECT DISTINCT " + m_Групи_Номенклатура_Список_View.Alias["Родитель"] + 
-                " FROM " + m_Групи_Номенклатура_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_a2 */ 
+                "SELECT DISTINCT " + m_Групи_Номенклатура_Список_View.Alias["Родитель"] + 
+                " FROM " + m_Групи_Номенклатура_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
                 

@@ -22,17 +22,17 @@ namespace ConfTrade
             
             Довідники.Валюти_Список_View m_Валюти_Список_View = new Довідники.Валюти_Список_View();
             m_Валюти_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_a1 */ 
-                "(SELECT DISTINCT " + m_Цени_Список_View.Alias["Валюта"] + 
-                " FROM " + m_Цени_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_a1 */ 
+                "SELECT DISTINCT " + m_Цени_Список_View.Alias["Валюта"] + 
+                " FROM " + m_Цени_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_Валюти_Список_View.Read());
                 
             Довідники.КатегорииЦен_Список_View m_КатегорииЦен_Список_View = new Довідники.КатегорииЦен_Список_View();
             m_КатегорииЦен_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.EQ, /* col_a3 */ 
-                "(SELECT DISTINCT " + m_Цени_Список_View.Alias["КатегорияЦени"] + 
-                " FROM " + m_Цени_Список_View.QuerySelect.TempTable + ")", true));
+                new Where("uid", Comparison.IN, /* col_a3 */ 
+                "SELECT DISTINCT " + m_Цени_Список_View.Alias["КатегорияЦени"] + 
+                " FROM " + m_Цени_Список_View.QuerySelect.TempTable, true));
                 
             sb.Append(m_КатегорииЦен_Список_View.Read());
                 
