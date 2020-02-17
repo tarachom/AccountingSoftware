@@ -56,7 +56,6 @@
     </Content>
     <Content Include="Comparison.xslt" />
     <Content Include="ComparisonReport.xml" />
-    <Content Include="Configuration - Copy.xml" />
     <Content Include="Configuration.xml" />
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />

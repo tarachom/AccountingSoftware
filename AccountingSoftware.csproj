@@ -86,6 +86,7 @@
   <ItemGroup>
     <Content Include="AccountingSoftware\Configuration\Old\Comparison_CSharp_code.txt" />
     <Content Include="back_up\Comparison.xml" />
+    <Content Include="back_up\Configuration - Copy.xml" />
     <Content Include="back_up\Configuration.xml" />
     <Content Include="back_up\ConfigurationNew.xml" />
     <Content Include="back_up\ConfTradeExample_code.txt" />

@@ -599,6 +599,13 @@ namespace AccountingSoftware
 							nodeFieldType.InnerText = configurationObjectField.Type;
 							nodeField.AppendChild(nodeFieldType);
 
+							if (configurationObjectField.Type == "pointer")
+							{
+								XmlElement nodeFieldPointer = xmlConfDocument.CreateElement("Pointer");
+								nodeFieldPointer.InnerText = configurationObjectField.Pointer;
+								nodeField.AppendChild(nodeFieldPointer);
+							}
+
 							break;
 						}
 					}

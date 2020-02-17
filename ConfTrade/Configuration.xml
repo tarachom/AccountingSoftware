@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>17.02.2020 10:56:31</DateTimeSave>
+  <DateTimeSave>17.02.2020 15:56:23</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -154,6 +154,7 @@
               <Name>Единица</Name>
               <NameInTable>col_a9</NameInTable>
               <Type>pointer</Type>
+              <Pointer>КлассификаторЕдИзм</Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -213,6 +214,35 @@
             <Field>
               <Name>КодЕдИзмерения</Name>
               <NameInTable>col_b3</NameInTable>
+              <Type>string</Type>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
+        <View>
+          <Name>Список2</Name>
+          <Table>tab_a05</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>ПолнНаименование</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>КодЕдИзмерения</Name>
+              <NameInTable>col_b3</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
           </Fields>
@@ -1238,6 +1268,140 @@
           </Fields>
           <Where />
         </View>
+        <View>
+          <Name>Список2</Name>
+          <Table>tab_a23</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>ПолнНаименование</Name>
+              <NameInTable>col_c6</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>ВидТовара</Name>
+              <NameInTable>col_c7</NameInTable>
+              <Type>empty_pointer</Type>
+            </Field>
+            <Field>
+              <Name>Артикул</Name>
+              <NameInTable>col_c8</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>БазоваяЕдиница</Name>
+              <NameInTable>col_c9</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>КлассификаторЕдИзм</Pointer>
+            </Field>
+            <Field>
+              <Name>Вес</Name>
+              <NameInTable>col_d1</NameInTable>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>ЕдиницаПоУмолчанию</Name>
+              <NameInTable>col_d2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Единици</Pointer>
+            </Field>
+            <Field>
+              <Name>ВалютаУчета</Name>
+              <NameInTable>col_d3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Валюти</Pointer>
+            </Field>
+            <Field>
+              <Name>УчетнаяЦена</Name>
+              <NameInTable>col_d4</NameInTable>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>МинимальнийОстаток</Name>
+              <NameInTable>col_d5</NameInTable>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>СтавкаНДС</Name>
+              <NameInTable>col_d6</NameInTable>
+              <Type>empty_pointer</Type>
+            </Field>
+            <Field>
+              <Name>СтатьяИздержекУслуги</Name>
+              <NameInTable>col_d7</NameInTable>
+              <Type>empty_pointer</Type>
+            </Field>
+            <Field>
+              <Name>ТипТовара</Name>
+              <NameInTable>col_d8</NameInTable>
+              <Type>empty_pointer</Type>
+            </Field>
+            <Field>
+              <Name>ТорговаяНаценка</Name>
+              <NameInTable>col_d9</NameInTable>
+              <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>ШтрихКод</Name>
+              <NameInTable>col_e1</NameInTable>
+              <Type>integer</Type>
+            </Field>
+            <Field>
+              <Name>Комментарий</Name>
+              <NameInTable>col_e2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Транспорт</Name>
+              <NameInTable>col_e3</NameInTable>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>УслугиНаСебестоимость</Name>
+              <NameInTable>col_e4</NameInTable>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>ЛьготаНДС</Name>
+              <NameInTable>col_e5</NameInTable>
+              <Type>integer</Type>
+            </Field>
+            <Field>
+              <Name>КодЛьготи</Name>
+              <NameInTable>col_e6</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>КвоДляНН</Name>
+              <NameInTable>col_e7</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>КодУКТВЕД</Name>
+              <NameInTable>col_e8</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>КодиУКТВЕД</Pointer>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Група</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Групи_Номенклатура</Pointer>
+            </Field>
+          </Fields>
+          <Where />
+        </View>
       </Views>
     </Directory>
     <Directory>
@@ -1402,6 +1566,7 @@
               <Name>Товар</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>pointer</Type>
+              <Pointer>Номенклатура</Pointer>
             </Field>
           </Fields>
           <Where />
@@ -2056,6 +2221,7 @@
               <Name>Руководитель</Name>
               <NameInTable>col_e4</NameInTable>
               <Type>pointer</Type>
+              <Pointer>Сотрудники</Pointer>
             </Field>
             <Field>
               <Name>Телефони</Name>
@@ -2211,11 +2377,13 @@
               <Name>Валюта</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>pointer</Type>
+              <Pointer>Валюти</Pointer>
             </Field>
             <Field>
               <Name>КатегорияЦени</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
+              <Pointer>КатегорииЦен</Pointer>
             </Field>
             <Field>
               <Name>Наценка</Name>
@@ -2273,6 +2441,7 @@
               <Name>Родитель</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>pointer</Type>
+              <Pointer>Групи_Номенклатура</Pointer>
             </Field>
           </Fields>
           <Where />
@@ -2330,6 +2499,7 @@
               <Name>Родитель</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
+              <Pointer>МестаХранения</Pointer>
             </Field>
           </Fields>
           <Where />

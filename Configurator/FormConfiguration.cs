@@ -63,26 +63,33 @@ namespace Configurator
 			treeConfiguration.Nodes.Clear();
 
 			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
-			rootNode.ImageIndex = 1;
+			rootNode.SelectedImageIndex = 2; 
+			rootNode.ImageIndex = 2;
 
 			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
-			directoriesNode.ImageIndex = 1;
+			directoriesNode.SelectedImageIndex = 3;
+			directoriesNode.ImageIndex = 3;
 
 			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
 			{
 				TreeNode directoryNode = directoriesNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
 				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
 				directoryNode.ContextMenuStrip = contextMenuStrip1;
+				directoryNode.SelectedImageIndex = 1;
 				directoryNode.ImageIndex = 1;
 
 				//Поля
 				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields)
 				{
-					directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + 
-						((ConfFields.Value.Type == "pointer") ? " -> " + ConfFields.Value.Pointer : "")).ImageIndex = 1;
+					TreeNode fieldNode = directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + 
+						((ConfFields.Value.Type == "pointer") ? " -> " + ConfFields.Value.Pointer : ""));
+
+					fieldNode.SelectedImageIndex = 0;
+					fieldNode.ImageIndex = 0;
 				}
 
 				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
+				directoriTabularPartsNode.SelectedImageIndex = 1;
 				directoriTabularPartsNode.ImageIndex = 1;
 
 				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts)
@@ -93,25 +100,33 @@ namespace Configurator
 					//Поля
 					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
 					{
-						directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name +
-							((ConfTablePartFields.Value.Type == "pointer") ? " -> " + ConfTablePartFields.Value.Pointer : "")).ImageIndex = 1;
+						TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name +
+							((ConfTablePartFields.Value.Type == "pointer") ? " -> " + ConfTablePartFields.Value.Pointer : ""));
+
+						fieldNode.SelectedImageIndex = 0;
+						fieldNode.ImageIndex = 0;
 					}
 
 					//directoriTablePartNode.Expand();
 				}
 
 				TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
+				directoriViewsNode.SelectedImageIndex = 1;
 				directoriViewsNode.ImageIndex = 1;
 
 				foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in ConfDirectory.Value.Views)
 				{
 					TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
+					directoriViewNode.SelectedImageIndex = 1;
 					directoriViewNode.ImageIndex = 1;
 
 					//Поля
 					foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
 					{
-						directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key).ImageIndex = 1;
+						TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
+
+						fieldNode.SelectedImageIndex = 0;
+						fieldNode.ImageIndex = 0;
 					}
 
 					//directoriTablePartNode.Expand();

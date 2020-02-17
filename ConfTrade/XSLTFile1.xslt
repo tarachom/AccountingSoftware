@@ -41,6 +41,12 @@
               </td>
               <td>
                 <xsl:value-of select="Документ"/>
+                
+                <xsl:call-template name="GetNameOd">
+                  <xsl:with-param name="list"></xsl:with-param>
+                  <xsl:with-param name="uid" select="" />
+                </xsl:call-template>
+                
               </td>
             </tr>
 
@@ -70,7 +76,7 @@
           </xsl:for-each>
 
         </table>
-        
+
       </body>
     </html>
 

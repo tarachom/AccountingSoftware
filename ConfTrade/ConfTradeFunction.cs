@@ -45,5 +45,11 @@ namespace ConfTrade
 
 			return "";
 		}
+
+		static string Run3()
+		{
+			//Довідники
+			return "";
+		}
 	}
 }
