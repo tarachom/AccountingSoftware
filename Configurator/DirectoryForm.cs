@@ -32,6 +32,20 @@ namespace Configurator
 				ConfDirectory = new ConfigurationDirectories();
 				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
 				IsNewDirectory = true;
+
+				string newUnigueNameInTable_Name = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
+				ConfDirectory.AppendField(new ConfigurationObjectField("Назва", newUnigueNameInTable_Name, "string", "", "Назва"));
+
+				string newUnigueNameInTable_Code = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
+				ConfDirectory.AppendField(new ConfigurationObjectField("Код", newUnigueNameInTable_Code, "string", "", "Код"));
+
+				ConfigurationObjectView NewView = new ConfigurationObjectView("Список", textBoxTable.Text, "Список");
+				NewView.Fields.Add("Назва", newUnigueNameInTable_Name);
+				NewView.Fields.Add("Код", newUnigueNameInTable_Code);
+				ConfDirectory.AppendView(NewView);
+
+				LoadFieldList();
+				LoadViewsList();
 			}
 			else
 			{
@@ -44,9 +58,7 @@ namespace Configurator
 				IsNewDirectory = false;
 
 				LoadFieldList();
-
 				LoadTabularPartsList();
-
 				LoadViewsList();
 			}
 		}

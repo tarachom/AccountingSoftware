@@ -150,7 +150,7 @@
 			this.comboBoxFieldType.FormattingEnabled = true;
 			this.comboBoxFieldType.Location = new System.Drawing.Point(123, 139);
 			this.comboBoxFieldType.Name = "comboBoxFieldType";
-			this.comboBoxFieldType.Size = new System.Drawing.Size(308, 21);
+			this.comboBoxFieldType.Size = new System.Drawing.Size(414, 21);
 			this.comboBoxFieldType.TabIndex = 14;
 			this.comboBoxFieldType.SelectedIndexChanged += new System.EventHandler(this.comboBoxFieldType_SelectedIndexChanged);
 			// 
