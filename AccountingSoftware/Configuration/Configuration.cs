@@ -373,8 +373,13 @@ namespace AccountingSoftware
 				string name = fieldNodes.Current.SelectSingleNode("Name").Value;
 				string nameInTable = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
 				string type = fieldNodes.Current.SelectSingleNode("Type").Value;
-				string pointer = (type == "pointer") ? fieldNodes.Current.SelectSingleNode("Pointer").Value : "";
+				string pointer = "";
 				string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
+
+				if (type == "pointer" || type == "enum")
+				{
+					pointer = fieldNodes.Current.SelectSingleNode("Pointer").Value;
+				}
 
 				ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc);
 

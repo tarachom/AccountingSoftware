@@ -2703,26 +2703,55 @@
   <Control_Directory>
     <Name>test</Name>
     <Table>tab_a16</Table>
-    <IsExist>no</IsExist>
-    <TableCreate>
-      <FieldCreate>
-        <Name>Назва</Name>
-        <NameInTable>col_a1</NameInTable>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>Код</Name>
-        <NameInTable>col_a2</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>ТипПоля</Name>
-        <NameInTable>col_a3</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ТипПоля</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>enum</ConfType>
-        <DataType />
-      </FieldCreate>
-    </TableCreate>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>esddf</Name>
+      <Table>tab_a47</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>sdfasdf</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>enum</ConfType>
+          <DataType>integer</DataType>
+          <UdtName>int4</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Directory>
 </root>

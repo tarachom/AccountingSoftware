@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>21.02.2020 16:55:58</DateTimeSave>
+  <DateTimeSave>21.02.2020 18:44:22</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2452,7 +2452,24 @@
           </Desc>
         </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>esddf</Name>
+          <Table>tab_a47</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sdfasdf</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення2</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views>
         <View>
           <Name>Список</Name>
@@ -2468,6 +2485,11 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>ТипПоля</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
             </Field>
           </Fields>
           <Where />

@@ -86,8 +86,7 @@ namespace Configurator
 						}
 					}
 				}
-
-				if (confTypeName == "enum")
+				else if (confTypeName == "enum")
 				{
 					for (int i = 0; i < comboBoxEnums.Items.Count; i++)
 					{

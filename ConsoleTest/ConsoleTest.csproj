@@ -71,6 +71,7 @@
     <None Include="CSharp\ТорговоеОборудование_Список.cs" />
     <None Include="CSharp\Фирми_Список.cs" />
     <None Include="CSharp\Цени_Список.cs" />
+    <Compile Include="CSharp\test_Список.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,6 +82,7 @@
     <Content Include="CreateFunctionCode.xslt" />
     <Content Include="old\Include.xslt" />
     <Content Include="CreateTemplate.xslt" />
+    <Content Include="XSLT\test_Список.xslt" />
     <Content Include="XSLT\Валюти_Список.xslt" />
     <Content Include="XSLT\Групи_МестаХранения_Список.xslt" />
     <Content Include="XSLT\Групи_Номенклатура_Список.xslt" />

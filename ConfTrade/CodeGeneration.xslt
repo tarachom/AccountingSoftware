@@ -39,6 +39,10 @@
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>DirectoryEmptyPointer</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'enum'">
+        <xsl:text>Enums.</xsl:text>
+        <xsl:value-of select="Pointer"/>
+      </xsl:when>
     </xsl:choose>    
   </xsl:template>
   
@@ -80,6 +84,9 @@
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>new DirectoryEmptyPointer()</xsl:text>
       </xsl:when>
+      <xsl:when test="Type = 'enum'">
+        <xsl:text>0</xsl:text>
+      </xsl:when>
     </xsl:choose>
   </xsl:template>
 
@@ -118,6 +125,9 @@
       </xsl:when>
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>null</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'enum'">
+        <xsl:text>0</xsl:text>
       </xsl:when>
     </xsl:choose>
   </xsl:template>
@@ -175,6 +185,10 @@
         <xsl:when test="Type = 'empty_pointer'">
           <xsl:text>new DirectoryEmptyPointer()</xsl:text>
         </xsl:when>
+        <xsl:when test="Type = 'enum'">
+          <xsl:text>(Enums.</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
+          <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+        </xsl:when>
      </xsl:choose>
   </xsl:template>
 
@@ -202,6 +216,7 @@
 using System;
 using System.Collections.Generic;
 using AccountingSoftware;
+using Enums = <xsl:value-of select="Configuration/NameSpace"/>.Enums;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
 {
@@ -264,12 +279,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
         {
             <xsl:for-each select="Fields/Field">
               <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
+              <xsl:if test="Type = 'enum'">
+                  <xsl:text>(int)</xsl:text>      
+              </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer'">
-                  <xsl:text>.UnigueID.UGuid</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'empty_pointer'">
+                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;

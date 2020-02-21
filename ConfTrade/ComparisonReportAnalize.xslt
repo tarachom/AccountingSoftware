@@ -223,7 +223,7 @@
 
               <xsl:when test="Type/DataType = 'boolean' or 
                               Type/DataType = 'date' or  Type/DataType = 'time without time zone' or Type/DataType = 'timestamp without time zone' or 
-                              Type/DataType = 'uuid'">
+                              Type/DataType = 'uuid' ">
                 <xsl:choose>
                   <xsl:when test="Type/ConfType = 'string'">
                     <sql>BEGIN;</sql>

@@ -38,6 +38,8 @@ namespace ConfTrade
 			Thread thread = new Thread(new ThreadStart(Test));
 			thread.Start();
 
+			Run4();
+
 			Console.ReadLine();
 		}
 
@@ -148,7 +150,7 @@ namespace ConfTrade
 
 					Stream output = response.OutputStream;
 
-					string res = ""; //RunValuty();
+					string res = Run();
 
 					//Console.WriteLine(res);
 
@@ -156,7 +158,7 @@ namespace ConfTrade
 					XmlReader xr = XmlReader.Create(sr);
 
 					XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
-					xslCompiledTransform.Load(@"../../Валюти_Список.xslt");
+					xslCompiledTransform.Load(@"../../test_Список.xslt");
 
 					XsltArgumentList xsltArgumentList = new XsltArgumentList();
 

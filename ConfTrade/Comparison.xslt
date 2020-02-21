@@ -192,6 +192,18 @@
                 </xsl:choose>
               </xsl:if>
 
+              <xsl:if test="$ConfFieldType = 'enum'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'integer' and $InfoSchemaFieldUdtName = 'int4'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>integer</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+
             </Type>
           </xsl:when>
           <xsl:otherwise>
@@ -265,6 +277,9 @@
           </xsl:when>
           <xsl:when test="Type = 'empty_pointer'">
             <xsl:text>uuid</xsl:text>
+          </xsl:when>
+          <xsl:when test="Type = 'enum'">
+            <xsl:text>integer</xsl:text>
           </xsl:when>
         </xsl:choose>
       </DataType>

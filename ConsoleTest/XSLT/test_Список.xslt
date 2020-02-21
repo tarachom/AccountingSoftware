@@ -19,9 +19,11 @@
   <title>HTML</title>
   <body>
     <table border="1">
-      <xsl:for-each select="root/Пользователи_Список/row">
+      <xsl:for-each select="root/test_Список/row">
       <tr>
         <td><xsl:value-of select="Назва"/></td>
+        <td><xsl:value-of select="Код"/></td>
+        <td><xsl:value-of select="ТипПоля"/></td>
       </tr>
       </xsl:for-each>
       </table>

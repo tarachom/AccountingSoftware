@@ -4,13 +4,14 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 21.02.2020 16:55:58
+ * Дата конфігурації: 21.02.2020 18:44:22
  *
  */
 
 using System;
 using System.Collections.Generic;
 using AccountingSoftware;
+using Enums = ConfTrade_v1_1.Enums;
 
 namespace ConfTrade_v1_1
 {
@@ -5923,7 +5924,235 @@ namespace ConfTrade_v1_1.Directory
       
     
     #endregion
+    
+    #region DIRECTORY "test"
+    
+    
+    class test_Objest : DirectoryObject
+    {
+        public test_Objest() : base(Config.Kernel, "tab_a16",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        {
+            Назва = "";
+            Код = "";
+            ТипПоля = 0;
+            
+            //Табличні частини
+            esddf_TablePart = new test_esddf_TablePart(this);
+            
+        }
         
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                ТипПоля = (Enums.Перелічення2)base.FieldValue["col_a3"];
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = (int)ТипПоля;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public test_Pointer GetDirectoryPointer()
+        {
+            test_Pointer directoryPointer = new test_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public Enums.Перелічення2 ТипПоля { get; set; }
+        
+        //Табличні частини
+        public test_esddf_TablePart esddf_TablePart { get; set; }
+        
+    }
+    
+    
+    class test_Pointer : DirectoryPointer
+    {
+        public test_Pointer(object uid = null) : base(Config.Kernel, "tab_a16")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public test_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a16")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public test_Objest GetDirectoryObject()
+        {
+            test_Objest testObjestItem = new test_Objest();
+            testObjestItem.Read(base.UnigueID);
+            return testObjestItem;
+        }
+    }
+    
+    
+    class test_Select : DirectorySelect, IDisposable
+    {
+        public test_Select() : base(Config.Kernel, "tab_a16") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new test_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public test_Pointer Current { get; private set; }
+    }
+    
+      
+    class test_esddf_TablePart : DirectoryTablePart
+    {
+        public test_esddf_TablePart(test_Objest owner) : base(Config.Kernel, "tab_a47",
+             new string[] { "col_a1" }) 
+        {
+            Owner = owner;
+            Records = new List<test_esddf_TablePartRecord>();
+        }
+        
+        public test_Objest Owner { get; private set; }
+        
+        public List<test_esddf_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                test_esddf_TablePartRecord record = new test_esddf_TablePartRecord();
+
+                record.sdfasdf = (Enums.Перелічення2)fieldValue["col_a1"];
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (test_esddf_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.sdfasdf);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class test_esddf_TablePartRecord : DirectoryTablePartRecord
+    {
+        public test_esddf_TablePartRecord()
+        {
+            sdfasdf = 0;
+            
+        }
+        
+        
+        public test_esddf_TablePartRecord(
+            Enums.Перелічення2 _sdfasdf = 0)
+        {
+            sdfasdf = _sdfasdf;
+            
+        }
+        public Enums.Перелічення2 sdfasdf { get; set; }
+        
+    }
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class test_Список_View : DirectoryView
+    {
+        public test_Список_View() : base(Config.Kernel, "tab_a16", 
+             new string[] { "col_a1", "col_a2", "col_a3" },
+             new string[] { "Назва", "Код", "ТипПоля" },
+             new string[] { "string", "string", "enum" },
+             "test_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
 }
 
 namespace ConfTrade_v1_1.Enums

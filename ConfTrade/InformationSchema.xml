@@ -946,6 +946,29 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a16</Name>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a15</Name>
     <Column>
       <Name>col_a2</Name>
@@ -1068,6 +1091,29 @@
       <Name>col_f7</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a47</Name>
+    <Column>
+      <Name>col_a1_old_21_02_2020_17_46_00</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1_old_21_02_2020_17_52_06</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
     </Column>
   </Table>
   <Table>

@@ -9,6 +9,7 @@ using System.Xml.Xsl;
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
 using Довідники = ConfTrade_v1_1.Directory;
+using Перелічення = ConfTrade_v1_1.Enums;
 
 namespace ConfTrade
 {
@@ -16,6 +17,15 @@ namespace ConfTrade
 	{
 		static string Run4()
 		{
+			Довідники.test_Objest test_Objest = new Довідники.test_Objest();
+			test_Objest.New();
+			test_Objest.ТипПоля = Перелічення.Перелічення2.Два;
+			test_Objest.Назва = "Тест";
+			test_Objest.Код = "1";
+			test_Objest.Save();
+
+			/*
+
 			Довідники.Валюти_Objest валюти_Objest = new Довідники.Валюти_Objest();
 			валюти_Objest.New();
 			валюти_Objest.Назва = "Евро";
@@ -30,6 +40,8 @@ namespace ConfTrade
 			номенклатура_Objest.ВалютаУчета = валюти_Objest.GetDirectoryPointer();
 			номенклатура_Objest.Вес = 10.45m;
 			номенклатура_Objest.Save();
+
+	        */
 
 			return "";
 		}
