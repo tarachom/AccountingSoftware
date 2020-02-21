@@ -3,18 +3,38 @@
 
    <xsl:output method="html" indent="yes" />
    
+
+   
    <xsl:template name="GetNameOd">
     <xsl:param name="list" />
     <xsl:param name="uid" />
-
     <xsl:for-each select="$list/row[uid = $uid]">
       <xsl:value-of select="Назва"/>
-    </xsl:for-each>
-    
+    </xsl:for-each>    
    </xsl:template>
 
+   
+   <xsl:template name="GetNameSelect">
+     <xsl:param name="pointer" />
+     <xsl:param name="value" />
+     <select>
+     <xsl:for-each select="/root/Enums/Enum[Name = $pointer]/Fields/Field">
+        <option>
+          <xsl:attribute name="value">
+            <xsl:value-of select="Value"/>
+          </xsl:attribute>
+          <xsl:if test="$value = Value">
+             <xsl:attribute name="selected">selected</xsl:attribute>          
+          </xsl:if>
+          <xsl:value-of select="Name"/>
+       </option>
+    </xsl:for-each>
+    </select>
+   </xsl:template>
+                      
+  
+   
    <xsl:template match="/">
-
     <html>
   <title>HTML</title>
   <body>
@@ -23,7 +43,9 @@
       <tr>
         <td><xsl:value-of select="Назва"/></td>
         <td><xsl:value-of select="Код"/></td>
-        <td><xsl:value-of select="ТипПоля"/></td>
+        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення2</xsl:with-param><xsl:with-param name="value" select="ТипПоля" /></xsl:call-template></td>
+        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення</xsl:with-param><xsl:with-param name="value" select="Поле2" /></xsl:call-template></td>
+        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення2</xsl:with-param><xsl:with-param name="value" select="Поле3" /></xsl:call-template></td>
       </tr>
       </xsl:for-each>
       </table>

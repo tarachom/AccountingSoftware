@@ -30,6 +30,8 @@ namespace ConsoleTest
 			{
 				string directoryName = nodeDirectory.Current.SelectSingleNode("Name").Value;
 
+				
+
 				XPathNodeIterator nodeView = nodeDirectory.Current.Select("Views/View");
 				while (nodeView.MoveNext())
 				{
@@ -47,7 +49,31 @@ namespace ConsoleTest
 					xsltTemplateGenerator.Transform(nodeView.Current, xsltArgumentList, stream);
 					stream.Close();
 
-					//------------------
+					//------------------>
+
+					string xml = "<Enums>\n";
+					List<string> UsingEnums = new List<string>();
+
+					XPathNodeIterator nodeFieldEnumType = nodeView.Current.Select("Fields/Field[Type = 'enum']");
+					while (nodeFieldEnumType.MoveNext())
+					{
+						string pointerEnum = nodeFieldEnumType.Current.SelectSingleNode("Pointer").Value;
+						if (!UsingEnums.Contains(pointerEnum))
+						{
+							XPathNavigator enumNode = xPathDocNavigator.SelectSingleNode("/Configuration/Enums/Enum[Name = '" + pointerEnum + "']");
+							if (enumNode != null)
+								xml += enumNode.OuterXml + "\n";
+							else
+								xml += "<error>Not found enum '" + pointerEnum + "'</error>\n";
+
+							UsingEnums.Add(pointerEnum);
+						}
+					}
+
+					xml += "</Enums>\n";
+
+					xsltArgumentList.AddParam("xml", "", xml);
+					//<------------------
 
 					string filename2 = "../../CSharp/" + directoryName + "_" + viewName + ".cs";
 					FileMode mode2 = File.Exists(filename2) ? FileMode.Truncate : FileMode.Create;

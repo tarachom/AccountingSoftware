@@ -20,7 +20,48 @@ namespace ConfTrade
             sb.Append(m_test_Список_View.Read());
             
             
-    
+            
+            sb.Append(@"<Enums>
+<Enum>
+  <Name>Перелічення2</Name>
+  <Desc>test
+      </Desc>
+  <Fields>
+    <Field>
+      <Name>Один</Name>
+      <Value>1</Value>
+    </Field>
+    <Field>
+      <Name>Два</Name>
+      <Value>2</Value>
+    </Field>
+    <Field>
+      <Name>Три</Name>
+      <Value>3</Value>
+    </Field>
+  </Fields>
+</Enum>
+<Enum>
+  <Name>Перелічення</Name>
+  <Desc>test
+      </Desc>
+  <Fields>
+    <Field>
+      <Name>Один</Name>
+      <Value>1</Value>
+    </Field>
+    <Field>
+      <Name>Два</Name>
+      <Value>2</Value>
+    </Field>
+    <Field>
+      <Name>Три</Name>
+      <Value>3</Value>
+    </Field>
+  </Fields>
+</Enum>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

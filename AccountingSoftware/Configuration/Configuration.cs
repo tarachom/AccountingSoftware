@@ -425,7 +425,8 @@ namespace AccountingSoftware
 
 					ConfObjectView.Fields.Add(nameField, nameInTableField);
 				}
-
+				
+				/*
 				XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
 				while (fieldWhere.MoveNext())
 				{
@@ -433,6 +434,7 @@ namespace AccountingSoftware
 
 					ConfObjectView.Where.Add(nameInTableField);
 				}
+				*/
 			}
 		}
 
@@ -463,7 +465,7 @@ namespace AccountingSoftware
 
 		public static void Save(string pathToConf, Configuration Conf)
 		{
-			string pathToCopyConf = CopyConfigurationFile(pathToConf);
+			//string pathToCopyConf = CopyConfigurationFile(pathToConf);
 
 			XmlDocument xmlConfDocument = new XmlDocument();
 			xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
@@ -638,7 +640,7 @@ namespace AccountingSoftware
 							nodeFieldType.InnerText = configurationObjectField.Type;
 							nodeField.AppendChild(nodeFieldType);
 
-							if (configurationObjectField.Type == "pointer")
+							if (configurationObjectField.Type == "pointer" || configurationObjectField.Type == "enum")
 							{
 								XmlElement nodeFieldPointer = xmlConfDocument.CreateElement("Pointer");
 								nodeFieldPointer.InnerText = configurationObjectField.Pointer;
@@ -650,7 +652,8 @@ namespace AccountingSoftware
 					}
 				}
 
-				XmlElement nodeWhere = xmlConfDocument.CreateElement("Where");
+				/*
+				XmlElement nodeWhere = xmlConfDocument.CreateElement("Where"); // ??
 				nodeView.AppendChild(nodeWhere);
 
 				foreach (string field in view.Value.Where)
@@ -662,6 +665,7 @@ namespace AccountingSoftware
 					nodeFieldNameInTable.InnerText = field;
 					nodeField.AppendChild(nodeFieldNameInTable);
 				}
+				*/
 			}
 		}
 

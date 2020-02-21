@@ -34,7 +34,10 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["КатегорияЦени"] + " FROM " + TempTable, true)); /* col_a3 */
             sb.Append(m_КатегорииЦен_Список_View.Read());
                 
-    
+            
+            sb.Append(@"<Enums>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

@@ -39,7 +39,10 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Група"] + " FROM " + TempTable, true)); /* col_a3 */
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
                 
-    
+            
+            sb.Append(@"<Enums>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

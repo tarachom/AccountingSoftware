@@ -953,6 +953,11 @@
       <UdtName>text</UdtName>
     </Column>
     <Column>
+      <Name>col_a4</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
       <Name>col_a2</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>

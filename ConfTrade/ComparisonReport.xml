@@ -2737,6 +2737,28 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Поле2</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>enum</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Поле3</Name>
+      <NameInTable>col_a5</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Поле3</Name>
+        <NameInTable>col_a5</NameInTable>
+        <ConfType>enum</ConfType>
+        <DataType>integer</DataType>
+      </FieldCreate>
+    </Control_Field>
     <Control_TabularParts>
       <Name>esddf</Name>
       <Table>tab_a47</Table>

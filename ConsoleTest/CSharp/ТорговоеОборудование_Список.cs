@@ -20,7 +20,10 @@ namespace ConfTrade
             sb.Append(m_ТорговоеОборудование_Список_View.Read());
             
             
-    
+            
+            sb.Append(@"<Enums>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="text" indent="yes"/>
 
+  <xsl:param name="xml" />
   <xsl:param name="DirectoryName" />
 
   <xsl:template match="View">
@@ -51,7 +52,8 @@ namespace ConfTrade
               </xsl:choose>
     
             </xsl:for-each>
-    
+            
+            sb.Append(@"<xsl:value-of select="$xml"/>");    
             sb.Append("<xsl:text disable-output-escaping="yes">&lt;/root&gt;</xsl:text>");
             return sb.ToString();
         }

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 21.02.2020 18:44:22
+ * Дата конфігурації: 21.02.2020 20:59:00
  *
  */
 
@@ -5931,11 +5931,13 @@ namespace ConfTrade_v1_1.Directory
     class test_Objest : DirectoryObject
     {
         public test_Objest() : base(Config.Kernel, "tab_a16",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
         {
             Назва = "";
             Код = "";
             ТипПоля = 0;
+            Поле2 = 0;
+            Поле3 = 0;
             
             //Табличні частини
             esddf_TablePart = new test_esddf_TablePart(this);
@@ -5949,6 +5951,8 @@ namespace ConfTrade_v1_1.Directory
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
                 ТипПоля = (Enums.Перелічення2)base.FieldValue["col_a3"];
+                Поле2 = (Enums.Перелічення)base.FieldValue["col_a4"];
+                Поле3 = (Enums.Перелічення2)base.FieldValue["col_a5"];
                 
                 BaseClear();
                 return true;
@@ -5962,6 +5966,8 @@ namespace ConfTrade_v1_1.Directory
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
             base.FieldValue["col_a3"] = (int)ТипПоля;
+            base.FieldValue["col_a4"] = (int)Поле2;
+            base.FieldValue["col_a5"] = (int)Поле3;
             
             BaseSave();
         }
@@ -5980,6 +5986,8 @@ namespace ConfTrade_v1_1.Directory
         public string Назва { get; set; }
         public string Код { get; set; }
         public Enums.Перелічення2 ТипПоля { get; set; }
+        public Enums.Перелічення Поле2 { get; set; }
+        public Enums.Перелічення2 Поле3 { get; set; }
         
         //Табличні частини
         public test_esddf_TablePart esddf_TablePart { get; set; }
@@ -6140,9 +6148,9 @@ namespace ConfTrade_v1_1.Directory
     class test_Список_View : DirectoryView
     {
         public test_Список_View() : base(Config.Kernel, "tab_a16", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "ТипПоля" },
-             new string[] { "string", "string", "enum" },
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" },
+             new string[] { "Назва", "Код", "ТипПоля", "Поле2", "Поле3" },
+             new string[] { "string", "string", "enum", "enum", "enum" },
              "test_Список")
         {
             

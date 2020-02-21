@@ -152,7 +152,7 @@ namespace ConfTrade
 
 					string res = Run();
 
-					//Console.WriteLine(res);
+					Console.WriteLine(res);
 
 					StringReader sr = new StringReader(res);
 					XmlReader xr = XmlReader.Create(sr);

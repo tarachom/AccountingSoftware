@@ -29,7 +29,10 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Руководитель"] + " FROM " + TempTable, true)); /* col_e4 */
             sb.Append(m_Сотрудники_Список_View.Read());
                 
-    
+            
+            sb.Append(@"<Enums>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

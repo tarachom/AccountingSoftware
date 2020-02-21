@@ -29,7 +29,10 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Родитель"] + " FROM " + TempTable, true)); /* col_a2 */
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
                 
-    
+            
+            sb.Append(@"<Enums>
+</Enums>
+");    
             sb.Append("</root>");
             return sb.ToString();
         }

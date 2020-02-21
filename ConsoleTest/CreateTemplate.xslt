@@ -10,18 +10,38 @@
 
    &lt;xsl:output method="html" indent="yes" /&gt;
    
+
+   <!---->
    &lt;xsl:template name="GetNameOd"&gt;
     &lt;xsl:param name="list" /&gt;
     &lt;xsl:param name="uid" /&gt;
-
     &lt;xsl:for-each select="$list/row[uid = $uid]"&gt;
       &lt;xsl:value-of select="Назва"/&gt;
-    &lt;/xsl:for-each&gt;
-    
+    &lt;/xsl:for-each&gt;    
    &lt;/xsl:template&gt;
 
+   <!---->
+   &lt;xsl:template name="GetNameSelect"&gt;
+     &lt;xsl:param name="pointer" /&gt;
+     &lt;xsl:param name="value" /&gt;
+     &lt;select&gt;
+     &lt;xsl:for-each select="/root/Enums/Enum[Name = $pointer]/Fields/Field"&gt;
+        &lt;option&gt;
+          &lt;xsl:attribute name="value"&gt;
+            &lt;xsl:value-of select="Value"/&gt;
+          &lt;/xsl:attribute&gt;
+          &lt;xsl:if test="$value = Value"&gt;
+             &lt;xsl:attribute name="selected"&gt;selected&lt;/xsl:attribute&gt;          
+          &lt;/xsl:if&gt;
+          &lt;xsl:value-of select="Name"/&gt;
+       &lt;/option&gt;
+    &lt;/xsl:for-each&gt;
+    &lt;/select&gt;
+   &lt;/xsl:template&gt;
+                      
+  
+   <!---->
    &lt;xsl:template match="/"&gt;
-
     </xsl:text>
 
     <html>
@@ -41,6 +61,7 @@
             <xsl:for-each select="Fields/Field">
               <td>
                 <xsl:choose>
+                  
                   <xsl:when test="Type = 'pointer'">
                     <xsl:text disable-output-escaping="yes">&lt;xsl:call-template name="GetNameOd"&gt;</xsl:text>
                     <xsl:text disable-output-escaping="yes">&lt;xsl:with-param name="list" select="/root/</xsl:text>
@@ -52,14 +73,28 @@
                     <xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
                     <xsl:text disable-output-escaping="yes">&lt;/xsl:call-template&gt;</xsl:text>
                   </xsl:when>
+                  
                   <xsl:when test="Type = 'empty_pointer'">
                     <xsl:text> </xsl:text>
                   </xsl:when>
+                  
+                  <xsl:when test="Type = 'enum'">
+                    <xsl:text disable-output-escaping="yes">&lt;xsl:call-template name="GetNameSelect"&gt;</xsl:text>
+                    <xsl:text disable-output-escaping="yes">&lt;xsl:with-param name="pointer"&gt;</xsl:text>
+                    <xsl:value-of select="Pointer"/>
+                   <xsl:text disable-output-escaping="yes">&lt;/xsl:with-param&gt;</xsl:text>
+                    <xsl:text disable-output-escaping="yes">&lt;xsl:with-param name="value" select="</xsl:text>
+                    <xsl:value-of select="Name"/>
+                    <xsl:text disable-output-escaping="yes">" /&gt;</xsl:text>
+                    <xsl:text disable-output-escaping="yes">&lt;/xsl:call-template&gt;</xsl:text>
+                  </xsl:when>
+                  
                   <xsl:otherwise>
                     <xsl:text disable-output-escaping="yes">&lt;xsl:value-of select="</xsl:text>
                     <xsl:value-of select="Name"/>
                     <xsl:text disable-output-escaping="yes">"/&gt;</xsl:text>
                   </xsl:otherwise>
+                
                 </xsl:choose>
               </td>
             </xsl:for-each>
