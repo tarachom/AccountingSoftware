@@ -16,16 +16,17 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.Групи_Номенклатура_Список_View m_Групи_Номенклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
+            
             m_Групи_Номенклатура_Список_View.QuerySelect.CreateTempTable = true;
+              string TempTable = m_Групи_Номенклатура_Список_View.QuerySelect.TempTable;
+              string[] Alias = m_Групи_Номенклатура_Список_View.Alias;
+              
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
             
             
             Довідники.Групи_Номенклатура_Список_View m_Групи_Номенклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
-            m_Групи_Номенклатура_Список_View.QuerySelect.Where.Add(
-                new Where("uid", Comparison.IN, /* col_a2 */ 
-                "SELECT DISTINCT " + m_Групи_Номенклатура_Список_View.Alias["Родитель"] + 
-                " FROM " + m_Групи_Номенклатура_Список_View.QuerySelect.TempTable, true));
-                
+            m_Групи_Номенклатура_Список_View.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
+                "SELECT DISTINCT " + Alias["Родитель"] + " FROM " + TempTable, true)); /* col_a2 */
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
                 
     

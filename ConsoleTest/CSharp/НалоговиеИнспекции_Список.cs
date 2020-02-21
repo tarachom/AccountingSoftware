@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.НалоговиеИнспекции_Список_View m_НалоговиеИнспекции_Список_View = new Довідники.НалоговиеИнспекции_Список_View();
-            m_НалоговиеИнспекции_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_НалоговиеИнспекции_Список_View.Read());
             
             

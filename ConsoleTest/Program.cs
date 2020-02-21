@@ -54,11 +54,8 @@ namespace ConsoleTest
 					FileStream stream2 = new FileStream(filename2, mode2);
 					xsltCodeGenerator.Transform(nodeView.Current, xsltArgumentList, stream2);
 					stream2.Close();
-
 				}
 			}
-
-			
 
 			//xsltCodeGnerator.Transform(@"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml", "../../Result.xslt");
 

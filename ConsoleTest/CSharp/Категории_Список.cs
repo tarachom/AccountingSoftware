@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.Категории_Список_View m_Категории_Список_View = new Довідники.Категории_Список_View();
-            m_Категории_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_Категории_Список_View.Read());
             
             

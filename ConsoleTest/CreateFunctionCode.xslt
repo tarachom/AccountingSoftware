@@ -23,8 +23,20 @@ namespace ConfTrade
             sb.Append("<xsl:text disable-output-escaping="yes">&lt;root&gt;</xsl:text>");
             
             Довідники.<xsl:value-of select="$FullViewName" /> m_<xsl:value-of select="$FullViewName" /> = new Довідники.<xsl:value-of select="$FullViewName" />();
-            m_<xsl:value-of select="$FullViewName" />.QuerySelect.CreateTempTable = true;
-            sb.Append(m_<xsl:value-of select="$FullViewName" />.Read());
+            
+            <xsl:if test="count(Fields/Field[Type = 'pointer']) > 0">
+              
+              <xsl:text>m_</xsl:text>
+              <xsl:value-of select="$FullViewName" />.QuerySelect.CreateTempTable = true;
+              <xsl:text>string TempTable = m_</xsl:text>
+              <xsl:value-of select="$FullViewName" />.QuerySelect.TempTable;
+              <xsl:text>string[] Alias = m_</xsl:text>
+              <xsl:value-of select="$FullViewName" />.Alias;
+              
+            </xsl:if>
+
+            <xsl:text>sb.Append(m_</xsl:text>
+            <xsl:value-of select="$FullViewName" />.Read());
             
             <xsl:for-each select="Fields/Field">
 
@@ -32,11 +44,8 @@ namespace ConfTrade
                 <xsl:when test="Type = 'pointer'">
                   <xsl:variable name="FullFieldViewName" select="concat(Pointer, '_Список_View')" />
             Довідники.<xsl:value-of select="$FullFieldViewName" /> m_<xsl:value-of select="$FullFieldViewName" /> = new Довідники.<xsl:value-of select="$FullFieldViewName" />();
-            m_<xsl:value-of select="$FullFieldViewName" />.QuerySelect.Where.Add(
-                new Where("uid", Comparison.IN, /* <xsl:value-of select="NameInTable" /> */ 
-                "SELECT DISTINCT " + m_<xsl:value-of select="$FullViewName" />.Alias["<xsl:value-of select="Name" />"] + 
-                " FROM " + m_<xsl:value-of select="$FullViewName" />.QuerySelect.TempTable, true));
-                
+            m_<xsl:value-of select="$FullFieldViewName" />.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
+                "SELECT DISTINCT " + Alias["<xsl:value-of select="Name" />"] + " FROM " + TempTable, true)); /* <xsl:value-of select="NameInTable" /> */
             sb.Append(m_<xsl:value-of select="$FullFieldViewName" />.Read());
                 </xsl:when>
               </xsl:choose>

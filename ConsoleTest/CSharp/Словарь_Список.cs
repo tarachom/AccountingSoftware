@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.Словарь_Список_View m_Словарь_Список_View = new Довідники.Словарь_Список_View();
-            m_Словарь_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_Словарь_Список_View.Read());
             
             

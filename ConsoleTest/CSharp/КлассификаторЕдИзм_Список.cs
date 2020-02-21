@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.КлассификаторЕдИзм_Список_View m_КлассификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
-            m_КлассификаторЕдИзм_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_КлассификаторЕдИзм_Список_View.Read());
             
             

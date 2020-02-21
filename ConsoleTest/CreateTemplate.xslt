@@ -9,7 +9,16 @@
 &lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" &gt;
 
    &lt;xsl:output method="html" indent="yes" /&gt;
-   &lt;xsl:include href="Include.xslt" /&gt;
+   
+   &lt;xsl:template name="GetNameOd"&gt;
+    &lt;xsl:param name="list" /&gt;
+    &lt;xsl:param name="uid" /&gt;
+
+    &lt;xsl:for-each select="$list/row[uid = $uid]"&gt;
+      &lt;xsl:value-of select="Назва"/&gt;
+    &lt;/xsl:for-each&gt;
+    
+   &lt;/xsl:template&gt;
 
    &lt;xsl:template match="/"&gt;
 

@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.МестаХранения_Список_View m_МестаХранения_Список_View = new Довідники.МестаХранения_Список_View();
-            m_МестаХранения_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_МестаХранения_Список_View.Read());
             
             

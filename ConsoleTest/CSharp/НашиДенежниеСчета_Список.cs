@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.НашиДенежниеСчета_Список_View m_НашиДенежниеСчета_Список_View = new Довідники.НашиДенежниеСчета_Список_View();
-            m_НашиДенежниеСчета_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_НашиДенежниеСчета_Список_View.Read());
             
             

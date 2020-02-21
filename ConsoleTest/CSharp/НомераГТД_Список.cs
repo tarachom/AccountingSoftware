@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.НомераГТД_Список_View m_НомераГТД_Список_View = new Довідники.НомераГТД_Список_View();
-            m_НомераГТД_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_НомераГТД_Список_View.Read());
             
             

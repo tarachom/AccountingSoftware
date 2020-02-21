@@ -16,7 +16,7 @@ namespace ConfTrade
             sb.Append("<root>");
             
             Довідники.ТорговоеОборудование_Список_View m_ТорговоеОборудование_Список_View = new Довідники.ТорговоеОборудование_Список_View();
-            m_ТорговоеОборудование_Список_View.QuerySelect.CreateTempTable = true;
+            
             sb.Append(m_ТорговоеОборудование_Список_View.Read());
             
             
