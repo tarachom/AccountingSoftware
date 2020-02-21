@@ -180,10 +180,11 @@
 
   <!-- Документування коду -->
   <xsl:template name="CommentSummary">
-    <xsl:if test="normalize-space(Desc) != ''">
+    <xsl:variable name="normalize_space_Desc" select="normalize-space(Desc)" />
+    <xsl:if test="$normalize_space_Desc != ''">
     <xsl:text>///&lt;summary</xsl:text>&gt;
     <xsl:text>///</xsl:text>
-    <xsl:value-of select="normalize-space(Desc)"/>.
+    <xsl:value-of select="$normalize_space_Desc"/>.
     <xsl:text>///&lt;/summary&gt;</xsl:text>
     </xsl:if>
   </xsl:template>
@@ -556,6 +557,27 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
       </xsl:for-each> <!-- Views -->
     
     #endregion
+    </xsl:for-each>
+}
+
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Enums
+{
+    <xsl:for-each select="Configuration/Enums/Enum">
+    <xsl:call-template name="CommentSummary" />
+    public enum <xsl:value-of select="Name"/>
+    {
+         <xsl:variable name="CountEnumField" select="count(Fields/Field)" />
+         <xsl:for-each select="Fields/Field">
+             <xsl:value-of select="Name"/>
+             <xsl:text> = </xsl:text>
+             <xsl:value-of select="Value"/>
+             <xsl:if test="position() &lt; $CountEnumField">
+         <xsl:text>,
+         </xsl:text>
+             </xsl:if>
+         </xsl:for-each>
+    }
+    
     </xsl:for-each>
 }
 

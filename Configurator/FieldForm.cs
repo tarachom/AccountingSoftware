@@ -34,12 +34,19 @@ namespace Configurator
 
 			comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[0];
 			comboBoxPointer.Enabled = false;
+			comboBoxEnums.Enabled = false;
 
 			//Список довідників
 			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)
 			{
 				comboBoxPointer.Items.Add(directoryName);
 			}
+
+			//Список перелічення
+			foreach (string enumName in Program.Kernel.Conf.Enums.Keys)
+			{
+				comboBoxEnums.Items.Add(enumName);
+			}			
 
 			if (configurationObjectField == null)
 			{
@@ -66,13 +73,27 @@ namespace Configurator
 					}
 				}
 
-				if (((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer")
+				string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
+
+				if (confTypeName == "pointer")
 				{
 					for (int i = 0; i < comboBoxPointer.Items.Count; i++)
 					{
 						if (configurationObjectField.Pointer == comboBoxPointer.Items[i].ToString())
 						{
 							comboBoxPointer.SelectedItem = comboBoxPointer.Items[i];
+							break;
+						}
+					}
+				}
+
+				if (confTypeName == "enum")
+				{
+					for (int i = 0; i < comboBoxEnums.Items.Count; i++)
+					{
+						if (configurationObjectField.Pointer == comboBoxEnums.Items[i].ToString())
+						{
+							comboBoxEnums.SelectedItem = comboBoxEnums.Items[i];
 							break;
 						}
 					}
@@ -102,14 +123,20 @@ namespace Configurator
 					return;
 				}
 
+			string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
+
 			configurationObjectField.Name = textBoxName.Text;
 			configurationObjectField.NameInTable = textBoxNameInTable.Text;
 			configurationObjectField.Desc = textBoxDesc.Text;
-			configurationObjectField.Type = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
+			configurationObjectField.Type = confTypeName;
 
-			if (((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer")
+			if (confTypeName == "pointer")
 			{
 				configurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+			}
+			else if (confTypeName == "enum")
+			{
+				configurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
 			}
 			else
 			{
@@ -128,7 +155,10 @@ namespace Configurator
 
 		private void comboBoxFieldType_SelectedIndexChanged(object sender, EventArgs e)
 		{
-			comboBoxPointer.Enabled = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName == "pointer";
+			string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
+
+			comboBoxPointer.Enabled = (confTypeName == "pointer");
+			comboBoxEnums.Enabled = (confTypeName == "enum");
 		}
 	}
 }

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 21.02.2020 15:41:25
+ * Дата конфігурації: 21.02.2020 16:55:58
  *
  */
 
@@ -5923,6 +5923,31 @@ namespace ConfTrade_v1_1.Directory
       
     
     #endregion
+        
+}
+
+namespace ConfTrade_v1_1.Enums
+{
+    ///<summary>
+    ///test.
+    ///</summary>
+    public enum Перелічення
+    {
+         Один = 1,
+         Два = 2,
+         Три = 3
+    }
+    
+    ///<summary>
+    ///test.
+    ///</summary>
+    public enum Перелічення2
+    {
+         Один = 1,
+         Два = 2,
+         Три = 3
+    }
+    
     
 }
 

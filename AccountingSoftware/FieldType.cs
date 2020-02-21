@@ -31,6 +31,7 @@ namespace AccountingSoftware
 			fieldTypes.Add(new FieldType("date",          "[ date ] - Дата"));
 			fieldTypes.Add(new FieldType("datetime",      "[ datetime ] - Дата та час"));
 			fieldTypes.Add(new FieldType("time",          "[ time ] - Час"));
+			fieldTypes.Add(new FieldType("enum",          "[ enum ] - Перелічення"));
 			fieldTypes.Add(new FieldType("pointer",       "[ pointer ] - Вказівник на елемент конфігурації"));
 			fieldTypes.Add(new FieldType("empty_pointer", "[ empty_pointer ] - Пустий вказівник"));
 			fieldTypes.Add(new FieldType("string[]",      "[ string[ .. ] ] - Текст масив"));

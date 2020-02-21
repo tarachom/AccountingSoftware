@@ -548,7 +548,7 @@ namespace AccountingSoftware
 				nodeFieldType.InnerText = field.Value.Type;
 				nodeField.AppendChild(nodeFieldType);
 
-				if (field.Value.Type == "pointer")
+				if (field.Value.Type == "pointer" || field.Value.Type == "enum")
 				{
 					XmlElement nodeFieldPointer = xmlConfDocument.CreateElement("Pointer");
 					nodeFieldPointer.InnerText = field.Value.Pointer;

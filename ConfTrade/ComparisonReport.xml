@@ -2700,4 +2700,29 @@
       </Type>
     </Control_Field>
   </Control_Directory>
+  <Control_Directory>
+    <Name>test</Name>
+    <Table>tab_a16</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>Код</Name>
+        <NameInTable>col_a2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>ТипПоля</Name>
+        <NameInTable>col_a3</NameInTable>
+        <ConfType>enum</ConfType>
+        <DataType />
+      </FieldCreate>
+    </TableCreate>
+  </Control_Directory>
 </root>

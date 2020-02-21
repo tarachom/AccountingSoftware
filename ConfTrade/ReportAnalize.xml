@@ -1,2 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <sql>CREATE TABLE tab_a16 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text,  "col_a3" , PRIMARY KEY(uid));</sql>
+</root>

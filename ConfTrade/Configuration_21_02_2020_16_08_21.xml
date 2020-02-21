@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>21.02.2020 16:55:58</DateTimeSave>
+  <DateTimeSave>21.02.2020 16:08:00</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2425,79 +2425,11 @@
         </View>
       </Views>
     </Directory>
-    <Directory>
-      <Name>test</Name>
-      <Table>tab_a16</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-        </Field>
-        <Field>
-          <Name>ТипПоля</Name>
-          <NameInTable>col_a3</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення2</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <Views>
-        <View>
-          <Name>Список</Name>
-          <Table>tab_a16</Table>
-          <Desc>Список</Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Код</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
-            </Field>
-          </Fields>
-          <Where />
-        </View>
-      </Views>
-    </Directory>
   </Directories>
   <Enums>
     <Enum>
       <Name>Перелічення</Name>
-      <Desc>test
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Один</Name>
-          <Value>1</Value>
-        </Field>
-        <Field>
-          <Name>Два</Name>
-          <Value>2</Value>
-        </Field>
-        <Field>
-          <Name>Три</Name>
-          <Value>3</Value>
-        </Field>
-      </Fields>
-    </Enum>
-    <Enum>
-      <Name>Перелічення2</Name>
-      <Desc>test
+      <Desc>
       </Desc>
       <Fields>
         <Field>

@@ -42,6 +42,8 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.comboBoxPointer = new System.Windows.Forms.ComboBox();
+			this.comboBoxEnums = new System.Windows.Forms.ComboBox();
+			this.label6 = new System.Windows.Forms.Label();
 			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -165,6 +167,8 @@
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.comboBoxEnums);
+			this.panel1.Controls.Add(this.label6);
 			this.panel1.Controls.Add(this.comboBoxPointer);
 			this.panel1.Controls.Add(this.label3);
 			this.panel1.Controls.Add(this.label2);
@@ -190,6 +194,25 @@
 			this.comboBoxPointer.Name = "comboBoxPointer";
 			this.comboBoxPointer.Size = new System.Drawing.Size(414, 21);
 			this.comboBoxPointer.TabIndex = 17;
+			// 
+			// comboBoxEnums
+			// 
+			this.comboBoxEnums.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEnums.FormattingEnabled = true;
+			this.comboBoxEnums.Location = new System.Drawing.Point(123, 194);
+			this.comboBoxEnums.Name = "comboBoxEnums";
+			this.comboBoxEnums.Size = new System.Drawing.Size(414, 21);
+			this.comboBoxEnums.TabIndex = 19;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(3, 197);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(73, 13);
+			this.label6.TabIndex = 18;
+			this.label6.Text = "Перелічення:";
 			// 
 			// FieldForm
 			// 
@@ -225,5 +248,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.ComboBox comboBoxPointer;
+		private System.Windows.Forms.ComboBox comboBoxEnums;
+		private System.Windows.Forms.Label label6;
 	}
 }
