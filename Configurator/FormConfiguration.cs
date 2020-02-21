@@ -148,6 +148,10 @@ namespace Configurator
 			Conf = Program.Kernel.Conf;
 
 			LoadTree();
+
+			//Conf.Enums["Перелічення"].AppendField("Один", 1);
+			//Conf.Enums["Перелічення"].AppendField("Два", 2);
+			//Conf.Enums["Перелічення"].AppendField("Три", 3);
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

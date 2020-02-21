@@ -51,6 +51,12 @@ namespace AccountingSoftware
 			return Directory;
 		}
 
+		public ConfigurationEnums AppendEnum(ConfigurationEnums Enum)
+		{
+			Enums.Add(Enum.Name, Enum);
+			return Enum;
+		}
+
 		public List<string> SearchForPointers(string searchDirectoryName)
 		{
 			List<string> ListPointer = new List<string>();
@@ -320,6 +326,8 @@ namespace AccountingSoftware
 			LoadConfigurationInfo(Conf, xPathDocNavigator);
 
 			LoadDirectories(Conf, xPathDocNavigator);
+
+			LoadEnums(Conf, xPathDocNavigator);
 		}
 
 		private static void LoadConfigurationInfo(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -423,6 +431,31 @@ namespace AccountingSoftware
 			}
 		}
 
+		public static void LoadEnums(Configuration Conf, XPathNavigator xPathDocNavigator)
+		{
+			//Перелічення
+			XPathNodeIterator enumsNodes = xPathDocNavigator.Select("/Configuration/Enums/Enum");
+			while (enumsNodes.MoveNext())
+			{
+				string name = enumsNodes.Current.SelectSingleNode("Name").Value;
+				string desc = enumsNodes.Current.SelectSingleNode("Desc").Value;
+
+				if (String.IsNullOrWhiteSpace(desc)) desc = "";
+
+				ConfigurationEnums configurationEnums = new ConfigurationEnums(name, desc);
+				Conf.Enums.Add(configurationEnums.Name, configurationEnums);
+
+				XPathNodeIterator enumFieldsNodes = enumsNodes.Current.Select("Fields/Field");
+				while (enumFieldsNodes.MoveNext())
+				{
+					string nameField = enumFieldsNodes.Current.SelectSingleNode("Name").Value;
+					string valueField = enumFieldsNodes.Current.SelectSingleNode("Value").Value;
+
+					configurationEnums.AppendField(nameField, int.Parse(valueField));
+				}
+			}
+		}
+
 		public static void Save(string pathToConf, Configuration Conf)
 		{
 			string pathToCopyConf = CopyConfigurationFile(pathToConf);
@@ -437,9 +470,11 @@ namespace AccountingSoftware
 
 			SaveDirectories(Conf.Directories, xmlConfDocument, rootNode);
 
+			SaveEnums(Conf.Enums, xmlConfDocument, rootNode);
+
 			xmlConfDocument.Save(pathToConf);
 
-			ComparisonCopyAndNewConfigurationFile(pathToConf, pathToCopyConf);
+			//ComparisonCopyAndNewConfigurationFile(pathToConf, pathToCopyConf);
 		}
 
 		private static void SaveConfigurationInfo(Configuration Conf, XmlDocument xmlConfDocument, XmlElement rootNode)
@@ -552,8 +587,7 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, 
-			ConfigurationDirectories confDirectory, XmlDocument xmlConfDocument, XmlElement rootNode)
+		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, ConfigurationDirectories confDirectory, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
 			XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
 			rootNode.AppendChild(nodeViews);
@@ -626,7 +660,44 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static string CopyConfigurationFile(string pathToConf)
+		private static void SaveEnums(Dictionary<string, ConfigurationEnums> enums, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement nodeEnums = xmlConfDocument.CreateElement("Enums");
+			rootNode.AppendChild(nodeEnums);
+
+			foreach (KeyValuePair<string, ConfigurationEnums> enum_item in enums)
+			{
+				XmlElement nodeEnum = xmlConfDocument.CreateElement("Enum");
+				nodeEnums.AppendChild(nodeEnum);
+
+				XmlElement nodeEnumName = xmlConfDocument.CreateElement("Name");
+				nodeEnumName.InnerText = enum_item.Key;
+				nodeEnum.AppendChild(nodeEnumName);
+
+				XmlElement nodeEnumDesc = xmlConfDocument.CreateElement("Desc");
+				nodeEnumDesc.InnerText = enum_item.Value.Desc;
+				nodeEnum.AppendChild(nodeEnumDesc);
+
+				XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
+				nodeEnum.AppendChild(nodeFields);
+
+				foreach (KeyValuePair<string, int> field in enum_item.Value.Fields)
+				{
+					XmlElement nodeField = xmlConfDocument.CreateElement("Field");
+					nodeFields.AppendChild(nodeField);
+
+					XmlElement nodeFieldName = xmlConfDocument.CreateElement("Name");
+					nodeFieldName.InnerText = field.Key;
+					nodeField.AppendChild(nodeFieldName);
+
+					XmlElement nodeFieldValue = xmlConfDocument.CreateElement("Value");
+					nodeFieldValue.InnerText = field.Value.ToString();
+					nodeField.AppendChild(nodeFieldValue);
+				}
+			}
+		}
+
+		private static string CopyConfigurationFile(string pathToConf) // ??
 		{
 			if (File.Exists(pathToConf))
 			{
@@ -661,8 +732,6 @@ namespace AccountingSoftware
 
 			xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
 		}
-
-
 
 		public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode)
 		{
@@ -700,7 +769,5 @@ namespace AccountingSoftware
 
 			return slqList;
 		}
-
-
 	}
 }

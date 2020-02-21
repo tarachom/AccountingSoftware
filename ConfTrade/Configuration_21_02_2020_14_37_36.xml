@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>21.02.2020 15:41:25</DateTimeSave>
+  <DateTimeSave>21.02.2020 14:18:42</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2426,25 +2426,5 @@
       </Views>
     </Directory>
   </Directories>
-  <Enums>
-    <Enum>
-      <Name>Перелічення</Name>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Один</Name>
-          <Value>1</Value>
-        </Field>
-        <Field>
-          <Name>Два</Name>
-          <Value>2</Value>
-        </Field>
-        <Field>
-          <Name>Три</Name>
-          <Value>3</Value>
-        </Field>
-      </Fields>
-    </Enum>
-  </Enums>
+  <Enums />
 </Configuration>

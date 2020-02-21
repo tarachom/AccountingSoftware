@@ -12,10 +12,10 @@
     </xsl:for-each>
     
    </xsl:template>
-
+  
    <xsl:template match="/">
 
-    <html>
+<html>
   <title>HTML</title>
   <body>
     <table border="1">
@@ -31,5 +31,5 @@
 </html>
 
    </xsl:template>
+
 </xsl:stylesheet>
-    

@@ -20,6 +20,6 @@ namespace AccountingSoftware
 
 		public Dictionary<string, string> Fields { get; }
 
-		public List<string> Where { get; }
+		public List<string> Where { get; } // ? 
 	}
 }

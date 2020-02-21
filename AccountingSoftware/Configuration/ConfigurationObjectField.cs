@@ -37,6 +37,9 @@ namespace AccountingSoftware
 		/// </summary>
 		public string NameInTable { get; set; }
 
+		/// <summary>
+		/// Тип даних
+		/// </summary>
 		public string Type { get; set; }
 
 		/// <summary>
