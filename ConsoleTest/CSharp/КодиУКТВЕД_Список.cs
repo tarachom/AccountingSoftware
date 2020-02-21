@@ -1,6 +1,7 @@
 ﻿
     
 using System.Text;
+using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;

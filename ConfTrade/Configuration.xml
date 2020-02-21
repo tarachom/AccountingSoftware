@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>21.02.2020 20:59:00</DateTimeSave>
+  <DateTimeSave>21.02.2020 22:10:18</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2440,6 +2440,14 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Поле4</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Номенклатура</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2492,6 +2500,12 @@
               <NameInTable>col_a5</NameInTable>
               <Type>enum</Type>
               <Pointer>Перелічення2</Pointer>
+            </Field>
+            <Field>
+              <Name>Поле4</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Номенклатура</Pointer>
             </Field>
           </Fields>
         </View>

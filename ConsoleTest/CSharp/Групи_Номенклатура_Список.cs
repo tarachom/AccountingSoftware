@@ -1,6 +1,7 @@
 ﻿
     
 using System.Text;
+using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
@@ -18,15 +19,14 @@ namespace ConfTrade
             Довідники.Групи_Номенклатура_Список_View m_Групи_Номенклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
             
             m_Групи_Номенклатура_Список_View.QuerySelect.CreateTempTable = true;
-              string TempTable = m_Групи_Номенклатура_Список_View.QuerySelect.TempTable;
-              string[] Alias = m_Групи_Номенклатура_Список_View.Alias;
+              Dictionary<string, string> Alias = m_Групи_Номенклатура_Список_View.Alias;
               
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
             
             
             Довідники.Групи_Номенклатура_Список_View m_Групи_Номенклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
             m_Групи_Номенклатура_Список_View.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
-                "SELECT DISTINCT " + Alias["Родитель"] + " FROM " + TempTable, true)); /* col_a2 */
+                "SELECT DISTINCT " + Alias["Родитель"] + " FROM " + m_Групи_Номенклатура_Список_View.QuerySelect.TempTable, true)); /* col_a2 */
             sb.Append(m_Групи_Номенклатура_Список_View.Read());
                 
             

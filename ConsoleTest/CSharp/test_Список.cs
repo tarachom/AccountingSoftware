@@ -1,6 +1,7 @@
 ﻿
     
 using System.Text;
+using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
@@ -17,9 +18,17 @@ namespace ConfTrade
             
             Довідники.test_Список_View m_test_Список_View = new Довідники.test_Список_View();
             
+            m_test_Список_View.QuerySelect.CreateTempTable = true;
+              Dictionary<string, string> Alias = m_test_Список_View.Alias;
+              
             sb.Append(m_test_Список_View.Read());
             
             
+            Довідники.Номенклатура_Список_View m_Номенклатура_Список_View = new Довідники.Номенклатура_Список_View();
+            m_Номенклатура_Список_View.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
+                "SELECT DISTINCT " + Alias["Поле4"] + " FROM " + m_test_Список_View.QuerySelect.TempTable, true)); /* col_a6 */
+            sb.Append(m_Номенклатура_Список_View.Read());
+                
             
             sb.Append(@"<Enums>
 <Enum>

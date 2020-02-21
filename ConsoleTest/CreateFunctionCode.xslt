@@ -9,6 +9,7 @@
     <xsl:variable name="FullViewName" select="concat($DirectoryName, '_', Name, '_View')" />
     
 using System.Text;
+using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
@@ -29,9 +30,7 @@ namespace ConfTrade
               
               <xsl:text>m_</xsl:text>
               <xsl:value-of select="$FullViewName" />.QuerySelect.CreateTempTable = true;
-              <xsl:text>string TempTable = m_</xsl:text>
-              <xsl:value-of select="$FullViewName" />.QuerySelect.TempTable;
-              <xsl:text>string[] Alias = m_</xsl:text>
+              <xsl:text disable-output-escaping="yes">Dictionary&lt;string, string&gt; Alias = m_</xsl:text>
               <xsl:value-of select="$FullViewName" />.Alias;
               
             </xsl:if>
@@ -46,7 +45,7 @@ namespace ConfTrade
                   <xsl:variable name="FullFieldViewName" select="concat(Pointer, '_Список_View')" />
             Довідники.<xsl:value-of select="$FullFieldViewName" /> m_<xsl:value-of select="$FullFieldViewName" /> = new Довідники.<xsl:value-of select="$FullFieldViewName" />();
             m_<xsl:value-of select="$FullFieldViewName" />.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
-                "SELECT DISTINCT " + Alias["<xsl:value-of select="Name" />"] + " FROM " + TempTable, true)); /* <xsl:value-of select="NameInTable" /> */
+                "SELECT DISTINCT " + Alias["<xsl:value-of select="Name" />"] + " FROM " + m_<xsl:value-of select="$FullViewName" />.QuerySelect.TempTable, true)); /* <xsl:value-of select="NameInTable" /> */
             sb.Append(m_<xsl:value-of select="$FullFieldViewName" />.Read());
                 </xsl:when>
               </xsl:choose>

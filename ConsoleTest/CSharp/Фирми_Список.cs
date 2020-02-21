@@ -1,6 +1,7 @@
 ﻿
     
 using System.Text;
+using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
@@ -18,15 +19,14 @@ namespace ConfTrade
             Довідники.Фирми_Список_View m_Фирми_Список_View = new Довідники.Фирми_Список_View();
             
             m_Фирми_Список_View.QuerySelect.CreateTempTable = true;
-              string TempTable = m_Фирми_Список_View.QuerySelect.TempTable;
-              string[] Alias = m_Фирми_Список_View.Alias;
+              Dictionary<string, string> Alias = m_Фирми_Список_View.Alias;
               
             sb.Append(m_Фирми_Список_View.Read());
             
             
             Довідники.Сотрудники_Список_View m_Сотрудники_Список_View = new Довідники.Сотрудники_Список_View();
             m_Сотрудники_Список_View.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
-                "SELECT DISTINCT " + Alias["Руководитель"] + " FROM " + TempTable, true)); /* col_e4 */
+                "SELECT DISTINCT " + Alias["Руководитель"] + " FROM " + m_Фирми_Список_View.QuerySelect.TempTable, true)); /* col_e4 */
             sb.Append(m_Сотрудники_Список_View.Read());
                 
             

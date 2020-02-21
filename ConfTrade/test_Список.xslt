@@ -46,6 +46,7 @@
         <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення2</xsl:with-param><xsl:with-param name="value" select="ТипПоля" /></xsl:call-template></td>
         <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення</xsl:with-param><xsl:with-param name="value" select="Поле2" /></xsl:call-template></td>
         <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення2</xsl:with-param><xsl:with-param name="value" select="Поле3" /></xsl:call-template></td>
+        <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Номенклатура_Список" /><xsl:with-param name="uid" select="Поле4" /></xsl:call-template></td>
       </tr>
       </xsl:for-each>
       </table>

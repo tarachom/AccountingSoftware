@@ -311,6 +311,7 @@ namespace AccountingSoftware
 						case "time":
 						case "pointer":
 						case "empty_pointer":
+						case "enum":
 							{
 								xml += reader[field].ToString();
 								break;

@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <sql>ALTER TABLE tab_a16 ADD COLUMN "col_a5" integer;</sql>
+  <sql>ALTER TABLE tab_a16 ADD COLUMN "col_a6" uuid;</sql>
 </root>
