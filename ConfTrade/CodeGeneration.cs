@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 21.02.2020 22:10:18
+ * Дата конфігурації: 24.02.2020 11:00:40
  *
  */
 
@@ -1474,7 +1474,7 @@ namespace ConfTrade_v1_1.Directory
             ВалютаВзаиморасчетов = new Валюти_Pointer();
             ВалютаКредита = new Валюти_Pointer();
             ВалютаКредитаПоставщика = new Валюти_Pointer();
-            ВидКонтрагента = new DirectoryEmptyPointer();
+            ВидКонтрагента = 0;
             Глубина = 0;
             ГлубинаКредитаПоставщика = 0;
             ДокументДатаВидачи = DateTime.MinValue;
@@ -1515,7 +1515,7 @@ namespace ConfTrade_v1_1.Directory
                 ВалютаВзаиморасчетов = new Валюти_Pointer(base.FieldValue["col_c4"]);
                 ВалютаКредита = new Валюти_Pointer(base.FieldValue["col_a1"]);
                 ВалютаКредитаПоставщика = new Валюти_Pointer(base.FieldValue["col_a2"]);
-                ВидКонтрагента = new DirectoryEmptyPointer();
+                ВидКонтрагента = (Enums.ВидиКонтрагентов)base.FieldValue["col_a3"];
                 Глубина = (base.FieldValue["col_a4"] != DBNull.Value) ? (int)base.FieldValue["col_a4"] : 0;
                 ГлубинаКредитаПоставщика = (base.FieldValue["col_a5"] != DBNull.Value) ? (int)base.FieldValue["col_a5"] : 0;
                 ДокументДатаВидачи = (base.FieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a6"].ToString()) : DateTime.MinValue;
@@ -1553,7 +1553,7 @@ namespace ConfTrade_v1_1.Directory
             base.FieldValue["col_c4"] = ВалютаВзаиморасчетов.UnigueID.UGuid;
             base.FieldValue["col_a1"] = ВалютаКредита.UnigueID.UGuid;
             base.FieldValue["col_a2"] = ВалютаКредитаПоставщика.UnigueID.UGuid;
-            base.FieldValue["col_a3"] = ВидКонтрагента.UnigueID.UGuid;
+            base.FieldValue["col_a3"] = (int)ВидКонтрагента;
             base.FieldValue["col_a4"] = Глубина;
             base.FieldValue["col_a5"] = ГлубинаКредитаПоставщика;
             base.FieldValue["col_a6"] = ДокументДатаВидачи;
@@ -1596,7 +1596,7 @@ namespace ConfTrade_v1_1.Directory
         public Валюти_Pointer ВалютаВзаиморасчетов { get; set; }
         public Валюти_Pointer ВалютаКредита { get; set; }
         public Валюти_Pointer ВалютаКредитаПоставщика { get; set; }
-        public DirectoryEmptyPointer ВидКонтрагента { get; set; }
+        public Enums.ВидиКонтрагентов ВидКонтрагента { get; set; }
         public int Глубина { get; set; }
         public int ГлубинаКредитаПоставщика { get; set; }
         public DateTime ДокументДатаВидачи { get; set; }
@@ -2064,9 +2064,9 @@ namespace ConfTrade_v1_1.Directory
     class Контрагенти_Список_View : DirectoryView
     {
         public Контрагенти_Список_View() : base(Config.Kernel, "tab_a12", 
-             new string[] { "col_c9" },
-             new string[] { "Назва" },
-             new string[] { "string" },
+             new string[] { "col_c9", "col_a3" },
+             new string[] { "Назва", "ВидКонтрагента" },
+             new string[] { "string", "enum" },
              "Контрагенти_Список")
         {
             
@@ -6152,10 +6152,146 @@ namespace ConfTrade_v1_1.Directory
     class test_Список_View : DirectoryView
     {
         public test_Список_View() : base(Config.Kernel, "tab_a16", 
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
-             new string[] { "Назва", "Код", "ТипПоля", "Поле2", "Поле3", "Поле4" },
-             new string[] { "string", "string", "enum", "enum", "enum", "pointer" },
+             new string[] { "col_a3", "col_a2", "col_a1" },
+             new string[] { "ТипПоля", "Код", "Назва" },
+             new string[] { "enum", "string", "string" },
              "test_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "test2"
+    
+    
+    class test2_Objest : DirectoryObject
+    {
+        public test2_Objest() : base(Config.Kernel, "tab_a48",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            Назва = "";
+            Код = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public test2_Pointer GetDirectoryPointer()
+        {
+            test2_Pointer directoryPointer = new test2_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class test2_Pointer : DirectoryPointer
+    {
+        public test2_Pointer(object uid = null) : base(Config.Kernel, "tab_a48")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public test2_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a48")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public test2_Objest GetDirectoryObject()
+        {
+            test2_Objest test2ObjestItem = new test2_Objest();
+            test2ObjestItem.Read(base.UnigueID);
+            return test2ObjestItem;
+        }
+    }
+    
+    
+    class test2_Select : DirectorySelect, IDisposable
+    {
+        public test2_Select() : base(Config.Kernel, "tab_a48") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new test2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public test2_Pointer Current { get; private set; }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class test2_Список_View : DirectoryView
+    {
+        public test2_Список_View() : base(Config.Kernel, "tab_a48", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "test2_Список")
         {
             
         }
@@ -6187,6 +6323,17 @@ namespace ConfTrade_v1_1.Enums
          Один = 1,
          Два = 2,
          Три = 3
+    }
+    
+    ///<summary>
+    ///ВидыКонтрагентов.
+    ///</summary>
+    public enum ВидиКонтрагентов
+    {
+         Организация = 1,
+         ЧастноеЛицо = 2,
+         Нерезидент = 3,
+         Безналоговые = 4
     }
     
     

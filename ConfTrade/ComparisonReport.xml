@@ -521,10 +521,11 @@
       <NameInTable>col_a3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>empty_pointer</ConfType>
+        <ConfType>enum</ConfType>
         <DataType>uuid</DataType>
         <UdtName>uuid</UdtName>
-        <Coincide>yes</Coincide>
+        <Coincide>no</Coincide>
+        <DataTypeCreate>integer</DataTypeCreate>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -2762,13 +2763,13 @@
     <Control_Field>
       <Name>Поле4</Name>
       <NameInTable>col_a6</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Поле4</Name>
-        <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>pointer</ConfType>
         <DataType>uuid</DataType>
-      </FieldCreate>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>esddf</Name>
@@ -2786,5 +2787,32 @@
         </Type>
       </Control_Field>
     </Control_TabularParts>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>test2</Name>
+    <Table>tab_a48</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Directory>
 </root>

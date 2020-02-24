@@ -3,7 +3,6 @@
 
    <xsl:output method="html" indent="yes" />
    <xsl:include  href="../Function.xslt" />                 
-  
    
    <xsl:template match="/">
     <html>

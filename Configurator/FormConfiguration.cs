@@ -136,8 +136,30 @@ namespace Configurator
 				//directoryNode.Expand();
 			}
 
+			TreeNode enumsNode = rootNode.Nodes.Add("Enums", "Перелічення");
+			enumsNode.SelectedImageIndex = 3;
+			enumsNode.ImageIndex = 3;
+
+			foreach (KeyValuePair<string, ConfigurationEnums> ConfEnum in Conf.Enums) 
+			{
+				TreeNode enumNode = enumsNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
+				enumNode.ContextMenuStrip = contextMenuStrip2;
+				enumNode.SelectedImageIndex = 1;
+				enumNode.ImageIndex = 1;
+
+				//Поля
+				foreach (KeyValuePair<string, int> ConfEnumFields in ConfEnum.Value.Fields)
+				{
+					TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.ToString(), ConfEnumFields.Key);
+
+					enumFieldNode.SelectedImageIndex = 0;
+					enumFieldNode.ImageIndex = 0;
+				}
+			}
+
 			rootNode.Expand();
 			directoriesNode.Expand();
+			enumsNode.Expand();
 		}
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
@@ -285,6 +307,24 @@ namespace Configurator
 		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SaveConf();
+		}
+
+		private void openEnumItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string directoryName = nodeSel.Name;
+
+				MessageBox.Show(directoryName);
+
+				//Configuration Conf = Program.Kernel.Conf;
+
+				//DirectoryForm directoryForm = new DirectoryForm();
+				//directoryForm.ConfDirectory = Conf.Directories[directoryName];
+				//directoryForm.CallBack = CallBack_Update_Directory;
+				//directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
+				//directoryForm.Show();
+			}
 		}
 	}
 }

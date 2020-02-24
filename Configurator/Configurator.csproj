@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EnumForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnumForm.Designer.cs">
+      <DependentUpon>EnumForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EnumForm.resx">
+      <DependentUpon>EnumForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>
     </EmbeddedResource>

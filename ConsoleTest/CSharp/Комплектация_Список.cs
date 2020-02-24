@@ -21,10 +21,6 @@ namespace ConfTrade
             sb.Append(m_Комплектация_Список_View.Read());
             
             
-            
-            sb.Append(@"<Enums>
-</Enums>
-");    
             sb.Append("</root>");
             return sb.ToString();
         }

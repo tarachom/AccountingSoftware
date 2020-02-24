@@ -29,10 +29,6 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Родитель"] + " FROM " + m_Групи_МестаХранения_Список_View.QuerySelect.TempTable, true)); /* col_a3 */
             sb.Append(m_МестаХранения_Список_View.Read());
                 
-            
-            sb.Append(@"<Enums>
-</Enums>
-");    
             sb.Append("</root>");
             return sb.ToString();
         }

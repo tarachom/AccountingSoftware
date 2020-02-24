@@ -29,10 +29,6 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Товар"] + " FROM " + m_Прайс_лист_Список_View.QuerySelect.TempTable, true)); /* col_a1 */
             sb.Append(m_Номенклатура_Список_View.Read());
                 
-            
-            sb.Append(@"<Enums>
-</Enums>
-");    
             sb.Append("</root>");
             return sb.ToString();
         }

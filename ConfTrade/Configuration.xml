@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>21.02.2020 22:10:18</DateTimeSave>
+  <DateTimeSave>24.02.2020 11:00:40</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -553,7 +553,8 @@
         <Field>
           <Name>ВидКонтрагента</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>empty_pointer</Type>
+          <Type>enum</Type>
+          <Pointer>ВидиКонтрагентов</Pointer>
           <Desc>ВидКонтрагента. Перелічення</Desc>
         </Field>
         <Field>
@@ -804,6 +805,12 @@
               <Name>Назва</Name>
               <NameInTable>col_c9</NameInTable>
               <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>ВидКонтрагента</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>ВидиКонтрагентов</Pointer>
             </Field>
           </Fields>
         </View>
@@ -2474,6 +2481,52 @@
           <Desc>Список</Desc>
           <Fields>
             <Field>
+              <Name>ТипПоля</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення2</Pointer>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>test2</Name>
+      <Table>tab_a48</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a48</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
               <Name>Назва</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>string</Type>
@@ -2482,30 +2535,6 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>ТипПоля</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення2</Pointer>
-            </Field>
-            <Field>
-              <Name>Поле2</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення</Pointer>
-            </Field>
-            <Field>
-              <Name>Поле3</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення2</Pointer>
-            </Field>
-            <Field>
-              <Name>Поле4</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Номенклатура</Pointer>
             </Field>
           </Fields>
         </View>
@@ -2548,6 +2577,28 @@
         <Field>
           <Name>Три</Name>
           <Value>3</Value>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>ВидиКонтрагентов</Name>
+      <Desc>ВидыКонтрагентов</Desc>
+      <Fields>
+        <Field>
+          <Name>Организация</Name>
+          <Value>1</Value>
+        </Field>
+        <Field>
+          <Name>ЧастноеЛицо</Name>
+          <Value>2</Value>
+        </Field>
+        <Field>
+          <Name>Нерезидент</Name>
+          <Value>3</Value>
+        </Field>
+        <Field>
+          <Name>Безналоговые</Name>
+          <Value>4</Value>
         </Field>
       </Fields>
     </Enum>

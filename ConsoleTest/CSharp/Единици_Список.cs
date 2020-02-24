@@ -29,10 +29,6 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["Единица"] + " FROM " + m_Единици_Список_View.QuerySelect.TempTable, true)); /* col_a9 */
             sb.Append(m_КлассификаторЕдИзм_Список_View.Read());
                 
-            
-            sb.Append(@"<Enums>
-</Enums>
-");    
             sb.Append("</root>");
             return sb.ToString();
         }

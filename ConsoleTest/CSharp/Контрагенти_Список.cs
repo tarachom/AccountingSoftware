@@ -21,10 +21,32 @@ namespace ConfTrade
             sb.Append(m_Контрагенти_Список_View.Read());
             
             
-            
             sb.Append(@"<Enums>
+<Enum>
+  <Name>ВидиКонтрагентов</Name>
+  <Desc>ВидыКонтрагентов</Desc>
+  <Fields>
+    <Field>
+      <Name>Организация</Name>
+      <Value>1</Value>
+    </Field>
+    <Field>
+      <Name>ЧастноеЛицо</Name>
+      <Value>2</Value>
+    </Field>
+    <Field>
+      <Name>Нерезидент</Name>
+      <Value>3</Value>
+    </Field>
+    <Field>
+      <Name>Безналоговые</Name>
+      <Value>4</Value>
+    </Field>
+  </Fields>
+</Enum>
 </Enums>
-");    
+");
+            
             sb.Append("</root>");
             return sb.ToString();
         }

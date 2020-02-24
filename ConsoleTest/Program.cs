@@ -51,7 +51,7 @@ namespace ConsoleTest
 
 					//------------------>
 
-					string xml = "<Enums>\n";
+					string xml = "";
 					List<string> UsingEnums = new List<string>();
 
 					XPathNodeIterator nodeFieldEnumType = nodeView.Current.Select("Fields/Field[Type = 'enum']");
@@ -70,7 +70,8 @@ namespace ConsoleTest
 						}
 					}
 
-					xml += "</Enums>\n";
+					if (!String.IsNullOrWhiteSpace(xml))
+						xml = "<Enums>\n" + xml + "</Enums>\n";
 
 					xsltArgumentList.AddParam("XmlHeap", "", xml);
 					//<------------------

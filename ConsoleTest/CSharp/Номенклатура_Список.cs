@@ -29,10 +29,6 @@ namespace ConfTrade
                 "SELECT DISTINCT " + Alias["ВалютаУчета"] + " FROM " + m_Номенклатура_Список_View.QuerySelect.TempTable, true)); /* col_d3 */
             sb.Append(m_Валюти_Список_View.Read());
                 
-            
-            sb.Append(@"<Enums>
-</Enums>
-");    
             sb.Append("</root>");
             return sb.ToString();
         }

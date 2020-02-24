@@ -43,6 +43,8 @@
 			this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.openEnumItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -50,6 +52,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataConfiguration)).BeginInit();
 			this.menuStripTop.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
+			this.contextMenuStrip2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainerBase
@@ -174,6 +177,20 @@
 			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
 			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
 			// 
+			// contextMenuStrip2
+			// 
+			this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openEnumItem});
+			this.contextMenuStrip2.Name = "contextMenuStrip2";
+			this.contextMenuStrip2.Size = new System.Drawing.Size(181, 48);
+			// 
+			// openEnumItem
+			// 
+			this.openEnumItem.Name = "openEnumItem";
+			this.openEnumItem.Size = new System.Drawing.Size(180, 22);
+			this.openEnumItem.Text = "Відкрити";
+			this.openEnumItem.Click += new System.EventHandler(this.openEnumItem_Click);
+			// 
 			// FormConfiguration
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,6 +212,7 @@
 			this.menuStripTop.ResumeLayout(false);
 			this.menuStripTop.PerformLayout();
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.contextMenuStrip2.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -215,6 +233,8 @@
 		private System.Windows.Forms.ToolStripMenuItem copyDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deleteDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+		private System.Windows.Forms.ToolStripMenuItem openEnumItem;
 	}
 }
 

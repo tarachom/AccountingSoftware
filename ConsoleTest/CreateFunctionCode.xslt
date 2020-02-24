@@ -51,8 +51,10 @@ namespace ConfTrade
               </xsl:choose>
     
             </xsl:for-each>
-            
-            sb.Append(@"<xsl:value-of select="$XmlHeap"/>");    
+
+            <xsl:if test="normalize-space($XmlHeap) != ''">
+            sb.Append(@"<xsl:value-of select="$XmlHeap"/>");
+            </xsl:if>
             sb.Append("<xsl:text disable-output-escaping="yes">&lt;/root&gt;</xsl:text>");
             return sb.ToString();
         }
