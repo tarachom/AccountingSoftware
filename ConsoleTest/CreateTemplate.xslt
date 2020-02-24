@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" indent="yes"/>
-
+  
   <xsl:param name="DirectoryName" />
 
   <xsl:template match="View">
@@ -9,38 +9,8 @@
 &lt;xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" &gt;
 
    &lt;xsl:output method="html" indent="yes" /&gt;
+   &lt;xsl:include  href="../Function.xslt" /&gt;                 
    
-
-   <!---->
-   &lt;xsl:template name="GetNameOd"&gt;
-    &lt;xsl:param name="list" /&gt;
-    &lt;xsl:param name="uid" /&gt;
-    &lt;xsl:for-each select="$list/row[uid = $uid]"&gt;
-      &lt;xsl:value-of select="Назва"/&gt;
-    &lt;/xsl:for-each&gt;    
-   &lt;/xsl:template&gt;
-
-   <!---->
-   &lt;xsl:template name="GetNameSelect"&gt;
-     &lt;xsl:param name="pointer" /&gt;
-     &lt;xsl:param name="value" /&gt;
-     &lt;select&gt;
-     &lt;xsl:for-each select="/root/Enums/Enum[Name = $pointer]/Fields/Field"&gt;
-        &lt;option&gt;
-          &lt;xsl:attribute name="value"&gt;
-            &lt;xsl:value-of select="Value"/&gt;
-          &lt;/xsl:attribute&gt;
-          &lt;xsl:if test="$value = Value"&gt;
-             &lt;xsl:attribute name="selected"&gt;selected&lt;/xsl:attribute&gt;          
-          &lt;/xsl:if&gt;
-          &lt;xsl:value-of select="Name"/&gt;
-       &lt;/option&gt;
-    &lt;/xsl:for-each&gt;
-    &lt;/select&gt;
-   &lt;/xsl:template&gt;
-                      
-  
-   <!---->
    &lt;xsl:template match="/"&gt;
     </xsl:text>
 

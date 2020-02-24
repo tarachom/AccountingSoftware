@@ -285,6 +285,24 @@ namespace AccountingSoftware
 
 					switch (directoryView.AliasFieldType[field])
 					{
+						case "string":
+							{
+								xml += "<![CDATA[" + reader[field].ToString() + "]]>";
+								break;
+							}
+						case "integer":
+						case "numeric":
+						case "boolean":
+						case "date":
+						case "datetime":
+						case "time":
+						case "pointer":
+						case "empty_pointer":
+						case "enum":
+							{
+								xml += reader[field].ToString();
+								break;
+							}
 						case "string[]":
 							{
 								string[] mas = (string[])reader[field];
@@ -301,19 +319,6 @@ namespace AccountingSoftware
 							{
 								decimal[] mas = (decimal[])reader[field];
 								foreach (decimal elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
-								break;
-							}
-						case "integer":
-						case "numeric":
-						case "boolean":
-						case "date":
-						case "datetime":
-						case "time":
-						case "pointer":
-						case "empty_pointer":
-						case "enum":
-							{
-								xml += reader[field].ToString();
 								break;
 							}
 						default:

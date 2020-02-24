@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreateFunctionCode.xslt" />
+    <Content Include="Function.xslt" />
     <Content Include="old\Include.xslt" />
     <Content Include="CreateTemplate.xslt" />
     <Content Include="XSLT\test_Список.xslt" />

@@ -72,7 +72,7 @@ namespace ConsoleTest
 
 					xml += "</Enums>\n";
 
-					xsltArgumentList.AddParam("xml", "", xml);
+					xsltArgumentList.AddParam("XmlHeap", "", xml);
 					//<------------------
 
 					string filename2 = "../../CSharp/" + directoryName + "_" + viewName + ".cs";
