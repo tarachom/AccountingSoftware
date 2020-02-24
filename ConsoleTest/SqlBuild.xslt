@@ -2,55 +2,67 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:msxsl="urn:schemas-microsoft-com:xslt" exclude-result-prefixes="msxsl">
 
-  <xsl:output method="text" indent="yes"/>
+  <xsl:output method="xml" indent="yes"/>
 
   <xsl:template match="/">
 
-    <xsl:variable name="НоменклатураНазва">Номенклатура</xsl:variable>
-    <xsl:variable name="Номенклатура" select="Configuration/Directories/Directory[Name = $НоменклатураНазва]" />
-    <xsl:variable name="Номенклатура.Таблиця" select="$Номенклатура/Table" />
-    <xsl:variable name="Номенклатура.Поля" select="$Номенклатура/Fields/Field" />
+    <root>
 
-    <xsl:variable name="Номенклатура.Вибірка">
-      <Поле>Код</Поле>
-      <Поле>Назва</Поле>
-      <Поле>ПолнНаименование</Поле>
-    </xsl:variable>
+      <xsl:variable name="НоменклатураНазва">Номенклатура</xsl:variable>
+      <xsl:variable name="Номенклатура" select="Configuration/Directories/Directory[Name = $НоменклатураНазва]" />
+      <xsl:variable name="Номенклатура.Таблиця" select="$Номенклатура/Table" />
+      <xsl:variable name="Номенклатура.Поля" select="$Номенклатура/Fields/Field" />
 
-    <xsl:variable name="ВалютиНазва">Валюти</xsl:variable>
-    <xsl:variable name="Валюти" select="Configuration/Directories/Directory[Name = $ВалютиНазва]" />
-    <xsl:variable name="Валюти.Таблиця" select="$Валюти/Table" />
-    <xsl:variable name="Валюти.Поля" select="$Валюти/Fields/Field" />
+      <xsl:variable name="Номенклатура-Вибірка">
+        <Поле>Код</Поле>
+        <Поле>Назва</Поле>
+        <Поле>ПолнНаименование</Поле>
+      </xsl:variable>
 
-    <xsl:variable name="Валюти.Вибірка">
-      <Поле>Код</Поле>
-      <Поле>Назва</Поле>
-    </xsl:variable>
+      <xsl:variable name="ВалютиНазва">Валюти</xsl:variable>
+      <xsl:variable name="Валюти" select="Configuration/Directories/Directory[Name = $ВалютиНазва]" />
+      <xsl:variable name="Валюти.Таблиця" select="$Валюти/Table" />
+      <xsl:variable name="Валюти.Поля" select="$Валюти/Fields/Field" />
 
+      <xsl:variable name="Валюти-Вибірка">
+        <Поле>Код</Поле>
+        <Поле>Назва</Поле>
+        <Поле>Курс</Поле>
+      </xsl:variable>
 
-    SELECT
+      <sql>
 
-    <xsl:for-each select="msxsl:node-set($Номенклатура.Вибірка)/Поле">
-      <xsl:variable name="НазваПоля" select="text()" />
-      <xsl:variable name="Current" select="$Номенклатура.Поля[Name = $НазваПоля]" />
-      <xsl:value-of select="$Номенклатура.Таблиця" />.<xsl:value-of select="$Current/NameInTable" /> AS <xsl:value-of select="$НоменклатураНазва"/>_<xsl:value-of select="$Current/Name" />,
-    </xsl:for-each>
+        SELECT
 
-    <xsl:for-each select="msxsl:node-set($Валюти.Вибірка)/Поле">
-      <xsl:variable name="НазваПоля" select="text()" />
-      <xsl:variable name="Current" select="$Валюти.Поля[Name = $НазваПоля]" />
-      <xsl:if test="position() > 1">,
-      </xsl:if>
-      <xsl:value-of select="$Валюти.Таблиця" />.<xsl:value-of select="$Current/NameInTable" /> AS <xsl:value-of select="$ВалютиНазва"/>_<xsl:value-of select="$Current/Name" />
-    </xsl:for-each>
+        <xsl:for-each select="msxsl:node-set($Номенклатура-Вибірка)/Поле">
+          <xsl:variable name="НазваПоля" select="text()" />
+          <xsl:variable name="Current" select="$Номенклатура.Поля[Name = $НазваПоля]" />
+          <xsl:value-of select="concat($Номенклатура.Таблиця, '.', $Current/NameInTable, ' AS ', $НоменклатураНазва, '_', $Current/Name)" />,
+        </xsl:for-each>
 
-    FROM TABLE
+        <xsl:for-each select="msxsl:node-set($Валюти-Вибірка)/Поле">
+          <xsl:variable name="НазваПоля" select="text()" />
+          <xsl:variable name="Current" select="$Валюти.Поля[Name = $НазваПоля]" />
+          <xsl:if test="position() > 1">
+            <xsl:text>, 
+          </xsl:text>
+          </xsl:if>
+          <xsl:value-of select="concat($Валюти.Таблиця, '.', $Current/NameInTable, ' AS ', $ВалютиНазва, '_', $Current/Name)" />
+        </xsl:for-each>
 
-    <xsl:value-of select="$Номенклатура.Таблиця" />,
-    <xsl:value-of select="$Валюти.Таблиця" />
+        FROM TABLE
 
-    ORDER BY <xsl:value-of select="$НоменклатураНазва"/>_Код
+        <xsl:value-of select="$Номенклатура.Таблиця" />,
+        <xsl:value-of select="$Валюти.Таблиця" />
 
+      </sql>
+
+      <sql>
+        SELECT
+        FROM
+        WHERE
+      </sql>
+    </root>
   </xsl:template>
 
 </xsl:stylesheet>

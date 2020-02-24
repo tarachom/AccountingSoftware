@@ -33,6 +33,8 @@ namespace ConsoleTest
 		{
 			CreatSQL();
 
+			return;
+
 			Console.ReadLine();
 
 
