@@ -48,14 +48,20 @@ namespace Configurator
 		{
 			string name = textBoxName.Text;
 			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
+			textBoxName.Text = name;
 
 			if (errorList.Length > 0)
 			{
-				textBoxName.Text = name;
 				MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
 				return;
 			}
+
+			if (IsNew || OriginalName != name)
+				if (CallBack_IsExistEnums(name))
+				{
+					MessageBox.Show("Назва перелічення не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 
 			ConfEnums.Name = textBoxName.Text;
 			ConfEnums.Desc = textBoxDesc.Text;

@@ -1,8 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>uuiduuid</info>
-  <sql>BEGIN;</sql>
-  <sql>ALTER TABLE tab_a12 RENAME COLUMN "col_a3" TO "col_a3_old_24_02_2020_11_00_41";</sql>
-  <sql>ALTER TABLE tab_a12 ADD COLUMN "col_a3" integer;</sql>
-  <sql>COMMIT;</sql>
-</root>
+<root />

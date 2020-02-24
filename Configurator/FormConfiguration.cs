@@ -170,10 +170,6 @@ namespace Configurator
 			Conf = Program.Kernel.Conf;
 
 			LoadTree();
-
-			//Conf.Enums["Перелічення"].AppendField("Один", 1);
-			//Conf.Enums["Перелічення"].AppendField("Два", 2);
-			//Conf.Enums["Перелічення"].AppendField("Три", 3);
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -226,6 +222,53 @@ namespace Configurator
 				else
 				{
 					Conf.Directories[originalName] = configurationDirectories;
+				}
+			}
+
+			LoadTree();
+		}
+
+		bool CallBack_IsExistEnumName(string name)
+		{
+			return Conf.Enums.ContainsKey(name);
+		}
+
+		void CallBack_Update_Enum(string originalName, ConfigurationEnums  configurationEnum, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendEnum(configurationEnum);
+			}
+			else
+			{
+				if (originalName != configurationEnum.Name)
+				{
+					List<string> ListPointers = Conf.SearchForPointersEnum(originalName);
+					if (ListPointers.Count == 0)
+					{
+						Conf.Enums.Remove(originalName);
+						Conf.AppendEnum(configurationEnum);
+					}
+					else
+					{
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() + 
+							" вказівники на перелічення \"" + originalName + "\":\n";
+
+						foreach (string item in ListPointers)
+							textListPointer += " -> " + item + "\n";
+
+						textListPointer += "\nПерейменувати неможливо";
+
+						MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() +
+							" вказівники на перелічення", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+						configurationEnum.Name = originalName;
+						Conf.Enums[originalName] = configurationEnum;
+					}
+				}
+				else
+				{
+					Conf.Enums[originalName] = configurationEnum;
 				}
 			}
 
@@ -313,18 +356,24 @@ namespace Configurator
 		{
 			if (nodeSel != null)
 			{
-				string directoryName = nodeSel.Name;
+				string enumName = nodeSel.Name;
 
-				MessageBox.Show(directoryName);
+				Configuration Conf = Program.Kernel.Conf;
 
-				//Configuration Conf = Program.Kernel.Conf;
-
-				//DirectoryForm directoryForm = new DirectoryForm();
-				//directoryForm.ConfDirectory = Conf.Directories[directoryName];
-				//directoryForm.CallBack = CallBack_Update_Directory;
-				//directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
-				//directoryForm.Show();
+				EnumForm enumForm = new EnumForm();
+				enumForm.ConfEnums = Conf.Enums[enumName];
+				enumForm.CallBack = CallBack_Update_Enum;
+				enumForm.CallBack_IsExistEnums = CallBack_IsExistEnumName;
+				enumForm.Show();
 			}
+		}
+
+		private void addEnumToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			EnumForm enumForm = new EnumForm();
+			enumForm.CallBack = CallBack_Update_Enum;
+			enumForm.CallBack_IsExistEnums = CallBack_IsExistEnumName;
+			enumForm.Show();
 		}
 	}
 }

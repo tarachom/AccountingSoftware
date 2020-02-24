@@ -45,6 +45,7 @@
 			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openEnumItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -120,6 +121,7 @@
 			// 
 			this.DirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addDirectoryToolStripMenuItem,
+            this.addEnumToolStripMenuItem,
             this.saveConfigurationToolStripMenuItem});
 			this.DirectoryToolStripMenuItem.Name = "DirectoryToolStripMenuItem";
 			this.DirectoryToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
@@ -128,8 +130,8 @@
 			// addDirectoryToolStripMenuItem
 			// 
 			this.addDirectoryToolStripMenuItem.Name = "addDirectoryToolStripMenuItem";
-			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
-			this.addDirectoryToolStripMenuItem.Text = "Додати довідник";
+			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.addDirectoryToolStripMenuItem.Text = "Додати новий довідник";
 			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
 			// 
 			// saveConfigurationToolStripMenuItem
@@ -182,7 +184,7 @@
 			this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openEnumItem});
 			this.contextMenuStrip2.Name = "contextMenuStrip2";
-			this.contextMenuStrip2.Size = new System.Drawing.Size(181, 48);
+			this.contextMenuStrip2.Size = new System.Drawing.Size(123, 26);
 			// 
 			// openEnumItem
 			// 
@@ -190,6 +192,13 @@
 			this.openEnumItem.Size = new System.Drawing.Size(180, 22);
 			this.openEnumItem.Text = "Відкрити";
 			this.openEnumItem.Click += new System.EventHandler(this.openEnumItem_Click);
+			// 
+			// addEnumToolStripMenuItem
+			// 
+			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
+			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
+			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
 			// 
 			// FormConfiguration
 			// 
@@ -235,6 +244,7 @@
 		private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
 		private System.Windows.Forms.ToolStripMenuItem openEnumItem;
+		private System.Windows.Forms.ToolStripMenuItem addEnumToolStripMenuItem;
 	}
 }
 

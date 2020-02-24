@@ -98,6 +98,47 @@ namespace AccountingSoftware
 			return ListPointer;
 		}
 
+		public List<string> SearchForPointersEnum(string searchEnumName)
+		{
+			List<string> ListPointer = new List<string>();
+
+			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на перелічення
+			foreach (ConfigurationDirectories directoryItem in Directories.Values)
+			{
+				//Поля довідника
+				foreach (ConfigurationObjectField directoryField in directoryItem.Fields.Values)
+				{
+					if (directoryField.Type == "enum")
+					{
+						if (directoryField.Pointer == searchEnumName)
+						{
+							//pointer
+							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
+						}
+					}
+				}
+
+				//Табличні частини
+				foreach (ConfigurationObjectTablePart directoryTablePart in directoryItem.TabularParts.Values)
+				{
+					//Поля табличної частини
+					foreach (ConfigurationObjectField tablePartField in directoryTablePart.Fields.Values)
+					{
+						if (tablePartField.Type == "enum")
+						{
+							if (tablePartField.Pointer == searchEnumName)
+							{
+								//pointer
+								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
+							}
+						}
+					}
+				}
+			}
+
+			return ListPointer;
+		}
+
 		public static void WriteLog(string txt)
 		{
 			File.AppendAllText(@"D:\log.txt", txt + "\n");
@@ -272,7 +313,7 @@ namespace AccountingSoftware
 					configurationObjectModificeName += checkChar;
 				}
 				else
-					errorList += "Недопустимий символ: " + "[" + checkChar + "]\n";
+					errorList += "Недопустимий символ (" + i.ToString() + "): " + "[" + checkChar + "]\n";
 			}
 
 			configurationObjectName = configurationObjectModificeName;

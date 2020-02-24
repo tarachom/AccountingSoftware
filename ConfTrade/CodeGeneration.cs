@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 24.02.2020 11:00:40
+ * Дата конфігурації: 24.02.2020 12:46:25
  *
  */
 
@@ -6301,6 +6301,146 @@ namespace ConfTrade_v1_1.Directory
     
     #endregion
     
+    #region DIRECTORY "вапвапв"
+    
+    
+    class вапвапв_Objest : DirectoryObject
+    {
+        public вапвапв_Objest() : base(Config.Kernel, "tab_a49",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        {
+            Назва = "";
+            Код = "";
+            іваіваіваівjj = "";
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                іваіваіваівjj = base.FieldValue["col_a3"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = іваіваіваівjj;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public вапвапв_Pointer GetDirectoryPointer()
+        {
+            вапвапв_Pointer directoryPointer = new вапвапв_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public string іваіваіваівjj { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class вапвапв_Pointer : DirectoryPointer
+    {
+        public вапвапв_Pointer(object uid = null) : base(Config.Kernel, "tab_a49")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public вапвапв_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a49")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public вапвапв_Objest GetDirectoryObject()
+        {
+            вапвапв_Objest вапвапвObjestItem = new вапвапв_Objest();
+            вапвапвObjestItem.Read(base.UnigueID);
+            return вапвапвObjestItem;
+        }
+    }
+    
+    
+    class вапвапв_Select : DirectorySelect, IDisposable
+    {
+        public вапвапв_Select() : base(Config.Kernel, "tab_a49") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new вапвапв_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public вапвапв_Pointer Current { get; private set; }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class вапвапв_Список_View : DirectoryView
+    {
+        public вапвапв_Список_View() : base(Config.Kernel, "tab_a49", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "вапвапв_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
 }
 
 namespace ConfTrade_v1_1.Enums
@@ -6334,6 +6474,12 @@ namespace ConfTrade_v1_1.Enums
          ЧастноеЛицо = 2,
          Нерезидент = 3,
          Безналоговые = 4
+    }
+    
+    
+    public enum test
+    {
+         
     }
     
     

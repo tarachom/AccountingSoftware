@@ -522,10 +522,9 @@
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>enum</ConfType>
-        <DataType>uuid</DataType>
-        <UdtName>uuid</UdtName>
-        <Coincide>no</Coincide>
-        <DataTypeCreate>integer</DataTypeCreate>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -2806,6 +2805,44 @@
     <Control_Field>
       <Name>Код</Name>
       <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>вапвапв</Name>
+    <Table>tab_a49</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>іваіваіваівjj</Name>
+      <NameInTable>col_a3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>string</ConfType>

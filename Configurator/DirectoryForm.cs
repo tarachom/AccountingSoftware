@@ -67,12 +67,11 @@ namespace Configurator
 		{
 			string name = textBoxName.Text;
 			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
+			textBoxName.Text = name;
 
 			if (errorList.Length > 0)
 			{
-				textBoxName.Text = name;
 				MessageBox.Show(errorList, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
 				return;
 			}
 
