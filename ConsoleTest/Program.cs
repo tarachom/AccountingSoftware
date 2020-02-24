@@ -14,8 +14,28 @@ namespace ConsoleTest
 {
 	partial class Program
 	{
+		static void CreatSQL()
+		{
+			XslCompiledTransform xsltTemplateGenerator = new XslCompiledTransform();
+			xsltTemplateGenerator.Load("../../SqlBuild.xslt");
+
+			string filename = "../../result_sql.txt";
+			FileMode mode = File.Exists(filename) ? FileMode.Truncate : FileMode.Create;
+
+			XsltArgumentList xsltArgumentList = new XsltArgumentList();
+
+			FileStream stream = new FileStream(filename, mode);
+
+			xsltTemplateGenerator.Transform(@"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml", xsltArgumentList, stream);
+		}
+
 		static void Main(string[] args)
 		{
+			CreatSQL();
+
+			Console.ReadLine();
+
+
 			XslCompiledTransform xsltTemplateGenerator = new XslCompiledTransform();
 			xsltTemplateGenerator.Load("../../CreateTemplate.xslt");
 

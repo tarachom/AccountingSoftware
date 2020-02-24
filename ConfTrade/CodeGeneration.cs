@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 24.02.2020 12:46:25
+ * Дата конфігурації: 24.02.2020 12:47:38
  *
  */
 
@@ -6476,8 +6476,10 @@ namespace ConfTrade_v1_1.Enums
          Безналоговые = 4
     }
     
-    
-    public enum test
+    ///<summary>
+    ///fgcchf.
+    ///</summary>
+    public enum test2
     {
          
     }

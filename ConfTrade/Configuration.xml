@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>24.02.2020 12:46:25</DateTimeSave>
+  <DateTimeSave>24.02.2020 12:47:38</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2649,9 +2649,8 @@
       </Fields>
     </Enum>
     <Enum>
-      <Name>test</Name>
-      <Desc>
-      </Desc>
+      <Name>test2</Name>
+      <Desc>fgcchf</Desc>
       <Fields />
     </Enum>
   </Enums>

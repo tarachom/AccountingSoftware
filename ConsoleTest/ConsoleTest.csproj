@@ -83,6 +83,8 @@
     <Content Include="Function.xslt" />
     <Content Include="old\Include.xslt" />
     <Content Include="CreateTemplate.xslt" />
+    <Content Include="result_sql.txt" />
+    <Content Include="SqlBuild.xslt" />
     <Content Include="XSLT\test_Список.xslt" />
     <Content Include="XSLT\Валюти_Список.xslt" />
     <Content Include="XSLT\Групи_МестаХранения_Список.xslt" />

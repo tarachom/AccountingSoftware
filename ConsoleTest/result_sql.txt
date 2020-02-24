@@ -1,0 +1,19 @@
+﻿
+
+
+    SELECT
+
+    tab_a23.col_a2 AS Номенклатура_Код,
+    tab_a23.col_a1 AS Номенклатура_Назва,
+    tab_a23.col_c6 AS Номенклатура_ПолнНаименование,
+    tab_a02.col_a5 AS Валюти_Код,
+      tab_a02.col_a4 AS Валюти_Назва
+
+    FROM TABLE
+
+    tab_a23,
+    tab_a02
+
+    ORDER BY Номенклатура_Код
+
+  
