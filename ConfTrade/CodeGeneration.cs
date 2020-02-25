@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 25.02.2020 12:42:01
+ * Дата конфігурації: 25.02.2020 13:03:53
  *
  */
 
@@ -6491,6 +6491,192 @@ namespace ConfTrade_v1_1.Document
 {
     
     #region DOCUMENT "Test"
+    
+    
+    class Test_Objest : DocumentObject
+    {
+        public Test_Objest() : base(Config.Kernel, "test",
+             new string[] {  }) 
+        {
+            
+            //Табличні частини
+            test_TablePart = new Test_test_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public Test_Pointer GetDocumentPointer()
+        {
+            Test_Pointer directoryPointer = new Test_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        
+        //Табличні частини
+        public Test_test_TablePart test_TablePart { get; set; }
+        
+    }
+    
+    
+    class Test_Pointer : DocumentPointer
+    {
+        public Test_Pointer(object uid = null) : base(Config.Kernel, "test")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public Test_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "test")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public Test_Objest GetDocumentObject()
+        {
+            Test_Objest TestObjestItem = new Test_Objest();
+            TestObjestItem.Read(base.UnigueID);
+            return TestObjestItem;
+        }
+    }
+    
+    
+    class Test_Select : DocumentSelect, IDisposable
+    {
+        public Test_Select() : base(Config.Kernel, "test") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new Test_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public Test_Pointer Current { get; private set; }
+    }
+    
+      
+    class Test_test_TablePart : DocumentTablePart
+    {
+        public Test_test_TablePart(Test_Objest owner) : base(Config.Kernel, "test2",
+             new string[] {  }) 
+        {
+            Owner = owner;
+            Records = new List<Test_test_TablePartRecord>();
+        }
+        
+        public Test_Objest Owner { get; private set; }
+        
+        public List<Test_test_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Test_test_TablePartRecord record = new Test_test_TablePartRecord();
+
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Test_test_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Test_test_TablePartRecord : DocumentTablePartRecord
+    {
+        public Test_test_TablePartRecord()
+        {
+            
+        }
+        
+        
+    }
+      
     
     #endregion
     

@@ -602,6 +602,296 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Document
       <xsl:variable name="DocumentName" select="Name"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
     
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
+    {
+        public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each> }) 
+        {
+            <xsl:for-each select="Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
+            </xsl:for-each>
+            //Табличні частини
+            <xsl:for-each select="TabularParts/TablePart">
+                <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+                <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
+                <xsl:value-of select="concat($DocumentName, '_', $TablePartName)"/><xsl:text>(this)</xsl:text>;
+            </xsl:for-each>
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                <xsl:for-each select="Fields/Field">
+                  <xsl:value-of select="Name"/>
+                  <xsl:text> = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            <xsl:for-each select="Fields/Field">
+              <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
+              <xsl:if test="Type = 'enum'">
+                  <xsl:text>(int)</xsl:text>      
+              </xsl:if>
+              <xsl:value-of select="Name"/>
+              <xsl:choose>
+                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                </xsl:when>
+              </xsl:choose>;
+            </xsl:for-each>
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()
+        {
+            <xsl:value-of select="$DocumentName"/>_Pointer directoryPointer = new <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        <xsl:for-each select="Fields/Field">
+          <xsl:text>public </xsl:text>
+          <xsl:call-template name="FieldType" />
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="Name"/>
+          <xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
+        //Табличні частини
+        <xsl:for-each select="TabularParts/TablePart">
+            <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
+            <xsl:text>public </xsl:text><xsl:value-of select="concat($DocumentName, '_', $TablePartName)"/><xsl:text> </xsl:text>
+            <xsl:value-of select="$TablePartName"/><xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
+    }
+    
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
+    {
+        public <xsl:value-of select="$DocumentName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public <xsl:value-of select="$DocumentName"/>_Objest GetDocumentObject()
+        {
+            <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
+            <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID);
+            return <xsl:value-of select="$DocumentName"/>ObjestItem;
+        }
+    }
+    
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
+    {
+        public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public <xsl:value-of select="$DocumentName"/>_Pointer Current { get; private set; }
+    }
+    
+      <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->
+        <xsl:variable name="TablePartName" select="Name"/>
+        <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
+    
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$TablePartFullName"/>_TablePart : DocumentTablePart
+    {
+        public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DocumentName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each> }) 
+        {
+            Owner = owner;
+            Records = new List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt;();
+        }
+        
+        public <xsl:value-of select="$DocumentName"/>_Objest Owner { get; private set; }
+        
+        public List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt; Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
+            {
+                <xsl:value-of select="$TablePartFullName"/>_TablePartRecord record = new <xsl:value-of select="$TablePartFullName"/>_TablePartRecord();
+
+                <xsl:for-each select="Fields/Field">
+                  <xsl:text>record.</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text> = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// &lt;summary&gt;
+        /// Зберегти колекцію Records в базу.
+        /// &lt;/summary&gt;
+        /// &lt;param name="clear_all_before_save"&gt;
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// &lt;/param&gt;
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (<xsl:value-of select="$TablePartFullName"/>_TablePartRecord record in Records)
+                {
+                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+
+                    <xsl:for-each select="Fields/Field">
+                      <xsl:text>fieldValue.Add("</xsl:text>
+                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:choose>
+                        <xsl:when test="Type = 'pointer'">
+                          <xsl:text>.UnigueID.UGuid</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="Type = 'empty_pointer'">
+                          <xsl:text>.UnigueID.UGuid</xsl:text>
+                        </xsl:when>
+                      </xsl:choose>
+                      <xsl:text>)</xsl:text>;
+                    </xsl:for-each>
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$TablePartFullName"/>_TablePartRecord : DocumentTablePartRecord
+    {
+        public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord()
+        {
+            <xsl:for-each select="Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
+            </xsl:for-each>
+        }
+        
+        <xsl:if test="count(Fields/Field) > 0">
+        public <xsl:value-of select="$TablePartFullName"/>_TablePartRecord(
+            <xsl:for-each select="Fields/Field">
+              <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
+              <xsl:call-template name="FieldType" />
+              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+                   <xsl:text>? </xsl:text>    
+              </xsl:if>
+              <xsl:text> _</xsl:text>
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultParamValue" />
+            </xsl:for-each>)
+        {
+            <xsl:for-each select="Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = _</xsl:text>
+              <xsl:value-of select="Name"/>
+              <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'pointer' or Type = 'empty_pointer'">
+                   <xsl:text> ?? </xsl:text>
+                   <xsl:call-template name="DefaultFieldValue" />
+              </xsl:if>;
+            </xsl:for-each>
+        }
+        </xsl:if>
+        
+        <xsl:for-each select="Fields/Field">
+          <xsl:text>public </xsl:text>
+          <xsl:call-template name="FieldType" />
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="Name"/>
+          <xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
+    }
+      </xsl:for-each> <!-- TableParts -->
+    
     #endregion
     </xsl:for-each>
 }
