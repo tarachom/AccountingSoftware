@@ -598,7 +598,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Enums
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Document
 {
-
+    <xsl:for-each select="Configuration/Documents/Document">
+      <xsl:variable name="DocumentName" select="Name"/>
+    #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
+    
+    #endregion
+    </xsl:for-each>
 }
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Journal

@@ -193,6 +193,14 @@ namespace Configurator
 
 			Conf = Program.Kernel.Conf;
 
+			//ConfigurationDocuments configurationDocuments = new ConfigurationDocuments("Test", "test", "");
+
+			//ConfigurationObjectTablePart configurationObjectTablePart = new ConfigurationObjectTablePart("test", "test2", "");
+
+			//configurationDocuments.TabularParts.Add(configurationObjectTablePart.Name, configurationObjectTablePart);
+
+			//Conf.Documents.Add(configurationDocuments.Name, configurationDocuments);
+
 			LoadTree();
 		}
 

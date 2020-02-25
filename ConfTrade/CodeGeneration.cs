@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 24.02.2020 12:47:38
+ * Дата конфігурації: 25.02.2020 12:42:01
  *
  */
 
@@ -6489,7 +6489,11 @@ namespace ConfTrade_v1_1.Enums
 
 namespace ConfTrade_v1_1.Document
 {
-
+    
+    #region DOCUMENT "Test"
+    
+    #endregion
+    
 }
 
 namespace ConfTrade_v1_1.Journal

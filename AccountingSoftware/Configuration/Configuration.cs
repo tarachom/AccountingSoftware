@@ -369,6 +369,8 @@ namespace AccountingSoftware
 			LoadDirectories(Conf, xPathDocNavigator);
 
 			LoadEnums(Conf, xPathDocNavigator);
+
+			LoadDocuments(Conf, xPathDocNavigator);
 		}
 
 		private static void LoadConfigurationInfo(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -504,6 +506,25 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void LoadDocuments(Configuration Conf, XPathNavigator xPathDocNavigator)
+		{
+			//Документи
+			XPathNodeIterator documentsNode = xPathDocNavigator.Select("/Configuration/Documents/Document");
+			while (documentsNode.MoveNext())
+			{
+				string name = documentsNode.Current.SelectSingleNode("Name").Value;
+				string table = documentsNode.Current.SelectSingleNode("Table").Value;
+				string desc = documentsNode.Current.SelectSingleNode("Desc").Value;
+
+				ConfigurationDocuments configurationDocuments = new ConfigurationDocuments(name, table, desc);
+				Conf.Documents.Add(configurationDocuments.Name, configurationDocuments);
+
+				LoadFields(configurationDocuments.Fields, documentsNode.Current);
+
+				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
+			}
+		}
+
 		public static void Save(string pathToConf, Configuration Conf)
 		{
 			//string pathToCopyConf = CopyConfigurationFile(pathToConf);
@@ -519,6 +540,8 @@ namespace AccountingSoftware
 			SaveDirectories(Conf.Directories, xmlConfDocument, rootNode);
 
 			SaveEnums(Conf.Enums, xmlConfDocument, rootNode);
+
+			SaveDocuments(Conf.Documents, xmlConfDocument, rootNode);
 
 			xmlConfDocument.Save(pathToConf);
 
@@ -744,6 +767,34 @@ namespace AccountingSoftware
 					nodeFieldValue.InnerText = field.Value.ToString();
 					nodeField.AppendChild(nodeFieldValue);
 				}
+			}
+		}
+
+		private static void SaveDocuments(Dictionary<string, ConfigurationDocuments> ConfDocuments, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement rootDocuments = xmlConfDocument.CreateElement("Documents");
+			rootNode.AppendChild(rootDocuments);
+
+			foreach (KeyValuePair<string, ConfigurationDocuments> ConfDocument in ConfDocuments)
+			{
+				XmlElement nodeDocument = xmlConfDocument.CreateElement("Document");
+				rootDocuments.AppendChild(nodeDocument);
+
+				XmlElement nodeDocumentName = xmlConfDocument.CreateElement("Name");
+				nodeDocumentName.InnerText = ConfDocument.Key;
+				nodeDocument.AppendChild(nodeDocumentName);
+
+				XmlElement nodeDocumentTable = xmlConfDocument.CreateElement("Table");
+				nodeDocumentTable.InnerText = ConfDocument.Value.Table;
+				nodeDocument.AppendChild(nodeDocumentTable);
+
+				XmlElement nodeDocumentDesc = xmlConfDocument.CreateElement("Desc");
+				nodeDocumentDesc.InnerText = ConfDocument.Value.Desc;
+				nodeDocument.AppendChild(nodeDocumentDesc);
+
+				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument);
+
+				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
 			}
 		}
 
