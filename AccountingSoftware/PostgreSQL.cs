@@ -444,6 +444,111 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
+		public void SelectDocumentPointer(DocumentSelect select, List<DocumentPointer> listDocumentPointer)
+		{
+			string query = select.QuerySelect.Construct();
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (select.QuerySelect.Where.Count > 0)
+			{
+				foreach (Where field in select.QuerySelect.Where)
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+			}
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fields = null;
+
+				if (select.QuerySelect.Field.Count > 0)
+				{
+					fields = new Dictionary<string, object>();
+
+					foreach (string field in select.QuerySelect.Field)
+						fields.Add(field, reader[field]);
+				}
+
+				DocumentPointer elementPointer = new DocumentPointer();
+				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields);
+
+				listDocumentPointer.Add(elementPointer);
+			}
+			reader.Close();
+		}
+
+		public void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
+		{
+			bool is_first = true;
+
+			string query = "SELECT ";
+
+			foreach (string field in fieldArray)
+			{
+				if (!is_first) query += ", "; else is_first = false;
+				query += field;
+			}
+
+			query += " FROM " + table + " WHERE owner = @owner";
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+				fieldValueList.Add(fieldValue);
+
+				foreach (string field in fieldArray)
+				{
+					fieldValue.Add(field, reader[field]);
+				}
+			}
+			reader.Close();
+		}
+
+		public void InsertDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "owner";
+			string query_values = "@owner";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+
+			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void DeleteDocumentTablePartRecords(UnigueID ownerUnigueID, string table)
+		{
+			string query = "DELETE FROM " + table + " WHERE owner = @owner";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
+
+			nCommand.ExecuteNonQuery();
+		}
+
 		#endregion
 
 		public bool IfExistsTable(string tableName)

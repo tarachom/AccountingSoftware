@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Документ Об'єкт
+	/// </summary>
 	public abstract class DocumentObject
 	{
 		public DocumentObject(Kernel kernel, string table, string[] fieldsArray)

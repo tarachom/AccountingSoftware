@@ -3,17 +3,14 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	/// <summary>
-	/// Довідник Вказівник - Вказівник на довідник
-	/// </summary>
-	public class DirectoryPointer
+	public class DocumentPointer
 	{
-		public DirectoryPointer()
+		public DocumentPointer()
 		{
 			UnigueID = new UnigueID(Guid.Empty);
 		}
 
-		public DirectoryPointer(Kernel kernel, string table) : this()
+		public DocumentPointer(Kernel kernel, string table) : this()
 		{
 			Table = table;
 			Kernel = kernel;
@@ -35,7 +32,7 @@ namespace AccountingSoftware
 
 		public void Delete()
 		{
-			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
+			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);
 		}
 	}
 }

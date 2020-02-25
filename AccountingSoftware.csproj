@@ -68,6 +68,11 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
     <None Include="AccountingSoftware\Configuration\Old\FieldValue.cs" />
+    <Compile Include="AccountingSoftware\Document\DocumentEmptyPointer.cs" />
+    <Compile Include="AccountingSoftware\Document\DocumentPointer.cs" />
+    <Compile Include="AccountingSoftware\Document\DocumentSelect.cs" />
+    <Compile Include="AccountingSoftware\Document\DocumentTablePart.cs" />
+    <Compile Include="AccountingSoftware\Document\DocumentTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentObject.cs" />
     <Compile Include="AccountingSoftware\FieldType.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
