@@ -3,12 +3,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	/// <summary>
-	/// Довідник Об'єкт
-	/// </summary>
-	public abstract class DirectoryObject
+	public abstract class DocumentObject
 	{
-		public DirectoryObject(Kernel kernel, string table, string[] fieldsArray)
+		public DocumentObject(Kernel kernel, string table, string[] fieldsArray)
 		{
 			Kernel = kernel;
 			Table = table;
@@ -51,7 +48,7 @@ namespace AccountingSoftware
 
 			BaseClear();
 
-			if (Kernel.DataBase.SelectDirectoryObject(this, uid, Table, FieldArray, FieldValue))
+			if (Kernel.DataBase.SelectDocumentObject(this, uid, Table, FieldArray, FieldValue))
 			{
 				UnigueID = uid;
 				return true;
@@ -64,11 +61,11 @@ namespace AccountingSoftware
 		{
 			if (IsNew)
 			{
-				Kernel.DataBase.InsertDirectoryObject(this, Table, FieldArray, FieldValue);
+				Kernel.DataBase.InsertDocumentObject(this, Table, FieldArray, FieldValue);
 			}
 			else
 			{
-				Kernel.DataBase.UpdateDirectoryObject(this, Table, FieldArray, FieldValue);
+				Kernel.DataBase.UpdateDocumentObject(this, Table, FieldArray, FieldValue);
 			}
 
 			BaseClear();
@@ -76,7 +73,7 @@ namespace AccountingSoftware
 
 		protected void BaseDelete()
 		{
-			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
+			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);
 
 			BaseClear();
 		}

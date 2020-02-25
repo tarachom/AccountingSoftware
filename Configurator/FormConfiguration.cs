@@ -157,9 +157,33 @@ namespace Configurator
 				}
 			}
 
+			TreeNode documentNode = rootNode.Nodes.Add("Documents", "Документи");
+			documentNode.SelectedImageIndex = 3;
+			documentNode.ImageIndex = 3;
+
+			//...
+
+			TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
+			journalsNode.SelectedImageIndex = 3;
+			journalsNode.ImageIndex = 3;
+
+			//...
+
+			TreeNode registersNode = rootNode.Nodes.Add("Registers", "Регістри");
+			registersNode.SelectedImageIndex = 3;
+			registersNode.ImageIndex = 3;
+
+			//...
+
+			TreeNode regularTasksNode = rootNode.Nodes.Add("RegularTasks", "Регламентні завдання");
+			regularTasksNode.SelectedImageIndex = 3;
+			regularTasksNode.ImageIndex = 3;
+
 			rootNode.Expand();
+
 			directoriesNode.Expand();
 			enumsNode.Expand();
+			documentNode.Expand();
 		}
 
 		private void FormConfiguration_Load(object sender, EventArgs e)

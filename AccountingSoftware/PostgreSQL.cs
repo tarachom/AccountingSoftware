@@ -41,6 +41,8 @@ namespace AccountingSoftware
 			Transaction.Rollback();
 		}
 
+		#region Directory
+
 		public void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query_field = "uid";
@@ -71,7 +73,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SaveDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void UpdateDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query = "UPDATE " + table + " SET ";
 
@@ -100,7 +102,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public bool SelectDirectoryObject(DirectoryObject directoryObject, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public bool SelectDirectoryObject(DirectoryObject directoryObject/*??*/, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query = "SELECT uid ";
 
@@ -222,6 +224,8 @@ namespace AccountingSoftware
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
+			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
+
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
@@ -340,25 +344,107 @@ namespace AccountingSoftware
 			return xml;
 		}
 
-		public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
+		#endregion
+
+		#region Document
+
+		public bool SelectDocumentObject(DocumentObject documentObject/*??*/, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			BeginTransaction();
-			string baseQuery = "DROP TABLE IF EXISTS ";
-			string SqlQuery = baseQuery + configurationDirectory.Table;
+			string query = "SELECT uid ";
 
-			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
-			nCommand.ExecuteNonQuery();
-
-			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts) 
+			foreach (string field in fieldArray)
 			{
-				SqlQuery = baseQuery + configurationObjectTablePart.Value.Table;
-
-				nCommand = new NpgsqlCommand(SqlQuery, Connection);
-				nCommand.ExecuteNonQuery();
+				query += ", " + field;
 			}
 
-			CommitTransaction();
+			query += " FROM " + table + " WHERE uid = @uid";
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+
+			bool isSelectDocumentObject = reader.HasRows;
+
+			while (reader.Read())
+			{
+				foreach (string field in fieldArray)
+				{
+					fieldValue[field] = reader[field];
+				}
+			}
+			reader.Close();
+
+			return isSelectDocumentObject;
 		}
+
+		public void InsertDocumentObject(DocumentObject documentObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "uid";
+			string query_values = "@uid";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", documentObject.UnigueID.UGuid));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			//Console.WriteLine(query);
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void UpdateDocumentObject(DocumentObject documentObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query = "UPDATE " + table + " SET ";
+
+			int count = 0;
+
+			foreach (string field in fieldArray)
+			{
+				if (count > 0) query += ", ";
+				query += field + " = @" + field;
+
+				count++;
+			}
+
+			query += " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", documentObject.UnigueID.UGuid));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			//Console.WriteLine(query);
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void DeleteDocumentObject(UnigueID unigueID, string table)
+		{
+			string query = "DELETE FROM " + table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		#endregion
 
 		public bool IfExistsTable(string tableName)
 		{
@@ -419,6 +505,26 @@ namespace AccountingSoftware
 			reader.Close();
 
 			return informationSchema;
+		}
+
+		public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
+		{
+			BeginTransaction();
+			string baseQuery = "DROP TABLE IF EXISTS ";
+			string SqlQuery = baseQuery + configurationDirectory.Table;
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
+			nCommand.ExecuteNonQuery();
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts)
+			{
+				SqlQuery = baseQuery + configurationObjectTablePart.Value.Table;
+
+				nCommand = new NpgsqlCommand(SqlQuery, Connection);
+				nCommand.ExecuteNonQuery();
+			}
+
+			CommitTransaction();
 		}
 
 		public int ExecuteSQL(string SqlQuery)

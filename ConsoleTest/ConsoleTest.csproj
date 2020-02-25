@@ -44,33 +44,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeGeneration.cs" />
-    <None Include="CSharp\Валюти_Список.cs" />
-    <None Include="CSharp\Групи_МестаХранения_Список.cs" />
-    <None Include="CSharp\Групи_Номенклатура_Список.cs" />
-    <None Include="CSharp\Единици_Список.cs" />
-    <None Include="CSharp\Категории_Список.cs" />
-    <None Include="CSharp\КатегорииКонтрагентов_Список.cs" />
-    <None Include="CSharp\КатегорииТоваров_Список.cs" />
-    <None Include="CSharp\КатегорииЦен_Список.cs" />
-    <None Include="CSharp\КлассификаторЕдИзм_Список.cs" />
-    <None Include="CSharp\КлассификаторЕдИзм_Список2.cs" />
-    <None Include="CSharp\КодиУКТВЕД_Список.cs" />
-    <None Include="CSharp\Комплектация_Список.cs" />
-    <None Include="CSharp\Контрагенти_Список.cs" />
-    <None Include="CSharp\МестаХранения_Список.cs" />
-    <None Include="CSharp\НалоговиеИнспекции_Список.cs" />
-    <None Include="CSharp\НашиДенежниеСчета_Список.cs" />
-    <None Include="CSharp\Номенклатура_Список.cs" />
-    <None Include="CSharp\Номенклатура_Список2.cs" />
-    <None Include="CSharp\НомераГТД_Список.cs" />
-    <None Include="CSharp\Пользователи_Список.cs" />
-    <None Include="CSharp\Прайс_лист_Список.cs" />
-    <None Include="CSharp\РасчетниеСчета_Список.cs" />
-    <None Include="CSharp\Словарь_Список.cs" />
-    <None Include="CSharp\Сотрудники_Список.cs" />
-    <None Include="CSharp\ТорговоеОборудование_Список.cs" />
-    <None Include="CSharp\Фирми_Список.cs" />
-    <None Include="CSharp\Цени_Список.cs" />
     <Compile Include="CSharp\test_Список.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,38 +54,10 @@
   <ItemGroup>
     <Content Include="CreateFunctionCode.xslt" />
     <Content Include="Function.xslt" />
-    <Content Include="old\Include.xslt" />
     <Content Include="CreateTemplate.xslt" />
     <Content Include="result_sql.txt" />
     <Content Include="SqlBuild.xslt" />
     <Content Include="XSLT\test_Список.xslt" />
-    <Content Include="XSLT\Валюти_Список.xslt" />
-    <Content Include="XSLT\Групи_МестаХранения_Список.xslt" />
-    <Content Include="XSLT\Групи_Номенклатура_Список.xslt" />
-    <Content Include="XSLT\Единици_Список.xslt" />
-    <Content Include="XSLT\Категории_Список.xslt" />
-    <Content Include="XSLT\КатегорииКонтрагентов_Список.xslt" />
-    <Content Include="XSLT\КатегорииТоваров_Список.xslt" />
-    <Content Include="XSLT\КатегорииЦен_Список.xslt" />
-    <Content Include="XSLT\КлассификаторЕдИзм_Список.xslt" />
-    <Content Include="XSLT\КлассификаторЕдИзм_Список2.xslt" />
-    <Content Include="XSLT\КодиУКТВЕД_Список.xslt" />
-    <Content Include="XSLT\Комплектация_Список.xslt" />
-    <Content Include="XSLT\Контрагенти_Список.xslt" />
-    <Content Include="XSLT\МестаХранения_Список.xslt" />
-    <Content Include="XSLT\НалоговиеИнспекции_Список.xslt" />
-    <Content Include="XSLT\НашиДенежниеСчета_Список.xslt" />
-    <Content Include="XSLT\Номенклатура_Список.xslt" />
-    <Content Include="XSLT\Номенклатура_Список2.xslt" />
-    <Content Include="XSLT\НомераГТД_Список.xslt" />
-    <Content Include="XSLT\Пользователи_Список.xslt" />
-    <Content Include="XSLT\Прайс_лист_Список.xslt" />
-    <Content Include="XSLT\РасчетниеСчета_Список.xslt" />
-    <Content Include="XSLT\Словарь_Список.xslt" />
-    <Content Include="XSLT\Сотрудники_Список.xslt" />
-    <Content Include="XSLT\ТорговоеОборудование_Список.xslt" />
-    <Content Include="XSLT\Фирми_Список.xslt" />
-    <Content Include="XSLT\Цени_Список.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">
