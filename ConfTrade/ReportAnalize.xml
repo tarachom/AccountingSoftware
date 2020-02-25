@@ -1,2 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <sql>ALTER TABLE tab_a50 ADD COLUMN "col_a6" integer;</sql>
+</root>

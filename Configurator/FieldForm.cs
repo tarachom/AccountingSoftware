@@ -39,13 +39,19 @@ namespace Configurator
 			//Список довідників
 			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)
 			{
-				comboBoxPointer.Items.Add(directoryName);
+				comboBoxPointer.Items.Add("Довідники." + directoryName);
+			}
+
+			//Список документів
+			foreach (string documentName in Program.Kernel.Conf.Documents.Keys)
+			{
+				comboBoxPointer.Items.Add("Документи." + documentName);
 			}
 
 			//Список перелічення
 			foreach (string enumName in Program.Kernel.Conf.Enums.Keys)
 			{
-				comboBoxEnums.Items.Add(enumName);
+				comboBoxEnums.Items.Add("Перелічення." + enumName);
 			}			
 
 			if (configurationObjectField == null)

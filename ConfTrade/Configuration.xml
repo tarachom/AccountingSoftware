@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>25.02.2020 14:04:38</DateTimeSave>
+  <DateTimeSave>25.02.2020 17:43:50</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -117,7 +117,7 @@
           <Name>Единица</Name>
           <NameInTable>col_a9</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КлассификаторЕдИзм</Pointer>
+          <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
           <Desc>Единица измерения</Desc>
         </Field>
         <Field>
@@ -153,7 +153,7 @@
               <Name>Единица</Name>
               <NameInTable>col_a9</NameInTable>
               <Type>pointer</Type>
-              <Pointer>КлассификаторЕдИзм</Pointer>
+              <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -298,7 +298,7 @@
           <Name>Категория</Name>
           <NameInTable>col_b5</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Категории</Pointer>
+          <Pointer>Довідники.Категории</Pointer>
           <Desc>Категория</Desc>
         </Field>
         <Field>
@@ -342,7 +342,7 @@
           <Name>Категория</Name>
           <NameInTable>col_b6</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Категории</Pointer>
+          <Pointer>Довідники.Категории</Pointer>
           <Desc>Категория</Desc>
         </Field>
         <Field>
@@ -533,28 +533,28 @@
           <Name>ВалютаВзаиморасчетов</Name>
           <NameInTable>col_c4</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>ВалютаВзаиморасчетов</Desc>
         </Field>
         <Field>
           <Name>ВалютаКредита</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>Валюта кредита покупателя</Desc>
         </Field>
         <Field>
           <Name>ВалютаКредитаПоставщика</Name>
           <NameInTable>col_a2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>ВалютаКредитаПоставщика</Desc>
         </Field>
         <Field>
           <Name>ВидКонтрагента</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>enum</Type>
-          <Pointer>ВидиКонтрагентов</Pointer>
+          <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
           <Desc>ВидКонтрагента. Перелічення</Desc>
         </Field>
         <Field>
@@ -609,14 +609,14 @@
           <Name>КатегорияЦен</Name>
           <NameInTable>col_b3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КатегорииЦен</Pointer>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
           <Desc>Категория цен покупателя</Desc>
         </Field>
         <Field>
           <Name>КатегорияЦенПоставщика</Name>
           <NameInTable>col_b4</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КатегорииЦен</Pointer>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
           <Desc>Категория цен поставщика</Desc>
         </Field>
         <Field>
@@ -810,7 +810,7 @@
               <Name>ВидКонтрагента</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>enum</Type>
-              <Pointer>ВидиКонтрагентов</Pointer>
+              <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
             </Field>
           </Fields>
         </View>
@@ -857,7 +857,7 @@
           <Name>Група</Name>
           <NameInTable>col_a6</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Групи_МестаХранения</Pointer>
+          <Pointer>Довідники.Групи_МестаХранения</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -998,7 +998,7 @@
           <Name>Валюта</Name>
           <NameInTable>col_c2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>Валюта</Desc>
         </Field>
         <Field>
@@ -1079,7 +1079,7 @@
           <Name>БазоваяЕдиница</Name>
           <NameInTable>col_c9</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КлассификаторЕдИзм</Pointer>
+          <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
           <Desc>Тип базовой единицы измерения</Desc>
         </Field>
         <Field>
@@ -1092,14 +1092,14 @@
           <Name>ЕдиницаПоУмолчанию</Name>
           <NameInTable>col_d2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Единици</Pointer>
+          <Pointer>Довідники.Единици</Pointer>
           <Desc>Единица измерения товара по умолчанию</Desc>
         </Field>
         <Field>
           <Name>ВалютаУчета</Name>
           <NameInTable>col_d3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>Валюта учета</Desc>
         </Field>
         <Field>
@@ -1187,7 +1187,7 @@
           <Name>КодУКТВЕД</Name>
           <NameInTable>col_e8</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КодиУКТВЕД</Pointer>
+          <Pointer>Довідники.КодиУКТВЕД</Pointer>
           <Desc>Код товара согласно УКТ ВЭД</Desc>
         </Field>
         <Field>
@@ -1208,7 +1208,7 @@
           <Name>Група</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Групи_Номенклатура</Pointer>
+          <Pointer>Довідники.Групи_Номенклатура</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -1257,7 +1257,7 @@
               <Name>ВалютаУчета</Name>
               <NameInTable>col_d3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Валюти</Pointer>
+              <Pointer>Довідники.Валюти</Pointer>
             </Field>
           </Fields>
         </View>
@@ -1281,7 +1281,7 @@
               <Name>БазоваяЕдиница</Name>
               <NameInTable>col_c9</NameInTable>
               <Type>pointer</Type>
-              <Pointer>КлассификаторЕдИзм</Pointer>
+              <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
             </Field>
             <Field>
               <Name>Вес</Name>
@@ -1292,7 +1292,7 @@
               <Name>ВалютаУчета</Name>
               <NameInTable>col_d3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Валюти</Pointer>
+              <Pointer>Довідники.Валюти</Pointer>
             </Field>
             <Field>
               <Name>Назва</Name>
@@ -1308,7 +1308,7 @@
               <Name>Група</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Групи_Номенклатура</Pointer>
+              <Pointer>Довідники.Групи_Номенклатура</Pointer>
             </Field>
           </Fields>
         </View>
@@ -1380,7 +1380,7 @@
           <Name>КатегорияЦен</Name>
           <NameInTable>col_f5</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КатегорииЦен</Pointer>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
           <Desc>Тип цен по умолчанию</Desc>
         </Field>
         <Field>
@@ -1431,7 +1431,7 @@
           <Name>Товар</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Номенклатура</Pointer>
+          <Pointer>Довідники.Номенклатура</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -1474,7 +1474,7 @@
               <Name>Товар</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Номенклатура</Pointer>
+              <Pointer>Довідники.Номенклатура</Pointer>
             </Field>
           </Fields>
         </View>
@@ -1727,7 +1727,7 @@
           <Name>ГлавнийБухгалтер</Name>
           <NameInTable>col_c7</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Сотрудники</Pointer>
+          <Pointer>Довідники.Сотрудники</Pointer>
           <Desc>Главный бухгалтер фирмы</Desc>
         </Field>
         <Field>
@@ -1758,7 +1758,7 @@
           <Name>Кассир</Name>
           <NameInTable>col_d3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Сотрудники</Pointer>
+          <Pointer>Довідники.Сотрудники</Pointer>
           <Desc>Кассир фирмы</Desc>
         </Field>
         <Field>
@@ -1778,7 +1778,7 @@
           <Name>НалоговаяИнспекция</Name>
           <NameInTable>col_d6</NameInTable>
           <Type>pointer</Type>
-          <Pointer>НалоговиеИнспекции</Pointer>
+          <Pointer>Довідники.НалоговиеИнспекции</Pointer>
           <Desc>Налоговая инспекция фирмы</Desc>
         </Field>
         <Field>
@@ -1821,14 +1821,14 @@
           <Name>Руководитель</Name>
           <NameInTable>col_e4</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Сотрудники</Pointer>
+          <Pointer>Довідники.Сотрудники</Pointer>
           <Desc>Руководитель фирмы</Desc>
         </Field>
         <Field>
           <Name>СчетПоУмолчанию</Name>
           <NameInTable>col_e5</NameInTable>
           <Type>pointer</Type>
-          <Pointer>НашиДенежниеСчета</Pointer>
+          <Pointer>Довідники.НашиДенежниеСчета</Pointer>
           <Desc>Банковский счет по умолчанию</Desc>
         </Field>
         <Field>
@@ -1924,7 +1924,7 @@
               <Name>Кассир</Name>
               <NameInTable>col_f7</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Сотрудники</Pointer>
+              <Pointer>Довідники.Сотрудники</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -1969,7 +1969,7 @@
               <Name>НалоговаяИнспекция</Name>
               <NameInTable>col_g2</NameInTable>
               <Type>pointer</Type>
-              <Pointer>НалоговиеИнспекции</Pointer>
+              <Pointer>Довідники.НалоговиеИнспекции</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2079,7 +2079,7 @@
               <Name>Руководитель</Name>
               <NameInTable>col_h3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Сотрудники</Pointer>
+              <Pointer>Довідники.Сотрудники</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2124,7 +2124,7 @@
               <Name>Руководитель</Name>
               <NameInTable>col_e4</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Сотрудники</Pointer>
+              <Pointer>Довідники.Сотрудники</Pointer>
             </Field>
             <Field>
               <Name>Телефони</Name>
@@ -2149,21 +2149,21 @@
           <Name>Валюта</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Валюти</Pointer>
+          <Pointer>Довідники.Валюти</Pointer>
           <Desc>Валюта</Desc>
         </Field>
         <Field>
           <Name>Единица</Name>
           <NameInTable>col_a2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Единици</Pointer>
+          <Pointer>Довідники.Единици</Pointer>
           <Desc>Единица измерения</Desc>
         </Field>
         <Field>
           <Name>КатегорияЦени</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>КатегорииЦен</Pointer>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
           <Desc>Категория цены</Desc>
         </Field>
         <Field>
@@ -2211,7 +2211,7 @@
               <Name>Валюта</Name>
               <NameInTable>col_a7</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Валюти</Pointer>
+              <Pointer>Довідники.Валюти</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2234,7 +2234,7 @@
               <Name>Единица</Name>
               <NameInTable>col_a9</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Единици</Pointer>
+              <Pointer>Довідники.Единици</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2279,13 +2279,13 @@
               <Name>Валюта</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Валюти</Pointer>
+              <Pointer>Довідники.Валюти</Pointer>
             </Field>
             <Field>
               <Name>КатегорияЦени</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>КатегорииЦен</Pointer>
+              <Pointer>Довідники.КатегорииЦен</Pointer>
             </Field>
             <Field>
               <Name>Наценка</Name>
@@ -2313,7 +2313,7 @@
           <Name>Родитель</Name>
           <NameInTable>col_a2</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Групи_Номенклатура</Pointer>
+          <Pointer>Довідники.Групи_Номенклатура</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2342,7 +2342,7 @@
               <Name>Родитель</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Групи_Номенклатура</Pointer>
+              <Pointer>Довідники.Групи_Номенклатура</Pointer>
             </Field>
           </Fields>
         </View>
@@ -2372,7 +2372,7 @@
           <Name>Родитель</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>pointer</Type>
-          <Pointer>МестаХранения</Pointer>
+          <Pointer>Довідники.МестаХранения</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2399,7 +2399,7 @@
               <Name>Родитель</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
-              <Pointer>МестаХранения</Pointer>
+              <Pointer>Довідники.МестаХранения</Pointer>
             </Field>
           </Fields>
         </View>
@@ -2427,7 +2427,7 @@
           <Name>ТипПоля</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>enum</Type>
-          <Pointer>Перелічення2</Pointer>
+          <Pointer>Перелічення.Перелічення2</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2435,7 +2435,7 @@
           <Name>Поле2</Name>
           <NameInTable>col_a4</NameInTable>
           <Type>enum</Type>
-          <Pointer>Перелічення</Pointer>
+          <Pointer>Перелічення.Перелічення</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2443,7 +2443,7 @@
           <Name>Поле3</Name>
           <NameInTable>col_a5</NameInTable>
           <Type>enum</Type>
-          <Pointer>Перелічення2</Pointer>
+          <Pointer>Перелічення.Перелічення2</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2451,7 +2451,7 @@
           <Name>Поле4</Name>
           <NameInTable>col_a6</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Номенклатура</Pointer>
+          <Pointer>Довідники.Номенклатура</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2467,7 +2467,7 @@
               <Name>sdfasdf</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>enum</Type>
-              <Pointer>Перелічення2</Pointer>
+              <Pointer>Перелічення.Перелічення2</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2484,7 +2484,7 @@
               <Name>ТипПоля</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>enum</Type>
-              <Pointer>Перелічення2</Pointer>
+              <Pointer>Перелічення.Перелічення2</Pointer>
             </Field>
             <Field>
               <Name>Код</Name>
@@ -2570,6 +2570,78 @@
         <View>
           <Name>Список</Name>
           <Table>tab_a49</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>іваів</Name>
+      <Table>tab_a50</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+        <Field>
+          <Name>іваі</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Категории</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sddfgsd</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Документ</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Документи.Test</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>аавпва</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a50</Table>
           <Desc>Список</Desc>
           <Fields>
             <Field>

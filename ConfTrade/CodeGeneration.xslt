@@ -40,7 +40,6 @@
         <xsl:text>DirectoryEmptyPointer</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
-        <xsl:text>Enums.</xsl:text>
         <xsl:value-of select="Pointer"/>
       </xsl:when>
     </xsl:choose>    
@@ -186,7 +185,7 @@
           <xsl:text>new DirectoryEmptyPointer()</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
-          <xsl:text>(Enums.</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
           <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
         </xsl:when>
      </xsl:choose>
@@ -216,7 +215,7 @@
 using System;
 using System.Collections.Generic;
 using AccountingSoftware;
-using Enums = <xsl:value-of select="Configuration/NameSpace"/>.Enums;
+using Перелічення = <xsl:value-of select="Configuration/NameSpace"/>.Перелічення;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
 {
@@ -226,7 +225,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     }
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 {
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
@@ -575,7 +574,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Directory
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Enums
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Перелічення
 {
     <xsl:for-each select="Configuration/Enums/Enum">
     <xsl:call-template name="CommentSummary" />
@@ -596,7 +595,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Enums
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Document
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 {
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
@@ -896,12 +895,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Document
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Journal
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
 {
 
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Register
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Регістри
 {
 
 }

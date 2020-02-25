@@ -4,14 +4,14 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 25.02.2020 14:04:38
+ * Дата конфігурації: 25.02.2020 17:43:50
  *
  */
 
 using System;
 using System.Collections.Generic;
 using AccountingSoftware;
-using Enums = ConfTrade_v1_1.Enums;
+using Перелічення = ConfTrade_v1_1.Перелічення;
 
 namespace ConfTrade_v1_1
 {
@@ -21,7 +21,7 @@ namespace ConfTrade_v1_1
     }
 }
 
-namespace ConfTrade_v1_1.Directory
+namespace ConfTrade_v1_1.Довідники
 {
     
     #region DIRECTORY "Валюти"
@@ -280,7 +280,7 @@ namespace ConfTrade_v1_1.Directory
         {
             Вес = 0;
             Коеффициент = 0;
-            Единица = new КлассификаторЕдИзм_Pointer();
+            Единица = new Довідники.КлассификаторЕдИзм_Pointer();
             ШтрихКод = 0;
             Назва = "";
             Код = "";
@@ -295,7 +295,7 @@ namespace ConfTrade_v1_1.Directory
             {
                 Вес = (base.FieldValue["col_a7"] != DBNull.Value) ? (decimal)base.FieldValue["col_a7"] : 0;
                 Коеффициент = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
-                Единица = new КлассификаторЕдИзм_Pointer(base.FieldValue["col_a9"]);
+                Единица = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_a9"]);
                 ШтрихКод = (base.FieldValue["col_b1"] != DBNull.Value) ? (int)base.FieldValue["col_b1"] : 0;
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
@@ -332,7 +332,7 @@ namespace ConfTrade_v1_1.Directory
         
         public decimal Вес { get; set; }
         public decimal Коеффициент { get; set; }
-        public КлассификаторЕдИзм_Pointer Единица { get; set; }
+        public Довідники.КлассификаторЕдИзм_Pointer Единица { get; set; }
         public int ШтрихКод { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -739,7 +739,7 @@ namespace ConfTrade_v1_1.Directory
         public КатегорииКонтрагентов_Objest() : base(Config.Kernel, "tab_a07",
              new string[] { "col_b5", "col_a1", "col_a2" }) 
         {
-            Категория = new Категории_Pointer();
+            Категория = new Довідники.Категории_Pointer();
             Назва = "";
             Код = "";
             
@@ -751,7 +751,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                Категория = new Категории_Pointer(base.FieldValue["col_b5"]);
+                Категория = new Довідники.Категории_Pointer(base.FieldValue["col_b5"]);
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
                 
@@ -782,7 +782,7 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Категории_Pointer Категория { get; set; }
+        public Довідники.Категории_Pointer Категория { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
         
@@ -883,7 +883,7 @@ namespace ConfTrade_v1_1.Directory
         public КатегорииТоваров_Objest() : base(Config.Kernel, "tab_a08",
              new string[] { "col_b6", "col_a1", "col_a2" }) 
         {
-            Категория = new Категории_Pointer();
+            Категория = new Довідники.Категории_Pointer();
             Назва = "";
             Код = "";
             
@@ -895,7 +895,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                Категория = new Категории_Pointer(base.FieldValue["col_b6"]);
+                Категория = new Довідники.Категории_Pointer(base.FieldValue["col_b6"]);
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
                 
@@ -926,7 +926,7 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Категории_Pointer Категория { get; set; }
+        public Довідники.Категории_Pointer Категория { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
         
@@ -1471,9 +1471,9 @@ namespace ConfTrade_v1_1.Directory
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a12",
              new string[] { "col_c4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1" }) 
         {
-            ВалютаВзаиморасчетов = new Валюти_Pointer();
-            ВалютаКредита = new Валюти_Pointer();
-            ВалютаКредитаПоставщика = new Валюти_Pointer();
+            ВалютаВзаиморасчетов = new Довідники.Валюти_Pointer();
+            ВалютаКредита = new Довідники.Валюти_Pointer();
+            ВалютаКредитаПоставщика = new Довідники.Валюти_Pointer();
             ВидКонтрагента = 0;
             Глубина = 0;
             ГлубинаКредитаПоставщика = 0;
@@ -1483,8 +1483,8 @@ namespace ConfTrade_v1_1.Directory
             ДокументСерия = "";
             ЕГРПОУ = "";
             ИНН = "";
-            КатегорияЦен = new КатегорииЦен_Pointer();
-            КатегорияЦенПоставщика = new КатегорииЦен_Pointer();
+            КатегорияЦен = new Довідники.КатегорииЦен_Pointer();
+            КатегорияЦенПоставщика = new Довідники.КатегорииЦен_Pointer();
             Комментарий = "";
             НомерСвидетельства = "";
             ОсновнойДоговорТорг = new DirectoryEmptyPointer();
@@ -1512,10 +1512,10 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                ВалютаВзаиморасчетов = new Валюти_Pointer(base.FieldValue["col_c4"]);
-                ВалютаКредита = new Валюти_Pointer(base.FieldValue["col_a1"]);
-                ВалютаКредитаПоставщика = new Валюти_Pointer(base.FieldValue["col_a2"]);
-                ВидКонтрагента = (Enums.ВидиКонтрагентов)base.FieldValue["col_a3"];
+                ВалютаВзаиморасчетов = new Довідники.Валюти_Pointer(base.FieldValue["col_c4"]);
+                ВалютаКредита = new Довідники.Валюти_Pointer(base.FieldValue["col_a1"]);
+                ВалютаКредитаПоставщика = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
+                ВидКонтрагента = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a3"];
                 Глубина = (base.FieldValue["col_a4"] != DBNull.Value) ? (int)base.FieldValue["col_a4"] : 0;
                 ГлубинаКредитаПоставщика = (base.FieldValue["col_a5"] != DBNull.Value) ? (int)base.FieldValue["col_a5"] : 0;
                 ДокументДатаВидачи = (base.FieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a6"].ToString()) : DateTime.MinValue;
@@ -1524,8 +1524,8 @@ namespace ConfTrade_v1_1.Directory
                 ДокументСерия = base.FieldValue["col_a9"].ToString();
                 ЕГРПОУ = base.FieldValue["col_b1"].ToString();
                 ИНН = base.FieldValue["col_b2"].ToString();
-                КатегорияЦен = new КатегорииЦен_Pointer(base.FieldValue["col_b3"]);
-                КатегорияЦенПоставщика = new КатегорииЦен_Pointer(base.FieldValue["col_b4"]);
+                КатегорияЦен = new Довідники.КатегорииЦен_Pointer(base.FieldValue["col_b3"]);
+                КатегорияЦенПоставщика = new Довідники.КатегорииЦен_Pointer(base.FieldValue["col_b4"]);
                 Комментарий = base.FieldValue["col_b5"].ToString();
                 НомерСвидетельства = base.FieldValue["col_b6"].ToString();
                 ОсновнойДоговорТорг = new DirectoryEmptyPointer();
@@ -1593,10 +1593,10 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Валюти_Pointer ВалютаВзаиморасчетов { get; set; }
-        public Валюти_Pointer ВалютаКредита { get; set; }
-        public Валюти_Pointer ВалютаКредитаПоставщика { get; set; }
-        public Enums.ВидиКонтрагентов ВидКонтрагента { get; set; }
+        public Довідники.Валюти_Pointer ВалютаВзаиморасчетов { get; set; }
+        public Довідники.Валюти_Pointer ВалютаКредита { get; set; }
+        public Довідники.Валюти_Pointer ВалютаКредитаПоставщика { get; set; }
+        public Перелічення.ВидиКонтрагентов ВидКонтрагента { get; set; }
         public int Глубина { get; set; }
         public int ГлубинаКредитаПоставщика { get; set; }
         public DateTime ДокументДатаВидачи { get; set; }
@@ -1605,8 +1605,8 @@ namespace ConfTrade_v1_1.Directory
         public string ДокументСерия { get; set; }
         public string ЕГРПОУ { get; set; }
         public string ИНН { get; set; }
-        public КатегорииЦен_Pointer КатегорияЦен { get; set; }
-        public КатегорииЦен_Pointer КатегорияЦенПоставщика { get; set; }
+        public Довідники.КатегорииЦен_Pointer КатегорияЦен { get; set; }
+        public Довідники.КатегорииЦен_Pointer КатегорияЦенПоставщика { get; set; }
         public string Комментарий { get; set; }
         public string НомерСвидетельства { get; set; }
         public DirectoryEmptyPointer ОсновнойДоговорТорг { get; set; }
@@ -2092,7 +2092,7 @@ namespace ConfTrade_v1_1.Directory
             Комментарий = "";
             Назва = "";
             Код = "";
-            Група = new Групи_МестаХранения_Pointer();
+            Група = new Довідники.Групи_МестаХранения_Pointer();
             
             //Табличні частини
             
@@ -2107,7 +2107,7 @@ namespace ConfTrade_v1_1.Directory
                 Комментарий = base.FieldValue["col_a3"].ToString();
                 Назва = base.FieldValue["col_a4"].ToString();
                 Код = base.FieldValue["col_a5"].ToString();
-                Група = new Групи_МестаХранения_Pointer(base.FieldValue["col_a6"]);
+                Група = new Довідники.Групи_МестаХранения_Pointer(base.FieldValue["col_a6"]);
                 
                 BaseClear();
                 return true;
@@ -2144,7 +2144,7 @@ namespace ConfTrade_v1_1.Directory
         public string Комментарий { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Групи_МестаХранения_Pointer Група { get; set; }
+        public Довідники.Групи_МестаХранения_Pointer Група { get; set; }
         
         //Табличні частини
         
@@ -2413,7 +2413,7 @@ namespace ConfTrade_v1_1.Directory
             БанкСчет = "";
             Телефони = "";
             БезНал = false;
-            Валюта = new Валюти_Pointer();
+            Валюта = new Довідники.Валюти_Pointer();
             Комментарий = "";
             ПоследнийРасхДок = 0;
             ПоследнийПрихДок = 0;
@@ -2434,7 +2434,7 @@ namespace ConfTrade_v1_1.Directory
                 БанкСчет = base.FieldValue["col_b8"].ToString();
                 Телефони = base.FieldValue["col_b9"].ToString();
                 БезНал = (bool)base.FieldValue["col_c1"];
-                Валюта = new Валюти_Pointer(base.FieldValue["col_c2"]);
+                Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_c2"]);
                 Комментарий = base.FieldValue["col_c3"].ToString();
                 ПоследнийРасхДок = (base.FieldValue["col_c4"] != DBNull.Value) ? (int)base.FieldValue["col_c4"] : 0;
                 ПоследнийПрихДок = (base.FieldValue["col_c5"] != DBNull.Value) ? (int)base.FieldValue["col_c5"] : 0;
@@ -2483,7 +2483,7 @@ namespace ConfTrade_v1_1.Directory
         public string БанкСчет { get; set; }
         public string Телефони { get; set; }
         public bool БезНал { get; set; }
-        public Валюти_Pointer Валюта { get; set; }
+        public Довідники.Валюти_Pointer Валюта { get; set; }
         public string Комментарий { get; set; }
         public int ПоследнийРасхДок { get; set; }
         public int ПоследнийПрихДок { get; set; }
@@ -2590,10 +2590,10 @@ namespace ConfTrade_v1_1.Directory
             ПолнНаименование = "";
             ВидТовара = new DirectoryEmptyPointer();
             Артикул = "";
-            БазоваяЕдиница = new КлассификаторЕдИзм_Pointer();
+            БазоваяЕдиница = new Довідники.КлассификаторЕдИзм_Pointer();
             Вес = 0;
-            ЕдиницаПоУмолчанию = new Единици_Pointer();
-            ВалютаУчета = new Валюти_Pointer();
+            ЕдиницаПоУмолчанию = new Довідники.Единици_Pointer();
+            ВалютаУчета = new Довідники.Валюти_Pointer();
             УчетнаяЦена = 0;
             МинимальнийОстаток = 0;
             СтавкаНДС = new DirectoryEmptyPointer();
@@ -2607,10 +2607,10 @@ namespace ConfTrade_v1_1.Directory
             ЛьготаНДС = 0;
             КодЛьготи = "";
             КвоДляНН = "";
-            КодУКТВЕД = new КодиУКТВЕД_Pointer();
+            КодУКТВЕД = new Довідники.КодиУКТВЕД_Pointer();
             Назва = "";
             Код = "";
-            Група = new Групи_Номенклатура_Pointer();
+            Група = new Довідники.Групи_Номенклатура_Pointer();
             
             //Табличні частини
             СтавкаНДС_TablePart = new Номенклатура_СтавкаНДС_TablePart(this);
@@ -2624,10 +2624,10 @@ namespace ConfTrade_v1_1.Directory
                 ПолнНаименование = base.FieldValue["col_c6"].ToString();
                 ВидТовара = new DirectoryEmptyPointer();
                 Артикул = base.FieldValue["col_c8"].ToString();
-                БазоваяЕдиница = new КлассификаторЕдИзм_Pointer(base.FieldValue["col_c9"]);
+                БазоваяЕдиница = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_c9"]);
                 Вес = (base.FieldValue["col_d1"] != DBNull.Value) ? (decimal)base.FieldValue["col_d1"] : 0;
-                ЕдиницаПоУмолчанию = new Единици_Pointer(base.FieldValue["col_d2"]);
-                ВалютаУчета = new Валюти_Pointer(base.FieldValue["col_d3"]);
+                ЕдиницаПоУмолчанию = new Довідники.Единици_Pointer(base.FieldValue["col_d2"]);
+                ВалютаУчета = new Довідники.Валюти_Pointer(base.FieldValue["col_d3"]);
                 УчетнаяЦена = (base.FieldValue["col_d4"] != DBNull.Value) ? (decimal)base.FieldValue["col_d4"] : 0;
                 МинимальнийОстаток = (base.FieldValue["col_d5"] != DBNull.Value) ? (decimal)base.FieldValue["col_d5"] : 0;
                 СтавкаНДС = new DirectoryEmptyPointer();
@@ -2641,10 +2641,10 @@ namespace ConfTrade_v1_1.Directory
                 ЛьготаНДС = (base.FieldValue["col_e5"] != DBNull.Value) ? (int)base.FieldValue["col_e5"] : 0;
                 КодЛьготи = base.FieldValue["col_e6"].ToString();
                 КвоДляНН = base.FieldValue["col_e7"].ToString();
-                КодУКТВЕД = new КодиУКТВЕД_Pointer(base.FieldValue["col_e8"]);
+                КодУКТВЕД = new Довідники.КодиУКТВЕД_Pointer(base.FieldValue["col_e8"]);
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                Група = new Групи_Номенклатура_Pointer(base.FieldValue["col_a3"]);
+                Група = new Довідники.Групи_Номенклатура_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
                 return true;
@@ -2697,10 +2697,10 @@ namespace ConfTrade_v1_1.Directory
         public string ПолнНаименование { get; set; }
         public DirectoryEmptyPointer ВидТовара { get; set; }
         public string Артикул { get; set; }
-        public КлассификаторЕдИзм_Pointer БазоваяЕдиница { get; set; }
+        public Довідники.КлассификаторЕдИзм_Pointer БазоваяЕдиница { get; set; }
         public decimal Вес { get; set; }
-        public Единици_Pointer ЕдиницаПоУмолчанию { get; set; }
-        public Валюти_Pointer ВалютаУчета { get; set; }
+        public Довідники.Единици_Pointer ЕдиницаПоУмолчанию { get; set; }
+        public Довідники.Валюти_Pointer ВалютаУчета { get; set; }
         public decimal УчетнаяЦена { get; set; }
         public decimal МинимальнийОстаток { get; set; }
         public DirectoryEmptyPointer СтавкаНДС { get; set; }
@@ -2714,10 +2714,10 @@ namespace ConfTrade_v1_1.Directory
         public int ЛьготаНДС { get; set; }
         public string КодЛьготи { get; set; }
         public string КвоДляНН { get; set; }
-        public КодиУКТВЕД_Pointer КодУКТВЕД { get; set; }
+        public Довідники.КодиУКТВЕД_Pointer КодУКТВЕД { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Групи_Номенклатура_Pointer Група { get; set; }
+        public Довідники.Групи_Номенклатура_Pointer Група { get; set; }
         
         //Табличні частини
         public Номенклатура_СтавкаНДС_TablePart СтавкаНДС_TablePart { get; set; }
@@ -3070,7 +3070,7 @@ namespace ConfTrade_v1_1.Directory
              new string[] { "col_f4", "col_f5", "col_f6", "col_f7", "col_f8" }) 
         {
             ОсновнаяФирма = new DirectoryEmptyPointer();
-            КатегорияЦен = new КатегорииЦен_Pointer();
+            КатегорияЦен = new Довідники.КатегорииЦен_Pointer();
             Отпустил = new DirectoryEmptyPointer();
             Назва = "";
             Код = "";
@@ -3084,7 +3084,7 @@ namespace ConfTrade_v1_1.Directory
             if (BaseRead(uid))
             {
                 ОсновнаяФирма = new DirectoryEmptyPointer();
-                КатегорияЦен = new КатегорииЦен_Pointer(base.FieldValue["col_f5"]);
+                КатегорияЦен = new Довідники.КатегорииЦен_Pointer(base.FieldValue["col_f5"]);
                 Отпустил = new DirectoryEmptyPointer();
                 Назва = base.FieldValue["col_f7"].ToString();
                 Код = base.FieldValue["col_f8"].ToString();
@@ -3119,7 +3119,7 @@ namespace ConfTrade_v1_1.Directory
         }
         
         public DirectoryEmptyPointer ОсновнаяФирма { get; set; }
-        public КатегорииЦен_Pointer КатегорияЦен { get; set; }
+        public Довідники.КатегорииЦен_Pointer КатегорияЦен { get; set; }
         public DirectoryEmptyPointer Отпустил { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3219,7 +3219,7 @@ namespace ConfTrade_v1_1.Directory
         public Прайс_лист_Objest() : base(Config.Kernel, "tab_a26",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
-            Товар = new Номенклатура_Pointer();
+            Товар = new Довідники.Номенклатура_Pointer();
             Комментарий = "";
             Назва = "";
             Код = "";
@@ -3232,7 +3232,7 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                Товар = new Номенклатура_Pointer(base.FieldValue["col_a1"]);
+                Товар = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a1"]);
                 Комментарий = base.FieldValue["col_a2"].ToString();
                 Назва = base.FieldValue["col_a3"].ToString();
                 Код = base.FieldValue["col_a4"].ToString();
@@ -3265,7 +3265,7 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Номенклатура_Pointer Товар { get; set; }
+        public Довідники.Номенклатура_Pointer Товар { get; set; }
         public string Комментарий { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
@@ -3973,23 +3973,23 @@ namespace ConfTrade_v1_1.Directory
         public Фирми_Objest() : base(Config.Kernel, "tab_a31",
              new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1" }) 
         {
-            ГлавнийБухгалтер = new Сотрудники_Pointer();
+            ГлавнийБухгалтер = new Довідники.Сотрудники_Pointer();
             ГНИ = "";
             ДатаРегистрации = DateTime.MinValue;
             ЕГРПОУ = "";
             ИНН = "";
-            Кассир = new Сотрудники_Pointer();
+            Кассир = new Довідники.Сотрудники_Pointer();
             Комментарий = "";
             МетодРасчетаСебестоимостиФинансовогоУчета = new DirectoryEmptyPointer();
-            НалоговаяИнспекция = new НалоговиеИнспекции_Pointer();
+            НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer();
             НомерСвидетельства = "";
             ОфициальноеНаименование = "";
             ПлательщикНалогаНаПрибиль = false;
             ПолнНаименование = "";
             ПочтовийАдрес = "";
             ПрефиксНомеровДокументов = "";
-            Руководитель = new Сотрудники_Pointer();
-            СчетПоУмолчанию = new НашиДенежниеСчета_Pointer();
+            Руководитель = new Довідники.Сотрудники_Pointer();
+            СчетПоУмолчанию = new Довідники.НашиДенежниеСчета_Pointer();
             Телефони = "";
             ЮридическийАдрес = "";
             ИнфОСтатусеПлательщикаНалогов = "";
@@ -4015,23 +4015,23 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                ГлавнийБухгалтер = new Сотрудники_Pointer(base.FieldValue["col_c7"]);
+                ГлавнийБухгалтер = new Довідники.Сотрудники_Pointer(base.FieldValue["col_c7"]);
                 ГНИ = base.FieldValue["col_c8"].ToString();
                 ДатаРегистрации = (base.FieldValue["col_c9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_c9"].ToString()) : DateTime.MinValue;
                 ЕГРПОУ = base.FieldValue["col_d1"].ToString();
                 ИНН = base.FieldValue["col_d2"].ToString();
-                Кассир = new Сотрудники_Pointer(base.FieldValue["col_d3"]);
+                Кассир = new Довідники.Сотрудники_Pointer(base.FieldValue["col_d3"]);
                 Комментарий = base.FieldValue["col_d4"].ToString();
                 МетодРасчетаСебестоимостиФинансовогоУчета = new DirectoryEmptyPointer();
-                НалоговаяИнспекция = new НалоговиеИнспекции_Pointer(base.FieldValue["col_d6"]);
+                НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer(base.FieldValue["col_d6"]);
                 НомерСвидетельства = base.FieldValue["col_d7"].ToString();
                 ОфициальноеНаименование = base.FieldValue["col_d8"].ToString();
                 ПлательщикНалогаНаПрибиль = (bool)base.FieldValue["col_d9"];
                 ПолнНаименование = base.FieldValue["col_e1"].ToString();
                 ПочтовийАдрес = base.FieldValue["col_e2"].ToString();
                 ПрефиксНомеровДокументов = base.FieldValue["col_e3"].ToString();
-                Руководитель = new Сотрудники_Pointer(base.FieldValue["col_e4"]);
-                СчетПоУмолчанию = new НашиДенежниеСчета_Pointer(base.FieldValue["col_e5"]);
+                Руководитель = new Довідники.Сотрудники_Pointer(base.FieldValue["col_e4"]);
+                СчетПоУмолчанию = new Довідники.НашиДенежниеСчета_Pointer(base.FieldValue["col_e5"]);
                 Телефони = base.FieldValue["col_e6"].ToString();
                 ЮридическийАдрес = base.FieldValue["col_e7"].ToString();
                 ИнфОСтатусеПлательщикаНалогов = base.FieldValue["col_e8"].ToString();
@@ -4084,23 +4084,23 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Сотрудники_Pointer ГлавнийБухгалтер { get; set; }
+        public Довідники.Сотрудники_Pointer ГлавнийБухгалтер { get; set; }
         public string ГНИ { get; set; }
         public DateTime ДатаРегистрации { get; set; }
         public string ЕГРПОУ { get; set; }
         public string ИНН { get; set; }
-        public Сотрудники_Pointer Кассир { get; set; }
+        public Довідники.Сотрудники_Pointer Кассир { get; set; }
         public string Комментарий { get; set; }
         public DirectoryEmptyPointer МетодРасчетаСебестоимостиФинансовогоУчета { get; set; }
-        public НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
+        public Довідники.НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
         public string НомерСвидетельства { get; set; }
         public string ОфициальноеНаименование { get; set; }
         public bool ПлательщикНалогаНаПрибиль { get; set; }
         public string ПолнНаименование { get; set; }
         public string ПочтовийАдрес { get; set; }
         public string ПрефиксНомеровДокументов { get; set; }
-        public Сотрудники_Pointer Руководитель { get; set; }
-        public НашиДенежниеСчета_Pointer СчетПоУмолчанию { get; set; }
+        public Довідники.Сотрудники_Pointer Руководитель { get; set; }
+        public Довідники.НашиДенежниеСчета_Pointer СчетПоУмолчанию { get; set; }
         public string Телефони { get; set; }
         public string ЮридическийАдрес { get; set; }
         public string ИнфОСтатусеПлательщикаНалогов { get; set; }
@@ -4396,7 +4396,7 @@ namespace ConfTrade_v1_1.Directory
                 Фирми_Кассир_TablePartRecord record = new Фирми_Кассир_TablePartRecord();
 
                 record.Дата = (fieldValue["col_f6"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_f6"].ToString()) : DateTime.MinValue;
-                record.Кассир = new Сотрудники_Pointer(fieldValue["col_f7"]);
+                record.Кассир = new Довідники.Сотрудники_Pointer(fieldValue["col_f7"]);
                 
                 Records.Add(record);
             }
@@ -4449,20 +4449,20 @@ namespace ConfTrade_v1_1.Directory
         public Фирми_Кассир_TablePartRecord()
         {
             Дата = DateTime.MinValue;
-            Кассир = new Сотрудники_Pointer();
+            Кассир = new Довідники.Сотрудники_Pointer();
             
         }
         
         
         public Фирми_Кассир_TablePartRecord(
-            DateTime?  _Дата = null, Сотрудники_Pointer _Кассир = null)
+            DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Кассир = null)
         {
             Дата = _Дата ?? DateTime.MinValue;
-            Кассир = _Кассир ?? new Сотрудники_Pointer();
+            Кассир = _Кассир ?? new Довідники.Сотрудники_Pointer();
             
         }
         public DateTime Дата { get; set; }
-        public Сотрудники_Pointer Кассир { get; set; }
+        public Довідники.Сотрудники_Pointer Кассир { get; set; }
         
     }
       
@@ -4580,7 +4580,7 @@ namespace ConfTrade_v1_1.Directory
                 Фирми_НалоговаяИнспекция_TablePartRecord record = new Фирми_НалоговаяИнспекция_TablePartRecord();
 
                 record.Дата = (fieldValue["col_g1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g1"].ToString()) : DateTime.MinValue;
-                record.НалоговаяИнспекция = new НалоговиеИнспекции_Pointer(fieldValue["col_g2"]);
+                record.НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer(fieldValue["col_g2"]);
                 
                 Records.Add(record);
             }
@@ -4631,20 +4631,20 @@ namespace ConfTrade_v1_1.Directory
         public Фирми_НалоговаяИнспекция_TablePartRecord()
         {
             Дата = DateTime.MinValue;
-            НалоговаяИнспекция = new НалоговиеИнспекции_Pointer();
+            НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer();
             
         }
         
         
         public Фирми_НалоговаяИнспекция_TablePartRecord(
-            DateTime?  _Дата = null, НалоговиеИнспекции_Pointer _НалоговаяИнспекция = null)
+            DateTime?  _Дата = null, Довідники.НалоговиеИнспекции_Pointer _НалоговаяИнспекция = null)
         {
             Дата = _Дата ?? DateTime.MinValue;
-            НалоговаяИнспекция = _НалоговаяИнспекция ?? new НалоговиеИнспекции_Pointer();
+            НалоговаяИнспекция = _НалоговаяИнспекция ?? new Довідники.НалоговиеИнспекции_Pointer();
             
         }
         public DateTime Дата { get; set; }
-        public НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
+        public Довідники.НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
         
     }
       
@@ -5035,7 +5035,7 @@ namespace ConfTrade_v1_1.Directory
                 Фирми_Руководитель_TablePartRecord record = new Фирми_Руководитель_TablePartRecord();
 
                 record.Дата = (fieldValue["col_h2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_h2"].ToString()) : DateTime.MinValue;
-                record.Руководитель = new Сотрудники_Pointer(fieldValue["col_h3"]);
+                record.Руководитель = new Довідники.Сотрудники_Pointer(fieldValue["col_h3"]);
                 
                 Records.Add(record);
             }
@@ -5086,20 +5086,20 @@ namespace ConfTrade_v1_1.Directory
         public Фирми_Руководитель_TablePartRecord()
         {
             Дата = DateTime.MinValue;
-            Руководитель = new Сотрудники_Pointer();
+            Руководитель = new Довідники.Сотрудники_Pointer();
             
         }
         
         
         public Фирми_Руководитель_TablePartRecord(
-            DateTime?  _Дата = null, Сотрудники_Pointer _Руководитель = null)
+            DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Руководитель = null)
         {
             Дата = _Дата ?? DateTime.MinValue;
-            Руководитель = _Руководитель ?? new Сотрудники_Pointer();
+            Руководитель = _Руководитель ?? new Довідники.Сотрудники_Pointer();
             
         }
         public DateTime Дата { get; set; }
-        public Сотрудники_Pointer Руководитель { get; set; }
+        public Довідники.Сотрудники_Pointer Руководитель { get; set; }
         
     }
       
@@ -5220,9 +5220,9 @@ namespace ConfTrade_v1_1.Directory
         public Цени_Objest() : base(Config.Kernel, "tab_a43",
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
         {
-            Валюта = new Валюти_Pointer();
-            Единица = new Единици_Pointer();
-            КатегорияЦени = new КатегорииЦен_Pointer();
+            Валюта = new Довідники.Валюти_Pointer();
+            Единица = new Довідники.Единици_Pointer();
+            КатегорияЦени = new Довідники.КатегорииЦен_Pointer();
             Наценка = 0;
             Цена = 0;
             Назва = "";
@@ -5239,9 +5239,9 @@ namespace ConfTrade_v1_1.Directory
         {
             if (BaseRead(uid))
             {
-                Валюта = new Валюти_Pointer(base.FieldValue["col_a1"]);
-                Единица = new Единици_Pointer(base.FieldValue["col_a2"]);
-                КатегорияЦени = new КатегорииЦен_Pointer(base.FieldValue["col_a3"]);
+                Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_a1"]);
+                Единица = new Довідники.Единици_Pointer(base.FieldValue["col_a2"]);
+                КатегорияЦени = new Довідники.КатегорииЦен_Pointer(base.FieldValue["col_a3"]);
                 Наценка = (base.FieldValue["col_a4"] != DBNull.Value) ? (decimal)base.FieldValue["col_a4"] : 0;
                 Цена = (base.FieldValue["col_a5"] != DBNull.Value) ? (decimal)base.FieldValue["col_a5"] : 0;
                 Назва = base.FieldValue["col_a6"].ToString();
@@ -5278,9 +5278,9 @@ namespace ConfTrade_v1_1.Directory
             return directoryPointer;
         }
         
-        public Валюти_Pointer Валюта { get; set; }
-        public Единици_Pointer Единица { get; set; }
-        public КатегорииЦен_Pointer КатегорияЦени { get; set; }
+        public Довідники.Валюти_Pointer Валюта { get; set; }
+        public Довідники.Единици_Pointer Единица { get; set; }
+        public Довідники.КатегорииЦен_Pointer КатегорияЦени { get; set; }
         public decimal Наценка { get; set; }
         public decimal Цена { get; set; }
         public string Назва { get; set; }
@@ -5383,7 +5383,7 @@ namespace ConfTrade_v1_1.Directory
                 Цени_Валюта_TablePartRecord record = new Цени_Валюта_TablePartRecord();
 
                 record.Дата = (fieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a6"].ToString()) : DateTime.MinValue;
-                record.Валюта = new Валюти_Pointer(fieldValue["col_a7"]);
+                record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a7"]);
                 
                 Records.Add(record);
             }
@@ -5434,20 +5434,20 @@ namespace ConfTrade_v1_1.Directory
         public Цени_Валюта_TablePartRecord()
         {
             Дата = DateTime.MinValue;
-            Валюта = new Валюти_Pointer();
+            Валюта = new Довідники.Валюти_Pointer();
             
         }
         
         
         public Цени_Валюта_TablePartRecord(
-            DateTime?  _Дата = null, Валюти_Pointer _Валюта = null)
+            DateTime?  _Дата = null, Довідники.Валюти_Pointer _Валюта = null)
         {
             Дата = _Дата ?? DateTime.MinValue;
-            Валюта = _Валюта ?? new Валюти_Pointer();
+            Валюта = _Валюта ?? new Довідники.Валюти_Pointer();
             
         }
         public DateTime Дата { get; set; }
-        public Валюти_Pointer Валюта { get; set; }
+        public Довідники.Валюти_Pointer Валюта { get; set; }
         
     }
       
@@ -5474,7 +5474,7 @@ namespace ConfTrade_v1_1.Directory
                 Цени_Единица_TablePartRecord record = new Цени_Единица_TablePartRecord();
 
                 record.Дата = (fieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a8"].ToString()) : DateTime.MinValue;
-                record.Единица = new Единици_Pointer(fieldValue["col_a9"]);
+                record.Единица = new Довідники.Единици_Pointer(fieldValue["col_a9"]);
                 
                 Records.Add(record);
             }
@@ -5525,20 +5525,20 @@ namespace ConfTrade_v1_1.Directory
         public Цени_Единица_TablePartRecord()
         {
             Дата = DateTime.MinValue;
-            Единица = new Единици_Pointer();
+            Единица = new Довідники.Единици_Pointer();
             
         }
         
         
         public Цени_Единица_TablePartRecord(
-            DateTime?  _Дата = null, Единици_Pointer _Единица = null)
+            DateTime?  _Дата = null, Довідники.Единици_Pointer _Единица = null)
         {
             Дата = _Дата ?? DateTime.MinValue;
-            Единица = _Единица ?? new Единици_Pointer();
+            Единица = _Единица ?? new Довідники.Единици_Pointer();
             
         }
         public DateTime Дата { get; set; }
-        public Единици_Pointer Единица { get; set; }
+        public Довідники.Единици_Pointer Единица { get; set; }
         
     }
       
@@ -5658,7 +5658,7 @@ namespace ConfTrade_v1_1.Directory
              new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
-            Родитель = new Групи_Номенклатура_Pointer();
+            Родитель = new Довідники.Групи_Номенклатура_Pointer();
             Код = "";
             
             //Табличні частини
@@ -5670,7 +5670,7 @@ namespace ConfTrade_v1_1.Directory
             if (BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a1"].ToString();
-                Родитель = new Групи_Номенклатура_Pointer(base.FieldValue["col_a2"]);
+                Родитель = new Довідники.Групи_Номенклатура_Pointer(base.FieldValue["col_a2"]);
                 Код = base.FieldValue["col_a3"].ToString();
                 
                 BaseClear();
@@ -5701,7 +5701,7 @@ namespace ConfTrade_v1_1.Directory
         }
         
         public string Назва { get; set; }
-        public Групи_Номенклатура_Pointer Родитель { get; set; }
+        public Довідники.Групи_Номенклатура_Pointer Родитель { get; set; }
         public string Код { get; set; }
         
         //Табличні частини
@@ -5797,7 +5797,7 @@ namespace ConfTrade_v1_1.Directory
         {
             Назва = "";
             Код = "";
-            Родитель = new МестаХранения_Pointer();
+            Родитель = new Довідники.МестаХранения_Pointer();
             
             //Табличні частини
             
@@ -5809,7 +5809,7 @@ namespace ConfTrade_v1_1.Directory
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                Родитель = new МестаХранения_Pointer(base.FieldValue["col_a3"]);
+                Родитель = new Довідники.МестаХранения_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
                 return true;
@@ -5840,7 +5840,7 @@ namespace ConfTrade_v1_1.Directory
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public МестаХранения_Pointer Родитель { get; set; }
+        public Довідники.МестаХранения_Pointer Родитель { get; set; }
         
         //Табличні частини
         
@@ -5938,7 +5938,7 @@ namespace ConfTrade_v1_1.Directory
             ТипПоля = 0;
             Поле2 = 0;
             Поле3 = 0;
-            Поле4 = new Номенклатура_Pointer();
+            Поле4 = new Довідники.Номенклатура_Pointer();
             
             //Табличні частини
             esddf_TablePart = new test_esddf_TablePart(this);
@@ -5951,10 +5951,10 @@ namespace ConfTrade_v1_1.Directory
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                ТипПоля = (Enums.Перелічення2)base.FieldValue["col_a3"];
-                Поле2 = (Enums.Перелічення)base.FieldValue["col_a4"];
-                Поле3 = (Enums.Перелічення2)base.FieldValue["col_a5"];
-                Поле4 = new Номенклатура_Pointer(base.FieldValue["col_a6"]);
+                ТипПоля = (Перелічення.Перелічення2)base.FieldValue["col_a3"];
+                Поле2 = (Перелічення.Перелічення)base.FieldValue["col_a4"];
+                Поле3 = (Перелічення.Перелічення2)base.FieldValue["col_a5"];
+                Поле4 = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a6"]);
                 
                 BaseClear();
                 return true;
@@ -5988,10 +5988,10 @@ namespace ConfTrade_v1_1.Directory
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Enums.Перелічення2 ТипПоля { get; set; }
-        public Enums.Перелічення Поле2 { get; set; }
-        public Enums.Перелічення2 Поле3 { get; set; }
-        public Номенклатура_Pointer Поле4 { get; set; }
+        public Перелічення.Перелічення2 ТипПоля { get; set; }
+        public Перелічення.Перелічення Поле2 { get; set; }
+        public Перелічення.Перелічення2 Поле3 { get; set; }
+        public Довідники.Номенклатура_Pointer Поле4 { get; set; }
         
         //Табличні частини
         public test_esddf_TablePart esddf_TablePart { get; set; }
@@ -6083,7 +6083,7 @@ namespace ConfTrade_v1_1.Directory
             {
                 test_esddf_TablePartRecord record = new test_esddf_TablePartRecord();
 
-                record.sdfasdf = (Enums.Перелічення2)fieldValue["col_a1"];
+                record.sdfasdf = (Перелічення.Перелічення2)fieldValue["col_a1"];
                 
                 Records.Add(record);
             }
@@ -6138,12 +6138,12 @@ namespace ConfTrade_v1_1.Directory
         
         
         public test_esddf_TablePartRecord(
-            Enums.Перелічення2 _sdfasdf = 0)
+            Перелічення.Перелічення2 _sdfasdf = 0)
         {
             sdfasdf = _sdfasdf;
             
         }
-        public Enums.Перелічення2 sdfasdf { get; set; }
+        public Перелічення.Перелічення2 sdfasdf { get; set; }
         
     }
       ///<summary>
@@ -6441,9 +6441,161 @@ namespace ConfTrade_v1_1.Directory
     
     #endregion
     
+    #region DIRECTORY "іваів"
+    
+    
+    class іваів_Objest : DirectoryObject
+    {
+        public іваів_Objest() : base(Config.Kernel, "tab_a50",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+        {
+            Назва = "";
+            Код = "";
+            іваі = new Довідники.Категории_Pointer();
+            sddfgsd = 0;
+            Документ = new Документи.Test_Pointer();
+            аавпва = 0;
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                іваі = new Довідники.Категории_Pointer(base.FieldValue["col_a3"]);
+                sddfgsd = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a4"];
+                Документ = new Документи.Test_Pointer(base.FieldValue["col_a5"]);
+                аавпва = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a6"];
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = іваі.UnigueID.UGuid;
+            base.FieldValue["col_a4"] = (int)sddfgsd;
+            base.FieldValue["col_a5"] = Документ.UnigueID.UGuid;
+            base.FieldValue["col_a6"] = (int)аавпва;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public іваів_Pointer GetDirectoryPointer()
+        {
+            іваів_Pointer directoryPointer = new іваів_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public Довідники.Категории_Pointer іваі { get; set; }
+        public Перелічення.ВидиКонтрагентов sddfgsd { get; set; }
+        public Документи.Test_Pointer Документ { get; set; }
+        public Перелічення.ВидиКонтрагентов аавпва { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class іваів_Pointer : DirectoryPointer
+    {
+        public іваів_Pointer(object uid = null) : base(Config.Kernel, "tab_a50")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public іваів_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a50")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public іваів_Objest GetDirectoryObject()
+        {
+            іваів_Objest іваівObjestItem = new іваів_Objest();
+            іваівObjestItem.Read(base.UnigueID);
+            return іваівObjestItem;
+        }
+    }
+    
+    
+    class іваів_Select : DirectorySelect, IDisposable
+    {
+        public іваів_Select() : base(Config.Kernel, "tab_a50") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new іваів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public іваів_Pointer Current { get; private set; }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class іваів_Список_View : DirectoryView
+    {
+        public іваів_Список_View() : base(Config.Kernel, "tab_a50", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "іваів_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
 }
 
-namespace ConfTrade_v1_1.Enums
+namespace ConfTrade_v1_1.Перелічення
 {
     ///<summary>
     ///test.
@@ -6487,7 +6639,7 @@ namespace ConfTrade_v1_1.Enums
     
 }
 
-namespace ConfTrade_v1_1.Document
+namespace ConfTrade_v1_1.Документи
 {
     
     #region DOCUMENT "Test"
@@ -6686,12 +6838,12 @@ namespace ConfTrade_v1_1.Document
     
 }
 
-namespace ConfTrade_v1_1.Journal
+namespace ConfTrade_v1_1.Журнали
 {
 
 }
 
-namespace ConfTrade_v1_1.Register
+namespace ConfTrade_v1_1.Регістри
 {
 
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
-using Довідники = ConfTrade_v1_1.Directory;    
+using Довідники = ConfTrade_v1_1.Довідники;    
 
 namespace ConfTrade
 {

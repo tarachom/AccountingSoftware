@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 using System.Xml.Xsl;
+using System.Windows.Forms;
 
 namespace AccountingSoftware
 {
@@ -57,8 +58,18 @@ namespace AccountingSoftware
 			return Enum;
 		}
 
-		public List<string> SearchForPointers(string searchDirectoryName)
+		public List<string> SearchForPointers(string searchName)
 		{
+			if (searchName.IndexOf(".") > 0)
+			{
+				string[] searchNameSplit = searchName.Split(new string[] { "." }, StringSplitOptions.None);
+
+				if (!(searchNameSplit[0] == "Довідники" || searchNameSplit[0] == "Документи"))
+					throw new Exception("Перша частина назви має бути 'Довідники' або 'Документи'");
+			}
+			else
+				throw new Exception("Назва для пошуку має бути 'Довідники.<Назва довідника>' або 'Документи.<Назва документу>'");
+
 			List<string> ListPointer = new List<string>();
 
 			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на цей довідник
@@ -69,7 +80,7 @@ namespace AccountingSoftware
 				{
 					if (directoryField.Type == "pointer")
 					{
-						if (directoryField.Pointer == searchDirectoryName)
+						if (directoryField.Pointer == searchName)
 						{
 							//pointer
 							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
@@ -85,7 +96,7 @@ namespace AccountingSoftware
 					{
 						if (tablePartField.Type == "pointer")
 						{
-							if (tablePartField.Pointer == searchDirectoryName)
+							if (tablePartField.Pointer == searchName)
 							{
 								//pointer
 								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
@@ -98,8 +109,18 @@ namespace AccountingSoftware
 			return ListPointer;
 		}
 
-		public List<string> SearchForPointersEnum(string searchEnumName)
+		public List<string> SearchForPointersEnum(string searchName)
 		{
+			if (searchName.IndexOf(".") > 0)
+			{
+				string[] searchNameSplit = searchName.Split(new string[] { "." }, StringSplitOptions.None);
+
+				if (!(searchNameSplit[0] == "Перелічення"))
+					throw new Exception("Перша частина назви має бути 'Перелічення'");
+			}
+			else
+				throw new Exception("Назва для пошуку має бути 'Перелічення.<Назва перелічення>'");
+
 			List<string> ListPointer = new List<string>();
 
 			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на перелічення
@@ -110,7 +131,7 @@ namespace AccountingSoftware
 				{
 					if (directoryField.Type == "enum")
 					{
-						if (directoryField.Pointer == searchEnumName)
+						if (directoryField.Pointer == searchName)
 						{
 							//pointer
 							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
@@ -126,7 +147,7 @@ namespace AccountingSoftware
 					{
 						if (tablePartField.Type == "enum")
 						{
-							if (tablePartField.Pointer == searchEnumName)
+							if (tablePartField.Pointer == searchName)
 							{
 								//pointer
 								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
@@ -156,7 +177,8 @@ namespace AccountingSoftware
 			bool noExistInConf = false;
 			string columnNewName = "";
 
-			if (String.IsNullOrWhiteSpace(table)) {
+			if (String.IsNullOrWhiteSpace(table))
+			{
 				table = "0";
 			}
 
@@ -187,7 +209,7 @@ namespace AccountingSoftware
 						}
 					}
 
-					if (noExistInReserved && noExistInConf) 
+					if (noExistInReserved && noExistInConf)
 					{
 						break;
 					}
@@ -206,10 +228,10 @@ namespace AccountingSoftware
 
 		public static string GetNewUnigueTableName(Kernel Kernel)
 		{
-			string[] mas = new string[] 
+			string[] mas = new string[]
 			{
 				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
-				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" 
+				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
 			};
 
 			bool noExistInReserved = false;
@@ -468,7 +490,7 @@ namespace AccountingSoftware
 
 					ConfObjectView.Fields.Add(nameField, nameInTableField);
 				}
-				
+
 				/*
 				XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
 				while (fieldWhere.MoveNext())

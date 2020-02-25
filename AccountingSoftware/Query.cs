@@ -193,7 +193,6 @@ namespace AccountingSoftware
 		}
 	}
 
-	//Tuple<string, Comparison, string, Comparison>
 	public class Where
 	{
 		public Where(string name, Comparison comparison, object value, bool usingSQLToValue = false, Comparison comparisonNext = Comparison.Empty)

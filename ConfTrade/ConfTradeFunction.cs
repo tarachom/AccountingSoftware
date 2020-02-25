@@ -8,13 +8,19 @@ using System.Xml.Xsl;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
-using Довідники = ConfTrade_v1_1.Directory;
-using Перелічення = ConfTrade_v1_1.Enums;
+using Довідники = ConfTrade_v1_1.Довідники;
+using Документи = ConfTrade_v1_1.Документи;
+using Перелічення = ConfTrade_v1_1.Перелічення;
 
 namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
+		static void Test2()
+		{
+
+		}
+
 		static string Run4()
 		{
 			Довідники.test_Objest test_Objest = new Довідники.test_Objest();
