@@ -157,33 +157,65 @@ namespace Configurator
 				}
 			}
 
-			TreeNode documentNode = rootNode.Nodes.Add("Documents", "Документи");
-			documentNode.SelectedImageIndex = 3;
-			documentNode.ImageIndex = 3;
+			TreeNode documentsNode = rootNode.Nodes.Add("Documents", "Документи");
+			documentsNode.SelectedImageIndex = 3;
+			documentsNode.ImageIndex = 3;
+
+			foreach (KeyValuePair<string, ConfigurationDocuments> ConfDocuments in Conf.Documents)
+			{
+				TreeNode documentNode = documentsNode.Nodes.Add(ConfDocuments.Key, ConfDocuments.Value.Name);
+				//documentNode.ContextMenuStrip = contextMenuStrip1;
+				documentNode.SelectedImageIndex = 1;
+				documentNode.ImageIndex = 1;
+
+				//Поля
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDocuments.Value.Fields)
+				{
+					TreeNode fieldNode = documentNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name +
+						((ConfFields.Value.Type == "pointer") ? " -> " + ConfFields.Value.Pointer : ""));
+
+					fieldNode.SelectedImageIndex = 0;
+					fieldNode.ImageIndex = 0;
+				}
+
+				TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
+				documentTabularPartsNode.SelectedImageIndex = 1;
+				documentTabularPartsNode.ImageIndex = 1;
+
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDocuments.Value.TabularParts)
+				{
+					TreeNode documentTablePartNode = documentTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+					documentTablePartNode.ImageIndex = 1;
+
+					//Поля
+					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+					{
+						TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name +
+							((ConfTablePartFields.Value.Type == "pointer") ? " -> " + ConfTablePartFields.Value.Pointer : ""));
+
+						fieldNode.SelectedImageIndex = 0;
+						fieldNode.ImageIndex = 0;
+					}
+				}
+			}
+
+			//TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
+			//journalsNode.SelectedImageIndex = 3;
+			//journalsNode.ImageIndex = 3;
 
 			//...
 
-			TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
-			journalsNode.SelectedImageIndex = 3;
-			journalsNode.ImageIndex = 3;
+			//TreeNode registersNode = rootNode.Nodes.Add("Registers", "Регістри");
+			//registersNode.SelectedImageIndex = 3;
+			//registersNode.ImageIndex = 3;
 
 			//...
-
-			TreeNode registersNode = rootNode.Nodes.Add("Registers", "Регістри");
-			registersNode.SelectedImageIndex = 3;
-			registersNode.ImageIndex = 3;
-
-			//...
-
-			TreeNode regularTasksNode = rootNode.Nodes.Add("RegularTasks", "Регламентні завдання");
-			regularTasksNode.SelectedImageIndex = 3;
-			regularTasksNode.ImageIndex = 3;
 
 			rootNode.Expand();
 
-			directoriesNode.Expand();
-			enumsNode.Expand();
-			documentNode.Expand();
+			//directoriesNode.Expand();
+			//enumsNode.Expand();
+			//documentsNode.Expand();
 		}
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
@@ -192,14 +224,6 @@ namespace Configurator
 			Program.Kernel.Open();
 
 			Conf = Program.Kernel.Conf;
-
-			//ConfigurationDocuments configurationDocuments = new ConfigurationDocuments("Test", "test", "");
-
-			//ConfigurationObjectTablePart configurationObjectTablePart = new ConfigurationObjectTablePart("test", "test2", "");
-
-			//configurationDocuments.TabularParts.Add(configurationObjectTablePart.Name, configurationObjectTablePart);
-
-			//Conf.Documents.Add(configurationDocuments.Name, configurationDocuments);
 
 			LoadTree();
 		}
