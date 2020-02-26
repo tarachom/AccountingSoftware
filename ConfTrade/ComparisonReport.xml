@@ -1222,10 +1222,9 @@
       <IsExist>yes</IsExist>
       <Type>
         <ConfType>enum</ConfType>
-        <DataType>uuid</DataType>
-        <UdtName>uuid</UdtName>
-        <Coincide>no</Coincide>
-        <DataTypeCreate>integer</DataTypeCreate>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>

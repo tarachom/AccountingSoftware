@@ -10,15 +10,18 @@ namespace AccountingSoftware
 			Fields = new Dictionary<string, ConfigurationEnumField>();
 		}
 
-		public ConfigurationEnums(string name, string desc = "") : this()
+		public ConfigurationEnums(string name, int serialNumber = 0, string desc = "") : this()
 		{
 			Name = name;
 			Desc = desc;
+			SerialNumber = serialNumber;
 		}
 
 		public string Name { get; set; }
 
 		public string Desc { get; set; }
+
+		public int SerialNumber { get; set; }
 
 		public Dictionary<string, ConfigurationEnumField> Fields { get; }
 

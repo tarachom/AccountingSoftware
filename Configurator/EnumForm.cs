@@ -105,7 +105,10 @@ namespace Configurator
 
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
+			ConfEnums.SerialNumber += 1;
+
 			EnumFieldForm enumFieldForm = new EnumFieldForm();
+			enumFieldForm.SerialNumber = ConfEnums.SerialNumber;
 			enumFieldForm.CallBack_IsExistField = CallBack_IsExistField;
 			enumFieldForm.CallBack = CallBack_Update_Field;
 			enumFieldForm.Show();
@@ -130,6 +133,25 @@ namespace Configurator
 				enumFieldForm.CallBack_IsExistField = CallBack_IsExistField;
 				enumFieldForm.CallBack = CallBack_Update_Field;
 				enumFieldForm.Show();
+			}
+		}
+
+		private void listBoxFields_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					int selectIndex = listBoxFields.SelectedIndex;
+
+					ConfEnums.Fields.Remove(listBoxFields.SelectedItem.ToString());
+					LoadFieldList();
+
+					if (selectIndex >= listBoxFields.Items.Count)
+						selectIndex = listBoxFields.Items.Count - 1;
+
+					listBoxFields.SelectedIndex = selectIndex;
+				}
 			}
 		}
 	}

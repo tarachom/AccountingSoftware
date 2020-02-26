@@ -511,10 +511,11 @@ namespace AccountingSoftware
 			{
 				string name = enumsNodes.Current.SelectSingleNode("Name").Value;
 				string desc = enumsNodes.Current.SelectSingleNode("Desc").Value;
+				int serialNumber = int.Parse(enumsNodes.Current.SelectSingleNode("SerialNumber").Value);
 
 				if (String.IsNullOrWhiteSpace(desc)) desc = "";
 
-				ConfigurationEnums configurationEnums = new ConfigurationEnums(name, desc);
+				ConfigurationEnums configurationEnums = new ConfigurationEnums(name, serialNumber, desc);
 				Conf.Enums.Add(configurationEnums.Name, configurationEnums);
 
 				XPathNodeIterator enumFieldsNodes = enumsNodes.Current.Select("Fields/Field");
@@ -773,6 +774,10 @@ namespace AccountingSoftware
 				XmlElement nodeEnumDesc = xmlConfDocument.CreateElement("Desc");
 				nodeEnumDesc.InnerText = enum_item.Value.Desc;
 				nodeEnum.AppendChild(nodeEnumDesc);
+
+				XmlElement nodeEnumSerialNumber = xmlConfDocument.CreateElement("SerialNumber");
+				nodeEnumSerialNumber.InnerText = enum_item.Value.SerialNumber.ToString();
+				nodeEnum.AppendChild(nodeEnumSerialNumber);
 
 				XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
 				nodeEnum.AppendChild(nodeFields);

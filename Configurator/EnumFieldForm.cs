@@ -20,6 +20,7 @@ namespace Configurator
 
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
+		public int SerialNumber { get; set; }
 
 		public EnumFieldForm()
 		{
@@ -31,6 +32,7 @@ namespace Configurator
 			if (Field == null)
 			{
 				Field = new ConfigurationEnumField();
+				textBoxNameValue.Text = SerialNumber.ToString();
 				IsNew = true;
 			}
 			else

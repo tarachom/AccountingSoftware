@@ -756,7 +756,7 @@
       <UdtName>numeric</UdtName>
     </Column>
     <Column>
-      <Name>col_c7</Name>
+      <Name>col_c7_old_26_02_2020_09_11_49</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
@@ -774,6 +774,11 @@
       <Name>col_e6</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_c7</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
     <Column>
       <Name>col_a3</Name>

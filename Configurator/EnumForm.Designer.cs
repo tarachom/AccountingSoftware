@@ -60,6 +60,7 @@
 			this.listBoxFields.Name = "listBoxFields";
 			this.listBoxFields.Size = new System.Drawing.Size(266, 228);
 			this.listBoxFields.TabIndex = 0;
+			this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
 			this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
 			// 
 			// panel1

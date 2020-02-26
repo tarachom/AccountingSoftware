@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 26.02.2020 09:11:47
+ * Дата конфігурації: 26.02.2020 10:05:46
  *
  */
 
@@ -6633,9 +6633,9 @@ namespace ConfTrade_v1_1.Перелічення
     ///</summary>
     public enum test2
     {
-         A1 = 1,
-         A3 = 2,
-         A2 = 3
+         sdfsdfsd = 3,
+         sdfsdf = 2,
+         sdfsd = 1
     }
     
     ///<summary>
@@ -6646,6 +6646,19 @@ namespace ConfTrade_v1_1.Перелічення
          Товар = 1,
          Послуга = 2,
          Бартер = 3
+    }
+    
+    ///<summary>
+    ///sfas.
+    ///</summary>
+    public enum dsfasdfas
+    {
+         asdasd = 15,
+         asdas = 16,
+         sdfsdfsd = 11,
+         as = 13,
+         asas = 14,
+         sfas = 17
     }
     
     

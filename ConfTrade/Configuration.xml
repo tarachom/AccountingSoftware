@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>26.02.2020 09:11:47</DateTimeSave>
+  <DateTimeSave>26.02.2020 10:05:46</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2666,6 +2666,7 @@
       <Name>Перелічення</Name>
       <Desc>test
       </Desc>
+      <SerialNumber>0</SerialNumber>
       <Fields>
         <Field>
           <Name>Один</Name>
@@ -2691,6 +2692,7 @@
       <Name>Перелічення2</Name>
       <Desc>test
       </Desc>
+      <SerialNumber>0</SerialNumber>
       <Fields>
         <Field>
           <Name>Один</Name>
@@ -2715,6 +2717,7 @@
     <Enum>
       <Name>ВидиКонтрагентов</Name>
       <Desc>ВидыКонтрагентов</Desc>
+      <SerialNumber>0</SerialNumber>
       <Fields>
         <Field>
           <Name>Организация</Name>
@@ -2745,27 +2748,32 @@
     <Enum>
       <Name>test2</Name>
       <Desc>fgcchf</Desc>
+      <SerialNumber>3</SerialNumber>
       <Fields>
         <Field>
-          <Name>A1</Name>
-          <Value>1</Value>
-          <Desc>sdfs</Desc>
-        </Field>
-        <Field>
-          <Name>A3</Name>
-          <Value>2</Value>
-          <Desc>cx</Desc>
-        </Field>
-        <Field>
-          <Name>A2</Name>
+          <Name>sdfsdfsd</Name>
           <Value>3</Value>
-          <Desc>sf</Desc>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfsdf</Name>
+          <Value>2</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfsd</Name>
+          <Value>1</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
     <Enum>
       <Name>ВидиТоварів</Name>
       <Desc>Види товарів</Desc>
+      <SerialNumber>1</SerialNumber>
       <Fields>
         <Field>
           <Name>Товар</Name>
@@ -2781,6 +2789,44 @@
           <Name>Бартер</Name>
           <Value>3</Value>
           <Desc>Бартер</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>dsfasdfas</Name>
+      <Desc>sfas</Desc>
+      <SerialNumber>17</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>asdasd</Name>
+          <Value>15</Value>
+          <Desc>asdas</Desc>
+        </Field>
+        <Field>
+          <Name>asdas</Name>
+          <Value>16</Value>
+          <Desc>asd</Desc>
+        </Field>
+        <Field>
+          <Name>sdfsdfsd</Name>
+          <Value>11</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>as</Name>
+          <Value>13</Value>
+          <Desc>sda</Desc>
+        </Field>
+        <Field>
+          <Name>asas</Name>
+          <Value>14</Value>
+          <Desc>asf</Desc>
+        </Field>
+        <Field>
+          <Name>sfas</Name>
+          <Value>17</Value>
+          <Desc>asfa</Desc>
         </Field>
       </Fields>
     </Enum>
