@@ -18,7 +18,7 @@ namespace ConfTrade
 	{
 		static void Test2()
 		{
-			
+
 		}
 
 		static string Run4()
@@ -79,7 +79,7 @@ namespace ConfTrade
 			валюти_Список_View.Read();
 
 			Довідники.КлассификаторЕдИзм_Список_View классификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
-		    классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
+			классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
 				new Where("owner", Comparison.EQ, "(SELECT uid FROM " + валюти_Список_View.QuerySelect.TempTable + ")", true));
 
 			классификаторЕдИзм_Список_View.Read();
