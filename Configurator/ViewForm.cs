@@ -106,18 +106,6 @@ namespace Configurator
 			}
 		}
 
-		private void listBoxFields_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			//if (listBoxFields.SelectedItem != null)
-			//{
-			//	FieldForm fieldForm = new FieldForm();
-			//	fieldForm.configurationObjectField = ConfDirectoryTablePart.Fields[listBoxFields.SelectedItem.ToString()];
-			//	fieldForm.CallBack = CallBack_Update_Field;
-			//	fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			//	fieldForm.Show();
-			//}
-		}
-
 		private void AddField()
 		{
 			if (listBoxAllFields.SelectedItem != null)

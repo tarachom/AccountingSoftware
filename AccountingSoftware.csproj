@@ -55,7 +55,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDocuments.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDirectories.cs" />
-    <None Include="AccountingSoftware\Configuration\Old\ConfigurationObjectType.cs" />
+    <None Include="back_up\Old\ConfigurationObjectType.cs" />
     <Compile Include="AccountingSoftware\Configuration\Configuration.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectTablePart.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryObject.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
-    <None Include="AccountingSoftware\Configuration\Old\FieldValue.cs" />
+    <None Include="back_up\Old\FieldValue.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentEmptyPointer.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentPointer.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentSelect.cs" />
@@ -92,7 +92,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AccountingSoftware\Configuration\Old\Comparison_CSharp_code.txt" />
+    <Content Include="back_up\Old\Comparison_CSharp_code.txt" />
     <Content Include="back_up\Comparison.xml" />
     <Content Include="back_up\Configuration - Copy.xml" />
     <Content Include="back_up\Configuration.xml" />

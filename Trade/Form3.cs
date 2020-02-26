@@ -22,16 +22,16 @@ namespace Trade
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Conf.Tovary_Objest tovary_Objest = new Conf.Tovary_Objest();
-			tovary_Objest.New();
+			//Conf.Tovary_Objest tovary_Objest = new Conf.Tovary_Objest();
+			//tovary_Objest.New();
 
-			tovary_Objest.name = textBox1.Text;
-			tovary_Objest.code = textBox2.Text;
-			tovary_Objest.description = textBox3.Text;
+			//tovary_Objest.name = textBox1.Text;
+			//tovary_Objest.code = textBox2.Text;
+			//tovary_Objest.description = textBox3.Text;
 
-			tovary_Objest.Save();
+			//tovary_Objest.Save();
 
-			this.Hide();
+			//this.Hide();
 		}
 
 		private void Form3_Load(object sender, EventArgs e)

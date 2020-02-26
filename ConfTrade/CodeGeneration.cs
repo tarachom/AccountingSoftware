@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 26.02.2020 16:39:25
+ * Дата конфігурації: 26.02.2020 17:45:49
  *
  */
 
@@ -6897,6 +6897,7 @@ namespace ConfTrade_v1_1.Документи
             
             //Табличні частини
             Товари_TablePart = new РозхіднаНакладна_Товари_TablePart(this);
+            Послуги_TablePart = new РозхіднаНакладна_Послуги_TablePart(this);
             
         }
         
@@ -6944,6 +6945,7 @@ namespace ConfTrade_v1_1.Документи
         
         //Табличні частини
         public РозхіднаНакладна_Товари_TablePart Товари_TablePart { get; set; }
+        public РозхіднаНакладна_Послуги_TablePart Послуги_TablePart { get; set; }
         
     }
     
@@ -7113,6 +7115,92 @@ namespace ConfTrade_v1_1.Документи
         public decimal Сума { get; set; }
         public decimal Ціна { get; set; }
         public int НомерСтроки { get; set; }
+        
+    }
+      
+    class РозхіднаНакладна_Послуги_TablePart : DocumentTablePart
+    {
+        public РозхіднаНакладна_Послуги_TablePart(РозхіднаНакладна_Objest owner) : base(Config.Kernel, "tab_a52",
+             new string[] { "col_a1" }) 
+        {
+            Owner = owner;
+            Records = new List<РозхіднаНакладна_Послуги_TablePartRecord>();
+        }
+        
+        public РозхіднаНакладна_Objest Owner { get; private set; }
+        
+        public List<РозхіднаНакладна_Послуги_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                РозхіднаНакладна_Послуги_TablePartRecord record = new РозхіднаНакладна_Послуги_TablePartRecord();
+
+                record.Послуга = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (РозхіднаНакладна_Послуги_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Послуга.UnigueID.UGuid);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class РозхіднаНакладна_Послуги_TablePartRecord : DocumentTablePartRecord
+    {
+        public РозхіднаНакладна_Послуги_TablePartRecord()
+        {
+            Послуга = new Довідники.Номенклатура_Pointer();
+            
+        }
+        
+        
+        public РозхіднаНакладна_Послуги_TablePartRecord(
+            Довідники.Номенклатура_Pointer _Послуга = null)
+        {
+            Послуга = _Послуга ?? new Довідники.Номенклатура_Pointer();
+            
+        }
+        public Довідники.Номенклатура_Pointer Послуга { get; set; }
         
     }
       

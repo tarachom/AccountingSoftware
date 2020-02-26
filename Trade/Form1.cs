@@ -18,9 +18,6 @@ namespace Trade
 		public Form1()
 		{
 			InitializeComponent();
-
-			Conf.Config.Kernel = new Kernel();
-			Conf.Config.Kernel.Open();
 		}
 
 		private void товариToolStripMenuItem_Click(object sender, EventArgs e)
@@ -32,7 +29,8 @@ namespace Trade
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-
+			Program.Kernel = new Kernel();
+			Program.Kernel.Open();
 		}
 
 		private void додатиToolStripMenuItem_Click(object sender, EventArgs e)

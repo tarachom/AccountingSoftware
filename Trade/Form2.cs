@@ -22,28 +22,28 @@ namespace Trade
 
 		private void Form2_Load(object sender, EventArgs e)
 		{
-			Conf.Tovary_Select tovary_Select = new Conf.Tovary_Select();
-			tovary_Select.QuerySelect.Field.Add("name");
-			tovary_Select.QuerySelect.Field.Add("code");
-			tovary_Select.QuerySelect.Field.Add("description");
-			tovary_Select.QuerySelect.Field.Add("od2");
+			//Conf.Tovary_Select tovary_Select = new Conf.Tovary_Select();
+			//tovary_Select.QuerySelect.Field.Add("name");
+			//tovary_Select.QuerySelect.Field.Add("code");
+			//tovary_Select.QuerySelect.Field.Add("description");
+			//tovary_Select.QuerySelect.Field.Add("od2");
 
-			tovary_Select.Select();
+			//tovary_Select.Select();
 
-			foreach (string field in tovary_Select.QuerySelect.Field)
-			{
-				dataConfiguration.Columns.Add(field, field);
-			}
+			//foreach (string field in tovary_Select.QuerySelect.Field)
+			//{
+			//	dataConfiguration.Columns.Add(field, field);
+			//}
 
-			while (tovary_Select.MoveNext())
-			{
-				dataConfiguration.Rows.Add(new object[] {
-					tovary_Select.Current.Fields["name"],
-					tovary_Select.Current.Fields["code"],
-					tovary_Select.Current.Fields["description"],
-					tovary_Select.Current.Fields["od2"]
-				});
-			}		
+			//while (tovary_Select.MoveNext())
+			//{
+			//	dataConfiguration.Rows.Add(new object[] {
+			//		tovary_Select.Current.Fields["name"],
+			//		tovary_Select.Current.Fields["code"],
+			//		tovary_Select.Current.Fields["description"],
+			//		tovary_Select.Current.Fields["od2"]
+			//	});
+			//}		
 
 			/*
 			dataConfiguration.Columns.Add("Name", "NAME");

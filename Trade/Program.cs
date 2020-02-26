@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using AccountingSoftware;
 
 namespace Trade
 {
-	static class Program
+	public static class Program
 	{
 		/// <summary>
 		/// The main entry point for the application.
@@ -15,5 +16,7 @@ namespace Trade
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new Form1());
 		}
+
+		public static Kernel Kernel { get; set; }
 	}
 }

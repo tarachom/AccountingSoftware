@@ -33,7 +33,6 @@
 			this.splitContainerBase = new System.Windows.Forms.SplitContainer();
 			this.treeConfiguration = new System.Windows.Forms.TreeView();
 			this.imgTreeList = new System.Windows.Forms.ImageList(this.components);
-			this.dataConfiguration = new System.Windows.Forms.DataGridView();
 			this.menuStripTop = new System.Windows.Forms.MenuStrip();
 			this.DirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,9 +50,7 @@
 			this.openDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
-			this.splitContainerBase.Panel2.SuspendLayout();
 			this.splitContainerBase.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataConfiguration)).BeginInit();
 			this.menuStripTop.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			this.contextMenuStrip2.SuspendLayout();
@@ -70,12 +67,8 @@
 			// splitContainerBase.Panel1
 			// 
 			this.splitContainerBase.Panel1.Controls.Add(this.treeConfiguration);
-			// 
-			// splitContainerBase.Panel2
-			// 
-			this.splitContainerBase.Panel2.Controls.Add(this.dataConfiguration);
 			this.splitContainerBase.Size = new System.Drawing.Size(842, 465);
-			this.splitContainerBase.SplitterDistance = 233;
+			this.splitContainerBase.SplitterDistance = 265;
 			this.splitContainerBase.TabIndex = 0;
 			// 
 			// treeConfiguration
@@ -86,7 +79,7 @@
 			this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
 			this.treeConfiguration.Name = "treeConfiguration";
 			this.treeConfiguration.SelectedImageIndex = 0;
-			this.treeConfiguration.Size = new System.Drawing.Size(233, 465);
+			this.treeConfiguration.Size = new System.Drawing.Size(265, 465);
 			this.treeConfiguration.TabIndex = 0;
 			this.treeConfiguration.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseClick);
 			this.treeConfiguration.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseDoubleClick);
@@ -99,17 +92,6 @@
 			this.imgTreeList.Images.SetKeyName(1, "2.ico");
 			this.imgTreeList.Images.SetKeyName(2, "26.ico");
 			this.imgTreeList.Images.SetKeyName(3, "52.ico");
-			// 
-			// dataConfiguration
-			// 
-			this.dataConfiguration.AllowUserToAddRows = false;
-			this.dataConfiguration.AllowUserToDeleteRows = false;
-			this.dataConfiguration.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataConfiguration.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dataConfiguration.Location = new System.Drawing.Point(0, 0);
-			this.dataConfiguration.Name = "dataConfiguration";
-			this.dataConfiguration.Size = new System.Drawing.Size(605, 465);
-			this.dataConfiguration.TabIndex = 0;
 			// 
 			// menuStripTop
 			// 
@@ -242,10 +224,8 @@
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguration_FormClosing);
 			this.Load += new System.EventHandler(this.FormConfiguration_Load);
 			this.splitContainerBase.Panel1.ResumeLayout(false);
-			this.splitContainerBase.Panel2.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).EndInit();
 			this.splitContainerBase.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataConfiguration)).EndInit();
 			this.menuStripTop.ResumeLayout(false);
 			this.menuStripTop.PerformLayout();
 			this.contextMenuStrip1.ResumeLayout(false);
@@ -260,7 +240,6 @@
 
 		private System.Windows.Forms.SplitContainer splitContainerBase;
 		private System.Windows.Forms.TreeView treeConfiguration;
-		private System.Windows.Forms.DataGridView dataConfiguration;
 		private System.Windows.Forms.ImageList imgTreeList;
 		private System.Windows.Forms.MenuStrip menuStripTop;
 		private System.Windows.Forms.ToolStripMenuItem DirectoryToolStripMenuItem;
