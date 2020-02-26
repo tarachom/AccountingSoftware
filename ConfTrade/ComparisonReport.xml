@@ -2922,5 +2922,54 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>asdasd</Name>
+      <NameInTable>col_a7</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>asdas</Name>
+      <Table>tab_a51</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>asdasd</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>asdasda</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>asdas</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Directory>
 </root>

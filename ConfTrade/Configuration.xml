@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>26.02.2020 15:32:43</DateTimeSave>
+  <DateTimeSave>26.02.2020 16:39:25</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2638,8 +2638,45 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>asdasd</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>asdas</Name>
+          <Table>tab_a51</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>asdasd</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>asdasda</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>asdas</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views>
         <View>
           <Name>Список</Name>
@@ -3000,6 +3037,97 @@
           </Fields>
         </TablePart>
       </TabularParts>
+    </Document>
+    <Document>
+      <Name>ПрихіднийКасовийОрдер</Name>
+      <Table>tab_a52</Table>
+      <Desc>Прихідний касовий ордер</Desc>
+      <Fields>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Каса</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.НашиДенежниеСчета</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Сума</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+    </Document>
+    <Document>
+      <Name>РозхіднийКасовийОрдер</Name>
+      <Table>tab_a53</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Каса</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.НашиДенежниеСчета</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Сума</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
     </Document>
   </Documents>
 </Configuration>

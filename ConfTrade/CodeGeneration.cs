@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 26.02.2020 15:32:43
+ * Дата конфігурації: 26.02.2020 16:39:25
  *
  */
 
@@ -6447,7 +6447,7 @@ namespace ConfTrade_v1_1.Довідники
     class іваів_Objest : DirectoryObject
     {
         public іваів_Objest() : base(Config.Kernel, "tab_a50",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
         {
             Назва = "";
             Код = "";
@@ -6455,8 +6455,10 @@ namespace ConfTrade_v1_1.Довідники
             sddfgsd = 0;
             Документ = new Документи.Test_Pointer();
             аавпва = 0;
+            asdasd = "";
             
             //Табличні частини
+            asdas_TablePart = new іваів_asdas_TablePart(this);
             
         }
         
@@ -6470,6 +6472,7 @@ namespace ConfTrade_v1_1.Довідники
                 sddfgsd = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a4"];
                 Документ = new Документи.Test_Pointer(base.FieldValue["col_a5"]);
                 аавпва = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a6"];
+                asdasd = base.FieldValue["col_a7"].ToString();
                 
                 BaseClear();
                 return true;
@@ -6486,6 +6489,7 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a4"] = (int)sddfgsd;
             base.FieldValue["col_a5"] = Документ.UnigueID.UGuid;
             base.FieldValue["col_a6"] = (int)аавпва;
+            base.FieldValue["col_a7"] = asdasd;
             
             BaseSave();
         }
@@ -6507,8 +6511,10 @@ namespace ConfTrade_v1_1.Довідники
         public Перелічення.ВидиКонтрагентов sddfgsd { get; set; }
         public Документи.Test_Pointer Документ { get; set; }
         public Перелічення.ВидиКонтрагентов аавпва { get; set; }
+        public string asdasd { get; set; }
         
         //Табличні частини
+        public іваів_asdas_TablePart asdas_TablePart { get; set; }
         
     }
     
@@ -6574,6 +6580,102 @@ namespace ConfTrade_v1_1.Довідники
         public іваів_Pointer Current { get; private set; }
     }
     
+      
+    class іваів_asdas_TablePart : DirectoryTablePart
+    {
+        public іваів_asdas_TablePart(іваів_Objest owner) : base(Config.Kernel, "tab_a51",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        {
+            Owner = owner;
+            Records = new List<іваів_asdas_TablePartRecord>();
+        }
+        
+        public іваів_Objest Owner { get; private set; }
+        
+        public List<іваів_asdas_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                іваів_asdas_TablePartRecord record = new іваів_asdas_TablePartRecord();
+
+                record.asdasd = fieldValue["col_a1"].ToString();
+                record.asdasda = fieldValue["col_a2"].ToString();
+                record.asdas = fieldValue["col_a3"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (іваів_asdas_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.asdasd);
+                    fieldValue.Add("col_a2", record.asdasda);
+                    fieldValue.Add("col_a3", record.asdas);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class іваів_asdas_TablePartRecord : DirectoryTablePartRecord
+    {
+        public іваів_asdas_TablePartRecord()
+        {
+            asdasd = "";
+            asdasda = "";
+            asdas = "";
+            
+        }
+        
+        
+        public іваів_asdas_TablePartRecord(
+            string _asdasd = "", string _asdasda = "", string _asdas = "")
+        {
+            asdasd = _asdasd;
+            asdasda = _asdasda;
+            asdas = _asdas;
+            
+        }
+        public string asdasd { get; set; }
+        public string asdasda { get; set; }
+        public string asdas { get; set; }
+        
+    }
       ///<summary>
     ///Список.
     ///</summary>
@@ -7246,6 +7348,278 @@ namespace ConfTrade_v1_1.Документи
         public int НомерСтроки { get; set; }
         
     }
+      
+    
+    #endregion
+    
+    #region DOCUMENT "ПрихіднийКасовийОрдер"
+    
+    ///<summary>
+    ///Прихідний касовий ордер.
+    ///</summary>
+    class ПрихіднийКасовийОрдер_Objest : DocumentObject
+    {
+        public ПрихіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a52",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" }) 
+        {
+            Контрагент = new Довідники.Контрагенти_Pointer();
+            Каса = new Довідники.НашиДенежниеСчета_Pointer();
+            Сума = 0;
+            ДатаДок = DateTime.MinValue;
+            НомерДок = 0;
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_a1"]);
+                Каса = new Довідники.НашиДенежниеСчета_Pointer(base.FieldValue["col_a2"]);
+                Сума = (base.FieldValue["col_a3"] != DBNull.Value) ? (decimal)base.FieldValue["col_a3"] : 0;
+                ДатаДок = (base.FieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a4"].ToString()) : DateTime.MinValue;
+                НомерДок = (base.FieldValue["col_a5"] != DBNull.Value) ? (int)base.FieldValue["col_a5"] : 0;
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Контрагент.UnigueID.UGuid;
+            base.FieldValue["col_a2"] = Каса.UnigueID.UGuid;
+            base.FieldValue["col_a3"] = Сума;
+            base.FieldValue["col_a4"] = ДатаДок;
+            base.FieldValue["col_a5"] = НомерДок;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public ПрихіднийКасовийОрдер_Pointer GetDocumentPointer()
+        {
+            ПрихіднийКасовийОрдер_Pointer directoryPointer = new ПрихіднийКасовийОрдер_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
+        public Довідники.НашиДенежниеСчета_Pointer Каса { get; set; }
+        public decimal Сума { get; set; }
+        public DateTime ДатаДок { get; set; }
+        public int НомерДок { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    ///<summary>
+    ///Прихідний касовий ордер.
+    ///</summary>
+    class ПрихіднийКасовийОрдер_Pointer : DocumentPointer
+    {
+        public ПрихіднийКасовийОрдер_Pointer(object uid = null) : base(Config.Kernel, "tab_a52")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public ПрихіднийКасовийОрдер_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a52")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public ПрихіднийКасовийОрдер_Objest GetDocumentObject()
+        {
+            ПрихіднийКасовийОрдер_Objest ПрихіднийКасовийОрдерObjestItem = new ПрихіднийКасовийОрдер_Objest();
+            ПрихіднийКасовийОрдерObjestItem.Read(base.UnigueID);
+            return ПрихіднийКасовийОрдерObjestItem;
+        }
+    }
+    
+    ///<summary>
+    ///Прихідний касовий ордер.
+    ///</summary>
+    class ПрихіднийКасовийОрдер_Select : DocumentSelect, IDisposable
+    {
+        public ПрихіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a52") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public ПрихіднийКасовийОрдер_Pointer Current { get; private set; }
+    }
+    
+      
+    
+    #endregion
+    
+    #region DOCUMENT "РозхіднийКасовийОрдер"
+    
+    
+    class РозхіднийКасовийОрдер_Objest : DocumentObject
+    {
+        public РозхіднийКасовийОрдер_Objest() : base(Config.Kernel, "tab_a53",
+             new string[] { "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" }) 
+        {
+            Контрагент = new Довідники.Контрагенти_Pointer();
+            Каса = new Довідники.НашиДенежниеСчета_Pointer();
+            Сума = 0;
+            ДатаДок = DateTime.MinValue;
+            НомерДок = 0;
+            
+            //Табличні частини
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Контрагент = new Довідники.Контрагенти_Pointer(base.FieldValue["col_a6"]);
+                Каса = new Довідники.НашиДенежниеСчета_Pointer(base.FieldValue["col_a7"]);
+                Сума = (base.FieldValue["col_a8"] != DBNull.Value) ? (decimal)base.FieldValue["col_a8"] : 0;
+                ДатаДок = (base.FieldValue["col_a9"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a9"].ToString()) : DateTime.MinValue;
+                НомерДок = (base.FieldValue["col_b1"] != DBNull.Value) ? (int)base.FieldValue["col_b1"] : 0;
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a6"] = Контрагент.UnigueID.UGuid;
+            base.FieldValue["col_a7"] = Каса.UnigueID.UGuid;
+            base.FieldValue["col_a8"] = Сума;
+            base.FieldValue["col_a9"] = ДатаДок;
+            base.FieldValue["col_b1"] = НомерДок;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public РозхіднийКасовийОрдер_Pointer GetDocumentPointer()
+        {
+            РозхіднийКасовийОрдер_Pointer directoryPointer = new РозхіднийКасовийОрдер_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public Довідники.Контрагенти_Pointer Контрагент { get; set; }
+        public Довідники.НашиДенежниеСчета_Pointer Каса { get; set; }
+        public decimal Сума { get; set; }
+        public DateTime ДатаДок { get; set; }
+        public int НомерДок { get; set; }
+        
+        //Табличні частини
+        
+    }
+    
+    
+    class РозхіднийКасовийОрдер_Pointer : DocumentPointer
+    {
+        public РозхіднийКасовийОрдер_Pointer(object uid = null) : base(Config.Kernel, "tab_a53")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public РозхіднийКасовийОрдер_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a53")
+        {
+            base.Init(uid, fields);
+        } 
+        
+        public РозхіднийКасовийОрдер_Objest GetDocumentObject()
+        {
+            РозхіднийКасовийОрдер_Objest РозхіднийКасовийОрдерObjestItem = new РозхіднийКасовийОрдер_Objest();
+            РозхіднийКасовийОрдерObjestItem.Read(base.UnigueID);
+            return РозхіднийКасовийОрдерObjestItem;
+        }
+    }
+    
+    
+    class РозхіднийКасовийОрдер_Select : DocumentSelect, IDisposable
+    {
+        public РозхіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a53") { }
+    
+        public bool Select() 
+        { 
+            return base.BaseSelect();
+        }
+        
+        public bool SelectSingle()
+        {
+            if (base.BaseSelectSingle())
+            {
+                MoveNext();
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+        
+        public bool MoveNext()
+        {
+            if (MoveToPosition())
+            {
+                Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
+                return true;
+            }
+            else
+            {
+                Current = null;
+                return false;
+            }
+        }
+
+        public РозхіднийКасовийОрдер_Pointer Current { get; private set; }
+    }
+    
       
     
     #endregion
