@@ -9,11 +9,10 @@
   <title>HTML</title>
   <body>
     <table border="1">
-      <xsl:for-each select="root/test_Список/row">
+      <xsl:for-each select="root/КлассификаторЕдИзм_Список/row">
       <tr>
-        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення.Перелічення2</xsl:with-param><xsl:with-param name="value" select="ТипПоля" /></xsl:call-template></td>
-        <td><xsl:value-of select="Код"/></td>
         <td><xsl:value-of select="Назва"/></td>
+        <td><xsl:value-of select="КодЕдИзмерения"/></td>
       </tr>
       </xsl:for-each>
       </table>

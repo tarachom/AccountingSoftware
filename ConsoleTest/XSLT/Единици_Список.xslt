@@ -9,10 +9,9 @@
   <title>HTML</title>
   <body>
     <table border="1">
-      <xsl:for-each select="root/test_Список/row">
+      <xsl:for-each select="root/Единици_Список/row">
       <tr>
-        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення.Перелічення2</xsl:with-param><xsl:with-param name="value" select="ТипПоля" /></xsl:call-template></td>
-        <td><xsl:value-of select="Код"/></td>
+        <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Довідники.КлассификаторЕдИзм_Список" /><xsl:with-param name="uid" select="Единица" /></xsl:call-template></td>
         <td><xsl:value-of select="Назва"/></td>
       </tr>
       </xsl:for-each>

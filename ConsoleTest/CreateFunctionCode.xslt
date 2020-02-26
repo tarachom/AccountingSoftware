@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<!--
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+  <xsl:output method="text" indent="yes"/>
+
+  <xsl:param name="XmlHeap" />
+  <xsl:param name="DirectoryName" />
+
+  <xsl:template name="License">
 /*
 Copyright (C) 2019-2020 Tarakhomin Yuri Ivanovich
 All rights reserved.
@@ -22,15 +28,11 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     find.org.ua
 */
--->
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-  <xsl:output method="text" indent="yes"/>
-
-  <xsl:param name="XmlHeap" />
-  <xsl:param name="DirectoryName" />
-
+  </xsl:template>
+  
   <xsl:template match="View">
     <xsl:variable name="FullViewName" select="concat($DirectoryName, '_', Name, '_View')" />
+    <xsl:call-template name="License" />
     
 using System.Text;
 using System.Collections.Generic;

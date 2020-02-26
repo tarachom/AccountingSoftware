@@ -54,11 +54,11 @@ namespace ConsoleTest
 
 		static void Main(string[] args)
 		{
-			CreatSQL();
+			//CreatSQL();
 
-			return;
+			//return;
 
-			Console.ReadLine();
+			//Console.ReadLine();
 
 
 			XslCompiledTransform xsltTemplateGenerator = new XslCompiledTransform();

@@ -39,10 +39,15 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.test2_Список_View m_test2_Список_View = new Довідники.test2_Список_View();
+            Довідники.Контрагенти_Список_View m_Контрагенти_Список_View = new Довідники.Контрагенти_Список_View();
             
-            sb.Append(m_test2_Список_View.Read());
+            sb.Append(m_Контрагенти_Список_View.Read());
             
+            
+            sb.Append(@"<Enums>
+<error>Not found enum 'Перелічення.ВидиКонтрагентов'</error>
+</Enums>
+");
             
             sb.Append("</root>");
             return sb.ToString();

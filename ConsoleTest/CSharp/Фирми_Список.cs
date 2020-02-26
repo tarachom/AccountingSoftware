@@ -39,11 +39,19 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.test2_Список_View m_test2_Список_View = new Довідники.test2_Список_View();
+            Довідники.Фирми_Список_View m_Фирми_Список_View = new Довідники.Фирми_Список_View();
             
-            sb.Append(m_test2_Список_View.Read());
+            m_Фирми_Список_View.QuerySelect.CreateTempTable = true;
+              Dictionary<string, string> Alias = m_Фирми_Список_View.Alias;
+              
+            sb.Append(m_Фирми_Список_View.Read());
             
             
+            Довідники.Довідники.Сотрудники_Список_View m_Довідники.Сотрудники_Список_View = new Довідники.Довідники.Сотрудники_Список_View();
+            m_Довідники.Сотрудники_Список_View.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
+                "SELECT DISTINCT " + Alias["Руководитель"] + " FROM " + m_Фирми_Список_View.QuerySelect.TempTable, true)); /* col_e4 */
+            sb.Append(m_Довідники.Сотрудники_Список_View.Read());
+                
             sb.Append("</root>");
             return sb.ToString();
         }
