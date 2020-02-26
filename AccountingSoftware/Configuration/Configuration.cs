@@ -78,14 +78,8 @@ namespace AccountingSoftware
 				//Поля довідника
 				foreach (ConfigurationObjectField directoryField in directoryItem.Fields.Values)
 				{
-					if (directoryField.Type == "pointer")
-					{
-						if (directoryField.Pointer == searchName)
-						{
-							//pointer
-							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
-						}
-					}
+					if (directoryField.Type == "pointer" && directoryField.Pointer == searchName)
+						ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
 				}
 
 				//Табличні частини
@@ -93,16 +87,8 @@ namespace AccountingSoftware
 				{
 					//Поля табличної частини
 					foreach (ConfigurationObjectField tablePartField in directoryTablePart.Fields.Values)
-					{
-						if (tablePartField.Type == "pointer")
-						{
-							if (tablePartField.Pointer == searchName)
-							{
-								//pointer
-								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
-							}
-						}
-					}
+						if (tablePartField.Type == "pointer" && tablePartField.Pointer == searchName)
+							ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
 				}
 			}
 
@@ -165,13 +151,18 @@ namespace AccountingSoftware
 			File.AppendAllText(@"D:\log.txt", txt + "\n");
 		}
 
-		public static string GetNewUnigueColumnName(Kernel Kernel, string table, Dictionary<string, ConfigurationObjectField> Fields)
+		private static string[] GetEnglishAlphabet()
 		{
-			string[] mas = new string[]
+			return new string[]
 			{
 				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
 				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
 			};
+		}
+
+		public static string GetNewUnigueColumnName(Kernel Kernel, string table, Dictionary<string, ConfigurationObjectField> Fields)
+		{
+			string[] englishAlphabet = GetEnglishAlphabet();
 
 			bool noExistInReserved = false;
 			bool noExistInConf = false;
@@ -185,11 +176,11 @@ namespace AccountingSoftware
 			if (!Kernel.Conf.ReservedUnigueColumnName.ContainsKey(table))
 				Kernel.Conf.ReservedUnigueColumnName.Add(table, new List<string>());
 
-			for (int j = 0; j < mas.Length; j++)
+			for (int j = 0; j < englishAlphabet.Length; j++)
 			{
 				for (int i = 1; i < 10; i++)
 				{
-					columnNewName = "col_" + mas[j] + i.ToString();
+					columnNewName = "col_" + englishAlphabet[j] + i.ToString();
 
 					if (!Kernel.Conf.ReservedUnigueColumnName[table].Contains(columnNewName))
 					{
@@ -228,22 +219,18 @@ namespace AccountingSoftware
 
 		public static string GetNewUnigueTableName(Kernel Kernel)
 		{
-			string[] mas = new string[]
-			{
-				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
-				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
-			};
+			string[] englishAlphabet = GetEnglishAlphabet();
 
 			bool noExistInReserved = false;
 			bool noExistInBase = false;
 			bool noExistInConf = false;
 			string tabNewName = "";
 
-			for (int j = 0; j < mas.Length; j++)
+			for (int j = 0; j < englishAlphabet.Length; j++)
 			{
 				for (int i = 1; i < 100; i++)
 				{
-					tabNewName = "tab_" + mas[j] + (i < 10 ? "0" : "") + i.ToString();
+					tabNewName = "tab_" + englishAlphabet[j] + (i < 10 ? "0" : "") + i.ToString();
 
 					if (!Kernel.Conf.ReservedUnigueTableName.Contains(tabNewName))
 					{

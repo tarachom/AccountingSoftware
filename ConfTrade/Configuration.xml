@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>26.02.2020 10:05:46</DateTimeSave>
+  <DateTimeSave>26.02.2020 10:27:16</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2814,7 +2814,7 @@
           </Desc>
         </Field>
         <Field>
-          <Name>as</Name>
+          <Name>ass</Name>
           <Value>13</Value>
           <Desc>sda</Desc>
         </Field>
