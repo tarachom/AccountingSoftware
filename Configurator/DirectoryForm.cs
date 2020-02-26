@@ -95,7 +95,7 @@ namespace Configurator
 		{
 			this.Hide();
 		}
-		
+
 		bool CallBack_IsExistFieldName(string name)
 		{
 			return ConfDirectory.Fields.ContainsKey(name);
@@ -270,6 +270,54 @@ namespace Configurator
 
 				viewForm.Show();
 			}
-		}		
+		}
+
+		private void listBoxFields_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					string question = "Видалити поле";
+
+					if (MessageBox.Show(question + " " + listBoxFields.SelectedItem.ToString() + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						int selectIndex = listBoxFields.SelectedIndex;
+
+						ConfDirectory.Fields.Remove(listBoxFields.SelectedItem.ToString());
+						LoadFieldList();
+
+						if (selectIndex >= listBoxFields.Items.Count)
+							selectIndex = listBoxFields.Items.Count - 1;
+
+						listBoxFields.SelectedIndex = selectIndex;
+					}
+				}
+			}
+		}
+
+		private void listBoxTabularParts_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxTabularParts.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					string question = "Видалити табличну частину";
+
+					if (MessageBox.Show(question + " " + listBoxTabularParts.SelectedItem.ToString() + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						int selectIndex = listBoxTabularParts.SelectedIndex;
+
+						ConfDirectory.TabularParts.Remove(listBoxTabularParts.SelectedItem.ToString());
+						LoadTabularPartsList();
+
+						if (selectIndex >= listBoxTabularParts.Items.Count)
+							selectIndex = listBoxTabularParts.Items.Count - 1;
+
+						listBoxTabularParts.SelectedIndex = selectIndex;
+					}
+				}
+			}
+		}
 	}
 }

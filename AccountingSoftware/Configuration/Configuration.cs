@@ -58,6 +58,12 @@ namespace AccountingSoftware
 			return Enum;
 		}
 
+		public ConfigurationDocuments AppendDocument(ConfigurationDocuments Document)
+		{
+			Documents.Add(Document.Name, Document);
+			return Document;
+		}
+
 		public List<string> SearchForPointers(string searchName)
 		{
 			if (searchName.IndexOf(".") > 0)
@@ -90,6 +96,28 @@ namespace AccountingSoftware
 					{
 						if (tablePartField.Type == "pointer" && tablePartField.Pointer == searchName)
 							ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
+					}
+				}
+			}
+
+			//Перевірка документів
+			foreach (ConfigurationDocuments documentItem in Documents.Values)
+			{
+				//Поля довідника
+				foreach (ConfigurationObjectField documentField in documentItem.Fields.Values)
+				{
+					if (documentField.Type == "pointer" && documentField.Pointer == searchName)
+						ListPointer.Add(documentItem.Name + "." + documentField.Name);
+				}
+
+				//Табличні частини
+				foreach (ConfigurationObjectTablePart documentTablePart in documentItem.TabularParts.Values)
+				{
+					//Поля табличної частини
+					foreach (ConfigurationObjectField tablePartField in documentTablePart.Fields.Values)
+					{
+						if (tablePartField.Type == "pointer" && tablePartField.Pointer == searchName)
+							ListPointer.Add(documentItem.Name + "." + documentTablePart.Name + "." + tablePartField.Name);
 					}
 				}
 			}

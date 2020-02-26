@@ -37,6 +37,7 @@
 			this.menuStripTop = new System.Windows.Forms.MenuStrip();
 			this.DirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,9 @@
 			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openEnumItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStripDocument = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.openDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -54,6 +57,7 @@
 			this.menuStripTop.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
 			this.contextMenuStrip2.SuspendLayout();
+			this.contextMenuStripDocument.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// splitContainerBase
@@ -122,6 +126,7 @@
 			this.DirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addDirectoryToolStripMenuItem,
             this.addEnumToolStripMenuItem,
+            this.addNewDocumentToolStripMenuItem,
             this.saveConfigurationToolStripMenuItem});
 			this.DirectoryToolStripMenuItem.Name = "DirectoryToolStripMenuItem";
 			this.DirectoryToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
@@ -134,10 +139,17 @@
 			this.addDirectoryToolStripMenuItem.Text = "Додати новий довідник";
 			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
 			// 
+			// addEnumToolStripMenuItem
+			// 
+			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
+			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
+			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
+			// 
 			// saveConfigurationToolStripMenuItem
 			// 
 			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
 			this.saveConfigurationToolStripMenuItem.Text = "SaveConfiguration";
 			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
@@ -189,16 +201,30 @@
 			// openEnumItem
 			// 
 			this.openEnumItem.Name = "openEnumItem";
-			this.openEnumItem.Size = new System.Drawing.Size(180, 22);
+			this.openEnumItem.Size = new System.Drawing.Size(122, 22);
 			this.openEnumItem.Text = "Відкрити";
 			this.openEnumItem.Click += new System.EventHandler(this.openEnumItem_Click);
 			// 
-			// addEnumToolStripMenuItem
+			// addNewDocumentToolStripMenuItem
 			// 
-			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
-			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
-			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
+			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
+			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.addNewDocumentToolStripMenuItem.Text = "Додати новий документ";
+			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
+			// 
+			// contextMenuStripDocument
+			// 
+			this.contextMenuStripDocument.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openDocumentItem});
+			this.contextMenuStripDocument.Name = "contextMenuStripDocument";
+			this.contextMenuStripDocument.Size = new System.Drawing.Size(123, 26);
+			// 
+			// openDocumentItem
+			// 
+			this.openDocumentItem.Name = "openDocumentItem";
+			this.openDocumentItem.Size = new System.Drawing.Size(180, 22);
+			this.openDocumentItem.Text = "Відкрити";
+			this.openDocumentItem.Click += new System.EventHandler(this.openDocumentItem_Click);
 			// 
 			// FormConfiguration
 			// 
@@ -210,7 +236,9 @@
 			this.MainMenuStrip = this.menuStripTop;
 			this.Name = "FormConfiguration";
 			this.Padding = new System.Windows.Forms.Padding(10);
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "Form1";
+			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguration_FormClosing);
 			this.Load += new System.EventHandler(this.FormConfiguration_Load);
 			this.splitContainerBase.Panel1.ResumeLayout(false);
@@ -222,6 +250,7 @@
 			this.menuStripTop.PerformLayout();
 			this.contextMenuStrip1.ResumeLayout(false);
 			this.contextMenuStrip2.ResumeLayout(false);
+			this.contextMenuStripDocument.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -245,6 +274,9 @@
 		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
 		private System.Windows.Forms.ToolStripMenuItem openEnumItem;
 		private System.Windows.Forms.ToolStripMenuItem addEnumToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem addNewDocumentToolStripMenuItem;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripDocument;
+		private System.Windows.Forms.ToolStripMenuItem openDocumentItem;
 	}
 }
 

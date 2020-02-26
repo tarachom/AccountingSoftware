@@ -21,5 +21,17 @@ namespace AccountingSoftware
 		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
+
+		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
+		{
+			Fields.Add(field.Name, field);
+			return field;
+		}
+
+		public ConfigurationObjectTablePart AppendTablePart(ConfigurationObjectTablePart tablePart)
+		{
+			TabularParts.Add(tablePart.Name, tablePart);
+			return tablePart;
+		}
 	}
 }

@@ -145,7 +145,7 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationDocuments> ConfDocuments in Conf.Documents)
 			{
 				TreeNode documentNode = documentsNode.Nodes.Add(ConfDocuments.Key, ConfDocuments.Value.Name);
-				//documentNode.ContextMenuStrip = contextMenuStrip1;
+				documentNode.ContextMenuStrip = contextMenuStripDocument;
 				documentNode.SelectedImageIndex = 1;
 				documentNode.ImageIndex = 1;
 
@@ -335,6 +335,52 @@ namespace Configurator
 			LoadTree();
 		}
 
+		bool CallBack_IsExistDocumentName(string name)
+		{
+			return Conf.Documents.ContainsKey(name);
+		}
+
+		void CallBack_Update_Document(string originalName, ConfigurationDocuments configurationDocuments, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendDocument(configurationDocuments);
+			}
+			else
+			{
+				if (originalName != configurationDocuments.Name)
+				{
+					List<string> ListPointers = Conf.SearchForPointers("Документи." + originalName);
+					if (ListPointers.Count == 0)
+					{
+						Conf.Documents.Remove(originalName);
+						Conf.AppendDocument(configurationDocuments);
+					}
+					else
+					{
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() +
+							" вказівники на документ \"" + originalName + "\":\n";
+
+						foreach (string item in ListPointers)
+							textListPointer += " -> " + item + "\n";
+
+						textListPointer += "\nПерейменувати неможливо";
+
+						MessageBox.Show(textListPointer, "Знайденно вказівники", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+						configurationDocuments.Name = originalName;
+						Conf.Documents[originalName] = configurationDocuments;
+					}
+				}
+				else
+				{
+					Conf.Documents[originalName] = configurationDocuments;
+				}
+			}
+
+			LoadTree();
+		}
+
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
@@ -434,6 +480,30 @@ namespace Configurator
 			enumForm.CallBack = CallBack_Update_Enum;
 			enumForm.CallBack_IsExistEnums = CallBack_IsExistEnumName;
 			enumForm.Show();
+		}
+
+		private void addNewDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DocumentForm documentForm = new DocumentForm();
+			documentForm.CallBack = CallBack_Update_Document;
+			documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
+			documentForm.Show();
+		}
+
+		private void openDocumentItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string documentName = nodeSel.Name;
+
+				Configuration Conf = Program.Kernel.Conf;
+
+				DocumentForm documentForm = new DocumentForm();
+				documentForm.ConfDocument = Conf.Documents[documentName];
+				documentForm.CallBack = CallBack_Update_Document;
+				documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
+				documentForm.Show();
+			}
 		}
 	}
 }

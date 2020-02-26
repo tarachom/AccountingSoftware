@@ -138,5 +138,29 @@ namespace Configurator
 				fieldForm.Show();
 			}
 		}
+
+		private void listBoxFields_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					string question = "Видалити поле";
+
+					if (MessageBox.Show(question + " " + listBoxFields.SelectedItem.ToString() + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						int selectIndex = listBoxFields.SelectedIndex;
+
+						ConfDirectoryTablePart.Fields.Remove(listBoxFields.SelectedItem.ToString());
+						LoadFieldList();
+
+						if (selectIndex >= listBoxFields.Items.Count)
+							selectIndex = listBoxFields.Items.Count - 1;
+
+						listBoxFields.SelectedIndex = selectIndex;
+					}
+				}
+			}
+		}
 	}
 }

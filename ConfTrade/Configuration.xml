@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>26.02.2020 10:27:16</DateTimeSave>
+  <DateTimeSave>26.02.2020 15:32:43</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2666,7 +2666,7 @@
       <Name>Перелічення</Name>
       <Desc>test
       </Desc>
-      <SerialNumber>0</SerialNumber>
+      <SerialNumber>4</SerialNumber>
       <Fields>
         <Field>
           <Name>Один</Name>
@@ -2692,7 +2692,7 @@
       <Name>Перелічення2</Name>
       <Desc>test
       </Desc>
-      <SerialNumber>0</SerialNumber>
+      <SerialNumber>4</SerialNumber>
       <Fields>
         <Field>
           <Name>Один</Name>
@@ -2717,7 +2717,7 @@
     <Enum>
       <Name>ВидиКонтрагентов</Name>
       <Desc>ВидыКонтрагентов</Desc>
-      <SerialNumber>0</SerialNumber>
+      <SerialNumber>5</SerialNumber>
       <Fields>
         <Field>
           <Name>Организация</Name>
@@ -2748,7 +2748,7 @@
     <Enum>
       <Name>test2</Name>
       <Desc>fgcchf</Desc>
-      <SerialNumber>3</SerialNumber>
+      <SerialNumber>5</SerialNumber>
       <Fields>
         <Field>
           <Name>sdfsdfsd</Name>
@@ -2773,7 +2773,7 @@
     <Enum>
       <Name>ВидиТоварів</Name>
       <Desc>Види товарів</Desc>
-      <SerialNumber>1</SerialNumber>
+      <SerialNumber>4</SerialNumber>
       <Fields>
         <Field>
           <Name>Товар</Name>
@@ -2795,7 +2795,7 @@
     <Enum>
       <Name>dsfasdfas</Name>
       <Desc>sfas</Desc>
-      <SerialNumber>17</SerialNumber>
+      <SerialNumber>18</SerialNumber>
       <Fields>
         <Field>
           <Name>asdasd</Name>
@@ -2837,22 +2837,167 @@
       <Table>test</Table>
       <Desc>
       </Desc>
+      <Fields />
+      <TabularParts />
+    </Document>
+    <Document>
+      <Name>РозхіднаНакладна</Name>
+      <Table>tab_a51</Table>
+      <Desc>
+      </Desc>
       <Fields>
         <Field>
-          <Name>name</Name>
-          <NameInTable>test3</NameInTable>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
           <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Номер</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
           <Desc>
           </Desc>
         </Field>
       </Fields>
       <TabularParts>
         <TablePart>
-          <Name>test</Name>
-          <Table>test2</Table>
+          <Name>Товари</Name>
+          <Table>tab_a52</Table>
           <Desc>
           </Desc>
-          <Fields />
+          <Fields>
+            <Field>
+              <Name>Товар</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>НомерСтроки</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+    </Document>
+    <Document>
+      <Name>ПрихіднаНакладна</Name>
+      <Table>tab_a51</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Номер</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Товар</Name>
+          <Table>tab_a52</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Товар</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>НомерСтроки</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
         </TablePart>
       </TabularParts>
     </Document>

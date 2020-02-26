@@ -60,8 +60,9 @@
 			this.listBoxFields.FormattingEnabled = true;
 			this.listBoxFields.Location = new System.Drawing.Point(0, 0);
 			this.listBoxFields.Name = "listBoxFields";
-			this.listBoxFields.Size = new System.Drawing.Size(266, 236);
+			this.listBoxFields.Size = new System.Drawing.Size(266, 272);
 			this.listBoxFields.TabIndex = 0;
+			this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
 			this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
 			// 
 			// panel1
@@ -77,10 +78,10 @@
 			// panel5
 			// 
 			this.panel5.Controls.Add(this.listBoxFields);
-			this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel5.Location = new System.Drawing.Point(0, 30);
 			this.panel5.Name = "panel5";
-			this.panel5.Size = new System.Drawing.Size(266, 236);
+			this.panel5.Size = new System.Drawing.Size(266, 272);
 			this.panel5.TabIndex = 2;
 			// 
 			// panel4

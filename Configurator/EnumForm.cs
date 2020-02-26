@@ -142,15 +142,20 @@ namespace Configurator
 			{
 				if (e.KeyData == Keys.Delete)
 				{
-					int selectIndex = listBoxFields.SelectedIndex;
+					string question = "Видалити поле";
 
-					ConfEnums.Fields.Remove(listBoxFields.SelectedItem.ToString());
-					LoadFieldList();
+					if (MessageBox.Show(question + " " + listBoxFields.SelectedItem.ToString() + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						int selectIndex = listBoxFields.SelectedIndex;
 
-					if (selectIndex >= listBoxFields.Items.Count)
-						selectIndex = listBoxFields.Items.Count - 1;
+						ConfEnums.Fields.Remove(listBoxFields.SelectedItem.ToString());
+						LoadFieldList();
 
-					listBoxFields.SelectedIndex = selectIndex;
+						if (selectIndex >= listBoxFields.Items.Count)
+							selectIndex = listBoxFields.Items.Count - 1;
+
+						listBoxFields.SelectedIndex = selectIndex;
+					}
 				}
 			}
 		}
