@@ -291,10 +291,12 @@
 			this.ClientSize = new System.Drawing.Size(837, 591);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "DocumentForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Документ";
 			this.Load += new System.EventHandler(this.DirectoryForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DocumentForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel7.ResumeLayout(false);
 			this.panel6.ResumeLayout(false);

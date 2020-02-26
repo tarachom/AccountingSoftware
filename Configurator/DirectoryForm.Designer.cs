@@ -348,10 +348,12 @@
 			this.ClientSize = new System.Drawing.Size(837, 591);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "DirectoryForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Довідник";
 			this.Load += new System.EventHandler(this.DirectoryForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DirectoryForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel8.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);

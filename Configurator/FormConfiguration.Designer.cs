@@ -38,6 +38,7 @@
 			this.DirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +47,6 @@
 			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openEnumItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripDocument = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
@@ -146,6 +146,13 @@
 			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
 			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
 			// 
+			// addNewDocumentToolStripMenuItem
+			// 
+			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
+			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
+			this.addNewDocumentToolStripMenuItem.Text = "Додати новий документ";
+			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
+			// 
 			// saveConfigurationToolStripMenuItem
 			// 
 			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
@@ -205,13 +212,6 @@
 			this.openEnumItem.Text = "Відкрити";
 			this.openEnumItem.Click += new System.EventHandler(this.openEnumItem_Click);
 			// 
-			// addNewDocumentToolStripMenuItem
-			// 
-			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
-			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(214, 22);
-			this.addNewDocumentToolStripMenuItem.Text = "Додати новий документ";
-			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
-			// 
 			// contextMenuStripDocument
 			// 
 			this.contextMenuStripDocument.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -222,7 +222,7 @@
 			// openDocumentItem
 			// 
 			this.openDocumentItem.Name = "openDocumentItem";
-			this.openDocumentItem.Size = new System.Drawing.Size(180, 22);
+			this.openDocumentItem.Size = new System.Drawing.Size(122, 22);
 			this.openDocumentItem.Text = "Відкрити";
 			this.openDocumentItem.Click += new System.EventHandler(this.openDocumentItem_Click);
 			// 

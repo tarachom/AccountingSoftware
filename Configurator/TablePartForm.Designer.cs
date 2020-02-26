@@ -233,10 +233,12 @@
 			this.ClientSize = new System.Drawing.Size(837, 360);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "TablePartForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Таблична частина";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablePartForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);

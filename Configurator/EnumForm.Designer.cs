@@ -211,10 +211,12 @@
 			this.ClientSize = new System.Drawing.Size(677, 316);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "EnumForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Перелічення";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnumForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);

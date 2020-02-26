@@ -153,10 +153,12 @@
 			this.ClientSize = new System.Drawing.Size(560, 212);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "EnumFieldForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Поле";
 			this.Load += new System.EventHandler(this.FieldForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnumFieldForm_KeyDown);
 			this.panel2.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();

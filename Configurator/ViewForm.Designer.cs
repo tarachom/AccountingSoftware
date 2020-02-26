@@ -278,10 +278,12 @@
 			this.ClientSize = new System.Drawing.Size(953, 360);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "ViewForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Візуалізація";
 			this.Load += new System.EventHandler(this.ViewForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ViewForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
 			this.splitContainer2.Panel1.ResumeLayout(false);

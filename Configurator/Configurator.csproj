@@ -94,12 +94,6 @@
     <Compile Include="FormConfiguration.Designer.cs">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormWorkProgress.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormWorkProgress.Designer.cs">
-      <DependentUpon>FormWorkProgress.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DocumentForm.resx">
@@ -125,9 +119,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormConfiguration.resx">
       <DependentUpon>FormConfiguration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormWorkProgress.resx">
-      <DependentUpon>FormWorkProgress.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

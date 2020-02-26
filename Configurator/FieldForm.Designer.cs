@@ -41,9 +41,9 @@
 			this.comboBoxFieldType = new System.Windows.Forms.ComboBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.comboBoxPointer = new System.Windows.Forms.ComboBox();
 			this.comboBoxEnums = new System.Windows.Forms.ComboBox();
 			this.label6 = new System.Windows.Forms.Label();
+			this.comboBoxPointer = new System.Windows.Forms.ComboBox();
 			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -185,16 +185,6 @@
 			this.panel1.Size = new System.Drawing.Size(540, 327);
 			this.panel1.TabIndex = 16;
 			// 
-			// comboBoxPointer
-			// 
-			this.comboBoxPointer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.comboBoxPointer.FormattingEnabled = true;
-			this.comboBoxPointer.Location = new System.Drawing.Point(123, 167);
-			this.comboBoxPointer.Name = "comboBoxPointer";
-			this.comboBoxPointer.Size = new System.Drawing.Size(414, 21);
-			this.comboBoxPointer.TabIndex = 17;
-			// 
 			// comboBoxEnums
 			// 
 			this.comboBoxEnums.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -214,6 +204,16 @@
 			this.label6.TabIndex = 18;
 			this.label6.Text = "Перелічення:";
 			// 
+			// comboBoxPointer
+			// 
+			this.comboBoxPointer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxPointer.FormattingEnabled = true;
+			this.comboBoxPointer.Location = new System.Drawing.Point(123, 167);
+			this.comboBoxPointer.Name = "comboBoxPointer";
+			this.comboBoxPointer.Size = new System.Drawing.Size(414, 21);
+			this.comboBoxPointer.TabIndex = 17;
+			// 
 			// FieldForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -221,10 +221,12 @@
 			this.ClientSize = new System.Drawing.Size(560, 385);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
+			this.KeyPreview = true;
 			this.Name = "FieldForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.Text = "Поле";
 			this.Load += new System.EventHandler(this.FieldForm_Load);
+			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FieldForm_KeyDown);
 			this.panel2.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
