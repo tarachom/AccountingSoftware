@@ -87,8 +87,10 @@ namespace AccountingSoftware
 				{
 					//Поля табличної частини
 					foreach (ConfigurationObjectField tablePartField in directoryTablePart.Fields.Values)
+					{
 						if (tablePartField.Type == "pointer" && tablePartField.Pointer == searchName)
 							ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
+					}
 				}
 			}
 
@@ -115,14 +117,8 @@ namespace AccountingSoftware
 				//Поля довідника
 				foreach (ConfigurationObjectField directoryField in directoryItem.Fields.Values)
 				{
-					if (directoryField.Type == "enum")
-					{
-						if (directoryField.Pointer == searchName)
-						{
-							//pointer
-							ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
-						}
-					}
+					if (directoryField.Type == "enum" && directoryField.Pointer == searchName)
+						ListPointer.Add(directoryItem.Name + "." + directoryField.Name);
 				}
 
 				//Табличні частини
@@ -131,14 +127,8 @@ namespace AccountingSoftware
 					//Поля табличної частини
 					foreach (ConfigurationObjectField tablePartField in directoryTablePart.Fields.Values)
 					{
-						if (tablePartField.Type == "enum")
-						{
-							if (tablePartField.Pointer == searchName)
-							{
-								//pointer
-								ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
-							}
-						}
+						if (tablePartField.Type == "enum" && tablePartField.Pointer == searchName)
+							ListPointer.Add(directoryItem.Name + "." + directoryTablePart.Name + "." + tablePartField.Name);
 					}
 				}
 			}
