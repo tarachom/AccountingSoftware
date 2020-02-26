@@ -92,6 +92,11 @@
       <UdtName>int4</UdtName>
     </Column>
     <Column>
+      <Name>col_a6</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
       <Name>col_a4_old_25_02_2020_17_32_37</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>

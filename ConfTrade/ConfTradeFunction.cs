@@ -18,7 +18,7 @@ namespace ConfTrade
 	{
 		static void Test2()
 		{
-
+			
 		}
 
 		static string Run4()

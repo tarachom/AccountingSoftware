@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>25.02.2020 17:43:50</DateTimeSave>
+  <DateTimeSave>26.02.2020 09:11:47</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -1066,7 +1066,8 @@
         <Field>
           <Name>ВидТовара</Name>
           <NameInTable>col_c7</NameInTable>
-          <Type>empty_pointer</Type>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ВидиТоварів</Pointer>
           <Desc>Вид товара (товар, набор, услуга). Перечисление</Desc>
         </Field>
         <Field>
@@ -1270,7 +1271,8 @@
             <Field>
               <Name>ВидТовара</Name>
               <NameInTable>col_c7</NameInTable>
-              <Type>empty_pointer</Type>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ВидиТоварів</Pointer>
             </Field>
             <Field>
               <Name>Артикул</Name>
@@ -2668,14 +2670,20 @@
         <Field>
           <Name>Один</Name>
           <Value>1</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Два</Name>
           <Value>2</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Три</Name>
           <Value>3</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
@@ -2687,14 +2695,20 @@
         <Field>
           <Name>Один</Name>
           <Value>1</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Два</Name>
           <Value>2</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Три</Name>
           <Value>3</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
@@ -2705,25 +2719,70 @@
         <Field>
           <Name>Организация</Name>
           <Value>1</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>ЧастноеЛицо</Name>
           <Value>2</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Нерезидент</Name>
           <Value>3</Value>
+          <Desc>
+          </Desc>
         </Field>
         <Field>
           <Name>Безналоговые</Name>
           <Value>4</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
     <Enum>
       <Name>test2</Name>
       <Desc>fgcchf</Desc>
-      <Fields />
+      <Fields>
+        <Field>
+          <Name>A1</Name>
+          <Value>1</Value>
+          <Desc>sdfs</Desc>
+        </Field>
+        <Field>
+          <Name>A3</Name>
+          <Value>2</Value>
+          <Desc>cx</Desc>
+        </Field>
+        <Field>
+          <Name>A2</Name>
+          <Value>3</Value>
+          <Desc>sf</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>ВидиТоварів</Name>
+      <Desc>Види товарів</Desc>
+      <Fields>
+        <Field>
+          <Name>Товар</Name>
+          <Value>1</Value>
+          <Desc>Просто товар</Desc>
+        </Field>
+        <Field>
+          <Name>Послуга</Name>
+          <Value>2</Value>
+          <Desc>Послуга</Desc>
+        </Field>
+        <Field>
+          <Name>Бартер</Name>
+          <Value>3</Value>
+          <Desc>Бартер</Desc>
+        </Field>
+      </Fields>
     </Enum>
   </Enums>
   <Documents>

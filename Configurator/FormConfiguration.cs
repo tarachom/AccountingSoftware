@@ -194,9 +194,9 @@ namespace Configurator
 				enumNode.ImageIndex = 1;
 
 				//Поля
-				foreach (KeyValuePair<string, int> ConfEnumFields in ConfEnum.Value.Fields)
+				foreach (KeyValuePair<string, ConfigurationEnumField> ConfEnumFields in ConfEnum.Value.Fields)
 				{
-					TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.ToString(), ConfEnumFields.Key);
+					TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.Value.ToString(), ConfEnumFields.Value.Name);
 
 					enumFieldNode.SelectedImageIndex = 0;
 					enumFieldNode.ImageIndex = 0;
@@ -303,7 +303,7 @@ namespace Configurator
 			{
 				if (originalName != configurationEnum.Name)
 				{
-					List<string> ListPointers = Conf.SearchForPointersEnum(originalName);
+					List<string> ListPointers = Conf.SearchForPointersEnum("Перелічення." + originalName);
 					if (ListPointers.Count == 0)
 					{
 						Conf.Enums.Remove(originalName);

@@ -76,47 +76,46 @@ namespace Configurator
 			this.Hide();
 		}
 
-		//bool CallBack_IsExistFieldName(string name)
-		//{
-		//	return ConfDirectoryTablePart.Fields.ContainsKey(name);
-		//}
+		bool CallBack_IsExistField(string name)
+		{
+			return ConfEnums.Fields.ContainsKey(name);
+		}
 
-		//void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
-		//{
-		//	if (isNew)
-		//	{
-		//		ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//	}
-		//	else
-		//	{
-		//		if (originalName != configurationObjectField.Name)
-		//		{
-		//			ConfDirectoryTablePart.Fields.Remove(originalName);
-		//			ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//		}
-		//		else
-		//		{
-		//			ConfDirectoryTablePart.Fields[originalName] = configurationObjectField;
-		//		}
-		//	}
+		void CallBack_Update_Field(string originalName, ConfigurationEnumField configurationEnumField, bool isNew)
+		{
+			if (isNew)
+			{
+				ConfEnums.AppendField(configurationEnumField);
+			}
+			else
+			{
+				if (originalName != configurationEnumField.Name)
+				{
+					ConfEnums.Fields.Remove(originalName);
+					ConfEnums.AppendField(configurationEnumField);
+				}
+				else
+				{
+					ConfEnums.Fields[originalName] = configurationEnumField;
+				}
+			}
 
-		//	LoadFieldList();
-		//}
+			LoadFieldList();
+		}
 
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
-			//FieldForm fieldForm = new FieldForm();
-			//fieldForm.CallBack = CallBack_Update_Field;
-			//fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			//fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectoryTablePart.Table, ConfDirectoryTablePart.Fields);
-			//fieldForm.Show();
+			EnumFieldForm enumFieldForm = new EnumFieldForm();
+			enumFieldForm.CallBack_IsExistField = CallBack_IsExistField;
+			enumFieldForm.CallBack = CallBack_Update_Field;
+			enumFieldForm.Show();
 		}
 
 		void LoadFieldList()
 		{
 			listBoxFields.Items.Clear();
 
-			foreach (KeyValuePair<string, int> configurationObjectField in ConfEnums.Fields)
+			foreach (KeyValuePair<string, ConfigurationEnumField> configurationObjectField in ConfEnums.Fields)
 			{
 				listBoxFields.Items.Add(configurationObjectField.Key);
 			}
@@ -126,11 +125,11 @@ namespace Configurator
 		{
 			if (listBoxFields.SelectedItem != null)
 			{
-				//FieldForm fieldForm = new FieldForm();
-				//fieldForm.configurationObjectField = ConfDirectoryTablePart.Fields[listBoxFields.SelectedItem.ToString()];
-				//fieldForm.CallBack = CallBack_Update_Field;
-				//fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-				//fieldForm.Show();
+				EnumFieldForm enumFieldForm = new EnumFieldForm();
+				enumFieldForm.Field = ConfEnums.Fields[listBoxFields.SelectedItem.ToString()];
+				enumFieldForm.CallBack_IsExistField = CallBack_IsExistField;
+				enumFieldForm.CallBack = CallBack_Update_Field;
+				enumFieldForm.Show();
 			}
 		}
 	}

@@ -4,7 +4,7 @@
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 25.02.2020 17:43:50
+ * Дата конфігурації: 26.02.2020 09:11:47
  *
  */
 
@@ -2588,7 +2588,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_a1", "col_a2", "col_a3" }) 
         {
             ПолнНаименование = "";
-            ВидТовара = new DirectoryEmptyPointer();
+            ВидТовара = 0;
             Артикул = "";
             БазоваяЕдиница = new Довідники.КлассификаторЕдИзм_Pointer();
             Вес = 0;
@@ -2622,7 +2622,7 @@ namespace ConfTrade_v1_1.Довідники
             if (BaseRead(uid))
             {
                 ПолнНаименование = base.FieldValue["col_c6"].ToString();
-                ВидТовара = new DirectoryEmptyPointer();
+                ВидТовара = (Перелічення.ВидиТоварів)base.FieldValue["col_c7"];
                 Артикул = base.FieldValue["col_c8"].ToString();
                 БазоваяЕдиница = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_c9"]);
                 Вес = (base.FieldValue["col_d1"] != DBNull.Value) ? (decimal)base.FieldValue["col_d1"] : 0;
@@ -2656,7 +2656,7 @@ namespace ConfTrade_v1_1.Довідники
         public void Save()
         {
             base.FieldValue["col_c6"] = ПолнНаименование;
-            base.FieldValue["col_c7"] = ВидТовара.UnigueID.UGuid;
+            base.FieldValue["col_c7"] = (int)ВидТовара;
             base.FieldValue["col_c8"] = Артикул;
             base.FieldValue["col_c9"] = БазоваяЕдиница.UnigueID.UGuid;
             base.FieldValue["col_d1"] = Вес;
@@ -2695,7 +2695,7 @@ namespace ConfTrade_v1_1.Довідники
         }
         
         public string ПолнНаименование { get; set; }
-        public DirectoryEmptyPointer ВидТовара { get; set; }
+        public Перелічення.ВидиТоварів ВидТовара { get; set; }
         public string Артикул { get; set; }
         public Довідники.КлассификаторЕдИзм_Pointer БазоваяЕдиница { get; set; }
         public decimal Вес { get; set; }
@@ -2900,7 +2900,7 @@ namespace ConfTrade_v1_1.Довідники
         public Номенклатура_Список2_View() : base(Config.Kernel, "tab_a23", 
              new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d3", "col_a1", "col_a2", "col_a3" },
              new string[] { "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ВалютаУчета", "Назва", "Код", "Група" },
-             new string[] { "empty_pointer", "string", "pointer", "numeric", "pointer", "string", "string", "pointer" },
+             new string[] { "enum", "string", "pointer", "numeric", "pointer", "string", "string", "pointer" },
              "Номенклатура_Список2")
         {
             
@@ -6633,7 +6633,19 @@ namespace ConfTrade_v1_1.Перелічення
     ///</summary>
     public enum test2
     {
-         
+         A1 = 1,
+         A3 = 2,
+         A2 = 3
+    }
+    
+    ///<summary>
+    ///Види товарів.
+    ///</summary>
+    public enum ВидиТоварів
+    {
+         Товар = 1,
+         Послуга = 2,
+         Бартер = 3
     }
     
     

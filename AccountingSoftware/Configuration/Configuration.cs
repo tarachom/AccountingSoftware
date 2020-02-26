@@ -522,8 +522,9 @@ namespace AccountingSoftware
 				{
 					string nameField = enumFieldsNodes.Current.SelectSingleNode("Name").Value;
 					string valueField = enumFieldsNodes.Current.SelectSingleNode("Value").Value;
+					string descField = enumFieldsNodes.Current.SelectSingleNode("Desc").Value;
 
-					configurationEnums.AppendField(nameField, int.Parse(valueField));
+					configurationEnums.AppendField(new ConfigurationEnumField(nameField, int.Parse(valueField), descField));
 				}
 			}
 		}
@@ -776,18 +777,22 @@ namespace AccountingSoftware
 				XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
 				nodeEnum.AppendChild(nodeFields);
 
-				foreach (KeyValuePair<string, int> field in enum_item.Value.Fields)
+				foreach (KeyValuePair<string, ConfigurationEnumField> field in enum_item.Value.Fields)
 				{
 					XmlElement nodeField = xmlConfDocument.CreateElement("Field");
 					nodeFields.AppendChild(nodeField);
 
 					XmlElement nodeFieldName = xmlConfDocument.CreateElement("Name");
-					nodeFieldName.InnerText = field.Key;
+					nodeFieldName.InnerText = field.Value.Name;
 					nodeField.AppendChild(nodeFieldName);
 
 					XmlElement nodeFieldValue = xmlConfDocument.CreateElement("Value");
-					nodeFieldValue.InnerText = field.Value.ToString();
+					nodeFieldValue.InnerText = field.Value.Value.ToString();
 					nodeField.AppendChild(nodeFieldValue);
+
+					XmlElement nodeFieldDesc = xmlConfDocument.CreateElement("Desc");
+					nodeFieldDesc.InnerText = field.Value.Desc;
+					nodeField.AppendChild(nodeFieldDesc);
 				}
 			}
 		}

@@ -7,7 +7,7 @@ namespace AccountingSoftware
 	{
 		public ConfigurationEnums()
 		{
-			Fields = new Dictionary<string, int>();
+			Fields = new Dictionary<string, ConfigurationEnumField>();
 		}
 
 		public ConfigurationEnums(string name, string desc = "") : this()
@@ -20,11 +20,11 @@ namespace AccountingSoftware
 
 		public string Desc { get; set; }
 
-		public Dictionary<string, int> Fields { get; }
+		public Dictionary<string, ConfigurationEnumField> Fields { get; }
 
-		public void AppendField(string fieldName, int fieldValue)
+		public void AppendField(ConfigurationEnumField field)
 		{
-			Fields.Add(fieldName, fieldValue);
+			Fields.Add(field.Name, field);
 		}
 	}
 }

@@ -1221,10 +1221,11 @@
       <NameInTable>col_c7</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>empty_pointer</ConfType>
+        <ConfType>enum</ConfType>
         <DataType>uuid</DataType>
         <UdtName>uuid</UdtName>
-        <Coincide>yes</Coincide>
+        <Coincide>no</Coincide>
+        <DataTypeCreate>integer</DataTypeCreate>
       </Type>
     </Control_Field>
     <Control_Field>
@@ -2914,13 +2915,13 @@
     <Control_Field>
       <Name>аавпва</Name>
       <NameInTable>col_a6</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>аавпва</Name>
-        <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>enum</ConfType>
         <DataType>integer</DataType>
-      </FieldCreate>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
   </Control_Directory>
 </root>
