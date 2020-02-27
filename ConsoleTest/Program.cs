@@ -75,8 +75,6 @@ namespace ConsoleTest
 			{
 				string directoryName = nodeDirectory.Current.SelectSingleNode("Name").Value;
 
-				
-
 				XPathNodeIterator nodeView = nodeDirectory.Current.Select("Views/View");
 				while (nodeView.MoveNext())
 				{
@@ -84,11 +82,11 @@ namespace ConsoleTest
 
 					Console.WriteLine(directoryName + "_" + viewName);
 
-					string filename = "../../XSLT/" + directoryName + "_" + viewName + ".xslt";
+					string filename = "../../XSLT/Довідники." + directoryName + "_" + viewName + ".xslt";
 					FileMode mode = File.Exists(filename) ? FileMode.Truncate : FileMode.Create;
 
 					XsltArgumentList xsltArgumentList = new XsltArgumentList();
-					xsltArgumentList.AddParam("DirectoryName", "", directoryName);
+					xsltArgumentList.AddParam("DirectoryName", "", "Довідники." + directoryName);
 
 					FileStream stream = new FileStream(filename, mode);
 					xsltTemplateGenerator.Transform(nodeView.Current, xsltArgumentList, stream);
@@ -103,6 +101,10 @@ namespace ConsoleTest
 					while (nodeFieldEnumType.MoveNext())
 					{
 						string pointerEnum = nodeFieldEnumType.Current.SelectSingleNode("Pointer").Value;
+
+						string[] pointerEnumSplit = pointerEnum.Split(new string[] { "." }, StringSplitOptions.None);
+						pointerEnum = pointerEnumSplit[1];
+
 						if (!UsingEnums.Contains(pointerEnum))
 						{
 							XPathNavigator enumNode = xPathDocNavigator.SelectSingleNode("/Configuration/Enums/Enum[Name = '" + pointerEnum + "']");
@@ -121,19 +123,13 @@ namespace ConsoleTest
 					xsltArgumentList.AddParam("XmlHeap", "", xml);
 					//<------------------
 
-					string filename2 = "../../CSharp/" + directoryName + "_" + viewName + ".cs";
+					string filename2 = "../../CSharp/Довідники." + directoryName + "_" + viewName + ".cs";
 					FileMode mode2 = File.Exists(filename2) ? FileMode.Truncate : FileMode.Create;
 					FileStream stream2 = new FileStream(filename2, mode2);
 					xsltCodeGenerator.Transform(nodeView.Current, xsltArgumentList, stream2);
 					stream2.Close();
 				}
 			}
-
-			//xsltCodeGnerator.Transform(@"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml", "../../Result.xslt");
-
-			//string genericText = File.ReadAllText("../../Result.xslt");
-
-			//File.WriteAllText("../../Result.xslt", "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + genericText.Trim());
 		}
 	}
 }

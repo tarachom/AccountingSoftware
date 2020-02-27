@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>26.02.2020 22:14:34</DateTimeSave>
+  <DateTimeSave>27.02.2020 10:34:23</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2874,8 +2874,32 @@
       <Table>test</Table>
       <Desc>
       </Desc>
-      <Fields />
-      <TabularParts />
+      <Fields>
+        <Field>
+          <Name>івафі</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>іва</Name>
+          <Table>tab_a52</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>іаів</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </Document>
     <Document>
       <Name>РозхіднаНакладна</Name>
@@ -2973,6 +2997,20 @@
               <Desc>
               </Desc>
             </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
           </Fields>
         </TablePart>
       </TabularParts>
@@ -3047,6 +3085,36 @@
               <Name>НомерСтроки</Name>
               <NameInTable>col_a6</NameInTable>
               <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Послуги</Name>
+          <Table>tab_a52</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Послуга</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>

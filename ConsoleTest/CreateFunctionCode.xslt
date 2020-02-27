@@ -32,6 +32,7 @@ limitations under the License.
   
   <xsl:template match="View">
     <xsl:variable name="FullViewName" select="concat($DirectoryName, '_', Name, '_View')" />
+    <xsl:variable name="CountPointerField" select="count(Fields/Field[Type = 'pointer'])" />
     <xsl:call-template name="License" />
     
 using System.Text;
@@ -39,7 +40,7 @@ using System.Collections.Generic;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
-using Довідники = ConfTrade_v1_1.Directory;    
+using Довідники = ConfTrade_v1_1.Довідники;    
 
 namespace ConfTrade
 {
@@ -50,29 +51,36 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<xsl:text disable-output-escaping="yes">&lt;root&gt;</xsl:text>");
             
-            Довідники.<xsl:value-of select="$FullViewName" /> m_<xsl:value-of select="$FullViewName" /> = new Довідники.<xsl:value-of select="$FullViewName" />();
+            <xsl:value-of select="$FullViewName" /> m_<xsl:value-of select="position()" /> = new <xsl:value-of select="$FullViewName" />();
             
-            <xsl:if test="count(Fields/Field[Type = 'pointer']) > 0">
+            <xsl:if test="$CountPointerField > 0">
               
-              <xsl:text>m_</xsl:text>
-              <xsl:value-of select="$FullViewName" />.QuerySelect.CreateTempTable = true;
-              <xsl:text disable-output-escaping="yes">Dictionary&lt;string, string&gt; Alias = m_</xsl:text>
-              <xsl:value-of select="$FullViewName" />.Alias;
+            <xsl:text>m_</xsl:text>
+            <xsl:value-of select="position()" />.QuerySelect.CreateTempTable = true;
+            <xsl:text disable-output-escaping="yes">Dictionary&lt;string, string&gt; Alias = m_</xsl:text>
+            <xsl:value-of select="position()" />.Alias;
               
             </xsl:if>
 
             <xsl:text>sb.Append(m_</xsl:text>
-            <xsl:value-of select="$FullViewName" />.Read());
+            <xsl:value-of select="position()" />.Read());
+            
+            <xsl:if test="$CountPointerField > 0">
+              
+            string TempTable = m_<xsl:value-of select="position()" />.QuerySelect.TempTable;
+              
+            </xsl:if>
             
             <xsl:for-each select="Fields/Field">
 
               <xsl:choose>
                 <xsl:when test="Type = 'pointer'">
-                  <xsl:variable name="FullFieldViewName" select="concat(Pointer, '_Список_View')" />
-            Довідники.<xsl:value-of select="$FullFieldViewName" /> m_<xsl:value-of select="$FullFieldViewName" /> = new Довідники.<xsl:value-of select="$FullFieldViewName" />();
-            m_<xsl:value-of select="$FullFieldViewName" />.QuerySelect.Where.Add(new Where("uid", Comparison.IN, 
-                "SELECT DISTINCT " + Alias["<xsl:value-of select="Name" />"] + " FROM " + m_<xsl:value-of select="$FullViewName" />.QuerySelect.TempTable, true)); /* <xsl:value-of select="NameInTable" /> */
-            sb.Append(m_<xsl:value-of select="$FullFieldViewName" />.Read());
+                  
+            <xsl:variable name="FullFieldViewName" select="concat(Pointer, '_Список_View')" />
+            <xsl:value-of select="$FullFieldViewName" /> m_<xsl:value-of select="position()" /> = new <xsl:value-of select="$FullFieldViewName" />();
+            m_<xsl:value-of select="position()" />.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["<xsl:value-of select="Name" />"] + " FROM " + TempTable, true));
+            sb.Append(m_<xsl:value-of select="position()" />.Read());
+            
                 </xsl:when>
               </xsl:choose>
     

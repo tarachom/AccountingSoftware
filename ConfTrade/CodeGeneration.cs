@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 26.02.2020 22:14:34
+ * Дата конфігурації: 27.02.2020 10:34:23
  *
  */
 
@@ -183,6 +183,8 @@ namespace ConfTrade_v1_1.Довідники
         public Валюти_КурсНаДату_TablePart(Валюти_Objest owner) : base(Config.Kernel, "tab_a03",
              new string[] { "col_a4", "col_a5", "col_a6" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Валюти_КурсНаДату_TablePartRecord>();
         }
@@ -280,7 +282,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a4", "col_a1" },
              new string[] { "Назва", "Курс" },
              new string[] { "string", "numeric" },
-             "Валюти_Список")
+             "Довідники.Валюти_Список")
         {
             
         }
@@ -436,7 +438,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a9", "col_a1" },
              new string[] { "Единица", "Назва" },
              new string[] { "pointer", "string" },
-             "Единици_Список")
+             "Довідники.Единици_Список")
         {
             
         }
@@ -584,7 +586,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_b3" },
              new string[] { "Назва", "КодЕдИзмерения" },
              new string[] { "string", "string" },
-             "КлассификаторЕдИзм_Список")
+             "Довідники.КлассификаторЕдИзм_Список")
         {
             
         }
@@ -597,7 +599,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_b2", "col_b3", "col_a1", "col_a2" },
              new string[] { "ПолнНаименование", "КодЕдИзмерения", "Назва", "Код" },
              new string[] { "string", "string", "string", "string" },
-             "КлассификаторЕдИзм_Список2")
+             "Довідники.КлассификаторЕдИзм_Список2")
         {
             
         }
@@ -741,7 +743,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "Категории_Список")
+             "Довідники.Категории_Список")
         {
             
         }
@@ -885,7 +887,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "КатегорииКонтрагентов_Список")
+             "Довідники.КатегорииКонтрагентов_Список")
         {
             
         }
@@ -1029,7 +1031,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "КатегорииТоваров_Список")
+             "Довідники.КатегорииТоваров_Список")
         {
             
         }
@@ -1177,7 +1179,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "КатегорииЦен_Список")
+             "Довідники.КатегорииЦен_Список")
         {
             
         }
@@ -1325,7 +1327,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "КодиУКТВЕД_Список")
+             "Довідники.КодиУКТВЕД_Список")
         {
             
         }
@@ -1473,7 +1475,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "Комплектация_Список")
+             "Довідники.Комплектация_Список")
         {
             
         }
@@ -1724,6 +1726,8 @@ namespace ConfTrade_v1_1.Довідники
         public Контрагенти_Глубина_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_a13",
              new string[] { "col_a1", "col_a2" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Контрагенти_Глубина_TablePartRecord>();
         }
@@ -1815,6 +1819,8 @@ namespace ConfTrade_v1_1.Довідники
         public Контрагенти_ГлубинаКредитаПоставщика_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_a17",
              new string[] { "col_a3", "col_a4" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord>();
         }
@@ -1906,6 +1912,8 @@ namespace ConfTrade_v1_1.Довідники
         public Контрагенти_СуммаКредита_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_a18",
              new string[] { "col_a1", "col_a2" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Контрагенти_СуммаКредита_TablePartRecord>();
         }
@@ -1997,6 +2005,8 @@ namespace ConfTrade_v1_1.Довідники
         public Контрагенти_СуммаКредитаПоставщика_TablePart(Контрагенти_Objest owner) : base(Config.Kernel, "tab_a19",
              new string[] { "col_a3", "col_a4" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Контрагенти_СуммаКредитаПоставщика_TablePartRecord>();
         }
@@ -2089,7 +2099,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_c9", "col_a3" },
              new string[] { "Назва", "ВидКонтрагента" },
              new string[] { "string", "enum" },
-             "Контрагенти_Список")
+             "Довідники.Контрагенти_Список")
         {
             
         }
@@ -2245,7 +2255,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a4" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "МестаХранения_Список")
+             "Довідники.МестаХранения_Список")
         {
             
         }
@@ -2409,7 +2419,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_b3" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "НалоговиеИнспекции_Список")
+             "Довідники.НалоговиеИнспекции_Список")
         {
             
         }
@@ -2589,7 +2599,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "НашиДенежниеСчета_Список")
+             "Довідники.НашиДенежниеСчета_Список")
         {
             
         }
@@ -2818,6 +2828,8 @@ namespace ConfTrade_v1_1.Довідники
         public Номенклатура_СтавкаНДС_TablePart(Номенклатура_Objest owner) : base(Config.Kernel, "tab_a14",
              new string[] { "col_a1", "col_a2" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Номенклатура_СтавкаНДС_TablePartRecord>();
         }
@@ -2910,7 +2922,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2", "col_d3" },
              new string[] { "Назва", "Код", "ВалютаУчета" },
              new string[] { "string", "string", "pointer" },
-             "Номенклатура_Список")
+             "Довідники.Номенклатура_Список")
         {
             
         }
@@ -2923,7 +2935,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d3", "col_a1", "col_a2", "col_a3" },
              new string[] { "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ВалютаУчета", "Назва", "Код", "Група" },
              new string[] { "enum", "string", "pointer", "numeric", "pointer", "string", "string", "pointer" },
-             "Номенклатура_Список2")
+             "Довідники.Номенклатура_Список2")
         {
             
         }
@@ -3071,7 +3083,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_f2" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "НомераГТД_Список")
+             "Довідники.НомераГТД_Список")
         {
             
         }
@@ -3223,7 +3235,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_f7" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "Пользователи_Список")
+             "Довідники.Пользователи_Список")
         {
             
         }
@@ -3365,7 +3377,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a3", "col_a1" },
              new string[] { "Назва", "Товар" },
              new string[] { "string", "pointer" },
-             "Прайс_лист_Список")
+             "Довідники.Прайс_лист_Список")
         {
             
         }
@@ -3521,7 +3533,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a7", "col_a3" },
              new string[] { "Назва", "БанкНазвание" },
              new string[] { "string", "string" },
-             "РасчетниеСчета_Список")
+             "Довідники.РасчетниеСчета_Список")
         {
             
         }
@@ -3665,7 +3677,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_b1" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "Словарь_Список")
+             "Довідники.Словарь_Список")
         {
             
         }
@@ -3829,7 +3841,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_b9" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "Сотрудники_Список")
+             "Довідники.Сотрудники_Список")
         {
             
         }
@@ -3975,7 +3987,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_c5" },
              new string[] { "Назва" },
              new string[] { "string" },
-             "ТорговоеОборудование_Список")
+             "Довідники.ТорговоеОборудование_Список")
         {
             
         }
@@ -4216,6 +4228,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ГлавнийБухгалтер_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a32",
              new string[] { "col_f2", "col_f3" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ГлавнийБухгалтер_TablePartRecord>();
         }
@@ -4307,6 +4321,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ГНИ_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a33",
              new string[] { "col_f4", "col_f5" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ГНИ_TablePartRecord>();
         }
@@ -4400,6 +4416,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_Кассир_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a34",
              new string[] { "col_f6", "col_f7" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_Кассир_TablePartRecord>();
         }
@@ -4493,6 +4511,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a35",
              new string[] { "col_f8", "col_f9" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord>();
         }
@@ -4584,6 +4604,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_НалоговаяИнспекция_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a36",
              new string[] { "col_g1", "col_g2" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_НалоговаяИнспекция_TablePartRecord>();
         }
@@ -4675,6 +4697,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ОфициальноеНаименование_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a37",
              new string[] { "col_g3", "col_g4" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ОфициальноеНаименование_TablePartRecord>();
         }
@@ -4766,6 +4790,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ПлательщикНалогаНаПрибиль_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a38",
              new string[] { "col_g5", "col_g6" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord>();
         }
@@ -4857,6 +4883,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ПолнНаименование_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a39",
              new string[] { "col_g7", "col_g8" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ПолнНаименование_TablePartRecord>();
         }
@@ -4948,6 +4976,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ПочтовийАдрес_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a40",
              new string[] { "col_g9", "col_h1" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ПочтовийАдрес_TablePartRecord>();
         }
@@ -5039,6 +5069,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_Руководитель_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a41",
              new string[] { "col_h2", "col_h3" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_Руководитель_TablePartRecord>();
         }
@@ -5130,6 +5162,8 @@ namespace ConfTrade_v1_1.Довідники
         public Фирми_ЮридическийАдрес_TablePart(Фирми_Objest owner) : base(Config.Kernel, "tab_a42",
              new string[] { "col_h4", "col_h5" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Фирми_ЮридическийАдрес_TablePartRecord>();
         }
@@ -5222,7 +5256,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_e9", "col_e4", "col_e6", "col_e2" },
              new string[] { "Назва", "Руководитель", "Телефони", "ПочтовийАдрес" },
              new string[] { "string", "pointer", "string", "string" },
-             "Фирми_Список")
+             "Довідники.Фирми_Список")
         {
             
         }
@@ -5387,6 +5421,8 @@ namespace ConfTrade_v1_1.Довідники
         public Цени_Валюта_TablePart(Цени_Objest owner) : base(Config.Kernel, "tab_a44",
              new string[] { "col_a6", "col_a7" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Цени_Валюта_TablePartRecord>();
         }
@@ -5478,6 +5514,8 @@ namespace ConfTrade_v1_1.Довідники
         public Цени_Единица_TablePart(Цени_Objest owner) : base(Config.Kernel, "tab_a45",
              new string[] { "col_a8", "col_a9" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Цени_Единица_TablePartRecord>();
         }
@@ -5569,6 +5607,8 @@ namespace ConfTrade_v1_1.Довідники
         public Цени_Цена_TablePart(Цени_Objest owner) : base(Config.Kernel, "tab_a46",
              new string[] { "col_b1", "col_b2" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<Цени_Цена_TablePartRecord>();
         }
@@ -5661,7 +5701,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a6", "col_a1", "col_a3", "col_a4" },
              new string[] { "Назва", "Валюта", "КатегорияЦени", "Наценка" },
              new string[] { "string", "pointer", "pointer", "numeric" },
-             "Цени_Список")
+             "Довідники.Цени_Список")
         {
             
         }
@@ -5799,7 +5839,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Родитель" },
              new string[] { "string", "pointer" },
-             "Групи_Номенклатура_Список")
+             "Довідники.Групи_Номенклатура_Список")
         {
             
         }
@@ -5937,7 +5977,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2", "col_a3" },
              new string[] { "Назва", "Код", "Родитель" },
              new string[] { "string", "string", "pointer" },
-             "Групи_МестаХранения_Список")
+             "Довідники.Групи_МестаХранения_Список")
         {
             
         }
@@ -6088,6 +6128,8 @@ namespace ConfTrade_v1_1.Довідники
         public test_esddf_TablePart(test_Objest owner) : base(Config.Kernel, "tab_a47",
              new string[] { "col_a1" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<test_esddf_TablePartRecord>();
         }
@@ -6177,7 +6219,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a3", "col_a2", "col_a1" },
              new string[] { "ТипПоля", "Код", "Назва" },
              new string[] { "enum", "string", "string" },
-             "test_Список")
+             "Довідники.test_Список")
         {
             
         }
@@ -6313,7 +6355,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "test2_Список")
+             "Довідники.test2_Список")
         {
             
         }
@@ -6453,7 +6495,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "вапвапв_Список")
+             "Довідники.вапвапв_Список")
         {
             
         }
@@ -6608,6 +6650,8 @@ namespace ConfTrade_v1_1.Довідники
         public іваів_asdas_TablePart(іваів_Objest owner) : base(Config.Kernel, "tab_a51",
              new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<іваів_asdas_TablePartRecord>();
         }
@@ -6707,7 +6751,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "іваів_Список")
+             "Довідники.іваів_Список")
         {
             
         }
@@ -6797,10 +6841,12 @@ namespace ConfTrade_v1_1.Документи
     class Test_Objest : DocumentObject
     {
         public Test_Objest() : base(Config.Kernel, "test",
-             new string[] {  }) 
+             new string[] { "col_a1" }) 
         {
+            івафі = "";
             
             //Табличні частини
+            іва_TablePart = new Test_іва_TablePart(this);
             
         }
         
@@ -6808,6 +6854,7 @@ namespace ConfTrade_v1_1.Документи
         {
             if (BaseRead(uid))
             {
+                івафі = base.FieldValue["col_a1"].ToString();
                 
                 BaseClear();
                 return true;
@@ -6818,6 +6865,7 @@ namespace ConfTrade_v1_1.Документи
         
         public void Save()
         {
+            base.FieldValue["col_a1"] = івафі;
             
             BaseSave();
         }
@@ -6833,8 +6881,10 @@ namespace ConfTrade_v1_1.Документи
             return directoryPointer;
         }
         
+        public string івафі { get; set; }
         
         //Табличні частини
+        public Test_іва_TablePart іва_TablePart { get; set; }
         
     }
     
@@ -6900,6 +6950,94 @@ namespace ConfTrade_v1_1.Документи
         public Test_Pointer Current { get; private set; }
     }
     
+      
+    class Test_іва_TablePart : DocumentTablePart
+    {
+        public Test_іва_TablePart(Test_Objest owner) : base(Config.Kernel, "tab_a52",
+             new string[] { "col_a1" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Test_іва_TablePartRecord>();
+        }
+        
+        public Test_Objest Owner { get; private set; }
+        
+        public List<Test_іва_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Test_іва_TablePartRecord record = new Test_іва_TablePartRecord();
+
+                record.іаів = fieldValue["col_a1"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Test_іва_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.іаів);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Test_іва_TablePartRecord : DocumentTablePartRecord
+    {
+        public Test_іва_TablePartRecord()
+        {
+            іаів = "";
+            
+        }
+        
+        
+        public Test_іва_TablePartRecord(
+            string _іаів = "")
+        {
+            іаів = _іаів;
+            
+        }
+        public string іаів { get; set; }
+        
+    }
       
     
     #endregion
@@ -7039,6 +7177,8 @@ namespace ConfTrade_v1_1.Документи
         public РозхіднаНакладна_Товари_TablePart(РозхіднаНакладна_Objest owner) : base(Config.Kernel, "tab_a52",
              new string[] { "col_a2", "col_a1", "col_a3", "col_a5", "col_a6" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<РозхіднаНакладна_Товари_TablePartRecord>();
         }
@@ -7143,8 +7283,10 @@ namespace ConfTrade_v1_1.Документи
     class РозхіднаНакладна_Послуги_TablePart : DocumentTablePart
     {
         public РозхіднаНакладна_Послуги_TablePart(РозхіднаНакладна_Objest owner) : base(Config.Kernel, "tab_a52",
-             new string[] { "col_a1" }) 
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<РозхіднаНакладна_Послуги_TablePartRecord>();
         }
@@ -7163,6 +7305,8 @@ namespace ConfTrade_v1_1.Документи
                 РозхіднаНакладна_Послуги_TablePartRecord record = new РозхіднаНакладна_Послуги_TablePartRecord();
 
                 record.Послуга = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.Сума = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
+                record.Кво = (fieldValue["col_a3"] != DBNull.Value) ? (int)fieldValue["col_a3"] : 0;
                 
                 Records.Add(record);
             }
@@ -7190,6 +7334,8 @@ namespace ConfTrade_v1_1.Документи
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Послуга.UnigueID.UGuid);
+                    fieldValue.Add("col_a2", record.Сума);
+                    fieldValue.Add("col_a3", record.Кво);
                     
                     base.BaseSave(Owner.UnigueID, fieldValue);
                 }
@@ -7212,17 +7358,23 @@ namespace ConfTrade_v1_1.Документи
         public РозхіднаНакладна_Послуги_TablePartRecord()
         {
             Послуга = new Довідники.Номенклатура_Pointer();
+            Сума = 0;
+            Кво = 0;
             
         }
         
         
         public РозхіднаНакладна_Послуги_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Послуга = null)
+            Довідники.Номенклатура_Pointer _Послуга = null, decimal _Сума = 0, int _Кво = 0)
         {
             Послуга = _Послуга ?? new Довідники.Номенклатура_Pointer();
+            Сума = _Сума;
+            Кво = _Кво;
             
         }
         public Довідники.Номенклатура_Pointer Послуга { get; set; }
+        public decimal Сума { get; set; }
+        public int Кво { get; set; }
         
     }
       
@@ -7243,6 +7395,7 @@ namespace ConfTrade_v1_1.Документи
             
             //Табличні частини
             Товар_TablePart = new ПрихіднаНакладна_Товар_TablePart(this);
+            Послуги_TablePart = new ПрихіднаНакладна_Послуги_TablePart(this);
             
         }
         
@@ -7287,6 +7440,7 @@ namespace ConfTrade_v1_1.Документи
         
         //Табличні частини
         public ПрихіднаНакладна_Товар_TablePart Товар_TablePart { get; set; }
+        public ПрихіднаНакладна_Послуги_TablePart Послуги_TablePart { get; set; }
         
     }
     
@@ -7358,6 +7512,8 @@ namespace ConfTrade_v1_1.Документи
         public ПрихіднаНакладна_Товар_TablePart(ПрихіднаНакладна_Objest owner) : base(Config.Kernel, "tab_a52",
              new string[] { "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List<ПрихіднаНакладна_Товар_TablePartRecord>();
         }
@@ -7456,6 +7612,104 @@ namespace ConfTrade_v1_1.Документи
         public decimal Сума { get; set; }
         public decimal Ціна { get; set; }
         public int НомерСтроки { get; set; }
+        
+    }
+      
+    class ПрихіднаНакладна_Послуги_TablePart : DocumentTablePart
+    {
+        public ПрихіднаНакладна_Послуги_TablePart(ПрихіднаНакладна_Objest owner) : base(Config.Kernel, "tab_a52",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<ПрихіднаНакладна_Послуги_TablePartRecord>();
+        }
+        
+        public ПрихіднаНакладна_Objest Owner { get; private set; }
+        
+        public List<ПрихіднаНакладна_Послуги_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                ПрихіднаНакладна_Послуги_TablePartRecord record = new ПрихіднаНакладна_Послуги_TablePartRecord();
+
+                record.Послуга = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.Кво = (fieldValue["col_a2"] != DBNull.Value) ? (int)fieldValue["col_a2"] : 0;
+                record.Сума = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (ПрихіднаНакладна_Послуги_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Послуга.UnigueID.UGuid);
+                    fieldValue.Add("col_a2", record.Кво);
+                    fieldValue.Add("col_a3", record.Сума);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class ПрихіднаНакладна_Послуги_TablePartRecord : DocumentTablePartRecord
+    {
+        public ПрихіднаНакладна_Послуги_TablePartRecord()
+        {
+            Послуга = new Довідники.Номенклатура_Pointer();
+            Кво = 0;
+            Сума = 0;
+            
+        }
+        
+        
+        public ПрихіднаНакладна_Послуги_TablePartRecord(
+            Довідники.Номенклатура_Pointer _Послуга = null, int _Кво = 0, decimal _Сума = 0)
+        {
+            Послуга = _Послуга ?? new Довідники.Номенклатура_Pointer();
+            Кво = _Кво;
+            Сума = _Сума;
+            
+        }
+        public Довідники.Номенклатура_Pointer Послуга { get; set; }
+        public int Кво { get; set; }
+        public decimal Сума { get; set; }
         
     }
       

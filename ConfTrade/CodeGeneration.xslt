@@ -420,6 +420,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
              </xsl:for-each> }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt;();
         }
@@ -575,7 +577,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                </xsl:if>
                <xsl:text>"</xsl:text><xsl:value-of select="Type"/><xsl:text>"</xsl:text>
              </xsl:for-each> },
-             "<xsl:value-of select="$ViewsFullName"/>")
+             "Довідники.<xsl:value-of select="$ViewsFullName"/>")
         {
             <!--
             base.QuerySelect.PrimaryField = "<xsl:value-of select="PrimaryField"/>";
@@ -790,6 +792,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
              </xsl:for-each> }) 
         {
+            if (owner == null) throw new Exception("owner null");
+            
             Owner = owner;
             Records = new List&lt;<xsl:value-of select="$TablePartFullName"/>_TablePartRecord&gt;();
         }
