@@ -7,7 +7,7 @@
 
   <xsl:template name="License">
 /*
-Copyright (C) 2019-2020 Tarakhomin Yuri Ivanovich
+Copyright (C) 2019-2020 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");

@@ -1,6 +1,6 @@
 ﻿
 /*
-Copyright (C) 2019-2020 Tarakhomin Yuri Ivanovich
+Copyright (C) 2019-2020 TARAKHOMYN YURIY IVANOVYCH
 All rights reserved.
 
 Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 27.02.2020 10:34:23
+ * Дата конфігурації: 28.02.2020 12:18:49
  *
  */
 
@@ -7999,4 +7999,3 @@ namespace ConfTrade_v1_1.Регістри
 {
 
 }
-  
