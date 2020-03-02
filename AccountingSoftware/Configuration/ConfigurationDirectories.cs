@@ -26,8 +26,14 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Довідник
+	/// </summary>
 	public class ConfigurationDirectories : ConfigurationObject
 	{
+		/// <summary>
+		/// Довідник
+		/// </summary>
 		public ConfigurationDirectories()
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
@@ -35,6 +41,12 @@ namespace AccountingSoftware
 			Views = new Dictionary<string, ConfigurationObjectView>();
 		}
 
+		/// <summary>
+		/// Довідник
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="table">Таблиця в базі даних</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationDirectories(string name, string table, string desc = "") : this()
 		{
 			Name = name;
@@ -42,28 +54,46 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Поля
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
+		/// <summary>
+		/// Табличні частини
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
 
+		/// <summary>
+		/// Візуалізації
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectView> Views { get; }
 
-		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
+		/// <summary>
+		/// Додати нове поле
+		/// </summary>
+		/// <param name="field">Нове поле</param>
+		public void AppendField(ConfigurationObjectField field)
 		{
 			Fields.Add(field.Name, field);
-			return field;
 		}
 
-		public ConfigurationObjectTablePart AppendTablePart(ConfigurationObjectTablePart tablePart)
+		/// <summary>
+		/// Додати нову табличну частину
+		/// </summary>
+		/// <param name="tablePart">Нова таблична частина</param>
+		public void AppendTablePart(ConfigurationObjectTablePart tablePart)
 		{
 			TabularParts.Add(tablePart.Name, tablePart);
-			return tablePart;
 		}
 
-		public ConfigurationObjectView AppendView(ConfigurationObjectView view)
+		/// <summary>
+		/// Додати нову візуалізацію
+		/// </summary>
+		/// <param name="view">Нова візуалізація</param>
+		public void AppendView(ConfigurationObjectView view)
 		{
 			Views.Add(view.Name, view);
-			return view;
 		}
 	}
 }

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>28.02.2020 12:18:49</DateTimeSave>
+  <DateTimeSave>02.03.2020 15:53:44</DateTimeSave>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
@@ -2563,7 +2563,7 @@
         <Field>
           <Name>іваіваіваівjj</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>string</Type>
+          <Type>empty_pointer</Type>
           <Desc>аіваі</Desc>
         </Field>
       </Fields>

@@ -98,8 +98,8 @@ namespace Configurator
 				TreeNode directoryNode = directoriesNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
 				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
 				directoryNode.ContextMenuStrip = contextMenuStrip1;
-				directoryNode.SelectedImageIndex = 1;
-				directoryNode.ImageIndex = 1;
+				directoryNode.SelectedImageIndex = 18;
+				directoryNode.ImageIndex = 18;
 
 				//Поля
 				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields)
@@ -108,18 +108,19 @@ namespace Configurator
 						" -> " + ConfFields.Value.Pointer : "";
 
 					TreeNode fieldNode = directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 0;
-					fieldNode.ImageIndex = 0;
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
 				}
 
 				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
-				directoriTabularPartsNode.SelectedImageIndex = 1;
-				directoriTabularPartsNode.ImageIndex = 1;
+				directoriTabularPartsNode.SelectedImageIndex = 4;
+				directoriTabularPartsNode.ImageIndex = 4;
 
 				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts)
 				{
 					TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
-					directoriTablePartNode.ImageIndex = 1;
+					directoriTablePartNode.SelectedImageIndex = 13;
+					directoriTablePartNode.ImageIndex = 13;
 
 					//Поля
 					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
@@ -128,30 +129,30 @@ namespace Configurator
 							" -> " + ConfTablePartFields.Value.Pointer : "";
 
 						TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-						fieldNode.SelectedImageIndex = 0;
-						fieldNode.ImageIndex = 0;
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
 					}
 
 					//directoriTablePartNode.Expand();
 				}
 
 				TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
-				directoriViewsNode.SelectedImageIndex = 1;
-				directoriViewsNode.ImageIndex = 1;
+				directoriViewsNode.SelectedImageIndex = 8;
+				directoriViewsNode.ImageIndex = 8;
 
 				foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in ConfDirectory.Value.Views)
 				{
 					TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
-					directoriViewNode.SelectedImageIndex = 1;
-					directoriViewNode.ImageIndex = 1;
+					directoriViewNode.SelectedImageIndex = 9;
+					directoriViewNode.ImageIndex = 9;
 
 					//Поля
 					foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
 					{
 						TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
 
-						fieldNode.SelectedImageIndex = 0;
-						fieldNode.ImageIndex = 0;
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
 					}
 
 					//directoriTablePartNode.Expand();
@@ -179,13 +180,13 @@ namespace Configurator
 							" -> " + ConfFields.Value.Pointer : "";
 
 					TreeNode fieldNode = documentNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 0;
-					fieldNode.ImageIndex = 0;
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
 				}
 
 				TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
-				documentTabularPartsNode.SelectedImageIndex = 1;
-				documentTabularPartsNode.ImageIndex = 1;
+				documentTabularPartsNode.SelectedImageIndex = 4;
+				documentTabularPartsNode.ImageIndex = 4;
 
 				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDocuments.Value.TabularParts)
 				{
@@ -199,30 +200,30 @@ namespace Configurator
 							" -> " + ConfTablePartFields.Value.Pointer : "";
 
 						TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-						fieldNode.SelectedImageIndex = 0;
-						fieldNode.ImageIndex = 0;
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
 					}
 				}
 			}
 
 			TreeNode enumsNode = rootNode.Nodes.Add("Enums", "Перелічення");
-			enumsNode.SelectedImageIndex = 3;
-			enumsNode.ImageIndex = 3;
+			enumsNode.SelectedImageIndex = 10;
+			enumsNode.ImageIndex = 10;
 
 			foreach (KeyValuePair<string, ConfigurationEnums> ConfEnum in Conf.Enums)
 			{
 				TreeNode enumNode = enumsNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
 				enumNode.ContextMenuStrip = contextMenuStrip2;
-				enumNode.SelectedImageIndex = 1;
-				enumNode.ImageIndex = 1;
+				enumNode.SelectedImageIndex = 13;
+				enumNode.ImageIndex = 13;
 
 				//Поля
 				foreach (KeyValuePair<string, ConfigurationEnumField> ConfEnumFields in ConfEnum.Value.Fields)
 				{
 					TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.Value.ToString(), ConfEnumFields.Value.Name);
 
-					enumFieldNode.SelectedImageIndex = 0;
-					enumFieldNode.ImageIndex = 0;
+					enumFieldNode.SelectedImageIndex = 15;
+					enumFieldNode.ImageIndex = 15;
 				}
 			}
 
@@ -253,6 +254,31 @@ namespace Configurator
 			Conf = Program.Kernel.Conf;
 
 			LoadTree();
+
+			DataGridViewRow dataGridViewRow = new DataGridViewRow();
+
+			DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
+			dataGridViewTextBoxCell.Value = "TExt";
+
+			DataGridViewButtonCell dataGridViewButtonCell = new DataGridViewButtonCell();
+			dataGridViewButtonCell.FlatStyle = FlatStyle.Flat;
+			dataGridViewButtonCell.Value = "TExt";
+
+			dataGridViewRow.Cells.Add(dataGridViewTextBoxCell);
+			dataGridViewRow.Cells.Add(dataGridViewButtonCell);
+
+			dataGridView1.Rows.Add(dataGridViewRow);
+
+
+			ColumnHeader ch = listView1.Columns.Add("name", "Name", 150);
+			ColumnHeader ch2 = listView1.Columns.Add("name2", "Name2", 150);
+
+			for (int i = 0; i < 10; i++)
+			{
+				ListViewItem j = new ListViewItem(new string[] { "test", "test" }, 13);
+				listView1.Items.Add(j);
+			}
+
 		}
 
 		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)

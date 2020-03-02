@@ -26,10 +26,19 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Поле перелічення
+	/// </summary>
 	public class ConfigurationEnumField
 	{
 		public ConfigurationEnumField() { /*..*/ }
 
+		/// <summary>
+		/// Поле перелічення 
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="value">Значення</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationEnumField(string name, int value, string desc = "")
 		{
 			Name = name;
@@ -37,10 +46,19 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Назва
+		/// </summary>
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Значення
+		/// </summary>
 		public int Value { get; set; }
 
+		/// <summary>
+		/// Опис
+		/// </summary>
 		public string Desc { get; set; }
 	}
 }

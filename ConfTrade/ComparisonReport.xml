@@ -2845,9 +2845,9 @@
       <NameInTable>col_a3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>empty_pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>

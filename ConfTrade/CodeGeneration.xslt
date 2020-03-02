@@ -62,7 +62,7 @@ limitations under the License.
         <xsl:text>_Pointer</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'empty_pointer'">
-        <xsl:text>DirectoryEmptyPointer</xsl:text>
+        <xsl:text>EmptyPointer</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:value-of select="Pointer"/>
@@ -106,7 +106,7 @@ limitations under the License.
         <xsl:text>_Pointer()</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'empty_pointer'">
-        <xsl:text>new DirectoryEmptyPointer()</xsl:text>
+        <xsl:text>new EmptyPointer()</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:text>0</xsl:text>
@@ -207,7 +207,7 @@ limitations under the License.
           <xsl:text>_Pointer(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"])</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'empty_pointer'">
-          <xsl:text>new DirectoryEmptyPointer()</xsl:text>
+          <xsl:text>new EmptyPointer()</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
           <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>

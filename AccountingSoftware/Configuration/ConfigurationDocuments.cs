@@ -26,14 +26,26 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Документ
+	/// </summary>
 	public class ConfigurationDocuments : ConfigurationObject
 	{
+		/// <summary>
+		/// Документ
+		/// </summary>
 		public ConfigurationDocuments()
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
+		/// <summary>
+		/// Документ
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="table">Таблиця в базі даних</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationDocuments(string name, string table, string desc = "") : this()
 		{
 			Name = name;
@@ -41,20 +53,32 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Поля
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
+		/// <summary>
+		/// Табличні частини
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
 
-		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
+		/// <summary>
+		/// Додати нове поле в список полів
+		/// </summary>
+		/// <param name="field">Нове поле</param>
+		public void AppendField(ConfigurationObjectField field)
 		{
 			Fields.Add(field.Name, field);
-			return field;
 		}
 
-		public ConfigurationObjectTablePart AppendTablePart(ConfigurationObjectTablePart tablePart)
+		/// <summary>
+		/// Додати нову табличну частину
+		/// </summary>
+		/// <param name="tablePart">Нова таблична частина</param>
+		public void AppendTablePart(ConfigurationObjectTablePart tablePart)
 		{
 			TabularParts.Add(tablePart.Name, tablePart);
-			return tablePart;
 		}
 	}
 }

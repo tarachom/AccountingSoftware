@@ -37,8 +37,8 @@ namespace AccountingSoftware
 		/// Поле
 		/// </summary>
 		/// <param name="name">Назва поля</param>
-		/// <param name="nameInTable">Назва поля в базі даних</param>
-		/// <param name="type">Тип поля</param>
+		/// <param name="nameInTable">Назва колонки в базі даних</param>
+		/// <param name="type">Тип поля (Всі типи описані в класі FieldType)</param>
 		/// <param name="pointer">Вказівник</param>
 		/// <param name="desc">Опис</param>
 		public ConfigurationObjectField(string name, string nameInTable, string type, string pointer, string desc = "")
@@ -66,7 +66,7 @@ namespace AccountingSoftware
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Якщо тип (Type = "pointer") потрібно вказати назву довідника з конфігурації на який робиться ссилка
+		/// Об'єкт конфігурації
 		/// </summary>
 		public string Pointer { get; set; }
 

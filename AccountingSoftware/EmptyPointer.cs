@@ -27,23 +27,20 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Об'єкт конфігурації
+	/// Пустий вказівник
 	/// </summary>
-	public abstract class ConfigurationObject 
+	public class EmptyPointer
 	{
-		/// <summary>
-		/// Назва
-		/// </summary>
-		public string Name { get; set; }
+		public EmptyPointer()
+		{
+			UnigueID = new UnigueID(Guid.Empty);
+		}
 
-		/// <summary>
-		/// Таблиця в базі даних
-		/// </summary>
-		public string Table { get; set; }
+		public UnigueID UnigueID { get; private set; }
 
-		/// <summary>
-		/// Опис
-		/// </summary>
-		public string Desc { get; set; }
+		public override string ToString()
+		{
+			return UnigueID.UGuid.ToString();
+		}
 	}
 }

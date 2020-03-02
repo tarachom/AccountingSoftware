@@ -1264,6 +1264,34 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a49</Name>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3_old_02_03_2020_15_45_33</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a24</Name>
     <Column>
       <Name>col_f1</Name>
@@ -1525,29 +1553,6 @@
       <Name>col_a1</Name>
       <DataType>date</DataType>
       <UdtName>date</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a49</Name>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
     </Column>
   </Table>
   <Table>

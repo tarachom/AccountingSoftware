@@ -55,13 +55,13 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDocuments.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDirectories.cs" />
-    <None Include="back_up\Old\ConfigurationObjectType.cs" />
+    <Content Include="back_up\Old\ConfigurationObjectType.cs.txt" />
     <Compile Include="AccountingSoftware\Configuration\Configuration.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectTablePart.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
-    <Compile Include="AccountingSoftware\Directory\DirectoryEmptyPointer.cs" />
+    <Content Include="back_up\DirectoryEmptyPointer.cs.txt" />
     <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
@@ -69,8 +69,9 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryObject.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
-    <None Include="back_up\Old\FieldValue.cs" />
-    <Compile Include="AccountingSoftware\Document\DocumentEmptyPointer.cs" />
+    <Content Include="back_up\Old\FieldValue.cs.txt" />
+    <Compile Include="AccountingSoftware\EmptyPointer.cs" />
+    <Content Include="back_up\DocumentEmptyPointer.cs.txt" />
     <Compile Include="AccountingSoftware\Document\DocumentPointer.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentSelect.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentTablePart.cs" />
@@ -84,7 +85,7 @@
     <Compile Include="AccountingSoftware\Document\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
     <Compile Include="AccountingSoftware\UnigueID.cs" />
-    <None Include="back_up\XmlSerialization.cs_" />
+    <Content Include="back_up\XmlSerialization.cs.txt" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

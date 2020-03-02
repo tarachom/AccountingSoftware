@@ -84,7 +84,7 @@ namespace ConfTrade
 
 			Довідники.Групи_Номенклатура_Список_View групиНоменклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
 			групиНоменклатура_Список_View.QuerySelect.Where.Add(
-				new Where(групиНоменклатура_Список_View.Alias["Родитель"], Comparison.EQ, new DirectoryEmptyPointer()));
+				new Where(групиНоменклатура_Список_View.Alias["Родитель"], Comparison.EQ, new EmptyPointer()));
 
 			Довідники.Номенклатура_Список_View номенклатура_Список_View = new Довідники.Номенклатура_Список_View();
 
