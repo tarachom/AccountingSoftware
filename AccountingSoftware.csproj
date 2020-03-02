@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationConstantsBlock.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationInformationSchema.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnumField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectView.cs" />

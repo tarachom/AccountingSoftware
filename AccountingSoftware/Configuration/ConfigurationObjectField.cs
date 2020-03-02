@@ -66,7 +66,7 @@ namespace AccountingSoftware
 		public string Type { get; set; }
 
 		/// <summary>
-		/// Об'єкт конфігурації
+		/// Вказівник на об'єкт конфігурації
 		/// </summary>
 		public string Pointer { get; set; }
 

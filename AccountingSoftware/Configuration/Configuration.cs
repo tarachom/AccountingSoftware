@@ -39,7 +39,7 @@ namespace AccountingSoftware
 	{
 		public Configuration()
 		{
-			Constants = new Dictionary<string, ConfigurationConstants>();
+			ConstantsBlock = new Dictionary<string, ConfigurationConstantsBlock>();
 			Directories = new Dictionary<string, ConfigurationDirectories>();
 			Documents = new Dictionary<string, ConfigurationDocuments>();
 			Enums = new Dictionary<string, ConfigurationEnums>();
@@ -70,9 +70,9 @@ namespace AccountingSoftware
 		public string PathToXmlFileConfiguration { get; set; }
 
 		/// <summary>
-		/// Константи
+		/// Блоки констант
 		/// </summary>
-		public Dictionary<string, ConfigurationConstants> Constants { get; }
+		public Dictionary<string, ConfigurationConstantsBlock> ConstantsBlock { get; }
 
 		/// <summary>
 		/// Довідники
@@ -118,7 +118,7 @@ namespace AccountingSoftware
 			};
 		}
 
-		private static void WriteLog(string txt) 
+		private static void WriteLog(string txt)
 		{
 			File.AppendAllText(@"D:\log.txt", txt + "\n");
 		}
@@ -495,6 +495,11 @@ namespace AccountingSoftware
 			xmlComparisonDocument.Save(pathToSave);
 		}
 
+		/// <summary>
+		/// Завантаження конфігурації
+		/// </summary>
+		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
+		/// <param name="Conf">Конфігурація</param>
 		public static void Load(string pathToConf, Configuration Conf)
 		{
 			XPathDocument xPathDoc = new XPathDocument(pathToConf);
@@ -663,6 +668,11 @@ namespace AccountingSoftware
 			}
 		}
 
+		/// <summary>
+		/// Збереження конфігурації
+		/// </summary>
+		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
+		/// <param name="Conf">Конфігурація</param>
 		public static void Save(string pathToConf, Configuration Conf)
 		{
 			//string pathToCopyConf = CopyConfigurationFile(pathToConf);
@@ -703,6 +713,33 @@ namespace AccountingSoftware
 			XmlElement nodeDateTimeSave = xmlConfDocument.CreateElement("DateTimeSave");
 			nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
 			rootNode.AppendChild(nodeDateTimeSave);
+		}
+
+		private static void SaveConstantsBlock(Dictionary<string, ConfigurationConstantsBlock> ConfConstantsBlocks, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement rootConstantsBlocks = xmlConfDocument.CreateElement("ConstantsBlocks");
+			rootNode.AppendChild(rootConstantsBlocks);
+
+			foreach (KeyValuePair<string, ConfigurationConstantsBlock> ConfConstantsBlock in ConfConstantsBlocks)
+			{
+				XmlElement rootConstantsBlock = xmlConfDocument.CreateElement("ConstantsBlock");
+				rootConstantsBlocks.AppendChild(rootConstantsBlock);
+
+				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
+				nodeName.InnerText = ConfConstantsBlock.Key;
+				rootConstantsBlocks.AppendChild(nodeName);
+
+				XmlElement nodeDesc = xmlConfDocument.CreateElement("Desc");
+				nodeDesc.InnerText = ConfConstantsBlock.Value.Desc;
+				rootConstantsBlocks.AppendChild(nodeDesc);
+
+				SaveConstants(ConfConstantsBlock.Value.Constants, xmlConfDocument, rootConstantsBlock);
+			}
+		}
+
+		private static void SaveConstants(Dictionary<string, ConfigurationConstants> ConfConstants, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+
 		}
 
 		private static void SaveDirectories(Dictionary<string, ConfigurationDirectories> ConfDirectories, XmlDocument xmlConfDocument, XmlElement rootNode)

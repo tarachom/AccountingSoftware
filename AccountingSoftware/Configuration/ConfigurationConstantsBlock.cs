@@ -27,24 +27,30 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Константи
+	/// Блок констант
 	/// </summary>
-	public class ConfigurationConstants
+	public class ConfigurationConstantsBlock
 	{
-		public ConfigurationConstants() { }
-
-		public ConfigurationConstants(string name, string type, string pointer = "", string desc = "") /* : this() */
+		public ConfigurationConstantsBlock()
 		{
-			Name = name;
-			Type = type;
-			Pointer = pointer;
+			Constants = new Dictionary<string, ConfigurationConstants>();
+		}
+
+		/// <summary>
+		/// Назва блоку констант
+		/// </summary>
+		/// <param name="blockName">Назва</param>
+		/// <param name="desc">Опис</param>
+		public ConfigurationConstantsBlock(string blockName, string desc = "") : this()
+		{
+			BlockName = blockName;
 			Desc = desc;
 		}
 
 		/// <summary>
 		/// Назва
 		/// </summary>
-		public string Name { get; set; }
+		public string BlockName { get; set; }
 
 		/// <summary>
 		/// Опис
@@ -52,13 +58,9 @@ namespace AccountingSoftware
 		public string Desc { get; set; }
 
 		/// <summary>
-		/// Тип даних
-		/// </summary>
-		public string Type { get; set; }
-
 		/// <summary>
-		/// Вказівник на об'єкт конфігурації
+		/// Константи
 		/// </summary>
-		public string Pointer { get; set; }
+		public Dictionary<string, ConfigurationConstants> Constants { get; }
 	}
 }
