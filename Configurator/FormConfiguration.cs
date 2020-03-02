@@ -255,6 +255,16 @@ namespace Configurator
 
 			LoadTree();
 
+			ConfigurationConstantsBlock configurationConstantsBlock = new ConfigurationConstantsBlock("A", "a");
+
+			Conf.ConstantsBlock.Add(configurationConstantsBlock.BlockName, configurationConstantsBlock);
+
+			ConfigurationConstants configurationConstants = new ConfigurationConstants("A", "string", "", "");
+			configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
+
+			ConfigurationConstants configurationConstants2 = new ConfigurationConstants("B", "string", "", "");
+			configurationConstantsBlock.Constants.Add(configurationConstants2.Name, configurationConstants2);
+
 			DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
 			DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();

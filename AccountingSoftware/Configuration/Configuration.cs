@@ -685,6 +685,8 @@ namespace AccountingSoftware
 
 			SaveConfigurationInfo(Conf, xmlConfDocument, rootNode);
 
+			SaveConstantsBlock(Conf.ConstantsBlock, xmlConfDocument, rootNode);
+
 			SaveDirectories(Conf.Directories, xmlConfDocument, rootNode);
 
 			SaveEnums(Conf.Enums, xmlConfDocument, rootNode);
@@ -727,11 +729,11 @@ namespace AccountingSoftware
 
 				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
 				nodeName.InnerText = ConfConstantsBlock.Key;
-				rootConstantsBlocks.AppendChild(nodeName);
+				rootConstantsBlock.AppendChild(nodeName);
 
 				XmlElement nodeDesc = xmlConfDocument.CreateElement("Desc");
 				nodeDesc.InnerText = ConfConstantsBlock.Value.Desc;
-				rootConstantsBlocks.AppendChild(nodeDesc);
+				rootConstantsBlock.AppendChild(nodeDesc);
 
 				SaveConstants(ConfConstantsBlock.Value.Constants, xmlConfDocument, rootConstantsBlock);
 			}
@@ -739,7 +741,33 @@ namespace AccountingSoftware
 
 		private static void SaveConstants(Dictionary<string, ConfigurationConstants> ConfConstants, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
+			XmlElement rootConstants = xmlConfDocument.CreateElement("Constants");
+			rootNode.AppendChild(rootConstants);
 
+			foreach (KeyValuePair<string, ConfigurationConstants> ConfConstant in ConfConstants)
+			{
+				XmlElement rootConstant = xmlConfDocument.CreateElement("Constant");
+				rootConstants.AppendChild(rootConstant);
+
+				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
+				nodeName.InnerText = ConfConstant.Key;
+				rootConstant.AppendChild(nodeName);
+
+				XmlElement nodeDesc = xmlConfDocument.CreateElement("Desc");
+				nodeDesc.InnerText = ConfConstant.Value.Desc;
+				rootConstant.AppendChild(nodeDesc);
+
+				XmlElement nodeType = xmlConfDocument.CreateElement("Type");
+				nodeType.InnerText = ConfConstant.Value.Type;
+				rootConstant.AppendChild(nodeType);
+
+				if (ConfConstant.Value.Type == "pointer" || ConfConstant.Value.Type == "enum")
+				{
+					XmlElement nodePointer = xmlConfDocument.CreateElement("Pointer");
+					nodePointer.InnerText = ConfConstant.Value.Pointer;
+					rootConstant.AppendChild(nodePointer);
+				}
+			}
 		}
 
 		private static void SaveDirectories(Dictionary<string, ConfigurationDirectories> ConfDirectories, XmlDocument xmlConfDocument, XmlElement rootNode)

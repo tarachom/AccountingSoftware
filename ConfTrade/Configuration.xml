@@ -3,7 +3,27 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>02.03.2020 15:53:44</DateTimeSave>
+  <DateTimeSave>02.03.2020 20:59:02</DateTimeSave>
+  <ConstantsBlocks>
+    <ConstantsBlock>
+      <Name>A</Name>
+      <Desc>a</Desc>
+      <Constants>
+        <Constant>
+          <Name>A</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+        </Constant>
+        <Constant>
+          <Name>B</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+  </ConstantsBlocks>
   <Directories>
     <Directory>
       <Name>Валюти</Name>
