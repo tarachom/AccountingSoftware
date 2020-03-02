@@ -26,13 +26,25 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Таблична частина
+	/// </summary>
 	public class ConfigurationObjectTablePart : ConfigurationObject
 	{
+		/// <summary>
+		/// Таблична частина
+		/// </summary>
 		public ConfigurationObjectTablePart()
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 		}
 
+		/// <summary>
+		/// Таблична частина
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="table">Таблиця в базі даних</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationObjectTablePart(string name, string table, string desc = "") : this()
 		{
 			Name = name;
@@ -40,12 +52,18 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Поля
+		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
-		public ConfigurationObjectField AppendField(ConfigurationObjectField field)
+		/// <summary>
+		/// Додати нове поле в список полів
+		/// </summary>
+		/// <param name="field">Нове поле</param>
+		public void AppendField(ConfigurationObjectField field)
 		{
 			Fields.Add(field.Name, field);
-			return field;
 		}
 	}
 }

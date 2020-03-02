@@ -26,14 +26,25 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Візуалізація
+	/// </summary>
 	public class ConfigurationObjectView : ConfigurationObject
 	{
+		/// <summary>
+		/// Візуалізація
+		/// </summary>
 		public ConfigurationObjectView()
 		{
 			Fields = new Dictionary<string, string>();
-			//Where = new List<string>();
 		}
 
+		/// <summary>
+		/// Візуалізація
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="table">Назва таблиці в базі даних</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationObjectView(string name, string table, string desc) : this()
 		{
 			Name = name;
@@ -41,8 +52,9 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Поля
+		/// </summary>
 		public Dictionary<string, string> Fields { get; }
-
-		//public List<string> Where { get; } // ? 
 	}
 }

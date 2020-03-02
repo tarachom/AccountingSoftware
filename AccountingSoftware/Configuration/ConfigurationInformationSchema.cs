@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+    /// <summary>
+	/// Структура таблиць і стовбців бази даних
+	/// </summary>
 	public class ConfigurationInformationSchema
 	{
 		public ConfigurationInformationSchema()
@@ -33,8 +36,18 @@ namespace AccountingSoftware
 			Tables = new Dictionary<string, ConfigurationInformationSchema_Table>();
 		}
 
+		/// <summary>
+		/// Таблиці
+		/// </summary>
 		public Dictionary<string, ConfigurationInformationSchema_Table> Tables { get; }
 
+		/// <summary>
+		/// Дабавлення інформації в структуру
+		/// </summary>
+		/// <param name="table">Таблиця</param>
+		/// <param name="column">Стовпець</param>
+		/// <param name="dataType">Тип даних</param>
+		/// <param name="udtName">Тип даних</param>
 		public void Append(string table, string column, string dataType, string udtName)
 		{
 			if (!Tables.ContainsKey(table))
@@ -46,22 +59,45 @@ namespace AccountingSoftware
 		}
 	}
 
+	/// <summary>
+	/// Таблиця
+	/// </summary>
 	public class ConfigurationInformationSchema_Table
 	{
+		/// <summary>
+		/// Таблиця
+		/// </summary>
+		/// <param name="tableName">Назва таблиці</param>
 		public ConfigurationInformationSchema_Table(string tableName)
 		{
 			TableName = tableName;
 			Columns = new Dictionary<string, ConfigurationInformationSchema_Column>();
 		}
 
+		/// <summary>
+		/// Назва таблиці
+		/// </summary>
 		public string TableName { get; set; }
+
+		/// <summary>
+		/// Стовпці
+		/// </summary>
 		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; }
 	}
 
+	/// <summary>
+	/// Стовпчик
+	/// </summary>
 	public class ConfigurationInformationSchema_Column
 	{
 		public ConfigurationInformationSchema_Column() { }
 
+		/// <summary>
+		/// Стовпчик
+		/// </summary>
+		/// <param name="columnName">Назва стовпця</param>
+		/// <param name="dataType">Тип даних</param>
+		/// <param name="udtName">Тип даних</param>
 		public ConfigurationInformationSchema_Column(string columnName, string dataType, string udtName)
 		{
 			ColumnName = columnName;
@@ -69,10 +105,19 @@ namespace AccountingSoftware
 			UdtName = udtName;
 		}
 
+		/// <summary>
+		/// Назва стовпця
+		/// </summary>
 		public string ColumnName { get; set; }
 
+		/// <summary>
+		/// Тип даних
+		/// </summary>
 		public string DataType { get; set; }
 
+		/// <summary>
+		/// Тип даних
+		/// </summary>
 		public string UdtName { get; set; }
 	}
 }

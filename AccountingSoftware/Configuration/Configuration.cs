@@ -31,8 +31,10 @@ using System.Windows.Forms;
 
 namespace AccountingSoftware
 {
-	//Конфігурація
-	//В цьому класі має міститися вся інформація про конфігурацію
+	/// <summary>
+	/// Конфігурація.
+	/// В цьому класі міститься вся інформація про конфігурацію.
+	/// </summary>
 	public class Configuration
 	{
 		public Configuration()
@@ -47,46 +49,114 @@ namespace AccountingSoftware
 			ReservedUnigueColumnName = new Dictionary<string, List<string>>();
 		}
 
+		/// <summary>
+		/// Назва конфігурації
+		/// </summary>
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Простір імен для конфігурації
+		/// </summary>
 		public string NameSpace { get; set; }
 
+		/// <summary>
+		/// Автор конфігурації
+		/// </summary>
 		public string Author { get; set; }
 
+		/// <summary>
+		/// Шлях до хмл файлу конфігурації
+		/// </summary>
 		public string PathToXmlFileConfiguration { get; set; }
 
+		/// <summary>
+		/// Константи
+		/// </summary>
 		public Dictionary<string, ConfigurationConstants> Constants { get; }
 
+		/// <summary>
+		/// Довідники
+		/// </summary>
 		public Dictionary<string, ConfigurationDirectories> Directories { get; }
 
+		/// <summary>
+		/// Документи
+		/// </summary>
 		public Dictionary<string, ConfigurationDocuments> Documents { get; }
 
+		/// <summary>
+		/// Перелічення
+		/// </summary>
 		public Dictionary<string, ConfigurationEnums> Enums { get; }
 
+		/// <summary>
+		/// Регістри
+		/// </summary>
 		public Dictionary<string, ConfigurationRegisters> Registers { get; }
 
+		#region Private_Function
+
+		/// <summary>
+		/// Список зарезервованих назв таблиць.
+		/// Довідка: коли створюється новий довідник, чи документ 
+		/// для нього резервується нова унікальна назва таблиці в базі даних. 
+		/// </summary>
 		private List<string> ReservedUnigueTableName { get; set; }
 
+		/// <summary>
+		/// Список зарезервованих назв стовпців.
+		/// Ключем виступає назва таблиці для якої резервуються стовпці.
+		/// </summary>
 		private Dictionary<string, List<string>> ReservedUnigueColumnName { get; set; }
 
-		public ConfigurationDirectories AppendDirectory(ConfigurationDirectories Directory)
+		private static string[] GetEnglishAlphabet()
+		{
+			return new string[]
+			{
+				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
+				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+			};
+		}
+
+		private static void WriteLog(string txt) 
+		{
+			File.AppendAllText(@"D:\log.txt", txt + "\n");
+		}
+
+		#endregion
+
+		/// <summary>
+		/// Додати довідник в список довідників
+		/// </summary>
+		/// <param name="Directory">Довідник</param>
+		public void AppendDirectory(ConfigurationDirectories Directory)
 		{
 			Directories.Add(Directory.Name, Directory);
-			return Directory;
 		}
 
-		public ConfigurationEnums AppendEnum(ConfigurationEnums Enum)
+		/// <summary>
+		/// Додати перелічення в список перелічень
+		/// </summary>
+		/// <param name="Enum">Перелічення</param>
+		public void AppendEnum(ConfigurationEnums Enum)
 		{
 			Enums.Add(Enum.Name, Enum);
-			return Enum;
 		}
 
-		public ConfigurationDocuments AppendDocument(ConfigurationDocuments Document)
+		/// <summary>
+		/// Додати документ в список документів
+		/// </summary>
+		/// <param name="Document">Документ</param>
+		public void AppendDocument(ConfigurationDocuments Document)
 		{
 			Documents.Add(Document.Name, Document);
-			return Document;
 		}
 
+		/// <summary>
+		/// Пошук ссилок довідників і документів
+		/// </summary>
+		/// <param name="searchName">Назва довідника або документу</param>
+		/// <returns>Повертає список довідників або документів які вказують на searchName</returns>
 		public List<string> SearchForPointers(string searchName)
 		{
 			if (searchName.IndexOf(".") > 0)
@@ -148,6 +218,11 @@ namespace AccountingSoftware
 			return ListPointer;
 		}
 
+		/// <summary>
+		/// Пошук ссилок на перелічення
+		/// </summary>
+		/// <param name="searchName">Назва перелічення</param>
+		/// <returns>Повертає список довідників або документів які вказують на searchName</returns>
 		public List<string> SearchForPointersEnum(string searchName)
 		{
 			if (searchName.IndexOf(".") > 0)
@@ -187,20 +262,13 @@ namespace AccountingSoftware
 			return ListPointer;
 		}
 
-		public static void WriteLog(string txt)
-		{
-			File.AppendAllText(@"D:\log.txt", txt + "\n");
-		}
-
-		private static string[] GetEnglishAlphabet()
-		{
-			return new string[]
-			{
-				"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "n",
-				"m", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
-			};
-		}
-
+		/// <summary>
+		/// Повертає унікальну назву стовпця для вказаної таблиці
+		/// </summary>
+		/// <param name="Kernel">Ядро</param>
+		/// <param name="table">Назва таблиці для якої генерується нова назва стовпця</param>
+		/// <param name="Fields">Список існуючих полів</param>
+		/// <returns>Повертає унікальну назву стовпця</returns>
 		public static string GetNewUnigueColumnName(Kernel Kernel, string table, Dictionary<string, ConfigurationObjectField> Fields)
 		{
 			string[] englishAlphabet = GetEnglishAlphabet();
@@ -258,6 +326,11 @@ namespace AccountingSoftware
 			return columnNewName;
 		}
 
+		/// <summary>
+		/// Повертає унікальну назву таблиці
+		/// </summary>
+		/// <param name="Kernel">Ядро</param>
+		/// <returns>Повертає унікальну назву таблиці</returns>
 		public static string GetNewUnigueTableName(Kernel Kernel)
 		{
 			string[] englishAlphabet = GetEnglishAlphabet();
@@ -329,6 +402,12 @@ namespace AccountingSoftware
 			return tabNewName;
 		}
 
+		/// <summary>
+		/// Перевіряє назву обєкту конфігурації (довідники, документи, поля) на валідність
+		/// </summary>
+		/// <param name="Kernel">Ядро</param>
+		/// <param name="configurationObjectName">Назва обєкту конфігурації</param>
+		/// <returns>Повертає інформацію про помилки у вигляді стрічки</returns>
 		public static string ValidateConfigurationObjectName(Kernel Kernel, ref string configurationObjectName)
 		{
 			string errorList = "";
@@ -359,17 +438,24 @@ namespace AccountingSoftware
 					{
 						errorList += "Назва має починатися з букви\n";
 					}
-
-					configurationObjectModificeName += checkChar;
 				}
 				else
+				{
 					errorList += "Недопустимий символ (" + i.ToString() + "): " + "[" + checkChar + "]\n";
+				}
+
+				configurationObjectModificeName += checkChar;
 			}
 
 			configurationObjectName = configurationObjectModificeName;
 			return errorList;
 		}
 
+		/// <summary>
+		/// Зберігає інформацію про схему бази даних в ХМЛ файл
+		/// </summary>
+		/// <param name="InformationSchema">Схема</param>
+		/// <param name="pathToSave">Шлях до файлу</param>
 		public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
 		{
 			XmlDocument xmlComparisonDocument = new XmlDocument();
