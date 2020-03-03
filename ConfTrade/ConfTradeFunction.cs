@@ -31,6 +31,7 @@ using System.Xml.Xsl;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
+using Константи = ConfTrade_v1_1.Константи;
 using Довідники = ConfTrade_v1_1.Довідники;
 using Документи = ConfTrade_v1_1.Документи;
 using Перелічення = ConfTrade_v1_1.Перелічення;
@@ -41,7 +42,7 @@ namespace ConfTrade
 	{
 		static void Test2()
 		{
-
+			
 		}
 
 		static string Run4()

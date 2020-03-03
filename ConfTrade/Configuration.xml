@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>03.03.2020 04:36:08</DateTimeSave>
+  <DateTimeSave>03.03.2020 07:42:13</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>A</Name>
@@ -20,6 +20,33 @@
           <Desc>
           </Desc>
           <Type>string</Type>
+        </Constant>
+        <Constant>
+          <Name>Контрагент</Name>
+          <Desc>
+          </Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+        </Constant>
+        <Constant>
+          <Name>ОсновнийСклад</Name>
+          <Desc>
+          </Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
+        </Constant>
+        <Constant>
+          <Name>ПереліченняА</Name>
+          <Desc>
+          </Desc>
+          <Type>enum</Type>
+          <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
+        </Constant>
+        <Constant>
+          <Name>Ntcn</Name>
+          <Desc>
+          </Desc>
+          <Type>empty_pointer</Type>
         </Constant>
       </Constants>
     </ConstantsBlock>

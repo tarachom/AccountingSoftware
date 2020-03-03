@@ -60,5 +60,10 @@ namespace AccountingSoftware
 		{
 			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
 		}
+
+		public override string ToString()
+		{
+			return UnigueID.UGuid.ToString();
+		}
 	}
 }

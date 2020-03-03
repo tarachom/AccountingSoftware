@@ -240,7 +240,6 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using AccountingSoftware;
-using Перелічення = <xsl:value-of select="Configuration/NameSpace"/>.Перелічення;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
 {
@@ -252,10 +251,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 {
-    <xsl:for-each select="Configuration/Directories/Directory">
-    static class Config
+    <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
+    static class <xsl:value-of select="Name"/>_Block
     {
-        public static Kernel Kernel { get; set; }
+        <xsl:for-each select="Constants/Constant">
+        <xsl:text>public static </xsl:text>
+        <xsl:call-template name="FieldType" />
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="Name"/>
+        <xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
     }
     </xsl:for-each>
 }
@@ -319,7 +324,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                  <xsl:text>.ToString()</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
@@ -486,11 +491,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:choose>
-                        <xsl:when test="Type = 'pointer'">
-                          <xsl:text>.UnigueID.UGuid</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="Type = 'empty_pointer'">
-                          <xsl:text>.UnigueID.UGuid</xsl:text>
+                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                          <xsl:text>.ToString()</xsl:text>
                         </xsl:when>
                       </xsl:choose>
                       <xsl:text>)</xsl:text>;
@@ -691,7 +693,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                  <xsl:text>.ToString()</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>

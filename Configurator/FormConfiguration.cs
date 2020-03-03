@@ -273,6 +273,10 @@ namespace Configurator
 
 			LoadTree();
 
+			//Conf.ConstantsBlock["A"].Constants.Add("Ntcn", new ConfigurationConstants("Ntcn", "empty_pointer", "", ""));
+			//Conf.ConstantsBlock["A"].Constants.Add("Контрагент", new ConfigurationConstants("Контрагент", "pointer", "Довідники.Контрагенти", ""));
+			//Conf.ConstantsBlock["A"].Constants.Add("ОсновнийСклад", new ConfigurationConstants("ОсновнийСклад", "pointer", "Довідники.МестаХранения", ""));
+			//Conf.ConstantsBlock["A"].Constants.Add("ПереліченняА", new ConfigurationConstants("ПереліченняА", "enum", "Перелічення.ВидиКонтрагентов", ""));
 
 			DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
