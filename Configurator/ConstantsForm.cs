@@ -34,23 +34,31 @@ using AccountingSoftware;
 
 namespace Configurator
 {
-	public partial class FieldForm : Form
+	public partial class ConstantsForm : Form
 	{
-		public Action<string, ConfigurationObjectField, bool> CallBack { get; set; }
-		public Func<string, Boolean> CallBack_IsExistFieldName { get; set; }
+		public Action<string, string, ConfigurationConstants, bool> CallBack { get; set; }
+		public Func<string, string, Boolean> CallBack_IsExistConstants { get; set; }
 
-		public ConfigurationObjectField configurationObjectField { get; set; }
+		public ConfigurationConstants Constants;
+
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
-		public string NewNameInTable { get; set; }
+		public string ConstantsBlock { get; set; }
 
-		public FieldForm()
+		public ConstantsForm()
 		{
 			InitializeComponent();
 		}
 
 		private void FieldForm_Load(object sender, EventArgs e)
 		{
+			//Блоки констант
+			foreach (string constantsBlockName in Program.Kernel.Conf.ConstantsBlock.Keys)
+				comboBoxBlock.Items.Add(constantsBlockName);
+
+			if (comboBoxBlock.Items.Count > 0)
+				comboBoxBlock.SelectedItem = comboBoxBlock.Items[0];
+
 			//Типи даних
 			foreach (FieldType fieldType in FieldType.DefaultList())
 				comboBoxFieldType.Items.Add(fieldType);
@@ -61,41 +69,39 @@ namespace Configurator
 
 			//Список довідників
 			foreach (string directoryName in Program.Kernel.Conf.Directories.Keys)
-			{
 				comboBoxPointer.Items.Add("Довідники." + directoryName);
-			}
 
 			//Список документів
 			foreach (string documentName in Program.Kernel.Conf.Documents.Keys)
-			{
 				comboBoxPointer.Items.Add("Документи." + documentName);
-			}
 
 			//Список перелічення
 			foreach (string enumName in Program.Kernel.Conf.Enums.Keys)
-			{
 				comboBoxEnums.Items.Add("Перелічення." + enumName);
-			}
 
-			if (configurationObjectField == null)
+			if (Constants == null)
 			{
-				configurationObjectField = new ConfigurationObjectField();
-				textBoxNameInTable.Text = NewNameInTable;
-
+				Constants = new ConfigurationConstants();
 				IsNew = true;
 			}
 			else
 			{
-				OriginalName = configurationObjectField.Name;
+				OriginalName = Constants.Name;
+				ConstantsBlock = Constants.Block.BlockName;
 
-				textBoxName.Text = configurationObjectField.Name;
-				textBoxNameInTable.Text = configurationObjectField.NameInTable;
-				textBoxDesc.Text = configurationObjectField.Desc;
+				textBoxName.Text = Constants.Name;
+				textBoxDesc.Text = Constants.Desc;
+
+				for (int i = 0; i < comboBoxBlock.Items.Count; i++)
+				{
+					if (ConstantsBlock == comboBoxBlock.Items[i].ToString())
+						comboBoxBlock.SelectedItem = comboBoxBlock.Items[i];
+				}
 
 				for (int i = 0; i < comboBoxFieldType.Items.Count; i++)
 				{
 					FieldType fieldType = (FieldType)comboBoxFieldType.Items[i];
-					if (fieldType.ConfTypeName == configurationObjectField.Type)
+					if (fieldType.ConfTypeName == Constants.Type)
 					{
 						comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[i];
 						break;
@@ -108,7 +114,7 @@ namespace Configurator
 				{
 					for (int i = 0; i < comboBoxPointer.Items.Count; i++)
 					{
-						if (configurationObjectField.Pointer == comboBoxPointer.Items[i].ToString())
+						if (Constants.Pointer == comboBoxPointer.Items[i].ToString())
 						{
 							comboBoxPointer.SelectedItem = comboBoxPointer.Items[i];
 							break;
@@ -119,7 +125,7 @@ namespace Configurator
 				{
 					for (int i = 0; i < comboBoxEnums.Items.Count; i++)
 					{
-						if (configurationObjectField.Pointer == comboBoxEnums.Items[i].ToString())
+						if (Constants.Pointer == comboBoxEnums.Items[i].ToString())
 						{
 							comboBoxEnums.SelectedItem = comboBoxEnums.Items[i];
 							break;
@@ -133,6 +139,8 @@ namespace Configurator
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
+			ConstantsBlock = comboBoxBlock.SelectedItem.ToString();
+
 			string name = textBoxName.Text;
 			string errorList = Configuration.ValidateConfigurationObjectName(Program.Kernel, ref name);
 			textBoxName.Text = name;
@@ -143,34 +151,33 @@ namespace Configurator
 				return;
 			}
 
-			if (IsNew || OriginalName != name)
-				if (CallBack_IsExistFieldName(name))
+			if (IsNew || OriginalName != name || ConstantsBlock != Constants.Block.BlockName)
+				if (CallBack_IsExistConstants(ConstantsBlock, name))
 				{
-					MessageBox.Show("Назва поля не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Назва константи не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 
 			string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
 
-			configurationObjectField.Name = textBoxName.Text;
-			configurationObjectField.NameInTable = textBoxNameInTable.Text;
-			configurationObjectField.Desc = textBoxDesc.Text;
-			configurationObjectField.Type = confTypeName;
+			Constants.Name = textBoxName.Text;
+			Constants.Desc = textBoxDesc.Text;
+			Constants.Type = confTypeName;
 
 			if (confTypeName == "pointer")
 			{
-				configurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+				Constants.Pointer = comboBoxPointer.SelectedItem.ToString();
 			}
 			else if (confTypeName == "enum")
 			{
-				configurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
+				Constants.Pointer = comboBoxEnums.SelectedItem.ToString();
 			}
 			else
 			{
-				configurationObjectField.Pointer = "";
+				Constants.Pointer = "";
 			}
 
-			CallBack.Invoke(OriginalName, configurationObjectField, IsNew);
+			CallBack.Invoke(ConstantsBlock, OriginalName, Constants, IsNew);
 
 			this.Hide();
 		}
@@ -188,7 +195,7 @@ namespace Configurator
 			comboBoxEnums.Enabled = (confTypeName == "enum");
 		}
 
-		private void FieldForm_KeyDown(object sender, KeyEventArgs e)
+		private void EnumFieldForm_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Escape)
 			{

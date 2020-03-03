@@ -33,13 +33,16 @@ namespace AccountingSoftware
 	{
 		public ConfigurationConstants() { }
 
-		public ConfigurationConstants(string name, string type, string pointer = "", string desc = "") /* : this() */
+		public ConfigurationConstants(string name, string type, ConfigurationConstantsBlock block, string pointer = "", string desc = "") /* : this() */
 		{
 			Name = name;
 			Type = type;
+			Block = block;
 			Pointer = pointer;
 			Desc = desc;
 		}
+
+		public ConfigurationConstantsBlock Block { get; set; }
 
 		/// <summary>
 		/// Назва

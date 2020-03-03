@@ -125,6 +125,17 @@ namespace AccountingSoftware
 
 		#endregion
 
+		public void AppendConstants(string blockName, ConfigurationConstants constants)
+		{
+			ConstantsBlock[blockName].Constants.Add(constants.Name, constants);
+			constants.Block = ConstantsBlock[blockName];
+		}
+
+		public void AppendConstantsBlock(ConfigurationConstantsBlock constantsBlock)
+		{
+			ConstantsBlock.Add(constantsBlock.BlockName, constantsBlock);
+		}
+
 		/// <summary>
 		/// Додати довідник в список довідників
 		/// </summary>
@@ -552,7 +563,7 @@ namespace AccountingSoftware
 					if (constType == "pointer" || constType == "enum")
 						constPointer = constantsNodes.Current.SelectSingleNode("Pointer").Value;
 
-					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, constType, constPointer, constDesc);
+					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, constType, configurationConstantsBlock, constPointer, constDesc);
 					configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
 				}
 			}

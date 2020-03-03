@@ -1,6 +1,6 @@
 ﻿namespace Configurator
 {
-	partial class EnumFieldForm
+	partial class ConstantsBlockForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -30,8 +30,6 @@
 		{
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
-			this.textBoxNameValue = new System.Windows.Forms.TextBox();
-			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
 			this.buttonClose = new System.Windows.Forms.Button();
@@ -46,38 +44,20 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(123, 70);
+			this.textBoxDesc.Location = new System.Drawing.Point(123, 44);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(442, 63);
+			this.textBoxDesc.Size = new System.Drawing.Size(443, 63);
 			this.textBoxDesc.TabIndex = 11;
 			// 
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(3, 73);
+			this.label5.Location = new System.Drawing.Point(3, 47);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(36, 13);
 			this.label5.TabIndex = 10;
 			this.label5.Text = "Опис:";
-			// 
-			// textBoxNameValue
-			// 
-			this.textBoxNameValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxNameValue.Location = new System.Drawing.Point(123, 44);
-			this.textBoxNameValue.Name = "textBoxNameValue";
-			this.textBoxNameValue.Size = new System.Drawing.Size(442, 20);
-			this.textBoxNameValue.TabIndex = 9;
-			// 
-			// label4
-			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(3, 47);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(107, 13);
-			this.label4.TabIndex = 8;
-			this.label4.Text = "Порядковий номер:";
 			// 
 			// textBoxName
 			// 
@@ -85,7 +65,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxName.Location = new System.Drawing.Point(123, 18);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(442, 20);
+			this.textBoxName.Size = new System.Drawing.Size(443, 20);
 			this.textBoxName.TabIndex = 7;
 			// 
 			// label3
@@ -101,7 +81,7 @@
 			// 
 			this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.buttonClose.Location = new System.Drawing.Point(456, 3);
+			this.buttonClose.Location = new System.Drawing.Point(612, 3);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(109, 32);
 			this.buttonClose.TabIndex = 3;
@@ -113,7 +93,7 @@
 			// 
 			this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-			this.buttonSave.Location = new System.Drawing.Point(341, 3);
+			this.buttonSave.Location = new System.Drawing.Point(497, 3);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(109, 32);
 			this.buttonSave.TabIndex = 2;
@@ -127,36 +107,33 @@
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(10, 164);
+			this.panel2.Location = new System.Drawing.Point(10, 439);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(568, 38);
+			this.panel2.Size = new System.Drawing.Size(724, 38);
 			this.panel2.TabIndex = 12;
 			// 
 			// panel1
 			// 
 			this.panel1.Controls.Add(this.label3);
 			this.panel1.Controls.Add(this.textBoxName);
-			this.panel1.Controls.Add(this.label4);
-			this.panel1.Controls.Add(this.textBoxNameValue);
 			this.panel1.Controls.Add(this.label5);
 			this.panel1.Controls.Add(this.textBoxDesc);
-			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(10, 10);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(568, 154);
+			this.panel1.Size = new System.Drawing.Size(569, 125);
 			this.panel1.TabIndex = 16;
 			// 
-			// EnumFieldForm
+			// ConstantsBlockForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(588, 212);
+			this.ClientSize = new System.Drawing.Size(744, 487);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
 			this.KeyPreview = true;
-			this.Name = "EnumFieldForm";
+			this.Name = "ConstantsBlockForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "Поле";
+			this.Text = "Блок констант";
 			this.Load += new System.EventHandler(this.FieldForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.EnumFieldForm_KeyDown);
 			this.panel2.ResumeLayout(false);
@@ -170,8 +147,6 @@
 
 		private System.Windows.Forms.TextBox textBoxDesc;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox textBoxNameValue;
-		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.TextBox textBoxName;
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.Button buttonClose;

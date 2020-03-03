@@ -96,14 +96,17 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationConstantsBlock> ConfConstantsBlock in Conf.ConstantsBlock)
 			{
 				TreeNode contantsBlockNode = contantsNode.Nodes.Add(ConfConstantsBlock.Key, ConfConstantsBlock.Value.BlockName);
+				contantsBlockNode.ContextMenuStrip = contextMenuStripConstantBlock;
 				contantsBlockNode.SelectedImageIndex = 13;
 				contantsBlockNode.ImageIndex = 13;
 
 				foreach (KeyValuePair<string, ConfigurationConstants> ConfConstants in ConfConstantsBlock.Value.Constants)
 				{
-					TreeNode contantNode = contantsBlockNode.Nodes.Add(ConfConstants.Key, ConfConstants.Value.Name);
-					contantNode.SelectedImageIndex = 15;
-					contantNode.ImageIndex = 15;
+					TreeNode constantNode = contantsBlockNode.Nodes.Add(ConfConstants.Key, ConfConstants.Value.Name);
+					constantNode.ContextMenuStrip = contextMenuStripConstatnt;
+					constantNode.Tag = ConfConstants.Value;
+					constantNode.SelectedImageIndex = 15;
+					constantNode.ImageIndex = 15;
 				}
 			}
 
@@ -258,7 +261,7 @@ namespace Configurator
 			//...
 
 			rootNode.Expand();
-
+			contantsNode.Expand();
 			directoriesNode.Expand();
 			enumsNode.Expand();
 			documentsNode.Expand();
@@ -453,6 +456,60 @@ namespace Configurator
 			LoadTree();
 		}
 
+		bool CallBack_IsExistConstantsBlock(string name)
+		{
+			return Conf.ConstantsBlock.ContainsKey(name);
+		}
+
+		void CallBack_Update_ConstantsBlock(string originalName, ConfigurationConstantsBlock configurationConstantsBlock, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendConstantsBlock(configurationConstantsBlock);
+			}
+			else
+			{
+				if (originalName != configurationConstantsBlock.BlockName)
+				{
+					Conf.ConstantsBlock.Remove(originalName);
+					Conf.AppendConstantsBlock(configurationConstantsBlock);
+				}
+				else
+				{
+					Conf.ConstantsBlock[originalName] = configurationConstantsBlock;
+				}
+			}
+
+			LoadTree();
+		}
+
+		bool CallBack_IsExistConstants(string blockName, string name)
+		{
+			return Conf.ConstantsBlock[blockName].Constants.ContainsKey(name);
+		}
+
+		void CallBack_Update_Constants(string blockName, string originalName, ConfigurationConstants configurationConstants, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendConstants(blockName, configurationConstants);
+			}
+			else
+			{
+				if (blockName != configurationConstants.Block.BlockName || originalName != configurationConstants.Name)
+				{
+					Conf.ConstantsBlock[configurationConstants.Block.BlockName].Constants.Remove(originalName);
+					Conf.AppendConstants(blockName, configurationConstants);
+				}
+				else
+				{
+					Conf.ConstantsBlock[blockName].Constants[originalName] = configurationConstants;
+				}
+			}
+
+			LoadTree();
+		}
+
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
@@ -466,8 +523,6 @@ namespace Configurator
 			if (nodeSel != null)
 			{
 				string directoryName = nodeSel.Name;
-
-				Configuration Conf = Program.Kernel.Conf;
 
 				DirectoryForm directoryForm = new DirectoryForm();
 				directoryForm.ConfDirectory = Conf.Directories[directoryName];
@@ -536,8 +591,6 @@ namespace Configurator
 			{
 				string enumName = nodeSel.Name;
 
-				Configuration Conf = Program.Kernel.Conf;
-
 				EnumForm enumForm = new EnumForm();
 				enumForm.ConfEnums = Conf.Enums[enumName];
 				enumForm.CallBack = CallBack_Update_Enum;
@@ -568,13 +621,55 @@ namespace Configurator
 			{
 				string documentName = nodeSel.Name;
 
-				Configuration Conf = Program.Kernel.Conf;
-
 				DocumentForm documentForm = new DocumentForm();
 				documentForm.ConfDocument = Conf.Documents[documentName];
 				documentForm.CallBack = CallBack_Update_Document;
 				documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
 				documentForm.Show();
+			}
+		}
+
+		private void addContantsBlockToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ConstantsBlockForm constantsBlockForm = new ConstantsBlockForm();
+			constantsBlockForm.CallBack_IsExistConstantsBlock = CallBack_IsExistConstantsBlock;
+			constantsBlockForm.CallBack = CallBack_Update_ConstantsBlock;
+			constantsBlockForm.Show();
+		}
+
+		private void addConstatntsToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ConstantsForm constantsForm = new ConstantsForm();
+			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
+			constantsForm.CallBack = CallBack_Update_Constants;
+			constantsForm.Show();
+		}
+
+		private void OpenConstantBlock_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string constantsBlockName = nodeSel.Name;
+
+				ConstantsBlockForm constantsBlockForm = new ConstantsBlockForm();
+				constantsBlockForm.ConstantsBlock = Conf.ConstantsBlock[constantsBlockName];
+				constantsBlockForm.CallBack_IsExistConstantsBlock = CallBack_IsExistConstantsBlock;
+				constantsBlockForm.CallBack = CallBack_Update_ConstantsBlock;
+				constantsBlockForm.Show();
+			}
+		}
+
+		private void openConstatnt_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
+
+				ConstantsForm constantsForm = new ConstantsForm();
+				constantsForm.Constants = configurationConstants;
+				constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
+				constantsForm.CallBack = CallBack_Update_Constants;
+				constantsForm.Show();
 			}
 		}
 	}

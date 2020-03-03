@@ -50,12 +50,7 @@ namespace AccountingSoftware
 		public void Close()
 		{
 			DataBase.Close();
-
-			Console.WriteLine("DataBase Close");
-
 			Conf = null;
-
-			Console.WriteLine("Configuration Close");
 		}
 
 		public Configuration Conf { get; set; }

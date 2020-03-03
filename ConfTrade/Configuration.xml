@@ -3,24 +3,12 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>03.03.2020 07:42:13</DateTimeSave>
+  <DateTimeSave>03.03.2020 19:18:12</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
-      <Name>A</Name>
+      <Name>Група0</Name>
       <Desc>a</Desc>
       <Constants>
-        <Constant>
-          <Name>A</Name>
-          <Desc>
-          </Desc>
-          <Type>string</Type>
-        </Constant>
-        <Constant>
-          <Name>B</Name>
-          <Desc>
-          </Desc>
-          <Type>string</Type>
-        </Constant>
         <Constant>
           <Name>Контрагент</Name>
           <Desc>
@@ -36,14 +24,75 @@
           <Pointer>Довідники.МестаХранения</Pointer>
         </Constant>
         <Constant>
-          <Name>ПереліченняА</Name>
+          <Name>Перелічення</Name>
           <Desc>
           </Desc>
           <Type>enum</Type>
           <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
         </Constant>
         <Constant>
-          <Name>Ntcn</Name>
+          <Name>Склад</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>Група1</Name>
+      <Desc>fasdfs</Desc>
+      <Constants>
+        <Constant>
+          <Name>A</Name>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+        </Constant>
+        <Constant>
+          <Name>B</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>Група2</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>іваіваddd</Name>
+          <Desc>іваіdddd</Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.test2</Pointer>
+        </Constant>
+        <Constant>
+          <Name>ваіва</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+        </Constant>
+        <Constant>
+          <Name>A</Name>
+          <Desc>
+          </Desc>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Перелічення2</Pointer>
+        </Constant>
+        <Constant>
+          <Name>Ф2</Name>
+          <Desc>ва</Desc>
+          <Type>string</Type>
+        </Constant>
+        <Constant>
+          <Name>Ntcn1</Name>
+          <Desc>
+          </Desc>
+          <Type>empty_pointer</Type>
+        </Constant>
+        <Constant>
+          <Name>Ntcn2</Name>
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
