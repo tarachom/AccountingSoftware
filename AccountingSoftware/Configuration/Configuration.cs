@@ -507,6 +507,8 @@ namespace AccountingSoftware
 
 			LoadConfigurationInfo(Conf, xPathDocNavigator);
 
+			LoadConstants(Conf, xPathDocNavigator);
+
 			LoadDirectories(Conf, xPathDocNavigator);
 
 			LoadEnums(Conf, xPathDocNavigator);
@@ -526,6 +528,34 @@ namespace AccountingSoftware
 
 			string author = rootNodeConfiguration.SelectSingleNode("Author").Value;
 			Conf.Author = author;
+		}
+
+		private static void LoadConstants(Configuration Conf, XPathNavigator xPathDocNavigator)
+		{
+			XPathNodeIterator constantsBlockNodes = xPathDocNavigator.Select("/Configuration/ConstantsBlocks/ConstantsBlock");
+			while (constantsBlockNodes.MoveNext())
+			{
+				string blockName = constantsBlockNodes.Current.SelectSingleNode("Name").Value;
+				string blockDesc = constantsBlockNodes.Current.SelectSingleNode("Desc").Value;
+
+				ConfigurationConstantsBlock configurationConstantsBlock = new ConfigurationConstantsBlock(blockName, blockDesc);
+				Conf.ConstantsBlock.Add(configurationConstantsBlock.BlockName, configurationConstantsBlock);
+
+				XPathNodeIterator constantsNodes = constantsBlockNodes.Current.Select("Constants/Constant");
+				while (constantsNodes.MoveNext())
+				{
+					string constName = constantsNodes.Current.SelectSingleNode("Name").Value;
+					string constType = constantsNodes.Current.SelectSingleNode("Type").Value;
+					string constDesc = constantsNodes.Current.SelectSingleNode("Desc").Value;
+
+					string constPointer = "";
+					if (constType == "pointer" || constType == "enum")
+						constPointer = constantsNodes.Current.SelectSingleNode("Pointer").Value;
+
+					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, constType, constPointer, constDesc);
+					configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
+				}
+			}
 		}
 
 		private static void LoadDirectories(Configuration Conf, XPathNavigator xPathDocNavigator)

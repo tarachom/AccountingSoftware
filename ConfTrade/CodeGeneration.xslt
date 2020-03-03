@@ -250,6 +250,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     }
 }
 
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
+{
+    <xsl:for-each select="Configuration/Directories/Directory">
+    static class Config
+    {
+        public static Kernel Kernel { get; set; }
+    }
+    </xsl:for-each>
+}
+
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 {
     <xsl:for-each select="Configuration/Directories/Directory">

@@ -89,6 +89,24 @@ namespace Configurator
 			rootNode.SelectedImageIndex = 2;
 			rootNode.ImageIndex = 2;
 
+			TreeNode contantsNode = rootNode.Nodes.Add("Contants", "Константи");
+			contantsNode.SelectedImageIndex = 3;
+			contantsNode.ImageIndex = 3;
+
+			foreach (KeyValuePair<string, ConfigurationConstantsBlock> ConfConstantsBlock in Conf.ConstantsBlock)
+			{
+				TreeNode contantsBlockNode = contantsNode.Nodes.Add(ConfConstantsBlock.Key, ConfConstantsBlock.Value.BlockName);
+				contantsBlockNode.SelectedImageIndex = 13;
+				contantsBlockNode.ImageIndex = 13;
+
+				foreach (KeyValuePair<string, ConfigurationConstants> ConfConstants in ConfConstantsBlock.Value.Constants)
+				{
+					TreeNode contantNode = contantsBlockNode.Nodes.Add(ConfConstants.Key, ConfConstants.Value.Name);
+					contantNode.SelectedImageIndex = 15;
+					contantNode.ImageIndex = 15;
+				}
+			}
+
 			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
 			directoriesNode.SelectedImageIndex = 3;
 			directoriesNode.ImageIndex = 3;
@@ -255,15 +273,6 @@ namespace Configurator
 
 			LoadTree();
 
-			ConfigurationConstantsBlock configurationConstantsBlock = new ConfigurationConstantsBlock("A", "a");
-
-			Conf.ConstantsBlock.Add(configurationConstantsBlock.BlockName, configurationConstantsBlock);
-
-			ConfigurationConstants configurationConstants = new ConfigurationConstants("A", "string", "", "");
-			configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
-
-			ConfigurationConstants configurationConstants2 = new ConfigurationConstants("B", "string", "", "");
-			configurationConstantsBlock.Constants.Add(configurationConstants2.Name, configurationConstants2);
 
 			DataGridViewRow dataGridViewRow = new DataGridViewRow();
 

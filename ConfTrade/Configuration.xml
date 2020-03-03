@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>02.03.2020 20:59:02</DateTimeSave>
+  <DateTimeSave>03.03.2020 04:36:08</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>A</Name>
@@ -2902,6 +2902,13 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>цуйцу</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2914,6 +2921,44 @@
               <Name>іаів</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>йцйц</Name>
+          <Table>tab_a52</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>йцуйцуй</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>йцуйцуйцуй</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Ордер</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Документи.ПрихіднийКасовийОрдер</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Тип</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.ВидиТоварів</Pointer>
               <Desc>
               </Desc>
             </Field>
