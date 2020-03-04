@@ -254,17 +254,69 @@ namespace Configurator
 
 			//...
 
-			//TreeNode registersNode = rootNode.Nodes.Add("Registers", "Регістри");
-			//registersNode.SelectedImageIndex = 3;
-			//registersNode.ImageIndex = 3;
+			TreeNode registersInformationNode = rootNode.Nodes.Add("RegistersInformation", "Регістри відомостей");
+			registersInformationNode.SelectedImageIndex = 3;
+			registersInformationNode.ImageIndex = 3;
 
-			//...
+			foreach (KeyValuePair<string, ConfigurationRegistersInformation> ConfRegistersInformation in Conf.RegistersInformation)
+			{
+				TreeNode registerInformationNode = registersInformationNode.Nodes.Add(ConfRegistersInformation.Key, ConfRegistersInformation.Value.Name);
+				registerInformationNode.ContextMenuStrip = contextMenuStrip2;
+				registerInformationNode.SelectedImageIndex = 13;
+				registerInformationNode.ImageIndex = 13;
+
+				TreeNode dimensionFieldsNode = registerInformationNode.Nodes.Add("DimensionFields", "Виміри");
+				dimensionFieldsNode.SelectedImageIndex = 9;
+				dimensionFieldsNode.ImageIndex = 9;
+
+				//Поля вимірів
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfDimensionFields in ConfRegistersInformation.Value.DimensionFields)
+				{
+					string info = (ConfDimensionFields.Value.Type == "pointer" || ConfDimensionFields.Value.Type == "enum") ?
+						" -> " + ConfDimensionFields.Value.Pointer : "";
+
+					TreeNode fieldNode = dimensionFieldsNode.Nodes.Add(ConfDimensionFields.Key, ConfDimensionFields.Value.Name + info);
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
+				}
+
+				TreeNode resourcesFieldsNode = registerInformationNode.Nodes.Add("ResourcesFields", "Ресурси");
+				resourcesFieldsNode.SelectedImageIndex = 9;
+				resourcesFieldsNode.ImageIndex = 9;
+
+				//Поля ресурсів
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfResourcesFields in ConfRegistersInformation.Value.ResourcesFields)
+				{
+					string info = (ConfResourcesFields.Value.Type == "pointer" || ConfResourcesFields.Value.Type == "enum") ?
+						" -> " + ConfResourcesFields.Value.Pointer : "";
+
+					TreeNode fieldNode = resourcesFieldsNode.Nodes.Add(ConfResourcesFields.Key, ConfResourcesFields.Value.Name + info);
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
+				}
+
+				TreeNode propertyFieldsNode = registerInformationNode.Nodes.Add("PropertyFields", "Реквізити");
+				propertyFieldsNode.SelectedImageIndex = 9;
+				propertyFieldsNode.ImageIndex = 9;
+
+				//Поля реквізитів
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfPropertyFields in ConfRegistersInformation.Value.PropertyFields)
+				{
+					string info = (ConfPropertyFields.Value.Type == "pointer" || ConfPropertyFields.Value.Type == "enum") ?
+						" -> " + ConfPropertyFields.Value.Pointer : "";
+
+					TreeNode fieldNode = propertyFieldsNode.Nodes.Add(ConfPropertyFields.Key, ConfPropertyFields.Value.Name + info);
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
+				}
+			}
 
 			rootNode.Expand();
 			contantsNode.Expand();
 			directoriesNode.Expand();
 			enumsNode.Expand();
 			documentsNode.Expand();
+			registersInformationNode.Expand();
 		}
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
@@ -275,6 +327,17 @@ namespace Configurator
 			Conf = Program.Kernel.Conf;
 
 			LoadTree();
+
+			//Conf.RegistersInformation.Add("too", new ConfigurationRegistersInformation("First", "tab_first", ""));
+
+			//Conf.RegistersInformation["too"].DimensionFields.Add("field2",
+			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
+
+			//Conf.RegistersInformation["too"].PropertyFields.Add("field2", 
+			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
+
+			//Conf.RegistersInformation["too"].ResourcesFields.Add("field2",
+			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
 
 			//Conf.ConstantsBlock["A"].Constants.Add("Ntcn", new ConfigurationConstants("Ntcn", "empty_pointer", "", ""));
 			//Conf.ConstantsBlock["A"].Constants.Add("Контрагент", new ConfigurationConstants("Контрагент", "pointer", "Довідники.Контрагенти", ""));

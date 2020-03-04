@@ -35,6 +35,19 @@ namespace AccountingSoftware
 			PropertyFields = new Dictionary<string, ConfigurationObjectField>();
 		}
 
+		/// <summary>
+		/// Регістер інформації
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="table">Таблиця в базі даних</param>
+		/// <param name="desc">Опис</param>
+		public ConfigurationRegistersInformation(string name, string table, string desc = "") : this()
+		{
+			Name = name;
+			Table = table;
+			Desc = desc;
+		}
+
 		public Dictionary<string, ConfigurationObjectField> DimensionFields { get; }
 
 		public Dictionary<string, ConfigurationObjectField> ResourcesFields { get; }

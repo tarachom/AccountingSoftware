@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>04.03.2020 06:34:42</DateTimeSave>
+  <DateTimeSave>04.03.2020 09:16:01</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -3369,4 +3369,105 @@
       <TabularParts />
     </Document>
   </Documents>
+  <RegistersInformation>
+    <RegisterInformation>
+      <Name>First</Name>
+      <Table>tab_first</Table>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>field1</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields>
+          <Field>
+            <Name>field1</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields>
+          <Field>
+            <Name>field1</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </PropertyFields>
+    </RegisterInformation>
+    <RegisterInformation>
+      <Name>too</Name>
+      <Table>tab_first</Table>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </PropertyFields>
+    </RegisterInformation>
+  </RegistersInformation>
 </Configuration>

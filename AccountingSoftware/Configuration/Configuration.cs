@@ -531,6 +531,8 @@ namespace AccountingSoftware
 			LoadEnums(Conf, xPathDocNavigator);
 
 			LoadDocuments(Conf, xPathDocNavigator);
+
+			LoadRegistersInformation(Conf, xPathDocNavigator);
 		}
 
 		private static void LoadConfigurationInfo(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -604,9 +606,9 @@ namespace AccountingSoftware
 				string name = fieldNodes.Current.SelectSingleNode("Name").Value;
 				string nameInTable = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
 				string type = fieldNodes.Current.SelectSingleNode("Type").Value;
-				string pointer = "";
 				string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
 
+				string pointer = "";
 				if (type == "pointer" || type == "enum")
 				{
 					pointer = fieldNodes.Current.SelectSingleNode("Pointer").Value;
@@ -712,6 +714,36 @@ namespace AccountingSoftware
 				LoadFields(configurationDocuments.Fields, documentsNode.Current);
 
 				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
+			}
+		}
+
+		private static void LoadRegistersInformation(Configuration Conf, XPathNavigator xPathDocNavigator)
+		{
+			//Регістри відомостей
+			XPathNodeIterator registerInformationNode = xPathDocNavigator.Select("/Configuration/RegistersInformation/RegisterInformation");
+			while (registerInformationNode.MoveNext())
+			{
+				string name = registerInformationNode.Current.SelectSingleNode("Name").Value;
+				string table = registerInformationNode.Current.SelectSingleNode("Table").Value;
+				string desc = registerInformationNode.Current.SelectSingleNode("Desc").Value;
+
+				ConfigurationRegistersInformation configurationRegistersInformation = new ConfigurationRegistersInformation(name, table, desc);
+				Conf.RegistersInformation.Add(configurationRegistersInformation.Name, configurationRegistersInformation);
+
+				XPathNavigator dimensionFieldsNode = registerInformationNode.Current.SelectSingleNode("DimensionFields");
+
+				if (dimensionFieldsNode != null)
+					LoadFields(configurationRegistersInformation.DimensionFields, dimensionFieldsNode);
+
+				XPathNavigator resourcesFieldsNode = registerInformationNode.Current.SelectSingleNode("ResourcesFields");
+
+				if (resourcesFieldsNode != null)
+					LoadFields(configurationRegistersInformation.ResourcesFields, resourcesFieldsNode);
+
+				XPathNavigator propertyFieldsNode = registerInformationNode.Current.SelectSingleNode("PropertyFields");
+
+				if (propertyFieldsNode != null)
+					LoadFields(configurationRegistersInformation.PropertyFields, propertyFieldsNode);
 			}
 		}
 
