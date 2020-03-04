@@ -56,7 +56,6 @@ namespace AccountingSoftware
 		protected void BaseRead(UnigueID ownerUnigueID)
 		{
 			BaseClear();
-
 			Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 

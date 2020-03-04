@@ -27,11 +27,11 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Регістри відомостей
+	/// Регістри накопичення
 	/// </summary>
-	public class ConfigurationRegistersInformation : ConfigurationObject
+	public class ConfigurationRegistersAccumulation : ConfigurationObject
 	{
-		public ConfigurationRegistersInformation()
+		public ConfigurationRegistersAccumulation()
 		{
 			DimensionFields = new Dictionary<string, ConfigurationObjectField>();
 			ResourcesFields = new Dictionary<string, ConfigurationObjectField>();
@@ -39,17 +39,21 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
-		/// Регістри відомостей
+		/// Регістри накопичення
 		/// </summary>
 		/// <param name="name">Назва</param>
 		/// <param name="table">Таблиця в базі даних</param>
 		/// <param name="desc">Опис</param>
-		public ConfigurationRegistersInformation(string name, string table, string desc = "") : this()
+		public ConfigurationRegistersAccumulation(string name, string table, int type, string desc = "") : this()
 		{
 			Name = name;
 			Table = table;
 			Desc = desc;
+
+			TypeRegistersAccumulation = (TypeRegistersAccumulation)type;
 		}
+
+		public TypeRegistersAccumulation TypeRegistersAccumulation { get; set; }
 
 		/// <summary>
 		/// Виміри
@@ -65,6 +69,18 @@ namespace AccountingSoftware
 		/// Реквізити
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> PropertyFields { get; }
-		
+	}
+
+	public enum TypeRegistersAccumulation
+	{
+		/// <summary>
+		/// Залишки
+		/// </summary>
+		Residues = 1,
+
+		/// <summary>
+		/// Оборот
+		/// </summary>
+		Turnover = 2
 	}
 }

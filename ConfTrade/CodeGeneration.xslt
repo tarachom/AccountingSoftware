@@ -943,7 +943,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Регістри
 {
-
+    <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
+       <xsl:variable name="RegisterName" select="Name"/>
+    #region REGISTER "<xsl:value-of select="$RegisterName"/>"
+       
+    #endregion
+    </xsl:for-each>
 }
   </xsl:template>
 </xsl:stylesheet>

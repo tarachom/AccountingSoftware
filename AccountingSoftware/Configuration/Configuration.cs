@@ -44,7 +44,7 @@ namespace AccountingSoftware
 			Documents = new Dictionary<string, ConfigurationDocuments>();
 			Enums = new Dictionary<string, ConfigurationEnums>();
 			RegistersInformation = new Dictionary<string, ConfigurationRegistersInformation>();
-			RegistersResidues = new Dictionary<string, ConfigurationRegistersResidues>();
+			RegistersAccumulation = new Dictionary<string, ConfigurationRegistersAccumulation>();
 
 			ReservedUnigueTableName = new List<string>();
 			ReservedUnigueColumnName = new Dictionary<string, List<string>>();
@@ -96,9 +96,9 @@ namespace AccountingSoftware
 		public Dictionary<string, ConfigurationRegistersInformation> RegistersInformation { get; }
 
 		/// <summary>
-		/// Регістри залишків
+		/// Регістри накопичення
 		/// </summary>
-		public Dictionary<string, ConfigurationRegistersResidues> RegistersResidues { get; }
+		public Dictionary<string, ConfigurationRegistersAccumulation> RegistersAccumulation { get; }
 
 		#region Private_Function
 
@@ -533,6 +533,8 @@ namespace AccountingSoftware
 			LoadDocuments(Conf, xPathDocNavigator);
 
 			LoadRegistersInformation(Conf, xPathDocNavigator);
+
+			LoadRegistersAccumulation(Conf, xPathDocNavigator);
 		}
 
 		private static void LoadConfigurationInfo(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -747,6 +749,39 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void LoadRegistersAccumulation(Configuration Conf, XPathNavigator xPathDocNavigator)
+		{
+			//Регістри накопичення
+			XPathNodeIterator registerAccumulationNode = xPathDocNavigator.Select("/Configuration/RegistersAccumulation/RegisterAccumulation");
+			while (registerAccumulationNode.MoveNext())
+			{
+				string name = registerAccumulationNode.Current.SelectSingleNode("Name").Value;
+				string table = registerAccumulationNode.Current.SelectSingleNode("Table").Value;
+				string type = registerAccumulationNode.Current.SelectSingleNode("Type").Value;
+				string desc = registerAccumulationNode.Current.SelectSingleNode("Desc").Value;
+
+				ConfigurationRegistersAccumulation configurationRegistersAccumulation = 
+					new ConfigurationRegistersAccumulation(name, table, int.Parse(type), desc);
+
+				Conf.RegistersAccumulation.Add(configurationRegistersAccumulation.Name, configurationRegistersAccumulation);
+
+				XPathNavigator dimensionFieldsNode = registerAccumulationNode.Current.SelectSingleNode("DimensionFields");
+
+				if (dimensionFieldsNode != null)
+					LoadFields(configurationRegistersAccumulation.DimensionFields, dimensionFieldsNode);
+
+				XPathNavigator resourcesFieldsNode = registerAccumulationNode.Current.SelectSingleNode("ResourcesFields");
+
+				if (resourcesFieldsNode != null)
+					LoadFields(configurationRegistersAccumulation.ResourcesFields, resourcesFieldsNode);
+
+				XPathNavigator propertyFieldsNode = registerAccumulationNode.Current.SelectSingleNode("PropertyFields");
+
+				if (propertyFieldsNode != null)
+					LoadFields(configurationRegistersAccumulation.PropertyFields, propertyFieldsNode);
+			}
+		}
+
 		/// <summary>
 		/// Збереження конфігурації
 		/// </summary>
@@ -773,6 +808,8 @@ namespace AccountingSoftware
 			SaveDocuments(Conf.Documents, xmlConfDocument, rootNode);
 
 			SaveRegistersInformation(Conf.RegistersInformation, xmlConfDocument, rootNode);
+
+			SaveRegistersAccumulation(Conf.RegistersAccumulation, xmlConfDocument, rootNode);
 
 			xmlConfDocument.Save(pathToConf);
 
@@ -1126,6 +1163,49 @@ namespace AccountingSoftware
 				nodeRegister.AppendChild(nodePropertyFields);
 
 				SaveFields(ConfRegisterInfo.Value.PropertyFields, xmlConfDocument, nodePropertyFields);
+			}
+		}
+
+		private static void SaveRegistersAccumulation(Dictionary<string, ConfigurationRegistersAccumulation> ConfRegistersAccumulation, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement rootRegistersInformation = xmlConfDocument.CreateElement("RegistersAccumulation");
+			rootNode.AppendChild(rootRegistersInformation);
+
+			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> ConfRegisterAccml in ConfRegistersAccumulation)
+			{
+				XmlElement nodeRegister = xmlConfDocument.CreateElement("RegisterAccumulation");
+				rootRegistersInformation.AppendChild(nodeRegister);
+
+				XmlElement nodeRegisterName = xmlConfDocument.CreateElement("Name");
+				nodeRegisterName.InnerText = ConfRegisterAccml.Key;
+				nodeRegister.AppendChild(nodeRegisterName);
+
+				XmlElement nodeRegisterTable = xmlConfDocument.CreateElement("Table");
+				nodeRegisterTable.InnerText = ConfRegisterAccml.Value.Table;
+				nodeRegister.AppendChild(nodeRegisterTable);
+
+				XmlElement nodeRegisterType = xmlConfDocument.CreateElement("Type");
+				nodeRegisterType.InnerText = ConfRegisterAccml.Value.TypeRegistersAccumulation.ToString();
+				nodeRegister.AppendChild(nodeRegisterType);
+
+				XmlElement nodeRegisterDesc = xmlConfDocument.CreateElement("Desc");
+				nodeRegisterDesc.InnerText = ConfRegisterAccml.Value.Desc;
+				nodeRegister.AppendChild(nodeRegisterDesc);
+
+				XmlElement nodeDimensionFields = xmlConfDocument.CreateElement("DimensionFields");
+				nodeRegister.AppendChild(nodeDimensionFields);
+
+				SaveFields(ConfRegisterAccml.Value.DimensionFields, xmlConfDocument, nodeDimensionFields);
+
+				XmlElement nodeResourcesFields = xmlConfDocument.CreateElement("ResourcesFields");
+				nodeRegister.AppendChild(nodeResourcesFields);
+
+				SaveFields(ConfRegisterAccml.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields);
+
+				XmlElement nodePropertyFields = xmlConfDocument.CreateElement("PropertyFields");
+				nodeRegister.AppendChild(nodePropertyFields);
+
+				SaveFields(ConfRegisterAccml.Value.PropertyFields, xmlConfDocument, nodePropertyFields);
 			}
 		}
 
