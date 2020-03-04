@@ -760,8 +760,16 @@ namespace AccountingSoftware
 				string type = registerAccumulationNode.Current.SelectSingleNode("Type").Value;
 				string desc = registerAccumulationNode.Current.SelectSingleNode("Desc").Value;
 
+				TypeRegistersAccumulation typeRegistersAccumulation;
+				if (type == "Residues")
+					typeRegistersAccumulation = TypeRegistersAccumulation.Residues;
+				else if (type == "Turnover")
+					typeRegistersAccumulation = TypeRegistersAccumulation.Turnover;
+				else
+					throw new Exception("Не оприділений тип регістру");
+
 				ConfigurationRegistersAccumulation configurationRegistersAccumulation = 
-					new ConfigurationRegistersAccumulation(name, table, int.Parse(type), desc);
+					new ConfigurationRegistersAccumulation(name, table, typeRegistersAccumulation, desc);
 
 				Conf.RegistersAccumulation.Add(configurationRegistersAccumulation.Name, configurationRegistersAccumulation);
 

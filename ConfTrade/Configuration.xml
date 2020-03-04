@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>04.03.2020 09:16:01</DateTimeSave>
+  <DateTimeSave>04.03.2020 18:31:56</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -3470,4 +3470,46 @@
       </PropertyFields>
     </RegisterInformation>
   </RegistersInformation>
+  <RegistersAccumulation>
+    <RegisterAccumulation>
+      <Name>one</Name>
+      <Table>tab_first</Table>
+      <Type>Residues</Type>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields>
+          <Field>
+            <Name>field2</Name>
+            <NameInTable>col_field1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
+      </PropertyFields>
+    </RegisterAccumulation>
+  </RegistersAccumulation>
 </Configuration>

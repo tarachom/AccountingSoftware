@@ -44,13 +44,13 @@ namespace AccountingSoftware
 		/// <param name="name">Назва</param>
 		/// <param name="table">Таблиця в базі даних</param>
 		/// <param name="desc">Опис</param>
-		public ConfigurationRegistersAccumulation(string name, string table, int type, string desc = "") : this()
+		public ConfigurationRegistersAccumulation(string name, string table, TypeRegistersAccumulation type, string desc = "") : this()
 		{
 			Name = name;
 			Table = table;
 			Desc = desc;
 
-			TypeRegistersAccumulation = (TypeRegistersAccumulation)type;
+			TypeRegistersAccumulation = type;
 		}
 
 		public TypeRegistersAccumulation TypeRegistersAccumulation { get; set; }

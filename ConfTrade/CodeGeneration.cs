@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 04.03.2020 09:16:01
+ * Дата конфігурації: 04.03.2020 18:31:56
  *
  */
 
@@ -8143,6 +8143,14 @@ namespace ConfTrade_v1_1.Журнали
 
 namespace ConfTrade_v1_1.Регістри
 {
-
+    
+    #region REGISTER "First"
+       
+    #endregion
+    
+    #region REGISTER "too"
+       
+    #endregion
+    
 }
   
