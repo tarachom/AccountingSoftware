@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 04.03.2020 18:31:56
+ * Дата конфігурації: 04.03.2020 19:03:25
  *
  */
 
@@ -8141,16 +8141,76 @@ namespace ConfTrade_v1_1.Журнали
 
 }
 
-namespace ConfTrade_v1_1.Регістри
+namespace ConfTrade_v1_1.РегістриВідомостей
 {
     
     #region REGISTER "First"
-       
-    #endregion
     
+    class First_Record
+    {
+        public First_Record()
+        {
+            field1_Dimension = "";
+            field2_Dimension = "";
+            field1_Resources = "";
+            field2_Resources = "";
+            field1_Property = "";
+            field2_Property = "";
+            
+        }
+        
+        public string field1_Dimension { get; set; }
+        public string field2_Dimension { get; set; }
+        public string field1_Resources { get; set; }
+        public string field2_Resources { get; set; }
+        public string field1_Property { get; set; }
+        public string field2_Property { get; set; }
+        
+    }
+    #endregion
+  
     #region REGISTER "too"
-       
-    #endregion
     
+    class too_Record
+    {
+        public too_Record()
+        {
+            field2_Dimension = "";
+            field2_Resources = "";
+            field2_Property = "";
+            
+        }
+        
+        public string field2_Dimension { get; set; }
+        public string field2_Resources { get; set; }
+        public string field2_Property { get; set; }
+        
+    }
+    #endregion
+  
+}
+
+namespace ConfTrade_v1_1.РегістриНакопичення
+{
+  
+    #region REGISTER "one"
+    
+    class one_Record
+    {
+        public one_Record()
+        {
+            field2_Dimension = "";
+            field2_Resources = "";
+            field2_Property = "";
+            
+        }
+        
+        public string field2_Dimension { get; set; }
+        public string field2_Resources { get; set; }
+        public string field2_Property { get; set; }
+        
+    }
+    #endregion
+  
 }
   
