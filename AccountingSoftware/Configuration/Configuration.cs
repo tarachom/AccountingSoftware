@@ -740,6 +740,8 @@ namespace AccountingSoftware
 
 			SaveDocuments(Conf.Documents, xmlConfDocument, rootNode);
 
+			SaveRegistersInformation(Conf.RegistersInformation, xmlConfDocument, rootNode);
+
 			xmlConfDocument.Save(pathToConf);
 
 			//ComparisonCopyAndNewConfigurationFile(pathToConf, pathToCopyConf);
@@ -1053,6 +1055,45 @@ namespace AccountingSoftware
 				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument);
 
 				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
+			}
+		}
+
+		private static void SaveRegistersInformation(Dictionary<string, ConfigurationRegistersInformation> ConfRegistersInformation, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement rootRegistersInformation = xmlConfDocument.CreateElement("RegistersInformation");
+			rootNode.AppendChild(rootRegistersInformation);
+
+			foreach (KeyValuePair<string, ConfigurationRegistersInformation> ConfRegisterInfo in ConfRegistersInformation)
+			{
+				XmlElement nodeRegister = xmlConfDocument.CreateElement("RegisterInformation");
+				rootRegistersInformation.AppendChild(nodeRegister);
+
+				XmlElement nodeRegisterName = xmlConfDocument.CreateElement("Name");
+				nodeRegisterName.InnerText = ConfRegisterInfo.Key;
+				nodeRegister.AppendChild(nodeRegisterName);
+
+				XmlElement nodeRegisterTable = xmlConfDocument.CreateElement("Table");
+				nodeRegisterTable.InnerText = ConfRegisterInfo.Value.Table;
+				nodeRegister.AppendChild(nodeRegisterTable);
+
+				XmlElement nodeRegisterDesc = xmlConfDocument.CreateElement("Desc");
+				nodeRegisterDesc.InnerText = ConfRegisterInfo.Value.Desc;
+				nodeRegister.AppendChild(nodeRegisterDesc);
+
+				XmlElement nodeDimensionFields = xmlConfDocument.CreateElement("DimensionFields");
+				nodeRegister.AppendChild(nodeDimensionFields);
+
+				SaveFields(ConfRegisterInfo.Value.DimensionFields, xmlConfDocument, nodeDimensionFields);
+
+				XmlElement nodeResourcesFields = xmlConfDocument.CreateElement("ResourcesFields");
+				nodeRegister.AppendChild(nodeResourcesFields);
+
+				SaveFields(ConfRegisterInfo.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields);
+
+				XmlElement nodePropertyFields = xmlConfDocument.CreateElement("PropertyFields");
+				nodeRegister.AppendChild(nodePropertyFields);
+
+				SaveFields(ConfRegisterInfo.Value.PropertyFields, xmlConfDocument, nodePropertyFields);
 			}
 		}
 
