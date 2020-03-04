@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 03.03.2020 19:18:12
+ * Дата конфігурації: 04.03.2020 06:34:42
  *
  */
 
@@ -66,9 +66,15 @@ namespace ConfTrade_v1_1.Константи
         public static Довідники.test2_Pointer іваіваddd { get; set; }
         public static string ваіва { get; set; }
         public static Перелічення.Перелічення2 A { get; set; }
-        public static string Ф2 { get; set; }
+        public static Довідники.МестаХранения_Pointer Ф2 { get; set; }
         public static EmptyPointer Ntcn1 { get; set; }
         public static EmptyPointer Ntcn2 { get; set; }
+        
+    }
+    
+    static class Група3_Block
+    {
+        public static string цукцук { get; set; }
         
     }
     

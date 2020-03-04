@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>03.03.2020 19:18:12</DateTimeSave>
+  <DateTimeSave>04.03.2020 06:34:42</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -83,7 +83,8 @@
         <Constant>
           <Name>Ф2</Name>
           <Desc>ва</Desc>
-          <Type>string</Type>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
         </Constant>
         <Constant>
           <Name>Ntcn1</Name>
@@ -96,6 +97,19 @@
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>Група3</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>цукцук</Name>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
         </Constant>
       </Constants>
     </ConstantsBlock>

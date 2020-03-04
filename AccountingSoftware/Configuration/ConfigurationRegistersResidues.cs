@@ -26,9 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
-	public class ConfigurationRegisters : ConfigurationObject
+	public class ConfigurationRegistersResidues : ConfigurationObject
 	{
-		public ConfigurationRegisters()
+		public ConfigurationRegistersResidues()
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 		}

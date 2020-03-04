@@ -43,7 +43,8 @@ namespace AccountingSoftware
 			Directories = new Dictionary<string, ConfigurationDirectories>();
 			Documents = new Dictionary<string, ConfigurationDocuments>();
 			Enums = new Dictionary<string, ConfigurationEnums>();
-			Registers = new Dictionary<string, ConfigurationRegisters>();
+			RegistersInformation = new Dictionary<string, ConfigurationRegistersInformation>();
+			RegistersResidues = new Dictionary<string, ConfigurationRegistersResidues>();
 
 			ReservedUnigueTableName = new List<string>();
 			ReservedUnigueColumnName = new Dictionary<string, List<string>>();
@@ -90,9 +91,14 @@ namespace AccountingSoftware
 		public Dictionary<string, ConfigurationEnums> Enums { get; }
 
 		/// <summary>
-		/// Регістри
+		/// Регістри відомостей
 		/// </summary>
-		public Dictionary<string, ConfigurationRegisters> Registers { get; }
+		public Dictionary<string, ConfigurationRegistersInformation> RegistersInformation { get; }
+
+		/// <summary>
+		/// Регістри залишків
+		/// </summary>
+		public Dictionary<string, ConfigurationRegistersResidues> RegistersResidues { get; }
 
 		#region Private_Function
 

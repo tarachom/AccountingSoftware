@@ -51,7 +51,8 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationInformationSchema.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnumField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectView.cs" />
-    <Compile Include="AccountingSoftware\Configuration\ConfigurationRegisters.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationRegistersInformation.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationRegistersResidues.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnums.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDocuments.cs" />
