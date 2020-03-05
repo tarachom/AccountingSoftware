@@ -43,7 +43,7 @@ namespace AccountingSoftware
 		void DeleteDirectoryObject(UnigueID unigueID, string table);
 
 		void SelectDirectoryPointers(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer);
-		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer)
+		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer);
 
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);

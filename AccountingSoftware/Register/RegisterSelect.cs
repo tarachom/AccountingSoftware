@@ -27,11 +27,11 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Довідник Вибірка Вказівників
+	/// 
 	/// </summary>
-	public abstract class DirectorySelect
+	public abstract class RegisterSelect
 	{
-		public DirectorySelect(Kernel kernel, string table, string[] fieldsNameInTableArray, string[] fieldsNameArray)
+		public RegisterSelect(Kernel kernel, string table, string[] fieldsNameInTableArray, string[] fieldsNameArray)
 		{
 			Kernel = kernel;
 			Table = table;
@@ -92,7 +92,7 @@ namespace AccountingSoftware
 			DirectoryPointerPosition = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectDirectoryPointers(this, BaseSelectList);
+			//Kernel.DataBase.SelectDirectoryPointers(this, BaseSelectList);
 
 			return Count() > 0;
 		}
@@ -107,21 +107,6 @@ namespace AccountingSoftware
 			QuerySelect.Limit = oldLimitValue;
 
 			return Count() > 0;
-		}
-
-		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
-		{
-			if (!Alias.ContainsKey(fieldName))
-				throw new Exception("Поле " + fieldName + " не знайдено!");
-
-			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
-
-			Query QuerySelect = new Query(Table);
-			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
-
-			bool isFind = Kernel.DataBase.FindDirectoryPointer(QuerySelect, ref directoryPointer);
-
-			return directoryPointer;
 		}
 
 		public void Dispose()

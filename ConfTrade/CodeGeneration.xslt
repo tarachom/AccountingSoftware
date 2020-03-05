@@ -270,7 +270,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
-    
+    <!--
     class <xsl:value-of select="$DirectoryName"/>_Manager : DirectoryManager
     {
         public <xsl:value-of select="$DirectoryName"/>_Manager() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -297,7 +297,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return itemPointer;
         }
     }
-    
+    -->
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
@@ -408,7 +408,21 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
-        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
+        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+            <xsl:text>new string[] { </xsl:text>
+            <xsl:for-each select="Fields/Field">
+              <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+            </xsl:for-each> },
+            <xsl:text>new string[] { </xsl:text>
+            <xsl:for-each select="Fields/Field">
+              <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+              </xsl:if>
+              <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+            </xsl:for-each> }) { }
     
         public bool Select() 
         { 
@@ -444,6 +458,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         }
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
+        
+        public <xsl:value-of select="$DirectoryName"/>_Pointer FindByField(string name, object value)
+        {
+            <xsl:value-of select="$DirectoryName"/>_Pointer itemPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       <xsl:for-each select="TabularParts/TablePart"> <!-- TableParts -->

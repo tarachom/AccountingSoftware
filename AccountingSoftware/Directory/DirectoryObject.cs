@@ -100,7 +100,6 @@ namespace AccountingSoftware
 		protected void BaseDelete()
 		{
 			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
-
 			BaseClear();
 		}
 	}

@@ -51,6 +51,9 @@ namespace AccountingSoftware
 
 		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
 		{
+			if (!Alias.ContainsKey(fieldName))
+				throw new Exception("Поле " + fieldName + " не знайдено!");
+
 			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
 			Query QuerySelect = new Query(Table);

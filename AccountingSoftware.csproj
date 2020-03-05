@@ -64,7 +64,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
     <Content Include="back_up\DirectoryEmptyPointer.cs.txt" />
-    <Compile Include="AccountingSoftware\Directory\DirectoryManager.cs" />
+    <Content Include="back_up\DirectoryManager.cs.txt" />
     <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
@@ -84,6 +84,9 @@
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Query.cs" />
+    <Compile Include="AccountingSoftware\Register\RegisterRecordsSet.cs" />
+    <Compile Include="AccountingSoftware\Register\RegisterRecord.cs" />
+    <Compile Include="AccountingSoftware\Register\RegisterSelect.cs" />
     <Compile Include="AccountingSoftware\Register\Register.cs" />
     <Compile Include="AccountingSoftware\Document\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />

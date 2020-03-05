@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 05.03.2020 12:21:59
+ * Дата конфігурації: 05.03.2020 15:00:56
  *
  */
 
@@ -84,22 +84,6 @@ namespace ConfTrade_v1_1.Довідники
 {
     
     #region DIRECTORY "Валюти"
-    
-    class Валюти_Manager : DirectoryManager
-    {
-        public Валюти_Manager() : base(Config.Kernel, "tab_a02",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" },
-            new string[] { "Курс", "Кратность", "Кратко", "Назва", "Код" }) { }
-
-        public Валюти_Pointer FindByField(string name, object value)
-        {
-            Валюти_Pointer itemPointer = new Валюти_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class Валюти_Objest : DirectoryObject
     {
@@ -191,7 +175,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class Валюти_Select : DirectorySelect, IDisposable
     {
-        public Валюти_Select() : base(Config.Kernel, "tab_a02") { }
+        public Валюти_Select() : base(Config.Kernel, "tab_a02",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" },
+            new string[] { "Курс", "Кратность", "Кратко", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -227,6 +213,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Валюти_Pointer Current { get; private set; }
+        
+        public Валюти_Pointer FindByField(string name, object value)
+        {
+            Валюти_Pointer itemPointer = new Валюти_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -345,22 +339,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Единици"
-    
-    class Единици_Manager : DirectoryManager
-    {
-        public Единици_Manager() : base(Config.Kernel, "tab_a04",
-            new string[] { "col_a7", "col_a8", "col_a9", "col_b1", "col_a1", "col_a2" },
-            new string[] { "Вес", "Коеффициент", "Единица", "ШтрихКод", "Назва", "Код" }) { }
-
-        public Единици_Pointer FindByField(string name, object value)
-        {
-            Единици_Pointer itemPointer = new Единици_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Единицы измерения товара.
     ///</summary>
@@ -460,7 +438,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Единици_Select : DirectorySelect, IDisposable
     {
-        public Единици_Select() : base(Config.Kernel, "tab_a04") { }
+        public Единици_Select() : base(Config.Kernel, "tab_a04",
+            new string[] { "col_a7", "col_a8", "col_a9", "col_b1", "col_a1", "col_a2" },
+            new string[] { "Вес", "Коеффициент", "Единица", "ШтрихКод", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -496,6 +476,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Единици_Pointer Current { get; private set; }
+        
+        public Единици_Pointer FindByField(string name, object value)
+        {
+            Единици_Pointer itemPointer = new Единици_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -516,22 +504,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "КлассификаторЕдИзм"
-    
-    class КлассификаторЕдИзм_Manager : DirectoryManager
-    {
-        public КлассификаторЕдИзм_Manager() : base(Config.Kernel, "tab_a05",
-            new string[] { "col_b2", "col_b3", "col_a1", "col_a2" },
-            new string[] { "ПолнНаименование", "КодЕдИзмерения", "Назва", "Код" }) { }
-
-        public КлассификаторЕдИзм_Pointer FindByField(string name, object value)
-        {
-            КлассификаторЕдИзм_Pointer itemPointer = new КлассификаторЕдИзм_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Классификатор единиц измерений.
     ///</summary>
@@ -623,7 +595,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class КлассификаторЕдИзм_Select : DirectorySelect, IDisposable
     {
-        public КлассификаторЕдИзм_Select() : base(Config.Kernel, "tab_a05") { }
+        public КлассификаторЕдИзм_Select() : base(Config.Kernel, "tab_a05",
+            new string[] { "col_b2", "col_b3", "col_a1", "col_a2" },
+            new string[] { "ПолнНаименование", "КодЕдИзмерения", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -659,6 +633,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public КлассификаторЕдИзм_Pointer Current { get; private set; }
+        
+        public КлассификаторЕдИзм_Pointer FindByField(string name, object value)
+        {
+            КлассификаторЕдИзм_Pointer itemPointer = new КлассификаторЕдИзм_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -692,22 +674,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Категории"
-    
-    class Категории_Manager : DirectoryManager
-    {
-        public Категории_Manager() : base(Config.Kernel, "tab_a06",
-            new string[] { "col_b4", "col_a1", "col_a2" },
-            new string[] { "Комментарий", "Назва", "Код" }) { }
-
-        public Категории_Pointer FindByField(string name, object value)
-        {
-            Категории_Pointer itemPointer = new Категории_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Категории товаров и контрагентов.
     ///</summary>
@@ -795,7 +761,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Категории_Select : DirectorySelect, IDisposable
     {
-        public Категории_Select() : base(Config.Kernel, "tab_a06") { }
+        public Категории_Select() : base(Config.Kernel, "tab_a06",
+            new string[] { "col_b4", "col_a1", "col_a2" },
+            new string[] { "Комментарий", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -831,6 +799,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Категории_Pointer Current { get; private set; }
+        
+        public Категории_Pointer FindByField(string name, object value)
+        {
+            Категории_Pointer itemPointer = new Категории_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -851,22 +827,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "КатегорииКонтрагентов"
-    
-    class КатегорииКонтрагентов_Manager : DirectoryManager
-    {
-        public КатегорииКонтрагентов_Manager() : base(Config.Kernel, "tab_a07",
-            new string[] { "col_b5", "col_a1", "col_a2" },
-            new string[] { "Категория", "Назва", "Код" }) { }
-
-        public КатегорииКонтрагентов_Pointer FindByField(string name, object value)
-        {
-            КатегорииКонтрагентов_Pointer itemPointer = new КатегорииКонтрагентов_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Категории контрагентов.
     ///</summary>
@@ -954,7 +914,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class КатегорииКонтрагентов_Select : DirectorySelect, IDisposable
     {
-        public КатегорииКонтрагентов_Select() : base(Config.Kernel, "tab_a07") { }
+        public КатегорииКонтрагентов_Select() : base(Config.Kernel, "tab_a07",
+            new string[] { "col_b5", "col_a1", "col_a2" },
+            new string[] { "Категория", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -990,6 +952,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public КатегорииКонтрагентов_Pointer Current { get; private set; }
+        
+        public КатегорииКонтрагентов_Pointer FindByField(string name, object value)
+        {
+            КатегорииКонтрагентов_Pointer itemPointer = new КатегорииКонтрагентов_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -1010,22 +980,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "КатегорииТоваров"
-    
-    class КатегорииТоваров_Manager : DirectoryManager
-    {
-        public КатегорииТоваров_Manager() : base(Config.Kernel, "tab_a08",
-            new string[] { "col_b6", "col_a1", "col_a2" },
-            new string[] { "Категория", "Назва", "Код" }) { }
-
-        public КатегорииТоваров_Pointer FindByField(string name, object value)
-        {
-            КатегорииТоваров_Pointer itemPointer = new КатегорииТоваров_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///КатегорииТоваров.
     ///</summary>
@@ -1113,7 +1067,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class КатегорииТоваров_Select : DirectorySelect, IDisposable
     {
-        public КатегорииТоваров_Select() : base(Config.Kernel, "tab_a08") { }
+        public КатегорииТоваров_Select() : base(Config.Kernel, "tab_a08",
+            new string[] { "col_b6", "col_a1", "col_a2" },
+            new string[] { "Категория", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -1149,6 +1105,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public КатегорииТоваров_Pointer Current { get; private set; }
+        
+        public КатегорииТоваров_Pointer FindByField(string name, object value)
+        {
+            КатегорииТоваров_Pointer itemPointer = new КатегорииТоваров_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -1169,22 +1133,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "КатегорииЦен"
-    
-    class КатегорииЦен_Manager : DirectoryManager
-    {
-        public КатегорииЦен_Manager() : base(Config.Kernel, "tab_a09",
-            new string[] { "col_b7", "col_b8", "col_a1", "col_a2" },
-            new string[] { "Комментарий", "ТорговаяНаценка", "Назва", "Код" }) { }
-
-        public КатегорииЦен_Pointer FindByField(string name, object value)
-        {
-            КатегорииЦен_Pointer itemPointer = new КатегорииЦен_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Типы цен.
     ///</summary>
@@ -1276,7 +1224,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class КатегорииЦен_Select : DirectorySelect, IDisposable
     {
-        public КатегорииЦен_Select() : base(Config.Kernel, "tab_a09") { }
+        public КатегорииЦен_Select() : base(Config.Kernel, "tab_a09",
+            new string[] { "col_b7", "col_b8", "col_a1", "col_a2" },
+            new string[] { "Комментарий", "ТорговаяНаценка", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -1312,6 +1262,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public КатегорииЦен_Pointer Current { get; private set; }
+        
+        public КатегорииЦен_Pointer FindByField(string name, object value)
+        {
+            КатегорииЦен_Pointer itemPointer = new КатегорииЦен_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -1332,22 +1290,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "КодиУКТВЕД"
-    
-    class КодиУКТВЕД_Manager : DirectoryManager
-    {
-        public КодиУКТВЕД_Manager() : base(Config.Kernel, "tab_a10",
-            new string[] { "col_b9", "col_c1", "col_a1", "col_a2" },
-            new string[] { "ПолноеНаименование", "Вид", "Назва", "Код" }) { }
-
-        public КодиУКТВЕД_Pointer FindByField(string name, object value)
-        {
-            КодиУКТВЕД_Pointer itemPointer = new КодиУКТВЕД_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Классификатор кодов для НН.
     ///</summary>
@@ -1439,7 +1381,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class КодиУКТВЕД_Select : DirectorySelect, IDisposable
     {
-        public КодиУКТВЕД_Select() : base(Config.Kernel, "tab_a10") { }
+        public КодиУКТВЕД_Select() : base(Config.Kernel, "tab_a10",
+            new string[] { "col_b9", "col_c1", "col_a1", "col_a2" },
+            new string[] { "ПолноеНаименование", "Вид", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -1475,6 +1419,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public КодиУКТВЕД_Pointer Current { get; private set; }
+        
+        public КодиУКТВЕД_Pointer FindByField(string name, object value)
+        {
+            КодиУКТВЕД_Pointer itemPointer = new КодиУКТВЕД_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -1495,22 +1447,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Комплектация"
-    
-    class Комплектация_Manager : DirectoryManager
-    {
-        public Комплектация_Manager() : base(Config.Kernel, "tab_a11",
-            new string[] { "col_c2", "col_c3", "col_a1", "col_a2" },
-            new string[] { "Кво", "Товар", "Назва", "Код" }) { }
-
-        public Комплектация_Pointer FindByField(string name, object value)
-        {
-            Комплектация_Pointer itemPointer = new Комплектация_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Состав наборов.
     ///</summary>
@@ -1602,7 +1538,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Комплектация_Select : DirectorySelect, IDisposable
     {
-        public Комплектация_Select() : base(Config.Kernel, "tab_a11") { }
+        public Комплектация_Select() : base(Config.Kernel, "tab_a11",
+            new string[] { "col_c2", "col_c3", "col_a1", "col_a2" },
+            new string[] { "Кво", "Товар", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -1638,6 +1576,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Комплектация_Pointer Current { get; private set; }
+        
+        public Комплектация_Pointer FindByField(string name, object value)
+        {
+            Комплектация_Pointer itemPointer = new Комплектация_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -1658,22 +1604,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Контрагенти"
-    
-    class Контрагенти_Manager : DirectoryManager
-    {
-        public Контрагенти_Manager() : base(Config.Kernel, "tab_a12",
-            new string[] { "col_c4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1" },
-            new string[] { "ВалютаВзаиморасчетов", "ВалютаКредита", "ВалютаКредитаПоставщика", "ВидКонтрагента", "Глубина", "ГлубинаКредитаПоставщика", "ДокументДатаВидачи", "ДокументКемВидан", "ДокументНомер", "ДокументСерия", "ЕГРПОУ", "ИНН", "КатегорияЦен", "КатегорияЦенПоставщика", "Комментарий", "НомерСвидетельства", "ОсновнойДоговорТорг", "ПолнНаименование", "ПочтовийАдрес", "СлужебнийДоговорТорг", "СуммаКредита", "СуммаКредитаПоставщика", "Телефони", "ЮридическийАдрес", "Страна", "ПлательщикНалогаНаПрибиль", "Назва", "Код" }) { }
-
-        public Контрагенти_Pointer FindByField(string name, object value)
-        {
-            Контрагенти_Pointer itemPointer = new Контрагенти_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Поставщики и покупатели.
     ///</summary>
@@ -1869,7 +1799,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Контрагенти_Select : DirectorySelect, IDisposable
     {
-        public Контрагенти_Select() : base(Config.Kernel, "tab_a12") { }
+        public Контрагенти_Select() : base(Config.Kernel, "tab_a12",
+            new string[] { "col_c4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1" },
+            new string[] { "ВалютаВзаиморасчетов", "ВалютаКредита", "ВалютаКредитаПоставщика", "ВидКонтрагента", "Глубина", "ГлубинаКредитаПоставщика", "ДокументДатаВидачи", "ДокументКемВидан", "ДокументНомер", "ДокументСерия", "ЕГРПОУ", "ИНН", "КатегорияЦен", "КатегорияЦенПоставщика", "Комментарий", "НомерСвидетельства", "ОсновнойДоговорТорг", "ПолнНаименование", "ПочтовийАдрес", "СлужебнийДоговорТорг", "СуммаКредита", "СуммаКредитаПоставщика", "Телефони", "ЮридическийАдрес", "Страна", "ПлательщикНалогаНаПрибиль", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -1905,6 +1837,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Контрагенти_Pointer Current { get; private set; }
+        
+        public Контрагенти_Pointer FindByField(string name, object value)
+        {
+            Контрагенти_Pointer itemPointer = new Контрагенти_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -2297,22 +2237,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "МестаХранения"
-    
-    class МестаХранения_Manager : DirectoryManager
-    {
-        public МестаХранения_Manager() : base(Config.Kernel, "tab_a20",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
-            new string[] { "ВидСклада", "МОЛ", "Комментарий", "Назва", "Код", "Група" }) { }
-
-        public МестаХранения_Pointer FindByField(string name, object value)
-        {
-            МестаХранения_Pointer itemPointer = new МестаХранения_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Склады или МОЛ.
     ///</summary>
@@ -2412,7 +2336,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class МестаХранения_Select : DirectorySelect, IDisposable
     {
-        public МестаХранения_Select() : base(Config.Kernel, "tab_a20") { }
+        public МестаХранения_Select() : base(Config.Kernel, "tab_a20",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
+            new string[] { "ВидСклада", "МОЛ", "Комментарий", "Назва", "Код", "Група" }) { }
     
         public bool Select() 
         { 
@@ -2448,6 +2374,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public МестаХранения_Pointer Current { get; private set; }
+        
+        public МестаХранения_Pointer FindByField(string name, object value)
+        {
+            МестаХранения_Pointer itemPointer = new МестаХранения_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -2468,22 +2402,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "НалоговиеИнспекции"
-    
-    class НалоговиеИнспекции_Manager : DirectoryManager
-    {
-        public НалоговиеИнспекции_Manager() : base(Config.Kernel, "tab_a21",
-            new string[] { "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" },
-            new string[] { "ЕДРПОУ", "Адрес", "ТипДПИ", "КодАдмРайона", "КодДляПоиска", "НаименованиеАдмРайона", "Назва", "Код" }) { }
-
-        public НалоговиеИнспекции_Pointer FindByField(string name, object value)
-        {
-            НалоговиеИнспекции_Pointer itemPointer = new НалоговиеИнспекции_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Содержит список налоговых инспекций.
     ///</summary>
@@ -2591,7 +2509,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class НалоговиеИнспекции_Select : DirectorySelect, IDisposable
     {
-        public НалоговиеИнспекции_Select() : base(Config.Kernel, "tab_a21") { }
+        public НалоговиеИнспекции_Select() : base(Config.Kernel, "tab_a21",
+            new string[] { "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" },
+            new string[] { "ЕДРПОУ", "Адрес", "ТипДПИ", "КодАдмРайона", "КодДляПоиска", "НаименованиеАдмРайона", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -2627,6 +2547,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public НалоговиеИнспекции_Pointer Current { get; private set; }
+        
+        public НалоговиеИнспекции_Pointer FindByField(string name, object value)
+        {
+            НалоговиеИнспекции_Pointer itemPointer = new НалоговиеИнспекции_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -2647,22 +2575,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "НашиДенежниеСчета"
-    
-    class НашиДенежниеСчета_Manager : DirectoryManager
-    {
-        public НашиДенежниеСчета_Manager() : base(Config.Kernel, "tab_a22",
-            new string[] { "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_a1", "col_a2" },
-            new string[] { "БанкНазвание", "БанкАдрес", "БанкМФО", "БанкСчет", "Телефони", "БезНал", "Валюта", "Комментарий", "ПоследнийРасхДок", "ПоследнийПрихДок", "Назва", "Код" }) { }
-
-        public НашиДенежниеСчета_Pointer FindByField(string name, object value)
-        {
-            НашиДенежниеСчета_Pointer itemPointer = new НашиДенежниеСчета_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Банковские счета.
     ///</summary>
@@ -2786,7 +2698,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class НашиДенежниеСчета_Select : DirectorySelect, IDisposable
     {
-        public НашиДенежниеСчета_Select() : base(Config.Kernel, "tab_a22") { }
+        public НашиДенежниеСчета_Select() : base(Config.Kernel, "tab_a22",
+            new string[] { "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_a1", "col_a2" },
+            new string[] { "БанкНазвание", "БанкАдрес", "БанкМФО", "БанкСчет", "Телефони", "БезНал", "Валюта", "Комментарий", "ПоследнийРасхДок", "ПоследнийПрихДок", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -2822,6 +2736,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public НашиДенежниеСчета_Pointer Current { get; private set; }
+        
+        public НашиДенежниеСчета_Pointer FindByField(string name, object value)
+        {
+            НашиДенежниеСчета_Pointer itemPointer = new НашиДенежниеСчета_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -2842,22 +2764,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Номенклатура"
-    
-    class Номенклатура_Manager : DirectoryManager
-    {
-        public Номенклатура_Manager() : base(Config.Kernel, "tab_a23",
-            new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_a1", "col_a2", "col_a3" },
-            new string[] { "ПолнНаименование", "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ЕдиницаПоУмолчанию", "ВалютаУчета", "УчетнаяЦена", "МинимальнийОстаток", "СтавкаНДС", "СтатьяИздержекУслуги", "ТипТовара", "ТорговаяНаценка", "ШтрихКод", "Комментарий", "Транспорт", "УслугиНаСебестоимость", "ЛьготаНДС", "КодЛьготи", "КвоДляНН", "КодУКТВЕД", "Назва", "Код", "Група" }) { }
-
-        public Номенклатура_Pointer FindByField(string name, object value)
-        {
-            Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Товары, услуги, наборы.
     ///</summary>
@@ -3031,7 +2937,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Номенклатура_Select : DirectorySelect, IDisposable
     {
-        public Номенклатура_Select() : base(Config.Kernel, "tab_a23") { }
+        public Номенклатура_Select() : base(Config.Kernel, "tab_a23",
+            new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_a1", "col_a2", "col_a3" },
+            new string[] { "ПолнНаименование", "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ЕдиницаПоУмолчанию", "ВалютаУчета", "УчетнаяЦена", "МинимальнийОстаток", "СтавкаНДС", "СтатьяИздержекУслуги", "ТипТовара", "ТорговаяНаценка", "ШтрихКод", "Комментарий", "Транспорт", "УслугиНаСебестоимость", "ЛьготаНДС", "КодЛьготи", "КвоДляНН", "КодУКТВЕД", "Назва", "Код", "Група" }) { }
     
         public bool Select() 
         { 
@@ -3067,6 +2975,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Номенклатура_Pointer Current { get; private set; }
+        
+        public Номенклатура_Pointer FindByField(string name, object value)
+        {
+            Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -3193,22 +3109,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "НомераГТД"
-    
-    class НомераГТД_Manager : DirectoryManager
-    {
-        public НомераГТД_Manager() : base(Config.Kernel, "tab_a24",
-            new string[] { "col_e9", "col_f1", "col_f2", "col_f3" },
-            new string[] { "ДатаГТД", "Комментарий", "Назва", "Код" }) { }
-
-        public НомераГТД_Pointer FindByField(string name, object value)
-        {
-            НомераГТД_Pointer itemPointer = new НомераГТД_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Номера ГТД.
     ///</summary>
@@ -3300,7 +3200,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class НомераГТД_Select : DirectorySelect, IDisposable
     {
-        public НомераГТД_Select() : base(Config.Kernel, "tab_a24") { }
+        public НомераГТД_Select() : base(Config.Kernel, "tab_a24",
+            new string[] { "col_e9", "col_f1", "col_f2", "col_f3" },
+            new string[] { "ДатаГТД", "Комментарий", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -3336,6 +3238,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public НомераГТД_Pointer Current { get; private set; }
+        
+        public НомераГТД_Pointer FindByField(string name, object value)
+        {
+            НомераГТД_Pointer itemPointer = new НомераГТД_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -3356,22 +3266,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Пользователи"
-    
-    class Пользователи_Manager : DirectoryManager
-    {
-        public Пользователи_Manager() : base(Config.Kernel, "tab_a25",
-            new string[] { "col_f4", "col_f5", "col_f6", "col_f7", "col_f8" },
-            new string[] { "ОсновнаяФирма", "КатегорияЦен", "Отпустил", "Назва", "Код" }) { }
-
-        public Пользователи_Pointer FindByField(string name, object value)
-        {
-            Пользователи_Pointer itemPointer = new Пользователи_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Пользователи.
     ///</summary>
@@ -3467,7 +3361,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Пользователи_Select : DirectorySelect, IDisposable
     {
-        public Пользователи_Select() : base(Config.Kernel, "tab_a25") { }
+        public Пользователи_Select() : base(Config.Kernel, "tab_a25",
+            new string[] { "col_f4", "col_f5", "col_f6", "col_f7", "col_f8" },
+            new string[] { "ОсновнаяФирма", "КатегорияЦен", "Отпустил", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -3503,6 +3399,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Пользователи_Pointer Current { get; private set; }
+        
+        public Пользователи_Pointer FindByField(string name, object value)
+        {
+            Пользователи_Pointer itemPointer = new Пользователи_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -3523,22 +3427,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Прайс_лист"
-    
-    class Прайс_лист_Manager : DirectoryManager
-    {
-        public Прайс_лист_Manager() : base(Config.Kernel, "tab_a26",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
-            new string[] { "Товар", "Комментарий", "Назва", "Код" }) { }
-
-        public Прайс_лист_Pointer FindByField(string name, object value)
-        {
-            Прайс_лист_Pointer itemPointer = new Прайс_лист_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class Прайс_лист_Objest : DirectoryObject
     {
@@ -3624,7 +3512,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class Прайс_лист_Select : DirectorySelect, IDisposable
     {
-        public Прайс_лист_Select() : base(Config.Kernel, "tab_a26") { }
+        public Прайс_лист_Select() : base(Config.Kernel, "tab_a26",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
+            new string[] { "Товар", "Комментарий", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -3660,6 +3550,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Прайс_лист_Pointer Current { get; private set; }
+        
+        public Прайс_лист_Pointer FindByField(string name, object value)
+        {
+            Прайс_лист_Pointer itemPointer = new Прайс_лист_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -3680,22 +3578,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "РасчетниеСчета"
-    
-    class РасчетниеСчета_Manager : DirectoryManager
-    {
-        public РасчетниеСчета_Manager() : base(Config.Kernel, "tab_a27",
-            new string[] { "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" },
-            new string[] { "БанкНазвание", "БанкМФО", "БанкСчет", "НомерСчетаУстаревший", "Назва", "Код" }) { }
-
-        public РасчетниеСчета_Pointer FindByField(string name, object value)
-        {
-            РасчетниеСчета_Pointer itemPointer = new РасчетниеСчета_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Расчетные счета контрагентов.
     ///</summary>
@@ -3795,7 +3677,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class РасчетниеСчета_Select : DirectorySelect, IDisposable
     {
-        public РасчетниеСчета_Select() : base(Config.Kernel, "tab_a27") { }
+        public РасчетниеСчета_Select() : base(Config.Kernel, "tab_a27",
+            new string[] { "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" },
+            new string[] { "БанкНазвание", "БанкМФО", "БанкСчет", "НомерСчетаУстаревший", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -3831,6 +3715,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public РасчетниеСчета_Pointer Current { get; private set; }
+        
+        public РасчетниеСчета_Pointer FindByField(string name, object value)
+        {
+            РасчетниеСчета_Pointer itemPointer = new РасчетниеСчета_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -3851,22 +3743,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Словарь"
-    
-    class Словарь_Manager : DirectoryManager
-    {
-        public Словарь_Manager() : base(Config.Kernel, "tab_a28",
-            new string[] { "col_a9", "col_b1", "col_b2" },
-            new string[] { "Перевод", "Назва", "Код" }) { }
-
-        public Словарь_Pointer FindByField(string name, object value)
-        {
-            Словарь_Pointer itemPointer = new Словарь_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Содержит переводы ключевых слов и фраз с русского на украинский язык.
     ///</summary>
@@ -3954,7 +3830,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Словарь_Select : DirectorySelect, IDisposable
     {
-        public Словарь_Select() : base(Config.Kernel, "tab_a28") { }
+        public Словарь_Select() : base(Config.Kernel, "tab_a28",
+            new string[] { "col_a9", "col_b1", "col_b2" },
+            new string[] { "Перевод", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -3990,6 +3868,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Словарь_Pointer Current { get; private set; }
+        
+        public Словарь_Pointer FindByField(string name, object value)
+        {
+            Словарь_Pointer itemPointer = new Словарь_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -4010,22 +3896,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Сотрудники"
-    
-    class Сотрудники_Manager : DirectoryManager
-    {
-        public Сотрудники_Manager() : base(Config.Kernel, "tab_a29",
-            new string[] { "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1" },
-            new string[] { "ДатаВидачиПаспорта", "КемВиданПаспорт", "НомерПаспорта", "СерияПаспорта", "Должность", "ИНН", "Назва", "Код" }) { }
-
-        public Сотрудники_Pointer FindByField(string name, object value)
-        {
-            Сотрудники_Pointer itemPointer = new Сотрудники_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Сотрудники.
     ///</summary>
@@ -4133,7 +4003,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Сотрудники_Select : DirectorySelect, IDisposable
     {
-        public Сотрудники_Select() : base(Config.Kernel, "tab_a29") { }
+        public Сотрудники_Select() : base(Config.Kernel, "tab_a29",
+            new string[] { "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1" },
+            new string[] { "ДатаВидачиПаспорта", "КемВиданПаспорт", "НомерПаспорта", "СерияПаспорта", "Должность", "ИНН", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -4169,6 +4041,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Сотрудники_Pointer Current { get; private set; }
+        
+        public Сотрудники_Pointer FindByField(string name, object value)
+        {
+            Сотрудники_Pointer itemPointer = new Сотрудники_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -4189,22 +4069,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "ТорговоеОборудование"
-    
-    class ТорговоеОборудование_Manager : DirectoryManager
-    {
-        public ТорговоеОборудование_Manager() : base(Config.Kernel, "tab_a30",
-            new string[] { "col_c2", "col_c3", "col_c4", "col_c5", "col_c6" },
-            new string[] { "РаботаСК", "ТипСканера", "ЕстьПрефикс", "Назва", "Код" }) { }
-
-        public ТорговоеОборудование_Pointer FindByField(string name, object value)
-        {
-            ТорговоеОборудование_Pointer itemPointer = new ТорговоеОборудование_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class ТорговоеОборудование_Objest : DirectoryObject
     {
@@ -4294,7 +4158,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class ТорговоеОборудование_Select : DirectorySelect, IDisposable
     {
-        public ТорговоеОборудование_Select() : base(Config.Kernel, "tab_a30") { }
+        public ТорговоеОборудование_Select() : base(Config.Kernel, "tab_a30",
+            new string[] { "col_c2", "col_c3", "col_c4", "col_c5", "col_c6" },
+            new string[] { "РаботаСК", "ТипСканера", "ЕстьПрефикс", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -4330,6 +4196,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public ТорговоеОборудование_Pointer Current { get; private set; }
+        
+        public ТорговоеОборудование_Pointer FindByField(string name, object value)
+        {
+            ТорговоеОборудование_Pointer itemPointer = new ТорговоеОборудование_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -4350,22 +4224,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Фирми"
-    
-    class Фирми_Manager : DirectoryManager
-    {
-        public Фирми_Manager() : base(Config.Kernel, "tab_a31",
-            new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1" },
-            new string[] { "ГлавнийБухгалтер", "ГНИ", "ДатаРегистрации", "ЕГРПОУ", "ИНН", "Кассир", "Комментарий", "МетодРасчетаСебестоимостиФинансовогоУчета", "НалоговаяИнспекция", "НомерСвидетельства", "ОфициальноеНаименование", "ПлательщикНалогаНаПрибиль", "ПолнНаименование", "ПочтовийАдрес", "ПрефиксНомеровДокументов", "Руководитель", "СчетПоУмолчанию", "Телефони", "ЮридическийАдрес", "ИнфОСтатусеПлательщикаНалогов", "Назва", "Код" }) { }
-
-        public Фирми_Pointer FindByField(string name, object value)
-        {
-            Фирми_Pointer itemPointer = new Фирми_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Справочник собственных фирм.
     ///</summary>
@@ -4551,7 +4409,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Фирми_Select : DirectorySelect, IDisposable
     {
-        public Фирми_Select() : base(Config.Kernel, "tab_a31") { }
+        public Фирми_Select() : base(Config.Kernel, "tab_a31",
+            new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1" },
+            new string[] { "ГлавнийБухгалтер", "ГНИ", "ДатаРегистрации", "ЕГРПОУ", "ИНН", "Кассир", "Комментарий", "МетодРасчетаСебестоимостиФинансовогоУчета", "НалоговаяИнспекция", "НомерСвидетельства", "ОфициальноеНаименование", "ПлательщикНалогаНаПрибиль", "ПолнНаименование", "ПочтовийАдрес", "ПрефиксНомеровДокументов", "Руководитель", "СчетПоУмолчанию", "Телефони", "ЮридическийАдрес", "ИнфОСтатусеПлательщикаНалогов", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -4587,6 +4447,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Фирми_Pointer Current { get; private set; }
+        
+        public Фирми_Pointer FindByField(string name, object value)
+        {
+            Фирми_Pointer itemPointer = new Фирми_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -5634,22 +5502,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Цени"
-    
-    class Цени_Manager : DirectoryManager
-    {
-        public Цени_Manager() : base(Config.Kernel, "tab_a43",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
-            new string[] { "Валюта", "Единица", "КатегорияЦени", "Наценка", "Цена", "Назва", "Код" }) { }
-
-        public Цени_Pointer FindByField(string name, object value)
-        {
-            Цени_Pointer itemPointer = new Цени_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     ///<summary>
     ///Цены товаров.
     ///</summary>
@@ -5759,7 +5611,9 @@ namespace ConfTrade_v1_1.Довідники
     ///</summary>
     class Цени_Select : DirectorySelect, IDisposable
     {
-        public Цени_Select() : base(Config.Kernel, "tab_a43") { }
+        public Цени_Select() : base(Config.Kernel, "tab_a43",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
+            new string[] { "Валюта", "Единица", "КатегорияЦени", "Наценка", "Цена", "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -5795,6 +5649,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Цени_Pointer Current { get; private set; }
+        
+        public Цени_Pointer FindByField(string name, object value)
+        {
+            Цени_Pointer itemPointer = new Цени_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -6095,22 +5957,6 @@ namespace ConfTrade_v1_1.Довідники
     
     #region DIRECTORY "Групи_Номенклатура"
     
-    class Групи_Номенклатура_Manager : DirectoryManager
-    {
-        public Групи_Номенклатура_Manager() : base(Config.Kernel, "tab_a01",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Родитель", "Код" }) { }
-
-        public Групи_Номенклатура_Pointer FindByField(string name, object value)
-        {
-            Групи_Номенклатура_Pointer itemPointer = new Групи_Номенклатура_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
-    
     class Групи_Номенклатура_Objest : DirectoryObject
     {
         public Групи_Номенклатура_Objest() : base(Config.Kernel, "tab_a01",
@@ -6191,7 +6037,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class Групи_Номенклатура_Select : DirectorySelect, IDisposable
     {
-        public Групи_Номенклатура_Select() : base(Config.Kernel, "tab_a01") { }
+        public Групи_Номенклатура_Select() : base(Config.Kernel, "tab_a01",
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Родитель", "Код" }) { }
     
         public bool Select() 
         { 
@@ -6227,6 +6075,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Групи_Номенклатура_Pointer Current { get; private set; }
+        
+        public Групи_Номенклатура_Pointer FindByField(string name, object value)
+        {
+            Групи_Номенклатура_Pointer itemPointer = new Групи_Номенклатура_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -6247,22 +6103,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "Групи_МестаХранения"
-    
-    class Групи_МестаХранения_Manager : DirectoryManager
-    {
-        public Групи_МестаХранения_Manager() : base(Config.Kernel, "tab_a15",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "Родитель" }) { }
-
-        public Групи_МестаХранения_Pointer FindByField(string name, object value)
-        {
-            Групи_МестаХранения_Pointer itemPointer = new Групи_МестаХранения_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class Групи_МестаХранения_Objest : DirectoryObject
     {
@@ -6344,7 +6184,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class Групи_МестаХранения_Select : DirectorySelect, IDisposable
     {
-        public Групи_МестаХранения_Select() : base(Config.Kernel, "tab_a15") { }
+        public Групи_МестаХранения_Select() : base(Config.Kernel, "tab_a15",
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "Родитель" }) { }
     
         public bool Select() 
         { 
@@ -6380,6 +6222,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public Групи_МестаХранения_Pointer Current { get; private set; }
+        
+        public Групи_МестаХранения_Pointer FindByField(string name, object value)
+        {
+            Групи_МестаХранения_Pointer itemPointer = new Групи_МестаХранения_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -6400,22 +6250,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "test"
-    
-    class test_Manager : DirectoryManager
-    {
-        public test_Manager() : base(Config.Kernel, "tab_a16",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
-            new string[] { "Назва", "Код", "ТипПоля", "Поле2", "Поле3", "Поле4" }) { }
-
-        public test_Pointer FindByField(string name, object value)
-        {
-            test_Pointer itemPointer = new test_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class test_Objest : DirectoryObject
     {
@@ -6511,7 +6345,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class test_Select : DirectorySelect, IDisposable
     {
-        public test_Select() : base(Config.Kernel, "tab_a16") { }
+        public test_Select() : base(Config.Kernel, "tab_a16",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
+            new string[] { "Назва", "Код", "ТипПоля", "Поле2", "Поле3", "Поле4" }) { }
     
         public bool Select() 
         { 
@@ -6547,6 +6383,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public test_Pointer Current { get; private set; }
+        
+        public test_Pointer FindByField(string name, object value)
+        {
+            test_Pointer itemPointer = new test_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       
@@ -6658,22 +6502,6 @@ namespace ConfTrade_v1_1.Довідники
     
     #region DIRECTORY "test2"
     
-    class test2_Manager : DirectoryManager
-    {
-        public test2_Manager() : base(Config.Kernel, "tab_a48",
-            new string[] { "col_a1", "col_a2" },
-            new string[] { "Назва", "Код" }) { }
-
-        public test2_Pointer FindByField(string name, object value)
-        {
-            test2_Pointer itemPointer = new test2_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
-    
     class test2_Objest : DirectoryObject
     {
         public test2_Objest() : base(Config.Kernel, "tab_a48",
@@ -6750,7 +6578,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class test2_Select : DirectorySelect, IDisposable
     {
-        public test2_Select() : base(Config.Kernel, "tab_a48") { }
+        public test2_Select() : base(Config.Kernel, "tab_a48",
+            new string[] { "col_a1", "col_a2" },
+            new string[] { "Назва", "Код" }) { }
     
         public bool Select() 
         { 
@@ -6786,6 +6616,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public test2_Pointer Current { get; private set; }
+        
+        public test2_Pointer FindByField(string name, object value)
+        {
+            test2_Pointer itemPointer = new test2_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       ///<summary>
@@ -6808,22 +6646,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "вапвапв"
-    
-    class вапвапв_Manager : DirectoryManager
-    {
-        public вапвапв_Manager() : base(Config.Kernel, "tab_a49",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "іваіваіваівjj" }) { }
-
-        public вапвапв_Pointer FindByField(string name, object value)
-        {
-            вапвапв_Pointer itemPointer = new вапвапв_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class вапвапв_Objest : DirectoryObject
     {
@@ -6905,7 +6727,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class вапвапв_Select : DirectorySelect, IDisposable
     {
-        public вапвапв_Select() : base(Config.Kernel, "tab_a49") { }
+        public вапвапв_Select() : base(Config.Kernel, "tab_a49",
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "іваіваіваівjj" }) { }
     
         public bool Select() 
         { 
@@ -6941,6 +6765,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public вапвапв_Pointer Current { get; private set; }
+        
+        public вапвапв_Pointer FindByField(string name, object value)
+        {
+            вапвапв_Pointer itemPointer = new вапвапв_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       ///<summary>
@@ -6963,22 +6795,6 @@ namespace ConfTrade_v1_1.Довідники
     #endregion
     
     #region DIRECTORY "іваів"
-    
-    class іваів_Manager : DirectoryManager
-    {
-        public іваів_Manager() : base(Config.Kernel, "tab_a50",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
-            new string[] { "Назва", "Код", "іваі", "sddfgsd", "Документ", "аавпва", "asdasd" }) { }
-
-        public іваів_Pointer FindByField(string name, object value)
-        {
-            іваів_Pointer itemPointer = new іваів_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    
     
     class іваів_Objest : DirectoryObject
     {
@@ -7078,7 +6894,9 @@ namespace ConfTrade_v1_1.Довідники
     
     class іваів_Select : DirectorySelect, IDisposable
     {
-        public іваів_Select() : base(Config.Kernel, "tab_a50") { }
+        public іваів_Select() : base(Config.Kernel, "tab_a50",
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
+            new string[] { "Назва", "Код", "іваі", "sddfgsd", "Документ", "аавпва", "asdasd" }) { }
     
         public bool Select() 
         { 
@@ -7114,6 +6932,14 @@ namespace ConfTrade_v1_1.Довідники
         }
 
         public іваів_Pointer Current { get; private set; }
+        
+        public іваів_Pointer FindByField(string name, object value)
+        {
+            іваів_Pointer itemPointer = new іваів_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
     }
     
       

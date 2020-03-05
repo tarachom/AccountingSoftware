@@ -62,10 +62,8 @@ namespace ConfTrade
 
 		static void Test2()
 		{
-			Довідники.Валюти_Manager валюти_Manager = new Довідники.Валюти_Manager();
-			валюти_Manager.FindByField("Назва", "");
-
-
+			Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
+			Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
 		}
 
 		static string Run4()
