@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>05.03.2020 15:00:56</DateTimeSave>
+  <DateTimeSave>05.03.2020 18:30:34</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -3386,7 +3386,7 @@
           </Field>
           <Field>
             <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <NameInTable>col_field2</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3396,15 +3396,15 @@
       <ResourcesFields>
         <Fields>
           <Field>
-            <Name>field1</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field3</Name>
+            <NameInTable>col_field3</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
           </Field>
           <Field>
-            <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field4</Name>
+            <NameInTable>col_field4</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3414,15 +3414,15 @@
       <PropertyFields>
         <Fields>
           <Field>
-            <Name>field1</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field5</Name>
+            <NameInTable>col_fiel5</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
           </Field>
           <Field>
-            <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field6</Name>
+            <NameInTable>col_field6</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3438,7 +3438,7 @@
       <DimensionFields>
         <Fields>
           <Field>
-            <Name>field2</Name>
+            <Name>field1</Name>
             <NameInTable>col_field1</NameInTable>
             <Type>string</Type>
             <Desc>
@@ -3450,7 +3450,7 @@
         <Fields>
           <Field>
             <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <NameInTable>col_field2</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3460,8 +3460,8 @@
       <PropertyFields>
         <Fields>
           <Field>
-            <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field3</Name>
+            <NameInTable>col_field3</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3480,7 +3480,7 @@
       <DimensionFields>
         <Fields>
           <Field>
-            <Name>field2</Name>
+            <Name>field1</Name>
             <NameInTable>col_field1</NameInTable>
             <Type>string</Type>
             <Desc>
@@ -3492,7 +3492,7 @@
         <Fields>
           <Field>
             <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <NameInTable>col_field2</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>
@@ -3502,8 +3502,8 @@
       <PropertyFields>
         <Fields>
           <Field>
-            <Name>field2</Name>
-            <NameInTable>col_field1</NameInTable>
+            <Name>field3</Name>
+            <NameInTable>col_field3</NameInTable>
             <Type>string</Type>
             <Desc>
             </Desc>

@@ -35,35 +35,26 @@ using Константи = ConfTrade_v1_1.Константи;
 using Довідники = ConfTrade_v1_1.Довідники;
 using Документи = ConfTrade_v1_1.Документи;
 using Перелічення = ConfTrade_v1_1.Перелічення;
+using РегістриВідомостей = ConfTrade_v1_1.РегістриВідомостей;
+using РегістриНакопичення = ConfTrade_v1_1.РегістриНакопичення;
 
 namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
-		//class Валюти_Manager : DirectoryManager
-		//{
-		//	public Валюти_Manager() : base(Config.Kernel, "tab_a02",
-		//		 new string[] { "col_a4", "col_a1" },
-		//		 new string[] { "Назва", "Курс" })
-		//	{
-
-		//	}
-
-		//	public Валюти_Pointer FindByField(string name, object value)
-		//	{
-		//		Валюти_Pointer валюти_Pointer = new Валюти_Pointer();
-
-		//		DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-		//		if (!directoryPointer.IsEmpty()) валюти_Pointer.Init(directoryPointer.UnigueID);
-
-		//		return валюти_Pointer;
-		//	}
-		//}
-
+		
 		static void Test2()
 		{
 			Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
 			Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
+
+			РегістриВідомостей.First_RecordsSet first_RecordsSet = new РегістриВідомостей.First_RecordsSet();
+			foreach (РегістриВідомостей.First_Record first_Record in first_RecordsSet.Records)
+			{
+				first_Record.field1 = "";
+			}
+
+			first_RecordsSet.Save();
 		}
 
 		static string Run4()

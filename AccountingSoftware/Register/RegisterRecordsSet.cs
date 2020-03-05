@@ -53,7 +53,7 @@ namespace AccountingSoftware
 			FieldValueList.Clear();
 		}
 
-		protected void BaseRead(UnigueID ownerUnigueID)
+		protected void BaseRead()
 		{
 			BaseClear();
 			//Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
@@ -74,12 +74,12 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
-		protected void BaseDelete(UnigueID ownerUnigueID)
+		protected void BaseDelete()
 		{
 			//Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
 		}
 
-		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
+		protected void BaseSave(Dictionary<string, object> fieldValue)
 		{
 			//Kernel.DataBase.InsertDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
 		}

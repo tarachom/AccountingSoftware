@@ -995,52 +995,103 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
+    
+    <xsl:call-template name="CommentSummary" />
+    class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterRecordsSet
+    {
+        public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <!--<xsl:value-of select="name(../..)"/>-->
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each>}) 
+        {
+            Records = new List&lt;<xsl:value-of select="$RegisterName"/>_Record&gt;();
+        }
+                
+        public List&lt;<xsl:value-of select="$RegisterName"/>_Record&gt; Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            
+            foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
+            {
+                <xsl:value-of select="$RegisterName"/>_Record record = new <xsl:value-of select="$RegisterName"/>_Record();
+
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                  <xsl:text>record.</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text> = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (<xsl:value-of select="$RegisterName"/>_Record record in Records)
+                {
+                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+
+                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                      <xsl:text>fieldValue.Add("</xsl:text>
+                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:choose>
+                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                          <xsl:text>.ToString()</xsl:text>
+                        </xsl:when>
+                      </xsl:choose>
+                      <xsl:text>)</xsl:text>;
+                    </xsl:for-each>
+                    base.BaseSave(fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+    }
+    
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$RegisterName"/>_Record
     {
         public <xsl:value-of select="$RegisterName"/>_Record()
         {
-            <xsl:for-each select="DimensionFields/Fields/Field">
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:value-of select="Name"/>
-              <xsl:text>_Dimension = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
-      
-            <xsl:for-each select="ResourcesFields/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text>_Resources = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
-      
-            <xsl:for-each select="PropertyFields/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text>_Property = </xsl:text>
+              <xsl:text> = </xsl:text>
               <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
         
-        <xsl:for-each select="DimensionFields/Fields/Field">
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
-          <xsl:text>_Dimension { get; set; </xsl:text>}
-        </xsl:for-each>
-      
-        <xsl:for-each select="ResourcesFields/Fields/Field">
-          <xsl:text>public </xsl:text>
-          <xsl:call-template name="FieldType" />
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="Name"/>
-          <xsl:text>_Resources { get; set; </xsl:text>}
-        </xsl:for-each>
-      
-        <xsl:for-each select="PropertyFields/Fields/Field">
-          <xsl:text>public </xsl:text>
-          <xsl:call-template name="FieldType" />
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="Name"/>
-          <xsl:text>_Property { get; set; </xsl:text>}
+          <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
     }
     #endregion
@@ -1057,47 +1108,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
     {
         public <xsl:value-of select="$RegisterName"/>_Record()
         {
-            <xsl:for-each select="DimensionFields/Fields/Field">
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:value-of select="Name"/>
-              <xsl:text>_Dimension = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
-
-            <xsl:for-each select="ResourcesFields/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text>_Resources = </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />;
-            </xsl:for-each>
-
-            <xsl:for-each select="PropertyFields/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text>_Property = </xsl:text>
+              <xsl:text> = </xsl:text>
               <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
         }
         
-        <xsl:for-each select="DimensionFields/Fields/Field">
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
-          <xsl:text>_Dimension { get; set; </xsl:text>}
-        </xsl:for-each>
-
-        <xsl:for-each select="ResourcesFields/Fields/Field">
-          <xsl:text>public </xsl:text>
-          <xsl:call-template name="FieldType" />
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="Name"/>
-          <xsl:text>_Resources { get; set; </xsl:text>}
-        </xsl:for-each>
-
-        <xsl:for-each select="PropertyFields/Fields/Field">
-          <xsl:text>public </xsl:text>
-          <xsl:call-template name="FieldType" />
-          <xsl:text> </xsl:text>
-          <xsl:value-of select="Name"/>
-          <xsl:text>_Property { get; set; </xsl:text>}
+          <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
     }
     #endregion

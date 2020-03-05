@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 05.03.2020 15:00:56
+ * Дата конфігурації: 05.03.2020 18:30:34
  *
  */
 
@@ -8407,44 +8407,174 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     
     #region REGISTER "First"
     
+    
+    class First_RecordsSet : RegisterRecordsSet
+    {
+        public First_RecordsSet() : base(Config.Kernel, "tab_first",
+             new string[] { "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6"}) 
+        {
+            Records = new List<First_Record>();
+        }
+                
+        public List<First_Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                First_Record record = new First_Record();
+
+                record.field1 = fieldValue["col_field1"].ToString();
+                record.field2 = fieldValue["col_field2"].ToString();
+                record.field3 = fieldValue["col_field3"].ToString();
+                record.field4 = fieldValue["col_field4"].ToString();
+                record.field5 = fieldValue["col_fiel5"].ToString();
+                record.field6 = fieldValue["col_field6"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (First_Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_field1", record.field1);
+                    fieldValue.Add("col_field2", record.field2);
+                    fieldValue.Add("col_field3", record.field3);
+                    fieldValue.Add("col_field4", record.field4);
+                    fieldValue.Add("col_fiel5", record.field5);
+                    fieldValue.Add("col_field6", record.field6);
+                    
+                    base.BaseSave(fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
     class First_Record
     {
         public First_Record()
         {
-            field1_Dimension = "";
-            field2_Dimension = "";
-            field1_Resources = "";
-            field2_Resources = "";
-            field1_Property = "";
-            field2_Property = "";
+            field1 = "";
+            field2 = "";
+            field3 = "";
+            field4 = "";
+            field5 = "";
+            field6 = "";
             
         }
         
-        public string field1_Dimension { get; set; }
-        public string field2_Dimension { get; set; }
-        public string field1_Resources { get; set; }
-        public string field2_Resources { get; set; }
-        public string field1_Property { get; set; }
-        public string field2_Property { get; set; }
+        public string field1 { get; set; }
+        public string field2 { get; set; }
+        public string field3 { get; set; }
+        public string field4 { get; set; }
+        public string field5 { get; set; }
+        public string field6 { get; set; }
         
     }
     #endregion
   
     #region REGISTER "too"
     
+    
+    class too_RecordsSet : RegisterRecordsSet
+    {
+        public too_RecordsSet() : base(Config.Kernel, "tab_first",
+             new string[] { "col_field1", "col_field2", "col_field3"}) 
+        {
+            Records = new List<too_Record>();
+        }
+                
+        public List<too_Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                too_Record record = new too_Record();
+
+                record.field1 = fieldValue["col_field1"].ToString();
+                record.field2 = fieldValue["col_field2"].ToString();
+                record.field3 = fieldValue["col_field3"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (too_Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_field1", record.field1);
+                    fieldValue.Add("col_field2", record.field2);
+                    fieldValue.Add("col_field3", record.field3);
+                    
+                    base.BaseSave(fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
     class too_Record
     {
         public too_Record()
         {
-            field2_Dimension = "";
-            field2_Resources = "";
-            field2_Property = "";
+            field1 = "";
+            field2 = "";
+            field3 = "";
             
         }
         
-        public string field2_Dimension { get; set; }
-        public string field2_Resources { get; set; }
-        public string field2_Property { get; set; }
+        public string field1 { get; set; }
+        public string field2 { get; set; }
+        public string field3 { get; set; }
         
     }
     #endregion
@@ -8460,15 +8590,15 @@ namespace ConfTrade_v1_1.РегістриНакопичення
     {
         public one_Record()
         {
-            field2_Dimension = "";
-            field2_Resources = "";
-            field2_Property = "";
+            field1 = "";
+            field2 = "";
+            field3 = "";
             
         }
         
-        public string field2_Dimension { get; set; }
-        public string field2_Resources { get; set; }
-        public string field2_Property { get; set; }
+        public string field1 { get; set; }
+        public string field2 { get; set; }
+        public string field3 { get; set; }
         
     }
     #endregion
