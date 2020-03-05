@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 05.03.2020 18:30:34
+ * Дата конфігурації: 05.03.2020 19:24:26
  *
  */
 
@@ -8414,6 +8414,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
              new string[] { "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6"}) 
         {
             Records = new List<First_Record>();
+            Filter = new First_Filter();
         }
                 
         public List<First_Record> Records { get; set; }
@@ -8421,6 +8422,12 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public void Read()
         {
             Records.Clear();
+            
+            if (Filter.field1 != "") base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false, Comparison.AND));
+            if (Filter.field2 != "") base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
+            
+            
+            base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -8472,6 +8479,8 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseDelete();
             base.BaseCommitTransaction();
         }
+        
+        public First_Filter Filter { get; set; }
     }
     
     
@@ -8496,6 +8505,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public string field6 { get; set; }
         
     }
+    
+    class First_Filter
+    {        
+        public string field1 { get; set; }
+        public string field2 { get; set; }
+        
+    }
     #endregion
   
     #region REGISTER "too"
@@ -8507,6 +8523,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
              new string[] { "col_field1", "col_field2", "col_field3"}) 
         {
             Records = new List<too_Record>();
+            Filter = new too_Filter();
         }
                 
         public List<too_Record> Records { get; set; }
@@ -8514,6 +8531,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public void Read()
         {
             Records.Clear();
+            
+            if (Filter.field1 != "") base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+            
+            
+            base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
@@ -8559,6 +8581,8 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseDelete();
             base.BaseCommitTransaction();
         }
+        
+        public too_Filter Filter { get; set; }
     }
     
     
@@ -8575,6 +8599,12 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public string field1 { get; set; }
         public string field2 { get; set; }
         public string field3 { get; set; }
+        
+    }
+    
+    class too_Filter
+    {        
+        public string field1 { get; set; }
         
     }
     #endregion

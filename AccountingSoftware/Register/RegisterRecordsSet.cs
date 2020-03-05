@@ -38,6 +38,7 @@ namespace AccountingSoftware
 			FieldArray = fieldsArray;
 
 			FieldValueList = new List<Dictionary<string, object>>();
+			BaseFilter = new List<Where>();
 		}
 
 		private Kernel Kernel { get; set; }
@@ -47,6 +48,8 @@ namespace AccountingSoftware
 		private string[] FieldArray { get; set; }
 
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
+
+		protected List<Where> BaseFilter { get; }
 
 		protected void BaseClear()
 		{

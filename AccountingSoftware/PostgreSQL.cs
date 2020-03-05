@@ -604,7 +604,43 @@ namespace AccountingSoftware
 
 		#region Register
 
+		public void SelectRegisterRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
+		{
+			bool is_first = true;
 
+			string query = "SELECT ";
+
+			foreach (string field in fieldArray)
+			{
+				if (!is_first) query += ", "; else is_first = false;
+				query += field;
+			}
+
+			query += " FROM " + table + " WHERE ";
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (Filter.Count > 0)
+			{
+				foreach (Where ItemFilter in Filter)
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+			}
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+				fieldValueList.Add(fieldValue);
+
+				foreach (string field in fieldArray)
+				{
+					fieldValue.Add(field, reader[field]);
+				}
+			}
+			reader.Close();
+		}
 
 		#endregion
 
