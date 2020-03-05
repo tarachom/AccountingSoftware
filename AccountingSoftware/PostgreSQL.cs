@@ -167,7 +167,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectDirectoryPointer(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer)
+		public void SelectDirectoryPointers(DirectorySelect select, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = select.QuerySelect.Construct();
 			//Console.WriteLine(query);
@@ -199,6 +199,34 @@ namespace AccountingSoftware
 				listDirectoryPointer.Add(elementPointer);
 			}
 			reader.Close();
+		}
+
+		public bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer)
+		{
+			QuerySelect.Limit = 1;
+
+			string query = QuerySelect.Construct();
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (QuerySelect.Where.Count > 0)
+			{
+				foreach (Where field in QuerySelect.Where)
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+			}
+
+			bool isFind = false;
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				isFind = true;
+				directoryPointer.Init(new UnigueID((Guid)reader["uid"], ""), null);
+			}
+			reader.Close();
+
+			return isFind;
 		}
 
 		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
@@ -571,6 +599,12 @@ namespace AccountingSoftware
 
 			nCommand.ExecuteNonQuery();
 		}
+
+		#endregion
+
+		#region Register
+
+
 
 		#endregion
 

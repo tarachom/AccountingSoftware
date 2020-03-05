@@ -40,9 +40,32 @@ namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
+		//class Валюти_Manager : DirectoryManager
+		//{
+		//	public Валюти_Manager() : base(Config.Kernel, "tab_a02",
+		//		 new string[] { "col_a4", "col_a1" },
+		//		 new string[] { "Назва", "Курс" })
+		//	{
+
+		//	}
+
+		//	public Валюти_Pointer FindByField(string name, object value)
+		//	{
+		//		Валюти_Pointer валюти_Pointer = new Валюти_Pointer();
+
+		//		DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+		//		if (!directoryPointer.IsEmpty()) валюти_Pointer.Init(directoryPointer.UnigueID);
+
+		//		return валюти_Pointer;
+		//	}
+		//}
+
 		static void Test2()
 		{
-			
+			Довідники.Валюти_Manager валюти_Manager = new Довідники.Валюти_Manager();
+			валюти_Manager.FindByField("Назва", "");
+
+
 		}
 
 		static string Run4()

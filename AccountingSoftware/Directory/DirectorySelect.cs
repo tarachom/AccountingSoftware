@@ -81,7 +81,7 @@ namespace AccountingSoftware
 			DirectoryPointerPosition = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectDirectoryPointer(this, BaseSelectList);
+			Kernel.DataBase.SelectDirectoryPointers(this, BaseSelectList);
 
 			return Count() > 0;
 		}

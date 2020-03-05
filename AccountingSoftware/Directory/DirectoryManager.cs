@@ -27,48 +27,38 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Довідник Вказівник
+	/// Довідник Менеджер
 	/// </summary>
-	public class DirectoryPointer
+	public abstract class DirectoryManager
 	{
-		public DirectoryPointer()
-		{
-			UnigueID = new UnigueID(Guid.Empty);
-		}
-
-		public DirectoryPointer(Kernel kernel, string table) : this()
+		public DirectoryManager(Kernel kernel, string table, string[] fieldsNameInTableArray, string[] fieldsNameArray)
 		{
 			Table = table;
 			Kernel = kernel;
-		}
 
-		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
-		{
-			UnigueID = uid;
-			Fields = fields;
+			Alias = new Dictionary<string, string>();
+			for (int i = 0; i < fieldsNameInTableArray.Length; i++)
+			{
+				Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
+			}
 		}
 
 		private Kernel Kernel { get; set; }
 
 		private string Table { get; set; }
 
-		public UnigueID UnigueID { get; private set; }
+		protected Dictionary<string, string> Alias { get; }
 
-		public Dictionary<string, object> Fields { get; private set; }
-
-		public bool IsEmpty()
+		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
 		{
-			return (UnigueID.UGuid == Guid.Empty);
-		}
+			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
-		public void Delete() //??? -> Object
-		{
-			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
-		}
+			Query QuerySelect = new Query(Table);
+			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
 
-		public override string ToString()
-		{
-			return UnigueID.UGuid.ToString();
+			bool isFind = Kernel.DataBase.FindDirectoryPointer(QuerySelect, ref directoryPointer);
+
+			return directoryPointer;
 		}
 	}
 }
