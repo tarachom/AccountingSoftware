@@ -1031,15 +1031,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if>
             
             <xsl:for-each select="DimensionFields/Fields/Field">
-            if (Filter.<xsl:value-of select="Name"/><xsl:text> != </xsl:text>
-            <xsl:choose>
-              <xsl:when test="Type = 'string'">
-                 <xsl:text>""</xsl:text>              
-              </xsl:when>
-              <xsl:otherwise>
-                 <xsl:text>null</xsl:text>
-              </xsl:otherwise>
-            </xsl:choose>)
+            if (Filter.<xsl:value-of select="Name"/> != null)
             {<xsl:choose>
               <xsl:when test="position() = 1">
                 base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
@@ -1053,13 +1045,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
               </xsl:when>
               <xsl:otherwise>
                 if (isExistPreceding)
-                {
                     base.BaseFilter.Add(new Where(Comparison.AND, "<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.ToString()</xsl:text>
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
-                }
                 else
                 {
                     base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
@@ -1153,7 +1143,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     }
     
     class <xsl:value-of select="$RegisterName"/>_Filter
-    {        
+    {
+        public <xsl:value-of select="$RegisterName"/>_Filter()
+        {
+             <xsl:for-each select="DimensionFields/Fields/Field">
+                 <xsl:value-of select="Name"/><xsl:text> = null</xsl:text>;
+             </xsl:for-each>
+        }
+        
         <xsl:for-each select="DimensionFields/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />

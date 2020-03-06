@@ -50,14 +50,16 @@ namespace ConfTrade
 
 		static void Main(string[] args)
 		{
+			string d = null;
+
 			int? c = null;
 			c = 1;
 			DateTime? a = null;
 
 			a = DateTime.Now;
 
-			Console.WriteLine(c == null);
-			Console.WriteLine(c);
+			Console.WriteLine(d == null);
+			Console.WriteLine(d);
 			Console.ReadLine();
 
 

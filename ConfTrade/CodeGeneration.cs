@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 06.03.2020 14:44:46
+ * Дата конфігурації: 06.03.2020 14:56:15
  *
  */
 
@@ -8339,9 +8339,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             if (Filter.field12 != null)
             {
                 if (isExistPreceding)
-                {
                     base.BaseFilter.Add(new Where(Comparison.AND, "col_field12", Comparison.EQ, Filter.field12, false));
-                }
                 else
                 {
                     base.BaseFilter.Add(new Where("col_field12", Comparison.EQ, Filter.field12, false));
@@ -8352,9 +8350,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             if (Filter.field11 != null)
             {
                 if (isExistPreceding)
-                {
                     base.BaseFilter.Add(new Where(Comparison.AND, "col_field11", Comparison.EQ, Filter.field11, false));
-                }
                 else
                 {
                     base.BaseFilter.Add(new Where("col_field11", Comparison.EQ, Filter.field11, false));
@@ -8362,12 +8358,10 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 }
             }
             
-            if (Filter.field1 != "")
+            if (Filter.field1 != null)
             {
                 if (isExistPreceding)
-                {
                     base.BaseFilter.Add(new Where(Comparison.AND, "col_field1", Comparison.EQ, Filter.field1, false));
-                }
                 else
                 {
                     base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
@@ -8375,12 +8369,10 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 }
             }
             
-            if (Filter.field2 != "")
+            if (Filter.field2 != null)
             {
                 if (isExistPreceding)
-                {
                     base.BaseFilter.Add(new Where(Comparison.AND, "col_field2", Comparison.EQ, Filter.field2, false));
-                }
                 else
                 {
                     base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
@@ -8481,7 +8473,17 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     }
     
     class First_Filter
-    {        
+    {
+        public First_Filter()
+        {
+             field0 = null;
+             field12 = null;
+             field11 = null;
+             field1 = null;
+             field2 = null;
+             
+        }
+        
         public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
         public int? field12 { get; set; }
         public DateTime? field11 { get; set; }
@@ -8510,7 +8512,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             Records.Clear();
             
             
-            if (Filter.field1 != "")
+            if (Filter.field1 != null)
             {
                 base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
                 
@@ -8585,7 +8587,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     }
     
     class too_Filter
-    {        
+    {
+        public too_Filter()
+        {
+             field1 = null;
+             
+        }
+        
         public string field1 { get; set; }
         
     }
