@@ -121,6 +121,12 @@ namespace AccountingSoftware
 				{
 					count++;
 
+					if (count > 1)
+					{
+						if (field.ComparisonPreceding != Comparison.Empty)
+							sb.Append(field.ComparisonPreceding + " ");
+					}
+
 					sb.Append(field.Name);
 
 					switch (field.Comparison)
@@ -173,11 +179,7 @@ namespace AccountingSoftware
 					if (count < lenght)
 					{
 						if (field.ComparisonNext != Comparison.Empty)
-						{
 							sb.Append(field.ComparisonNext + " ");
-						}
-						else
-							sb.Append(Comparison.AND + " ");
 					}
 				}
 			}
@@ -220,6 +222,7 @@ namespace AccountingSoftware
 	{
 		public Where(string name, Comparison comparison, object value, bool usingSQLToValue = false, Comparison comparisonNext = Comparison.Empty)
 		{
+			ComparisonPreceding = Comparison.Empty;
 			Name = name;
 			Comparison = comparison;
 			Value = value;
@@ -227,11 +230,23 @@ namespace AccountingSoftware
 			ComparisonNext = comparisonNext;
 		}
 
+		public Where(Comparison comparisonPreceding, string name, Comparison comparison, object value, bool usingSQLToValue = false)
+		{
+			ComparisonPreceding = comparisonPreceding;
+			Name = name;
+			Comparison = comparison;
+			Value = value;
+			UsingSQLToValue = usingSQLToValue;
+			ComparisonNext = Comparison.Empty;
+		}
+
 		public string Name { get; set; }
 
 		public object Value { get; set; }
 
 		public Comparison Comparison { get; set; }
+
+		public Comparison ComparisonPreceding { get; set; }
 
 		public Comparison ComparisonNext { get; set; }
 

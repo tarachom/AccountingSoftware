@@ -68,6 +68,13 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region RegisterInformation
+
+		void SelectRegisterRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
+		void InsertRegisterRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteRegisterRecords(string table, List<Where> Filter);
+
+		#endregion
 
 		void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory);
 		ConfigurationInformationSchema SelectInformationSchema();

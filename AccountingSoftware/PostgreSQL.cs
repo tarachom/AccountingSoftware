@@ -606,19 +606,14 @@ namespace AccountingSoftware
 
 		public void SelectRegisterRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
 		{
-			bool is_first = true;
+			Query QuerySelect = new Query(table);
 
-			string query = "SELECT ";
+			foreach (string fieldItem in fieldArray)
+				QuerySelect.Field.Add(fieldItem);
 
-			foreach (string field in fieldArray)
-			{
-				if (!is_first) query += ", "; else is_first = false;
-				query += field;
-			}
+			QuerySelect.Where = Filter;
 
-			query += " FROM " + table + " WHERE ";
-
-			//Console.WriteLine(query);
+			string query = QuerySelect.Construct();
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -640,6 +635,52 @@ namespace AccountingSoftware
 				}
 			}
 			reader.Close();
+		}
+
+		public void InsertRegisterRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "uid";
+			string query_values = "@uid";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+
+			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
+
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", new Guid().ToString()));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void DeleteRegisterRecords(string table, List<Where> Filter)
+		{
+			Query QuerySelect = new Query(table);
+			QuerySelect.Where = Filter;
+
+			string query = "DELETE FROM " + table + " WHERE uid IN (\n" + QuerySelect.Construct() + "\n)";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (Filter.Count > 0)
+			{
+				foreach (Where ItemFilter in Filter)
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+			}
+
+			nCommand.ExecuteNonQuery();
 		}
 
 		#endregion

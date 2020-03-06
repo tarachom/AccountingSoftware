@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 05.03.2020 19:24:26
+ * Дата конфігурації: 06.03.2020 09:23:39
  *
  */
 
@@ -354,8 +354,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -405,8 +403,6 @@ namespace ConfTrade_v1_1.Довідники
         public int ШтрихКод { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -517,8 +513,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -562,8 +556,6 @@ namespace ConfTrade_v1_1.Довідники
         public string КодЕдИзмерения { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -686,8 +678,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -728,8 +718,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Комментарий { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -839,8 +827,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -881,8 +867,6 @@ namespace ConfTrade_v1_1.Довідники
         public Довідники.Категории_Pointer Категория { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -992,8 +976,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -1034,8 +1016,6 @@ namespace ConfTrade_v1_1.Довідники
         public Довідники.Категории_Pointer Категория { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -1146,8 +1126,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -1191,8 +1169,6 @@ namespace ConfTrade_v1_1.Довідники
         public decimal ТорговаяНаценка { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -1303,8 +1279,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -1348,8 +1322,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Вид { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -1460,8 +1432,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -1505,8 +1475,6 @@ namespace ConfTrade_v1_1.Довідники
         public EmptyPointer Товар { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -2252,8 +2220,6 @@ namespace ConfTrade_v1_1.Довідники
             Код = "";
             Група = new Довідники.Групи_МестаХранения_Pointer();
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -2303,8 +2269,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Назва { get; set; }
         public string Код { get; set; }
         public Довідники.Групи_МестаХранения_Pointer Група { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -2419,8 +2383,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -2476,8 +2438,6 @@ namespace ConfTrade_v1_1.Довідники
         public string НаименованиеАдмРайона { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -2596,8 +2556,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -2665,8 +2623,6 @@ namespace ConfTrade_v1_1.Довідники
         public int ПоследнийПрихДок { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3122,8 +3078,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3167,8 +3121,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Комментарий { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3280,8 +3232,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3328,8 +3278,6 @@ namespace ConfTrade_v1_1.Довідники
         public EmptyPointer Отпустил { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3438,8 +3386,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3483,8 +3429,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Комментарий { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3593,8 +3537,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3644,8 +3586,6 @@ namespace ConfTrade_v1_1.Довідники
         public string НомерСчетаУстаревший { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3755,8 +3695,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3797,8 +3735,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Перевод { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -3913,8 +3849,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -3970,8 +3904,6 @@ namespace ConfTrade_v1_1.Довідники
         public string ИНН { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -4081,8 +4013,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -4129,8 +4059,6 @@ namespace ConfTrade_v1_1.Довідники
         public bool ЕстьПрефикс { get; set; }
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -5966,8 +5894,6 @@ namespace ConfTrade_v1_1.Довідники
             Родитель = new Довідники.Групи_Номенклатура_Pointer();
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -6008,8 +5934,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Назва { get; set; }
         public Довідники.Групи_Номенклатура_Pointer Родитель { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -6113,8 +6037,6 @@ namespace ConfTrade_v1_1.Довідники
             Код = "";
             Родитель = new Довідники.МестаХранения_Pointer();
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -6155,8 +6077,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Назва { get; set; }
         public string Код { get; set; }
         public Довідники.МестаХранения_Pointer Родитель { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -6510,8 +6430,6 @@ namespace ConfTrade_v1_1.Довідники
             Назва = "";
             Код = "";
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -6549,8 +6467,6 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -6656,8 +6572,6 @@ namespace ConfTrade_v1_1.Довідники
             Код = "";
             іваіваіваівjj = new EmptyPointer();
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -6698,8 +6612,6 @@ namespace ConfTrade_v1_1.Довідники
         public string Назва { get; set; }
         public string Код { get; set; }
         public EmptyPointer іваіваіваівjj { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -8139,8 +8051,6 @@ namespace ConfTrade_v1_1.Документи
             ДатаДок = DateTime.MinValue;
             НомерДок = 0;
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -8187,8 +8097,6 @@ namespace ConfTrade_v1_1.Документи
         public decimal Сума { get; set; }
         public DateTime ДатаДок { get; set; }
         public int НомерДок { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -8276,8 +8184,6 @@ namespace ConfTrade_v1_1.Документи
             ДатаДок = DateTime.MinValue;
             НомерДок = 0;
             
-            //Табличні частини
-            
         }
         
         public bool Read(UnigueID uid)
@@ -8324,8 +8230,6 @@ namespace ConfTrade_v1_1.Документи
         public decimal Сума { get; set; }
         public DateTime ДатаДок { get; set; }
         public int НомерДок { get; set; }
-        
-        //Табличні частини
         
     }
     
@@ -8423,10 +8327,21 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             Records.Clear();
             
-            if (Filter.field1 != "") base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false, Comparison.AND));
-            if (Filter.field2 != "") base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
+            bool isExistPreceding = false; //Чи є попередні фільтри
             
+            if (Filter.field1 != "") {
+              base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                  isExistPreceding = true;
+                  }
+            if (Filter.field2 != "") {
+              if (isExistPreceding)
+                  base.BaseFilter.Add(new Where(Comparison.AND, "col_field2", Comparison.EQ, Filter.field2, false));
+                  else {
+                  base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
+                  isExistPreceding = true; }
+                }
             
+
             base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
@@ -8532,9 +8447,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             Records.Clear();
             
-            if (Filter.field1 != "") base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+             //Чи є попередні фільтри
             
+            if (Filter.field1 != "") {
+              base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                  }
             
+
             base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 

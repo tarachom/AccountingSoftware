@@ -315,7 +315,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               <xsl:text> = </xsl:text>
               <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
+            <xsl:if test="count(TabularParts/TablePart) &gt; 0">
             //Табличні частини
+            </xsl:if>
             <xsl:for-each select="TabularParts/TablePart">
                 <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
                 <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
@@ -376,7 +378,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
+        <xsl:if test="count(TabularParts/TablePart) &gt; 0">
         //Табличні частини
+        </xsl:if>
         <xsl:for-each select="TabularParts/TablePart">
             <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
             <xsl:text>public </xsl:text><xsl:value-of select="concat($DirectoryName, '_', $TablePartName)"/><xsl:text> </xsl:text>
@@ -706,7 +710,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               <xsl:text> = </xsl:text>
               <xsl:call-template name="DefaultFieldValue" />;
             </xsl:for-each>
+            <xsl:if test="count(TabularParts/TablePart) &gt; 0">
             //Табличні частини
+            </xsl:if>
             <xsl:for-each select="TabularParts/TablePart">
                 <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
                 <xsl:value-of select="$TablePartName"/><xsl:text> = new </xsl:text>
@@ -767,7 +773,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}
         </xsl:for-each>
+        <xsl:if test="count(TabularParts/TablePart) &gt; 0">
         //Табличні частини
+        </xsl:if>
         <xsl:for-each select="TabularParts/TablePart">
             <xsl:variable name="TablePartName" select="concat(Name, '_TablePart')"/>
             <xsl:text>public </xsl:text><xsl:value-of select="concat($DocumentName, '_', $TablePartName)"/><xsl:text> </xsl:text>
@@ -1020,22 +1028,42 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             Records.Clear();
             
             <xsl:variable name="DimensionFieldsCount" select="count(DimensionFields/Fields/Field)" />
+            <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if> //Чи є попередні фільтри
+            
             <xsl:for-each select="DimensionFields/Fields/Field">
               <xsl:text>if (Filter.</xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:text> != </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />
-              <xsl:text>) base.BaseFilter.Add(new Where("</xsl:text>
-              <xsl:value-of select="NameInTable"/>
-              <xsl:text>", Comparison.EQ, Filter.</xsl:text>
-              <xsl:value-of select="Name"/>
-              <xsl:text>, false</xsl:text>
-              <xsl:if test="position() != $DimensionFieldsCount">
-                 <xsl:text>, Comparison.AND</xsl:text>
-               </xsl:if>
-               <xsl:text>))</xsl:text>;
+              <xsl:call-template name="DefaultFieldValue" />) {
+              <xsl:choose>
+                <xsl:when test="position() = 1">
+                  <xsl:text>base.BaseFilter.Add(new Where("</xsl:text>
+                  <xsl:value-of select="NameInTable"/>
+                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text>, false))</xsl:text>;
+                  <xsl:if test="$DimensionFieldsCount &gt; 1">
+                  <xsl:text>isExistPreceding = true</xsl:text>;
+                  </xsl:if>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:text>if (isExistPreceding</xsl:text>)
+                  <xsl:text>base.BaseFilter.Add(new Where(Comparison.AND, "</xsl:text>
+                  <xsl:value-of select="NameInTable"/>
+                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text>, false))</xsl:text>;
+                  <xsl:text>else</xsl:text> {
+                  <xsl:text>base.BaseFilter.Add(new Where("</xsl:text>
+                  <xsl:value-of select="NameInTable"/>
+                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text>, false))</xsl:text>;
+                  <xsl:text>isExistPreceding = true</xsl:text>; }
+                </xsl:otherwise>
+              </xsl:choose>}
             </xsl:for-each>
-            
+
             base.BaseRead();
             
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
