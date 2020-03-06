@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 06.03.2020 09:23:39
+ * Дата конфігурації: 06.03.2020 13:21:05
  *
  */
 
@@ -8315,7 +8315,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     class First_RecordsSet : RegisterRecordsSet
     {
         public First_RecordsSet() : base(Config.Kernel, "tab_first",
-             new string[] { "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6"}) 
+             new string[] { "col_field0", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
         {
             Records = new List<First_Record>();
             Filter = new First_Filter();
@@ -8327,19 +8327,40 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             Records.Clear();
             
-            bool isExistPreceding = false; //Чи є попередні фільтри
+            bool isExistPreceding = false;
+            if (Filter.field0 != null)
+            {
+                base.BaseFilter.Add(new Where("col_field0", Comparison.EQ, Filter.field0.ToString(), false));
+                
+                isExistPreceding = true;
+                
+            }
             
-            if (Filter.field1 != "") {
-              base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
-                  isExistPreceding = true;
-                  }
-            if (Filter.field2 != "") {
-              if (isExistPreceding)
-                  base.BaseFilter.Add(new Where(Comparison.AND, "col_field2", Comparison.EQ, Filter.field2, false));
-                  else {
-                  base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
-                  isExistPreceding = true; }
+            if (Filter.field1 != "")
+            {
+                if (isExistPreceding)
+                {
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_field1", Comparison.EQ, Filter.field1, false));
                 }
+                else 
+                {
+                    base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.field2 != "")
+            {
+                if (isExistPreceding)
+                {
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_field2", Comparison.EQ, Filter.field2, false));
+                }
+                else 
+                {
+                    base.BaseFilter.Add(new Where("col_field2", Comparison.EQ, Filter.field2, false));
+                    isExistPreceding = true; 
+                }
+            }
             
 
             base.BaseRead();
@@ -8348,6 +8369,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             {
                 First_Record record = new First_Record();
 
+                record.field0 = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_field0"]);
                 record.field1 = fieldValue["col_field1"].ToString();
                 record.field2 = fieldValue["col_field2"].ToString();
                 record.field3 = fieldValue["col_field3"].ToString();
@@ -8374,6 +8396,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
+                    fieldValue.Add("col_field0", record.field0.ToString());
                     fieldValue.Add("col_field1", record.field1);
                     fieldValue.Add("col_field2", record.field2);
                     fieldValue.Add("col_field3", record.field3);
@@ -8403,6 +8426,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     {
         public First_Record()
         {
+            field0 = new Довідники.КлассификаторЕдИзм_Pointer();
             field1 = "";
             field2 = "";
             field3 = "";
@@ -8412,6 +8436,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
         }
         
+        public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
         public string field1 { get; set; }
         public string field2 { get; set; }
         public string field3 { get; set; }
@@ -8422,7 +8447,16 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     }
     
     class First_Filter
-    {        
+    {   
+        public First_Filter()
+        {
+            field0 = null;
+            field1 = "";
+            field2 = "";
+            
+        }
+        
+        public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
         public string field1 { get; set; }
         public string field2 { get; set; }
         
@@ -8435,7 +8469,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     class too_RecordsSet : RegisterRecordsSet
     {
         public too_RecordsSet() : base(Config.Kernel, "tab_first",
-             new string[] { "col_field1", "col_field2", "col_field3"}) 
+             new string[] { "col_field1", "col_field2", "col_field3" }) 
         {
             Records = new List<too_Record>();
             Filter = new too_Filter();
@@ -8447,11 +8481,12 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             Records.Clear();
             
-             //Чи є попередні фільтри
             
-            if (Filter.field1 != "") {
-              base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
-                  }
+            if (Filter.field1 != "")
+            {
+                base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                
+            }
             
 
             base.BaseRead();
@@ -8522,7 +8557,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     }
     
     class too_Filter
-    {        
+    {   
+        public too_Filter()
+        {
+            field1 = "";
+            
+        }
+        
         public string field1 { get; set; }
         
     }

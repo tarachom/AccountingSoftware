@@ -1015,7 +1015,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                </xsl:if>
                <!--<xsl:value-of select="name(../..)"/>-->
                <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-             </xsl:for-each>}) 
+             </xsl:for-each> }) 
         {
             Records = new List&lt;<xsl:value-of select="$RegisterName"/>_Record&gt;();
             Filter = new <xsl:value-of select="$RegisterName"/>_Filter();
@@ -1028,40 +1028,41 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             Records.Clear();
             
             <xsl:variable name="DimensionFieldsCount" select="count(DimensionFields/Fields/Field)" />
-            <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if> //Чи є попередні фільтри
+            <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if>
             
             <xsl:for-each select="DimensionFields/Fields/Field">
-              <xsl:text>if (Filter.</xsl:text>
-              <xsl:value-of select="Name"/>
-              <xsl:text> != </xsl:text>
-              <xsl:call-template name="DefaultFieldValue" />) {
-              <xsl:choose>
-                <xsl:when test="position() = 1">
-                  <xsl:text>base.BaseFilter.Add(new Where("</xsl:text>
-                  <xsl:value-of select="NameInTable"/>
-                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text>, false))</xsl:text>;
-                  <xsl:if test="$DimensionFieldsCount &gt; 1">
-                  <xsl:text>isExistPreceding = true</xsl:text>;
-                  </xsl:if>
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:text>if (isExistPreceding</xsl:text>)
-                  <xsl:text>base.BaseFilter.Add(new Where(Comparison.AND, "</xsl:text>
-                  <xsl:value-of select="NameInTable"/>
-                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text>, false))</xsl:text>;
-                  <xsl:text>else</xsl:text> {
-                  <xsl:text>base.BaseFilter.Add(new Where("</xsl:text>
-                  <xsl:value-of select="NameInTable"/>
-                  <xsl:text>", Comparison.EQ, Filter.</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text>, false))</xsl:text>;
-                  <xsl:text>isExistPreceding = true</xsl:text>; }
-                </xsl:otherwise>
-              </xsl:choose>}
+            if (Filter.<xsl:value-of select="Name"/> != <xsl:call-template name="DefaultParamValue" />)
+            {<xsl:choose>
+              <xsl:when test="position() = 1">
+                base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
+                <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:text>.ToString()</xsl:text>
+                </xsl:if>
+                <xsl:text>, false))</xsl:text>;
+                <xsl:if test="$DimensionFieldsCount &gt; 1">
+                isExistPreceding = true;
+                </xsl:if>
+              </xsl:when>
+              <xsl:otherwise>
+                if (isExistPreceding)
+                {
+                    base.BaseFilter.Add(new Where(Comparison.AND, "<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:text>.ToString()</xsl:text>
+                    </xsl:if>
+                    <xsl:text>, false))</xsl:text>;
+                }
+                else 
+                {
+                    base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:text>.ToString()</xsl:text>
+                    </xsl:if>
+                    <xsl:text>, false))</xsl:text>;
+                    isExistPreceding = true; 
+                }</xsl:otherwise>
+            </xsl:choose>
+            }
             </xsl:for-each>
 
             base.BaseRead();
@@ -1100,11 +1101,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                          <xsl:text>.ToString()</xsl:text>
-                        </xsl:when>
-                      </xsl:choose>
+                      <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:text>.ToString()</xsl:text>
+                      </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
                     base.BaseSave(fieldValue);
@@ -1146,7 +1145,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     }
     
     class <xsl:value-of select="$RegisterName"/>_Filter
-    {        
+    {   
+        public <xsl:value-of select="$RegisterName"/>_Filter()
+        {
+            <xsl:for-each select="DimensionFields/Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultParamValue" />;
+            </xsl:for-each>
+        }
+        
         <xsl:for-each select="DimensionFields/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />

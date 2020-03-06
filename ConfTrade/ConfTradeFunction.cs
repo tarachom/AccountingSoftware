@@ -49,8 +49,6 @@ namespace ConfTrade
 			Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
 
 			РегістриВідомостей.First_RecordsSet first_RecordsSet = new РегістриВідомостей.First_RecordsSet();
-
-			first_RecordsSet.Filter.field1 = "";
 			
 			first_RecordsSet.Read();
 			foreach (РегістриВідомостей.First_Record first_Record in first_RecordsSet.Records)
