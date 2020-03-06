@@ -428,38 +428,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
             </xsl:for-each> }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DirectoryName"/>_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public <xsl:value-of select="$DirectoryName"/>_Pointer Current { get; private set; }
         
@@ -469,6 +442,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; directoryPointerList = new List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -808,40 +789,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
     {
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new <xsl:value-of select="$DocumentName"/>_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public <xsl:value-of select="$DocumentName"/>_Pointer Current { get; private set; }
     }
     

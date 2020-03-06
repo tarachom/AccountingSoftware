@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 06.03.2020 14:56:15
+ * Дата конфігурації: 06.03.2020 15:54:50
  *
  */
 
@@ -179,38 +179,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5" },
             new string[] { "Курс", "Кратность", "Кратко", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Валюти_Pointer Current { get; private set; }
         
@@ -220,6 +193,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Валюти_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Валюти_Pointer> directoryPointerList = new List<Валюти_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -438,38 +419,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a7", "col_a8", "col_a9", "col_b1", "col_a1", "col_a2" },
             new string[] { "Вес", "Коеффициент", "Единица", "ШтрихКод", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Единици_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Единици_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Единици_Pointer Current { get; private set; }
         
@@ -479,6 +433,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Единици_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Единици_Pointer> directoryPointerList = new List<Единици_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Единици_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -591,38 +553,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b2", "col_b3", "col_a1", "col_a2" },
             new string[] { "ПолнНаименование", "КодЕдИзмерения", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new КлассификаторЕдИзм_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КлассификаторЕдИзм_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КлассификаторЕдИзм_Pointer Current { get; private set; }
         
@@ -632,6 +567,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<КлассификаторЕдИзм_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КлассификаторЕдИзм_Pointer> directoryPointerList = new List<КлассификаторЕдИзм_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new КлассификаторЕдИзм_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -753,38 +696,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b4", "col_a1", "col_a2" },
             new string[] { "Комментарий", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Категории_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Категории_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Категории_Pointer Current { get; private set; }
         
@@ -794,6 +710,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Категории_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Категории_Pointer> directoryPointerList = new List<Категории_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Категории_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -902,38 +826,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b5", "col_a1", "col_a2" },
             new string[] { "Категория", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new КатегорииКонтрагентов_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КатегорииКонтрагентов_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КатегорииКонтрагентов_Pointer Current { get; private set; }
         
@@ -943,6 +840,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<КатегорииКонтрагентов_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КатегорииКонтрагентов_Pointer> directoryPointerList = new List<КатегорииКонтрагентов_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new КатегорииКонтрагентов_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -1051,38 +956,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b6", "col_a1", "col_a2" },
             new string[] { "Категория", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new КатегорииТоваров_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КатегорииТоваров_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КатегорииТоваров_Pointer Current { get; private set; }
         
@@ -1092,6 +970,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<КатегорииТоваров_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КатегорииТоваров_Pointer> directoryPointerList = new List<КатегорииТоваров_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new КатегорииТоваров_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -1204,38 +1090,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b7", "col_b8", "col_a1", "col_a2" },
             new string[] { "Комментарий", "ТорговаяНаценка", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new КатегорииЦен_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КатегорииЦен_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КатегорииЦен_Pointer Current { get; private set; }
         
@@ -1245,6 +1104,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<КатегорииЦен_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КатегорииЦен_Pointer> directoryPointerList = new List<КатегорииЦен_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new КатегорииЦен_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -1357,38 +1224,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b9", "col_c1", "col_a1", "col_a2" },
             new string[] { "ПолноеНаименование", "Вид", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new КодиУКТВЕД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new КодиУКТВЕД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public КодиУКТВЕД_Pointer Current { get; private set; }
         
@@ -1398,6 +1238,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<КодиУКТВЕД_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<КодиУКТВЕД_Pointer> directoryPointerList = new List<КодиУКТВЕД_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new КодиУКТВЕД_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -1510,38 +1358,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_c2", "col_c3", "col_a1", "col_a2" },
             new string[] { "Кво", "Товар", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Комплектация_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Комплектация_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Комплектация_Pointer Current { get; private set; }
         
@@ -1551,6 +1372,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Комплектация_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Комплектация_Pointer> directoryPointerList = new List<Комплектация_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Комплектация_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -1771,38 +1600,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_c4", "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c5", "col_c6", "col_c7", "col_c8", "col_c9", "col_d1" },
             new string[] { "ВалютаВзаиморасчетов", "ВалютаКредита", "ВалютаКредитаПоставщика", "ВидКонтрагента", "Глубина", "ГлубинаКредитаПоставщика", "ДокументДатаВидачи", "ДокументКемВидан", "ДокументНомер", "ДокументСерия", "ЕГРПОУ", "ИНН", "КатегорияЦен", "КатегорияЦенПоставщика", "Комментарий", "НомерСвидетельства", "ОсновнойДоговорТорг", "ПолнНаименование", "ПочтовийАдрес", "СлужебнийДоговорТорг", "СуммаКредита", "СуммаКредитаПоставщика", "Телефони", "ЮридическийАдрес", "Страна", "ПлательщикНалогаНаПрибиль", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Контрагенти_Pointer Current { get; private set; }
         
@@ -1812,6 +1614,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Контрагенти_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Контрагенти_Pointer> directoryPointerList = new List<Контрагенти_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Контрагенти_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -2304,38 +2114,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
             new string[] { "ВидСклада", "МОЛ", "Комментарий", "Назва", "Код", "Група" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public МестаХранения_Pointer Current { get; private set; }
         
@@ -2345,6 +2128,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<МестаХранения_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<МестаХранения_Pointer> directoryPointerList = new List<МестаХранения_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new МестаХранения_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -2473,38 +2264,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" },
             new string[] { "ЕДРПОУ", "Адрес", "ТипДПИ", "КодАдмРайона", "КодДляПоиска", "НаименованиеАдмРайона", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new НалоговиеИнспекции_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new НалоговиеИнспекции_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public НалоговиеИнспекции_Pointer Current { get; private set; }
         
@@ -2514,6 +2278,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<НалоговиеИнспекции_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<НалоговиеИнспекции_Pointer> directoryPointerList = new List<НалоговиеИнспекции_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new НалоговиеИнспекции_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -2658,38 +2430,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1", "col_c2", "col_c3", "col_c4", "col_c5", "col_a1", "col_a2" },
             new string[] { "БанкНазвание", "БанкАдрес", "БанкМФО", "БанкСчет", "Телефони", "БезНал", "Валюта", "Комментарий", "ПоследнийРасхДок", "ПоследнийПрихДок", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new НашиДенежниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new НашиДенежниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public НашиДенежниеСчета_Pointer Current { get; private set; }
         
@@ -2699,6 +2444,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<НашиДенежниеСчета_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<НашиДенежниеСчета_Pointer> directoryPointerList = new List<НашиДенежниеСчета_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new НашиДенежниеСчета_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -2897,38 +2650,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_a1", "col_a2", "col_a3" },
             new string[] { "ПолнНаименование", "ВидТовара", "Артикул", "БазоваяЕдиница", "Вес", "ЕдиницаПоУмолчанию", "ВалютаУчета", "УчетнаяЦена", "МинимальнийОстаток", "СтавкаНДС", "СтатьяИздержекУслуги", "ТипТовара", "ТорговаяНаценка", "ШтрихКод", "Комментарий", "Транспорт", "УслугиНаСебестоимость", "ЛьготаНДС", "КодЛьготи", "КвоДляНН", "КодУКТВЕД", "Назва", "Код", "Група" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Номенклатура_Pointer Current { get; private set; }
         
@@ -2938,6 +2664,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Номенклатура_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Номенклатура_Pointer> directoryPointerList = new List<Номенклатура_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3156,38 +2890,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_e9", "col_f1", "col_f2", "col_f3" },
             new string[] { "ДатаГТД", "Комментарий", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new НомераГТД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new НомераГТД_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public НомераГТД_Pointer Current { get; private set; }
         
@@ -3197,6 +2904,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<НомераГТД_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<НомераГТД_Pointer> directoryPointerList = new List<НомераГТД_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new НомераГТД_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3313,38 +3028,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_f4", "col_f5", "col_f6", "col_f7", "col_f8" },
             new string[] { "ОсновнаяФирма", "КатегорияЦен", "Отпустил", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Пользователи_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Пользователи_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Пользователи_Pointer Current { get; private set; }
         
@@ -3354,6 +3042,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Пользователи_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Пользователи_Pointer> directoryPointerList = new List<Пользователи_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Пользователи_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3460,38 +3156,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
             new string[] { "Товар", "Комментарий", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Прайс_лист_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Прайс_лист_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Прайс_лист_Pointer Current { get; private set; }
         
@@ -3501,6 +3170,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Прайс_лист_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Прайс_лист_Pointer> directoryPointerList = new List<Прайс_лист_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Прайс_лист_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3621,38 +3298,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" },
             new string[] { "БанкНазвание", "БанкМФО", "БанкСчет", "НомерСчетаУстаревший", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new РасчетниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new РасчетниеСчета_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public РасчетниеСчета_Pointer Current { get; private set; }
         
@@ -3662,6 +3312,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<РасчетниеСчета_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<РасчетниеСчета_Pointer> directoryPointerList = new List<РасчетниеСчета_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new РасчетниеСчета_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3770,38 +3428,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a9", "col_b1", "col_b2" },
             new string[] { "Перевод", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Словарь_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Словарь_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Словарь_Pointer Current { get; private set; }
         
@@ -3811,6 +3442,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Словарь_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Словарь_Pointer> directoryPointerList = new List<Словарь_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Словарь_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -3939,38 +3578,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_b3", "col_b4", "col_b5", "col_b6", "col_b7", "col_b8", "col_b9", "col_c1" },
             new string[] { "ДатаВидачиПаспорта", "КемВиданПаспорт", "НомерПаспорта", "СерияПаспорта", "Должность", "ИНН", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Сотрудники_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Сотрудники_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Сотрудники_Pointer Current { get; private set; }
         
@@ -3980,6 +3592,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Сотрудники_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Сотрудники_Pointer> directoryPointerList = new List<Сотрудники_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Сотрудники_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -4090,38 +3710,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_c2", "col_c3", "col_c4", "col_c5", "col_c6" },
             new string[] { "РаботаСК", "ТипСканера", "ЕстьПрефикс", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new ТорговоеОборудование_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new ТорговоеОборудование_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public ТорговоеОборудование_Pointer Current { get; private set; }
         
@@ -4131,6 +3724,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<ТорговоеОборудование_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ТорговоеОборудование_Pointer> directoryPointerList = new List<ТорговоеОборудование_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new ТорговоеОборудование_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -4341,38 +3942,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_e1", "col_e2", "col_e3", "col_e4", "col_e5", "col_e6", "col_e7", "col_e8", "col_e9", "col_f1" },
             new string[] { "ГлавнийБухгалтер", "ГНИ", "ДатаРегистрации", "ЕГРПОУ", "ИНН", "Кассир", "Комментарий", "МетодРасчетаСебестоимостиФинансовогоУчета", "НалоговаяИнспекция", "НомерСвидетельства", "ОфициальноеНаименование", "ПлательщикНалогаНаПрибиль", "ПолнНаименование", "ПочтовийАдрес", "ПрефиксНомеровДокументов", "Руководитель", "СчетПоУмолчанию", "Телефони", "ЮридическийАдрес", "ИнфОСтатусеПлательщикаНалогов", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Фирми_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Фирми_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Фирми_Pointer Current { get; private set; }
         
@@ -4382,6 +3956,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Фирми_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Фирми_Pointer> directoryPointerList = new List<Фирми_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Фирми_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -5543,38 +5125,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
             new string[] { "Валюта", "Единица", "КатегорияЦени", "Наценка", "Цена", "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Цени_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Цени_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Цени_Pointer Current { get; private set; }
         
@@ -5584,6 +5139,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Цени_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Цени_Pointer> directoryPointerList = new List<Цени_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Цени_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -5965,38 +5528,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3" },
             new string[] { "Назва", "Родитель", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Групи_Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Групи_Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Групи_Номенклатура_Pointer Current { get; private set; }
         
@@ -6006,6 +5542,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Групи_Номенклатура_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Групи_Номенклатура_Pointer> directoryPointerList = new List<Групи_Номенклатура_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Групи_Номенклатура_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -6108,38 +5652,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3" },
             new string[] { "Назва", "Код", "Родитель" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Групи_МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Групи_МестаХранения_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public Групи_МестаХранения_Pointer Current { get; private set; }
         
@@ -6149,6 +5666,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<Групи_МестаХранения_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Групи_МестаХранения_Pointer> directoryPointerList = new List<Групи_МестаХранения_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new Групи_МестаХранения_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -6269,38 +5794,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" },
             new string[] { "Назва", "Код", "ТипПоля", "Поле2", "Поле3", "Поле4" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new test_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new test_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public test_Pointer Current { get; private set; }
         
@@ -6310,6 +5808,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<test_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<test_Pointer> directoryPointerList = new List<test_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new test_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -6498,38 +6004,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2" },
             new string[] { "Назва", "Код" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new test2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new test2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public test2_Pointer Current { get; private set; }
         
@@ -6539,6 +6018,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<test2_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<test2_Pointer> directoryPointerList = new List<test2_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new test2_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -6643,38 +6130,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3" },
             new string[] { "Назва", "Код", "іваіваіваівjj" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new вапвапв_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new вапвапв_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public вапвапв_Pointer Current { get; private set; }
         
@@ -6684,6 +6144,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<вапвапв_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<вапвапв_Pointer> directoryPointerList = new List<вапвапв_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new вапвапв_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -6810,38 +6278,11 @@ namespace ConfTrade_v1_1.Довідники
             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
             new string[] { "Назва", "Код", "іваі", "sddfgsd", "Документ", "аавпва", "asdasd" }) { }
     
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new іваів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new іваів_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
         public іваів_Pointer Current { get; private set; }
         
@@ -6851,6 +6292,14 @@ namespace ConfTrade_v1_1.Довідники
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
+        }
+        
+        public List<іваів_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<іваів_Pointer> directoryPointerList = new List<іваів_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new іваів_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
         }
     }
     
@@ -7129,40 +6578,13 @@ namespace ConfTrade_v1_1.Документи
     class Test_Select : DocumentSelect, IDisposable
     {
         public Test_Select() : base(Config.Kernel, "test") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new Test_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Test_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public Test_Pointer Current { get; private set; }
     }
     
@@ -7453,40 +6875,13 @@ namespace ConfTrade_v1_1.Документи
     class РозхіднаНакладна_Select : DocumentSelect, IDisposable
     {
         public РозхіднаНакладна_Select() : base(Config.Kernel, "tab_a51") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new РозхіднаНакладна_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new РозхіднаНакладна_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public РозхіднаНакладна_Pointer Current { get; private set; }
     }
     
@@ -7788,40 +7183,13 @@ namespace ConfTrade_v1_1.Документи
     class ПрихіднаНакладна_Select : DocumentSelect, IDisposable
     {
         public ПрихіднаНакладна_Select() : base(Config.Kernel, "tab_a51") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new ПрихіднаНакладна_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new ПрихіднаНакладна_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public ПрихіднаНакладна_Pointer Current { get; private set; }
     }
     
@@ -8129,40 +7497,13 @@ namespace ConfTrade_v1_1.Документи
     class ПрихіднийКасовийОрдер_Select : DocumentSelect, IDisposable
     {
         public ПрихіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a52") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new ПрихіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public ПрихіднийКасовийОрдер_Pointer Current { get; private set; }
     }
     
@@ -8258,40 +7599,13 @@ namespace ConfTrade_v1_1.Документи
     class РозхіднийКасовийОрдер_Select : DocumentSelect, IDisposable
     {
         public РозхіднийКасовийОрдер_Select() : base(Config.Kernel, "tab_a53") { }
-    
-        public bool Select() 
-        { 
-            return base.BaseSelect();
-        }
         
-        public bool SelectSingle()
-        {
-            if (base.BaseSelectSingle())
-            {
-                MoveNext();
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
+        public bool Select() { return base.BaseSelect(); }
         
-        public bool MoveNext()
-        {
-            if (MoveToPosition())
-            {
-                Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields);
-                return true;
-            }
-            else
-            {
-                Current = null;
-                return false;
-            }
-        }
-
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new РозхіднийКасовийОрдер_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        
         public РозхіднийКасовийОрдер_Pointer Current { get; private set; }
     }
     
@@ -8315,7 +7629,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     class First_RecordsSet : RegisterRecordsSet
     {
         public First_RecordsSet() : base(Config.Kernel, "tab_first",
-             new string[] { "col_field0", "col_field12", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
+             new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
         {
             Records = new List<First_Record>();
             Filter = new First_Filter();
@@ -8343,6 +7657,17 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 else
                 {
                     base.BaseFilter.Add(new Where("col_field12", Comparison.EQ, Filter.field12, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.field13 != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_field13", Comparison.EQ, Filter.field13, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_field13", Comparison.EQ, Filter.field13, false));
                     isExistPreceding = true; 
                 }
             }
@@ -8389,6 +7714,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
 
                 record.field0 = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_field0"]);
                 record.field12 = (fieldValue["col_field12"] != DBNull.Value) ? (int)fieldValue["col_field12"] : 0;
+                record.field13 = (fieldValue["col_field13"] != DBNull.Value) ? (int[])fieldValue["col_field13"] : new int[] { };
                 record.field11 = (fieldValue["col_field11"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_field11"].ToString()) : DateTime.MinValue;
                 record.field1 = fieldValue["col_field1"].ToString();
                 record.field2 = fieldValue["col_field2"].ToString();
@@ -8418,6 +7744,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
 
                     fieldValue.Add("col_field0", record.field0.ToString());
                     fieldValue.Add("col_field12", record.field12);
+                    fieldValue.Add("col_field13", record.field13);
                     fieldValue.Add("col_field11", record.field11);
                     fieldValue.Add("col_field1", record.field1);
                     fieldValue.Add("col_field2", record.field2);
@@ -8450,6 +7777,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             field0 = new Довідники.КлассификаторЕдИзм_Pointer();
             field12 = 0;
+            field13 = new int[] { };
             field11 = DateTime.MinValue;
             field1 = "";
             field2 = "";
@@ -8462,6 +7790,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         
         public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
         public int field12 { get; set; }
+        public int[] field13 { get; set; }
         public DateTime field11 { get; set; }
         public string field1 { get; set; }
         public string field2 { get; set; }
@@ -8478,6 +7807,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
              field0 = null;
              field12 = null;
+             field13 = null;
              field11 = null;
              field1 = null;
              field2 = null;
@@ -8486,6 +7816,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         
         public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
         public int? field12 { get; set; }
+        public int[] field13 { get; set; }
         public DateTime? field11 { get; set; }
         public string field1 { get; set; }
         public string field2 { get; set; }

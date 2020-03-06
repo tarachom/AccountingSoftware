@@ -92,7 +92,7 @@ namespace AccountingSoftware
 			DirectoryPointerPosition = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectDirectoryPointers(this, BaseSelectList);
+			Kernel.DataBase.SelectDirectoryPointers(QuerySelect, BaseSelectList);
 
 			return Count() > 0;
 		}
@@ -116,12 +116,29 @@ namespace AccountingSoftware
 
 			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
-			Query QuerySelect = new Query(Table);
+			Query querySelect = new Query(Table);
 			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
 
-			bool isFind = Kernel.DataBase.FindDirectoryPointer(QuerySelect, ref directoryPointer);
+			bool isFind = Kernel.DataBase.FindDirectoryPointer(querySelect, ref directoryPointer);
 
 			return directoryPointer;
+		}
+
+		protected List<DirectoryPointer> BaseFindListByField(string fieldName, object fieldValue, int limit = 0, int offset = 0)
+		{
+			if (!Alias.ContainsKey(fieldName))
+				throw new Exception("Поле " + fieldName + " не знайдено!");
+
+			List<DirectoryPointer> directoryPointerList = new List<DirectoryPointer>();
+
+			Query querySelect = new Query(Table);
+			querySelect.Limit = limit;
+			querySelect.Offset = offset;
+			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
+
+			Kernel.DataBase.SelectDirectoryPointers(querySelect, directoryPointerList);
+
+			return directoryPointerList;
 		}
 
 		public void Dispose()
