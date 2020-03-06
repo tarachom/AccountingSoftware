@@ -602,9 +602,9 @@ namespace AccountingSoftware
 
 		#endregion
 
-		#region Register
+		#region RegistersInformation
 
-		public void SelectRegisterRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
+		public void SelectRegisterInformationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
 		{
 			Query QuerySelect = new Query(table);
 
@@ -637,7 +637,7 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertRegisterRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertRegisterInformationRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query_field = "uid";
 			string query_values = "@uid";
@@ -665,7 +665,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteRegisterRecords(string table, List<Where> Filter)
+		public void DeleteRegisterInformationRecords(string table, List<Where> Filter)
 		{
 			Query QuerySelect = new Query(table);
 			QuerySelect.Where = Filter;

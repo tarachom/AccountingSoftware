@@ -70,9 +70,9 @@ namespace AccountingSoftware
 
 		#region RegisterInformation
 
-		void SelectRegisterRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
-		void InsertRegisterRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
-		void DeleteRegisterRecords(string table, List<Where> Filter);
+		void SelectRegisterInformationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
+		void InsertRegisterInformationRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteRegisterInformationRecords(string table, List<Where> Filter);
 
 		#endregion
 

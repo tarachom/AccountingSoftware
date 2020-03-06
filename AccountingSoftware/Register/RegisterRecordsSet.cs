@@ -59,7 +59,7 @@ namespace AccountingSoftware
 		protected void BaseRead()
 		{
 			BaseClear();
-			Kernel.DataBase.SelectRegisterRecords(Table, FieldArray, BaseFilter, FieldValueList);
+			Kernel.DataBase.SelectRegisterInformationRecords(Table, FieldArray, BaseFilter, FieldValueList);
 		}
 
 		protected void BaseBeginTransaction()
@@ -79,12 +79,12 @@ namespace AccountingSoftware
 
 		protected void BaseDelete()
 		{
-			Kernel.DataBase.DeleteRegisterRecords(Table, BaseFilter);
+			Kernel.DataBase.DeleteRegisterInformationRecords(Table, BaseFilter);
 		}
 
 		protected void BaseSave(Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertRegisterRecords(Table, FieldArray, fieldValue);
+			Kernel.DataBase.InsertRegisterInformationRecords(Table, FieldArray, fieldValue);
 		}
 	}
 }
