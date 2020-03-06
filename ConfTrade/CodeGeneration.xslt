@@ -1020,7 +1020,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             Records = new List&lt;<xsl:value-of select="$RegisterName"/>_Record&gt;();
             Filter = new <xsl:value-of select="$RegisterName"/>_Filter();
         }
-                
+        
         public List&lt;<xsl:value-of select="$RegisterName"/>_Record&gt; Records { get; set; }
         
         public void Read()
@@ -1031,7 +1031,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if>
             
             <xsl:for-each select="DimensionFields/Fields/Field">
-            if (Filter.<xsl:value-of select="Name"/> != <xsl:call-template name="DefaultParamValue" />)
+            if (Filter.<xsl:value-of select="Name"/><xsl:text> != </xsl:text>
+            <xsl:choose>
+              <xsl:when test="Type = 'string'">
+                 <xsl:text>""</xsl:text>              
+              </xsl:when>
+              <xsl:otherwise>
+                 <xsl:text>null</xsl:text>
+              </xsl:otherwise>
+            </xsl:choose>)
             {<xsl:choose>
               <xsl:when test="position() = 1">
                 base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
@@ -1052,7 +1060,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
                 }
-                else 
+                else
                 {
                     base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
@@ -1145,19 +1153,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     }
     
     class <xsl:value-of select="$RegisterName"/>_Filter
-    {   
-        public <xsl:value-of select="$RegisterName"/>_Filter()
-        {
-            <xsl:for-each select="DimensionFields/Fields/Field">
-              <xsl:value-of select="Name"/>
-              <xsl:text> = </xsl:text>
-              <xsl:call-template name="DefaultParamValue" />;
-            </xsl:for-each>
-        }
-        
+    {        
         <xsl:for-each select="DimensionFields/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
+          <xsl:if test="Type = 'integer' or Type = 'numeric' or Type = 'boolean' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+                <xsl:text>?</xsl:text>    
+          </xsl:if>
           <xsl:text> </xsl:text>
           <xsl:value-of select="Name"/>
           <xsl:text> { get; set; </xsl:text>}

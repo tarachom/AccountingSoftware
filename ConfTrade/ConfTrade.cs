@@ -50,6 +50,17 @@ namespace ConfTrade
 
 		static void Main(string[] args)
 		{
+			int? c = null;
+			c = 1;
+			DateTime? a = null;
+
+			a = DateTime.Now;
+
+			Console.WriteLine(c == null);
+			Console.WriteLine(c);
+			Console.ReadLine();
+
+
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
