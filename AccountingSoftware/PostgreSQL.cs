@@ -29,14 +29,9 @@ namespace AccountingSoftware
 {
 	public class PostgreSQL: IDataBase
 	{
-		public PostgreSQL()
-		{
-
-		}
+		public PostgreSQL() { }
 
 		private NpgsqlConnection Connection { get; set; }
-
-		private NpgsqlTransaction Transaction { get; set; }
 
 		public void Open(string connectionString)
 		{
@@ -48,6 +43,10 @@ namespace AccountingSoftware
 		{
 			Connection.Close();
 		}
+
+		#region Transaction
+
+		private NpgsqlTransaction Transaction { get; set; }
 
 		public void BeginTransaction()
 		{
@@ -63,6 +62,8 @@ namespace AccountingSoftware
 		{
 			Transaction.Rollback();
 		}
+
+		#endregion
 
 		#region Directory
 
@@ -685,6 +686,8 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region InformationShema
+
 		public bool IfExistsTable(string tableName)
 		{
 			string query = "SELECT table_name " +
@@ -771,5 +774,7 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
 			return nCommand.ExecuteNonQuery();
 		}
+
+		#endregion
 	}
 }

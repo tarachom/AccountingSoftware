@@ -65,6 +65,8 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
     <Content Include="back_up\DirectoryEmptyPointer.cs.txt" />
     <Content Include="back_up\DirectoryManager.cs.txt" />
+    <Compile Include="AccountingSoftware\Constants\ConstantsTablePart.cs" />
+    <Compile Include="AccountingSoftware\Constants\ConstantsTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />

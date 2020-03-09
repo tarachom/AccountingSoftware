@@ -51,15 +51,28 @@ namespace ConfTrade_v1_1.Константи
         public static Довідники.МестаХранения_Pointer ОсновнийСклад { get; set; }
         public static Перелічення.ВидиКонтрагентов Перелічення { get; set; }
         public static string Склад { get; set; }
-        
+
+        public class A:DirectoryTablePart
+        {
+            public A() : base(null, "", null)
+            {
+
+            }
+        }
     }
-    
+
+
+
     static class Група1_Block
     {
         public static int A { get; set; }
         public static string B { get; set; }
-        
-    }
+        void c()
+        {
+            Група0_Block.A a = new Група0_Block.A();
+            
+        }
+     }
     
     static class Група2_Block
     {

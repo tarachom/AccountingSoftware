@@ -81,8 +81,5 @@ namespace AccountingSoftware
 		bool IfExistsTable(string tableName);
 		bool IfExistsColumn(string tableName, string columnName);
 		int ExecuteSQL(string SqlQuery);
-
-
-
 	}
 }
