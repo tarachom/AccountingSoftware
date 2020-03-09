@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>06.03.2020 15:54:50</DateTimeSave>
+  <DateTimeSave>09.03.2020 18:15:07</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -2984,17 +2984,190 @@
       <Table>test</Table>
       <Desc>
       </Desc>
+      <Fields />
+      <TabularParts />
+    </Document>
+    <Document>
+      <Name>РасходнаяНакладная</Name>
+      <Table>tab_a51</Table>
+      <Desc>
+      </Desc>
       <Fields>
         <Field>
-          <Name>івафі</Name>
-          <NameInTable>col_a1</NameInTable>
+          <Name>Валюта</Name>
+          <NameInTable>col_c3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДокументОснование</Name>
+          <NameInTable>col_c2</NameInTable>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Договор</Name>
+          <NameInTable>col_c1</NameInTable>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_b9</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Дата_курса</Name>
+          <NameInTable>col_c4</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Курс</Name>
+          <NameInTable>col_c5</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Глубина</Name>
+          <NameInTable>col_c6</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаОплати</Name>
+          <NameInTable>col_c7</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>КатегорияЦен</Name>
+          <NameInTable>col_c8</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ВидОперации</Name>
+          <NameInTable>col_c9</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <NameInTable>col_d1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ВидТорговли</Name>
+          <NameInTable>col_d2</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>
         </Field>
         <Field>
-          <Name>цуйцу</Name>
-          <NameInTable>col_a2</NameInTable>
+          <Name>ЗасчитиватьОплатуПоСлужДоговору</Name>
+          <NameInTable>col_d3</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДовСерия</Name>
+          <NameInTable>col_d4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДовНомер</Name>
+          <NameInTable>col_d5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДовДата</Name>
+          <NameInTable>col_d6</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Отпустил</Name>
+          <NameInTable>col_d7</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Получил</Name>
+          <NameInTable>col_d8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>РежимПроведения</Name>
+          <NameInTable>col_d9</NameInTable>
+          <Type>integer</Type>
+          <Desc>1 - Предварительное проведение, 0 - не проведен или проведен полностью.</Desc>
+        </Field>
+        <Field>
+          <Name>Касса</Name>
+          <NameInTable>col_e1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.НашиДенежниеСчета</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>МестоСоставления</Name>
+          <NameInTable>col_e2</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ПолучилПоДругомуДокументу</Name>
+          <NameInTable>col_e3</NameInTable>
+          <Type>boolean</Type>
+          <Desc>Получил по другому документу (не по доверенности)</Desc>
+        </Field>
+        <Field>
+          <Name>ДокументПолучил</Name>
+          <NameInTable>col_e4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_e5</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_e6</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>
@@ -3002,53 +3175,95 @@
       </Fields>
       <TabularParts>
         <TablePart>
-          <Name>іва</Name>
-          <Table>tab_a52</Table>
+          <Name>Товари</Name>
+          <Table>tab_a53</Table>
           <Desc>
           </Desc>
           <Fields>
             <Field>
-              <Name>іаів</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>йцйц</Name>
-          <Table>tab_a52</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>йцуйцуй</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>йцуйцуйцуй</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Ордер</Name>
-              <NameInTable>col_a3</NameInTable>
+              <Name>Товар</Name>
+              <NameInTable>col_b1</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Документи.ПрихіднийКасовийОрдер</Pointer>
+              <Pointer>Довідники.Номенклатура</Pointer>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>Тип</Name>
-              <NameInTable>col_a4</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення.ВидиТоварів</Pointer>
+              <Name>Предпочтение</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>empty_pointer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Единица</Name>
+              <NameInTable>col_b3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Единици</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Количество</Name>
+              <NameInTable>col_b4</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Коеффициент</Name>
+              <NameInTable>col_b5</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>ЦенаБезНДС</Name>
+              <NameInTable>col_b6</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>ЦенаСНДС</Name>
+              <NameInTable>col_b7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СуммаБезСкидки</Name>
+              <NameInTable>col_b8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СуммаСкидки</Name>
+              <NameInTable>col_b9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СуммаБезНДС</Name>
+              <NameInTable>col_c1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СуммаСНДС</Name>
+              <NameInTable>col_c2</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Набор</Name>
+              <NameInTable>col_c3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -3057,38 +3272,130 @@
       </TabularParts>
     </Document>
     <Document>
-      <Name>РозхіднаНакладна</Name>
+      <Name>ПриходнаяНакладная</Name>
       <Table>tab_a51</Table>
-      <Desc>
-      </Desc>
+      <Desc>Приходная накладная</Desc>
       <Fields>
         <Field>
-          <Name>Назва</Name>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
           <NameInTable>col_a1</NameInTable>
           <Type>string</Type>
           <Desc>
           </Desc>
         </Field>
         <Field>
-          <Name>Номер</Name>
-          <NameInTable>col_a2</NameInTable>
+          <Name>Договор</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДокументОснование</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Дата_курса</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Курс</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Глубина</Name>
+          <NameInTable>col_a9</NameInTable>
           <Type>integer</Type>
           <Desc>
           </Desc>
         </Field>
         <Field>
+          <Name>ДатаОплати</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>КатегорияЦен</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
+          <Desc>Категория цен товаров при подборе из прайса</Desc>
+        </Field>
+        <Field>
+          <Name>ВидОперации</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>integer</Type>
+          <Desc>Вид операции
+приход/возврат</Desc>
+        </Field>
+        <Field>
           <Name>Склад</Name>
-          <NameInTable>col_a4</NameInTable>
+          <NameInTable>col_b4</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.МестаХранения</Pointer>
           <Desc>
           </Desc>
         </Field>
         <Field>
-          <Name>Контрагент</Name>
-          <NameInTable>col_a5</NameInTable>
+          <Name>ВидТорговли</Name>
+          <NameInTable>col_b5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ЗасчитиватьОплатуПоСлужДоговору</Name>
+          <NameInTable>col_b6</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Касса</Name>
+          <NameInTable>col_b7</NameInTable>
           <Type>pointer</Type>
-          <Pointer>Довідники.Контрагенти</Pointer>
+          <Pointer>Довідники.НашиДенежниеСчета</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>НомерРасходнойНакладной</Name>
+          <NameInTable>col_b8</NameInTable>
+          <Type>string</Type>
           <Desc>
           </Desc>
         </Field>
@@ -3109,166 +3416,51 @@
               </Desc>
             </Field>
             <Field>
-              <Name>Кво</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>integer</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Сума</Name>
+              <Name>Единица</Name>
               <NameInTable>col_a3</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Ціна</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>НомерСтроки</Name>
-              <NameInTable>col_a6</NameInTable>
-              <Type>integer</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>Послуги</Name>
-          <Table>tab_a52</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Послуга</Name>
-              <NameInTable>col_a1</NameInTable>
               <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
+              <Pointer>Довідники.Единици</Pointer>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>Сума</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>numeric</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Кво</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>integer</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-    </Document>
-    <Document>
-      <Name>ПрихіднаНакладна</Name>
-      <Table>tab_a51</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Номер</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>integer</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Склад</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.МестаХранения</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Контрагент</Name>
-          <NameInTable>col_a3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Контрагенти</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Товар</Name>
-          <Table>tab_a52</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Товар</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Кво</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>integer</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>Сума</Name>
+              <Name>Количество</Name>
               <NameInTable>col_a4</NameInTable>
               <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>Ціна</Name>
+              <Name>Коеффициент</Name>
               <NameInTable>col_a5</NameInTable>
               <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>НомерСтроки</Name>
+              <Name>ЦенаБезНДС</Name>
               <NameInTable>col_a6</NameInTable>
-              <Type>integer</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>Послуги</Name>
-          <Table>tab_a52</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Послуга</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Номенклатура</Pointer>
+              <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>Кво</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>integer</Type>
+              <Name>ЦенаСНДС</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>
             <Field>
-              <Name>Сума</Name>
-              <NameInTable>col_a3</NameInTable>
+              <Name>СуммаБезНДС</Name>
+              <NameInTable>col_a8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>СуммаСНДС</Name>
+              <NameInTable>col_a9</NameInTable>
               <Type>numeric</Type>
               <Desc>
               </Desc>
@@ -3364,6 +3556,260 @@
           <Type>integer</Type>
           <Desc>
           </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+    </Document>
+    <Document>
+      <Name>Инвентаризация</Name>
+      <Table>tab_a52</Table>
+      <Desc>Инвентаризация товаров</Desc>
+      <Fields>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>datetime</Type>
+          <Desc>ДатаДок</Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>integer</Type>
+          <Desc>НомерДок</Desc>
+        </Field>
+        <Field>
+          <Name>Склад</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.МестаХранения</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Дата_курса</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Курс</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ТипИнвентаризации</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ПредседательКомиссии</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ЧленКомиссии1</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ЧленКомиссии2</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ЧленКомиссии3</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ПровелПроверку</Name>
+          <NameInTable>col_b4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Сотрудники</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Товари</Name>
+          <Table>tab_a53</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Товар</Name>
+              <NameInTable>col_b5</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Единица</Name>
+              <NameInTable>col_b6</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Единици</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Количество</Name>
+              <NameInTable>col_b7</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Коеффициент</Name>
+              <NameInTable>col_b8</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>ИнвКоличество</Name>
+              <NameInTable>col_b9</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Стоимость</Name>
+              <NameInTable>col_c1</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+    </Document>
+    <Document>
+      <Name>Договор</Name>
+      <Table>tab_a55</Table>
+      <Desc>Договор с контрагентом</Desc>
+      <Fields>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_c6</NameInTable>
+          <Type>datetime</Type>
+          <Desc>ДатаДок</Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_c7</NameInTable>
+          <Type>integer</Type>
+          <Desc>НомерДок</Desc>
+        </Field>
+        <Field>
+          <Name>НомерДоговора</Name>
+          <NameInTable>col_c8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_c9</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <NameInTable>col_d1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Дата_курса</Name>
+          <NameInTable>col_d2</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Курс</Name>
+          <NameInTable>col_d3</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаНачала</Name>
+          <NameInTable>col_d4</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаОкончания</Name>
+          <NameInTable>col_d5</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ВидТорговли</Name>
+          <NameInTable>col_d6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>СпособФормированияНалоговихДокументов</Name>
+          <NameInTable>col_d7</NameInTable>
+          <Type>integer</Type>
+          <Desc>Способ формирования налоговых документов</Desc>
+        </Field>
+        <Field>
+          <Name>ПлательщикНалогаНаПрибиль</Name>
+          <NameInTable>col_d8</NameInTable>
+          <Type>boolean</Type>
+          <Desc>Плательщик налога на прибыль на общих основаниях</Desc>
+        </Field>
+        <Field>
+          <Name>ВидДоговора</Name>
+          <NameInTable>col_d9</NameInTable>
+          <Type>string</Type>
+          <Desc>Вид гражданско-правового договора</Desc>
         </Field>
       </Fields>
       <TabularParts />

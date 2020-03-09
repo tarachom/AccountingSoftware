@@ -399,7 +399,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
             base.Init(uid, fields);
-        } 
+        }
         
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
