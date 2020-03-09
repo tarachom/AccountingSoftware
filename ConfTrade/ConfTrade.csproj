@@ -60,10 +60,8 @@
     <Content Include="Configuration.xml" />
     <Content Include="Function.xslt" />
     <Content Include="InformationSchema.xml" />
-    <Content Include="old\code.txt" />
     <Content Include="README.txt" />
     <Content Include="ReportAnalize.xml" />
-    <Content Include="old\XSLTFile1.xslt" />
     <Content Include="test_Список.xslt" />
   </ItemGroup>
   <ItemGroup>
