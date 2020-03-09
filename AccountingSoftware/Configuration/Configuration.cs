@@ -575,6 +575,8 @@ namespace AccountingSoftware
 
 					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, constType, configurationConstantsBlock, constPointer, constDesc);
 					configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
+
+					LoadTabularParts(configurationConstants.TabularParts, constantsNodes.Current);
 				}
 			}
 		}
@@ -893,6 +895,8 @@ namespace AccountingSoftware
 					nodePointer.InnerText = ConfConstant.Value.Pointer;
 					rootConstant.AppendChild(nodePointer);
 				}
+
+				SaveTabularParts(ConfConstant.Value.TabularParts, xmlConfDocument, rootConstant);
 			}
 		}
 

@@ -1185,29 +1185,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_a47</Name>
-    <Column>
-      <Name>col_a1_old_21_02_2020_17_46_00</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1_old_21_02_2020_17_52_06</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a27</Name>
     <Column>
       <Name>col_a7</Name>
@@ -1671,6 +1648,24 @@
       <Name>col_a7</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a47</Name>
+    <Column>
+      <Name>any_col</Name>
+      <DataType>USER-DEFINED</DataType>
+      <UdtName>uuid_and_string</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
   </Table>
 </InformationSchema>

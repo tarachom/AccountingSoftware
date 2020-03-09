@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>09.03.2020 18:15:07</DateTimeSave>
+  <DateTimeSave>09.03.2020 20:41:41</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -15,6 +15,7 @@
           </Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.Контрагенти</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>ОсновнийСклад</Name>
@@ -22,6 +23,7 @@
           </Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.МестаХранения</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>Перелічення</Name>
@@ -29,12 +31,14 @@
           </Desc>
           <Type>enum</Type>
           <Pointer>Перелічення.ВидиКонтрагентов</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>Склад</Name>
           <Desc>
           </Desc>
           <Type>string</Type>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>
@@ -47,12 +51,14 @@
           <Desc>
           </Desc>
           <Type>integer</Type>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>B</Name>
           <Desc>
           </Desc>
           <Type>string</Type>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>
@@ -66,12 +72,14 @@
           <Desc>іваіdddd</Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.test2</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>ваіва</Name>
           <Desc>
           </Desc>
           <Type>string</Type>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>A</Name>
@@ -79,24 +87,28 @@
           </Desc>
           <Type>enum</Type>
           <Pointer>Перелічення.Перелічення2</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>Ф2</Name>
           <Desc>ва</Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.МестаХранения</Pointer>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>Ntcn1</Name>
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>Ntcn2</Name>
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>
@@ -110,6 +122,7 @@
           <Desc>
           </Desc>
           <Type>string</Type>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>

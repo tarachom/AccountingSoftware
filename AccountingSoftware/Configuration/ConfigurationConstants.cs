@@ -40,6 +40,8 @@ namespace AccountingSoftware
 			Block = block;
 			Pointer = pointer;
 			Desc = desc;
+
+			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
 		public ConfigurationConstantsBlock Block { get; set; }
@@ -63,5 +65,18 @@ namespace AccountingSoftware
 		/// Вказівник на об'єкт конфігурації
 		/// </summary>
 		public string Pointer { get; set; }
+
+		/// <summary>
+		/// Табличні частини
+		/// </summary>
+		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
 	}
 }
+
+/*
+
+Довідка.
+TabularParts - список табличних частин для константи.
+Може використовуватися для збереження історії константи.
+
+ */
