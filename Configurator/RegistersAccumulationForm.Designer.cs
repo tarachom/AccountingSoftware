@@ -1,6 +1,6 @@
 ﻿namespace Configurator
 {
-	partial class RegistersInformationForm
+	partial class RegistersAccumulationForm
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -36,6 +36,8 @@
 			this.buttonAddField = new System.Windows.Forms.Button();
 			this.contextMenuStripAddField = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addDimensionField = new System.Windows.Forms.ToolStripMenuItem();
+			this.addResourcesField = new System.Windows.Forms.ToolStripMenuItem();
+			this.addPropertyField = new System.Windows.Forms.ToolStripMenuItem();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -47,8 +49,8 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.addResourcesField = new System.Windows.Forms.ToolStripMenuItem();
-			this.addPropertyField = new System.Windows.Forms.ToolStripMenuItem();
+			this.label2 = new System.Windows.Forms.Label();
+			this.comboBoxRegisterType = new System.Windows.Forms.ComboBox();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -121,9 +123,23 @@
 			// addDimensionField
 			// 
 			this.addDimensionField.Name = "addDimensionField";
-			this.addDimensionField.Size = new System.Drawing.Size(180, 22);
+			this.addDimensionField.Size = new System.Drawing.Size(112, 22);
 			this.addDimensionField.Text = "Вимір";
 			this.addDimensionField.Click += new System.EventHandler(this.addDimensionField_Click);
+			// 
+			// addResourcesField
+			// 
+			this.addResourcesField.Name = "addResourcesField";
+			this.addResourcesField.Size = new System.Drawing.Size(112, 22);
+			this.addResourcesField.Text = "Ресурс";
+			this.addResourcesField.Click += new System.EventHandler(this.addResourcesField_Click);
+			// 
+			// addPropertyField
+			// 
+			this.addPropertyField.Name = "addPropertyField";
+			this.addPropertyField.Size = new System.Drawing.Size(112, 22);
+			this.addPropertyField.Text = "Поле";
+			this.addPropertyField.Click += new System.EventHandler(this.addPropertyField_Click);
 			// 
 			// label1
 			// 
@@ -182,6 +198,8 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.comboBoxRegisterType);
+			this.splitContainer1.Panel2.Controls.Add(this.label2);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
 			this.splitContainer1.Panel2.Controls.Add(this.label5);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxTable);
@@ -196,7 +214,7 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(88, 83);
+			this.textBoxDesc.Location = new System.Drawing.Point(88, 111);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
 			this.textBoxDesc.Size = new System.Drawing.Size(456, 62);
@@ -205,7 +223,7 @@
 			// label5
 			// 
 			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(11, 86);
+			this.label5.Location = new System.Drawing.Point(11, 114);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(36, 13);
 			this.label5.TabIndex = 4;
@@ -247,21 +265,26 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// addResourcesField
+			// label2
 			// 
-			this.addResourcesField.Name = "addResourcesField";
-			this.addResourcesField.Size = new System.Drawing.Size(180, 22);
-			this.addResourcesField.Text = "Ресурс";
-			this.addResourcesField.Click += new System.EventHandler(this.addResourcesField_Click);
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(9, 86);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(73, 13);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Тип регістру:";
 			// 
-			// addPropertyField
+			// comboBoxRegisterType
 			// 
-			this.addPropertyField.Name = "addPropertyField";
-			this.addPropertyField.Size = new System.Drawing.Size(180, 22);
-			this.addPropertyField.Text = "Поле";
-			this.addPropertyField.Click += new System.EventHandler(this.addPropertyField_Click);
+			this.comboBoxRegisterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxRegisterType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxRegisterType.FormattingEnabled = true;
+			this.comboBoxRegisterType.Location = new System.Drawing.Point(88, 83);
+			this.comboBoxRegisterType.Name = "comboBoxRegisterType";
+			this.comboBoxRegisterType.Size = new System.Drawing.Size(291, 21);
+			this.comboBoxRegisterType.TabIndex = 7;
 			// 
-			// RegistersInformationForm
+			// RegistersAccumulationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -269,9 +292,9 @@
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
 			this.KeyPreview = true;
-			this.Name = "RegistersInformationForm";
+			this.Name = "RegistersAccumulationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "Регістер накопичення";
+			this.Text = "Регістер відомостей";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablePartForm_KeyDown);
 			this.panel1.ResumeLayout(false);
@@ -310,5 +333,7 @@
 		private System.Windows.Forms.ToolStripMenuItem addDimensionField;
 		private System.Windows.Forms.ToolStripMenuItem addResourcesField;
 		private System.Windows.Forms.ToolStripMenuItem addPropertyField;
+		private System.Windows.Forms.ComboBox comboBoxRegisterType;
+		private System.Windows.Forms.Label label2;
 	}
 }

@@ -46,23 +46,23 @@ namespace ConfTrade
 		static void Test2()
 		{
 
-			Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
-			Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
+			//Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
+			//Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
 
-			РегістриВідомостей.First_RecordsSet first_RecordsSet = new РегістриВідомостей.First_RecordsSet();
+			//РегістриВідомостей.First_RecordsSet first_RecordsSet = new РегістриВідомостей.First_RecordsSet();
 
-			РегістриВідомостей.First_Record first_Record1 = new РегістриВідомостей.First_Record();
-			first_Record1.field0 = new Довідники.КлассификаторЕдИзм_Select().FindByField("Код", "1");
+			//РегістриВідомостей.First_Record first_Record1 = new РегістриВідомостей.First_Record();
+			//first_Record1.field0 = new Довідники.КлассификаторЕдИзм_Select().FindByField("Код", "1");
 
-			first_RecordsSet.Records.Add(first_Record1);
+			//first_RecordsSet.Records.Add(first_Record1);
 
-			first_RecordsSet.Read();
-			foreach (РегістриВідомостей.First_Record first_Record in first_RecordsSet.Records)
-			{
-				first_Record.field1 = "";
-			}
+			//first_RecordsSet.Read();
+			//foreach (РегістриВідомостей.First_Record first_Record in first_RecordsSet.Records)
+			//{
+			//	first_Record.field1 = "";
+			//}
 
-			first_RecordsSet.Save();
+			//first_RecordsSet.Save();
 		}
 
 		static string Run4()

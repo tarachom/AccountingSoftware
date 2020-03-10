@@ -179,6 +179,15 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
+		/// Додати регістр в список регістрів
+		/// </summary>
+		/// <param name="registersAccumulation">Регістр</param>
+		public void AppendRegistersAccumulation(ConfigurationRegistersAccumulation registersAccumulation)
+		{
+			RegistersAccumulation.Add(registersAccumulation.Name, registersAccumulation);
+		}
+
+		/// <summary>
 		/// Пошук ссилок довідників і документів
 		/// </summary>
 		/// <param name="searchName">Назва довідника або документу</param>

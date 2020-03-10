@@ -302,7 +302,7 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> ConfRegistersAccumulation in Conf.RegistersAccumulation)
 			{
 				TreeNode registerAccumulationNode = rootNode.Nodes.Add(ConfRegistersAccumulation.Key, ConfRegistersAccumulation.Value.Name);
-				registerAccumulationNode.ContextMenuStrip = contextMenuStrip2;
+				registerAccumulationNode.ContextMenuStrip = contextMenuStripRegistersAccumulation;
 				registerAccumulationNode.SelectedImageIndex = 13;
 				registerAccumulationNode.ImageIndex = 13;
 
@@ -693,6 +693,33 @@ namespace Configurator
 			LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
 		}
 
+		bool CallBack_IsExistRegistersAccumulation(string name)
+		{
+			return Conf.RegistersAccumulation.ContainsKey(name);
+		}
+
+		void CallBack_Update_RegistersAccumulation(string originalName, ConfigurationRegistersAccumulation configurationRegistersAccumulation, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendRegistersAccumulation(configurationRegistersAccumulation);
+			}
+			else
+			{
+				if (originalName != configurationRegistersAccumulation.Name)
+				{
+					Conf.RegistersAccumulation.Remove(originalName);
+					Conf.AppendRegistersAccumulation(configurationRegistersAccumulation);
+				}
+				else
+				{
+					Conf.RegistersAccumulation[originalName] = configurationRegistersAccumulation;
+				}
+			}
+
+			LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
+		}
+
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
@@ -876,6 +903,28 @@ namespace Configurator
 			registersInformationForm.CallBack = CallBack_Update_RegistersInformation;
 			registersInformationForm.CallBack_IsExistRegistersInformation = CallBack_IsExistRegistersInformation;
 			registersInformationForm.Show();
+		}
+
+		private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RegistersAccumulationForm registersAccumulationForm = new RegistersAccumulationForm();
+			registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
+			registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
+			registersAccumulationForm.Show();
+		}
+
+		private void openItemRegistersAccumulation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersAccumulationName = nodeSel.Name;
+
+				RegistersAccumulationForm registersAccumulationForm = new RegistersAccumulationForm();
+				registersAccumulationForm.ConfRegistersAccumulation = Conf.RegistersAccumulation[registersAccumulationName];
+				registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
+				registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
+				registersAccumulationForm.Show();
+			}
 		}
 	}
 }

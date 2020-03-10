@@ -34,25 +34,29 @@ using AccountingSoftware;
 
 namespace Configurator
 {
-	public partial class RegistersInformationForm : Form
+	public partial class RegistersAccumulationForm : Form
 	{
-		public RegistersInformationForm()
+		public RegistersAccumulationForm()
 		{
 			InitializeComponent();
 		}
 
-		public Action<string, ConfigurationRegistersInformation, bool> CallBack { get; set; }
-		public Func<string, Boolean> CallBack_IsExistRegistersInformation { get; set; }
+		public Action<string, ConfigurationRegistersAccumulation, bool> CallBack { get; set; }
+		public Func<string, Boolean> CallBack_IsExistRegistersAccumulation { get; set; }
 
-		public ConfigurationRegistersInformation ConfRegistersInformation { get; set; }
+		public ConfigurationRegistersAccumulation ConfRegistersAccumulation { get; set; }
 		public bool IsNew { get; set; }
 		public string OriginalName { get; set; }
 
 		private void TablePartForm_Load(object sender, EventArgs e)
 		{
-			if (ConfRegistersInformation == null)
+			comboBoxRegisterType.Items.Add(TypeRegistersAccumulation.Residues);
+			comboBoxRegisterType.Items.Add(TypeRegistersAccumulation.Turnover);
+			comboBoxRegisterType.SelectedItem = comboBoxRegisterType.Items[0];
+
+			if (ConfRegistersAccumulation == null)
 			{
-				ConfRegistersInformation = new ConfigurationRegistersInformation();
+				ConfRegistersAccumulation = new ConfigurationRegistersAccumulation();
 
 				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
 
@@ -60,12 +64,17 @@ namespace Configurator
 			}
 			else
 			{
-				OriginalName = ConfRegistersInformation.Name;
+				OriginalName = ConfRegistersAccumulation.Name;
 
-				textBoxName.Text = ConfRegistersInformation.Name;
-				textBoxTable.Text = ConfRegistersInformation.Table;
-				textBoxDesc.Text = ConfRegistersInformation.Desc;
+				textBoxName.Text = ConfRegistersAccumulation.Name;
+				textBoxTable.Text = ConfRegistersAccumulation.Table;
+				textBoxDesc.Text = ConfRegistersAccumulation.Desc;
 
+				if (ConfRegistersAccumulation.TypeRegistersAccumulation == TypeRegistersAccumulation.Residues)
+					comboBoxRegisterType.SelectedItem = comboBoxRegisterType.Items[0];
+				else if (ConfRegistersAccumulation.TypeRegistersAccumulation == TypeRegistersAccumulation.Turnover)
+					comboBoxRegisterType.SelectedItem = comboBoxRegisterType.Items[1];
+				
 				IsNew = false;
 			}
 
@@ -76,7 +85,7 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (ConfigurationObjectField dimensionField in ConfRegistersInformation.DimensionFields.Values)
+			foreach (ConfigurationObjectField dimensionField in ConfRegistersAccumulation.DimensionFields.Values)
 			{
 				TreeNode dimensionNode = rootNode.Nodes.Add(dimensionField.Name, dimensionField.Name);
 				dimensionNode.Tag = new  Tuple<ConfigurationObjectField, string>(dimensionField, "Dimension");
@@ -87,7 +96,7 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (ConfigurationObjectField resourcesFields in ConfRegistersInformation.ResourcesFields.Values)
+			foreach (ConfigurationObjectField resourcesFields in ConfRegistersAccumulation.ResourcesFields.Values)
 			{
 				TreeNode resourcesNode = rootNode.Nodes.Add(resourcesFields.Name, resourcesFields.Name);
 				resourcesNode.Tag = new Tuple<ConfigurationObjectField, string>(resourcesFields, "Resources");
@@ -98,7 +107,7 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (ConfigurationObjectField propertyFields in ConfRegistersInformation.PropertyFields.Values)
+			foreach (ConfigurationObjectField propertyFields in ConfRegistersAccumulation.PropertyFields.Values)
 			{
 				TreeNode propertyNode = rootNode.Nodes.Add(propertyFields.Name, propertyFields.Name);
 				propertyNode.Tag = new Tuple<ConfigurationObjectField, string>(propertyFields, "Property");
@@ -134,17 +143,18 @@ namespace Configurator
 			}
 
 			if (IsNew || OriginalName != name)
-				if (CallBack_IsExistRegistersInformation(name))
+				if (CallBack_IsExistRegistersAccumulation(name))
 				{
 					MessageBox.Show("Назва регістру не унікальна", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 
-			ConfRegistersInformation.Name = textBoxName.Text;
-			ConfRegistersInformation.Table = textBoxTable.Text;
-			ConfRegistersInformation.Desc = textBoxDesc.Text;
+			ConfRegistersAccumulation.Name = textBoxName.Text;
+			ConfRegistersAccumulation.Table = textBoxTable.Text;
+			ConfRegistersAccumulation.TypeRegistersAccumulation = (TypeRegistersAccumulation)comboBoxRegisterType.SelectedItem;
+			ConfRegistersAccumulation.Desc = textBoxDesc.Text;
 
-			CallBack.Invoke(OriginalName, ConfRegistersInformation, IsNew);
+			CallBack.Invoke(OriginalName, ConfRegistersAccumulation, IsNew);
 
 			this.Hide();
 		}
@@ -156,9 +166,9 @@ namespace Configurator
 
 		bool CallBack_IsExistFieldName(string name)
 		{
-			return ConfRegistersInformation.DimensionFields.ContainsKey(name) ||
-				ConfRegistersInformation.ResourcesFields.ContainsKey(name) ||
-				ConfRegistersInformation.PropertyFields.ContainsKey(name);
+			return ConfRegistersAccumulation.DimensionFields.ContainsKey(name) ||
+				ConfRegistersAccumulation.ResourcesFields.ContainsKey(name) ||
+				ConfRegistersAccumulation.PropertyFields.ContainsKey(name);
 		}
 
 		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew, object Tag)
@@ -170,11 +180,11 @@ namespace Configurator
 			if (isNew)
 			{
 				if (flagTag == "Dimension")
-					ConfRegistersInformation.AppendDimensionField(configurationObjectField);
+					ConfRegistersAccumulation.AppendDimensionField(configurationObjectField);
 				else if (flagTag == "Resources")
-					ConfRegistersInformation.AppendResourcesField(configurationObjectField);
+					ConfRegistersAccumulation.AppendResourcesField(configurationObjectField);
 				else if (flagTag == "Property")
-					ConfRegistersInformation.AppendPropertyField(configurationObjectField);					
+					ConfRegistersAccumulation.AppendPropertyField(configurationObjectField);					
 			}
 			else
 			{
@@ -182,28 +192,28 @@ namespace Configurator
 				{
 					if (flagTag == "Dimension")
 					{
-						ConfRegistersInformation.DimensionFields.Remove(originalName);
-						ConfRegistersInformation.AppendDimensionField(configurationObjectField);
+						ConfRegistersAccumulation.DimensionFields.Remove(originalName);
+						ConfRegistersAccumulation.AppendDimensionField(configurationObjectField);
 					}
 					else if (flagTag == "Resources")
 					{
-						ConfRegistersInformation.ResourcesFields.Remove(originalName);
-						ConfRegistersInformation.AppendResourcesField(configurationObjectField);
+						ConfRegistersAccumulation.ResourcesFields.Remove(originalName);
+						ConfRegistersAccumulation.AppendResourcesField(configurationObjectField);
 					}
 					else if (flagTag == "Property")
 					{
-						ConfRegistersInformation.PropertyFields.Remove(originalName);
-						ConfRegistersInformation.AppendPropertyField(configurationObjectField);
+						ConfRegistersAccumulation.PropertyFields.Remove(originalName);
+						ConfRegistersAccumulation.AppendPropertyField(configurationObjectField);
 					}
 				}
 				else
 				{
 					if (flagTag == "Dimension")
-						ConfRegistersInformation.DimensionFields[originalName] = configurationObjectField;
+						ConfRegistersAccumulation.DimensionFields[originalName] = configurationObjectField;
 					else if (flagTag == "Resources")
-						ConfRegistersInformation.ResourcesFields[originalName] = configurationObjectField;
+						ConfRegistersAccumulation.ResourcesFields[originalName] = configurationObjectField;
 					else if (flagTag == "Property")
-						ConfRegistersInformation.PropertyFields[originalName] = configurationObjectField;					
+						ConfRegistersAccumulation.PropertyFields[originalName] = configurationObjectField;					
 				}
 			}
 
@@ -235,13 +245,13 @@ namespace Configurator
 		{
 			Dictionary<string, ConfigurationObjectField> allField = new Dictionary<string, ConfigurationObjectField>();
 
-			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.DimensionFields)
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersAccumulation.DimensionFields)
 				allField.Add(keyValuePair.Key, keyValuePair.Value);
 
-			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.ResourcesFields)
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersAccumulation.ResourcesFields)
 				allField.Add(keyValuePair.Key, keyValuePair.Value);
 
-			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.PropertyFields)
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersAccumulation.PropertyFields)
 				allField.Add(keyValuePair.Key, keyValuePair.Value);
 
 			return allField;
@@ -253,7 +263,7 @@ namespace Configurator
 			fieldForm.Tag = "Dimension";
 			fieldForm.CallBack = CallBack_Update_Field;
 			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersAccumulation.Table, GetAllField());
 			fieldForm.Show();
 		}
 
@@ -270,7 +280,7 @@ namespace Configurator
 				fieldForm.ConfigurationObjectField = field;
 				fieldForm.CallBack = CallBack_Update_Field;
 				fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-				fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+				fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersAccumulation.Table, GetAllField());
 				fieldForm.Show();
 			}
 		}
@@ -281,7 +291,7 @@ namespace Configurator
 			fieldForm.Tag = "Resources";
 			fieldForm.CallBack = CallBack_Update_Field;
 			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersAccumulation.Table, GetAllField());
 			fieldForm.Show();
 		}
 
@@ -291,7 +301,7 @@ namespace Configurator
 			fieldForm.Tag = "Property";
 			fieldForm.CallBack = CallBack_Update_Field;
 			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersAccumulation.Table, GetAllField());
 			fieldForm.Show();
 		}
 	}

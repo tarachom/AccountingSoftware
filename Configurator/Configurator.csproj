@@ -76,6 +76,12 @@
     <Compile Include="EnumFieldForm.Designer.cs">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistersAccumulationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistersAccumulationForm.Designer.cs">
+      <DependentUpon>RegistersAccumulationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="RegistersInformationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnumFieldForm.resx">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistersAccumulationForm.resx">
+      <DependentUpon>RegistersAccumulationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RegistersInformationForm.resx">
       <DependentUpon>RegistersInformationForm.cs</DependentUpon>

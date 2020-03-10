@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.03.2020 16:33:11
+ * Дата конфігурації: 10.03.2020 17:17:58
  *
  */
 
@@ -8558,14 +8558,54 @@ namespace ConfTrade_v1_1.РегістриНакопичення
         public one_Record()
         {
             field1 = "";
+            field4 = "";
             field2 = "";
             field3 = "";
             
         }
         
         public string field1 { get; set; }
+        public string field4 { get; set; }
         public string field2 { get; set; }
         public string field3 { get; set; }
+        
+    }
+    #endregion
+  
+    #region REGISTER "Остатки"
+    
+    class Остатки_Record
+    {
+        public Остатки_Record()
+        {
+            Товар = new Довідники.Номенклатура_Pointer();
+            Склад = new Довідники.МестаХранения_Pointer();
+            Кількість = 0;
+            Договір = new Документи.Договор_Pointer();
+            
+        }
+        
+        public Довідники.Номенклатура_Pointer Товар { get; set; }
+        public Довідники.МестаХранения_Pointer Склад { get; set; }
+        public int Кількість { get; set; }
+        public Документи.Договор_Pointer Договір { get; set; }
+        
+    }
+    #endregion
+  
+    #region REGISTER "Обороти"
+    ///<summary>
+    ///Обороти.
+    ///</summary>
+    class Обороти_Record
+    {
+        public Обороти_Record()
+        {
+            Товар = new Довідники.Номенклатура_Pointer();
+            
+        }
+        
+        public Довідники.Номенклатура_Pointer Товар { get; set; }
         
     }
     #endregion
