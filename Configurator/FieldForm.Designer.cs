@@ -52,10 +52,10 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(123, 70);
+			this.textBoxDesc.Location = new System.Drawing.Point(95, 70);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(446, 63);
+			this.textBoxDesc.Size = new System.Drawing.Size(474, 63);
 			this.textBoxDesc.TabIndex = 11;
 			// 
 			// label5
@@ -71,9 +71,9 @@
 			// 
 			this.textBoxNameInTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxNameInTable.Location = new System.Drawing.Point(123, 44);
+			this.textBoxNameInTable.Location = new System.Drawing.Point(95, 44);
 			this.textBoxNameInTable.Name = "textBoxNameInTable";
-			this.textBoxNameInTable.Size = new System.Drawing.Size(446, 20);
+			this.textBoxNameInTable.Size = new System.Drawing.Size(474, 20);
 			this.textBoxNameInTable.TabIndex = 9;
 			// 
 			// label4
@@ -81,17 +81,17 @@
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(3, 47);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(118, 13);
+			this.label4.Size = new System.Drawing.Size(91, 13);
 			this.label4.TabIndex = 8;
-			this.label4.Text = "Назва поля в таблиці:";
+			this.label4.Text = "Назва в таблиці:";
 			// 
 			// textBoxName
 			// 
 			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxName.Location = new System.Drawing.Point(123, 18);
+			this.textBoxName.Location = new System.Drawing.Point(95, 18);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(446, 20);
+			this.textBoxName.Size = new System.Drawing.Size(474, 20);
 			this.textBoxName.TabIndex = 7;
 			// 
 			// label3
@@ -152,9 +152,9 @@
 			this.comboBoxFieldType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxFieldType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxFieldType.FormattingEnabled = true;
-			this.comboBoxFieldType.Location = new System.Drawing.Point(123, 139);
+			this.comboBoxFieldType.Location = new System.Drawing.Point(95, 139);
 			this.comboBoxFieldType.Name = "comboBoxFieldType";
-			this.comboBoxFieldType.Size = new System.Drawing.Size(446, 21);
+			this.comboBoxFieldType.Size = new System.Drawing.Size(474, 21);
 			this.comboBoxFieldType.TabIndex = 14;
 			this.comboBoxFieldType.SelectedIndexChanged += new System.EventHandler(this.comboBoxFieldType_SelectedIndexChanged);
 			// 
@@ -192,9 +192,9 @@
 			this.comboBoxEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxEnums.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxEnums.FormattingEnabled = true;
-			this.comboBoxEnums.Location = new System.Drawing.Point(123, 194);
+			this.comboBoxEnums.Location = new System.Drawing.Point(95, 194);
 			this.comboBoxEnums.Name = "comboBoxEnums";
-			this.comboBoxEnums.Size = new System.Drawing.Size(446, 21);
+			this.comboBoxEnums.Size = new System.Drawing.Size(474, 21);
 			this.comboBoxEnums.TabIndex = 19;
 			// 
 			// label6
@@ -211,9 +211,9 @@
 			this.comboBoxPointer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.comboBoxPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxPointer.FormattingEnabled = true;
-			this.comboBoxPointer.Location = new System.Drawing.Point(123, 167);
+			this.comboBoxPointer.Location = new System.Drawing.Point(95, 167);
 			this.comboBoxPointer.Name = "comboBoxPointer";
-			this.comboBoxPointer.Size = new System.Drawing.Size(446, 21);
+			this.comboBoxPointer.Size = new System.Drawing.Size(474, 21);
 			this.comboBoxPointer.TabIndex = 17;
 			// 
 			// FieldForm

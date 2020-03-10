@@ -44,10 +44,10 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(123, 44);
+			this.textBoxDesc.Location = new System.Drawing.Point(51, 44);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(443, 63);
+			this.textBoxDesc.Size = new System.Drawing.Size(510, 63);
 			this.textBoxDesc.TabIndex = 11;
 			// 
 			// label5
@@ -63,9 +63,9 @@
 			// 
 			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxName.Location = new System.Drawing.Point(123, 18);
+			this.textBoxName.Location = new System.Drawing.Point(51, 18);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(443, 20);
+			this.textBoxName.Size = new System.Drawing.Size(510, 20);
 			this.textBoxName.TabIndex = 7;
 			// 
 			// label3
@@ -81,7 +81,7 @@
 			// 
 			this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.buttonClose.Location = new System.Drawing.Point(612, 3);
+			this.buttonClose.Location = new System.Drawing.Point(452, 3);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(109, 32);
 			this.buttonClose.TabIndex = 3;
@@ -93,7 +93,7 @@
 			// 
 			this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-			this.buttonSave.Location = new System.Drawing.Point(497, 3);
+			this.buttonSave.Location = new System.Drawing.Point(337, 3);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(109, 32);
 			this.buttonSave.TabIndex = 2;
@@ -107,9 +107,9 @@
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(10, 439);
+			this.panel2.Location = new System.Drawing.Point(10, 139);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(724, 38);
+			this.panel2.Size = new System.Drawing.Size(564, 38);
 			this.panel2.TabIndex = 12;
 			// 
 			// panel1
@@ -118,16 +118,17 @@
 			this.panel1.Controls.Add(this.textBoxName);
 			this.panel1.Controls.Add(this.label5);
 			this.panel1.Controls.Add(this.textBoxDesc);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.panel1.Location = new System.Drawing.Point(10, 10);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(569, 125);
+			this.panel1.Size = new System.Drawing.Size(564, 129);
 			this.panel1.TabIndex = 16;
 			// 
 			// ConstantsBlockForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(744, 487);
+			this.ClientSize = new System.Drawing.Size(584, 187);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
 			this.KeyPreview = true;

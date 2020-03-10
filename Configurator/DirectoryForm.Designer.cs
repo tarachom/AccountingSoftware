@@ -290,10 +290,10 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(131, 83);
+			this.textBoxDesc.Location = new System.Drawing.Point(85, 83);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(413, 62);
+			this.textBoxDesc.Size = new System.Drawing.Size(459, 62);
 			this.textBoxDesc.TabIndex = 5;
 			// 
 			// label5
@@ -309,9 +309,9 @@
 			// 
 			this.textBoxTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTable.Location = new System.Drawing.Point(131, 57);
+			this.textBoxTable.Location = new System.Drawing.Point(85, 57);
 			this.textBoxTable.Name = "textBoxTable";
-			this.textBoxTable.Size = new System.Drawing.Size(413, 20);
+			this.textBoxTable.Size = new System.Drawing.Size(459, 20);
 			this.textBoxTable.TabIndex = 3;
 			// 
 			// label4
@@ -319,17 +319,17 @@
 			this.label4.AutoSize = true;
 			this.label4.Location = new System.Drawing.Point(11, 60);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(114, 13);
+			this.label4.Size = new System.Drawing.Size(74, 13);
 			this.label4.TabIndex = 2;
-			this.label4.Text = "Назва таблиці в базі:";
+			this.label4.Text = "Назва в базі:";
 			// 
 			// textBoxName
 			// 
 			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxName.Location = new System.Drawing.Point(131, 31);
+			this.textBoxName.Location = new System.Drawing.Point(85, 31);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(413, 20);
+			this.textBoxName.Size = new System.Drawing.Size(459, 20);
 			this.textBoxName.TabIndex = 1;
 			// 
 			// label3

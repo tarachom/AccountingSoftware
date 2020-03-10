@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.03.2020 13:04:43</DateTimeSave>
+  <DateTimeSave>10.03.2020 14:41:49</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -4087,6 +4087,21 @@
             </Desc>
           </Field>
         </Fields>
+      </PropertyFields>
+    </RegisterInformation>
+    <RegisterInformation>
+      <Name>івфіф</Name>
+      <Table>tab_a60</Table>
+      <Desc>
+      </Desc>
+      <DimensionFields>
+        <Fields />
+      </DimensionFields>
+      <ResourcesFields>
+        <Fields />
+      </ResourcesFields>
+      <PropertyFields>
+        <Fields />
       </PropertyFields>
     </RegisterInformation>
   </RegistersInformation>

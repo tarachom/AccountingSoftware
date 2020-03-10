@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.03.2020 13:04:43
+ * Дата конфігурації: 10.03.2020 14:41:49
  *
  */
 
@@ -8298,6 +8298,92 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         }
         
         public string field1 { get; set; }
+        
+    }
+    #endregion
+  
+    #region REGISTER "івфіф"
+    
+    
+    class івфіф_RecordsSet : RegisterRecordsSet
+    {
+        public івфіф_RecordsSet() : base(Config.Kernel, "tab_a60",
+             new string[] {  }) 
+        {
+            Records = new List<івфіф_Record>();
+            Filter = new івфіф_Filter();
+        }
+        
+        public List<івфіф_Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            
+            
+
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                івфіф_Record record = new івфіф_Record();
+
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (івфіф_Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    
+                    base.BaseSave(fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+        
+        public івфіф_Filter Filter { get; set; }
+    }
+    
+    
+    class івфіф_Record
+    {
+        public івфіф_Record()
+        {
+            
+        }
+        
+        
+    }
+    
+    class івфіф_Filter
+    {
+        public івфіф_Filter()
+        {
+             
+        }
+        
         
     }
     #endregion

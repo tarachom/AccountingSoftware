@@ -46,10 +46,10 @@
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxDesc.Location = new System.Drawing.Point(123, 70);
+			this.textBoxDesc.Location = new System.Drawing.Point(116, 70);
 			this.textBoxDesc.Multiline = true;
 			this.textBoxDesc.Name = "textBoxDesc";
-			this.textBoxDesc.Size = new System.Drawing.Size(442, 63);
+			this.textBoxDesc.Size = new System.Drawing.Size(449, 63);
 			this.textBoxDesc.TabIndex = 11;
 			// 
 			// label5
@@ -65,9 +65,9 @@
 			// 
 			this.textBoxNameValue.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxNameValue.Location = new System.Drawing.Point(123, 44);
+			this.textBoxNameValue.Location = new System.Drawing.Point(116, 44);
 			this.textBoxNameValue.Name = "textBoxNameValue";
-			this.textBoxNameValue.Size = new System.Drawing.Size(442, 20);
+			this.textBoxNameValue.Size = new System.Drawing.Size(449, 20);
 			this.textBoxNameValue.TabIndex = 9;
 			// 
 			// label4
@@ -83,9 +83,9 @@
 			// 
 			this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxName.Location = new System.Drawing.Point(123, 18);
+			this.textBoxName.Location = new System.Drawing.Point(116, 18);
 			this.textBoxName.Name = "textBoxName";
-			this.textBoxName.Size = new System.Drawing.Size(442, 20);
+			this.textBoxName.Size = new System.Drawing.Size(449, 20);
 			this.textBoxName.TabIndex = 7;
 			// 
 			// label3

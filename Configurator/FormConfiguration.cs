@@ -81,21 +81,13 @@ namespace Configurator
 
 		}
 
-		public void LoadTree()
+		public void LoadConstants(TreeNode rootNode)
 		{
-			treeConfiguration.Nodes.Clear();
-
-			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
-			rootNode.SelectedImageIndex = 2;
-			rootNode.ImageIndex = 2;
-
-			TreeNode contantsNode = rootNode.Nodes.Add("Contants", "Константи");
-			contantsNode.SelectedImageIndex = 3;
-			contantsNode.ImageIndex = 3;
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationConstantsBlock> ConfConstantsBlock in Conf.ConstantsBlock)
 			{
-				TreeNode contantsBlockNode = contantsNode.Nodes.Add(ConfConstantsBlock.Key, ConfConstantsBlock.Value.BlockName);
+				TreeNode contantsBlockNode = rootNode.Nodes.Add(ConfConstantsBlock.Key, ConfConstantsBlock.Value.BlockName);
 				contantsBlockNode.ContextMenuStrip = contextMenuStripConstantBlock;
 				contantsBlockNode.SelectedImageIndex = 13;
 				contantsBlockNode.ImageIndex = 13;
@@ -109,14 +101,15 @@ namespace Configurator
 					constantNode.ImageIndex = 15;
 				}
 			}
+		}
 
-			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
-			directoriesNode.SelectedImageIndex = 3;
-			directoriesNode.ImageIndex = 3;
+		public void LoadDirectories(TreeNode rootNode)
+		{
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
 			{
-				TreeNode directoryNode = directoriesNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
+				TreeNode directoryNode = rootNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
 				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
 				directoryNode.ContextMenuStrip = contextMenuStrip1;
 				directoryNode.SelectedImageIndex = 18;
@@ -153,8 +146,6 @@ namespace Configurator
 						fieldNode.SelectedImageIndex = 15;
 						fieldNode.ImageIndex = 15;
 					}
-
-					//directoriTablePartNode.Expand();
 				}
 
 				TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
@@ -175,21 +166,17 @@ namespace Configurator
 						fieldNode.SelectedImageIndex = 15;
 						fieldNode.ImageIndex = 15;
 					}
-
-					//directoriTablePartNode.Expand();
 				}
-
-				//directoriTabularPartsNode.Expand();
-				//directoryNode.Expand();
 			}
+		}
 
-			TreeNode documentsNode = rootNode.Nodes.Add("Documents", "Документи");
-			documentsNode.SelectedImageIndex = 3;
-			documentsNode.ImageIndex = 3;
+		public void LoadDocuments(TreeNode rootNode)
+		{
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationDocuments> ConfDocuments in Conf.Documents)
 			{
-				TreeNode documentNode = documentsNode.Nodes.Add(ConfDocuments.Key, ConfDocuments.Value.Name);
+				TreeNode documentNode = rootNode.Nodes.Add(ConfDocuments.Key, ConfDocuments.Value.Name);
 				documentNode.ContextMenuStrip = contextMenuStripDocument;
 				documentNode.SelectedImageIndex = 1;
 				documentNode.ImageIndex = 1;
@@ -226,14 +213,15 @@ namespace Configurator
 					}
 				}
 			}
+		}
 
-			TreeNode enumsNode = rootNode.Nodes.Add("Enums", "Перелічення");
-			enumsNode.SelectedImageIndex = 10;
-			enumsNode.ImageIndex = 10;
+		public void LoadEnums(TreeNode rootNode)
+		{
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationEnums> ConfEnum in Conf.Enums)
 			{
-				TreeNode enumNode = enumsNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
+				TreeNode enumNode = rootNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
 				enumNode.ContextMenuStrip = contextMenuStrip2;
 				enumNode.SelectedImageIndex = 13;
 				enumNode.ImageIndex = 13;
@@ -247,21 +235,16 @@ namespace Configurator
 					enumFieldNode.ImageIndex = 15;
 				}
 			}
+		}
 
-			//TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
-			//journalsNode.SelectedImageIndex = 3;
-			//journalsNode.ImageIndex = 3;
-
-			//...
-
-			TreeNode registersInformationNode = rootNode.Nodes.Add("RegistersInformation", "Регістри відомостей");
-			registersInformationNode.SelectedImageIndex = 3;
-			registersInformationNode.ImageIndex = 3;
+		public void LoadRegistersInformation(TreeNode rootNode)
+		{
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationRegistersInformation> ConfRegistersInformation in Conf.RegistersInformation)
 			{
-				TreeNode registerInformationNode = registersInformationNode.Nodes.Add(ConfRegistersInformation.Key, ConfRegistersInformation.Value.Name);
-				registerInformationNode.ContextMenuStrip = contextMenuStrip2;
+				TreeNode registerInformationNode = rootNode.Nodes.Add(ConfRegistersInformation.Key, ConfRegistersInformation.Value.Name);
+				registerInformationNode.ContextMenuStrip = contextMenuStripRegistersInformation;
 				registerInformationNode.SelectedImageIndex = 13;
 				registerInformationNode.ImageIndex = 13;
 
@@ -310,14 +293,15 @@ namespace Configurator
 					fieldNode.ImageIndex = 15;
 				}
 			}
+		}
 
-			TreeNode registersAccumulationNode = rootNode.Nodes.Add("RegistersAccumulation", "Регістри накопичення");
-			registersAccumulationNode.SelectedImageIndex = 3;
-			registersAccumulationNode.ImageIndex = 3;
+		public void LoadRegistersAccumulation(TreeNode rootNode)
+		{
+			rootNode.Nodes.Clear();
 
 			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> ConfRegistersAccumulation in Conf.RegistersAccumulation)
 			{
-				TreeNode registerAccumulationNode = registersAccumulationNode.Nodes.Add(ConfRegistersAccumulation.Key, ConfRegistersAccumulation.Value.Name);
+				TreeNode registerAccumulationNode = rootNode.Nodes.Add(ConfRegistersAccumulation.Key, ConfRegistersAccumulation.Value.Name);
 				registerAccumulationNode.ContextMenuStrip = contextMenuStrip2;
 				registerAccumulationNode.SelectedImageIndex = 13;
 				registerAccumulationNode.ImageIndex = 13;
@@ -367,6 +351,57 @@ namespace Configurator
 					fieldNode.ImageIndex = 15;
 				}
 			}
+		}
+
+		public void LoadTree()
+		{
+			treeConfiguration.Nodes.Clear();
+
+			TreeNode rootNode = treeConfiguration.Nodes.Add("root", "Конфігурація");
+			rootNode.SelectedImageIndex = 2;
+			rootNode.ImageIndex = 2;
+
+			TreeNode contantsNode = rootNode.Nodes.Add("Contants", "Константи");
+			contantsNode.SelectedImageIndex = 3;
+			contantsNode.ImageIndex = 3;
+
+			LoadConstants(contantsNode);
+
+			TreeNode directoriesNode = rootNode.Nodes.Add("Directories", "Довідники");
+			directoriesNode.SelectedImageIndex = 3;
+			directoriesNode.ImageIndex = 3;
+
+			LoadDirectories(directoriesNode);
+
+			TreeNode documentsNode = rootNode.Nodes.Add("Documents", "Документи");
+			documentsNode.SelectedImageIndex = 3;
+			documentsNode.ImageIndex = 3;
+
+			LoadDocuments(documentsNode);
+
+			TreeNode enumsNode = rootNode.Nodes.Add("Enums", "Перелічення");
+			enumsNode.SelectedImageIndex = 10;
+			enumsNode.ImageIndex = 10;
+
+			LoadEnums(enumsNode);
+
+			TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
+			journalsNode.SelectedImageIndex = 3;
+			journalsNode.ImageIndex = 3;
+
+			//...
+
+			TreeNode registersInformationNode = rootNode.Nodes.Add("RegistersInformation", "Регістри відомостей");
+			registersInformationNode.SelectedImageIndex = 3;
+			registersInformationNode.ImageIndex = 3;
+
+			LoadRegistersInformation(registersInformationNode);
+
+			TreeNode registersAccumulationNode = rootNode.Nodes.Add("RegistersAccumulation", "Регістри накопичення");
+			registersAccumulationNode.SelectedImageIndex = 3;
+			registersAccumulationNode.ImageIndex = 3;
+
+			LoadRegistersAccumulation(registersAccumulationNode);
 
 			rootNode.Expand();
 			contantsNode.Expand();
@@ -439,6 +474,60 @@ namespace Configurator
 			Program.Kernel.Close();
 		}
 
+		bool CallBack_IsExistConstantsBlock(string name)
+		{
+			return Conf.ConstantsBlock.ContainsKey(name);
+		}
+
+		void CallBack_Update_ConstantsBlock(string originalName, ConfigurationConstantsBlock configurationConstantsBlock, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendConstantsBlock(configurationConstantsBlock);
+			}
+			else
+			{
+				if (originalName != configurationConstantsBlock.BlockName)
+				{
+					Conf.ConstantsBlock.Remove(originalName);
+					Conf.AppendConstantsBlock(configurationConstantsBlock);
+				}
+				else
+				{
+					Conf.ConstantsBlock[originalName] = configurationConstantsBlock;
+				}
+			}
+
+			LoadConstants(treeConfiguration.Nodes["root"].Nodes["Contants"]);
+		}
+
+		bool CallBack_IsExistConstants(string blockName, string name)
+		{
+			return Conf.ConstantsBlock[blockName].Constants.ContainsKey(name);
+		}
+
+		void CallBack_Update_Constants(string blockName, string originalName, ConfigurationConstants configurationConstants, bool isNew)
+		{
+			if (isNew)
+			{
+				Conf.AppendConstants(blockName, configurationConstants);
+			}
+			else
+			{
+				if (blockName != configurationConstants.Block.BlockName || originalName != configurationConstants.Name)
+				{
+					Conf.ConstantsBlock[configurationConstants.Block.BlockName].Constants.Remove(originalName);
+					Conf.AppendConstants(blockName, configurationConstants);
+				}
+				else
+				{
+					Conf.ConstantsBlock[blockName].Constants[originalName] = configurationConstants;
+				}
+			}
+
+			LoadConstants(treeConfiguration.Nodes["root"].Nodes["Contants"]);
+		}
+
 		bool CallBack_IsExistDirectoryName(string name)
 		{
 			return Conf.Directories.ContainsKey(name);
@@ -481,7 +570,7 @@ namespace Configurator
 				}
 			}
 
-			LoadTree();
+			LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
 		}
 
 		bool CallBack_IsExistEnumName(string name)
@@ -528,7 +617,7 @@ namespace Configurator
 				}
 			}
 
-			LoadTree();
+			LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
 		}
 
 		bool CallBack_IsExistDocumentName(string name)
@@ -574,61 +663,34 @@ namespace Configurator
 				}
 			}
 
-			LoadTree();
+			LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
 		}
 
-		bool CallBack_IsExistConstantsBlock(string name)
+		bool CallBack_IsExistRegistersInformation(string name)
 		{
-			return Conf.ConstantsBlock.ContainsKey(name);
+			return Conf.RegistersInformation.ContainsKey(name);
 		}
 
-		void CallBack_Update_ConstantsBlock(string originalName, ConfigurationConstantsBlock configurationConstantsBlock, bool isNew)
-		{
-			if (isNew)
-			{
-				Conf.AppendConstantsBlock(configurationConstantsBlock);
-			}
-			else
-			{
-				if (originalName != configurationConstantsBlock.BlockName)
-				{
-					Conf.ConstantsBlock.Remove(originalName);
-					Conf.AppendConstantsBlock(configurationConstantsBlock);
-				}
-				else
-				{
-					Conf.ConstantsBlock[originalName] = configurationConstantsBlock;
-				}
-			}
-
-			LoadTree();
-		}
-
-		bool CallBack_IsExistConstants(string blockName, string name)
-		{
-			return Conf.ConstantsBlock[blockName].Constants.ContainsKey(name);
-		}
-
-		void CallBack_Update_Constants(string blockName, string originalName, ConfigurationConstants configurationConstants, bool isNew)
+		void CallBack_Update_RegistersInformation(string originalName, ConfigurationRegistersInformation configurationRegistersInformation, bool isNew)
 		{
 			if (isNew)
 			{
-				Conf.AppendConstants(blockName, configurationConstants);
+				Conf.AppendRegistersInformation(configurationRegistersInformation);
 			}
 			else
 			{
-				if (blockName != configurationConstants.Block.BlockName || originalName != configurationConstants.Name)
+				if (originalName != configurationRegistersInformation.Name)
 				{
-					Conf.ConstantsBlock[configurationConstants.Block.BlockName].Constants.Remove(originalName);
-					Conf.AppendConstants(blockName, configurationConstants);
+					Conf.RegistersInformation.Remove(originalName);
+					Conf.AppendRegistersInformation(configurationRegistersInformation);
 				}
 				else
 				{
-					Conf.ConstantsBlock[blockName].Constants[originalName] = configurationConstants;
+					Conf.RegistersInformation[originalName] = configurationRegistersInformation;
 				}
 			}
 
-			LoadTree();
+			LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
 		}
 
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -792,6 +854,28 @@ namespace Configurator
 				constantsForm.CallBack = CallBack_Update_Constants;
 				constantsForm.Show();
 			}
+		}
+
+		private void openItemRegistersInformation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersInformationName = nodeSel.Name;
+
+				RegistersInformationForm registersInformationForm = new RegistersInformationForm();
+				registersInformationForm.ConfRegistersInformation = Conf.RegistersInformation[registersInformationName];
+				registersInformationForm.CallBack = CallBack_Update_RegistersInformation;
+				registersInformationForm.CallBack_IsExistRegistersInformation = CallBack_IsExistRegistersInformation;
+				registersInformationForm.Show();
+			}
+		}
+
+		private void addNewRegistersInformationToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			RegistersInformationForm registersInformationForm = new RegistersInformationForm();
+			registersInformationForm.CallBack = CallBack_Update_RegistersInformation;
+			registersInformationForm.CallBack_IsExistRegistersInformation = CallBack_IsExistRegistersInformation;
+			registersInformationForm.Show();
 		}
 	}
 }

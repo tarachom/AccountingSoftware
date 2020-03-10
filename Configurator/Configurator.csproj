@@ -76,6 +76,12 @@
     <Compile Include="EnumFieldForm.Designer.cs">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RegistersInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RegistersInformationForm.Designer.cs">
+      <DependentUpon>RegistersInformationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="EnumFieldForm.resx">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RegistersInformationForm.resx">
+      <DependentUpon>RegistersInformationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>

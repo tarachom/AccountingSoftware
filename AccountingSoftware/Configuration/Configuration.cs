@@ -164,9 +164,18 @@ namespace AccountingSoftware
 		/// Додати документ в список документів
 		/// </summary>
 		/// <param name="Document">Документ</param>
-		public void AppendDocument(ConfigurationDocuments Document)
+		public void AppendDocument(ConfigurationDocuments document)
 		{
-			Documents.Add(Document.Name, Document);
+			Documents.Add(document.Name, document);
+		}
+
+		/// <summary>
+		/// Додати регістр в список регістрів
+		/// </summary>
+		/// <param name="registersInformation">Регістр</param>
+		public void AppendRegistersInformation(ConfigurationRegistersInformation registersInformation)
+		{
+			RegistersInformation.Add(registersInformation.Name, registersInformation);
 		}
 
 		/// <summary>
