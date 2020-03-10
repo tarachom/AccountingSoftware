@@ -379,19 +379,21 @@ namespace AccountingSoftware
 
 					noExistInConf = true;
 
-					foreach (ConfigurationDirectories directoryItem in Kernel.Conf.Directories.Values)
+					foreach (ConfigurationConstantsBlock block in Kernel.Conf.ConstantsBlock.Values)
 					{
-						if (directoryItem.Table == tabNewName)
+						foreach (ConfigurationConstants constantsItem in block.Constants.Values)
 						{
-							noExistInConf = false;
-							break;
-						}
-
-						foreach (ConfigurationObjectTablePart directoryTablePart in directoryItem.TabularParts.Values)
-						{
-							if (directoryTablePart.Table == tabNewName)
+							foreach (ConfigurationObjectTablePart constantsTablePart in constantsItem.TabularParts.Values)
 							{
-								noExistInConf = false;
+								if (constantsTablePart.Table == tabNewName)
+								{
+									noExistInConf = false;
+									break;
+								}
+							}
+
+							if (!noExistInConf)
+							{
 								break;
 							}
 						}
@@ -401,6 +403,54 @@ namespace AccountingSoftware
 							break;
 						}
 					}
+
+					if (noExistInConf)
+						foreach (ConfigurationDirectories directoryItem in Kernel.Conf.Directories.Values)
+						{
+							if (directoryItem.Table == tabNewName)
+							{
+								noExistInConf = false;
+								break;
+							}
+
+							foreach (ConfigurationObjectTablePart directoryTablePart in directoryItem.TabularParts.Values)
+							{
+								if (directoryTablePart.Table == tabNewName)
+								{
+									noExistInConf = false;
+									break;
+								}
+							}
+
+							if (!noExistInConf)
+							{
+								break;
+							}
+						}
+
+					if (noExistInConf)
+						foreach (ConfigurationDocuments documentItem in Kernel.Conf.Documents.Values)
+						{
+							if (documentItem.Table == tabNewName)
+							{
+								noExistInConf = false;
+								break;
+							}
+
+							foreach (ConfigurationObjectTablePart documentTablePart in documentItem.TabularParts.Values)
+							{
+								if (documentTablePart.Table == tabNewName)
+								{
+									noExistInConf = false;
+									break;
+								}
+							}
+
+							if (!noExistInConf)
+							{
+								break;
+							}
+						}
 
 					if (noExistInReserved && noExistInBase && noExistInConf)
 					{

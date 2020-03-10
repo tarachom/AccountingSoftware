@@ -35,6 +35,14 @@ namespace AccountingSoftware
 		void CommitTransaction();
 		void RollbackTransaction();
 
+		#region Constants
+
+		void SelectConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
+		void InsertConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteConstantsTablePartRecords(UnigueID ownerUnigueID, string table);
+
+		#endregion
+
 		#region Directory
 
 		void InsertDirectoryObject(DirectoryObject directoryObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);

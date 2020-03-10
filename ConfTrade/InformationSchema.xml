@@ -880,6 +880,19 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a58</Name>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a43</Name>
     <Column>
       <Name>col_a7</Name>

@@ -27,7 +27,7 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Довідник Таблична частина
+	/// Константа Таблична частина
 	/// </summary>
 	public abstract class ConstantsTablePart
 	{
@@ -56,7 +56,7 @@ namespace AccountingSoftware
 		protected void BaseRead(UnigueID ownerUnigueID)
 		{
 			BaseClear();
-			//Kernel.DataBase.SelectDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
+			Kernel.DataBase.SelectConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 
 		protected void BaseBeginTransaction()
@@ -76,12 +76,12 @@ namespace AccountingSoftware
 
 		protected void BaseDelete(UnigueID ownerUnigueID)
 		{
-			//Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
+			Kernel.DataBase.DeleteConstantsTablePartRecords(ownerUnigueID, Table);
 		}
 
 		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
-			//Kernel.DataBase.InsertDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
+			Kernel.DataBase.InsertConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }

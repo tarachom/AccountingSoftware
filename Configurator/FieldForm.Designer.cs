@@ -149,8 +149,8 @@
 			// 
 			// comboBoxFieldType
 			// 
-			this.comboBoxFieldType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxFieldType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxFieldType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxFieldType.FormattingEnabled = true;
 			this.comboBoxFieldType.Location = new System.Drawing.Point(123, 139);
 			this.comboBoxFieldType.Name = "comboBoxFieldType";
@@ -189,8 +189,8 @@
 			// 
 			// comboBoxEnums
 			// 
-			this.comboBoxEnums.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxEnums.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxEnums.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxEnums.FormattingEnabled = true;
 			this.comboBoxEnums.Location = new System.Drawing.Point(123, 194);
 			this.comboBoxEnums.Name = "comboBoxEnums";
@@ -208,8 +208,8 @@
 			// 
 			// comboBoxPointer
 			// 
-			this.comboBoxPointer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+			this.comboBoxPointer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxPointer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxPointer.FormattingEnabled = true;
 			this.comboBoxPointer.Location = new System.Drawing.Point(123, 167);
 			this.comboBoxPointer.Name = "comboBoxPointer";

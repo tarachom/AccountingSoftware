@@ -52,6 +52,11 @@ namespace AccountingSoftware
 		public string Name { get; set; }
 
 		/// <summary>
+		/// Назва поля в базі даних
+		/// </summary>
+		public string NameInTable { get; set; }
+
+		/// <summary>
 		/// Опис
 		/// </summary>
 		public string Desc { get; set; }
@@ -70,6 +75,15 @@ namespace AccountingSoftware
 		/// Табличні частини
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
+
+		/// <summary>
+		/// Додати нову табличну частину
+		/// </summary>
+		/// <param name="tablePart">Нова таблична частина</param>
+		public void AppendTablePart(ConfigurationObjectTablePart tablePart)
+		{
+			TabularParts.Add(tablePart.Name, tablePart);
+		}
 	}
 }
 

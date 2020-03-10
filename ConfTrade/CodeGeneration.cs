@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 09.03.2020 20:41:41
+ * Дата конфігурації: 10.03.2020 13:04:43
  *
  */
 
@@ -51,28 +51,15 @@ namespace ConfTrade_v1_1.Константи
         public static Довідники.МестаХранения_Pointer ОсновнийСклад { get; set; }
         public static Перелічення.ВидиКонтрагентов Перелічення { get; set; }
         public static string Склад { get; set; }
-
-        public class A:DirectoryTablePart
-        {
-            public A() : base(null, "", null)
-            {
-
-            }
-        }
+        
     }
-
-
-
+    
     static class Група1_Block
     {
         public static int A { get; set; }
         public static string B { get; set; }
-        void c()
-        {
-            Група0_Block.A a = new Група0_Block.A();
-            
-        }
-     }
+        
+    }
     
     static class Група2_Block
     {
@@ -5723,6 +5710,7 @@ namespace ConfTrade_v1_1.Довідники
             
             //Табличні частини
             esddf_TablePart = new test_esddf_TablePart(this);
+            werw_TablePart = new test_werw_TablePart(this);
             
         }
         
@@ -5776,6 +5764,7 @@ namespace ConfTrade_v1_1.Довідники
         
         //Табличні частини
         public test_esddf_TablePart esddf_TablePart { get; set; }
+        public test_werw_TablePart werw_TablePart { get; set; }
         
     }
     
@@ -5918,6 +5907,94 @@ namespace ConfTrade_v1_1.Довідники
             
         }
         public Перелічення.Перелічення2 sdfasdf { get; set; }
+        
+    }
+      
+    class test_werw_TablePart : DirectoryTablePart
+    {
+        public test_werw_TablePart(test_Objest owner) : base(Config.Kernel, "tab_a58",
+             new string[] { "col_a4" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<test_werw_TablePartRecord>();
+        }
+        
+        public test_Objest Owner { get; private set; }
+        
+        public List<test_werw_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                test_werw_TablePartRecord record = new test_werw_TablePartRecord();
+
+                record.werwe = fieldValue["col_a4"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (test_werw_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a4", record.werwe);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class test_werw_TablePartRecord : DirectoryTablePartRecord
+    {
+        public test_werw_TablePartRecord()
+        {
+            werwe = "";
+            
+        }
+        
+        
+        public test_werw_TablePartRecord(
+            string _werwe = "")
+        {
+            werwe = _werwe;
+            
+        }
+        public string werwe { get; set; }
         
     }
       ///<summary>
@@ -6516,6 +6593,9 @@ namespace ConfTrade_v1_1.Документи
              new string[] {  }) 
         {
             
+            //Табличні частини
+            werwe_TablePart = new Test_werwe_TablePart(this);
+            
         }
         
         public bool Read(UnigueID uid)
@@ -6547,6 +6627,9 @@ namespace ConfTrade_v1_1.Документи
             return directoryPointer;
         }
         
+        
+        //Табличні частини
+        public Test_werwe_TablePart werwe_TablePart { get; set; }
         
     }
     
@@ -6585,6 +6668,94 @@ namespace ConfTrade_v1_1.Документи
         public Test_Pointer Current { get; private set; }
     }
     
+      
+    class Test_werwe_TablePart : DocumentTablePart
+    {
+        public Test_werwe_TablePart(Test_Objest owner) : base(Config.Kernel, "tab_a59",
+             new string[] { "col_a5" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Test_werwe_TablePartRecord>();
+        }
+        
+        public Test_Objest Owner { get; private set; }
+        
+        public List<Test_werwe_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Test_werwe_TablePartRecord record = new Test_werwe_TablePartRecord();
+
+                record.werwe = fieldValue["col_a5"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Test_werwe_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a5", record.werwe);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Test_werwe_TablePartRecord : DocumentTablePartRecord
+    {
+        public Test_werwe_TablePartRecord()
+        {
+            werwe = "";
+            
+        }
+        
+        
+        public Test_werwe_TablePartRecord(
+            string _werwe = "")
+        {
+            werwe = _werwe;
+            
+        }
+        public string werwe { get; set; }
+        
+    }
       
     
     #endregion

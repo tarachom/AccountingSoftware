@@ -2786,6 +2786,22 @@
         </Type>
       </Control_Field>
     </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>werw</Name>
+      <Table>tab_a58</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>werwe</Name>
+        <NameInTable>col_a4</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
     <Name>test2</Name>

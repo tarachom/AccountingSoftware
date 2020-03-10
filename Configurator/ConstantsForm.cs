@@ -133,7 +133,9 @@ namespace Configurator
 					}
 				}
 
-				IsNew = false;
+				LoadTabularPartsList();
+
+				IsNew = false;				
 			}
 		}
 
@@ -202,6 +204,88 @@ namespace Configurator
 				if (MessageBox.Show("Закрити форму?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 				{
 					this.Hide();
+				}
+			}
+		}
+
+		void LoadTabularPartsList()
+		{
+			listBoxTabularParts.Items.Clear();
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in Constants.TabularParts)
+			{
+				listBoxTabularParts.Items.Add(configurationObjectTablePart.Value.Name);
+			}
+		}
+
+		bool CallBack_IsExistTablePartName(string name)
+		{
+			return Constants.TabularParts.ContainsKey(name);
+		}
+
+		void CallBack_Update_TablePart(string originalName, ConfigurationObjectTablePart configurationObjectTablePart, bool isNew)
+		{
+			if (isNew)
+			{
+				Constants.AppendTablePart(configurationObjectTablePart);
+			}
+			else
+			{
+				if (originalName != configurationObjectTablePart.Name)
+				{
+					Constants.TabularParts.Remove(originalName);
+					Constants.AppendTablePart(configurationObjectTablePart);
+				}
+				else
+				{
+					Constants.TabularParts[originalName] = configurationObjectTablePart;
+				}
+			}
+
+			LoadTabularPartsList();
+		}
+
+		private void buttonAddTablePart_Click(object sender, EventArgs e)
+		{
+			TablePartForm tablePartForm = new TablePartForm();
+			tablePartForm.CallBack = CallBack_Update_TablePart;
+			tablePartForm.CallBack_IsExistTablePartName = CallBack_IsExistTablePartName;
+			tablePartForm.Show();
+		}
+
+		private void listBoxTabularParts_MouseDoubleClick(object sender, MouseEventArgs e)
+		{
+			if (listBoxTabularParts.SelectedItem != null)
+			{
+				TablePartForm tablePartForm = new TablePartForm();
+				tablePartForm.ConfDirectoryTablePart = Constants.TabularParts[listBoxTabularParts.SelectedItem.ToString()];
+				tablePartForm.CallBack = CallBack_Update_TablePart;
+				tablePartForm.CallBack_IsExistTablePartName = CallBack_IsExistTablePartName;
+
+				tablePartForm.Show();
+			}
+		}
+
+		private void listBoxTabularParts_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (listBoxTabularParts.SelectedItem != null)
+			{
+				if (e.KeyData == Keys.Delete)
+				{
+					string question = "Видалити табличну частину";
+
+					if (MessageBox.Show(question + " " + listBoxTabularParts.SelectedItem.ToString() + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						int selectIndex = listBoxTabularParts.SelectedIndex;
+
+						Constants.TabularParts.Remove(listBoxTabularParts.SelectedItem.ToString());
+						LoadTabularPartsList();
+
+						if (selectIndex >= listBoxTabularParts.Items.Count)
+							selectIndex = listBoxTabularParts.Items.Count - 1;
+
+						listBoxTabularParts.SelectedIndex = selectIndex;
+					}
 				}
 			}
 		}

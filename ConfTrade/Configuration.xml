@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>09.03.2020 20:41:41</DateTimeSave>
+  <DateTimeSave>10.03.2020 13:04:43</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -23,7 +23,45 @@
           </Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.МестаХранения</Pointer>
-          <TabularParts />
+          <TabularParts>
+            <TablePart>
+              <Name>Історія</Name>
+              <Table>tab_a62</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Дата</Name>
+                  <NameInTable>col_a4</NameInTable>
+                  <Type>datetime</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Значенн</Name>
+                  <NameInTable>col_a5</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+            <TablePart>
+              <Name>asdfasd</Name>
+              <Table>tab_a61</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>sdfasdfasd</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
         <Constant>
           <Name>Перелічення</Name>
@@ -51,7 +89,38 @@
           <Desc>
           </Desc>
           <Type>integer</Type>
-          <TabularParts />
+          <TabularParts>
+            <TablePart>
+              <Name>івафів</Name>
+              <Table>tab_a52</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>іваіваі</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+            <TablePart>
+              <Name>wwe</Name>
+              <Table>tab_a54</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>werwe</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
         <Constant>
           <Name>B</Name>
@@ -79,7 +148,23 @@
           <Desc>
           </Desc>
           <Type>string</Type>
-          <TabularParts />
+          <TabularParts>
+            <TablePart>
+              <Name>werwer</Name>
+              <Table>tab_a56</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>werwer</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
         <Constant>
           <Name>A</Name>
@@ -122,7 +207,23 @@
           <Desc>
           </Desc>
           <Type>string</Type>
-          <TabularParts />
+          <TabularParts>
+            <TablePart>
+              <Name>werwer</Name>
+              <Table>tab_a57</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>werwer</Name>
+                  <NameInTable>col_a3</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
       </Constants>
     </ConstantsBlock>
@@ -2598,6 +2699,21 @@
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>werw</Name>
+          <Table>tab_a58</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werwe</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <Views>
         <View>
@@ -2998,7 +3114,23 @@
       <Desc>
       </Desc>
       <Fields />
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>werwe</Name>
+          <Table>tab_a59</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>werwe</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </Document>
     <Document>
       <Name>РасходнаяНакладная</Name>

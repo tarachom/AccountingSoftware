@@ -31,6 +31,6 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class Directory
 	{
-		public string Name { get; set; }
+		
 	}
 }
