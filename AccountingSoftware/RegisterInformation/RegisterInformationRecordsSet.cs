@@ -29,9 +29,9 @@ namespace AccountingSoftware
 	/// <summary>
 	/// 
 	/// </summary>
-	public abstract class RegisterRecordsSet
+	public abstract class RegisterInformationRecordsSet
 	{
-		public RegisterRecordsSet(Kernel kernel, string table, string[] fieldsArray)
+		public RegisterInformationRecordsSet(Kernel kernel, string table, string[] fieldsArray)
 		{
 			Kernel = kernel;
 			Table = table;

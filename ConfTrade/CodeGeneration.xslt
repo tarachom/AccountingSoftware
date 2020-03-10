@@ -959,7 +959,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterRecordsSet
+    class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>

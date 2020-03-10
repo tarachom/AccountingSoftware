@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.03.2020 17:17:58
+ * Дата конфігурації: 10.03.2020 17:30:45
  *
  */
 
@@ -7998,7 +7998,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     #region REGISTER "Перший"
     
     
-    class Перший_RecordsSet : RegisterRecordsSet
+    class Перший_RecordsSet : RegisterInformationRecordsSet
     {
         public Перший_RecordsSet() : base(Config.Kernel, "tab_first",
              new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
@@ -8199,7 +8199,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     #region REGISTER "Другий"
     
     
-    class Другий_RecordsSet : RegisterRecordsSet
+    class Другий_RecordsSet : RegisterInformationRecordsSet
     {
         public Другий_RecordsSet() : base(Config.Kernel, "tab_first",
              new string[] { "col_field1", "col_field2", "col_field3" }) 
@@ -8305,7 +8305,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     #region REGISTER "Валюти"
     
     
-    class Валюти_RecordsSet : RegisterRecordsSet
+    class Валюти_RecordsSet : RegisterInformationRecordsSet
     {
         public Валюти_RecordsSet() : base(Config.Kernel, "tab_a60",
              new string[] { "col1", "col2", "col3", "col4", "col5", "col6", "col_a7", "col_a8", "col_a9", "col_a1", "col_a2" }) 
@@ -8551,11 +8551,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
 namespace ConfTrade_v1_1.РегістриНакопичення
 {
   
-    #region REGISTER "one"
+    #region REGISTER "Перший"
     
-    class one_Record
+    class Перший_Record
     {
-        public one_Record()
+        public Перший_Record()
         {
             field1 = "";
             field4 = "";

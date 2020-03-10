@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.03.2020 17:17:58</DateTimeSave>
+  <DateTimeSave>10.03.2020 17:30:45</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -4212,7 +4212,7 @@
   </RegistersInformation>
   <RegistersAccumulation>
     <RegisterAccumulation>
-      <Name>one</Name>
+      <Name>Перший</Name>
       <Table>tab_first</Table>
       <Type>Residues</Type>
       <Desc>
