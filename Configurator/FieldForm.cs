@@ -36,10 +36,11 @@ namespace Configurator
 {
 	public partial class FieldForm : Form
 	{
-		public Action<string, ConfigurationObjectField, bool> CallBack { get; set; }
+		//1. Оригінальна назва поля 2. Об'єкт 3. Чи новий? 4. Tag
+		public Action<string, ConfigurationObjectField, bool, object> CallBack { get; set; }
 		public Func<string, Boolean> CallBack_IsExistFieldName { get; set; }
 
-		public ConfigurationObjectField configurationObjectField { get; set; }
+		public ConfigurationObjectField ConfigurationObjectField { get; set; }
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
 		public string NewNameInTable { get; set; }
@@ -77,25 +78,25 @@ namespace Configurator
 				comboBoxEnums.Items.Add("Перелічення." + enumName);
 			}
 
-			if (configurationObjectField == null)
+			if (ConfigurationObjectField == null)
 			{
-				configurationObjectField = new ConfigurationObjectField();
+				ConfigurationObjectField = new ConfigurationObjectField();
 				textBoxNameInTable.Text = NewNameInTable;
 
 				IsNew = true;
 			}
 			else
 			{
-				OriginalName = configurationObjectField.Name;
+				OriginalName = ConfigurationObjectField.Name;
 
-				textBoxName.Text = configurationObjectField.Name;
-				textBoxNameInTable.Text = configurationObjectField.NameInTable;
-				textBoxDesc.Text = configurationObjectField.Desc;
+				textBoxName.Text = ConfigurationObjectField.Name;
+				textBoxNameInTable.Text = ConfigurationObjectField.NameInTable;
+				textBoxDesc.Text = ConfigurationObjectField.Desc;
 
 				for (int i = 0; i < comboBoxFieldType.Items.Count; i++)
 				{
 					FieldType fieldType = (FieldType)comboBoxFieldType.Items[i];
-					if (fieldType.ConfTypeName == configurationObjectField.Type)
+					if (fieldType.ConfTypeName == ConfigurationObjectField.Type)
 					{
 						comboBoxFieldType.SelectedItem = comboBoxFieldType.Items[i];
 						break;
@@ -108,7 +109,7 @@ namespace Configurator
 				{
 					for (int i = 0; i < comboBoxPointer.Items.Count; i++)
 					{
-						if (configurationObjectField.Pointer == comboBoxPointer.Items[i].ToString())
+						if (ConfigurationObjectField.Pointer == comboBoxPointer.Items[i].ToString())
 						{
 							comboBoxPointer.SelectedItem = comboBoxPointer.Items[i];
 							break;
@@ -119,7 +120,7 @@ namespace Configurator
 				{
 					for (int i = 0; i < comboBoxEnums.Items.Count; i++)
 					{
-						if (configurationObjectField.Pointer == comboBoxEnums.Items[i].ToString())
+						if (ConfigurationObjectField.Pointer == comboBoxEnums.Items[i].ToString())
 						{
 							comboBoxEnums.SelectedItem = comboBoxEnums.Items[i];
 							break;
@@ -152,25 +153,25 @@ namespace Configurator
 
 			string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
 
-			configurationObjectField.Name = textBoxName.Text;
-			configurationObjectField.NameInTable = textBoxNameInTable.Text;
-			configurationObjectField.Desc = textBoxDesc.Text;
-			configurationObjectField.Type = confTypeName;
+			ConfigurationObjectField.Name = textBoxName.Text;
+			ConfigurationObjectField.NameInTable = textBoxNameInTable.Text;
+			ConfigurationObjectField.Desc = textBoxDesc.Text;
+			ConfigurationObjectField.Type = confTypeName;
 
 			if (confTypeName == "pointer")
 			{
-				configurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+				ConfigurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
 			}
 			else if (confTypeName == "enum")
 			{
-				configurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
+				ConfigurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
 			}
 			else
 			{
-				configurationObjectField.Pointer = "";
+				ConfigurationObjectField.Pointer = "";
 			}
 
-			CallBack.Invoke(OriginalName, configurationObjectField, IsNew);
+			CallBack.Invoke(OriginalName, ConfigurationObjectField, IsNew, this.Tag);
 
 			this.Hide();
 		}

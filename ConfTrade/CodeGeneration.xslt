@@ -1108,7 +1108,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         <xsl:for-each select="DimensionFields/Fields/Field">
           <xsl:text>public </xsl:text>
           <xsl:call-template name="FieldType" />
-          <xsl:if test="Type = 'integer' or Type = 'numeric' or Type = 'boolean' or Type = 'date' or Type = 'datetime' or Type = 'time'">
+          <xsl:if test="Type = 'integer' or Type = 'numeric' or Type = 'boolean' or 
+                        Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'enum'">
                 <xsl:text>?</xsl:text>    
           </xsl:if>
           <xsl:text> </xsl:text>

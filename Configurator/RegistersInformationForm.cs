@@ -79,6 +79,7 @@ namespace Configurator
 			foreach (ConfigurationObjectField dimensionField in ConfRegistersInformation.DimensionFields.Values)
 			{
 				TreeNode dimensionNode = rootNode.Nodes.Add(dimensionField.Name, dimensionField.Name);
+				dimensionNode.Tag = new  Tuple<ConfigurationObjectField, string>(dimensionField, "Dimension");
 			}
 		}
 
@@ -89,6 +90,7 @@ namespace Configurator
 			foreach (ConfigurationObjectField resourcesFields in ConfRegistersInformation.ResourcesFields.Values)
 			{
 				TreeNode resourcesNode = rootNode.Nodes.Add(resourcesFields.Name, resourcesFields.Name);
+				resourcesNode.Tag = new Tuple<ConfigurationObjectField, string>(resourcesFields, "Resources");
 			}
 		}
 
@@ -99,6 +101,7 @@ namespace Configurator
 			foreach (ConfigurationObjectField propertyFields in ConfRegistersInformation.PropertyFields.Values)
 			{
 				TreeNode propertyNode = rootNode.Nodes.Add(propertyFields.Name, propertyFields.Name);
+				propertyNode.Tag = new Tuple<ConfigurationObjectField, string>(propertyFields, "Property");
 			}
 		}
 
@@ -108,7 +111,7 @@ namespace Configurator
 
 			TreeNode dimensionNode = rootNode.Nodes.Add("Dimension", "Виміри");
 			LoadTreeViewDimension(dimensionNode);
-
+			
 			TreeNode resourcesNode = rootNode.Nodes.Add("Resources", "Ресурси");
 			LoadTreeViewResources(resourcesNode);
 
@@ -151,38 +154,65 @@ namespace Configurator
 			this.Hide();
 		}
 
-		//bool CallBack_IsExistFieldName(string name)
-		//{
-		//	return ConfDirectoryTablePart.Fields.ContainsKey(name);
-		//}
-
-		//void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
-		//{
-		//	if (isNew)
-		//	{
-		//		ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//	}
-		//	else
-		//	{
-		//		if (originalName != configurationObjectField.Name)
-		//		{
-		//			ConfDirectoryTablePart.Fields.Remove(originalName);
-		//			ConfDirectoryTablePart.AppendField(configurationObjectField);
-		//		}
-		//		else
-		//		{
-		//			ConfDirectoryTablePart.Fields[originalName] = configurationObjectField;
-		//		}
-		//	}
-		//}
-
-		private void buttonAddField_Click(object sender, EventArgs e)
+		bool CallBack_IsExistFieldName(string name)
 		{
-			//FieldForm fieldForm = new FieldForm();
-			//fieldForm.CallBack = CallBack_Update_Field;
-			//fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
-			//fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectoryTablePart.Table, ConfDirectoryTablePart.Fields);
-			//fieldForm.Show();
+			return ConfRegistersInformation.DimensionFields.ContainsKey(name) ||
+				ConfRegistersInformation.ResourcesFields.ContainsKey(name) ||
+				ConfRegistersInformation.PropertyFields.ContainsKey(name);
+		}
+
+		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew, object Tag)
+		{
+			string flagTag = Tag.ToString();
+			if (!(flagTag == "Dimension" || flagTag == "Resources" || flagTag == "Property"))
+				throw new Exception("Error flag value");
+
+			if (isNew)
+			{
+				if (flagTag == "Dimension")
+					ConfRegistersInformation.AppendDimensionField(configurationObjectField);
+				else if (flagTag == "Resources")
+					ConfRegistersInformation.AppendResourcesField(configurationObjectField);
+				else if (flagTag == "Property")
+					ConfRegistersInformation.AppendPropertyField(configurationObjectField);					
+			}
+			else
+			{
+				if (originalName != configurationObjectField.Name)
+				{
+					if (flagTag == "Dimension")
+					{
+						ConfRegistersInformation.DimensionFields.Remove(originalName);
+						ConfRegistersInformation.AppendDimensionField(configurationObjectField);
+					}
+					else if (flagTag == "Resources")
+					{
+						ConfRegistersInformation.ResourcesFields.Remove(originalName);
+						ConfRegistersInformation.AppendResourcesField(configurationObjectField);
+					}
+					else if (flagTag == "Property")
+					{
+						ConfRegistersInformation.PropertyFields.Remove(originalName);
+						ConfRegistersInformation.AppendPropertyField(configurationObjectField);
+					}
+				}
+				else
+				{
+					if (flagTag == "Dimension")
+						ConfRegistersInformation.DimensionFields[originalName] = configurationObjectField;
+					else if (flagTag == "Resources")
+						ConfRegistersInformation.ResourcesFields[originalName] = configurationObjectField;
+					else if (flagTag == "Property")
+						ConfRegistersInformation.PropertyFields[originalName] = configurationObjectField;					
+				}
+			}
+
+			if (flagTag == "Dimension")
+				LoadTreeViewDimension(treeViewFields.Nodes["root"].Nodes["Dimension"]);
+			else if (flagTag == "Resources")
+				LoadTreeViewResources(treeViewFields.Nodes["root"].Nodes["Resources"]);
+			else if (flagTag == "Property")
+				LoadTreeViewProperty(treeViewFields.Nodes["root"].Nodes["Property"]);
 		}
 
 		private void TablePartForm_KeyDown(object sender, KeyEventArgs e)
@@ -194,6 +224,75 @@ namespace Configurator
 					this.Hide();
 				}
 			}
+		}
+
+		private void buttonAddField_Click(object sender, EventArgs e)
+		{
+			contextMenuStripAddField.Show(ToolStripDropDown.MousePosition);
+		}
+
+		private Dictionary<string, ConfigurationObjectField> GetAllField()
+		{
+			Dictionary<string, ConfigurationObjectField> allField = new Dictionary<string, ConfigurationObjectField>();
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.DimensionFields)
+				allField.Add(keyValuePair.Key, keyValuePair.Value);
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.ResourcesFields)
+				allField.Add(keyValuePair.Key, keyValuePair.Value);
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> keyValuePair in ConfRegistersInformation.PropertyFields)
+				allField.Add(keyValuePair.Key, keyValuePair.Value);
+
+			return allField;
+		}
+
+		private void addDimensionField_Click(object sender, EventArgs e)
+		{
+			FieldForm fieldForm = new FieldForm();
+			fieldForm.Tag = "Dimension";
+			fieldForm.CallBack = CallBack_Update_Field;
+			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.Show();
+		}
+
+		private void treeViewFields_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			if (e.Node.Tag != null)
+			{
+				Tuple<ConfigurationObjectField, string> tuple = (Tuple<ConfigurationObjectField, string>)e.Node.Tag;
+				ConfigurationObjectField field = tuple.Item1;
+				string flagTag = tuple.Item2;
+
+				FieldForm fieldForm = new FieldForm();
+				fieldForm.Tag = flagTag;
+				fieldForm.ConfigurationObjectField = field;
+				fieldForm.CallBack = CallBack_Update_Field;
+				fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
+				fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+				fieldForm.Show();
+			}
+		}
+
+		private void addResourcesField_Click(object sender, EventArgs e)
+		{
+			FieldForm fieldForm = new FieldForm();
+			fieldForm.Tag = "Resources";
+			fieldForm.CallBack = CallBack_Update_Field;
+			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.Show();
+		}
+
+		private void addPropertyField_Click(object sender, EventArgs e)
+		{
+			FieldForm fieldForm = new FieldForm();
+			fieldForm.Tag = "Property";
+			fieldForm.CallBack = CallBack_Update_Field;
+			fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
+			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
+			fieldForm.Show();
 		}
 	}
 }

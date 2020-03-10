@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.03.2020 14:41:49
+ * Дата конфігурації: 10.03.2020 16:33:11
  *
  */
 
@@ -7995,28 +7995,28 @@ namespace ConfTrade_v1_1.Журнали
 namespace ConfTrade_v1_1.РегістриВідомостей
 {
     
-    #region REGISTER "First"
+    #region REGISTER "Перший"
     
     
-    class First_RecordsSet : RegisterRecordsSet
+    class Перший_RecordsSet : RegisterRecordsSet
     {
-        public First_RecordsSet() : base(Config.Kernel, "tab_first",
+        public Перший_RecordsSet() : base(Config.Kernel, "tab_first",
              new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
         {
-            Records = new List<First_Record>();
-            Filter = new First_Filter();
+            Records = new List<Перший_Record>();
+            Filter = new Перший_Filter();
         }
         
-        public List<First_Record> Records { get; set; }
+        public List<Перший_Record> Records { get; set; }
         
         public void Read()
         {
             Records.Clear();
             
             bool isExistPreceding = false;
-            if (Filter.field0 != null)
+            if (Filter.field00 != null)
             {
-                base.BaseFilter.Add(new Where("col_field0", Comparison.EQ, Filter.field0.ToString(), false));
+                base.BaseFilter.Add(new Where("col_field0", Comparison.EQ, Filter.field00.ToString(), false));
                 
                 isExistPreceding = true;
                 
@@ -8082,13 +8082,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                First_Record record = new First_Record();
+                Перший_Record record = new Перший_Record();
 
-                record.field0 = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_field0"]);
+                record.field00 = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_field0"]);
                 record.field12 = (fieldValue["col_field12"] != DBNull.Value) ? (int)fieldValue["col_field12"] : 0;
                 record.field13 = (fieldValue["col_field13"] != DBNull.Value) ? (int[])fieldValue["col_field13"] : new int[] { };
                 record.field11 = (fieldValue["col_field11"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_field11"].ToString()) : DateTime.MinValue;
-                record.field1 = fieldValue["col_field1"].ToString();
+                record.field1 = (fieldValue["col_field1"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["col_field1"].ToString()) : DateTime.MinValue.TimeOfDay;
                 record.field2 = fieldValue["col_field2"].ToString();
                 record.field3 = fieldValue["col_field3"].ToString();
                 record.field4 = fieldValue["col_field4"].ToString();
@@ -8110,11 +8110,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (First_Record record in Records)
+                foreach (Перший_Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
-                    fieldValue.Add("col_field0", record.field0.ToString());
+                    fieldValue.Add("col_field0", record.field00.ToString());
                     fieldValue.Add("col_field12", record.field12);
                     fieldValue.Add("col_field13", record.field13);
                     fieldValue.Add("col_field11", record.field11);
@@ -8139,19 +8139,19 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public First_Filter Filter { get; set; }
+        public Перший_Filter Filter { get; set; }
     }
     
     
-    class First_Record
+    class Перший_Record
     {
-        public First_Record()
+        public Перший_Record()
         {
-            field0 = new Довідники.КлассификаторЕдИзм_Pointer();
+            field00 = new Довідники.КлассификаторЕдИзм_Pointer();
             field12 = 0;
             field13 = new int[] { };
             field11 = DateTime.MinValue;
-            field1 = "";
+            field1 = DateTime.MinValue.TimeOfDay;
             field2 = "";
             field3 = "";
             field4 = "";
@@ -8160,11 +8160,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
         }
         
-        public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
+        public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
         public int field12 { get; set; }
         public int[] field13 { get; set; }
         public DateTime field11 { get; set; }
-        public string field1 { get; set; }
+        public TimeSpan field1 { get; set; }
         public string field2 { get; set; }
         public string field3 { get; set; }
         public string field4 { get; set; }
@@ -8173,11 +8173,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         
     }
     
-    class First_Filter
+    class Перший_Filter
     {
-        public First_Filter()
+        public Перший_Filter()
         {
-             field0 = null;
+             field00 = null;
              field12 = null;
              field13 = null;
              field11 = null;
@@ -8186,29 +8186,29 @@ namespace ConfTrade_v1_1.РегістриВідомостей
              
         }
         
-        public Довідники.КлассификаторЕдИзм_Pointer field0 { get; set; }
+        public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
         public int? field12 { get; set; }
         public int[] field13 { get; set; }
         public DateTime? field11 { get; set; }
-        public string field1 { get; set; }
+        public TimeSpan? field1 { get; set; }
         public string field2 { get; set; }
         
     }
     #endregion
   
-    #region REGISTER "too"
+    #region REGISTER "Другий"
     
     
-    class too_RecordsSet : RegisterRecordsSet
+    class Другий_RecordsSet : RegisterRecordsSet
     {
-        public too_RecordsSet() : base(Config.Kernel, "tab_first",
+        public Другий_RecordsSet() : base(Config.Kernel, "tab_first",
              new string[] { "col_field1", "col_field2", "col_field3" }) 
         {
-            Records = new List<too_Record>();
-            Filter = new too_Filter();
+            Records = new List<Другий_Record>();
+            Filter = new Другий_Filter();
         }
         
-        public List<too_Record> Records { get; set; }
+        public List<Другий_Record> Records { get; set; }
         
         public void Read()
         {
@@ -8226,7 +8226,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                too_Record record = new too_Record();
+                Другий_Record record = new Другий_Record();
 
                 record.field1 = fieldValue["col_field1"].ToString();
                 record.field2 = fieldValue["col_field2"].ToString();
@@ -8247,7 +8247,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (too_Record record in Records)
+                foreach (Другий_Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -8269,13 +8269,13 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public too_Filter Filter { get; set; }
+        public Другий_Filter Filter { get; set; }
     }
     
     
-    class too_Record
+    class Другий_Record
     {
-        public too_Record()
+        public Другий_Record()
         {
             field1 = "";
             field2 = "";
@@ -8289,9 +8289,9 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         
     }
     
-    class too_Filter
+    class Другий_Filter
     {
-        public too_Filter()
+        public Другий_Filter()
         {
              field1 = null;
              
@@ -8302,32 +8302,139 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     }
     #endregion
   
-    #region REGISTER "івфіф"
+    #region REGISTER "Валюти"
     
     
-    class івфіф_RecordsSet : RegisterRecordsSet
+    class Валюти_RecordsSet : RegisterRecordsSet
     {
-        public івфіф_RecordsSet() : base(Config.Kernel, "tab_a60",
-             new string[] {  }) 
+        public Валюти_RecordsSet() : base(Config.Kernel, "tab_a60",
+             new string[] { "col1", "col2", "col3", "col4", "col5", "col6", "col_a7", "col_a8", "col_a9", "col_a1", "col_a2" }) 
         {
-            Records = new List<івфіф_Record>();
-            Filter = new івфіф_Filter();
+            Records = new List<Валюти_Record>();
+            Filter = new Валюти_Filter();
         }
         
-        public List<івфіф_Record> Records { get; set; }
+        public List<Валюти_Record> Records { get; set; }
         
         public void Read()
         {
             Records.Clear();
             
+            bool isExistPreceding = false;
+            if (Filter.zSAdAS != null)
+            {
+                base.BaseFilter.Add(new Where("col1", Comparison.EQ, Filter.zSAdAS, false));
+                
+                isExistPreceding = true;
+                
+            }
+            
+            if (Filter.SDFASDFA != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col2", Comparison.EQ, Filter.SDFASDFA, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col2", Comparison.EQ, Filter.SDFASDFA, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.werwew != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col3", Comparison.EQ, Filter.werwew, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col3", Comparison.EQ, Filter.werwew, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.s13 != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col4", Comparison.EQ, Filter.s13, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col4", Comparison.EQ, Filter.s13, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.s11 != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col5", Comparison.EQ, Filter.s11, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col5", Comparison.EQ, Filter.s11, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.s12 != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col6", Comparison.EQ, Filter.s12, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col6", Comparison.EQ, Filter.s12, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.sdfsdfasd != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a7", Comparison.EQ, Filter.sdfsdfasd, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a7", Comparison.EQ, Filter.sdfsdfasd, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.Склад != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a8", Comparison.EQ, Filter.Склад.ToString(), false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a8", Comparison.EQ, Filter.Склад.ToString(), false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.Вид != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a9", Comparison.EQ, Filter.Вид, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a9", Comparison.EQ, Filter.Вид, false));
+                    isExistPreceding = true; 
+                }
+            }
             
 
             base.BaseRead();
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                івфіф_Record record = new івфіф_Record();
+                Валюти_Record record = new Валюти_Record();
 
+                record.zSAdAS = fieldValue["col1"].ToString();
+                record.SDFASDFA = fieldValue["col2"].ToString();
+                record.werwew = fieldValue["col3"].ToString();
+                record.s13 = fieldValue["col4"].ToString();
+                record.s11 = fieldValue["col5"].ToString();
+                record.s12 = fieldValue["col6"].ToString();
+                record.sdfsdfasd = fieldValue["col_a7"].ToString();
+                record.Склад = new Довідники.МестаХранения_Pointer(fieldValue["col_a8"]);
+                record.Вид = (Перелічення.ВидиТоварів)fieldValue["col_a9"];
+                record.цйуцу = fieldValue["col_a1"].ToString();
+                record.івафіваф = fieldValue["col_a2"].ToString();
                 
                 Records.Add(record);
             }
@@ -8344,10 +8451,21 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (івфіф_Record record in Records)
+                foreach (Валюти_Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
+                    fieldValue.Add("col1", record.zSAdAS);
+                    fieldValue.Add("col2", record.SDFASDFA);
+                    fieldValue.Add("col3", record.werwew);
+                    fieldValue.Add("col4", record.s13);
+                    fieldValue.Add("col5", record.s11);
+                    fieldValue.Add("col6", record.s12);
+                    fieldValue.Add("col_a7", record.sdfsdfasd);
+                    fieldValue.Add("col_a8", record.Склад.ToString());
+                    fieldValue.Add("col_a9", record.Вид);
+                    fieldValue.Add("col_a1", record.цйуцу);
+                    fieldValue.Add("col_a2", record.івафіваф);
                     
                     base.BaseSave(fieldValue);
                 }
@@ -8363,27 +8481,67 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public івфіф_Filter Filter { get; set; }
+        public Валюти_Filter Filter { get; set; }
     }
     
     
-    class івфіф_Record
+    class Валюти_Record
     {
-        public івфіф_Record()
+        public Валюти_Record()
         {
+            zSAdAS = "";
+            SDFASDFA = "";
+            werwew = "";
+            s13 = "";
+            s11 = "";
+            s12 = "";
+            sdfsdfasd = "";
+            Склад = new Довідники.МестаХранения_Pointer();
+            Вид = 0;
+            цйуцу = "";
+            івафіваф = "";
             
         }
         
+        public string zSAdAS { get; set; }
+        public string SDFASDFA { get; set; }
+        public string werwew { get; set; }
+        public string s13 { get; set; }
+        public string s11 { get; set; }
+        public string s12 { get; set; }
+        public string sdfsdfasd { get; set; }
+        public Довідники.МестаХранения_Pointer Склад { get; set; }
+        public Перелічення.ВидиТоварів Вид { get; set; }
+        public string цйуцу { get; set; }
+        public string івафіваф { get; set; }
         
     }
     
-    class івфіф_Filter
+    class Валюти_Filter
     {
-        public івфіф_Filter()
+        public Валюти_Filter()
         {
+             zSAdAS = null;
+             SDFASDFA = null;
+             werwew = null;
+             s13 = null;
+             s11 = null;
+             s12 = null;
+             sdfsdfasd = null;
+             Склад = null;
+             Вид = null;
              
         }
         
+        public string zSAdAS { get; set; }
+        public string SDFASDFA { get; set; }
+        public string werwew { get; set; }
+        public string s13 { get; set; }
+        public string s11 { get; set; }
+        public string s12 { get; set; }
+        public string sdfsdfasd { get; set; }
+        public Довідники.МестаХранения_Pointer Склад { get; set; }
+        public Перелічення.ВидиТоварів? Вид { get; set; }
         
     }
     #endregion

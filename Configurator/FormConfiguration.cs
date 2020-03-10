@@ -278,7 +278,7 @@ namespace Configurator
 					fieldNode.ImageIndex = 15;
 				}
 
-				TreeNode propertyFieldsNode = registerInformationNode.Nodes.Add("PropertyFields", "Реквізити");
+				TreeNode propertyFieldsNode = registerInformationNode.Nodes.Add("PropertyFields", "Поля");
 				propertyFieldsNode.SelectedImageIndex = 9;
 				propertyFieldsNode.ImageIndex = 9;
 
@@ -336,7 +336,7 @@ namespace Configurator
 					fieldNode.ImageIndex = 15;
 				}
 
-				TreeNode propertyFieldsNode = registerAccumulationNode.Nodes.Add("PropertyFields", "Реквізити");
+				TreeNode propertyFieldsNode = registerAccumulationNode.Nodes.Add("PropertyFields", "Поля");
 				propertyFieldsNode.SelectedImageIndex = 9;
 				propertyFieldsNode.ImageIndex = 9;
 

@@ -65,6 +65,20 @@ namespace AccountingSoftware
 		/// Реквізити
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> PropertyFields { get; }
-		
+
+		public void AppendDimensionField(ConfigurationObjectField field)
+		{
+			DimensionFields.Add(field.Name, field);
+		}
+
+		public void AppendResourcesField(ConfigurationObjectField field)
+		{
+			ResourcesFields.Add(field.Name, field);
+		}
+
+		public void AppendPropertyField(ConfigurationObjectField field)
+		{
+			PropertyFields.Add(field.Name, field);
+		}
 	}
 }

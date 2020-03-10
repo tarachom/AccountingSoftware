@@ -109,7 +109,7 @@ namespace Configurator
 			return ConfDirectoryTablePart.Fields.ContainsKey(name);
 		}
 
-		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew)
+		void CallBack_Update_Field(string originalName, ConfigurationObjectField configurationObjectField, bool isNew, object Tag = null)
 		{
 			if (isNew)
 			{
@@ -155,7 +155,7 @@ namespace Configurator
 			if (listBoxFields.SelectedItem != null)
 			{
 				FieldForm fieldForm = new FieldForm();
-				fieldForm.configurationObjectField = ConfDirectoryTablePart.Fields[listBoxFields.SelectedItem.ToString()];
+				fieldForm.ConfigurationObjectField = ConfDirectoryTablePart.Fields[listBoxFields.SelectedItem.ToString()];
 				fieldForm.CallBack = CallBack_Update_Field;
 				fieldForm.CallBack_IsExistFieldName = CallBack_IsExistFieldName;
 				fieldForm.Show();

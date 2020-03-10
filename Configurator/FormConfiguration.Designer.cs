@@ -44,6 +44,7 @@
 			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addContantsBlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addConstatntsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewRegistersInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +61,6 @@
 			this.openConstatnt = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripRegistersInformation = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openItemRegistersInformation = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNewRegistersInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -201,42 +201,49 @@
 			// addDirectoryToolStripMenuItem
 			// 
 			this.addDirectoryToolStripMenuItem.Name = "addDirectoryToolStripMenuItem";
-			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
 			this.addDirectoryToolStripMenuItem.Text = "Додати новий довідник";
 			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
 			// 
 			// addEnumToolStripMenuItem
 			// 
 			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
-			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
 			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
 			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
 			// 
 			// addNewDocumentToolStripMenuItem
 			// 
 			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
-			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
 			this.addNewDocumentToolStripMenuItem.Text = "Додати новий документ";
 			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
 			// 
 			// addContantsBlockToolStripMenuItem
 			// 
 			this.addContantsBlockToolStripMenuItem.Name = "addContantsBlockToolStripMenuItem";
-			this.addContantsBlockToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+			this.addContantsBlockToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
 			this.addContantsBlockToolStripMenuItem.Text = "Додати новий блок констант";
 			this.addContantsBlockToolStripMenuItem.Click += new System.EventHandler(this.addContantsBlockToolStripMenuItem_Click);
 			// 
 			// addConstatntsToolStripMenuItem
 			// 
 			this.addConstatntsToolStripMenuItem.Name = "addConstatntsToolStripMenuItem";
-			this.addConstatntsToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-			this.addConstatntsToolStripMenuItem.Text = "Додати константу";
+			this.addConstatntsToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+			this.addConstatntsToolStripMenuItem.Text = "Додати нову константу";
 			this.addConstatntsToolStripMenuItem.Click += new System.EventHandler(this.addConstatntsToolStripMenuItem_Click);
+			// 
+			// addNewRegistersInformationToolStripMenuItem
+			// 
+			this.addNewRegistersInformationToolStripMenuItem.Name = "addNewRegistersInformationToolStripMenuItem";
+			this.addNewRegistersInformationToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
+			this.addNewRegistersInformationToolStripMenuItem.Text = "Додати новий регістер відомостей";
+			this.addNewRegistersInformationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegistersInformationToolStripMenuItem_Click);
 			// 
 			// saveConfigurationToolStripMenuItem
 			// 
 			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
+			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(263, 22);
 			this.saveConfigurationToolStripMenuItem.Text = "SaveConfiguration";
 			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
@@ -347,13 +354,6 @@
 			this.openItemRegistersInformation.Size = new System.Drawing.Size(122, 22);
 			this.openItemRegistersInformation.Text = "Відкрити";
 			this.openItemRegistersInformation.Click += new System.EventHandler(this.openItemRegistersInformation_Click);
-			// 
-			// addNewRegistersInformationToolStripMenuItem
-			// 
-			this.addNewRegistersInformationToolStripMenuItem.Name = "addNewRegistersInformationToolStripMenuItem";
-			this.addNewRegistersInformationToolStripMenuItem.Size = new System.Drawing.Size(256, 22);
-			this.addNewRegistersInformationToolStripMenuItem.Text = "Додати новий регістр інформації";
-			this.addNewRegistersInformationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegistersInformationToolStripMenuItem_Click);
 			// 
 			// FormConfiguration
 			// 

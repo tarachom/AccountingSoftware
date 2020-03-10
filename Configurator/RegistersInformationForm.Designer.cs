@@ -28,10 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel5 = new System.Windows.Forms.Panel();
+			this.treeViewFields = new System.Windows.Forms.TreeView();
 			this.panel4 = new System.Windows.Forms.Panel();
 			this.buttonAddField = new System.Windows.Forms.Button();
+			this.contextMenuStripAddField = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.addDimensionField = new System.Windows.Forms.ToolStripMenuItem();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -43,10 +47,12 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.treeViewFields = new System.Windows.Forms.TreeView();
+			this.addResourcesField = new System.Windows.Forms.ToolStripMenuItem();
+			this.addPropertyField = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel4.SuspendLayout();
+			this.contextMenuStripAddField.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -73,6 +79,15 @@
 			this.panel5.Size = new System.Drawing.Size(266, 344);
 			this.panel5.TabIndex = 2;
 			// 
+			// treeViewFields
+			// 
+			this.treeViewFields.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.treeViewFields.Location = new System.Drawing.Point(0, 0);
+			this.treeViewFields.Name = "treeViewFields";
+			this.treeViewFields.Size = new System.Drawing.Size(266, 344);
+			this.treeViewFields.TabIndex = 0;
+			this.treeViewFields.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewFields_NodeMouseDoubleClick);
+			// 
 			// panel4
 			// 
 			this.panel4.Controls.Add(this.buttonAddField);
@@ -85,6 +100,7 @@
 			// 
 			// buttonAddField
 			// 
+			this.buttonAddField.ContextMenuStrip = this.contextMenuStripAddField;
 			this.buttonAddField.Location = new System.Drawing.Point(44, 4);
 			this.buttonAddField.Name = "buttonAddField";
 			this.buttonAddField.Size = new System.Drawing.Size(55, 23);
@@ -92,6 +108,22 @@
 			this.buttonAddField.Text = "Додати";
 			this.buttonAddField.UseVisualStyleBackColor = true;
 			this.buttonAddField.Click += new System.EventHandler(this.buttonAddField_Click);
+			// 
+			// contextMenuStripAddField
+			// 
+			this.contextMenuStripAddField.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addDimensionField,
+            this.addResourcesField,
+            this.addPropertyField});
+			this.contextMenuStripAddField.Name = "contextMenuStripAddField";
+			this.contextMenuStripAddField.Size = new System.Drawing.Size(113, 70);
+			// 
+			// addDimensionField
+			// 
+			this.addDimensionField.Name = "addDimensionField";
+			this.addDimensionField.Size = new System.Drawing.Size(180, 22);
+			this.addDimensionField.Text = "Вимір";
+			this.addDimensionField.Click += new System.EventHandler(this.addDimensionField_Click);
 			// 
 			// label1
 			// 
@@ -215,13 +247,19 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// treeViewFields
+			// addResourcesField
 			// 
-			this.treeViewFields.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.treeViewFields.Location = new System.Drawing.Point(0, 0);
-			this.treeViewFields.Name = "treeViewFields";
-			this.treeViewFields.Size = new System.Drawing.Size(266, 344);
-			this.treeViewFields.TabIndex = 0;
+			this.addResourcesField.Name = "addResourcesField";
+			this.addResourcesField.Size = new System.Drawing.Size(180, 22);
+			this.addResourcesField.Text = "Ресурс";
+			this.addResourcesField.Click += new System.EventHandler(this.addResourcesField_Click);
+			// 
+			// addPropertyField
+			// 
+			this.addPropertyField.Name = "addPropertyField";
+			this.addPropertyField.Size = new System.Drawing.Size(180, 22);
+			this.addPropertyField.Text = "Поле";
+			this.addPropertyField.Click += new System.EventHandler(this.addPropertyField_Click);
 			// 
 			// RegistersInformationForm
 			// 
@@ -233,13 +271,14 @@
 			this.KeyPreview = true;
 			this.Name = "RegistersInformationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "Таблична частина";
+			this.Text = "Регістер відомостей";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablePartForm_KeyDown);
 			this.panel1.ResumeLayout(false);
 			this.panel5.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
 			this.panel4.PerformLayout();
+			this.contextMenuStripAddField.ResumeLayout(false);
 			this.panel2.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
@@ -267,5 +306,9 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button buttonAddField;
 		private System.Windows.Forms.TreeView treeViewFields;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripAddField;
+		private System.Windows.Forms.ToolStripMenuItem addDimensionField;
+		private System.Windows.Forms.ToolStripMenuItem addResourcesField;
+		private System.Windows.Forms.ToolStripMenuItem addPropertyField;
 	}
 }

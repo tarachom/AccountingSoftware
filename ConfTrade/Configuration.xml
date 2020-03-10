@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.03.2020 14:41:49</DateTimeSave>
+  <DateTimeSave>10.03.2020 16:33:11</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -15,7 +15,30 @@
           </Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.Контрагенти</Pointer>
-          <TabularParts />
+          <TabularParts>
+            <TablePart>
+              <Name>Історія</Name>
+              <Table>tab_a60</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Дата</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>datetime</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Значення</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
         <Constant>
           <Name>ОсновнийСклад</Name>
@@ -3962,14 +3985,14 @@
   </Documents>
   <RegistersInformation>
     <RegisterInformation>
-      <Name>First</Name>
+      <Name>Перший</Name>
       <Table>tab_first</Table>
       <Desc>
       </Desc>
       <DimensionFields>
         <Fields>
           <Field>
-            <Name>field0</Name>
+            <Name>field00</Name>
             <NameInTable>col_field0</NameInTable>
             <Type>pointer</Type>
             <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
@@ -4000,7 +4023,7 @@
           <Field>
             <Name>field1</Name>
             <NameInTable>col_field1</NameInTable>
-            <Type>string</Type>
+            <Type>time</Type>
             <Desc>
             </Desc>
           </Field>
@@ -4051,7 +4074,7 @@
       </PropertyFields>
     </RegisterInformation>
     <RegisterInformation>
-      <Name>too</Name>
+      <Name>Другий</Name>
       <Table>tab_first</Table>
       <Desc>
       </Desc>
@@ -4090,18 +4113,100 @@
       </PropertyFields>
     </RegisterInformation>
     <RegisterInformation>
-      <Name>івфіф</Name>
+      <Name>Валюти</Name>
       <Table>tab_a60</Table>
       <Desc>
       </Desc>
       <DimensionFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>zSAdAS</Name>
+            <NameInTable>col1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>SDFASDFA</Name>
+            <NameInTable>col2</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>werwew</Name>
+            <NameInTable>col3</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>s13</Name>
+            <NameInTable>col4</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>s11</Name>
+            <NameInTable>col5</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>s12</Name>
+            <NameInTable>col6</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>sdfsdfasd</Name>
+            <NameInTable>col_a7</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Склад</Name>
+            <NameInTable>col_a8</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.МестаХранения</Pointer>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Вид</Name>
+            <NameInTable>col_a9</NameInTable>
+            <Type>enum</Type>
+            <Pointer>Перелічення.ВидиТоварів</Pointer>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </DimensionFields>
       <ResourcesFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>цйуцу</Name>
+            <NameInTable>col_a1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </ResourcesFields>
       <PropertyFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>івафіваф</Name>
+            <NameInTable>col_a2</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </PropertyFields>
     </RegisterInformation>
   </RegistersInformation>
