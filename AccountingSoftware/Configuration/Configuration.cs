@@ -768,6 +768,7 @@ namespace AccountingSoftware
 				while (constantsNodes.MoveNext())
 				{
 					string constName = constantsNodes.Current.SelectSingleNode("Name").Value;
+					string nameInTable = constantsNodes.Current.SelectSingleNode("NameInTable").Value;
 					string constType = constantsNodes.Current.SelectSingleNode("Type").Value;
 					string constDesc = constantsNodes.Current.SelectSingleNode("Desc").Value;
 
@@ -775,7 +776,7 @@ namespace AccountingSoftware
 					if (constType == "pointer" || constType == "enum")
 						constPointer = constantsNodes.Current.SelectSingleNode("Pointer").Value;
 
-					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, constType, configurationConstantsBlock, constPointer, constDesc);
+					ConfigurationConstants configurationConstants = new ConfigurationConstants(constName, nameInTable, constType, configurationConstantsBlock, constPointer, constDesc);
 					configurationConstantsBlock.Constants.Add(configurationConstants.Name, configurationConstants);
 
 					LoadTabularParts(configurationConstants.TabularParts, constantsNodes.Current);
@@ -1082,6 +1083,10 @@ namespace AccountingSoftware
 				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
 				nodeName.InnerText = ConfConstant.Key;
 				rootConstant.AppendChild(nodeName);
+
+				XmlElement nodeNameInTable = xmlConfDocument.CreateElement("NameInTable");
+				nodeNameInTable.InnerText = ConfConstant.Value.NameInTable;
+				rootConstant.AppendChild(nodeNameInTable);
 
 				XmlElement nodeDesc = xmlConfDocument.CreateElement("Desc");
 				nodeDesc.InnerText = ConfConstant.Value.Desc;

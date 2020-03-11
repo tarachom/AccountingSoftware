@@ -44,6 +44,7 @@ namespace Configurator
 		public string OriginalName { get; set; }
 		public bool IsNew { get; set; }
 		public string ConstantsBlock { get; set; }
+		public string NewNameInTable { get; set; }
 
 		public ConstantsForm()
 		{
@@ -82,6 +83,7 @@ namespace Configurator
 			if (Constants == null)
 			{
 				Constants = new ConfigurationConstants();
+				textBoxNameInTable.Text = NewNameInTable;
 				IsNew = true;
 			}
 			else
@@ -90,6 +92,7 @@ namespace Configurator
 				ConstantsBlock = Constants.Block.BlockName;
 
 				textBoxName.Text = Constants.Name;
+				textBoxNameInTable.Text = Constants.NameInTable;
 				textBoxDesc.Text = Constants.Desc;
 
 				for (int i = 0; i < comboBoxBlock.Items.Count; i++)
@@ -163,6 +166,7 @@ namespace Configurator
 			string confTypeName = ((FieldType)comboBoxFieldType.SelectedItem).ConfTypeName;
 
 			Constants.Name = textBoxName.Text;
+			Constants.NameInTable = textBoxNameInTable.Text;
 			Constants.Desc = textBoxDesc.Text;
 			Constants.Type = confTypeName;
 

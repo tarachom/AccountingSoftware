@@ -246,6 +246,31 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     static class Config
     {
         public static Kernel Kernel { get; set; }
+        
+        public static void InitConstants()
+        {
+            <xsl:variable name="Constants" select="Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
+            Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+            bool IsSelect = Kernel.DataBase.SelectConstants("tab_constants",
+                 <xsl:text>new string[] { </xsl:text>
+                 <xsl:for-each select="$Constants">
+                   <xsl:if test="position() != 1">
+                     <xsl:text>, </xsl:text>
+                   </xsl:if>
+                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                 </xsl:for-each> }, fieldValue);
+            
+            if (IsSelect)
+            {
+                <xsl:for-each select="$Constants">
+                  <xsl:text>Константи.</xsl:text><xsl:value-of select="../../Name"/><xsl:text>.</xsl:text><xsl:value-of select="Name"/>
+                  <xsl:text> = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+            }
+        }
     }
 }
 

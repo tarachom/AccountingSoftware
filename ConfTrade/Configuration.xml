@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>11.03.2020 14:45:56</DateTimeSave>
+  <DateTimeSave>11.03.2020 16:39:26</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -11,6 +11,7 @@
       <Constants>
         <Constant>
           <Name>Контрагент</Name>
+          <NameInTable>col_a1</NameInTable>
           <Desc>
           </Desc>
           <Type>pointer</Type>
@@ -42,6 +43,7 @@
         </Constant>
         <Constant>
           <Name>ОсновнийСклад</Name>
+          <NameInTable>const_2</NameInTable>
           <Desc>
           </Desc>
           <Type>pointer</Type>
@@ -73,6 +75,7 @@
         </Constant>
         <Constant>
           <Name>Перелічення</Name>
+          <NameInTable>const_3</NameInTable>
           <Desc>
           </Desc>
           <Type>enum</Type>
@@ -81,6 +84,7 @@
         </Constant>
         <Constant>
           <Name>Склад</Name>
+          <NameInTable>const_4</NameInTable>
           <Desc>
           </Desc>
           <Type>string</Type>
@@ -94,6 +98,7 @@
       <Constants>
         <Constant>
           <Name>A</Name>
+          <NameInTable>const_5</NameInTable>
           <Desc>
           </Desc>
           <Type>integer</Type>
@@ -101,6 +106,7 @@
         </Constant>
         <Constant>
           <Name>B</Name>
+          <NameInTable>const_6</NameInTable>
           <Desc>
           </Desc>
           <Type>string</Type>
@@ -115,6 +121,7 @@
       <Constants>
         <Constant>
           <Name>іваіваddd</Name>
+          <NameInTable>const_7</NameInTable>
           <Desc>іваіdddd</Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.test2</Pointer>
@@ -122,6 +129,7 @@
         </Constant>
         <Constant>
           <Name>ваіва</Name>
+          <NameInTable>const_8</NameInTable>
           <Desc>
           </Desc>
           <Type>string</Type>
@@ -129,6 +137,7 @@
         </Constant>
         <Constant>
           <Name>A</Name>
+          <NameInTable>const_9</NameInTable>
           <Desc>
           </Desc>
           <Type>enum</Type>
@@ -137,6 +146,7 @@
         </Constant>
         <Constant>
           <Name>Ф2</Name>
+          <NameInTable>const_10</NameInTable>
           <Desc>ва</Desc>
           <Type>pointer</Type>
           <Pointer>Довідники.МестаХранения</Pointer>
@@ -144,6 +154,7 @@
         </Constant>
         <Constant>
           <Name>Ntcn1</Name>
+          <NameInTable>const_11</NameInTable>
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
@@ -151,6 +162,7 @@
         </Constant>
         <Constant>
           <Name>Ntcn2</Name>
+          <NameInTable>const_12</NameInTable>
           <Desc>
           </Desc>
           <Type>empty_pointer</Type>
@@ -164,7 +176,39 @@
       </Desc>
       <Constants>
         <Constant>
-          <Name>цукцук</Name>
+          <Name>Стан</Name>
+          <NameInTable>const_13</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+          <TabularParts />
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>Робот</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>Старт</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>datetime</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>Стоп</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>datetime</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>Стан</Name>
+          <NameInTable>col_a4</NameInTable>
           <Desc>
           </Desc>
           <Type>string</Type>

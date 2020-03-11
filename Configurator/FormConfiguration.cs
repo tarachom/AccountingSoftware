@@ -420,23 +420,7 @@ namespace Configurator
 			Conf = Program.Kernel.Conf;
 
 			LoadTree();
-
-			//Conf.RegistersAccumulation.Add("one", new ConfigurationRegistersAccumulation("one", "tab_first", 1, ""));
-
-			//Conf.RegistersAccumulation["one"].DimensionFields.Add("field2",
-			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
-
-			//Conf.RegistersAccumulation["one"].PropertyFields.Add("field2",
-			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
-
-			//Conf.RegistersAccumulation["one"].ResourcesFields.Add("field2",
-			//	new ConfigurationObjectField("field2", "col_field1", "string", "", ""));
-
-			//Conf.ConstantsBlock["A"].Constants.Add("Ntcn", new ConfigurationConstants("Ntcn", "empty_pointer", "", ""));
-			//Conf.ConstantsBlock["A"].Constants.Add("Контрагент", new ConfigurationConstants("Контрагент", "pointer", "Довідники.Контрагенти", ""));
-			//Conf.ConstantsBlock["A"].Constants.Add("ОсновнийСклад", new ConfigurationConstants("ОсновнийСклад", "pointer", "Довідники.МестаХранения", ""));
-			//Conf.ConstantsBlock["A"].Constants.Add("ПереліченняА", new ConfigurationConstants("ПереліченняА", "enum", "Перелічення.ВидиКонтрагентов", ""));
-
+			
 			DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
 			DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
@@ -849,9 +833,20 @@ namespace Configurator
 
 		private void addConstatntsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
+			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
+			{
+				foreach (ConfigurationConstants constants in block.Constants.Values) 
+				{
+					string fullName = block.BlockName + "." + constants.Name;
+					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
+				}
+			}
+
 			ConstantsForm constantsForm = new ConstantsForm();
 			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
 			constantsForm.CallBack = CallBack_Update_Constants;
+			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", ConstantsAllFields);
 			constantsForm.Show();
 		}
 

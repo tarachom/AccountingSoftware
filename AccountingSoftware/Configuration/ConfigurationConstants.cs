@@ -31,17 +31,19 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationConstants
 	{
-		public ConfigurationConstants() { }
+		public ConfigurationConstants()
+		{
+			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
+		}
 
-		public ConfigurationConstants(string name, string type, ConfigurationConstantsBlock block, string pointer = "", string desc = "") /* : this() */
+		public ConfigurationConstants(string name, string nameInTable, string type, ConfigurationConstantsBlock block, string pointer = "", string desc = "") : this()
 		{
 			Name = name;
+			NameInTable = nameInTable;
 			Type = type;
 			Block = block;
 			Pointer = pointer;
 			Desc = desc;
-
-			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
 		public ConfigurationConstantsBlock Block { get; set; }

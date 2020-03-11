@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 11.03.2020 14:45:56
+ * Дата конфігурації: 11.03.2020 16:39:26
  *
  */
 
@@ -39,6 +39,35 @@ namespace ConfTrade_v1_1
     static class Config
     {
         public static Kernel Kernel { get; set; }
+        
+        public static void InitConstants()
+        {
+            
+            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+            bool IsSelect = Kernel.DataBase.SelectConstants("tab_constants",
+                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4" }, fieldValue);
+            
+            if (IsSelect)
+            {
+                Константи.Основні.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a1"]);
+                Константи.Основні.ОсновнийСклад = new Довідники.МестаХранения_Pointer(fieldValue["const_2"]);
+                Константи.Основні.Перелічення = (Перелічення.ВидиКонтрагентов)fieldValue["const_3"];
+                Константи.Основні.Склад = fieldValue["const_4"].ToString();
+                Константи.Додаткові.A = (fieldValue["const_5"] != DBNull.Value) ? (int)fieldValue["const_5"] : 0;
+                Константи.Додаткові.B = fieldValue["const_6"].ToString();
+                Константи.ПоштовіНастройки.іваіваddd = new Довідники.test2_Pointer(fieldValue["const_7"]);
+                Константи.ПоштовіНастройки.ваіва = fieldValue["const_8"].ToString();
+                Константи.ПоштовіНастройки.A = (Перелічення.Перелічення2)fieldValue["const_9"];
+                Константи.ПоштовіНастройки.Ф2 = new Довідники.МестаХранения_Pointer(fieldValue["const_10"]);
+                Константи.ПоштовіНастройки.Ntcn1 = new EmptyPointer();
+                Константи.ПоштовіНастройки.Ntcn2 = new EmptyPointer();
+                Константи.РегламентніЗавдання.Стан = fieldValue["const_13"].ToString();
+                Константи.Робот.Старт = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"].ToString()) : DateTime.MinValue;
+                Константи.Робот.Стоп = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString()) : DateTime.MinValue;
+                Константи.Робот.Стан = fieldValue["col_a4"].ToString();
+                
+            }
+        }
     }
 }
 
@@ -234,7 +263,15 @@ namespace ConfTrade_v1_1.Константи
     
     static class РегламентніЗавдання
     {
-        public static string цукцук { get; set; }
+        public static string Стан { get; set; }
+             
+    }
+    
+    static class Робот
+    {
+        public static DateTime Старт { get; set; }
+        public static DateTime Стоп { get; set; }
+        public static string Стан { get; set; }
              
     }
     

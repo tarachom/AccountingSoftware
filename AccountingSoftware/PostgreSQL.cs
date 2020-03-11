@@ -96,6 +96,43 @@ namespace AccountingSoftware
 
 		#region Constants
 
+		public bool SelectConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query = "SELECT ";
+			bool is_first = true;
+
+			foreach (string field in fieldArray)
+			{
+				if (!is_first)
+					query += ", ";
+				else
+					is_first = false;
+
+				query += field;
+			}
+
+			query += " FROM " + table;
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			bool isSelect = false;
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				foreach (string field in fieldArray)
+				{
+					fieldValue.Add(field, reader[field]);
+				}
+
+				isSelect = true;
+			}
+			reader.Close();
+
+			return isSelect;
+		}
+
 		public void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = "SELECT ";
@@ -112,7 +149,6 @@ namespace AccountingSoftware
 			}
 
 			query += " FROM " + table;
-
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
