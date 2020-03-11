@@ -111,6 +111,11 @@
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
+    <Column>
+      <Name>col_a8</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
   </Table>
   <Table>
     <Name>tab_a32</Name>
@@ -1093,6 +1098,19 @@
       <Name>col_a1</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a65</Name>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
   </Table>
   <Table>

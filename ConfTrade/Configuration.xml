@@ -3,11 +3,11 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>11.03.2020 13:14:54</DateTimeSave>
+  <DateTimeSave>11.03.2020 14:45:56</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
-      <Name>Група0</Name>
-      <Desc>a</Desc>
+      <Name>Основні</Name>
+      <Desc>Основні значення </Desc>
       <Constants>
         <Constant>
           <Name>Контрагент</Name>
@@ -69,21 +69,6 @@
                 </Field>
               </Fields>
             </TablePart>
-            <TablePart>
-              <Name>asdfasd</Name>
-              <Table>tab_a61</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>sdfasdfasd</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
           </TabularParts>
         </Constant>
         <Constant>
@@ -104,7 +89,7 @@
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
-      <Name>Група1</Name>
+      <Name>Додаткові</Name>
       <Desc>fasdfs</Desc>
       <Constants>
         <Constant>
@@ -112,38 +97,7 @@
           <Desc>
           </Desc>
           <Type>integer</Type>
-          <TabularParts>
-            <TablePart>
-              <Name>івафів</Name>
-              <Table>tab_a52</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>іваіваі</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-            <TablePart>
-              <Name>wwe</Name>
-              <Table>tab_a54</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>werwe</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-          </TabularParts>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>B</Name>
@@ -155,7 +109,7 @@
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
-      <Name>Група2</Name>
+      <Name>ПоштовіНастройки</Name>
       <Desc>
       </Desc>
       <Constants>
@@ -171,23 +125,7 @@
           <Desc>
           </Desc>
           <Type>string</Type>
-          <TabularParts>
-            <TablePart>
-              <Name>werwer</Name>
-              <Table>tab_a56</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>werwer</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-          </TabularParts>
+          <TabularParts />
         </Constant>
         <Constant>
           <Name>A</Name>
@@ -221,7 +159,7 @@
       </Constants>
     </ConstantsBlock>
     <ConstantsBlock>
-      <Name>Група3</Name>
+      <Name>РегламентніЗавдання</Name>
       <Desc>
       </Desc>
       <Constants>
@@ -230,23 +168,7 @@
           <Desc>
           </Desc>
           <Type>string</Type>
-          <TabularParts>
-            <TablePart>
-              <Name>werwer</Name>
-              <Table>tab_a57</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>werwer</Name>
-                  <NameInTable>col_a3</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-          </TabularParts>
+          <TabularParts />
         </Constant>
       </Constants>
     </ConstantsBlock>

@@ -2952,13 +2952,13 @@
     <Control_Field>
       <Name>Один</Name>
       <NameInTable>col_a8</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Один</Name>
-        <NameInTable>col_a8</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>enum</ConfType>
         <DataType>integer</DataType>
-      </FieldCreate>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
     <Control_TabularParts>
       <Name>asdas</Name>
@@ -3001,15 +3001,18 @@
     <Control_TabularParts>
       <Name>Список</Name>
       <Table>tab_a65</Table>
-      <IsExist>no</IsExist>
-      <TableCreate>
-        <FieldCreate>
-          <Name>Один</Name>
-          <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>Один</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>enum</ConfType>
           <DataType>integer</DataType>
-        </FieldCreate>
-      </TableCreate>
+          <UdtName>int4</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Directory>
 </root>

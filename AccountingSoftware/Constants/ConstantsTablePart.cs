@@ -53,10 +53,10 @@ namespace AccountingSoftware
 			FieldValueList.Clear();
 		}
 
-		protected void BaseRead(UnigueID ownerUnigueID)
+		protected void BaseRead()
 		{
 			BaseClear();
-			Kernel.DataBase.SelectConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
+			//Kernel.DataBase.SelectConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, FieldValueList);
 		}
 
 		protected void BaseBeginTransaction()
@@ -74,14 +74,14 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
-		protected void BaseDelete(UnigueID ownerUnigueID)
+		protected void BaseDelete()
 		{
-			Kernel.DataBase.DeleteConstantsTablePartRecords(ownerUnigueID, Table);
+			//Kernel.DataBase.DeleteConstantsTablePartRecords(ownerUnigueID, Table);
 		}
 
-		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
+		protected void BaseSave(Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
+			//Kernel.DataBase.InsertConstantsTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }
