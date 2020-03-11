@@ -96,24 +96,26 @@ namespace AccountingSoftware
 
 		#region Constants
 
-		public void SelectConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
+		public void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
-			bool is_first = true;
-
 			string query = "SELECT ";
+			bool is_first = true;
 
 			foreach (string field in fieldArray)
 			{
-				if (!is_first) query += ", "; else is_first = false;
+				if (!is_first) 
+					query += ", "; 
+				else 
+					is_first = false;
+
 				query += field;
 			}
 
-			query += " FROM " + table + " WHERE owner = @owner";
+			query += " FROM " + table;
 
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
@@ -129,22 +131,30 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertConstantsTablePartRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "owner";
-			string query_values = "@owner";
+			string query_field = "";
+			string query_values = "";
+			bool is_first = true;
 
 			foreach (string field in fieldArray)
 			{
-				query_field += ", " + field;
-				query_values += ", @" + field;
+				if (!is_first)
+				{
+					query_field += ", ";
+					query_values += ", ";
+				}
+				else
+					is_first = false;
+
+				query_field += field;
+				query_values += "@" + field;
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			foreach (string field in fieldArray)
 			{
@@ -154,12 +164,11 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteConstantsTablePartRecords(UnigueID ownerUnigueID, string table)
+		public void DeleteConstantsTablePartRecords(string table)
 		{
-			string query = "DELETE FROM " + table + " WHERE owner = @owner";
+			string query = "DELETE FROM " + table;
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			nCommand.ExecuteNonQuery();
 		}

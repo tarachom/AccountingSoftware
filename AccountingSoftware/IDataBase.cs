@@ -37,9 +37,9 @@ namespace AccountingSoftware
 
 		#region Constants
 
-		void SelectConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
-		void InsertConstantsTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
-		void DeleteConstantsTablePartRecords(UnigueID ownerUnigueID, string table);
+		void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
+		void InsertConstantsTablePartRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteConstantsTablePartRecords(string table);
 
 		#endregion
 
