@@ -160,11 +160,23 @@ namespace Configurator
 
 			if (confTypeName == "pointer")
 			{
-				ConfigurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+				if (comboBoxPointer.SelectedItem != null)
+					ConfigurationObjectField.Pointer = comboBoxPointer.SelectedItem.ToString();
+				else
+				{
+					MessageBox.Show("Не заповнено поле вказівник", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 			}
 			else if (confTypeName == "enum")
 			{
-				ConfigurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
+				if (comboBoxEnums.SelectedItem != null)
+					ConfigurationObjectField.Pointer = comboBoxEnums.SelectedItem.ToString();
+				else
+				{
+					MessageBox.Show("Не заповнено поле перелічення", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
 			}
 			else
 			{
