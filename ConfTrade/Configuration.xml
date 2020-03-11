@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>10.03.2020 17:30:45</DateTimeSave>
+  <DateTimeSave>11.03.2020 13:14:54</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Група0</Name>
@@ -2907,6 +2907,14 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Один</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Список</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2933,6 +2941,22 @@
               <Name>asdas</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>Список</Name>
+          <Table>tab_a65</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Один</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Список</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -3126,6 +3150,32 @@
           <Name>sfas</Name>
           <Value>17</Value>
           <Desc>asfa</Desc>
+        </Field>
+      </Fields>
+    </Enum>
+    <Enum>
+      <Name>Список</Name>
+      <Desc>
+      </Desc>
+      <SerialNumber>3</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>Один</Name>
+          <Value>1</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Два</Name>
+          <Value>2</Value>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Три</Name>
+          <Value>3</Value>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
     </Enum>
@@ -3979,8 +4029,49 @@
           <Type>string</Type>
           <Desc>Вид гражданско-правового договора</Desc>
         </Field>
+        <Field>
+          <Name>Ед</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Один</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Список</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>Тест</Name>
+          <Table>tab_a64</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Ед</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КлассификаторЕдИзм</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Один</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Список</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
     </Document>
   </Documents>
   <RegistersInformation>
@@ -4067,6 +4158,14 @@
             <Name>field6</Name>
             <NameInTable>col_field6</NameInTable>
             <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Один</Name>
+            <NameInTable>col_a1</NameInTable>
+            <Type>enum</Type>
+            <Pointer>Перелічення.Список</Pointer>
             <Desc>
             </Desc>
           </Field>
@@ -4252,6 +4351,14 @@
             <Name>field3</Name>
             <NameInTable>col_field3</NameInTable>
             <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Один</Name>
+            <NameInTable>col_a2</NameInTable>
+            <Type>enum</Type>
+            <Pointer>Перелічення.Список</Pointer>
             <Desc>
             </Desc>
           </Field>

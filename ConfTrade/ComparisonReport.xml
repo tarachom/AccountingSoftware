@@ -2949,6 +2949,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>Один</Name>
+      <NameInTable>col_a8</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Один</Name>
+        <NameInTable>col_a8</NameInTable>
+        <ConfType>enum</ConfType>
+        <DataType>integer</DataType>
+      </FieldCreate>
+    </Control_Field>
     <Control_TabularParts>
       <Name>asdas</Name>
       <Table>tab_a51</Table>
@@ -2986,6 +2997,19 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>Список</Name>
+      <Table>tab_a65</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>Один</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>enum</ConfType>
+          <DataType>integer</DataType>
+        </FieldCreate>
+      </TableCreate>
     </Control_TabularParts>
   </Control_Directory>
 </root>

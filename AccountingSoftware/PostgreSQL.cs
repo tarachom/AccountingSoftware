@@ -47,6 +47,32 @@ namespace AccountingSoftware
 			Connection.Close();
 		}
 
+		#region UserType
+
+		public class uuid_and_string
+		{
+			public uuid_and_string() { }
+
+			public uuid_and_string(Guid _uuid, string _text)
+			{
+				uuid = _uuid;
+				text = _text;
+			}
+
+			[PgName("uuid")]
+			public Guid uuid { get; set; }
+
+			[PgName("string")]
+			public string text { get; set; }
+
+			public override string ToString()
+			{
+				return "('" + uuid.ToString() + "', '" + text + "')";
+			}
+		}
+
+		#endregion
+
 		#region Transaction
 
 		private NpgsqlTransaction Transaction { get; set; }
@@ -868,37 +894,15 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(sql, Connection);
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			if (reader.Read())
+			while (reader.Read())
 			{
-				uuid_and_string a = reader.GetFieldValue<uuid_and_string>(1);
+				//uuid_and_string a = reader.GetFieldValue<uuid_and_string>(1);
 
-				result = reader["owner"].ToString() + ", " + a.uuid;
+				result += reader["owner"].ToString() + ", " + reader["any_col"].ToString() + "\n";
 			}
 			reader.Close();
 
 			return result;
-		}
-
-		public class uuid_and_string
-		{
-			public uuid_and_string() { }
-
-			public uuid_and_string(Guid _uuid, string _text) 
-			{
-				uuid = _uuid;
-				text = _text;
-			}
-
-			[PgName("uuid")]
-			public Guid uuid { get; set; }
-
-			[PgName("string")]
-			public string text { get; set; }
-
-			public override string ToString()
-			{
-				return "('" + uuid.ToString() + "', '" + text + "')";
-			}
 		}
 
 		#endregion

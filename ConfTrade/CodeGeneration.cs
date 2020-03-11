@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 10.03.2020 17:30:45
+ * Дата конфігурації: 11.03.2020 13:14:54
  *
  */
 
@@ -6269,7 +6269,7 @@ namespace ConfTrade_v1_1.Довідники
     class іваів_Objest : DirectoryObject
     {
         public іваів_Objest() : base(Config.Kernel, "tab_a50",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" }) 
         {
             Назва = "";
             Код = "";
@@ -6278,9 +6278,11 @@ namespace ConfTrade_v1_1.Довідники
             Документ = new Документи.Test_Pointer();
             аавпва = 0;
             asdasd = "";
+            Один = 0;
             
             //Табличні частини
             asdas_TablePart = new іваів_asdas_TablePart(this);
+            Список_TablePart = new іваів_Список_TablePart(this);
             
         }
         
@@ -6295,6 +6297,7 @@ namespace ConfTrade_v1_1.Довідники
                 Документ = new Документи.Test_Pointer(base.FieldValue["col_a5"]);
                 аавпва = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a6"];
                 asdasd = base.FieldValue["col_a7"].ToString();
+                Один = (Перелічення.Список)base.FieldValue["col_a8"];
                 
                 BaseClear();
                 return true;
@@ -6312,6 +6315,7 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a5"] = Документ.ToString();
             base.FieldValue["col_a6"] = (int)аавпва;
             base.FieldValue["col_a7"] = asdasd;
+            base.FieldValue["col_a8"] = (int)Один;
             
             BaseSave();
         }
@@ -6334,9 +6338,11 @@ namespace ConfTrade_v1_1.Довідники
         public Документи.Test_Pointer Документ { get; set; }
         public Перелічення.ВидиКонтрагентов аавпва { get; set; }
         public string asdasd { get; set; }
+        public Перелічення.Список Один { get; set; }
         
         //Табличні частини
         public іваів_asdas_TablePart asdas_TablePart { get; set; }
+        public іваів_Список_TablePart Список_TablePart { get; set; }
         
     }
     
@@ -6365,8 +6371,8 @@ namespace ConfTrade_v1_1.Довідники
     class іваів_Select : DirectorySelect, IDisposable
     {
         public іваів_Select() : base(Config.Kernel, "tab_a50",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" },
-            new string[] { "Назва", "Код", "іваі", "sddfgsd", "Документ", "аавпва", "asdasd" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8" },
+            new string[] { "Назва", "Код", "іваі", "sddfgsd", "Документ", "аавпва", "asdasd", "Один" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -6491,6 +6497,94 @@ namespace ConfTrade_v1_1.Довідники
         public string asdas { get; set; }
         
     }
+      
+    class іваів_Список_TablePart : DirectoryTablePart
+    {
+        public іваів_Список_TablePart(іваів_Objest owner) : base(Config.Kernel, "tab_a65",
+             new string[] { "col_a1" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<іваів_Список_TablePartRecord>();
+        }
+        
+        public іваів_Objest Owner { get; private set; }
+        
+        public List<іваів_Список_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                іваів_Список_TablePartRecord record = new іваів_Список_TablePartRecord();
+
+                record.Один = (Перелічення.Список)fieldValue["col_a1"];
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (іваів_Список_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Один);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class іваів_Список_TablePartRecord : DirectoryTablePartRecord
+    {
+        public іваів_Список_TablePartRecord()
+        {
+            Один = 0;
+            
+        }
+        
+        
+        public іваів_Список_TablePartRecord(
+            Перелічення.Список _Один = 0)
+        {
+            Один = _Один;
+            
+        }
+        public Перелічення.Список Один { get; set; }
+        
+    }
       ///<summary>
     ///Список.
     ///</summary>
@@ -6576,6 +6670,14 @@ namespace ConfTrade_v1_1.Перелічення
          ass = 13,
          asas = 14,
          sfas = 17
+    }
+    
+    
+    public enum Список
+    {
+         Один = 1,
+         Два = 2,
+         Три = 3
     }
     
     
@@ -7853,7 +7955,7 @@ namespace ConfTrade_v1_1.Документи
     class Договор_Objest : DocumentObject
     {
         public Договор_Objest() : base(Config.Kernel, "tab_a55",
-             new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9" }) 
+             new string[] { "col_c6", "col_c7", "col_c8", "col_c9", "col_d1", "col_d2", "col_d3", "col_d4", "col_d5", "col_d6", "col_d7", "col_d8", "col_d9", "col_a1", "col_a2" }) 
         {
             ДатаДок = DateTime.MinValue;
             НомерДок = 0;
@@ -7868,6 +7970,11 @@ namespace ConfTrade_v1_1.Документи
             СпособФормированияНалоговихДокументов = 0;
             ПлательщикНалогаНаПрибиль = false;
             ВидДоговора = "";
+            Ед = new Довідники.КлассификаторЕдИзм_Pointer();
+            Один = 0;
+            
+            //Табличні частини
+            Тест_TablePart = new Договор_Тест_TablePart(this);
             
         }
         
@@ -7888,6 +7995,8 @@ namespace ConfTrade_v1_1.Документи
                 СпособФормированияНалоговихДокументов = (base.FieldValue["col_d7"] != DBNull.Value) ? (int)base.FieldValue["col_d7"] : 0;
                 ПлательщикНалогаНаПрибиль = (bool)base.FieldValue["col_d8"];
                 ВидДоговора = base.FieldValue["col_d9"].ToString();
+                Ед = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_a1"]);
+                Один = (Перелічення.Список)base.FieldValue["col_a2"];
                 
                 BaseClear();
                 return true;
@@ -7911,6 +8020,8 @@ namespace ConfTrade_v1_1.Документи
             base.FieldValue["col_d7"] = СпособФормированияНалоговихДокументов;
             base.FieldValue["col_d8"] = ПлательщикНалогаНаПрибиль;
             base.FieldValue["col_d9"] = ВидДоговора;
+            base.FieldValue["col_a1"] = Ед.ToString();
+            base.FieldValue["col_a2"] = (int)Один;
             
             BaseSave();
         }
@@ -7939,6 +8050,11 @@ namespace ConfTrade_v1_1.Документи
         public int СпособФормированияНалоговихДокументов { get; set; }
         public bool ПлательщикНалогаНаПрибиль { get; set; }
         public string ВидДоговора { get; set; }
+        public Довідники.КлассификаторЕдИзм_Pointer Ед { get; set; }
+        public Перелічення.Список Один { get; set; }
+        
+        //Табличні частини
+        public Договор_Тест_TablePart Тест_TablePart { get; set; }
         
     }
     
@@ -7982,6 +8098,99 @@ namespace ConfTrade_v1_1.Документи
     }
     
       
+    class Договор_Тест_TablePart : DocumentTablePart
+    {
+        public Договор_Тест_TablePart(Договор_Objest owner) : base(Config.Kernel, "tab_a64",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Договор_Тест_TablePartRecord>();
+        }
+        
+        public Договор_Objest Owner { get; private set; }
+        
+        public List<Договор_Тест_TablePartRecord> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Договор_Тест_TablePartRecord record = new Договор_Тест_TablePartRecord();
+
+                record.Ед = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_a1"]);
+                record.Один = (Перелічення.Список)fieldValue["col_a2"];
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        /// <summary>
+        /// Зберегти колекцію Records в базу.
+        /// </summary>
+        /// <param name="clear_all_before_save">
+        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
+        /// </param>
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Договор_Тест_TablePartRecord record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Ед.UnigueID.UGuid);
+                    fieldValue.Add("col_a2", record.Один);
+                    
+                    base.BaseSave(Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+    }
+    
+    
+    class Договор_Тест_TablePartRecord : DocumentTablePartRecord
+    {
+        public Договор_Тест_TablePartRecord()
+        {
+            Ед = new Довідники.КлассификаторЕдИзм_Pointer();
+            Один = 0;
+            
+        }
+        
+        
+        public Договор_Тест_TablePartRecord(
+            Довідники.КлассификаторЕдИзм_Pointer _Ед = null, Перелічення.Список _Один = 0)
+        {
+            Ед = _Ед ?? new Довідники.КлассификаторЕдИзм_Pointer();
+            Один = _Один;
+            
+        }
+        public Довідники.КлассификаторЕдИзм_Pointer Ед { get; set; }
+        public Перелічення.Список Один { get; set; }
+        
+    }
+      
     
     #endregion
     
@@ -8001,7 +8210,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     class Перший_RecordsSet : RegisterInformationRecordsSet
     {
         public Перший_RecordsSet() : base(Config.Kernel, "tab_first",
-             new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6" }) 
+             new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6", "col_a1" }) 
         {
             Records = new List<Перший_Record>();
             Filter = new Перший_Filter();
@@ -8094,6 +8303,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 record.field4 = fieldValue["col_field4"].ToString();
                 record.field5 = fieldValue["col_fiel5"].ToString();
                 record.field6 = fieldValue["col_field6"].ToString();
+                record.Один = (Перелічення.Список)fieldValue["col_a1"];
                 
                 Records.Add(record);
             }
@@ -8124,6 +8334,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                     fieldValue.Add("col_field4", record.field4);
                     fieldValue.Add("col_fiel5", record.field5);
                     fieldValue.Add("col_field6", record.field6);
+                    fieldValue.Add("col_a1", record.Один);
                     
                     base.BaseSave(fieldValue);
                 }
@@ -8157,6 +8368,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             field4 = "";
             field5 = "";
             field6 = "";
+            Один = 0;
             
         }
         
@@ -8170,6 +8382,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public string field4 { get; set; }
         public string field5 { get; set; }
         public string field6 { get; set; }
+        public Перелічення.Список Один { get; set; }
         
     }
     
@@ -8561,6 +8774,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
             field4 = "";
             field2 = "";
             field3 = "";
+            Один = 0;
             
         }
         
@@ -8568,6 +8782,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
         public string field4 { get; set; }
         public string field2 { get; set; }
         public string field3 { get; set; }
+        public Перелічення.Список Один { get; set; }
         
     }
     #endregion
