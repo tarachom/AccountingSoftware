@@ -50,21 +50,11 @@ namespace ConfTrade
 
 		static void Main(string[] args)
 		{
-			string d = null;
-
-			int? c = null;
-			c = 1;
-			DateTime? a = null;
-
-			a = DateTime.Now;
-
-			Console.WriteLine(d == null);
-			Console.WriteLine(d);
-			Console.ReadLine();
-
-
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
+
+			Console.WriteLine(Conf.Config.Kernel.DataBase.Test());
+			Console.ReadLine();
 
 			listHttpContext = new List<HttpListenerContext>();
 

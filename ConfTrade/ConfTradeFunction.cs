@@ -67,14 +67,15 @@ namespace ConfTrade
 
 		static string Run4()
 		{
+		Console.WriteLine(	Conf.Config.Kernel.DataBase.Test());
+
+			/*
 			Довідники.test_Objest test_Objest = new Довідники.test_Objest();
 			test_Objest.New();
 			test_Objest.ТипПоля = Перелічення.Перелічення2.Два;
 			test_Objest.Назва = "Тест";
 			test_Objest.Код = "1";
 			test_Objest.Save();
-
-			/*
 
 			Довідники.Валюти_Objest валюти_Objest = new Довідники.Валюти_Objest();
 			валюти_Objest.New();

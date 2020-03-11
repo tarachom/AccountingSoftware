@@ -50,10 +50,10 @@ namespace Configurator
 
 		private void TablePartForm_Load(object sender, EventArgs e)
 		{
-			comboBoxRegisterType.Items.Add(TypeRegistersAccumulation.Residues);
-			comboBoxRegisterType.Items.Add(TypeRegistersAccumulation.Turnover);
+			comboBoxRegisterType.Items.Add(new NameValue<TypeRegistersAccumulation>("Залишки", TypeRegistersAccumulation.Residues));
+			comboBoxRegisterType.Items.Add(new NameValue<TypeRegistersAccumulation>("Обороти", TypeRegistersAccumulation.Turnover));
 			comboBoxRegisterType.SelectedItem = comboBoxRegisterType.Items[0];
-
+			
 			if (ConfRegistersAccumulation == null)
 			{
 				ConfRegistersAccumulation = new ConfigurationRegistersAccumulation();
@@ -151,7 +151,7 @@ namespace Configurator
 
 			ConfRegistersAccumulation.Name = textBoxName.Text;
 			ConfRegistersAccumulation.Table = textBoxTable.Text;
-			ConfRegistersAccumulation.TypeRegistersAccumulation = (TypeRegistersAccumulation)comboBoxRegisterType.SelectedItem;
+			ConfRegistersAccumulation.TypeRegistersAccumulation = ((NameValue<TypeRegistersAccumulation>)comboBoxRegisterType.SelectedItem).Value;
 			ConfRegistersAccumulation.Desc = textBoxDesc.Text;
 
 			CallBack.Invoke(OriginalName, ConfRegistersAccumulation, IsNew);
