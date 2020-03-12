@@ -89,6 +89,12 @@
     <Compile Include="RegistersInformationForm.Designer.cs">
       <DependentUpon>RegistersInformationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SaveConfigurationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SaveConfigurationForm.Designer.cs">
+      <DependentUpon>SaveConfigurationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViewForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +147,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RegistersInformationForm.resx">
       <DependentUpon>RegistersInformationForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SaveConfigurationForm.resx">
+      <DependentUpon>SaveConfigurationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>

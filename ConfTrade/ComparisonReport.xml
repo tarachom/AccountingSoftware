@@ -1599,11 +1599,23 @@
       <NameInTable>col_f8</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
+        <ConfType>integer</ConfType>
         <DataType>text</DataType>
         <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
+        <Coincide>no</Coincide>
+        <DataTypeCreate>integer</DataTypeCreate>
       </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>dfsd</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>dfsd</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
     </Control_Field>
   </Control_Directory>
   <Control_Directory>
@@ -2622,6 +2634,17 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+      <Control_Field>
+        <Name>Інфо</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>Інфо</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -2785,6 +2808,17 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+      <Control_Field>
+        <Name>ddd</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>ddd</Name>
+          <NameInTable>col_a2</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </Control_Field>
     </Control_TabularParts>
     <Control_TabularParts>
       <Name>werw</Name>
@@ -2801,6 +2835,30 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+      <Control_Field>
+        <Name>www</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>www</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>dafsd</Name>
+      <Table>tab_a61</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>sdfasdfa</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </TableCreate>
     </Control_TabularParts>
   </Control_Directory>
   <Control_Directory>
@@ -2869,7 +2927,7 @@
     </Control_Field>
   </Control_Directory>
   <Control_Directory>
-    <Name>іваів</Name>
+    <Name>ОСТАННІЙ</Name>
     <Table>tab_a50</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
@@ -2960,6 +3018,39 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>укцукц</Name>
+      <NameInTable>col_a9</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>укцукц</Name>
+        <NameInTable>col_a9</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>eeeeeee</Name>
+      <NameInTable>col_b1</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>eeeeeee</Name>
+        <NameInTable>col_b1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>werqwerq</Name>
+      <NameInTable>col_b2</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>werqwerq</Name>
+        <NameInTable>col_b2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
     <Control_TabularParts>
       <Name>asdas</Name>
       <Table>tab_a51</Table>
@@ -3013,6 +3104,51 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>Нова</Name>
+      <Table>tab_a57</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>Поле</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </TableCreate>
+    </Control_TabularParts>
+  </Control_Directory>
+  <Control_Directory>
+    <Name>кккк</Name>
+    <Table>tab_a54</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>Код</Name>
+        <NameInTable>col_a2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+    <Control_TabularParts>
+      <Name>Товари</Name>
+      <Table>tab_a56</Table>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>Товар</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+        </FieldCreate>
+      </TableCreate>
     </Control_TabularParts>
   </Control_Directory>
 </root>

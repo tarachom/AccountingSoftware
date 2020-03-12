@@ -44,42 +44,42 @@ namespace Configurator
 
 		public Configuration Conf { get; set; }
 
-		public void SaveConf()
-		{
-			//Save
-			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
+		//public void SaveConf()
+		//{
+		//	//Save
+		//	Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
-			//Comparison
-			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
-			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
+		//	//Comparison
+		//	ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
+		//	Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
-			//Code Generation
-			Configuration.Generation(Conf.PathToXmlFileConfiguration,
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+		//	//Code Generation
+		//	Configuration.Generation(Conf.PathToXmlFileConfiguration,
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
 
-			//Аналіз таблиць і полів конфігурації та бази даних
-			Configuration.ComparisonGeneration(
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
+		//	//Аналіз таблиць і полів конфігурації та бази даних
+		//	Configuration.ComparisonGeneration(
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 
-			//Create SQL
-			Configuration.ComparisonGeneration(
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+		//	//Create SQL
+		//	Configuration.ComparisonGeneration(
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
+		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
 
-			//Read SQL
-			List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+		//	//Read SQL
+		//	List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
 
-			//Execute
-			foreach (string sqlText in SqlList)
-			{
-				Program.Kernel.DataBase.ExecuteSQL(sqlText);
-			}
+		//	//Execute
+		//	foreach (string sqlText in SqlList)
+		//	{
+		//		Program.Kernel.DataBase.ExecuteSQL(sqlText);
+		//	}
 
-		}
+		//}
 
 		public void LoadConstants(TreeNode rootNode)
 		{
@@ -776,7 +776,9 @@ namespace Configurator
 
 		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			SaveConf();
+			SaveConfigurationForm saveConfigurationForm = new SaveConfigurationForm();
+			saveConfigurationForm.Conf = Conf;
+			saveConfigurationForm.ShowDialog();
 		}
 
 		private void openEnumItem_Click(object sender, EventArgs e)
