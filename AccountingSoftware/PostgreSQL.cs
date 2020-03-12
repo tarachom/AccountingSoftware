@@ -28,7 +28,7 @@ using NpgsqlTypes;
 
 namespace AccountingSoftware
 {
-	public class PostgreSQL: IDataBase
+	public class PostgreSQL : IDataBase
 	{
 		public PostgreSQL() { }
 
@@ -38,6 +38,23 @@ namespace AccountingSoftware
 		{
 			Connection = new NpgsqlConnection(connectionString);
 			Connection.Open();
+
+			Start();
+		}
+
+		private void Start()
+		{
+			//List<string> StartSQL = new List<string>();
+
+			string query = "SELECT 'Exist' FROM pg_type WHERE typname = 'uuid_and_string'";
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			object result = nCommand.ExecuteScalar();
+
+			if (!(result != null && result.ToString() == "Exist"))
+				ExecuteSQL("CREATE TYPE public.uuid_and_string AS(uuid uuid, string text)");
+			
+			//foreach (string sqlQuery in StartSQL)
+			//	ExecuteSQL(sqlQuery);
 
 			Connection.MapComposite<uuid_and_string>("uuid_and_string");
 		}
@@ -140,9 +157,9 @@ namespace AccountingSoftware
 
 			foreach (string field in fieldArray)
 			{
-				if (!is_first) 
-					query += ", "; 
-				else 
+				if (!is_first)
+					query += ", ";
+				else
 					is_first = false;
 
 				query += field;
@@ -220,7 +237,7 @@ namespace AccountingSoftware
 
 			foreach (string field in fieldArray)
 			{
-				query_field += ", " + field; 
+				query_field += ", " + field;
 				query_values += ", @" + field;
 			}
 
@@ -379,7 +396,7 @@ namespace AccountingSoftware
 		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			bool is_first = true;
-			
+
 			string query = "SELECT ";
 
 			foreach (string field in fieldArray)
@@ -480,7 +497,7 @@ namespace AccountingSoftware
 			{
 				xml += "  <row>\n";
 				xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
-				
+
 				foreach (string field in directoryView.QuerySelect.Field)
 				{
 					xml += "    <" + directoryView.AliasRevers[field] + ">";
@@ -529,7 +546,7 @@ namespace AccountingSoftware
 								break;
 							}
 					}
-					
+
 					xml += "</" + directoryView.AliasRevers[field] + ">\n";
 				}
 
@@ -876,7 +893,7 @@ namespace AccountingSoftware
 			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
 
 			string query = "SELECT table_name, column_name, data_type, udt_name " +
-				           "FROM information_schema.columns " +
+						   "FROM information_schema.columns " +
 						   "WHERE table_schema = 'public'";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);

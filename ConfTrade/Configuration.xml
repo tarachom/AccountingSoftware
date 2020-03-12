@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>12.03.2020 14:34:07</DateTimeSave>
+  <DateTimeSave>12.03.2020 19:32:44</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -282,6 +282,14 @@
               <Name>Кратность</Name>
               <NameInTable>col_a6</NameInTable>
               <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>НовеПоле</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Пользователи</Pointer>
               <Desc>
               </Desc>
             </Field>
@@ -2684,6 +2692,27 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Gjkt1</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>dfasdfa</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdf</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -2746,6 +2775,29 @@
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>sdfasd</Name>
+          <Table>tab_a66</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sdfasdfa</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>sdfasd</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Категории</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <Views>
         <View>
@@ -2792,7 +2844,23 @@
           <Desc>Код</Desc>
         </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>sdfasdfa</Name>
+          <Table>tab_a67</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>fasd</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views>
         <View>
           <Name>Список</Name>
@@ -2832,10 +2900,46 @@
           <Desc>Код</Desc>
         </Field>
         <Field>
-          <Name>іваіваіваівjj</Name>
+          <Name>Поле1</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>empty_pointer</Type>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Цени</Pointer>
           <Desc>аіваі</Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdfa</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>faewrqwe</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasd</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdsdf</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdfasdfa</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
       <TabularParts />
@@ -2920,21 +3024,22 @@
           <Name>Один</Name>
           <NameInTable>col_a8</NameInTable>
           <Type>enum</Type>
-          <Pointer>Перелічення.Список</Pointer>
+          <Pointer>Перелічення.test2</Pointer>
           <Desc>
           </Desc>
         </Field>
         <Field>
           <Name>укцукц</Name>
           <NameInTable>col_a9</NameInTable>
-          <Type>string</Type>
+          <Type>numeric</Type>
           <Desc>
           </Desc>
         </Field>
         <Field>
           <Name>eeeeeee</Name>
           <NameInTable>col_b1</NameInTable>
-          <Type>string</Type>
+          <Type>pointer</Type>
+          <Pointer>Довідники.КатегорииЦен</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -2942,6 +3047,27 @@
           <Name>werqwerq</Name>
           <NameInTable>col_b2</NameInTable>
           <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdasdf</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>time</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>sdfasdfa</Name>
+          <NameInTable>col_b4</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>fasdfasd</Name>
+          <NameInTable>col_b5</NameInTable>
+          <Type>boolean</Type>
           <Desc>
           </Desc>
         </Field>
@@ -3007,6 +3133,36 @@
             </Field>
           </Fields>
         </TablePart>
+        <TablePart>
+          <Name>sdfasdf</Name>
+          <Table>tab_a71</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sdfasdfasdf</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>sdfasdfasdsd</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>numeric</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>sdfsd</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.КатегорииТоваров</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
       </TabularParts>
       <Views>
         <View>
@@ -3046,6 +3202,13 @@
           <Type>string</Type>
           <Desc>Код</Desc>
         </Field>
+        <Field>
+          <Name>Тест</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
@@ -3080,6 +3243,98 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>sdfasd</Name>
+      <Table>tab_a68</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string[]</Type>
+          <Desc>Код</Desc>
+        </Field>
+        <Field>
+          <Name>fsdfsd</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string[]</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>as</Name>
+          <Table>tab_a69</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sdfasd</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>dfs</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>dfasdfa</Name>
+          <Table>tab_a70</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sdfasdf</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>date</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>sdfasd</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a68</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string[]</Type>
             </Field>
           </Fields>
         </View>
@@ -3309,7 +3564,7 @@
     </Document>
     <Document>
       <Name>РасходнаяНакладная</Name>
-      <Table>tab_a51</Table>
+      <Table>tab_a512</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -3593,7 +3848,7 @@
     </Document>
     <Document>
       <Name>ПриходнаяНакладная</Name>
-      <Table>tab_a51</Table>
+      <Table>tab_a512r4</Table>
       <Desc>Приходная накладная</Desc>
       <Fields>
         <Field>
@@ -3791,7 +4046,7 @@
     </Document>
     <Document>
       <Name>ПрихіднийКасовийОрдер</Name>
-      <Table>tab_a52</Table>
+      <Table>tab_a522</Table>
       <Desc>Прихідний касовий ордер</Desc>
       <Fields>
         <Field>
@@ -3836,7 +4091,7 @@
     </Document>
     <Document>
       <Name>РозхіднийКасовийОрдер</Name>
-      <Table>tab_a53</Table>
+      <Table>tab_a533</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -3882,7 +4137,7 @@
     </Document>
     <Document>
       <Name>Инвентаризация</Name>
-      <Table>tab_a52</Table>
+      <Table>tab_a52565</Table>
       <Desc>Инвентаризация товаров</Desc>
       <Fields>
         <Field>
@@ -3986,7 +4241,7 @@
       <TabularParts>
         <TablePart>
           <Name>Товари</Name>
-          <Table>tab_a53</Table>
+          <Table>tab_a5344</Table>
           <Desc>
           </Desc>
           <Fields>
@@ -4168,6 +4423,102 @@
               <NameInTable>col_a2</NameInTable>
               <Type>enum</Type>
               <Pointer>Перелічення.Список</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+    </Document>
+    <Document>
+      <Name>Договір2</Name>
+      <Table>tab_a72</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>ДатаДок</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>datetime</Type>
+          <Desc>ДатаДок</Desc>
+        </Field>
+        <Field>
+          <Name>НомерДок</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>integer</Type>
+          <Desc>НомерДок</Desc>
+        </Field>
+        <Field>
+          <Name>Контрагент</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Договір</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Документи.Договор</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Активність</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ОстанняРеакція</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Коментар</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Товари</Name>
+          <Table>tab_a73</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Товар</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Сума</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>numeric</Type>
               <Desc>
               </Desc>
             </Field>

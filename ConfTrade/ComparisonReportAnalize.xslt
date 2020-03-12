@@ -33,6 +33,10 @@ limitations under the License.
     <xsl:param name="FieldNameInTable" />
     <xsl:param name="DataTypeCreate" />
 
+    <info> <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Перейменувати колонку <xsl:value-of select="$FieldNameInTable"/> в таблиці <xsl:value-of select="$TableName"/><xsl:text> на </xsl:text>
+      <xsl:value-of select="$FieldNameInTable"/><xsl:text>_old_</xsl:text><xsl:value-of select="$KeyUID"/>
+    </info>
+
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
@@ -44,6 +48,8 @@ limitations under the License.
       <xsl:value-of select="$KeyUID"/>
       <xsl:text>";</xsl:text>
     </sql>
+
+    <info> <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Додати колонку <xsl:value-of select="$FieldNameInTable"/> в таблицю <xsl:value-of select="$TableName"/></info>
 
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
@@ -60,6 +66,9 @@ limitations under the License.
   <xsl:template name="Template_DropColumn">
     <xsl:param name="TableName" />
     <xsl:param name="FieldNameInTable" />
+
+    <info> <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Видалити колонку <xsl:value-of select="$FieldNameInTable"/><xsl:text>_old_</xsl:text><xsl:value-of select="$KeyUID"/> в таблиці <xsl:value-of select="$TableName"/></info>
+
     <sql>
       <xsl:text>ALTER TABLE </xsl:text>
       <xsl:value-of select="$TableName"/>
@@ -73,6 +82,7 @@ limitations under the License.
 
   <xsl:template name="Template_Control_Field">
     <xsl:param name="Control_Field" />
+    <xsl:param name="Name" />
     <xsl:param name="TableName" />
 
     <xsl:for-each select="$Control_Field">
@@ -82,16 +92,15 @@ limitations under the License.
 
           <xsl:if test="Type/Coincide = 'no'">
 
-            <info>
-              <xsl:value-of select="Type/DataType"/>
-              <xsl:value-of select="Type/UdtName"/>
-            </info>
+            <info>Таблиця <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>), поле <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/><xsl:text>). </xsl:text>
+              <xsl:text>Перетворити тип даних </xsl:text>(<xsl:value-of select="Type/DataType"/>, <xsl:value-of select="Type/UdtName"/>)<xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> <xsl:value-of select="Type/ConfType"/></info>
 
             <xsl:choose>
               <xsl:when test="Type/DataType = 'text'">
                 <xsl:choose>
                   <!-- Текст в масив -->
                   <xsl:when test="Type/ConfType = 'string[]'">
+                    <info>Резструктуризація можлива: Текст в масив.</info>
                     <sql>BEGIN;</sql>
 
                     <xsl:call-template name="Template_RenameColumn">
@@ -130,6 +139,7 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
+                    <info>Реструкторизація неможлива, створення копії колонки!</info>
                     <sql>BEGIN;</sql>
                     <xsl:call-template name="Template_RenameColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
@@ -145,6 +155,7 @@ limitations under the License.
                 <xsl:choose>
                   <!-- Число в масив -->
                   <xsl:when test="Type/ConfType = 'integer[]' or Type/ConfType = 'numeric[]'">
+                    <info>Резструктуризація можлива: Число в масив.</info>
                     <sql>BEGIN;</sql>
 
                     <xsl:call-template name="Template_RenameColumn">
@@ -179,6 +190,7 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
+                    <info>Реструкторизація неможлива, створення копії колонки!</info>
                     <sql>BEGIN;</sql>
                     <xsl:call-template name="Template_RenameColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
@@ -196,6 +208,7 @@ limitations under the License.
                 <xsl:choose>
                   <!-- Масив в текст -->
                   <xsl:when test="Type/ConfType = 'string'">
+                    <info>Резструктуризація можлива: Масив в текст.</info>
                     <sql>BEGIN;</sql>
 
                     <xsl:call-template name="Template_RenameColumn">
@@ -234,6 +247,7 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
+                    <info>Реструкторизація неможлива, створення копії колонки!</info>
                     <sql>BEGIN;</sql>
                     <xsl:call-template name="Template_RenameColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
@@ -250,6 +264,7 @@ limitations under the License.
                               Type/DataType = 'uuid' ">
                 <xsl:choose>
                   <xsl:when test="Type/ConfType = 'string'">
+                    <info>Резструктуризація можлива: Дані в текст.</info>
                     <sql>BEGIN;</sql>
 
                     <xsl:call-template name="Template_RenameColumn">
@@ -282,6 +297,7 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
+                    <info>Реструкторизація неможлива, створення копії колонки!</info>
                     <sql>BEGIN;</sql>
                     <xsl:call-template name="Template_RenameColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
@@ -293,6 +309,9 @@ limitations under the License.
                 </xsl:choose>
               </xsl:when>
 
+              <xsl:otherwise>
+                <info>ПОМИЛКА! Не вдалось знайти спосіб реструктуризації для даного типу.</info>
+              </xsl:otherwise>
             </xsl:choose>
           </xsl:if>
 
@@ -300,7 +319,7 @@ limitations under the License.
         <xsl:when test="IsExist = 'no'">
 
           <xsl:for-each select="FieldCreate">
-
+            <info>Додати колонку <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/>, тип <xsl:value-of select="DataType"/>)  в таблицю <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>)</info>
             <sql>
               <xsl:text>ALTER TABLE </xsl:text>
               <xsl:value-of select="$TableName"/>
@@ -324,8 +343,9 @@ limitations under the License.
 
     <root>
 
-      <xsl:for-each select="root/Control_Directory">
+      <xsl:for-each select="root/Control_Table">
 
+        <xsl:variable name="DirectoryName" select="Name" />
         <xsl:variable name="TableName" select="Table" />
 
         <xsl:choose>
@@ -333,6 +353,7 @@ limitations under the License.
 
             <xsl:call-template name="Template_Control_Field">
               <xsl:with-param name="Control_Field" select="Control_Field" />
+              <xsl:with-param name="Name" select="$DirectoryName" />
               <xsl:with-param name="TableName" select="$TableName" />
             </xsl:call-template>
 
@@ -340,6 +361,7 @@ limitations under the License.
           <xsl:when test="IsExist = 'no'">
 
             <xsl:for-each select="TableCreate">
+              <info>Створити таблицю <xsl:value-of select="$DirectoryName"/> (<xsl:value-of select="$TableName"/>)</info>
               <sql>
                 <xsl:text>CREATE TABLE </xsl:text>
                 <xsl:value-of select="$TableName"/>
@@ -360,6 +382,8 @@ limitations under the License.
         </xsl:choose>
 
         <xsl:for-each select="Control_TabularParts">
+          
+          <xsl:variable name="TablePartName" select="Name" />
           <xsl:variable name="TabularParts_TableName" select="Table" />
 
           <xsl:choose>
@@ -367,6 +391,7 @@ limitations under the License.
 
               <xsl:call-template name="Template_Control_Field">
                 <xsl:with-param name="Control_Field" select="Control_Field" />
+                <xsl:with-param name="Name" select="$TablePartName" />
                 <xsl:with-param name="TableName" select="$TabularParts_TableName" />
               </xsl:call-template>
 
@@ -374,6 +399,7 @@ limitations under the License.
             <xsl:when test="IsExist = 'no'">
 
               <xsl:for-each select="TableCreate">
+                <info>Створити таблицю <xsl:value-of select="$TablePartName"/> (<xsl:value-of select="$TabularParts_TableName"/>)</info>
                 <sql>
                   <xsl:text>CREATE TABLE </xsl:text>
                   <xsl:value-of select="$TabularParts_TableName"/>
@@ -398,7 +424,7 @@ limitations under the License.
           </xsl:choose>
 
         </xsl:for-each>
-        
+
       </xsl:for-each>
 
     </root>

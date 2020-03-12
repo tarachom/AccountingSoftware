@@ -22,47 +22,38 @@ namespace Configurator
 
 		public Configuration Conf { get; set; }
 
-		public void SaveConf()
-		{
-
-
-			//Code Generation
-			Configuration.Generation(Conf.PathToXmlFileConfiguration,
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
-
-			//Create SQL
-			Configuration.ComparisonGeneration(
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
-
-			//Read SQL
-			List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
-
-			//Execute
-			foreach (string sqlText in SqlList)
-			{
-				Program.Kernel.DataBase.ExecuteSQL(sqlText);
-			}
-
-		}
-
 		private void ApendLine(string head, string bodySelect, string futer = "")
 		{
 			richTextBoxInfo.AppendText(head);
 
-			richTextBoxInfo.SelectionFont = new Font("Microsoft Sans Serif", 8, FontStyle.Underline);
+			richTextBoxInfo.SelectionFont = new Font("Consolas"/*"Microsoft Sans Serif"*/, 10, FontStyle.Underline);
 			richTextBoxInfo.SelectionColor = Color.DarkBlue;
 			richTextBoxInfo.AppendText(bodySelect);
 
-			richTextBoxInfo.SelectionFont = new Font("Microsoft Sans Serif", 8);
+			richTextBoxInfo.SelectionFont = new Font("Consolas", 10);
 			richTextBoxInfo.SelectionColor = Color.Black;
 			richTextBoxInfo.AppendText(" " + futer + "\n");
+
+			richTextBoxInfo.ScrollToCaret();
+		}
+
+		private string GetNameFromType(string Type)
+		{
+			switch(Type)
+				{
+				case "Directory":
+					return "Довідник";
+				case "Document":
+					return "Документ";
+				default:
+					return "<Невідомий тип>";
+			}
 		}
 
 		private void SaveConfigurationForm_Load(object sender, EventArgs e)
 		{
+			buttonSave.Enabled = false;
+
 			//Конфігурація в файл
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
@@ -79,11 +70,12 @@ namespace Configurator
 			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
-			XPathNodeIterator nodeNewDirectory = xPathDocNavigator.Select("/root/Control_Directory[IsExist = 'no']");
+			XPathNodeIterator nodeNewDirectory = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'no']");
 			while (nodeNewDirectory.MoveNext())
 			{
 				XPathNavigator nodeName = nodeNewDirectory.Current.SelectSingleNode("Name");
-				ApendLine("Новий Довідник: ", nodeName.Value);
+				XPathNavigator nodeType = nodeNewDirectory.Current.SelectSingleNode("Type");
+				ApendLine("Новий " + GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
 
 				InfoTableCreateFieldCreate(nodeNewDirectory.Current, "\t ");
 				richTextBoxInfo.AppendText("\n");
@@ -99,17 +91,17 @@ namespace Configurator
 				richTextBoxInfo.AppendText("\n");
 			}
 
-			XPathNodeIterator nodeDirectoryExist = xPathDocNavigator.Select("/root/Control_Directory[IsExist = 'yes']");
+			XPathNodeIterator nodeDirectoryExist = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'yes']");
 			while (nodeDirectoryExist.MoveNext())
 			{
 				bool flag = false;
-
+				
 				XPathNodeIterator nodeDirectoryNewField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'no']");
 				if (nodeDirectoryNewField.Count > 0)
 				{
 					XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
-					ApendLine("Довідник : ", nodeName.Value);
-
+					XPathNavigator nodeType = nodeDirectoryExist.Current.SelectSingleNode("Type");
+					ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
 					flag = true;
 				}
 				while (nodeDirectoryNewField.MoveNext())
@@ -126,8 +118,8 @@ namespace Configurator
 				if (nodeDirectoryExistField.Count > 0 && flag == false)
 				{
 					XPathNavigator nodeName = nodeDirectoryExistField.Current.SelectSingleNode("Name");
-					ApendLine("Довідник : ", nodeName.Value);
-
+					XPathNavigator nodeType = nodeDirectoryExistField.Current.SelectSingleNode("Type");
+					ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
 					flag = true;
 				}
 				while (nodeDirectoryExistField.MoveNext())
@@ -149,7 +141,9 @@ namespace Configurator
 					if (flag == false)
 					{
 						XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
-						ApendLine("Довідник : ", nodeName.Value);
+						XPathNavigator nodeType = nodeDirectoryExist.Current.SelectSingleNode("Type");
+						ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+						flag = true;
 					}
 				}
 				while (nodeDirectoryNewTabularParts.MoveNext())
@@ -167,14 +161,25 @@ namespace Configurator
 				XPathNodeIterator nodeDirectoryTabularParts = nodeDirectoryExist.Current.Select("Control_TabularParts[IsExist = 'yes']");
 				while (nodeDirectoryTabularParts.MoveNext())
 				{
+					bool flagTP = false;
+
 					XPathNodeIterator nodeDirectoryTabularPartsNewField = nodeDirectoryTabularParts.Current.Select("Control_Field[IsExist = 'no']");
 					if (nodeDirectoryTabularPartsNewField.Count > 0)
 					{
-						XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
-						ApendLine("Довідник : ", nodeName.Value);
+						if (!flag)
+						{
+							XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
+							XPathNavigator nodeType = nodeDirectoryExist.Current.SelectSingleNode("Type");
+							ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+							flag = true;
+						}
 
-						XPathNavigator nodeTabularPartsName = nodeDirectoryTabularParts.Current.SelectSingleNode("Name");
-						ApendLine("\t Таблична частина : ", nodeTabularPartsName.Value);
+						if (!flagTP)
+						{
+							XPathNavigator nodeTabularPartsName = nodeDirectoryTabularParts.Current.SelectSingleNode("Name");
+							ApendLine("\t Таблична частина : ", nodeTabularPartsName.Value);
+							flagTP = true;
+						}
 					}
 					while (nodeDirectoryTabularPartsNewField.MoveNext())
 					{
@@ -184,6 +189,37 @@ namespace Configurator
 						ApendLine("\t\t Нове Поле: ", nodeFieldName.Value, "(Тип: " + nodeConfType.Value + ")");
 					}
 					if (nodeDirectoryTabularPartsNewField.Count > 0)
+					{
+						richTextBoxInfo.AppendText("\n");
+					}
+
+					XPathNodeIterator nodeDirectoryTabularPartsField = nodeDirectoryTabularParts.Current.Select("Control_Field[IsExist = 'yes']/Type[Coincide = 'no']");
+					if (nodeDirectoryTabularPartsField.Count > 0)
+					{
+						if (flag == false)
+						{
+							XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
+							XPathNavigator nodeType = nodeDirectoryExist.Current.SelectSingleNode("Type");
+							ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+							flag = true;
+						}
+
+						if (!flagTP)
+						{
+							XPathNavigator nodeTabularPartsName = nodeDirectoryTabularParts.Current.SelectSingleNode("Name");
+							ApendLine("\t Таблична частина : ", nodeTabularPartsName.Value);
+							flagTP = true;
+						}
+					}
+					while (nodeDirectoryTabularPartsField.MoveNext())
+					{
+						XPathNavigator nodeFieldName = nodeDirectoryTabularPartsField.Current.SelectSingleNode("../Name");
+						XPathNavigator nodeDataType = nodeDirectoryTabularPartsField.Current.SelectSingleNode("DataType");
+						XPathNavigator nodeDataTypeCreate = nodeDirectoryTabularPartsField.Current.SelectSingleNode("DataTypeCreate");
+
+						ApendLine("\t\t Поле: ", nodeFieldName.Value, " -> змінений тип даних (Тип в базі: " + nodeDataType.Value + " -> Новий тип: " + nodeDataTypeCreate.Value + "). Можлива втрата даних, або колонка буде скопійована!");
+					}
+					if (nodeDirectoryExistField.Count > 0)
 					{
 						richTextBoxInfo.AppendText("\n");
 					}
@@ -208,9 +244,99 @@ namespace Configurator
 			this.Hide();
 		}
 
+		private void buttonAnalize_Click(object sender, EventArgs e)
+		{
+			richTextBoxInfo.AppendText("\n\n[ АНАЛІЗ ]\n\n");
+			richTextBoxInfo.ScrollToCaret();
+
+			//Конфігурація в файл
+			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
+
+			//Схема бази даних в файл
+			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
+			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
+
+			//Аналіз таблиць і полів конфігурації та бази даних
+			Configuration.ComparisonGeneration(
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
+
+			//Create SQL
+			Configuration.ComparisonGeneration(
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+
+			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+			XPathNodeIterator nodeInfo = xPathDocNavigator.Select("/root/info");
+			if (nodeInfo.Count == 0)
+			{
+				richTextBoxInfo.AppendText("Інформація відсутня!\n\n");
+				richTextBoxInfo.ScrollToCaret();
+			}
+			else
+				while (nodeInfo.MoveNext())
+				{
+					richTextBoxInfo.AppendText(nodeInfo.Current.Value + "\n");
+					richTextBoxInfo.ScrollToCaret();
+				}
+
+			richTextBoxInfo.AppendText("\n[ Команди SQL ]\n\n");
+			richTextBoxInfo.ScrollToCaret();
+
+			XPathNodeIterator nodeSQL = xPathDocNavigator.Select("/root/sql");
+			if (nodeSQL.Count == 0)
+			{
+				richTextBoxInfo.AppendText("Команди відсутні!\n\n");
+				richTextBoxInfo.ScrollToCaret();
+			}
+			else
+				while (nodeSQL.MoveNext())
+				{
+					richTextBoxInfo.AppendText(nodeSQL.Current.Value + "\n");
+					richTextBoxInfo.ScrollToCaret();
+				}
+
+			buttonSave.Enabled = true;
+		}
+
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
+			//Read SQL
+			List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
 
+			richTextBoxInfo.AppendText("\n[ Виконання SQL ]\n\n");
+			richTextBoxInfo.ScrollToCaret();
+
+			if (SqlList.Count == 0)
+			{
+				richTextBoxInfo.AppendText("Команди відсутні!\n\n");
+				richTextBoxInfo.ScrollToCaret();
+			}
+			else
+				//Execute
+				foreach (string sqlText in SqlList)
+				{
+					int resultSQL = Program.Kernel.DataBase.ExecuteSQL(sqlText);
+					richTextBoxInfo.AppendText(" -> " + sqlText + " [" + resultSQL.ToString() + "]\n");
+					richTextBoxInfo.ScrollToCaret();
+				}
+
+			buttonSave.Enabled = false;
+
+			richTextBoxInfo.AppendText("\n[ Генерування класів C# для об'єктів конфігурації ]\n\n");
+			richTextBoxInfo.ScrollToCaret();
+
+			//Code Generation
+			Configuration.Generation(Conf.PathToXmlFileConfiguration,
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+
+			richTextBoxInfo.AppendText("ГОТОВО!\n\n\n");
+			richTextBoxInfo.ScrollToCaret();
 		}
 	}
 }

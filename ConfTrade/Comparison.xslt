@@ -370,7 +370,8 @@ limitations under the License.
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
 
-        <Control_Directory>
+        <Control_Table>
+          <Type>Directory</Type>
           <Name>
             <xsl:value-of select="$ConfDirectoryName"/>
           </Name>
@@ -411,10 +412,60 @@ limitations under the License.
             <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
           </xsl:call-template>
 
-        </Control_Directory>
+        </Control_Table>
 
       </xsl:for-each>
 
+      <xsl:for-each select="document('Configuration.xml')/Configuration/Documents/Document">
+        <xsl:variable name="ConfDirectoryName" select="Name" />
+        <xsl:variable name="ConfDirectoryTable" select="Table" />
+
+        <Control_Table>
+          <Type>Document</Type>
+          <Name>
+            <xsl:value-of select="$ConfDirectoryName"/>
+          </Name>
+          <Table>
+            <xsl:value-of select="$ConfDirectoryTable"/>
+          </Table>
+
+          <xsl:choose>
+            <xsl:when test="$InfoSchemaTableList[Name = $ConfDirectoryTable]">
+              <IsExist>yes</IsExist>
+
+              <xsl:call-template name="FieldsControl">
+                <xsl:with-param name="ConfigurationFieldList" select="Fields/Field" />
+                <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
+              </xsl:call-template>
+
+            </xsl:when>
+            <xsl:otherwise>
+              <IsExist>no</IsExist>
+
+              <TableCreate>
+
+                <xsl:for-each select="Fields/Field">
+                  <xsl:call-template name="FieldCreate">
+                    <xsl:with-param name="ConfFieldName" select="Name" />
+                    <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
+                    <xsl:with-param name="ConfFieldType" select="Type" />
+                  </xsl:call-template>
+                </xsl:for-each>
+
+              </TableCreate>
+
+            </xsl:otherwise>
+          </xsl:choose>
+
+          <xsl:call-template name="TabularPartsControl">
+            <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
+            <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+          </xsl:call-template>
+
+        </Control_Table>
+
+      </xsl:for-each>
+      
     </root>
 
   </xsl:template>

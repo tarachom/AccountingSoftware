@@ -33,6 +33,7 @@
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.richTextBoxInfo = new System.Windows.Forms.RichTextBox();
+			this.buttonAnalize = new System.Windows.Forms.Button();
 			this.panel2.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.SuspendLayout();
@@ -40,6 +41,7 @@
 			// panel2
 			// 
 			this.panel2.BackColor = System.Drawing.SystemColors.Control;
+			this.panel2.Controls.Add(this.buttonAnalize);
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -64,11 +66,11 @@
 			// 
 			this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-			this.buttonSave.Location = new System.Drawing.Point(553, 3);
+			this.buttonSave.Location = new System.Drawing.Point(488, 3);
 			this.buttonSave.Name = "buttonSave";
-			this.buttonSave.Size = new System.Drawing.Size(109, 32);
+			this.buttonSave.Size = new System.Drawing.Size(150, 32);
 			this.buttonSave.TabIndex = 2;
-			this.buttonSave.Text = "Зберегти";
+			this.buttonSave.Text = "Крок 2. Виконати SQL.";
 			this.buttonSave.UseVisualStyleBackColor = true;
 			this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
@@ -84,12 +86,24 @@
 			// richTextBoxInfo
 			// 
 			this.richTextBoxInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.richTextBoxInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+			this.richTextBoxInfo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.richTextBoxInfo.Location = new System.Drawing.Point(0, 0);
 			this.richTextBoxInfo.Name = "richTextBoxInfo";
 			this.richTextBoxInfo.Size = new System.Drawing.Size(780, 392);
 			this.richTextBoxInfo.TabIndex = 0;
 			this.richTextBoxInfo.Text = "";
+			// 
+			// buttonAnalize
+			// 
+			this.buttonAnalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+			this.buttonAnalize.ForeColor = System.Drawing.Color.ForestGreen;
+			this.buttonAnalize.Location = new System.Drawing.Point(373, 3);
+			this.buttonAnalize.Name = "buttonAnalize";
+			this.buttonAnalize.Size = new System.Drawing.Size(109, 32);
+			this.buttonAnalize.TabIndex = 4;
+			this.buttonAnalize.Text = "Крок 1. Аналіз.";
+			this.buttonAnalize.UseVisualStyleBackColor = true;
+			this.buttonAnalize.Click += new System.EventHandler(this.buttonAnalize_Click);
 			// 
 			// SaveConfigurationForm
 			// 
@@ -115,5 +129,6 @@
 		private System.Windows.Forms.Button buttonSave;
 		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.RichTextBox richTextBoxInfo;
+		private System.Windows.Forms.Button buttonAnalize;
 	}
 }
