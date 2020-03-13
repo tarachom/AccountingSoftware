@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 12.03.2020 19:32:16
+ * Дата конфігурації: 13.03.2020 09:25:18
  *
  */
 
@@ -45,7 +45,7 @@ namespace ConfTrade_v1_1
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Kernel.DataBase.SelectConstants("tab_constants",
-                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4" }, fieldValue);
+                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5" }, fieldValue);
             
             if (IsSelect)
             {
@@ -65,6 +65,7 @@ namespace ConfTrade_v1_1
                 Константи.Робот.Старт = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"].ToString()) : DateTime.MinValue;
                 Константи.Робот.Стоп = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString()) : DateTime.MinValue;
                 Константи.Робот.Стан = fieldValue["col_a4"].ToString();
+                Константи.Робот.Коментар = fieldValue["col_a5"].ToString();
                 
             }
         }
@@ -272,6 +273,7 @@ namespace ConfTrade_v1_1.Константи
         public static DateTime Старт { get; set; }
         public static DateTime Стоп { get; set; }
         public static string Стан { get; set; }
+        public static string Коментар { get; set; }
              
     }
     
@@ -7578,8 +7580,8 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
-            Код = new string[] { };
-            fsdfsd = new string[] { };
+            Код = "";
+            fsdfsd = "";
             
             //Табличні частини
             as_TablePart = new sdfasd_as_TablePart(this);
@@ -7592,8 +7594,8 @@ namespace ConfTrade_v1_1.Довідники
             if (BaseRead(uid))
             {
                 Назва = base.FieldValue["col_a1"].ToString();
-                Код = (base.FieldValue["col_a2"] != DBNull.Value) ? (string[])base.FieldValue["col_a2"] : new string[] { };
-                fsdfsd = (base.FieldValue["col_a3"] != DBNull.Value) ? (string[])base.FieldValue["col_a3"] : new string[] { };
+                Код = base.FieldValue["col_a2"].ToString();
+                fsdfsd = base.FieldValue["col_a3"].ToString();
                 
                 BaseClear();
                 return true;
@@ -7623,8 +7625,8 @@ namespace ConfTrade_v1_1.Довідники
         }
         
         public string Назва { get; set; }
-        public string[] Код { get; set; }
-        public string[] fsdfsd { get; set; }
+        public string Код { get; set; }
+        public string fsdfsd { get; set; }
         
         //Табличні частини
         public sdfasd_as_TablePart as_TablePart { get; set; }
@@ -7803,7 +7805,7 @@ namespace ConfTrade_v1_1.Довідники
             {
                 sdfasd_dfasdfa_TablePartRecord record = new sdfasd_dfasdfa_TablePartRecord();
 
-                record.sdfasdf = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
+                record.sdfasdf = fieldValue["col_a1"].ToString();
                 record.sdfasd = fieldValue["col_a2"].ToString();
                 
                 Records.Add(record);
@@ -7854,20 +7856,20 @@ namespace ConfTrade_v1_1.Довідники
     {
         public sdfasd_dfasdfa_TablePartRecord()
         {
-            sdfasdf = DateTime.MinValue;
+            sdfasdf = "";
             sdfasd = "";
             
         }
         
         
         public sdfasd_dfasdfa_TablePartRecord(
-            DateTime?  _sdfasdf = null, string _sdfasd = "")
+            string _sdfasdf = "", string _sdfasd = "")
         {
-            sdfasdf = _sdfasdf ?? DateTime.MinValue;
+            sdfasdf = _sdfasdf;
             sdfasd = _sdfasd;
             
         }
-        public DateTime sdfasdf { get; set; }
+        public string sdfasdf { get; set; }
         public string sdfasd { get; set; }
         
     }
@@ -7879,7 +7881,7 @@ namespace ConfTrade_v1_1.Довідники
         public sdfasd_Список_View() : base(Config.Kernel, "tab_a68", 
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
-             new string[] { "string", "string[]" },
+             new string[] { "string", "string" },
              "Довідники.sdfasd_Список")
         {
             
@@ -9619,7 +9621,7 @@ namespace ConfTrade_v1_1.Документи
 
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
                 record.Кво = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0;
-                record.Ціна = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
+                record.Ціна = (fieldValue["col_a2"] != DBNull.Value) ? (int)fieldValue["col_a2"] : 0;
                 record.Сума = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
                 
                 Records.Add(record);
@@ -9681,7 +9683,7 @@ namespace ConfTrade_v1_1.Документи
         
         
         public Договір2_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null, int _Кво = 0, decimal _Ціна = 0, decimal _Сума = 0)
+            Довідники.Номенклатура_Pointer _Товар = null, int _Кво = 0, int _Ціна = 0, decimal _Сума = 0)
         {
             Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
             Кво = _Кво;
@@ -9691,7 +9693,7 @@ namespace ConfTrade_v1_1.Документи
         }
         public Довідники.Номенклатура_Pointer Товар { get; set; }
         public int Кво { get; set; }
-        public decimal Ціна { get; set; }
+        public int Ціна { get; set; }
         public decimal Сума { get; set; }
         
     }
@@ -9714,7 +9716,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     
     class Перший_RecordsSet : RegisterInformationRecordsSet
     {
-        public Перший_RecordsSet() : base(Config.Kernel, "tab_first",
+        public Перший_RecordsSet() : base(Config.Kernel, "register_1",
              new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6", "col_a1" }) 
         {
             Records = new List<Перший_Record>();
@@ -9919,7 +9921,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     
     class Другий_RecordsSet : RegisterInformationRecordsSet
     {
-        public Другий_RecordsSet() : base(Config.Kernel, "tab_first",
+        public Другий_RecordsSet() : base(Config.Kernel, "register_2",
              new string[] { "col_field1", "col_field2", "col_field3" }) 
         {
             Records = new List<Другий_Record>();
@@ -10025,7 +10027,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     
     class Валюти_RecordsSet : RegisterInformationRecordsSet
     {
-        public Валюти_RecordsSet() : base(Config.Kernel, "tab_a60",
+        public Валюти_RecordsSet() : base(Config.Kernel, "register_3",
              new string[] { "col1", "col2", "col3", "col4", "col5", "col6", "col_a7", "col_a8", "col_a9", "col_a1", "col_a2" }) 
         {
             Records = new List<Валюти_Record>();
@@ -10326,6 +10328,25 @@ namespace ConfTrade_v1_1.РегістриНакопичення
         }
         
         public Довідники.Номенклатура_Pointer Товар { get; set; }
+        
+    }
+    #endregion
+  
+    #region REGISTER "НДС"
+    
+    class НДС_Record
+    {
+        public НДС_Record()
+        {
+            Документ = new Документи.РасходнаяНакладная_Pointer();
+            Кво = 0;
+            Коментар = "";
+            
+        }
+        
+        public Документи.РасходнаяНакладная_Pointer Документ { get; set; }
+        public decimal Кво { get; set; }
+        public string Коментар { get; set; }
         
     }
     #endregion

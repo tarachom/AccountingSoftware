@@ -26,9 +26,34 @@ limitations under the License.
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
 
+  <!-- Заміщати існуючу колонку новою колонкою у випадку неможливості провести реструктуризацію даних (yes/no) -->
+  <xsl:param name="ReplacementColumn" /> 
+
+  <!-- Унікальний ключ для створення копій колонок -->
   <xsl:param name="KeyUID" />
 
-  <xsl:template name="Template_RenameColumn">
+  <xsl:template name="Template_AddColumn">
+    <xsl:param name="TableName" />
+    <xsl:param name="FieldNameInTable" />
+    <xsl:param name="DataTypeCreate" />
+
+    <info>
+      <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Додати колонку <xsl:value-of select="$FieldNameInTable"/> в таблицю <xsl:value-of select="$TableName"/>
+    </info>
+
+    <sql>
+      <xsl:text>ALTER TABLE </xsl:text>
+      <xsl:value-of select="$TableName"/>
+      <xsl:text> ADD COLUMN "</xsl:text>
+      <xsl:value-of select="$FieldNameInTable"/>
+      <xsl:text>" </xsl:text>
+      <xsl:value-of select="$DataTypeCreate"/>
+      <xsl:text>;</xsl:text>
+    </sql>
+    
+  </xsl:template>
+  
+  <xsl:template name="Template_CopyColumn">
     <xsl:param name="TableName" />
     <xsl:param name="FieldNameInTable" />
     <xsl:param name="DataTypeCreate" />
@@ -49,21 +74,32 @@ limitations under the License.
       <xsl:text>";</xsl:text>
     </sql>
 
-    <info> <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Додати колонку <xsl:value-of select="$FieldNameInTable"/> в таблицю <xsl:value-of select="$TableName"/></info>
-
-    <sql>
-      <xsl:text>ALTER TABLE </xsl:text>
-      <xsl:value-of select="$TableName"/>
-      <xsl:text> ADD COLUMN "</xsl:text>
-      <xsl:value-of select="$FieldNameInTable"/>
-      <xsl:text>" </xsl:text>
-      <xsl:value-of select="$DataTypeCreate"/>
-      <xsl:text>;</xsl:text>
-    </sql>
+    <xsl:call-template name="Template_AddColumn">
+      <xsl:with-param name="TableName" select="$TableName" />
+      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+    </xsl:call-template>
 
   </xsl:template>
 
   <xsl:template name="Template_DropColumn">
+    <xsl:param name="TableName" />
+    <xsl:param name="FieldNameInTable" />
+
+    <info>
+      <xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> Видалити колонку <xsl:value-of select="$FieldNameInTable"/> в таблиці <xsl:value-of select="$TableName"/>
+    </info>
+
+    <sql>
+      <xsl:text>ALTER TABLE </xsl:text>
+      <xsl:value-of select="$TableName"/>
+      <xsl:text> DROP COLUMN "</xsl:text>
+      <xsl:value-of select="$FieldNameInTable"/>
+      <xsl:text>";</xsl:text>
+    </sql>
+  </xsl:template>
+  
+  <xsl:template name="Template_DropOldColumn">
     <xsl:param name="TableName" />
     <xsl:param name="FieldNameInTable" />
 
@@ -103,7 +139,7 @@ limitations under the License.
                     <info>Резструктуризація можлива: Текст в масив.</info>
                     <sql>BEGIN;</sql>
 
-                    <xsl:call-template name="Template_RenameColumn">
+                    <xsl:call-template name="Template_CopyColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                       <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
@@ -131,7 +167,7 @@ limitations under the License.
                       <xsl:text> != NULL);</xsl:text>
                     </sql>
 
-                    <xsl:call-template name="Template_DropColumn">
+                    <xsl:call-template name="Template_DropOldColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                     </xsl:call-template>
@@ -139,14 +175,38 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
-                    <info>Реструкторизація неможлива, створення копії колонки!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_RenameColumn">
-                      <xsl:with-param name="TableName" select="$TableName" />
-                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
+
+                    <xsl:choose>
+                      <xsl:when test="$ReplacementColumn = 'yes'">
+
+                        <info>Заміна колонки! Втрата даних!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_DropColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                        </xsl:call-template>
+                        <xsl:call-template name="Template_AddColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:when>
+                      <xsl:otherwise>
+
+                        <info>Реструкторизація неможлива, створення копії колонки!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_CopyColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:otherwise>
+                    </xsl:choose>
+
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
@@ -158,7 +218,7 @@ limitations under the License.
                     <info>Резструктуризація можлива: Число в масив.</info>
                     <sql>BEGIN;</sql>
 
-                    <xsl:call-template name="Template_RenameColumn">
+                    <xsl:call-template name="Template_CopyColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                       <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
@@ -182,7 +242,7 @@ limitations under the License.
                       <xsl:text> != NULL);</xsl:text>
                     </sql>
 
-                    <xsl:call-template name="Template_DropColumn">
+                    <xsl:call-template name="Template_DropOldColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                     </xsl:call-template>
@@ -190,14 +250,38 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
-                    <info>Реструкторизація неможлива, створення копії колонки!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_RenameColumn">
-                      <xsl:with-param name="TableName" select="$TableName" />
-                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
+
+                    <xsl:choose>
+                      <xsl:when test="$ReplacementColumn = 'yes'">
+
+                        <info>Заміна колонки! Втрата даних!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_DropColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                        </xsl:call-template>
+                        <xsl:call-template name="Template_AddColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:when>
+                      <xsl:otherwise>
+
+                        <info>Реструкторизація неможлива, створення копії колонки!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_CopyColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:otherwise>
+                    </xsl:choose>
+
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
@@ -211,7 +295,7 @@ limitations under the License.
                     <info>Резструктуризація можлива: Масив в текст.</info>
                     <sql>BEGIN;</sql>
 
-                    <xsl:call-template name="Template_RenameColumn">
+                    <xsl:call-template name="Template_CopyColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                       <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
@@ -239,7 +323,7 @@ limitations under the License.
                       <xsl:text> != NULL);</xsl:text>
                     </sql>
 
-                    <xsl:call-template name="Template_DropColumn">
+                    <xsl:call-template name="Template_DropOldColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                     </xsl:call-template>
@@ -247,14 +331,38 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
-                    <info>Реструкторизація неможлива, створення копії колонки!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_RenameColumn">
-                      <xsl:with-param name="TableName" select="$TableName" />
-                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
+                    
+                    <xsl:choose>
+                      <xsl:when test="$ReplacementColumn = 'yes'">
+
+                        <info>Заміна колонки! Втрата даних!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_DropColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                        </xsl:call-template>
+                        <xsl:call-template name="Template_AddColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:when>
+                      <xsl:otherwise>
+
+                        <info>Реструкторизація неможлива, створення копії колонки!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_CopyColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+
+                      </xsl:otherwise>
+                    </xsl:choose>
+                    
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
@@ -267,7 +375,7 @@ limitations under the License.
                     <info>Резструктуризація можлива: Дані в текст.</info>
                     <sql>BEGIN;</sql>
 
-                    <xsl:call-template name="Template_RenameColumn">
+                    <xsl:call-template name="Template_CopyColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                       <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
@@ -289,7 +397,7 @@ limitations under the License.
                       <xsl:text>.uid);</xsl:text>
                     </sql>
 
-                    <xsl:call-template name="Template_DropColumn">
+                    <xsl:call-template name="Template_DropOldColumn">
                       <xsl:with-param name="TableName" select="$TableName" />
                       <xsl:with-param name="FieldNameInTable" select="NameInTable" />
                     </xsl:call-template>
@@ -297,14 +405,38 @@ limitations under the License.
                     <sql>COMMIT;</sql>
                   </xsl:when>
                   <xsl:otherwise>
-                    <info>Реструкторизація неможлива, створення копії колонки!</info>
-                    <sql>BEGIN;</sql>
-                    <xsl:call-template name="Template_RenameColumn">
-                      <xsl:with-param name="TableName" select="$TableName" />
-                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
-                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
-                    </xsl:call-template>
-                    <sql>COMMIT;</sql>
+
+                    <xsl:choose>
+                      <xsl:when test="$ReplacementColumn = 'yes'">
+
+                        <info>Заміна колонки! Втрата даних!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_DropColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                        </xsl:call-template>
+                        <xsl:call-template name="Template_AddColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+                        
+                      </xsl:when>
+                      <xsl:otherwise>
+
+                        <info>Реструкторизація неможлива, створення копії колонки!</info>
+                        <sql>BEGIN;</sql>
+                        <xsl:call-template name="Template_CopyColumn">
+                          <xsl:with-param name="TableName" select="$TableName" />
+                          <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                          <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                        </xsl:call-template>
+                        <sql>COMMIT;</sql>
+                        
+                      </xsl:otherwise>
+                    </xsl:choose>
+                    
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
@@ -404,14 +536,16 @@ limitations under the License.
                   <xsl:text>CREATE TABLE </xsl:text>
                   <xsl:value-of select="$TabularParts_TableName"/>
                   <xsl:text> (</xsl:text>
-                  <xsl:text>owner uuid NOT NULL</xsl:text>
+                  <xsl:text>uid uuid NOT NULL, </xsl:text>
+                  <xsl:text>owner uuid NOT NULL, </xsl:text>
                   <xsl:for-each select="FieldCreate">
-                    <xsl:text>, "</xsl:text>
+                    <xsl:text>"</xsl:text>
                     <xsl:value-of select="NameInTable"/>
                     <xsl:text>" </xsl:text>
                     <xsl:value-of select="DataType"/>
+                    <xsl:text>, </xsl:text>
                   </xsl:for-each>
-                  <xsl:text>);</xsl:text>
+                  <xsl:text>PRIMARY KEY(uid));</xsl:text>
                 </sql>
                 <sql>
                   <xsl:text>CREATE INDEX ON </xsl:text>

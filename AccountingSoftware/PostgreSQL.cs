@@ -439,8 +439,6 @@ namespace AccountingSoftware
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
-			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
-
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);

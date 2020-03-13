@@ -1467,9 +1467,22 @@ namespace AccountingSoftware
 		public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);	
+
+			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveCode, System.IO.FileMode.Create);
+
+			xsltCodeGnerator.Transform(pathToXML, null, fileStream);
+
+			fileStream.Close();
+		}
+
+		public static void ComparisonAnalizeGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode, string replacementColumn)
+		{
+			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
 			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);
 
 			XsltArgumentList xsltArgumentList = new XsltArgumentList();
+			xsltArgumentList.AddParam("ReplacementColumn", "", replacementColumn);
 			xsltArgumentList.AddParam("KeyUID", "", DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss"));
 
 			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveCode, System.IO.FileMode.Create);

@@ -39,12 +39,18 @@ namespace Configurator
 
 		private string GetNameFromType(string Type)
 		{
-			switch(Type)
-				{
+			switch (Type)
+			{
+				case "Constants":
+					return "Константи";
 				case "Directory":
 					return "Довідник";
 				case "Document":
 					return "Документ";
+				case "RegisterInformation":
+					return "Регістер відомостей";
+				case "RegisterAccumulation":
+					return "Регістер накопичення";
 				default:
 					return "<Невідомий тип>";
 			}
@@ -95,7 +101,7 @@ namespace Configurator
 			while (nodeDirectoryExist.MoveNext())
 			{
 				bool flag = false;
-				
+
 				XPathNodeIterator nodeDirectoryNewField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'no']");
 				if (nodeDirectoryNewField.Count > 0)
 				{
@@ -249,6 +255,8 @@ namespace Configurator
 			richTextBoxInfo.AppendText("\n\n[ АНАЛІЗ ]\n\n");
 			richTextBoxInfo.ScrollToCaret();
 
+			string replacementColumn = (checkBoxReplacement.Checked ? "yes" : "no");
+
 			//Конфігурація в файл
 			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
 
@@ -263,10 +271,10 @@ namespace Configurator
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 
 			//Create SQL
-			Configuration.ComparisonGeneration(
+			Configuration.ComparisonAnalizeGeneration(
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml", replacementColumn);
 
 			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();

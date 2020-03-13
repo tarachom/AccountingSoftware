@@ -1,11 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Таблиця Товари (tab_a73), поле Ціна (col_a2). Перетворити тип даних (numeric, numeric) -> integer</info>
-  <info>Реструкторизація неможлива, створення копії колонки!</info>
-  <sql>BEGIN;</sql>
-  <info> ->  Перейменувати колонку col_a2 в таблиці tab_a73 на col_a2_old_12_03_2020_19_32_44</info>
-  <sql>ALTER TABLE tab_a73 RENAME COLUMN "col_a2" TO "col_a2_old_12_03_2020_19_32_44";</sql>
-  <info> ->  Додати колонку col_a2 в таблицю tab_a73</info>
-  <sql>ALTER TABLE tab_a73 ADD COLUMN "col_a2" integer;</sql>
-  <sql>COMMIT;</sql>
-</root>
+<root />
