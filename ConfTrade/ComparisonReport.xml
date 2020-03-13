@@ -153,9 +153,9 @@
       <NameInTable>col_a2</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>date</ConfType>
-        <DataType>date</DataType>
-        <UdtName>date</UdtName>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -189,6 +189,17 @@
         <ConfType>string</ConfType>
         <DataType>text</DataType>
         <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Число</Name>
+      <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>integer</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>

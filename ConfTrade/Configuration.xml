@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.03.2020 13:26:30</DateTimeSave>
+  <DateTimeSave>13.03.2020 14:56:29</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -195,7 +195,7 @@
           <NameInTable>col_a2</NameInTable>
           <Desc>
           </Desc>
-          <Type>date</Type>
+          <Type>datetime</Type>
           <TabularParts />
         </Constant>
         <Constant>
@@ -220,6 +220,14 @@
           <Desc>
           </Desc>
           <Type>string</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>Число</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
           <TabularParts />
         </Constant>
       </Constants>

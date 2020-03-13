@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.03.2020 13:26:30
+ * Дата конфігурації: 13.03.2020 14:56:29
  *
  */
 
@@ -47,7 +47,7 @@ namespace ConfTrade_v1_1
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5" }, fieldValue);
+                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }, fieldValue);
             
             if (IsSelect)
             {
@@ -69,6 +69,7 @@ namespace ConfTrade_v1_1
                 Константи.Робот.Стоп = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString()) : DateTime.MinValue;
                 Константи.Робот.Стан = fieldValue["col_a4"].ToString();
                 Константи.Робот.Коментар = fieldValue["col_a5"].ToString();
+                Константи.Робот.Число = (fieldValue["col_a6"] != DBNull.Value) ? (int)fieldValue["col_a6"] : 0;
                 
                 StartInit = false;
             }
@@ -450,6 +451,17 @@ namespace ConfTrade_v1_1.Константи
                 _Коментар = value;
                 if (!Config.StartInit)
                     Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a5", _Коментар);
+            }
+        }
+        private static int _Число;
+        public static int Число
+        {
+            get { return _Число; }
+            set
+            {
+                _Число = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a6", _Число);
             }
         }
              

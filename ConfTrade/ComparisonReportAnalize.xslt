@@ -211,7 +211,8 @@ limitations under the License.
                 </xsl:choose>
               </xsl:when>
 
-              <xsl:when test="Type/DataType = 'integer' or Type/DataType = 'numeric'">
+              <xsl:when test="Type/DataType = 'integer' or 
+                              Type/DataType = 'numeric'">
                 <xsl:choose>
                   <!-- Число в масив -->
                   <xsl:when test="Type/ConfType = 'integer[]' or Type/ConfType = 'numeric[]'">
@@ -240,6 +241,74 @@ limitations under the License.
                       <xsl:text>_old_</xsl:text>
                       <xsl:value-of select="$KeyUID"/>
                       <xsl:text> != NULL);</xsl:text>
+                    </sql>
+
+                    <xsl:call-template name="Template_DropOldColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <!-- Ціле число в число з комою -->
+                  <xsl:when test="Type/ConfType = 'numeric' and Type/DataType = 'integer'">
+                    <info>Резструктуризація можлива: Ціле число в число з комою.</info>
+                    <sql>BEGIN;</sql>
+
+                    <xsl:call-template name="Template_CopyColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> = (SELECT t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_old_</xsl:text>
+                      <xsl:value-of select="$KeyUID"/>
+                      <xsl:text> FROM </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid);</xsl:text>
+                    </sql>
+
+                    <xsl:call-template name="Template_DropOldColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <!-- Число з комою в ціле число -->
+                  <xsl:when test="Type/ConfType = 'integer' and Type/DataType = 'numeric'">
+                    <info>Резструктуризація можлива (Часткова втрата даних: значення після коми будуть втрачення): Число з комою в ціле число.</info>
+                    <sql>BEGIN;</sql>
+
+                    <xsl:call-template name="Template_CopyColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> = (SELECT trunc(t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_old_</xsl:text>
+                      <xsl:value-of select="$KeyUID"/>
+                      <xsl:text>) FROM </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid);</xsl:text>
                     </sql>
 
                     <xsl:call-template name="Template_DropOldColumn">
@@ -366,13 +435,118 @@ limitations under the License.
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
-
+              
               <xsl:when test="Type/DataType = 'boolean' or 
-                              Type/DataType = 'date' or  Type/DataType = 'time without time zone' or Type/DataType = 'timestamp without time zone' or 
+                              Type/DataType = 'date' or  
+                              Type/DataType = 'time without time zone' or 
+                              Type/DataType = 'timestamp without time zone' or 
                               Type/DataType = 'uuid' ">
                 <xsl:choose>
+                  <!-- Значення в Текст -->
                   <xsl:when test="Type/ConfType = 'string'">
                     <info>Резструктуризація можлива: Дані в текст.</info>
+                    <sql>BEGIN;</sql>
+
+                    <xsl:call-template name="Template_CopyColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> = (SELECT t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_old_</xsl:text>
+                      <xsl:value-of select="$KeyUID"/>
+                      <xsl:text> FROM </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid);</xsl:text>
+                    </sql>
+
+                    <xsl:call-template name="Template_DropOldColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <!-- Дата -> Дата та час -->
+                  <xsl:when test="Type/ConfType = 'datetime' and Type/DataType = 'date'">
+                    <info>Резструктуризація можлива: Дата в Дата та час.</info>
+                    <sql>BEGIN;</sql>
+
+                    <xsl:call-template name="Template_CopyColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> = (SELECT t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_old_</xsl:text>
+                      <xsl:value-of select="$KeyUID"/>
+                      <xsl:text> FROM </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid);</xsl:text>
+                    </sql>
+
+                    <xsl:call-template name="Template_DropOldColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <!-- Дата та час -> Дата -->
+                  <xsl:when test="Type/ConfType = 'date' and Type/DataType = 'timestamp without time zone'">
+                    <info>Резструктуризація можлива (часткова втрата даних): Дата та час в Дата.</info>
+                    <sql>BEGIN;</sql>
+
+                    <xsl:call-template name="Template_CopyColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                      <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                    </xsl:call-template>
+
+                    <sql>
+                      <xsl:text>UPDATE </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> SET </xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text> = (SELECT t.</xsl:text>
+                      <xsl:value-of select="NameInTable"/>
+                      <xsl:text>_old_</xsl:text>
+                      <xsl:value-of select="$KeyUID"/>
+                      <xsl:text> FROM </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text> AS t WHERE t.uid = </xsl:text>
+                      <xsl:value-of select="$TableName"/>
+                      <xsl:text>.uid);</xsl:text>
+                    </sql>
+
+                    <xsl:call-template name="Template_DropOldColumn">
+                      <xsl:with-param name="TableName" select="$TableName" />
+                      <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                    </xsl:call-template>
+
+                    <sql>COMMIT;</sql>
+                  </xsl:when>
+                  <!-- Дата та час -> Час -->
+                  <xsl:when test="Type/ConfType = 'time' and Type/DataType = 'timestamp without time zone'">
+                    <info>Резструктуризація можлива (часткова втрата даних): Дата та час в Час.</info>
                     <sql>BEGIN;</sql>
 
                     <xsl:call-template name="Template_CopyColumn">

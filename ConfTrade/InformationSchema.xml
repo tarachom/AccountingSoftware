@@ -73,11 +73,6 @@
       <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>col_a2</Name>
-      <DataType>date</DataType>
-      <UdtName>date</UdtName>
-    </Column>
-    <Column>
       <Name>col_a3</Name>
       <DataType>timestamp without time zone</DataType>
       <UdtName>timestamp</UdtName>
@@ -91,6 +86,16 @@
       <Name>col_a5</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a6</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
     </Column>
   </Table>
   <Table>
