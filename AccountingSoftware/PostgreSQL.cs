@@ -113,7 +113,7 @@ namespace AccountingSoftware
 
 		#region Constants
 
-		public bool SelectConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public bool SelectAllConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query = "SELECT ";
 			bool is_first = true;
@@ -128,10 +128,11 @@ namespace AccountingSoftware
 				query += field;
 			}
 
-			query += " FROM " + table;
+			query += " FROM " + table + " WHERE uid = @uid";
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Empty));
 
 			bool isSelect = false;
 
@@ -148,6 +149,18 @@ namespace AccountingSoftware
 			reader.Close();
 
 			return isSelect;
+		}
+
+		public void SaveConstants(string table, string field, object fieldValue)
+		{
+			string query = "INSERT INTO " + table + " (uid, " + field + ") VALUES (@uid, @" + field + ") " +
+						   " ON CONFLICT (uid) DO UPDATE SET " + field + " = @" + field;
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Empty));
+			nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue));
+
+			nCommand.ExecuteNonQuery();
 		}
 
 		public void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)

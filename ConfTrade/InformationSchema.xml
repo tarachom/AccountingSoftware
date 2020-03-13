@@ -3142,21 +3142,6 @@
       <UdtName>uuid</UdtName>
     </Column>
     <Column>
-      <Name>col_field1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_field2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
       <Name>col_field3</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
@@ -3165,6 +3150,36 @@
       <Name>col_a2</Name>
       <DataType>integer</DataType>
       <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_field1</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_field2</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a8</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
     </Column>
   </Table>
   <Table>

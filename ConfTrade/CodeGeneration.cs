@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.03.2020 11:11:58
+ * Дата конфігурації: 13.03.2020 13:26:30
  *
  */
 
@@ -40,24 +40,27 @@ namespace ConfTrade_v1_1
     {
         public static Kernel Kernel { get; set; }
         
-        public static void InitConstants()
+        public static bool StartInit { get; set; }
+        
+        public static void InitAllConstants()
         {
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Kernel.DataBase.SelectConstants("tab_constants",
+            bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
                  new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5" }, fieldValue);
             
             if (IsSelect)
             {
+                StartInit = true;
                 Константи.Основні.Контрагент = new Довідники.Контрагенти_Pointer(fieldValue["col_a1"]);
                 Константи.Основні.ОсновнийСклад = new Довідники.МестаХранения_Pointer(fieldValue["const_2"]);
-                Константи.Основні.Перелічення = (Перелічення.ВидиКонтрагентов)fieldValue["const_3"];
+                Константи.Основні.Перелічення = (fieldValue["const_3"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)fieldValue["const_3"] : 0;
                 Константи.Основні.Склад = fieldValue["const_4"].ToString();
                 Константи.Додаткові.A = (fieldValue["const_5"] != DBNull.Value) ? (int)fieldValue["const_5"] : 0;
                 Константи.Додаткові.B = fieldValue["const_6"].ToString();
                 Константи.ПоштовіНастройки.іваіваddd = new Довідники.test2_Pointer(fieldValue["const_7"]);
                 Константи.ПоштовіНастройки.ваіва = fieldValue["const_8"].ToString();
-                Константи.ПоштовіНастройки.A = (Перелічення.Перелічення2)fieldValue["const_9"];
+                Константи.ПоштовіНастройки.A = (fieldValue["const_9"] != DBNull.Value) ? (Перелічення.Перелічення2)fieldValue["const_9"] : 0;
                 Константи.ПоштовіНастройки.Ф2 = new Довідники.МестаХранения_Pointer(fieldValue["const_10"]);
                 Константи.ПоштовіНастройки.Ntcn1 = new EmptyPointer();
                 Константи.ПоштовіНастройки.Ntcn2 = new EmptyPointer();
@@ -67,6 +70,7 @@ namespace ConfTrade_v1_1
                 Константи.Робот.Стан = fieldValue["col_a4"].ToString();
                 Константи.Робот.Коментар = fieldValue["col_a5"].ToString();
                 
+                StartInit = false;
             }
         }
     }
@@ -77,10 +81,50 @@ namespace ConfTrade_v1_1.Константи
     
     static class Основні
     {
-        public static Довідники.Контрагенти_Pointer Контрагент { get; set; }
-        public static Довідники.МестаХранения_Pointer ОсновнийСклад { get; set; }
-        public static Перелічення.ВидиКонтрагентов Перелічення { get; set; }
-        public static string Склад { get; set; }
+        private static Довідники.Контрагенти_Pointer _Контрагент;
+        public static Довідники.Контрагенти_Pointer Контрагент
+        {
+            get { return _Контрагент; }
+            set
+            {
+                _Контрагент = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a1", _Контрагент.ToString());
+            }
+        }
+        private static Довідники.МестаХранения_Pointer _ОсновнийСклад;
+        public static Довідники.МестаХранения_Pointer ОсновнийСклад
+        {
+            get { return _ОсновнийСклад; }
+            set
+            {
+                _ОсновнийСклад = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_2", _ОсновнийСклад.ToString());
+            }
+        }
+        private static Перелічення.ВидиКонтрагентов _Перелічення;
+        public static Перелічення.ВидиКонтрагентов Перелічення
+        {
+            get { return _Перелічення; }
+            set
+            {
+                _Перелічення = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_3", (int)_Перелічення);
+            }
+        }
+        private static string _Склад;
+        public static string Склад
+        {
+            get { return _Склад; }
+            set
+            {
+                _Склад = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_4", _Склад);
+            }
+        }
         
         public class Контрагент_Історія_TablePart : ConstantsTablePart
         {
@@ -250,34 +294,164 @@ namespace ConfTrade_v1_1.Константи
     
     static class Додаткові
     {
-        public static int A { get; set; }
-        public static string B { get; set; }
+        private static int _A;
+        public static int A
+        {
+            get { return _A; }
+            set
+            {
+                _A = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_5", _A);
+            }
+        }
+        private static string _B;
+        public static string B
+        {
+            get { return _B; }
+            set
+            {
+                _B = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_6", _B);
+            }
+        }
              
     }
     
     static class ПоштовіНастройки
     {
-        public static Довідники.test2_Pointer іваіваddd { get; set; }
-        public static string ваіва { get; set; }
-        public static Перелічення.Перелічення2 A { get; set; }
-        public static Довідники.МестаХранения_Pointer Ф2 { get; set; }
-        public static EmptyPointer Ntcn1 { get; set; }
-        public static EmptyPointer Ntcn2 { get; set; }
+        private static Довідники.test2_Pointer _іваіваddd;
+        public static Довідники.test2_Pointer іваіваddd
+        {
+            get { return _іваіваddd; }
+            set
+            {
+                _іваіваddd = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_7", _іваіваddd.ToString());
+            }
+        }
+        private static string _ваіва;
+        public static string ваіва
+        {
+            get { return _ваіва; }
+            set
+            {
+                _ваіва = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_8", _ваіва);
+            }
+        }
+        private static Перелічення.Перелічення2 _A;
+        public static Перелічення.Перелічення2 A
+        {
+            get { return _A; }
+            set
+            {
+                _A = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_9", (int)_A);
+            }
+        }
+        private static Довідники.МестаХранения_Pointer _Ф2;
+        public static Довідники.МестаХранения_Pointer Ф2
+        {
+            get { return _Ф2; }
+            set
+            {
+                _Ф2 = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_10", _Ф2.ToString());
+            }
+        }
+        private static EmptyPointer _Ntcn1;
+        public static EmptyPointer Ntcn1
+        {
+            get { return _Ntcn1; }
+            set
+            {
+                _Ntcn1 = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_11", _Ntcn1.ToString());
+            }
+        }
+        private static EmptyPointer _Ntcn2;
+        public static EmptyPointer Ntcn2
+        {
+            get { return _Ntcn2; }
+            set
+            {
+                _Ntcn2 = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_12", _Ntcn2.ToString());
+            }
+        }
              
     }
     
     static class РегламентніЗавдання
     {
-        public static string Стан { get; set; }
+        private static string _Стан;
+        public static string Стан
+        {
+            get { return _Стан; }
+            set
+            {
+                _Стан = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_13", _Стан);
+            }
+        }
              
     }
     
     static class Робот
     {
-        public static DateTime Старт { get; set; }
-        public static DateTime Стоп { get; set; }
-        public static string Стан { get; set; }
-        public static string Коментар { get; set; }
+        private static DateTime _Старт;
+        public static DateTime Старт
+        {
+            get { return _Старт; }
+            set
+            {
+                _Старт = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a2", _Старт);
+            }
+        }
+        private static DateTime _Стоп;
+        public static DateTime Стоп
+        {
+            get { return _Стоп; }
+            set
+            {
+                _Стоп = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a3", _Стоп);
+            }
+        }
+        private static string _Стан;
+        public static string Стан
+        {
+            get { return _Стан; }
+            set
+            {
+                _Стан = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a4", _Стан);
+            }
+        }
+        private static string _Коментар;
+        public static string Коментар
+        {
+            get { return _Коментар; }
+            set
+            {
+                _Коментар = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a5", _Коментар);
+            }
+        }
              
     }
     
@@ -1656,7 +1830,7 @@ namespace ConfTrade_v1_1.Довідники
                 ВалютаВзаиморасчетов = new Довідники.Валюти_Pointer(base.FieldValue["col_c4"]);
                 ВалютаКредита = new Довідники.Валюти_Pointer(base.FieldValue["col_a1"]);
                 ВалютаКредитаПоставщика = new Довідники.Валюти_Pointer(base.FieldValue["col_a2"]);
-                ВидКонтрагента = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a3"];
+                ВидКонтрагента = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a3"] : 0;
                 Глубина = (base.FieldValue["col_a4"] != DBNull.Value) ? (int)base.FieldValue["col_a4"] : 0;
                 ГлубинаКредитаПоставщика = (base.FieldValue["col_a5"] != DBNull.Value) ? (int)base.FieldValue["col_a5"] : 0;
                 ДокументДатаВидачи = (base.FieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a6"].ToString()) : DateTime.MinValue;
@@ -2699,7 +2873,7 @@ namespace ConfTrade_v1_1.Довідники
             if (BaseRead(uid))
             {
                 ПолнНаименование = base.FieldValue["col_c6"].ToString();
-                ВидТовара = (Перелічення.ВидиТоварів)base.FieldValue["col_c7"];
+                ВидТовара = (base.FieldValue["col_c7"] != DBNull.Value) ? (Перелічення.ВидиТоварів)base.FieldValue["col_c7"] : 0;
                 Артикул = base.FieldValue["col_c8"].ToString();
                 БазоваяЕдиница = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_c9"]);
                 Вес = (base.FieldValue["col_d1"] != DBNull.Value) ? (decimal)base.FieldValue["col_d1"] : 0;
@@ -5842,9 +6016,9 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                ТипПоля = (Перелічення.Перелічення2)base.FieldValue["col_a3"];
-                Поле2 = (Перелічення.Перелічення)base.FieldValue["col_a4"];
-                Поле3 = (Перелічення.Перелічення2)base.FieldValue["col_a5"];
+                ТипПоля = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Перелічення2)base.FieldValue["col_a3"] : 0;
+                Поле2 = (base.FieldValue["col_a4"] != DBNull.Value) ? (Перелічення.Перелічення)base.FieldValue["col_a4"] : 0;
+                Поле3 = (base.FieldValue["col_a5"] != DBNull.Value) ? (Перелічення.Перелічення2)base.FieldValue["col_a5"] : 0;
                 Поле4 = new Довідники.Номенклатура_Pointer(base.FieldValue["col_a6"]);
                 Gjkt1 = base.FieldValue["col_a7"].ToString();
                 dfasdfa = (base.FieldValue["col_a8"] != DBNull.Value) ? (int)base.FieldValue["col_a8"] : 0;
@@ -5980,7 +6154,7 @@ namespace ConfTrade_v1_1.Довідники
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.sdfasdf = (Перелічення.Перелічення2)fieldValue["col_a1"];
+                record.sdfasdf = (fieldValue["col_a1"] != DBNull.Value) ? (Перелічення.Перелічення2)fieldValue["col_a1"] : 0;
                 record.ddd = fieldValue["col_a2"].ToString();
                 
                 Records.Add(record);
@@ -6714,11 +6888,11 @@ namespace ConfTrade_v1_1.Довідники
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
                 іваі = new Довідники.Категории_Pointer(base.FieldValue["col_a3"]);
-                sddfgsd = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a4"];
+                sddfgsd = (base.FieldValue["col_a4"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a4"] : 0;
                 Документ = new Документи.Test_Pointer(base.FieldValue["col_a5"]);
-                аавпва = (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a6"];
+                аавпва = (base.FieldValue["col_a6"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)base.FieldValue["col_a6"] : 0;
                 asdasd = base.FieldValue["col_a7"].ToString();
-                Один = (Перелічення.test2)base.FieldValue["col_a8"];
+                Один = (base.FieldValue["col_a8"] != DBNull.Value) ? (Перелічення.test2)base.FieldValue["col_a8"] : 0;
                 укцукц = (base.FieldValue["col_a9"] != DBNull.Value) ? (decimal)base.FieldValue["col_a9"] : 0;
                 eeeeeee = new Довідники.КатегорииЦен_Pointer(base.FieldValue["col_b1"]);
                 werqwerq = base.FieldValue["col_b2"].ToString();
@@ -6959,7 +7133,7 @@ namespace ConfTrade_v1_1.Довідники
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
                 
-                record.Один = (Перелічення.Список)fieldValue["col_a1"];
+                record.Один = (fieldValue["col_a1"] != DBNull.Value) ? (Перелічення.Список)fieldValue["col_a1"] : 0;
                 
                 Records.Add(record);
             }
@@ -9108,7 +9282,7 @@ namespace ConfTrade_v1_1.Документи
                 ПлательщикНалогаНаПрибиль = (bool)base.FieldValue["col_d8"];
                 ВидДоговора = base.FieldValue["col_d9"].ToString();
                 Ед = new Довідники.КлассификаторЕдИзм_Pointer(base.FieldValue["col_a1"]);
-                Один = (Перелічення.Список)base.FieldValue["col_a2"];
+                Один = (base.FieldValue["col_a2"] != DBNull.Value) ? (Перелічення.Список)base.FieldValue["col_a2"] : 0;
                 
                 BaseClear();
                 return true;
@@ -9236,7 +9410,7 @@ namespace ConfTrade_v1_1.Документи
                 record.UID = (Guid)fieldValue["uid"];
                 
                 record.Ед = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_a1"]);
-                record.Один = (Перелічення.Список)fieldValue["col_a2"];
+                record.Один = (fieldValue["col_a2"] != DBNull.Value) ? (Перелічення.Список)fieldValue["col_a2"] : 0;
                 
                 Records.Add(record);
             }
@@ -9626,7 +9800,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 record.field4 = fieldValue["col_field4"].ToString();
                 record.field5 = fieldValue["col_fiel5"].ToString();
                 record.field6 = fieldValue["col_field6"].ToString();
-                record.Один = (Перелічення.Список)fieldValue["col_a1"];
+                record.Один = (fieldValue["col_a1"] != DBNull.Value) ? (Перелічення.Список)fieldValue["col_a1"] : 0;
                 
                 Records.Add(record);
             }
@@ -9974,7 +10148,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 record.s12 = fieldValue["col6"].ToString();
                 record.sdfsdfasd = fieldValue["col_a7"].ToString();
                 record.Склад = new Довідники.МестаХранения_Pointer(fieldValue["col_a8"]);
-                record.Вид = (Перелічення.ВидиТоварів)fieldValue["col_a9"];
+                record.Вид = (fieldValue["col_a9"] != DBNull.Value) ? (Перелічення.ВидиТоварів)fieldValue["col_a9"] : 0;
                 record.цйуцу = fieldValue["col_a1"].ToString();
                 record.івафіваф = fieldValue["col_a2"].ToString();
                 
@@ -10100,7 +10274,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
     class Перший_RecordsSet : RegisterAccumulationRecordsSet
     {
         public Перший_RecordsSet() : base(Config.Kernel, "register_4",
-             new string[] { "col_field1", "col_a1", "col_field2", "col_field3", "col_a2" }) 
+             new string[] { "col_field1", "col_a1", "col_a3", "col_a4", "col_field2", "col_a8", "col_field3", "col_a2" }) 
         {
             Records = new List<Record>();
             Filter = new SelectFilter();
@@ -10113,21 +10287,43 @@ namespace ConfTrade_v1_1.РегістриНакопичення
             Records.Clear();
             
             bool isExistPreceding = false;
-            if (Filter.field1 != null)
+            if (Filter.Період != null)
             {
-                base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.Період, false));
                 
                 isExistPreceding = true;
                 
             }
             
-            if (Filter.field4 != null)
+            if (Filter.Фірма != null)
             {
                 if (isExistPreceding)
-                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a1", Comparison.EQ, Filter.field4, false));
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a1", Comparison.EQ, Filter.Фірма.ToString(), false));
                 else
                 {
-                    base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.field4, false));
+                    base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.Фірма.ToString(), false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.Товар != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a3", Comparison.EQ, Filter.Товар.ToString(), false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a3", Comparison.EQ, Filter.Товар.ToString(), false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+            if (Filter.Склад != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a4", Comparison.EQ, Filter.Склад.ToString(), false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a4", Comparison.EQ, Filter.Склад.ToString(), false));
                     isExistPreceding = true; 
                 }
             }
@@ -10141,11 +10337,14 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 
                 record.UID = (Guid)fieldValue["uid"];
                   
-                record.field1 = fieldValue["col_field1"].ToString();
-                record.field4 = fieldValue["col_a1"].ToString();
-                record.field2 = fieldValue["col_field2"].ToString();
-                record.field3 = fieldValue["col_field3"].ToString();
-                record.Один = (Перелічення.Список)fieldValue["col_a2"];
+                record.Період = (fieldValue["col_field1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_field1"].ToString()) : DateTime.MinValue;
+                record.Фірма = new Довідники.Фирми_Pointer(fieldValue["col_a1"]);
+                record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a3"]);
+                record.Склад = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
+                record.Кво = (fieldValue["col_field2"] != DBNull.Value) ? (decimal)fieldValue["col_field2"] : 0;
+                record.Сума = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
+                record.Коментар = fieldValue["col_field3"].ToString();
+                record.Один = (fieldValue["col_a2"] != DBNull.Value) ? (Перелічення.Список)fieldValue["col_a2"] : 0;
                 
                 Records.Add(record);
             }
@@ -10166,10 +10365,13 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
-                    fieldValue.Add("col_field1", record.field1);
-                    fieldValue.Add("col_a1", record.field4);
-                    fieldValue.Add("col_field2", record.field2);
-                    fieldValue.Add("col_field3", record.field3);
+                    fieldValue.Add("col_field1", record.Період);
+                    fieldValue.Add("col_a1", record.Фірма.ToString());
+                    fieldValue.Add("col_a3", record.Товар.ToString());
+                    fieldValue.Add("col_a4", record.Склад.ToString());
+                    fieldValue.Add("col_field2", record.Кво);
+                    fieldValue.Add("col_a8", record.Сума);
+                    fieldValue.Add("col_field3", record.Коментар);
                     fieldValue.Add("col_a2", record.Один);
                     
                     base.BaseSave(record.UID, fieldValue);
@@ -10193,18 +10395,24 @@ namespace ConfTrade_v1_1.РегістриНакопичення
         {
             public Record()
             {
-                field1 = "";
-                field4 = "";
-                field2 = "";
-                field3 = "";
+                Період = DateTime.MinValue;
+                Фірма = new Довідники.Фирми_Pointer();
+                Товар = new Довідники.Номенклатура_Pointer();
+                Склад = new Довідники.Номенклатура_Pointer();
+                Кво = 0;
+                Сума = 0;
+                Коментар = "";
                 Один = 0;
                 
             }
         
-            public string field1 { get; set; }
-            public string field4 { get; set; }
-            public string field2 { get; set; }
-            public string field3 { get; set; }
+            public DateTime Період { get; set; }
+            public Довідники.Фирми_Pointer Фірма { get; set; }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.Номенклатура_Pointer Склад { get; set; }
+            public decimal Кво { get; set; }
+            public decimal Сума { get; set; }
+            public string Коментар { get; set; }
             public Перелічення.Список Один { get; set; }
             
         }
@@ -10213,13 +10421,17 @@ namespace ConfTrade_v1_1.РегістриНакопичення
         {
             public SelectFilter()
             {
-                 field1 = null;
-                 field4 = null;
+                 Період = null;
+                 Фірма = null;
+                 Товар = null;
+                 Склад = null;
                  
             }
         
-            public string field1 { get; set; }
-            public string field4 { get; set; }
+            public DateTime? Період { get; set; }
+            public Довідники.Фирми_Pointer Фірма { get; set; }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.Номенклатура_Pointer Склад { get; set; }
             
         }
     }

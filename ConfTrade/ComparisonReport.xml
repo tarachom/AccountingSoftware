@@ -5458,40 +5458,73 @@
     <Table>register_4</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
-      <Name>field1</Name>
+      <Name>Період</Name>
       <NameInTable>col_field1</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>field4</Name>
+      <Name>Фірма</Name>
       <NameInTable>col_a1</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>field2</Name>
+      <Name>Товар</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Склад</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Кво</Name>
       <NameInTable>col_field2</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
     <Control_Field>
-      <Name>field3</Name>
+      <Name>Сума</Name>
+      <NameInTable>col_a8</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Коментар</Name>
       <NameInTable>col_field3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>

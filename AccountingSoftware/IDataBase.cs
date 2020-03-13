@@ -37,7 +37,9 @@ namespace AccountingSoftware
 
 		#region Constants
 
-		bool SelectConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		bool SelectAllConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void SaveConstants(string table, string field, object fieldValue);
+
 		void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void InsertConstantsTablePartRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteConstantsTablePartRecords(string table);

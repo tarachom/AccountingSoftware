@@ -36,6 +36,7 @@ using System.Web;
 
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
+using Константи = ConfTrade_v1_1.Константи;
 
 //Конфігурація Торгівля
 namespace ConfTrade
@@ -52,8 +53,15 @@ namespace ConfTrade
 		{
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
+			Conf.Config.InitAllConstants();
 
-			Console.WriteLine(Conf.Config.Kernel.DataBase.Test());
+			Console.WriteLine(Константи.Основні.Перелічення);
+
+			Константи.Основні.Перелічення = Conf.Перелічення.ВидиКонтрагентов.Безналоговые;
+			Константи.Робот.Старт = DateTime.Now;
+
+			Console.WriteLine(Константи.Основні.Перелічення);
+
 			Console.ReadLine();
 
 			listHttpContext = new List<HttpListenerContext>();

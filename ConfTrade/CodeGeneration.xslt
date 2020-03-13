@@ -210,8 +210,10 @@ limitations under the License.
           <xsl:text>new EmptyPointer()</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'enum'">
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
           <xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+          <xsl:text> : 0</xsl:text>
         </xsl:when>
      </xsl:choose>
   </xsl:template>
@@ -247,11 +249,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public static Kernel Kernel { get; set; }
         
-        public static void InitConstants()
+        public static bool StartInit { get; set; }
+        
+        public static void InitAllConstants()
         {
             <xsl:variable name="Constants" select="Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
             Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-            bool IsSelect = Kernel.DataBase.SelectConstants("tab_constants",
+            bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
                  <xsl:text>new string[] { </xsl:text>
                  <xsl:for-each select="$Constants">
                    <xsl:if test="position() != 1">
@@ -262,6 +266,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             
             if (IsSelect)
             {
+                StartInit = true;
                 <xsl:for-each select="$Constants">
                   <xsl:text>Константи.</xsl:text><xsl:value-of select="../../Name"/><xsl:text>.</xsl:text><xsl:value-of select="Name"/>
                   <xsl:text> = </xsl:text>
@@ -269,6 +274,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                     <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
                   </xsl:call-template>;
                 </xsl:for-each>
+                StartInit = false;
             }
         }
     }
@@ -280,11 +286,33 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
     static class <xsl:value-of select="Name"/>
     {
         <xsl:for-each select="Constants/Constant">
+        <xsl:text>private static </xsl:text>
+        <xsl:call-template name="FieldType" />
+        <xsl:text> _</xsl:text>
+        <xsl:value-of select="Name"/>;
         <xsl:text>public static </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> </xsl:text>
         <xsl:value-of select="Name"/>
-        <xsl:text> { get; set; </xsl:text>}
+        {
+            get { return _<xsl:value-of select="Name"/>; }
+            set
+            {
+                _<xsl:value-of select="Name"/> = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                    <xsl:if test="Type = 'enum'">
+                        <xsl:text>(int)</xsl:text>      
+                    </xsl:if>
+                    <xsl:text>_</xsl:text>
+                    <xsl:value-of select="Name"/>
+                    <xsl:choose>
+                      <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:text>.ToString()</xsl:text>
+                      </xsl:when>
+                    </xsl:choose>);
+            }
+        }
         </xsl:for-each>
 
         <xsl:for-each select="Constants/Constant">

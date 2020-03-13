@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>13.03.2020 11:11:58</DateTimeSave>
+  <DateTimeSave>13.03.2020 13:26:30</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -4780,16 +4780,33 @@
       <DimensionFields>
         <Fields>
           <Field>
-            <Name>field1</Name>
+            <Name>Період</Name>
             <NameInTable>col_field1</NameInTable>
-            <Type>string</Type>
+            <Type>datetime</Type>
             <Desc>
             </Desc>
           </Field>
           <Field>
-            <Name>field4</Name>
+            <Name>Фірма</Name>
             <NameInTable>col_a1</NameInTable>
-            <Type>string</Type>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Фирми</Pointer>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Товар</Name>
+            <NameInTable>col_a3</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Номенклатура</Pointer>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Склад</Name>
+            <NameInTable>col_a4</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Номенклатура</Pointer>
             <Desc>
             </Desc>
           </Field>
@@ -4798,9 +4815,16 @@
       <ResourcesFields>
         <Fields>
           <Field>
-            <Name>field2</Name>
+            <Name>Кво</Name>
             <NameInTable>col_field2</NameInTable>
-            <Type>string</Type>
+            <Type>numeric</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Сума</Name>
+            <NameInTable>col_a8</NameInTable>
+            <Type>numeric</Type>
             <Desc>
             </Desc>
           </Field>
@@ -4809,7 +4833,7 @@
       <PropertyFields>
         <Fields>
           <Field>
-            <Name>field3</Name>
+            <Name>Коментар</Name>
             <NameInTable>col_field3</NameInTable>
             <Type>string</Type>
             <Desc>
