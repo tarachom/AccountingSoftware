@@ -31,6 +31,6 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DocumentTablePartRecord
 	{
-
+		public Guid UID { get; set; }
 	}
 }

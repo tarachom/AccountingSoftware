@@ -31,6 +31,6 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DirectoryTablePartRecord
 	{
-
+		public Guid UID { get; set; }
 	}
 }

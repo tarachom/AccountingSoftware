@@ -79,9 +79,10 @@ namespace AccountingSoftware
 			Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
 		}
 
-		protected void BaseSave(UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertDirectoryTablePartRecords(ownerUnigueID, Table, FieldArray, fieldValue);
+			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Kernel.DataBase.InsertDirectoryTablePartRecords(recordUnigueID, ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }

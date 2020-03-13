@@ -152,17 +152,11 @@ namespace AccountingSoftware
 
 		public void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
-			string query = "SELECT ";
-			bool is_first = true;
+			string query = "SELECT uid";
 
 			foreach (string field in fieldArray)
 			{
-				if (!is_first)
-					query += ", ";
-				else
-					is_first = false;
-
-				query += field;
+				query += ", " + field;
 			}
 
 			query += " FROM " + table;
@@ -176,6 +170,8 @@ namespace AccountingSoftware
 				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 				fieldValueList.Add(fieldValue);
 
+				fieldValue.Add("uid", reader["uid"]);
+
 				foreach (string field in fieldArray)
 				{
 					fieldValue.Add(field, reader[field]);
@@ -184,30 +180,22 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertConstantsTablePartRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertConstantsTablePartRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "";
-			string query_values = "";
-			bool is_first = true;
+			string query_field = "uid";
+			string query_values = "@uid";
 
 			foreach (string field in fieldArray)
 			{
-				if (!is_first)
-				{
-					query_field += ", ";
-					query_values += ", ";
-				}
-				else
-					is_first = false;
-
-				query_field += field;
-				query_values += "@" + field;
+				query_field += ", " + field;
+				query_values += ", @" + field;
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 
 			foreach (string field in fieldArray)
 			{
@@ -395,15 +383,10 @@ namespace AccountingSoftware
 
 		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
-			bool is_first = true;
-
-			string query = "SELECT ";
+			string query = "SELECT uid ";
 
 			foreach (string field in fieldArray)
-			{
-				if (!is_first) query += ", "; else is_first = false;
-				query += field;
-			}
+				query += ", " + field;
 
 			query += " FROM " + table + " WHERE owner = @owner";
 
@@ -418,6 +401,8 @@ namespace AccountingSoftware
 				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 				fieldValueList.Add(fieldValue);
 
+				fieldValue.Add("uid", reader["uid"]);
+
 				foreach (string field in fieldArray)
 				{
 					fieldValue.Add(field, reader[field]);
@@ -426,10 +411,10 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertDirectoryTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "owner";
-			string query_values = "@owner";
+			string query_field = "uid, owner";
+			string query_values = "@uid, @owner";
 
 			foreach (string field in fieldArray)
 			{
@@ -442,6 +427,7 @@ namespace AccountingSoftware
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			foreach (string field in fieldArray)
@@ -693,14 +679,11 @@ namespace AccountingSoftware
 
 		public void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
-			bool is_first = true;
-
-			string query = "SELECT ";
+			string query = "SELECT uid";
 
 			foreach (string field in fieldArray)
 			{
-				if (!is_first) query += ", "; else is_first = false;
-				query += field;
+				query += ", " + field;
 			}
 
 			query += " FROM " + table + " WHERE owner = @owner";
@@ -716,6 +699,8 @@ namespace AccountingSoftware
 				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 				fieldValueList.Add(fieldValue);
 
+				fieldValue.Add("uid", reader["uid"]);
+
 				foreach (string field in fieldArray)
 				{
 					fieldValue.Add(field, reader[field]);
@@ -724,10 +709,10 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertDocumentTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "owner";
-			string query_values = "@owner";
+			string query_field = "uid, owner";
+			string query_values = "@uid, @owner";
 
 			foreach (string field in fieldArray)
 			{
@@ -736,12 +721,10 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-
-			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
-
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			foreach (string field in fieldArray)
@@ -791,6 +774,8 @@ namespace AccountingSoftware
 				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 				fieldValueList.Add(fieldValue);
 
+				fieldValue.Add("uid", reader["uid"]);
+
 				foreach (string field in fieldArray)
 				{
 					fieldValue.Add(field, reader[field]);
@@ -799,7 +784,7 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertRegisterInformationRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertRegisterInformationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
 			string query_field = "uid";
 			string query_values = "@uid";
@@ -811,13 +796,10 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-
-			// ?? Можна одним інсертом записати всі рядки VALUES(...), VALUES (...), ...
-
 			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", new Guid().ToString()));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 
 			foreach (string field in fieldArray)
 			{
@@ -828,6 +810,88 @@ namespace AccountingSoftware
 		}
 
 		public void DeleteRegisterInformationRecords(string table, List<Where> Filter)
+		{
+			Query QuerySelect = new Query(table);
+			QuerySelect.Where = Filter;
+
+			string query = "DELETE FROM " + table + " WHERE uid IN (\n" + QuerySelect.Construct() + "\n)";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (Filter.Count > 0)
+			{
+				foreach (Where ItemFilter in Filter)
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+			}
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		#endregion
+
+		#region RegistersAccumulation
+
+		public void SelectRegisterAccumulationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
+		{
+			Query QuerySelect = new Query(table);
+
+			foreach (string fieldItem in fieldArray)
+				QuerySelect.Field.Add(fieldItem);
+
+			QuerySelect.Where = Filter;
+
+			string query = QuerySelect.Construct();
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			if (Filter.Count > 0)
+			{
+				foreach (Where ItemFilter in Filter)
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+			}
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+				fieldValueList.Add(fieldValue);
+
+				fieldValue.Add("uid", reader["uid"]);
+
+				foreach (string field in fieldArray)
+				{
+					fieldValue.Add(field, reader[field]);
+				}
+			}
+			reader.Close();
+		}
+
+		public void InsertRegisterAccumulationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "uid";
+			string query_values = "@uid";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+			//Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
+
+			foreach (string field in fieldArray)
+			{
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+			}
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void DeleteRegisterAccumulationRecords(string table, List<Where> Filter)
 		{
 			Query QuerySelect = new Query(table);
 			QuerySelect.Where = Filter;

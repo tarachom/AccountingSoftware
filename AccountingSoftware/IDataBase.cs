@@ -39,7 +39,7 @@ namespace AccountingSoftware
 
 		bool SelectConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
-		void InsertConstantsTablePartRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertConstantsTablePartRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteConstantsTablePartRecords(string table);
 
 		#endregion
@@ -55,7 +55,7 @@ namespace AccountingSoftware
 		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer);
 
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
-		void InsertDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertDirectoryTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
 		string SelectDirectoryView(DirectoryView directoryView);
@@ -72,7 +72,7 @@ namespace AccountingSoftware
 		void SelectDocumentPointer(DocumentSelect select, List<DocumentPointer> listDocumentPointer);
 
 		void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
-		void InsertDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertDocumentTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDocumentTablePartRecords(UnigueID ownerUnigueID, string table);
 
 		#endregion
@@ -80,8 +80,16 @@ namespace AccountingSoftware
 		#region RegisterInformation
 
 		void SelectRegisterInformationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
-		void InsertRegisterInformationRecords(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertRegisterInformationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteRegisterInformationRecords(string table, List<Where> Filter);
+
+		#endregion
+
+		#region RegisterAccumulation
+
+		void SelectRegisterAccumulationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
+		void InsertRegisterAccumulationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteRegisterAccumulationRecords(string table, List<Where> Filter);
 
 		#endregion
 

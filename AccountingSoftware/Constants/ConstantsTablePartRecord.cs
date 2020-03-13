@@ -31,6 +31,6 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class ConstantsTablePartRecord
 	{
-
+		public Guid UID { get; set; }
 	}
 }

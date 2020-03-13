@@ -31,6 +31,6 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class RegisterRecord
 	{
-
+		public Guid UID { get; set; }
 	}
 }

@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 13.03.2020 09:25:18
+ * Дата конфігурації: 13.03.2020 11:11:58
  *
  */
 
@@ -100,7 +100,9 @@ namespace ConfTrade_v1_1.Константи
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
                     Історія_Record record = new Історія_Record();
-
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
                     record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
                     record.Значення = fieldValue["col_a2"].ToString();
                     
@@ -126,7 +128,7 @@ namespace ConfTrade_v1_1.Константи
                         fieldValue.Add("col_a1", record.Дата);
                         fieldValue.Add("col_a2", record.Значення);
                         
-                        base.BaseSave(fieldValue);
+                        base.BaseSave(record.UID, fieldValue);
                     }
                 
                     base.BaseCommitTransaction();
@@ -180,7 +182,9 @@ namespace ConfTrade_v1_1.Константи
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
                     Історія_Record record = new Історія_Record();
-
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
                     record.Дата = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"].ToString()) : DateTime.MinValue;
                     record.Значенн = fieldValue["col_a5"].ToString();
                     
@@ -206,7 +210,7 @@ namespace ConfTrade_v1_1.Константи
                         fieldValue.Add("col_a4", record.Дата);
                         fieldValue.Add("col_a5", record.Значенн);
                         
-                        base.BaseSave(fieldValue);
+                        base.BaseSave(record.UID, fieldValue);
                     }
                 
                     base.BaseCommitTransaction();
@@ -412,12 +416,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Валюти_КурсНаДату_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Валюти_Objest Owner { get; private set; }
         
-        public List<Валюти_КурсНаДату_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -426,8 +430,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Валюти_КурсНаДату_TablePartRecord record = new Валюти_КурсНаДату_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a4"].ToString()) : DateTime.MinValue;
                 record.Курс = (fieldValue["col_a5"] != DBNull.Value) ? (decimal)fieldValue["col_a5"] : 0;
                 record.Кратность = (fieldValue["col_a6"] != DBNull.Value) ? (int)fieldValue["col_a6"] : 0;
@@ -439,12 +444,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -454,7 +453,7 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Валюти_КурсНаДату_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -463,7 +462,7 @@ namespace ConfTrade_v1_1.Довідники
                     fieldValue.Add("col_a6", record.Кратность);
                     fieldValue.Add("col_a1", record.НовеПоле.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -476,35 +475,35 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Валюти_КурсНаДату_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Валюти_КурсНаДату_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Курс = 0;
-            Кратность = 0;
-            НовеПоле = new Довідники.Пользователи_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Курс = 0;
+                Кратность = 0;
+                НовеПоле = new Довідники.Пользователи_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, decimal _Курс = 0, int _Кратность = 0, Довідники.Пользователи_Pointer _НовеПоле = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Курс = _Курс;
+                Кратность = _Кратность;
+                НовеПоле = _НовеПоле ?? new Довідники.Пользователи_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public decimal Курс { get; set; }
+            public int Кратность { get; set; }
+            public Довідники.Пользователи_Pointer НовеПоле { get; set; }
             
         }
-        
-        
-        public Валюти_КурсНаДату_TablePartRecord(
-            DateTime?  _Дата = null, decimal _Курс = 0, int _Кратность = 0, Довідники.Пользователи_Pointer _НовеПоле = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Курс = _Курс;
-            Кратность = _Кратность;
-            НовеПоле = _НовеПоле ?? new Довідники.Пользователи_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public decimal Курс { get; set; }
-        public int Кратность { get; set; }
-        public Довідники.Пользователи_Pointer НовеПоле { get; set; }
-        
     }
       
     class Валюти_Список_View : DirectoryView
@@ -1838,12 +1837,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Контрагенти_Глубина_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Контрагенти_Objest Owner { get; private set; }
         
-        public List<Контрагенти_Глубина_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -1852,8 +1851,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Контрагенти_Глубина_TablePartRecord record = new Контрагенти_Глубина_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
                 record.Глубина = (fieldValue["col_a2"] != DBNull.Value) ? (int)fieldValue["col_a2"] : 0;
                 
@@ -1863,12 +1863,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -1878,14 +1872,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Контрагенти_Глубина_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Дата);
                     fieldValue.Add("col_a2", record.Глубина);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -1898,29 +1892,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Контрагенти_Глубина_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Контрагенти_Глубина_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Глубина = 0;
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Глубина = 0;
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, int _Глубина = 0)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Глубина = _Глубина;
+                
+            }
+            public DateTime Дата { get; set; }
+            public int Глубина { get; set; }
             
         }
-        
-        
-        public Контрагенти_Глубина_TablePartRecord(
-            DateTime?  _Дата = null, int _Глубина = 0)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Глубина = _Глубина;
-            
-        }
-        public DateTime Дата { get; set; }
-        public int Глубина { get; set; }
-        
     }
       
     class Контрагенти_ГлубинаКредитаПоставщика_TablePart : DirectoryTablePart
@@ -1931,12 +1925,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Контрагенти_Objest Owner { get; private set; }
         
-        public List<Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -1945,8 +1939,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord record = new Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString()) : DateTime.MinValue;
                 record.ГлубинаКредитаПоставщика = (fieldValue["col_a4"] != DBNull.Value) ? (int)fieldValue["col_a4"] : 0;
                 
@@ -1956,12 +1951,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -1971,14 +1960,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a3", record.Дата);
                     fieldValue.Add("col_a4", record.ГлубинаКредитаПоставщика);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -1991,29 +1980,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ГлубинаКредитаПоставщика = 0;
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ГлубинаКредитаПоставщика = 0;
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, int _ГлубинаКредитаПоставщика = 0)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ГлубинаКредитаПоставщика = _ГлубинаКредитаПоставщика;
+                
+            }
+            public DateTime Дата { get; set; }
+            public int ГлубинаКредитаПоставщика { get; set; }
             
         }
-        
-        
-        public Контрагенти_ГлубинаКредитаПоставщика_TablePartRecord(
-            DateTime?  _Дата = null, int _ГлубинаКредитаПоставщика = 0)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ГлубинаКредитаПоставщика = _ГлубинаКредитаПоставщика;
-            
-        }
-        public DateTime Дата { get; set; }
-        public int ГлубинаКредитаПоставщика { get; set; }
-        
     }
       
     class Контрагенти_СуммаКредита_TablePart : DirectoryTablePart
@@ -2024,12 +2013,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Контрагенти_СуммаКредита_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Контрагенти_Objest Owner { get; private set; }
         
-        public List<Контрагенти_СуммаКредита_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -2038,8 +2027,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Контрагенти_СуммаКредита_TablePartRecord record = new Контрагенти_СуммаКредита_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
                 record.СуммаКредита = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
                 
@@ -2049,12 +2039,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -2064,14 +2048,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Контрагенти_СуммаКредита_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Дата);
                     fieldValue.Add("col_a2", record.СуммаКредита);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -2084,29 +2068,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Контрагенти_СуммаКредита_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Контрагенти_СуммаКредита_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            СуммаКредита = 0;
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                СуммаКредита = 0;
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, decimal _СуммаКредита = 0)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                СуммаКредита = _СуммаКредита;
+                
+            }
+            public DateTime Дата { get; set; }
+            public decimal СуммаКредита { get; set; }
             
         }
-        
-        
-        public Контрагенти_СуммаКредита_TablePartRecord(
-            DateTime?  _Дата = null, decimal _СуммаКредита = 0)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            СуммаКредита = _СуммаКредита;
-            
-        }
-        public DateTime Дата { get; set; }
-        public decimal СуммаКредита { get; set; }
-        
     }
       
     class Контрагенти_СуммаКредитаПоставщика_TablePart : DirectoryTablePart
@@ -2117,12 +2101,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Контрагенти_СуммаКредитаПоставщика_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Контрагенти_Objest Owner { get; private set; }
         
-        public List<Контрагенти_СуммаКредитаПоставщика_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -2131,8 +2115,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Контрагенти_СуммаКредитаПоставщика_TablePartRecord record = new Контрагенти_СуммаКредитаПоставщика_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a3"].ToString()) : DateTime.MinValue;
                 record.СуммаКредитаПоставщика = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
                 
@@ -2142,12 +2127,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -2157,14 +2136,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Контрагенти_СуммаКредитаПоставщика_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a3", record.Дата);
                     fieldValue.Add("col_a4", record.СуммаКредитаПоставщика);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -2177,29 +2156,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Контрагенти_СуммаКредитаПоставщика_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Контрагенти_СуммаКредитаПоставщика_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            СуммаКредитаПоставщика = 0;
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                СуммаКредитаПоставщика = 0;
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, decimal _СуммаКредитаПоставщика = 0)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                СуммаКредитаПоставщика = _СуммаКредитаПоставщика;
+                
+            }
+            public DateTime Дата { get; set; }
+            public decimal СуммаКредитаПоставщика { get; set; }
             
         }
-        
-        
-        public Контрагенти_СуммаКредитаПоставщика_TablePartRecord(
-            DateTime?  _Дата = null, decimal _СуммаКредитаПоставщика = 0)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            СуммаКредитаПоставщика = _СуммаКредитаПоставщика;
-            
-        }
-        public DateTime Дата { get; set; }
-        public decimal СуммаКредитаПоставщика { get; set; }
-        
     }
       
     class Контрагенти_Список_View : DirectoryView
@@ -2888,12 +2867,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Номенклатура_СтавкаНДС_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Номенклатура_Objest Owner { get; private set; }
         
-        public List<Номенклатура_СтавкаНДС_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -2902,8 +2881,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Номенклатура_СтавкаНДС_TablePartRecord record = new Номенклатура_СтавкаНДС_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
                 record.СтавкаНДС = new EmptyPointer();
                 
@@ -2913,12 +2893,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -2928,14 +2902,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Номенклатура_СтавкаНДС_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Дата);
                     fieldValue.Add("col_a2", record.СтавкаНДС.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -2948,29 +2922,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Номенклатура_СтавкаНДС_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Номенклатура_СтавкаНДС_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            СтавкаНДС = new EmptyPointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                СтавкаНДС = new EmptyPointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, EmptyPointer _СтавкаНДС = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                СтавкаНДС = _СтавкаНДС ?? new EmptyPointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public EmptyPointer СтавкаНДС { get; set; }
             
         }
-        
-        
-        public Номенклатура_СтавкаНДС_TablePartRecord(
-            DateTime?  _Дата = null, EmptyPointer _СтавкаНДС = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            СтавкаНДС = _СтавкаНДС ?? new EmptyPointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public EmptyPointer СтавкаНДС { get; set; }
-        
     }
       
     class Номенклатура_Список_View : DirectoryView
@@ -4184,12 +4158,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ГлавнийБухгалтер_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ГлавнийБухгалтер_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4198,8 +4172,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ГлавнийБухгалтер_TablePartRecord record = new Фирми_ГлавнийБухгалтер_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_f2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_f2"].ToString()) : DateTime.MinValue;
                 record.ГлавнийБухгалтер = fieldValue["col_f3"].ToString();
                 
@@ -4209,12 +4184,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4224,14 +4193,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ГлавнийБухгалтер_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_f2", record.Дата);
                     fieldValue.Add("col_f3", record.ГлавнийБухгалтер);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4244,29 +4213,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ГлавнийБухгалтер_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ГлавнийБухгалтер_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ГлавнийБухгалтер = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ГлавнийБухгалтер = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ГлавнийБухгалтер = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ГлавнийБухгалтер = _ГлавнийБухгалтер;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ГлавнийБухгалтер { get; set; }
             
         }
-        
-        
-        public Фирми_ГлавнийБухгалтер_TablePartRecord(
-            DateTime?  _Дата = null, string _ГлавнийБухгалтер = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ГлавнийБухгалтер = _ГлавнийБухгалтер;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ГлавнийБухгалтер { get; set; }
-        
     }
       
     class Фирми_ГНИ_TablePart : DirectoryTablePart
@@ -4277,12 +4246,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ГНИ_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ГНИ_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4291,8 +4260,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ГНИ_TablePartRecord record = new Фирми_ГНИ_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_f4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_f4"].ToString()) : DateTime.MinValue;
                 record.ГНИ = fieldValue["col_f5"].ToString();
                 
@@ -4302,12 +4272,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4317,14 +4281,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ГНИ_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_f4", record.Дата);
                     fieldValue.Add("col_f5", record.ГНИ);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4337,29 +4301,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ГНИ_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ГНИ_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ГНИ = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ГНИ = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ГНИ = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ГНИ = _ГНИ;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ГНИ { get; set; }
             
         }
-        
-        
-        public Фирми_ГНИ_TablePartRecord(
-            DateTime?  _Дата = null, string _ГНИ = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ГНИ = _ГНИ;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ГНИ { get; set; }
-        
     }
       ///<summary>
     ///Кассир фирмы.
@@ -4372,12 +4336,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_Кассир_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_Кассир_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4386,8 +4350,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_Кассир_TablePartRecord record = new Фирми_Кассир_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_f6"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_f6"].ToString()) : DateTime.MinValue;
                 record.Кассир = new Довідники.Сотрудники_Pointer(fieldValue["col_f7"]);
                 
@@ -4397,12 +4362,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4412,14 +4371,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_Кассир_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_f6", record.Дата);
                     fieldValue.Add("col_f7", record.Кассир.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4432,31 +4391,31 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    ///<summary>
+        
+        ///<summary>
     ///Кассир фирмы.
     ///</summary>
-    class Фирми_Кассир_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_Кассир_TablePartRecord()
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Кассир = new Довідники.Сотрудники_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Кассир = new Довідники.Сотрудники_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Кассир = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Кассир = _Кассир ?? new Довідники.Сотрудники_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public Довідники.Сотрудники_Pointer Кассир { get; set; }
             
         }
-        
-        
-        public Фирми_Кассир_TablePartRecord(
-            DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Кассир = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Кассир = _Кассир ?? new Довідники.Сотрудники_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public Довідники.Сотрудники_Pointer Кассир { get; set; }
-        
     }
       
     class Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePart : DirectoryTablePart
@@ -4467,12 +4426,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4481,8 +4440,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord record = new Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_f8"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_f8"].ToString()) : DateTime.MinValue;
                 record.МетодРасчетаСебестоимостиФинансовогоУчета = new EmptyPointer();
                 
@@ -4492,12 +4452,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4507,14 +4461,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_f8", record.Дата);
                     fieldValue.Add("col_f9", record.МетодРасчетаСебестоимостиФинансовогоУчета.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4527,29 +4481,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            МетодРасчетаСебестоимостиФинансовогоУчета = new EmptyPointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                МетодРасчетаСебестоимостиФинансовогоУчета = new EmptyPointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, EmptyPointer _МетодРасчетаСебестоимостиФинансовогоУчета = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                МетодРасчетаСебестоимостиФинансовогоУчета = _МетодРасчетаСебестоимостиФинансовогоУчета ?? new EmptyPointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public EmptyPointer МетодРасчетаСебестоимостиФинансовогоУчета { get; set; }
             
         }
-        
-        
-        public Фирми_МетодРасчетаСебестоимостиФинансовогоУчета_TablePartRecord(
-            DateTime?  _Дата = null, EmptyPointer _МетодРасчетаСебестоимостиФинансовогоУчета = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            МетодРасчетаСебестоимостиФинансовогоУчета = _МетодРасчетаСебестоимостиФинансовогоУчета ?? new EmptyPointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public EmptyPointer МетодРасчетаСебестоимостиФинансовогоУчета { get; set; }
-        
     }
       
     class Фирми_НалоговаяИнспекция_TablePart : DirectoryTablePart
@@ -4560,12 +4514,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_НалоговаяИнспекция_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_НалоговаяИнспекция_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4574,8 +4528,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_НалоговаяИнспекция_TablePartRecord record = new Фирми_НалоговаяИнспекция_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_g1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g1"].ToString()) : DateTime.MinValue;
                 record.НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer(fieldValue["col_g2"]);
                 
@@ -4585,12 +4540,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4600,14 +4549,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_НалоговаяИнспекция_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_g1", record.Дата);
                     fieldValue.Add("col_g2", record.НалоговаяИнспекция.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4620,29 +4569,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_НалоговаяИнспекция_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_НалоговаяИнспекция_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                НалоговаяИнспекция = new Довідники.НалоговиеИнспекции_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, Довідники.НалоговиеИнспекции_Pointer _НалоговаяИнспекция = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                НалоговаяИнспекция = _НалоговаяИнспекция ?? new Довідники.НалоговиеИнспекции_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public Довідники.НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
             
         }
-        
-        
-        public Фирми_НалоговаяИнспекция_TablePartRecord(
-            DateTime?  _Дата = null, Довідники.НалоговиеИнспекции_Pointer _НалоговаяИнспекция = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            НалоговаяИнспекция = _НалоговаяИнспекция ?? new Довідники.НалоговиеИнспекции_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public Довідники.НалоговиеИнспекции_Pointer НалоговаяИнспекция { get; set; }
-        
     }
       
     class Фирми_ОфициальноеНаименование_TablePart : DirectoryTablePart
@@ -4653,12 +4602,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ОфициальноеНаименование_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ОфициальноеНаименование_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4667,8 +4616,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ОфициальноеНаименование_TablePartRecord record = new Фирми_ОфициальноеНаименование_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_g3"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g3"].ToString()) : DateTime.MinValue;
                 record.ОфициальноеНаименование = fieldValue["col_g4"].ToString();
                 
@@ -4678,12 +4628,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4693,14 +4637,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ОфициальноеНаименование_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_g3", record.Дата);
                     fieldValue.Add("col_g4", record.ОфициальноеНаименование);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4713,29 +4657,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ОфициальноеНаименование_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ОфициальноеНаименование_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ОфициальноеНаименование = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ОфициальноеНаименование = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ОфициальноеНаименование = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ОфициальноеНаименование = _ОфициальноеНаименование;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ОфициальноеНаименование { get; set; }
             
         }
-        
-        
-        public Фирми_ОфициальноеНаименование_TablePartRecord(
-            DateTime?  _Дата = null, string _ОфициальноеНаименование = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ОфициальноеНаименование = _ОфициальноеНаименование;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ОфициальноеНаименование { get; set; }
-        
     }
       
     class Фирми_ПлательщикНалогаНаПрибиль_TablePart : DirectoryTablePart
@@ -4746,12 +4690,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4760,8 +4704,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord record = new Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_g5"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g5"].ToString()) : DateTime.MinValue;
                 record.ПлательщикНалогаНаПрибиль = (bool)fieldValue["col_g6"];
                 
@@ -4771,12 +4716,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4786,14 +4725,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_g5", record.Дата);
                     fieldValue.Add("col_g6", record.ПлательщикНалогаНаПрибиль);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4806,29 +4745,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ПлательщикНалогаНаПрибиль = false;
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ПлательщикНалогаНаПрибиль = false;
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, bool _ПлательщикНалогаНаПрибиль = false)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ПлательщикНалогаНаПрибиль = _ПлательщикНалогаНаПрибиль;
+                
+            }
+            public DateTime Дата { get; set; }
+            public bool ПлательщикНалогаНаПрибиль { get; set; }
             
         }
-        
-        
-        public Фирми_ПлательщикНалогаНаПрибиль_TablePartRecord(
-            DateTime?  _Дата = null, bool _ПлательщикНалогаНаПрибиль = false)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ПлательщикНалогаНаПрибиль = _ПлательщикНалогаНаПрибиль;
-            
-        }
-        public DateTime Дата { get; set; }
-        public bool ПлательщикНалогаНаПрибиль { get; set; }
-        
     }
       
     class Фирми_ПолнНаименование_TablePart : DirectoryTablePart
@@ -4839,12 +4778,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ПолнНаименование_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ПолнНаименование_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4853,8 +4792,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ПолнНаименование_TablePartRecord record = new Фирми_ПолнНаименование_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_g7"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g7"].ToString()) : DateTime.MinValue;
                 record.ПолнНаименование = fieldValue["col_g8"].ToString();
                 
@@ -4864,12 +4804,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4879,14 +4813,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ПолнНаименование_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_g7", record.Дата);
                     fieldValue.Add("col_g8", record.ПолнНаименование);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4899,29 +4833,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ПолнНаименование_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ПолнНаименование_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ПолнНаименование = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ПолнНаименование = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ПолнНаименование = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ПолнНаименование = _ПолнНаименование;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ПолнНаименование { get; set; }
             
         }
-        
-        
-        public Фирми_ПолнНаименование_TablePartRecord(
-            DateTime?  _Дата = null, string _ПолнНаименование = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ПолнНаименование = _ПолнНаименование;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ПолнНаименование { get; set; }
-        
     }
       
     class Фирми_ПочтовийАдрес_TablePart : DirectoryTablePart
@@ -4932,12 +4866,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ПочтовийАдрес_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ПочтовийАдрес_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -4946,8 +4880,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ПочтовийАдрес_TablePartRecord record = new Фирми_ПочтовийАдрес_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_g9"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_g9"].ToString()) : DateTime.MinValue;
                 record.ПочтовийАдрес = fieldValue["col_h1"].ToString();
                 
@@ -4957,12 +4892,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -4972,14 +4901,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ПочтовийАдрес_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_g9", record.Дата);
                     fieldValue.Add("col_h1", record.ПочтовийАдрес);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -4992,29 +4921,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ПочтовийАдрес_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ПочтовийАдрес_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ПочтовийАдрес = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ПочтовийАдрес = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ПочтовийАдрес = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ПочтовийАдрес = _ПочтовийАдрес;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ПочтовийАдрес { get; set; }
             
         }
-        
-        
-        public Фирми_ПочтовийАдрес_TablePartRecord(
-            DateTime?  _Дата = null, string _ПочтовийАдрес = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ПочтовийАдрес = _ПочтовийАдрес;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ПочтовийАдрес { get; set; }
-        
     }
       
     class Фирми_Руководитель_TablePart : DirectoryTablePart
@@ -5025,12 +4954,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_Руководитель_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_Руководитель_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -5039,8 +4968,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_Руководитель_TablePartRecord record = new Фирми_Руководитель_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_h2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_h2"].ToString()) : DateTime.MinValue;
                 record.Руководитель = new Довідники.Сотрудники_Pointer(fieldValue["col_h3"]);
                 
@@ -5050,12 +4980,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -5065,14 +4989,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_Руководитель_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_h2", record.Дата);
                     fieldValue.Add("col_h3", record.Руководитель.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -5085,29 +5009,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_Руководитель_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_Руководитель_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Руководитель = new Довідники.Сотрудники_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Руководитель = new Довідники.Сотрудники_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Руководитель = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Руководитель = _Руководитель ?? new Довідники.Сотрудники_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public Довідники.Сотрудники_Pointer Руководитель { get; set; }
             
         }
-        
-        
-        public Фирми_Руководитель_TablePartRecord(
-            DateTime?  _Дата = null, Довідники.Сотрудники_Pointer _Руководитель = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Руководитель = _Руководитель ?? new Довідники.Сотрудники_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public Довідники.Сотрудники_Pointer Руководитель { get; set; }
-        
     }
       
     class Фирми_ЮридическийАдрес_TablePart : DirectoryTablePart
@@ -5118,12 +5042,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Фирми_ЮридическийАдрес_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Фирми_Objest Owner { get; private set; }
         
-        public List<Фирми_ЮридическийАдрес_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -5132,8 +5056,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Фирми_ЮридическийАдрес_TablePartRecord record = new Фирми_ЮридическийАдрес_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_h4"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_h4"].ToString()) : DateTime.MinValue;
                 record.ЮридическийАдрес = fieldValue["col_h5"].ToString();
                 
@@ -5143,12 +5068,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -5158,14 +5077,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Фирми_ЮридическийАдрес_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_h4", record.Дата);
                     fieldValue.Add("col_h5", record.ЮридическийАдрес);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -5178,29 +5097,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Фирми_ЮридическийАдрес_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Фирми_ЮридическийАдрес_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            ЮридическийАдрес = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                ЮридическийАдрес = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, string _ЮридическийАдрес = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                ЮридическийАдрес = _ЮридическийАдрес;
+                
+            }
+            public DateTime Дата { get; set; }
+            public string ЮридическийАдрес { get; set; }
             
         }
-        
-        
-        public Фирми_ЮридическийАдрес_TablePartRecord(
-            DateTime?  _Дата = null, string _ЮридическийАдрес = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            ЮридическийАдрес = _ЮридическийАдрес;
-            
-        }
-        public DateTime Дата { get; set; }
-        public string ЮридическийАдрес { get; set; }
-        
     }
       
     class Фирми_Список_View : DirectoryView
@@ -5367,12 +5286,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Цени_Валюта_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Цени_Objest Owner { get; private set; }
         
-        public List<Цени_Валюта_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -5381,8 +5300,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Цени_Валюта_TablePartRecord record = new Цени_Валюта_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a6"].ToString()) : DateTime.MinValue;
                 record.Валюта = new Довідники.Валюти_Pointer(fieldValue["col_a7"]);
                 
@@ -5392,12 +5312,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -5407,14 +5321,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Цени_Валюта_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a6", record.Дата);
                     fieldValue.Add("col_a7", record.Валюта.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -5427,29 +5341,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Цени_Валюта_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Цени_Валюта_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Валюта = new Довідники.Валюти_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Валюта = new Довідники.Валюти_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, Довідники.Валюти_Pointer _Валюта = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Валюта = _Валюта ?? new Довідники.Валюти_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public Довідники.Валюти_Pointer Валюта { get; set; }
             
         }
-        
-        
-        public Цени_Валюта_TablePartRecord(
-            DateTime?  _Дата = null, Довідники.Валюти_Pointer _Валюта = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Валюта = _Валюта ?? new Довідники.Валюти_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public Довідники.Валюти_Pointer Валюта { get; set; }
-        
     }
       
     class Цени_Единица_TablePart : DirectoryTablePart
@@ -5460,12 +5374,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Цени_Единица_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Цени_Objest Owner { get; private set; }
         
-        public List<Цени_Единица_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -5474,8 +5388,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Цени_Единица_TablePartRecord record = new Цени_Единица_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_a8"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a8"].ToString()) : DateTime.MinValue;
                 record.Единица = new Довідники.Единици_Pointer(fieldValue["col_a9"]);
                 
@@ -5485,12 +5400,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -5500,14 +5409,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Цени_Единица_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a8", record.Дата);
                     fieldValue.Add("col_a9", record.Единица.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -5520,29 +5429,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Цени_Единица_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Цени_Единица_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Единица = new Довідники.Единици_Pointer();
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Единица = new Довідники.Единици_Pointer();
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, Довідники.Единици_Pointer _Единица = null)
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Единица = _Единица ?? new Довідники.Единици_Pointer();
+                
+            }
+            public DateTime Дата { get; set; }
+            public Довідники.Единици_Pointer Единица { get; set; }
             
         }
-        
-        
-        public Цени_Единица_TablePartRecord(
-            DateTime?  _Дата = null, Довідники.Единици_Pointer _Единица = null)
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Единица = _Единица ?? new Довідники.Единици_Pointer();
-            
-        }
-        public DateTime Дата { get; set; }
-        public Довідники.Единици_Pointer Единица { get; set; }
-        
     }
       
     class Цени_Цена_TablePart : DirectoryTablePart
@@ -5553,12 +5462,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Цени_Цена_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Цени_Objest Owner { get; private set; }
         
-        public List<Цени_Цена_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -5567,8 +5476,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Цени_Цена_TablePartRecord record = new Цени_Цена_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Дата = (fieldValue["col_b1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_b1"].ToString()) : DateTime.MinValue;
                 record.Цена = (fieldValue["col_b2"] != DBNull.Value) ? (decimal)fieldValue["col_b2"] : 0;
                 record.Інфо = fieldValue["col_a1"].ToString();
@@ -5579,12 +5489,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -5594,7 +5498,7 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Цени_Цена_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -5602,7 +5506,7 @@ namespace ConfTrade_v1_1.Довідники
                     fieldValue.Add("col_b2", record.Цена);
                     fieldValue.Add("col_a1", record.Інфо);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -5615,32 +5519,32 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Цени_Цена_TablePartRecord : DirectoryTablePartRecord
-    {
-        public Цени_Цена_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Дата = DateTime.MinValue;
-            Цена = 0;
-            Інфо = "";
+            public Record()
+            {
+                Дата = DateTime.MinValue;
+                Цена = 0;
+                Інфо = "";
+                
+            }
+        
+            
+            public Record(
+                DateTime?  _Дата = null, decimal _Цена = 0, string _Інфо = "")
+            {
+                Дата = _Дата ?? DateTime.MinValue;
+                Цена = _Цена;
+                Інфо = _Інфо;
+                
+            }
+            public DateTime Дата { get; set; }
+            public decimal Цена { get; set; }
+            public string Інфо { get; set; }
             
         }
-        
-        
-        public Цени_Цена_TablePartRecord(
-            DateTime?  _Дата = null, decimal _Цена = 0, string _Інфо = "")
-        {
-            Дата = _Дата ?? DateTime.MinValue;
-            Цена = _Цена;
-            Інфо = _Інфо;
-            
-        }
-        public DateTime Дата { get; set; }
-        public decimal Цена { get; set; }
-        public string Інфо { get; set; }
-        
     }
       
     class Цени_Список_View : DirectoryView
@@ -6059,12 +5963,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<test_esddf_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public test_Objest Owner { get; private set; }
         
-        public List<test_esddf_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6073,8 +5977,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                test_esddf_TablePartRecord record = new test_esddf_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasdf = (Перелічення.Перелічення2)fieldValue["col_a1"];
                 record.ddd = fieldValue["col_a2"].ToString();
                 
@@ -6084,12 +5989,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -6099,14 +5998,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (test_esddf_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.sdfasdf);
                     fieldValue.Add("col_a2", record.ddd);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -6119,29 +6018,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class test_esddf_TablePartRecord : DirectoryTablePartRecord
-    {
-        public test_esddf_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasdf = 0;
-            ddd = "";
+            public Record()
+            {
+                sdfasdf = 0;
+                ddd = "";
+                
+            }
+        
+            
+            public Record(
+                Перелічення.Перелічення2 _sdfasdf = 0, string _ddd = "")
+            {
+                sdfasdf = _sdfasdf;
+                ddd = _ddd;
+                
+            }
+            public Перелічення.Перелічення2 sdfasdf { get; set; }
+            public string ddd { get; set; }
             
         }
-        
-        
-        public test_esddf_TablePartRecord(
-            Перелічення.Перелічення2 _sdfasdf = 0, string _ddd = "")
-        {
-            sdfasdf = _sdfasdf;
-            ddd = _ddd;
-            
-        }
-        public Перелічення.Перелічення2 sdfasdf { get; set; }
-        public string ddd { get; set; }
-        
     }
       
     class test_werw_TablePart : DirectoryTablePart
@@ -6152,12 +6051,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<test_werw_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public test_Objest Owner { get; private set; }
         
-        public List<test_werw_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6166,8 +6065,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                test_werw_TablePartRecord record = new test_werw_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.werwe = fieldValue["col_a4"].ToString();
                 record.www = fieldValue["col_a1"].ToString();
                 
@@ -6177,12 +6077,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -6192,14 +6086,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (test_werw_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a4", record.werwe);
                     fieldValue.Add("col_a1", record.www);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -6212,29 +6106,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class test_werw_TablePartRecord : DirectoryTablePartRecord
-    {
-        public test_werw_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            werwe = "";
-            www = "";
+            public Record()
+            {
+                werwe = "";
+                www = "";
+                
+            }
+        
+            
+            public Record(
+                string _werwe = "", string _www = "")
+            {
+                werwe = _werwe;
+                www = _www;
+                
+            }
+            public string werwe { get; set; }
+            public string www { get; set; }
             
         }
-        
-        
-        public test_werw_TablePartRecord(
-            string _werwe = "", string _www = "")
-        {
-            werwe = _werwe;
-            www = _www;
-            
-        }
-        public string werwe { get; set; }
-        public string www { get; set; }
-        
     }
       
     class test_dafsd_TablePart : DirectoryTablePart
@@ -6245,12 +6139,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<test_dafsd_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public test_Objest Owner { get; private set; }
         
-        public List<test_dafsd_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6259,8 +6153,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                test_dafsd_TablePartRecord record = new test_dafsd_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasdfa = fieldValue["col_a1"].ToString();
                 
                 Records.Add(record);
@@ -6269,12 +6164,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -6284,13 +6173,13 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (test_dafsd_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.sdfasdfa);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -6303,26 +6192,26 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class test_dafsd_TablePartRecord : DirectoryTablePartRecord
-    {
-        public test_dafsd_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasdfa = "";
+            public Record()
+            {
+                sdfasdfa = "";
+                
+            }
+        
+            
+            public Record(
+                string _sdfasdfa = "")
+            {
+                sdfasdfa = _sdfasdfa;
+                
+            }
+            public string sdfasdfa { get; set; }
             
         }
-        
-        
-        public test_dafsd_TablePartRecord(
-            string _sdfasdfa = "")
-        {
-            sdfasdfa = _sdfasdfa;
-            
-        }
-        public string sdfasdfa { get; set; }
-        
     }
       
     class test_sdfasd_TablePart : DirectoryTablePart
@@ -6333,12 +6222,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<test_sdfasd_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public test_Objest Owner { get; private set; }
         
-        public List<test_sdfasd_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6347,8 +6236,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                test_sdfasd_TablePartRecord record = new test_sdfasd_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasdfa = fieldValue["col_a1"].ToString();
                 record.sdfasd = new Довідники.Категории_Pointer(fieldValue["col_a2"]);
                 
@@ -6358,12 +6248,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -6373,14 +6257,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (test_sdfasd_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.sdfasdfa);
                     fieldValue.Add("col_a2", record.sdfasd.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -6393,29 +6277,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class test_sdfasd_TablePartRecord : DirectoryTablePartRecord
-    {
-        public test_sdfasd_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasdfa = "";
-            sdfasd = new Довідники.Категории_Pointer();
+            public Record()
+            {
+                sdfasdfa = "";
+                sdfasd = new Довідники.Категории_Pointer();
+                
+            }
+        
+            
+            public Record(
+                string _sdfasdfa = "", Довідники.Категории_Pointer _sdfasd = null)
+            {
+                sdfasdfa = _sdfasdfa;
+                sdfasd = _sdfasd ?? new Довідники.Категории_Pointer();
+                
+            }
+            public string sdfasdfa { get; set; }
+            public Довідники.Категории_Pointer sdfasd { get; set; }
             
         }
-        
-        
-        public test_sdfasd_TablePartRecord(
-            string _sdfasdfa = "", Довідники.Категории_Pointer _sdfasd = null)
-        {
-            sdfasdfa = _sdfasdfa;
-            sdfasd = _sdfasd ?? new Довідники.Категории_Pointer();
-            
-        }
-        public string sdfasdfa { get; set; }
-        public Довідники.Категории_Pointer sdfasd { get; set; }
-        
     }
       ///<summary>
     ///Список.
@@ -6554,12 +6438,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<test2_sdfasdfa_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public test2_Objest Owner { get; private set; }
         
-        public List<test2_sdfasdfa_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6568,8 +6452,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                test2_sdfasdfa_TablePartRecord record = new test2_sdfasdfa_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.fasd = fieldValue["col_a1"].ToString();
                 
                 Records.Add(record);
@@ -6578,12 +6463,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -6593,13 +6472,13 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (test2_sdfasdfa_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.fasd);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -6612,26 +6491,26 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class test2_sdfasdfa_TablePartRecord : DirectoryTablePartRecord
-    {
-        public test2_sdfasdfa_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            fasd = "";
+            public Record()
+            {
+                fasd = "";
+                
+            }
+        
+            
+            public Record(
+                string _fasd = "")
+            {
+                fasd = _fasd;
+                
+            }
+            public string fasd { get; set; }
             
         }
-        
-        
-        public test2_sdfasdfa_TablePartRecord(
-            string _fasd = "")
-        {
-            fasd = _fasd;
-            
-        }
-        public string fasd { get; set; }
-        
     }
       ///<summary>
     ///Список.
@@ -6970,12 +6849,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<ОСТАННІЙ_asdas_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public ОСТАННІЙ_Objest Owner { get; private set; }
         
-        public List<ОСТАННІЙ_asdas_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -6984,8 +6863,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                ОСТАННІЙ_asdas_TablePartRecord record = new ОСТАННІЙ_asdas_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.asdasd = fieldValue["col_a1"].ToString();
                 record.asdasda = fieldValue["col_a2"].ToString();
                 record.asdas = fieldValue["col_a3"].ToString();
@@ -6996,12 +6876,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7011,7 +6885,7 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (ОСТАННІЙ_asdas_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -7019,7 +6893,7 @@ namespace ConfTrade_v1_1.Довідники
                     fieldValue.Add("col_a2", record.asdasda);
                     fieldValue.Add("col_a3", record.asdas);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7032,32 +6906,32 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class ОСТАННІЙ_asdas_TablePartRecord : DirectoryTablePartRecord
-    {
-        public ОСТАННІЙ_asdas_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            asdasd = "";
-            asdasda = "";
-            asdas = "";
+            public Record()
+            {
+                asdasd = "";
+                asdasda = "";
+                asdas = "";
+                
+            }
+        
+            
+            public Record(
+                string _asdasd = "", string _asdasda = "", string _asdas = "")
+            {
+                asdasd = _asdasd;
+                asdasda = _asdasda;
+                asdas = _asdas;
+                
+            }
+            public string asdasd { get; set; }
+            public string asdasda { get; set; }
+            public string asdas { get; set; }
             
         }
-        
-        
-        public ОСТАННІЙ_asdas_TablePartRecord(
-            string _asdasd = "", string _asdasda = "", string _asdas = "")
-        {
-            asdasd = _asdasd;
-            asdasda = _asdasda;
-            asdas = _asdas;
-            
-        }
-        public string asdasd { get; set; }
-        public string asdasda { get; set; }
-        public string asdas { get; set; }
-        
     }
       
     class ОСТАННІЙ_Список_TablePart : DirectoryTablePart
@@ -7068,12 +6942,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<ОСТАННІЙ_Список_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public ОСТАННІЙ_Objest Owner { get; private set; }
         
-        public List<ОСТАННІЙ_Список_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7082,8 +6956,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                ОСТАННІЙ_Список_TablePartRecord record = new ОСТАННІЙ_Список_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Один = (Перелічення.Список)fieldValue["col_a1"];
                 
                 Records.Add(record);
@@ -7092,12 +6967,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7107,13 +6976,13 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (ОСТАННІЙ_Список_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Один);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7126,26 +6995,26 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class ОСТАННІЙ_Список_TablePartRecord : DirectoryTablePartRecord
-    {
-        public ОСТАННІЙ_Список_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Один = 0;
+            public Record()
+            {
+                Один = 0;
+                
+            }
+        
+            
+            public Record(
+                Перелічення.Список _Один = 0)
+            {
+                Один = _Один;
+                
+            }
+            public Перелічення.Список Один { get; set; }
             
         }
-        
-        
-        public ОСТАННІЙ_Список_TablePartRecord(
-            Перелічення.Список _Один = 0)
-        {
-            Один = _Один;
-            
-        }
-        public Перелічення.Список Один { get; set; }
-        
     }
       
     class ОСТАННІЙ_Нова_TablePart : DirectoryTablePart
@@ -7156,12 +7025,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<ОСТАННІЙ_Нова_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public ОСТАННІЙ_Objest Owner { get; private set; }
         
-        public List<ОСТАННІЙ_Нова_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7170,8 +7039,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                ОСТАННІЙ_Нова_TablePartRecord record = new ОСТАННІЙ_Нова_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Поле = fieldValue["col_a1"].ToString();
                 
                 Records.Add(record);
@@ -7180,12 +7050,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7195,13 +7059,13 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (ОСТАННІЙ_Нова_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Поле);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7214,26 +7078,26 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class ОСТАННІЙ_Нова_TablePartRecord : DirectoryTablePartRecord
-    {
-        public ОСТАННІЙ_Нова_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Поле = "";
+            public Record()
+            {
+                Поле = "";
+                
+            }
+        
+            
+            public Record(
+                string _Поле = "")
+            {
+                Поле = _Поле;
+                
+            }
+            public string Поле { get; set; }
             
         }
-        
-        
-        public ОСТАННІЙ_Нова_TablePartRecord(
-            string _Поле = "")
-        {
-            Поле = _Поле;
-            
-        }
-        public string Поле { get; set; }
-        
     }
       
     class ОСТАННІЙ_sdfasdf_TablePart : DirectoryTablePart
@@ -7244,12 +7108,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<ОСТАННІЙ_sdfasdf_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public ОСТАННІЙ_Objest Owner { get; private set; }
         
-        public List<ОСТАННІЙ_sdfasdf_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7258,8 +7122,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                ОСТАННІЙ_sdfasdf_TablePartRecord record = new ОСТАННІЙ_sdfasdf_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasdfasdf = fieldValue["col_a2"].ToString();
                 record.sdfasdfasdsd = (fieldValue["col_a3"] != DBNull.Value) ? (decimal)fieldValue["col_a3"] : 0;
                 record.sdfsd = new Довідники.КатегорииТоваров_Pointer(fieldValue["col_a1"]);
@@ -7270,12 +7135,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7285,7 +7144,7 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (ОСТАННІЙ_sdfasdf_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -7293,7 +7152,7 @@ namespace ConfTrade_v1_1.Довідники
                     fieldValue.Add("col_a3", record.sdfasdfasdsd);
                     fieldValue.Add("col_a1", record.sdfsd.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7306,32 +7165,32 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class ОСТАННІЙ_sdfasdf_TablePartRecord : DirectoryTablePartRecord
-    {
-        public ОСТАННІЙ_sdfasdf_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasdfasdf = "";
-            sdfasdfasdsd = 0;
-            sdfsd = new Довідники.КатегорииТоваров_Pointer();
+            public Record()
+            {
+                sdfasdfasdf = "";
+                sdfasdfasdsd = 0;
+                sdfsd = new Довідники.КатегорииТоваров_Pointer();
+                
+            }
+        
+            
+            public Record(
+                string _sdfasdfasdf = "", decimal _sdfasdfasdsd = 0, Довідники.КатегорииТоваров_Pointer _sdfsd = null)
+            {
+                sdfasdfasdf = _sdfasdfasdf;
+                sdfasdfasdsd = _sdfasdfasdsd;
+                sdfsd = _sdfsd ?? new Довідники.КатегорииТоваров_Pointer();
+                
+            }
+            public string sdfasdfasdf { get; set; }
+            public decimal sdfasdfasdsd { get; set; }
+            public Довідники.КатегорииТоваров_Pointer sdfsd { get; set; }
             
         }
-        
-        
-        public ОСТАННІЙ_sdfasdf_TablePartRecord(
-            string _sdfasdfasdf = "", decimal _sdfasdfasdsd = 0, Довідники.КатегорииТоваров_Pointer _sdfsd = null)
-        {
-            sdfasdfasdf = _sdfasdfasdf;
-            sdfasdfasdsd = _sdfasdfasdsd;
-            sdfsd = _sdfsd ?? new Довідники.КатегорииТоваров_Pointer();
-            
-        }
-        public string sdfasdfasdf { get; set; }
-        public decimal sdfasdfasdsd { get; set; }
-        public Довідники.КатегорииТоваров_Pointer sdfsd { get; set; }
-        
     }
       ///<summary>
     ///Список.
@@ -7474,12 +7333,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<кккк_Товари_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public кккк_Objest Owner { get; private set; }
         
-        public List<кккк_Товари_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7488,8 +7347,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                кккк_Товари_TablePartRecord record = new кккк_Товари_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
                 
                 Records.Add(record);
@@ -7498,12 +7358,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7513,13 +7367,13 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (кккк_Товари_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Товар.ToString());
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7532,26 +7386,26 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class кккк_Товари_TablePartRecord : DirectoryTablePartRecord
-    {
-        public кккк_Товари_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            Товар = new Довідники.Номенклатура_Pointer();
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                
+            }
+        
+            
+            public Record(
+                Довідники.Номенклатура_Pointer _Товар = null)
+            {
+                Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
+                
+            }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
             
         }
-        
-        
-        public кккк_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null)
-        {
-            Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
-            
-        }
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        
     }
       ///<summary>
     ///Список.
@@ -7696,12 +7550,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<sdfasd_as_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public sdfasd_Objest Owner { get; private set; }
         
-        public List<sdfasd_as_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7710,8 +7564,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                sdfasd_as_TablePartRecord record = new sdfasd_as_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasd = fieldValue["col_a3"].ToString();
                 record.dfs = fieldValue["col_a1"].ToString();
                 
@@ -7721,12 +7576,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7736,14 +7585,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (sdfasd_as_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a3", record.sdfasd);
                     fieldValue.Add("col_a1", record.dfs);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7756,29 +7605,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class sdfasd_as_TablePartRecord : DirectoryTablePartRecord
-    {
-        public sdfasd_as_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasd = "";
-            dfs = "";
+            public Record()
+            {
+                sdfasd = "";
+                dfs = "";
+                
+            }
+        
+            
+            public Record(
+                string _sdfasd = "", string _dfs = "")
+            {
+                sdfasd = _sdfasd;
+                dfs = _dfs;
+                
+            }
+            public string sdfasd { get; set; }
+            public string dfs { get; set; }
             
         }
-        
-        
-        public sdfasd_as_TablePartRecord(
-            string _sdfasd = "", string _dfs = "")
-        {
-            sdfasd = _sdfasd;
-            dfs = _dfs;
-            
-        }
-        public string sdfasd { get; set; }
-        public string dfs { get; set; }
-        
     }
       
     class sdfasd_dfasdfa_TablePart : DirectoryTablePart
@@ -7789,12 +7638,12 @@ namespace ConfTrade_v1_1.Довідники
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<sdfasd_dfasdfa_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public sdfasd_Objest Owner { get; private set; }
         
-        public List<sdfasd_dfasdfa_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -7803,8 +7652,9 @@ namespace ConfTrade_v1_1.Довідники
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                sdfasd_dfasdfa_TablePartRecord record = new sdfasd_dfasdfa_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.sdfasdf = fieldValue["col_a1"].ToString();
                 record.sdfasd = fieldValue["col_a2"].ToString();
                 
@@ -7814,12 +7664,6 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -7829,14 +7673,14 @@ namespace ConfTrade_v1_1.Довідники
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (sdfasd_dfasdfa_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.sdfasdf);
                     fieldValue.Add("col_a2", record.sdfasd);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -7849,29 +7693,29 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class sdfasd_dfasdfa_TablePartRecord : DirectoryTablePartRecord
-    {
-        public sdfasd_dfasdfa_TablePartRecord()
+        
+        
+        public class Record : DirectoryTablePartRecord
         {
-            sdfasdf = "";
-            sdfasd = "";
+            public Record()
+            {
+                sdfasdf = "";
+                sdfasd = "";
+                
+            }
+        
+            
+            public Record(
+                string _sdfasdf = "", string _sdfasd = "")
+            {
+                sdfasdf = _sdfasdf;
+                sdfasd = _sdfasd;
+                
+            }
+            public string sdfasdf { get; set; }
+            public string sdfasd { get; set; }
             
         }
-        
-        
-        public sdfasd_dfasdfa_TablePartRecord(
-            string _sdfasdf = "", string _sdfasd = "")
-        {
-            sdfasdf = _sdfasdf;
-            sdfasd = _sdfasd;
-            
-        }
-        public string sdfasdf { get; set; }
-        public string sdfasd { get; set; }
-        
     }
       ///<summary>
     ///Список.
@@ -8067,12 +7911,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Test_werwe_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Test_Objest Owner { get; private set; }
         
-        public List<Test_werwe_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -8081,8 +7925,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Test_werwe_TablePartRecord record = new Test_werwe_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.werwe = fieldValue["col_a5"].ToString();
                 
                 Records.Add(record);
@@ -8091,12 +7936,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -8106,13 +7945,13 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Test_werwe_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a5", record.werwe);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -8125,26 +7964,26 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Test_werwe_TablePartRecord : DocumentTablePartRecord
-    {
-        public Test_werwe_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            werwe = "";
+            public Record()
+            {
+                werwe = "";
+                
+            }
+        
+            
+            public Record(
+                string _werwe = "")
+            {
+                werwe = _werwe;
+                
+            }
+            public string werwe { get; set; }
             
         }
-        
-        
-        public Test_werwe_TablePartRecord(
-            string _werwe = "")
-        {
-            werwe = _werwe;
-            
-        }
-        public string werwe { get; set; }
-        
     }
       
     
@@ -8343,12 +8182,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<РасходнаяНакладная_Товари_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public РасходнаяНакладная_Objest Owner { get; private set; }
         
-        public List<РасходнаяНакладная_Товари_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -8357,8 +8196,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                РасходнаяНакладная_Товари_TablePartRecord record = new РасходнаяНакладная_Товари_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_b1"]);
                 record.Предпочтение = new EmptyPointer();
                 record.Единица = new Довідники.Единици_Pointer(fieldValue["col_b3"]);
@@ -8378,12 +8218,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -8393,7 +8227,7 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (РасходнаяНакладная_Товари_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -8410,7 +8244,7 @@ namespace ConfTrade_v1_1.Документи
                     fieldValue.Add("col_c2", record.СуммаСНДС);
                     fieldValue.Add("col_c3", record.Набор.UnigueID.UGuid);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -8423,59 +8257,59 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class РасходнаяНакладная_Товари_TablePartRecord : DocumentTablePartRecord
-    {
-        public РасходнаяНакладная_Товари_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            Предпочтение = new EmptyPointer();
-            Единица = new Довідники.Единици_Pointer();
-            Количество = 0;
-            Коеффициент = 0;
-            ЦенаБезНДС = 0;
-            ЦенаСНДС = 0;
-            СуммаБезСкидки = 0;
-            СуммаСкидки = 0;
-            СуммаБезНДС = 0;
-            СуммаСНДС = 0;
-            Набор = new Довідники.Номенклатура_Pointer();
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                Предпочтение = new EmptyPointer();
+                Единица = new Довідники.Единици_Pointer();
+                Количество = 0;
+                Коеффициент = 0;
+                ЦенаБезНДС = 0;
+                ЦенаСНДС = 0;
+                СуммаБезСкидки = 0;
+                СуммаСкидки = 0;
+                СуммаБезНДС = 0;
+                СуммаСНДС = 0;
+                Набор = new Довідники.Номенклатура_Pointer();
+                
+            }
+        
+            
+            public Record(
+                Довідники.Номенклатура_Pointer _Товар = null, EmptyPointer _Предпочтение = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ЦенаБезНДС = 0, decimal _ЦенаСНДС = 0, decimal _СуммаБезСкидки = 0, decimal _СуммаСкидки = 0, decimal _СуммаБезНДС = 0, decimal _СуммаСНДС = 0, Довідники.Номенклатура_Pointer _Набор = null)
+            {
+                Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
+                Предпочтение = _Предпочтение ?? new EmptyPointer();
+                Единица = _Единица ?? new Довідники.Единици_Pointer();
+                Количество = _Количество;
+                Коеффициент = _Коеффициент;
+                ЦенаБезНДС = _ЦенаБезНДС;
+                ЦенаСНДС = _ЦенаСНДС;
+                СуммаБезСкидки = _СуммаБезСкидки;
+                СуммаСкидки = _СуммаСкидки;
+                СуммаБезНДС = _СуммаБезНДС;
+                СуммаСНДС = _СуммаСНДС;
+                Набор = _Набор ?? new Довідники.Номенклатура_Pointer();
+                
+            }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public EmptyPointer Предпочтение { get; set; }
+            public Довідники.Единици_Pointer Единица { get; set; }
+            public decimal Количество { get; set; }
+            public decimal Коеффициент { get; set; }
+            public decimal ЦенаБезНДС { get; set; }
+            public decimal ЦенаСНДС { get; set; }
+            public decimal СуммаБезСкидки { get; set; }
+            public decimal СуммаСкидки { get; set; }
+            public decimal СуммаБезНДС { get; set; }
+            public decimal СуммаСНДС { get; set; }
+            public Довідники.Номенклатура_Pointer Набор { get; set; }
             
         }
-        
-        
-        public РасходнаяНакладная_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null, EmptyPointer _Предпочтение = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ЦенаБезНДС = 0, decimal _ЦенаСНДС = 0, decimal _СуммаБезСкидки = 0, decimal _СуммаСкидки = 0, decimal _СуммаБезНДС = 0, decimal _СуммаСНДС = 0, Довідники.Номенклатура_Pointer _Набор = null)
-        {
-            Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
-            Предпочтение = _Предпочтение ?? new EmptyPointer();
-            Единица = _Единица ?? new Довідники.Единици_Pointer();
-            Количество = _Количество;
-            Коеффициент = _Коеффициент;
-            ЦенаБезНДС = _ЦенаБезНДС;
-            ЦенаСНДС = _ЦенаСНДС;
-            СуммаБезСкидки = _СуммаБезСкидки;
-            СуммаСкидки = _СуммаСкидки;
-            СуммаБезНДС = _СуммаБезНДС;
-            СуммаСНДС = _СуммаСНДС;
-            Набор = _Набор ?? new Довідники.Номенклатура_Pointer();
-            
-        }
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        public EmptyPointer Предпочтение { get; set; }
-        public Довідники.Единици_Pointer Единица { get; set; }
-        public decimal Количество { get; set; }
-        public decimal Коеффициент { get; set; }
-        public decimal ЦенаБезНДС { get; set; }
-        public decimal ЦенаСНДС { get; set; }
-        public decimal СуммаБезСкидки { get; set; }
-        public decimal СуммаСкидки { get; set; }
-        public decimal СуммаБезНДС { get; set; }
-        public decimal СуммаСНДС { get; set; }
-        public Довідники.Номенклатура_Pointer Набор { get; set; }
-        
     }
       
     
@@ -8648,12 +8482,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<ПриходнаяНакладная_Товари_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public ПриходнаяНакладная_Objest Owner { get; private set; }
         
-        public List<ПриходнаяНакладная_Товари_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -8662,8 +8496,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                ПриходнаяНакладная_Товари_TablePartRecord record = new ПриходнаяНакладная_Товари_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a2"]);
                 record.Единица = new Довідники.Единици_Pointer(fieldValue["col_a3"]);
                 record.Количество = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
@@ -8679,12 +8514,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -8694,7 +8523,7 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (ПриходнаяНакладная_Товари_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -8707,7 +8536,7 @@ namespace ConfTrade_v1_1.Документи
                     fieldValue.Add("col_a8", record.СуммаБезНДС);
                     fieldValue.Add("col_a9", record.СуммаСНДС);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -8720,47 +8549,47 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class ПриходнаяНакладная_Товари_TablePartRecord : DocumentTablePartRecord
-    {
-        public ПриходнаяНакладная_Товари_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            Единица = new Довідники.Единици_Pointer();
-            Количество = 0;
-            Коеффициент = 0;
-            ЦенаБезНДС = 0;
-            ЦенаСНДС = 0;
-            СуммаБезНДС = 0;
-            СуммаСНДС = 0;
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                Единица = new Довідники.Единици_Pointer();
+                Количество = 0;
+                Коеффициент = 0;
+                ЦенаБезНДС = 0;
+                ЦенаСНДС = 0;
+                СуммаБезНДС = 0;
+                СуммаСНДС = 0;
+                
+            }
+        
+            
+            public Record(
+                Довідники.Номенклатура_Pointer _Товар = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ЦенаБезНДС = 0, decimal _ЦенаСНДС = 0, decimal _СуммаБезНДС = 0, decimal _СуммаСНДС = 0)
+            {
+                Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
+                Единица = _Единица ?? new Довідники.Единици_Pointer();
+                Количество = _Количество;
+                Коеффициент = _Коеффициент;
+                ЦенаБезНДС = _ЦенаБезНДС;
+                ЦенаСНДС = _ЦенаСНДС;
+                СуммаБезНДС = _СуммаБезНДС;
+                СуммаСНДС = _СуммаСНДС;
+                
+            }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.Единици_Pointer Единица { get; set; }
+            public decimal Количество { get; set; }
+            public decimal Коеффициент { get; set; }
+            public decimal ЦенаБезНДС { get; set; }
+            public decimal ЦенаСНДС { get; set; }
+            public decimal СуммаБезНДС { get; set; }
+            public decimal СуммаСНДС { get; set; }
             
         }
-        
-        
-        public ПриходнаяНакладная_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ЦенаБезНДС = 0, decimal _ЦенаСНДС = 0, decimal _СуммаБезНДС = 0, decimal _СуммаСНДС = 0)
-        {
-            Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
-            Единица = _Единица ?? new Довідники.Единици_Pointer();
-            Количество = _Количество;
-            Коеффициент = _Коеффициент;
-            ЦенаБезНДС = _ЦенаБезНДС;
-            ЦенаСНДС = _ЦенаСНДС;
-            СуммаБезНДС = _СуммаБезНДС;
-            СуммаСНДС = _СуммаСНДС;
-            
-        }
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        public Довідники.Единици_Pointer Единица { get; set; }
-        public decimal Количество { get; set; }
-        public decimal Коеффициент { get; set; }
-        public decimal ЦенаБезНДС { get; set; }
-        public decimal ЦенаСНДС { get; set; }
-        public decimal СуммаБезНДС { get; set; }
-        public decimal СуммаСНДС { get; set; }
-        
     }
       
     
@@ -9127,12 +8956,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Инвентаризация_Товари_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Инвентаризация_Objest Owner { get; private set; }
         
-        public List<Инвентаризация_Товари_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -9141,8 +8970,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Инвентаризация_Товари_TablePartRecord record = new Инвентаризация_Товари_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_b5"]);
                 record.Единица = new Довідники.Единици_Pointer(fieldValue["col_b6"]);
                 record.Количество = (fieldValue["col_b7"] != DBNull.Value) ? (decimal)fieldValue["col_b7"] : 0;
@@ -9156,12 +8986,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -9171,7 +8995,7 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Инвентаризация_Товари_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -9182,7 +9006,7 @@ namespace ConfTrade_v1_1.Документи
                     fieldValue.Add("col_b9", record.ИнвКоличество);
                     fieldValue.Add("col_c1", record.Стоимость);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -9195,41 +9019,41 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Инвентаризация_Товари_TablePartRecord : DocumentTablePartRecord
-    {
-        public Инвентаризация_Товари_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            Единица = new Довідники.Единици_Pointer();
-            Количество = 0;
-            Коеффициент = 0;
-            ИнвКоличество = 0;
-            Стоимость = 0;
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                Единица = new Довідники.Единици_Pointer();
+                Количество = 0;
+                Коеффициент = 0;
+                ИнвКоличество = 0;
+                Стоимость = 0;
+                
+            }
+        
+            
+            public Record(
+                Довідники.Номенклатура_Pointer _Товар = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ИнвКоличество = 0, decimal _Стоимость = 0)
+            {
+                Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
+                Единица = _Единица ?? new Довідники.Единици_Pointer();
+                Количество = _Количество;
+                Коеффициент = _Коеффициент;
+                ИнвКоличество = _ИнвКоличество;
+                Стоимость = _Стоимость;
+                
+            }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.Единици_Pointer Единица { get; set; }
+            public decimal Количество { get; set; }
+            public decimal Коеффициент { get; set; }
+            public decimal ИнвКоличество { get; set; }
+            public decimal Стоимость { get; set; }
             
         }
-        
-        
-        public Инвентаризация_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null, Довідники.Единици_Pointer _Единица = null, decimal _Количество = 0, decimal _Коеффициент = 0, decimal _ИнвКоличество = 0, decimal _Стоимость = 0)
-        {
-            Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
-            Единица = _Единица ?? new Довідники.Единици_Pointer();
-            Количество = _Количество;
-            Коеффициент = _Коеффициент;
-            ИнвКоличество = _ИнвКоличество;
-            Стоимость = _Стоимость;
-            
-        }
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        public Довідники.Единици_Pointer Единица { get; set; }
-        public decimal Количество { get; set; }
-        public decimal Коеффициент { get; set; }
-        public decimal ИнвКоличество { get; set; }
-        public decimal Стоимость { get; set; }
-        
     }
       
     
@@ -9394,12 +9218,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Договор_Тест_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Договор_Objest Owner { get; private set; }
         
-        public List<Договор_Тест_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -9408,8 +9232,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Договор_Тест_TablePartRecord record = new Договор_Тест_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Ед = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_a1"]);
                 record.Один = (Перелічення.Список)fieldValue["col_a2"];
                 
@@ -9419,12 +9244,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -9434,14 +9253,14 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Договор_Тест_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
                     fieldValue.Add("col_a1", record.Ед.UnigueID.UGuid);
                     fieldValue.Add("col_a2", record.Один);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -9454,29 +9273,29 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Договор_Тест_TablePartRecord : DocumentTablePartRecord
-    {
-        public Договор_Тест_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            Ед = new Довідники.КлассификаторЕдИзм_Pointer();
-            Один = 0;
+            public Record()
+            {
+                Ед = new Довідники.КлассификаторЕдИзм_Pointer();
+                Один = 0;
+                
+            }
+        
+            
+            public Record(
+                Довідники.КлассификаторЕдИзм_Pointer _Ед = null, Перелічення.Список _Один = 0)
+            {
+                Ед = _Ед ?? new Довідники.КлассификаторЕдИзм_Pointer();
+                Один = _Один;
+                
+            }
+            public Довідники.КлассификаторЕдИзм_Pointer Ед { get; set; }
+            public Перелічення.Список Один { get; set; }
             
         }
-        
-        
-        public Договор_Тест_TablePartRecord(
-            Довідники.КлассификаторЕдИзм_Pointer _Ед = null, Перелічення.Список _Один = 0)
-        {
-            Ед = _Ед ?? new Довідники.КлассификаторЕдИзм_Pointer();
-            Один = _Один;
-            
-        }
-        public Довідники.КлассификаторЕдИзм_Pointer Ед { get; set; }
-        public Перелічення.Список Один { get; set; }
-        
     }
       
     
@@ -9603,12 +9422,12 @@ namespace ConfTrade_v1_1.Документи
             if (owner == null) throw new Exception("owner null");
             
             Owner = owner;
-            Records = new List<Договір2_Товари_TablePartRecord>();
+            Records = new List<Record>();
         }
         
         public Договір2_Objest Owner { get; private set; }
         
-        public List<Договір2_Товари_TablePartRecord> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -9617,8 +9436,9 @@ namespace ConfTrade_v1_1.Документи
 
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Договір2_Товари_TablePartRecord record = new Договір2_Товари_TablePartRecord();
-
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
                 record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a4"]);
                 record.Кво = (fieldValue["col_a1"] != DBNull.Value) ? (int)fieldValue["col_a1"] : 0;
                 record.Ціна = (fieldValue["col_a2"] != DBNull.Value) ? (int)fieldValue["col_a2"] : 0;
@@ -9630,12 +9450,6 @@ namespace ConfTrade_v1_1.Документи
             base.BaseClear();
         }
         
-        /// <summary>
-        /// Зберегти колекцію Records в базу.
-        /// </summary>
-        /// <param name="clear_all_before_save">
-        /// Щоб не очищати всю колекцію в базі перед записом треба поставити clear_all_before_save = false.
-        /// </param>
         public void Save(bool clear_all_before_save /*= true*/) 
         {
             if (Records.Count > 0)
@@ -9645,7 +9459,7 @@ namespace ConfTrade_v1_1.Документи
                 if (clear_all_before_save)
                     base.BaseDelete(Owner.UnigueID);
 
-                foreach (Договір2_Товари_TablePartRecord record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -9654,7 +9468,7 @@ namespace ConfTrade_v1_1.Документи
                     fieldValue.Add("col_a2", record.Ціна);
                     fieldValue.Add("col_a3", record.Сума);
                     
-                    base.BaseSave(Owner.UnigueID, fieldValue);
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -9667,35 +9481,35 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-    }
-    
-    
-    class Договір2_Товари_TablePartRecord : DocumentTablePartRecord
-    {
-        public Договір2_Товари_TablePartRecord()
+        
+        
+        public class Record : DocumentTablePartRecord
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            Кво = 0;
-            Ціна = 0;
-            Сума = 0;
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                Кво = 0;
+                Ціна = 0;
+                Сума = 0;
+                
+            }
+        
+            
+            public Record(
+                Довідники.Номенклатура_Pointer _Товар = null, int _Кво = 0, int _Ціна = 0, decimal _Сума = 0)
+            {
+                Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
+                Кво = _Кво;
+                Ціна = _Ціна;
+                Сума = _Сума;
+                
+            }
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public int Кво { get; set; }
+            public int Ціна { get; set; }
+            public decimal Сума { get; set; }
             
         }
-        
-        
-        public Договір2_Товари_TablePartRecord(
-            Довідники.Номенклатура_Pointer _Товар = null, int _Кво = 0, int _Ціна = 0, decimal _Сума = 0)
-        {
-            Товар = _Товар ?? new Довідники.Номенклатура_Pointer();
-            Кво = _Кво;
-            Ціна = _Ціна;
-            Сума = _Сума;
-            
-        }
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        public int Кво { get; set; }
-        public int Ціна { get; set; }
-        public decimal Сума { get; set; }
-        
     }
       
     
@@ -9719,11 +9533,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public Перший_RecordsSet() : base(Config.Kernel, "register_1",
              new string[] { "col_field0", "col_field12", "col_field13", "col_field11", "col_field1", "col_field2", "col_field3", "col_field4", "col_fiel5", "col_field6", "col_a1" }) 
         {
-            Records = new List<Перший_Record>();
-            Filter = new Перший_Filter();
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public List<Перший_Record> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -9798,8 +9612,10 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Перший_Record record = new Перший_Record();
-
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
                 record.field00 = new Довідники.КлассификаторЕдИзм_Pointer(fieldValue["col_field0"]);
                 record.field12 = (fieldValue["col_field12"] != DBNull.Value) ? (int)fieldValue["col_field12"] : 0;
                 record.field13 = (fieldValue["col_field13"] != DBNull.Value) ? (int[])fieldValue["col_field13"] : new int[] { };
@@ -9827,7 +9643,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (Перший_Record record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -9843,7 +9659,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                     fieldValue.Add("col_field6", record.field6);
                     fieldValue.Add("col_a1", record.Один);
                     
-                    base.BaseSave(fieldValue);
+                    base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -9857,63 +9673,64 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public Перший_Filter Filter { get; set; }
-    }
-    
-    
-    class Перший_Record
-    {
-        public Перший_Record()
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
         {
-            field00 = new Довідники.КлассификаторЕдИзм_Pointer();
-            field12 = 0;
-            field13 = new int[] { };
-            field11 = DateTime.MinValue;
-            field1 = DateTime.MinValue.TimeOfDay;
-            field2 = "";
-            field3 = "";
-            field4 = "";
-            field5 = "";
-            field6 = "";
-            Один = 0;
+            public Record()
+            {
+                field00 = new Довідники.КлассификаторЕдИзм_Pointer();
+                field12 = 0;
+                field13 = new int[] { };
+                field11 = DateTime.MinValue;
+                field1 = DateTime.MinValue.TimeOfDay;
+                field2 = "";
+                field3 = "";
+                field4 = "";
+                field5 = "";
+                field6 = "";
+                Один = 0;
+                
+            }
+        
+            public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
+            public int field12 { get; set; }
+            public int[] field13 { get; set; }
+            public DateTime field11 { get; set; }
+            public TimeSpan field1 { get; set; }
+            public string field2 { get; set; }
+            public string field3 { get; set; }
+            public string field4 { get; set; }
+            public string field5 { get; set; }
+            public string field6 { get; set; }
+            public Перелічення.Список Один { get; set; }
             
         }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 field00 = null;
+                 field12 = null;
+                 field13 = null;
+                 field11 = null;
+                 field1 = null;
+                 field2 = null;
+                 
+            }
         
-        public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
-        public int field12 { get; set; }
-        public int[] field13 { get; set; }
-        public DateTime field11 { get; set; }
-        public TimeSpan field1 { get; set; }
-        public string field2 { get; set; }
-        public string field3 { get; set; }
-        public string field4 { get; set; }
-        public string field5 { get; set; }
-        public string field6 { get; set; }
-        public Перелічення.Список Один { get; set; }
-        
+            public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
+            public int? field12 { get; set; }
+            public int[] field13 { get; set; }
+            public DateTime? field11 { get; set; }
+            public TimeSpan? field1 { get; set; }
+            public string field2 { get; set; }
+            
+        }
     }
     
-    class Перший_Filter
-    {
-        public Перший_Filter()
-        {
-             field00 = null;
-             field12 = null;
-             field13 = null;
-             field11 = null;
-             field1 = null;
-             field2 = null;
-             
-        }
-        
-        public Довідники.КлассификаторЕдИзм_Pointer field00 { get; set; }
-        public int? field12 { get; set; }
-        public int[] field13 { get; set; }
-        public DateTime? field11 { get; set; }
-        public TimeSpan? field1 { get; set; }
-        public string field2 { get; set; }
-        
-    }
     #endregion
   
     #region REGISTER "Другий"
@@ -9924,11 +9741,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public Другий_RecordsSet() : base(Config.Kernel, "register_2",
              new string[] { "col_field1", "col_field2", "col_field3" }) 
         {
-            Records = new List<Другий_Record>();
-            Filter = new Другий_Filter();
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public List<Другий_Record> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -9946,8 +9763,10 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Другий_Record record = new Другий_Record();
-
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
                 record.field1 = fieldValue["col_field1"].ToString();
                 record.field2 = fieldValue["col_field2"].ToString();
                 record.field3 = fieldValue["col_field3"].ToString();
@@ -9967,7 +9786,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (Другий_Record record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -9975,7 +9794,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                     fieldValue.Add("col_field2", record.field2);
                     fieldValue.Add("col_field3", record.field3);
                     
-                    base.BaseSave(fieldValue);
+                    base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -9989,37 +9808,38 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public Другий_Filter Filter { get; set; }
-    }
-    
-    
-    class Другий_Record
-    {
-        public Другий_Record()
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
         {
-            field1 = "";
-            field2 = "";
-            field3 = "";
+            public Record()
+            {
+                field1 = "";
+                field2 = "";
+                field3 = "";
+                
+            }
+        
+            public string field1 { get; set; }
+            public string field2 { get; set; }
+            public string field3 { get; set; }
             
         }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 field1 = null;
+                 
+            }
         
-        public string field1 { get; set; }
-        public string field2 { get; set; }
-        public string field3 { get; set; }
-        
+            public string field1 { get; set; }
+            
+        }
     }
     
-    class Другий_Filter
-    {
-        public Другий_Filter()
-        {
-             field1 = null;
-             
-        }
-        
-        public string field1 { get; set; }
-        
-    }
     #endregion
   
     #region REGISTER "Валюти"
@@ -10030,11 +9850,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         public Валюти_RecordsSet() : base(Config.Kernel, "register_3",
              new string[] { "col1", "col2", "col3", "col4", "col5", "col6", "col_a7", "col_a8", "col_a9", "col_a1", "col_a2" }) 
         {
-            Records = new List<Валюти_Record>();
-            Filter = new Валюти_Filter();
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public List<Валюти_Record> Records { get; set; }
+        public List<Record> Records { get; set; }
         
         public void Read()
         {
@@ -10142,8 +9962,10 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             
             foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
             {
-                Валюти_Record record = new Валюти_Record();
-
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
                 record.zSAdAS = fieldValue["col1"].ToString();
                 record.SDFASDFA = fieldValue["col2"].ToString();
                 record.werwew = fieldValue["col3"].ToString();
@@ -10171,7 +9993,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 if (clear_all_before_save)
                     base.BaseDelete();
 
-                foreach (Валюти_Record record in Records)
+                foreach (Record record in Records)
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -10187,7 +10009,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                     fieldValue.Add("col_a1", record.цйуцу);
                     fieldValue.Add("col_a2", record.івафіваф);
                     
-                    base.BaseSave(fieldValue);
+                    base.BaseSave(record.UID, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -10201,154 +10023,549 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             base.BaseCommitTransaction();
         }
         
-        public Валюти_Filter Filter { get; set; }
-    }
-    
-    
-    class Валюти_Record
-    {
-        public Валюти_Record()
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
         {
-            zSAdAS = "";
-            SDFASDFA = "";
-            werwew = "";
-            s13 = "";
-            s11 = "";
-            s12 = "";
-            sdfsdfasd = "";
-            Склад = new Довідники.МестаХранения_Pointer();
-            Вид = 0;
-            цйуцу = "";
-            івафіваф = "";
+            public Record()
+            {
+                zSAdAS = "";
+                SDFASDFA = "";
+                werwew = "";
+                s13 = "";
+                s11 = "";
+                s12 = "";
+                sdfsdfasd = "";
+                Склад = new Довідники.МестаХранения_Pointer();
+                Вид = 0;
+                цйуцу = "";
+                івафіваф = "";
+                
+            }
+        
+            public string zSAdAS { get; set; }
+            public string SDFASDFA { get; set; }
+            public string werwew { get; set; }
+            public string s13 { get; set; }
+            public string s11 { get; set; }
+            public string s12 { get; set; }
+            public string sdfsdfasd { get; set; }
+            public Довідники.МестаХранения_Pointer Склад { get; set; }
+            public Перелічення.ВидиТоварів Вид { get; set; }
+            public string цйуцу { get; set; }
+            public string івафіваф { get; set; }
             
         }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 zSAdAS = null;
+                 SDFASDFA = null;
+                 werwew = null;
+                 s13 = null;
+                 s11 = null;
+                 s12 = null;
+                 sdfsdfasd = null;
+                 Склад = null;
+                 Вид = null;
+                 
+            }
         
-        public string zSAdAS { get; set; }
-        public string SDFASDFA { get; set; }
-        public string werwew { get; set; }
-        public string s13 { get; set; }
-        public string s11 { get; set; }
-        public string s12 { get; set; }
-        public string sdfsdfasd { get; set; }
-        public Довідники.МестаХранения_Pointer Склад { get; set; }
-        public Перелічення.ВидиТоварів Вид { get; set; }
-        public string цйуцу { get; set; }
-        public string івафіваф { get; set; }
-        
+            public string zSAdAS { get; set; }
+            public string SDFASDFA { get; set; }
+            public string werwew { get; set; }
+            public string s13 { get; set; }
+            public string s11 { get; set; }
+            public string s12 { get; set; }
+            public string sdfsdfasd { get; set; }
+            public Довідники.МестаХранения_Pointer Склад { get; set; }
+            public Перелічення.ВидиТоварів? Вид { get; set; }
+            
+        }
     }
     
-    class Валюти_Filter
-    {
-        public Валюти_Filter()
-        {
-             zSAdAS = null;
-             SDFASDFA = null;
-             werwew = null;
-             s13 = null;
-             s11 = null;
-             s12 = null;
-             sdfsdfasd = null;
-             Склад = null;
-             Вид = null;
-             
-        }
-        
-        public string zSAdAS { get; set; }
-        public string SDFASDFA { get; set; }
-        public string werwew { get; set; }
-        public string s13 { get; set; }
-        public string s11 { get; set; }
-        public string s12 { get; set; }
-        public string sdfsdfasd { get; set; }
-        public Довідники.МестаХранения_Pointer Склад { get; set; }
-        public Перелічення.ВидиТоварів? Вид { get; set; }
-        
-    }
     #endregion
   
 }
 
 namespace ConfTrade_v1_1.РегістриНакопичення
 {
-  
+    
     #region REGISTER "Перший"
     
-    class Перший_Record
+    
+    class Перший_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public Перший_Record()
+        public Перший_RecordsSet() : base(Config.Kernel, "register_4",
+             new string[] { "col_field1", "col_a1", "col_field2", "col_field3", "col_a2" }) 
         {
-            field1 = "";
-            field4 = "";
-            field2 = "";
-            field3 = "";
-            Один = 0;
-            
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public string field1 { get; set; }
-        public string field4 { get; set; }
-        public string field2 { get; set; }
-        public string field3 { get; set; }
-        public Перелічення.Список Один { get; set; }
+        public List<Record> Records { get; set; }
         
+        public void Read()
+        {
+            Records.Clear();
+            
+            bool isExistPreceding = false;
+            if (Filter.field1 != null)
+            {
+                base.BaseFilter.Add(new Where("col_field1", Comparison.EQ, Filter.field1, false));
+                
+                isExistPreceding = true;
+                
+            }
+            
+            if (Filter.field4 != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a1", Comparison.EQ, Filter.field4, false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.field4, false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
+                record.field1 = fieldValue["col_field1"].ToString();
+                record.field4 = fieldValue["col_a1"].ToString();
+                record.field2 = fieldValue["col_field2"].ToString();
+                record.field3 = fieldValue["col_field3"].ToString();
+                record.Один = (Перелічення.Список)fieldValue["col_a2"];
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_field1", record.field1);
+                    fieldValue.Add("col_a1", record.field4);
+                    fieldValue.Add("col_field2", record.field2);
+                    fieldValue.Add("col_field3", record.field3);
+                    fieldValue.Add("col_a2", record.Один);
+                    
+                    base.BaseSave(record.UID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+        
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
+        {
+            public Record()
+            {
+                field1 = "";
+                field4 = "";
+                field2 = "";
+                field3 = "";
+                Один = 0;
+                
+            }
+        
+            public string field1 { get; set; }
+            public string field4 { get; set; }
+            public string field2 { get; set; }
+            public string field3 { get; set; }
+            public Перелічення.Список Один { get; set; }
+            
+        }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 field1 = null;
+                 field4 = null;
+                 
+            }
+        
+            public string field1 { get; set; }
+            public string field4 { get; set; }
+            
+        }
     }
+    
     #endregion
   
     #region REGISTER "Остатки"
     
-    class Остатки_Record
+    
+    class Остатки_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public Остатки_Record()
+        public Остатки_RecordsSet() : base(Config.Kernel, "register_5",
+             new string[] { "col_a1", "col_a4", "col_a3", "col_a6" }) 
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            Склад = new Довідники.МестаХранения_Pointer();
-            Кількість = 0;
-            Договір = new Документи.Договор_Pointer();
-            
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
-        public Довідники.МестаХранения_Pointer Склад { get; set; }
-        public int Кількість { get; set; }
-        public Документи.Договор_Pointer Договір { get; set; }
+        public List<Record> Records { get; set; }
         
+        public void Read()
+        {
+            Records.Clear();
+            
+            bool isExistPreceding = false;
+            if (Filter.Товар != null)
+            {
+                base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.Товар.ToString(), false));
+                
+                isExistPreceding = true;
+                
+            }
+            
+            if (Filter.Склад != null)
+            {
+                if (isExistPreceding)
+                    base.BaseFilter.Add(new Where(Comparison.AND, "col_a4", Comparison.EQ, Filter.Склад.ToString(), false));
+                else
+                {
+                    base.BaseFilter.Add(new Where("col_a4", Comparison.EQ, Filter.Склад.ToString(), false));
+                    isExistPreceding = true; 
+                }
+            }
+            
+
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
+                record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                record.Склад = new Довідники.МестаХранения_Pointer(fieldValue["col_a4"]);
+                record.Кількість = (fieldValue["col_a3"] != DBNull.Value) ? (int)fieldValue["col_a3"] : 0;
+                record.Договір = new Документи.Договор_Pointer(fieldValue["col_a6"]);
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Товар.ToString());
+                    fieldValue.Add("col_a4", record.Склад.ToString());
+                    fieldValue.Add("col_a3", record.Кількість);
+                    fieldValue.Add("col_a6", record.Договір.ToString());
+                    
+                    base.BaseSave(record.UID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+        
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
+        {
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                Склад = new Довідники.МестаХранения_Pointer();
+                Кількість = 0;
+                Договір = new Документи.Договор_Pointer();
+                
+            }
+        
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.МестаХранения_Pointer Склад { get; set; }
+            public int Кількість { get; set; }
+            public Документи.Договор_Pointer Договір { get; set; }
+            
+        }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 Товар = null;
+                 Склад = null;
+                 
+            }
+        
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            public Довідники.МестаХранения_Pointer Склад { get; set; }
+            
+        }
     }
+    
     #endregion
   
     #region REGISTER "Обороти"
+    
     ///<summary>
     ///Обороти.
     ///</summary>
-    class Обороти_Record
+    class Обороти_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public Обороти_Record()
+        public Обороти_RecordsSet() : base(Config.Kernel, "register_6",
+             new string[] { "col_a1" }) 
         {
-            Товар = new Довідники.Номенклатура_Pointer();
-            
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public Довідники.Номенклатура_Pointer Товар { get; set; }
+        public List<Record> Records { get; set; }
         
+        public void Read()
+        {
+            Records.Clear();
+            
+            
+            if (Filter.Товар != null)
+            {
+                base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.Товар.ToString(), false));
+                
+            }
+            
+
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
+                record.Товар = new Довідники.Номенклатура_Pointer(fieldValue["col_a1"]);
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Товар.ToString());
+                    
+                    base.BaseSave(record.UID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+        
+        public SelectFilter Filter { get; set; }
+        
+        ///<summary>
+    ///Обороти.
+    ///</summary>
+        public class Record : RegisterRecord
+        {
+            public Record()
+            {
+                Товар = new Довідники.Номенклатура_Pointer();
+                
+            }
+        
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            
+        }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 Товар = null;
+                 
+            }
+        
+            public Довідники.Номенклатура_Pointer Товар { get; set; }
+            
+        }
     }
+    
     #endregion
   
     #region REGISTER "НДС"
     
-    class НДС_Record
+    
+    class НДС_RecordsSet : RegisterAccumulationRecordsSet
     {
-        public НДС_Record()
+        public НДС_RecordsSet() : base(Config.Kernel, "tab_a63",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
-            Документ = new Документи.РасходнаяНакладная_Pointer();
-            Кво = 0;
-            Коментар = "";
-            
+            Records = new List<Record>();
+            Filter = new SelectFilter();
         }
         
-        public Документи.РасходнаяНакладная_Pointer Документ { get; set; }
-        public decimal Кво { get; set; }
-        public string Коментар { get; set; }
+        public List<Record> Records { get; set; }
         
+        public void Read()
+        {
+            Records.Clear();
+            
+            
+            if (Filter.Документ != null)
+            {
+                base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.Документ.ToString(), false));
+                
+            }
+            
+
+            base.BaseRead();
+            
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                
+                record.UID = (Guid)fieldValue["uid"];
+                  
+                record.Документ = new Документи.РасходнаяНакладная_Pointer(fieldValue["col_a1"]);
+                record.Кво = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
+                record.Коментар = fieldValue["col_a3"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save = true) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.Документ.ToString());
+                    fieldValue.Add("col_a2", record.Кво);
+                    fieldValue.Add("col_a3", record.Коментар);
+                    
+                    base.BaseSave(record.UID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete();
+            base.BaseCommitTransaction();
+        }
+        
+        public SelectFilter Filter { get; set; }
+        
+        
+        public class Record : RegisterRecord
+        {
+            public Record()
+            {
+                Документ = new Документи.РасходнаяНакладная_Pointer();
+                Кво = 0;
+                Коментар = "";
+                
+            }
+        
+            public Документи.РасходнаяНакладная_Pointer Документ { get; set; }
+            public decimal Кво { get; set; }
+            public string Коментар { get; set; }
+            
+        }
+    
+        public class SelectFilter
+        {
+            public SelectFilter()
+            {
+                 Документ = null;
+                 
+            }
+        
+            public Документи.РасходнаяНакладная_Pointer Документ { get; set; }
+            
+        }
     }
+    
     #endregion
   
 }

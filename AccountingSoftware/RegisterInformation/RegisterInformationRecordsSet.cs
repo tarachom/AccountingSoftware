@@ -82,9 +82,10 @@ namespace AccountingSoftware
 			Kernel.DataBase.DeleteRegisterInformationRecords(Table, BaseFilter);
 		}
 
-		protected void BaseSave(Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertRegisterInformationRecords(Table, FieldArray, fieldValue);
+			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Kernel.DataBase.InsertRegisterInformationRecords(recordUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }

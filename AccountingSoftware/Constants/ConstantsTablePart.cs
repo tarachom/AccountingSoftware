@@ -79,9 +79,10 @@ namespace AccountingSoftware
 			Kernel.DataBase.DeleteConstantsTablePartRecords(Table);
 		}
 
-		protected void BaseSave(Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertConstantsTablePartRecords(Table, FieldArray, fieldValue);
+			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Kernel.DataBase.InsertConstantsTablePartRecords(recordUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }

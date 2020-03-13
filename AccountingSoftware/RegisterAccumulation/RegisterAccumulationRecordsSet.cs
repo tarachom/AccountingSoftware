@@ -59,7 +59,7 @@ namespace AccountingSoftware
 		protected void BaseRead()
 		{
 			BaseClear();
-			Kernel.DataBase.SelectRegisterInformationRecords(Table, FieldArray, BaseFilter, FieldValueList);
+			Kernel.DataBase.SelectRegisterAccumulationRecords(Table, FieldArray, BaseFilter, FieldValueList);
 		}
 
 		protected void BaseBeginTransaction()
@@ -79,12 +79,13 @@ namespace AccountingSoftware
 
 		protected void BaseDelete()
 		{
-			Kernel.DataBase.DeleteRegisterInformationRecords(Table, BaseFilter);
+			Kernel.DataBase.DeleteRegisterAccumulationRecords(Table, BaseFilter);
 		}
 
-		protected void BaseSave(Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
-			Kernel.DataBase.InsertRegisterInformationRecords(Table, FieldArray, fieldValue);
+			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Kernel.DataBase.InsertRegisterAccumulationRecords(recordUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }
