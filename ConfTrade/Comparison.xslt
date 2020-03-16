@@ -409,16 +409,21 @@ limitations under the License.
 
         </xsl:when>
         <xsl:otherwise>
-
-          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'enum'">
+          
+          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer' or $SecondConfFieldType = 'enum'">
 
             <!-- Вказівник з копії конфігурації -->
             <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
 
             <!-- Вказівник з конфігурації за умови що типи не відрізняються -->
-            <xsl:variable name="DocumentConfigurationPointer" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable and Type = $SecondConfFieldType]/Pointer" />
+            <xsl:variable name="DocumentConfigurationPointer" select="$DocumentConfigurationFieldNodes
+                                [NameInTable = $SecondConfFieldNameInTable and Type = $SecondConfFieldType]/Pointer" />
 
-            <xsl:if test="$SecondConfFieldPointer != $DocumentConfigurationPointer">
+            <xsl:variable name="DocumentConfigurationType" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable]/Type" />
+            
+            <xsl:if test="($SecondConfFieldPointer != $DocumentConfigurationPointer) or 
+              ($SecondConfFieldType = 'empty_pointer' and $DocumentConfigurationType = 'pointer') or
+              ($SecondConfFieldType = 'pointer' and $DocumentConfigurationType = 'empty_pointer')">
 
               <Control_Table>
                 <Type>
@@ -444,7 +449,7 @@ limitations under the License.
                     <Coincide>clear</Coincide>
 
                     <xsl:choose>
-                      <xsl:when test="$SecondConfFieldType = 'pointer'">
+                      <xsl:when test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer'">
                         <DataTypeCreate>uuid</DataTypeCreate>
                       </xsl:when>
                       <xsl:when test="$SecondConfFieldType = 'enum'">

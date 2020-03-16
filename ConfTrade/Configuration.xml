@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>16.03.2020 21:42:40</DateTimeSave>
+  <DateTimeSave>16.03.2020 22:45:42</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -2853,24 +2853,17 @@
       <Table>test</Table>
       <Desc>
       </Desc>
-      <Fields />
-      <TabularParts>
-        <TablePart>
-          <Name>werweв</Name>
-          <Table>tab_a59</Table>
+      <Fields>
+        <Field>
+          <Name>erwerw</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Единици</Pointer>
           <Desc>
           </Desc>
-          <Fields>
-            <Field>
-              <Name>werweв</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
+        </Field>
+      </Fields>
+      <TabularParts />
     </Document>
     <Document>
       <Name>РасходнаяНакладная</Name>
@@ -4149,6 +4142,13 @@
             <Desc>
             </Desc>
           </Field>
+          <Field>
+            <Name>sdfsdfs</Name>
+            <NameInTable>col_a5</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
         </Fields>
       </PropertyFields>
     </RegisterAccumulation>
@@ -4261,6 +4261,14 @@
             <Name>Коментар</Name>
             <NameInTable>col_a3</NameInTable>
             <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+          <Field>
+            <Name>Додатково</Name>
+            <NameInTable>col_a5</NameInTable>
+            <Type>pointer</Type>
+            <Pointer>Довідники.Прайс_лист</Pointer>
             <Desc>
             </Desc>
           </Field>

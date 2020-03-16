@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 16.03.2020 21:42:09
+ * Дата конфігурації: 16.03.2020 22:45:21
  *
  */
 
@@ -5993,231 +5993,6 @@ namespace ConfTrade_v1_1.Довідники
     
     #endregion
     
-    #region DIRECTORY "sfsdfw2"
-    
-    class sfsdfw2_Objest : DirectoryObject
-    {
-        public sfsdfw2_Objest() : base(Config.Kernel, "tab_a16",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
-        {
-            Назва = "";
-            Код = "";
-            ПовнаНазва = "";
-            
-            //Табличні частини
-            qwqe2_TablePart = new sfsdfw2_qwqe2_TablePart(this);
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_a1"].ToString();
-                Код = base.FieldValue["col_a2"].ToString();
-                ПовнаНазва = base.FieldValue["col_a3"].ToString();
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["col_a1"] = Назва;
-            base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = ПовнаНазва;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public sfsdfw2_Pointer GetDirectoryPointer()
-        {
-            sfsdfw2_Pointer directoryPointer = new sfsdfw2_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public string ПовнаНазва { get; set; }
-        
-        //Табличні частини
-        public sfsdfw2_qwqe2_TablePart qwqe2_TablePart { get; set; }
-        
-    }
-    
-    
-    class sfsdfw2_Pointer : DirectoryPointer
-    {
-        public sfsdfw2_Pointer(object uid = null) : base(Config.Kernel, "tab_a16")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public sfsdfw2_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a16")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public sfsdfw2_Objest GetDirectoryObject()
-        {
-            sfsdfw2_Objest sfsdfw2ObjestItem = new sfsdfw2_Objest();
-            sfsdfw2ObjestItem.Read(base.UnigueID);
-            return sfsdfw2ObjestItem;
-        }
-    }
-    
-    
-    class sfsdfw2_Select : DirectorySelect, IDisposable
-    {
-        public sfsdfw2_Select() : base(Config.Kernel, "tab_a16",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "ПовнаНазва" }) { }
-    
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new sfsdfw2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public sfsdfw2_Pointer Current { get; private set; }
-        
-        public sfsdfw2_Pointer FindByField(string name, object value)
-        {
-            sfsdfw2_Pointer itemPointer = new sfsdfw2_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<sfsdfw2_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<sfsdfw2_Pointer> directoryPointerList = new List<sfsdfw2_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new sfsdfw2_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-    class sfsdfw2_qwqe2_TablePart : DirectoryTablePart
-    {
-        public sfsdfw2_qwqe2_TablePart(sfsdfw2_Objest owner) : base(Config.Kernel, "tab_a47",
-             new string[] { "col_a2", "col_a3", "col_a4" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public sfsdfw2_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.фіваф = fieldValue["col_a2"].ToString();
-                record.івафіваф = fieldValue["col_a3"].ToString();
-                record.івафівафв = fieldValue["col_a4"].ToString();
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a2", record.фіваф);
-                    fieldValue.Add("col_a3", record.івафіваф);
-                    fieldValue.Add("col_a4", record.івафівафв);
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                фіваф = "";
-                івафіваф = "";
-                івафівафв = "";
-                
-            }
-        
-            
-            public Record(
-                string _фіваф = "", string _івафіваф = "", string _івафівафв = "")
-            {
-                фіваф = _фіваф;
-                івафіваф = _івафіваф;
-                івафівафв = _івафівафв;
-                
-            }
-            public string фіваф { get; set; }
-            public string івафіваф { get; set; }
-            public string івафівафв { get; set; }
-            
-        }
-    }
-      ///<summary>
-    ///Список.
-    ///</summary>
-    class sfsdfw2_Список_View : DirectoryView
-    {
-        public sfsdfw2_Список_View() : base(Config.Kernel, "tab_a16", 
-             new string[] { "col_a1", "col_a2" },
-             new string[] { "Назва", "Код" },
-             new string[] { "string", "string" },
-             "Довідники.sfsdfw2_Список")
-        {
-            
-        }
-        
-    }
-      
-    
-    #endregion
-    
 }
 
 namespace ConfTrade_v1_1.Перелічення
@@ -6300,17 +6075,15 @@ namespace ConfTrade_v1_1.Перелічення
 namespace ConfTrade_v1_1.Документи
 {
     
-    #region DOCUMENT "Test"
+    #region DOCUMENT "Testв"
     
     
-    class Test_Objest : DocumentObject
+    class Testв_Objest : DocumentObject
     {
-        public Test_Objest() : base(Config.Kernel, "test",
-             new string[] {  }) 
+        public Testв_Objest() : base(Config.Kernel, "test",
+             new string[] { "col_a1" }) 
         {
-            
-            //Табличні частини
-            werwe_TablePart = new Test_werwe_TablePart(this);
+            erwerw = 0;
             
         }
         
@@ -6318,6 +6091,7 @@ namespace ConfTrade_v1_1.Документи
         {
             if (BaseRead(uid))
             {
+                erwerw = (base.FieldValue["col_a1"] != DBNull.Value) ? (Перелічення.test2)base.FieldValue["col_a1"] : 0;
                 
                 BaseClear();
                 return true;
@@ -6328,6 +6102,7 @@ namespace ConfTrade_v1_1.Документи
         
         public void Save()
         {
+            base.FieldValue["col_a1"] = (int)erwerw;
             
             BaseSave();
         }
@@ -6337,136 +6112,51 @@ namespace ConfTrade_v1_1.Документи
             base.BaseDelete();
         }
         
-        public Test_Pointer GetDocumentPointer()
+        public Testв_Pointer GetDocumentPointer()
         {
-            Test_Pointer directoryPointer = new Test_Pointer(UnigueID.UGuid);
+            Testв_Pointer directoryPointer = new Testв_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
         
-        
-        //Табличні частини
-        public Test_werwe_TablePart werwe_TablePart { get; set; }
+        public Перелічення.test2 erwerw { get; set; }
         
     }
     
     
-    class Test_Pointer : DocumentPointer
+    class Testв_Pointer : DocumentPointer
     {
-        public Test_Pointer(object uid = null) : base(Config.Kernel, "test")
+        public Testв_Pointer(object uid = null) : base(Config.Kernel, "test")
         {
             base.Init(new UnigueID(uid), null);
         }
         
-        public Test_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "test")
+        public Testв_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "test")
         {
             base.Init(uid, fields);
         } 
         
-        public Test_Objest GetDocumentObject()
+        public Testв_Objest GetDocumentObject()
         {
-            Test_Objest TestObjestItem = new Test_Objest();
-            TestObjestItem.Read(base.UnigueID);
-            return TestObjestItem;
+            Testв_Objest TestвObjestItem = new Testв_Objest();
+            TestвObjestItem.Read(base.UnigueID);
+            return TestвObjestItem;
         }
     }
     
     
-    class Test_Select : DocumentSelect, IDisposable
+    class Testв_Select : DocumentSelect, IDisposable
     {
-        public Test_Select() : base(Config.Kernel, "test") { }
+        public Testв_Select() : base(Config.Kernel, "test") { }
         
         public bool Select() { return base.BaseSelect(); }
         
         public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Testв_Pointer(base.DocumentPointerPosition.UnigueID, base.DocumentPointerPosition.Fields); return true; } else { Current = null; return false; } }
         
-        public Test_Pointer Current { get; private set; }
+        public Testв_Pointer Current { get; private set; }
     }
     
-      
-    class Test_werwe_TablePart : DocumentTablePart
-    {
-        public Test_werwe_TablePart(Test_Objest owner) : base(Config.Kernel, "tab_a59",
-             new string[] { "col_a5" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.werwe = fieldValue["col_a5"].ToString();
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a5", record.werwe);
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DocumentTablePartRecord
-        {
-            public Record()
-            {
-                werwe = "";
-                
-            }
-        
-            
-            public Record(
-                string _werwe = "")
-            {
-                werwe = _werwe;
-                
-            }
-            public string werwe { get; set; }
-            
-        }
-    }
       
     
     #endregion
@@ -8582,7 +8272,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
     class Перший_RecordsSet : RegisterAccumulationRecordsSet
     {
         public Перший_RecordsSet() : base(Config.Kernel, "register_4",
-             new string[] { "col_field1", "col_a1", "col_a3", "col_a4", "col_field2", "col_a8", "col_field3", "col_a2" }) 
+             new string[] { "col_field1", "col_a1", "col_a3", "col_a4", "col_field2", "col_a8", "col_field3", "col_a2", "col_a5" }) 
         {
             Records = new List<Record>();
             Filter = new SelectFilter();
@@ -8653,6 +8343,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 record.Сума = (fieldValue["col_a8"] != DBNull.Value) ? (decimal)fieldValue["col_a8"] : 0;
                 record.Коментар = fieldValue["col_field3"].ToString();
                 record.Один = (fieldValue["col_a2"] != DBNull.Value) ? (Перелічення.Список)fieldValue["col_a2"] : 0;
+                record.sdfsdfs = fieldValue["col_a5"].ToString();
                 
                 Records.Add(record);
             }
@@ -8681,6 +8372,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                     fieldValue.Add("col_a8", record.Сума);
                     fieldValue.Add("col_field3", record.Коментар);
                     fieldValue.Add("col_a2", record.Один);
+                    fieldValue.Add("col_a5", record.sdfsdfs);
                     
                     base.BaseSave(record.UID, fieldValue);
                 }
@@ -8711,6 +8403,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 Сума = 0;
                 Коментар = "";
                 Один = 0;
+                sdfsdfs = "";
                 
             }
         
@@ -8722,6 +8415,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
             public decimal Сума { get; set; }
             public string Коментар { get; set; }
             public Перелічення.Список Один { get; set; }
+            public string sdfsdfs { get; set; }
             
         }
     
@@ -8985,7 +8679,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
     class НДС_RecordsSet : RegisterAccumulationRecordsSet
     {
         public НДС_RecordsSet() : base(Config.Kernel, "tab_a63",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a5" }) 
         {
             Records = new List<Record>();
             Filter = new SelectFilter();
@@ -9016,6 +8710,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 record.Документ = new Документи.РасходнаяНакладная_Pointer(fieldValue["col_a1"]);
                 record.Кво = (fieldValue["col_a2"] != DBNull.Value) ? (decimal)fieldValue["col_a2"] : 0;
                 record.Коментар = fieldValue["col_a3"].ToString();
+                record.Додатково = new Довідники.Прайс_лист_Pointer(fieldValue["col_a5"]);
                 
                 Records.Add(record);
             }
@@ -9039,6 +8734,7 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                     fieldValue.Add("col_a1", record.Документ.ToString());
                     fieldValue.Add("col_a2", record.Кво);
                     fieldValue.Add("col_a3", record.Коментар);
+                    fieldValue.Add("col_a5", record.Додатково.ToString());
                     
                     base.BaseSave(record.UID, fieldValue);
                 }
@@ -9064,12 +8760,14 @@ namespace ConfTrade_v1_1.РегістриНакопичення
                 Документ = new Документи.РасходнаяНакладная_Pointer();
                 Кво = 0;
                 Коментар = "";
+                Додатково = new Довідники.Прайс_лист_Pointer();
                 
             }
         
             public Документи.РасходнаяНакладная_Pointer Документ { get; set; }
             public decimal Кво { get; set; }
             public string Коментар { get; set; }
+            public Довідники.Прайс_лист_Pointer Додатково { get; set; }
             
         }
     

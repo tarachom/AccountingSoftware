@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Видалити таблицю sfsdfw2 (tab_a16)</info>
-  <sql>DROP TABLE tab_a16;</sql>
-  <info>Видалити таблицю qwqe2 (tab_a47)</info>
-  <sql>DROP TABLE tab_a47;</sql>
+  <info>Таблиця Testв (test), поле erwerw (col_a1). Перетворити тип даних (integer, int4) -> pointer</info>
+  <info>Заміна колонки! Втрата даних!</info>
+  <sql>BEGIN;</sql>
+  <info> ->  Видалити колонку col_a1 в таблиці test</info>
+  <sql>ALTER TABLE test DROP COLUMN "col_a1";</sql>
+  <info> ->  Додати колонку col_a1 в таблицю test</info>
+  <sql>ALTER TABLE test ADD COLUMN "col_a1" uuid;</sql>
+  <sql>COMMIT;</sql>
 </root>
