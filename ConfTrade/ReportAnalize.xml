@@ -1,2 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <info>Видалити таблицю sfsdfw2 (tab_a16)</info>
+  <sql>DROP TABLE tab_a16;</sql>
+  <info>Видалити таблицю qwqe2 (tab_a47)</info>
+  <sql>DROP TABLE tab_a47;</sql>
+</root>

@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>16.03.2020 19:46:32</DateTimeSave>
+  <DateTimeSave>16.03.2020 21:42:40</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -1641,13 +1641,6 @@
           <Desc>
           </Desc>
         </Field>
-        <Field>
-          <Name>dfsd</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>
-          </Desc>
-        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -2657,46 +2650,6 @@
         </View>
       </Views>
     </Directory>
-    <Directory>
-      <Name>ццйцц</Name>
-      <Table>tab_a16</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-      <Views>
-        <View>
-          <Name>Список</Name>
-          <Table>tab_a16</Table>
-          <Desc>Список</Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Код</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
-            </Field>
-          </Fields>
-        </View>
-      </Views>
-    </Directory>
   </Directories>
   <Enums>
     <Enum>
@@ -2896,20 +2849,20 @@
   </Enums>
   <Documents>
     <Document>
-      <Name>Test</Name>
+      <Name>Testв</Name>
       <Table>test</Table>
       <Desc>
       </Desc>
       <Fields />
       <TabularParts>
         <TablePart>
-          <Name>werwe</Name>
+          <Name>werweв</Name>
           <Table>tab_a59</Table>
           <Desc>
           </Desc>
           <Fields>
             <Field>
-              <Name>werwe</Name>
+              <Name>werweв</Name>
               <NameInTable>col_a5</NameInTable>
               <Type>string</Type>
               <Desc>

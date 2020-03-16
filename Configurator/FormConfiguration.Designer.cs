@@ -109,7 +109,6 @@
 			this.treeConfiguration.Size = new System.Drawing.Size(265, 465);
 			this.treeConfiguration.TabIndex = 0;
 			this.treeConfiguration.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseClick);
-			this.treeConfiguration.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseDoubleClick);
 			// 
 			// imgTreeList
 			// 
@@ -267,33 +266,33 @@
             this.copyDirectoryToolStripMenuItem,
             this.deleteDirectoryToolStripMenuItem});
 			this.contextMenuStripDirectory.Name = "contextMenuStrip1";
-			this.contextMenuStripDirectory.Size = new System.Drawing.Size(181, 114);
+			this.contextMenuStripDirectory.Size = new System.Drawing.Size(151, 92);
 			// 
 			// openDirectoryToolStripMenuItem
 			// 
 			this.openDirectoryToolStripMenuItem.Name = "openDirectoryToolStripMenuItem";
-			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.openDirectoryToolStripMenuItem.Text = "Відкрити";
 			this.openDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryToolStripMenuItem_Click);
 			// 
 			// addNewDirectiryToolStripMenuItem
 			// 
 			this.addNewDirectiryToolStripMenuItem.Name = "addNewDirectiryToolStripMenuItem";
-			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.addNewDirectiryToolStripMenuItem.Text = "Додати новий";
 			this.addNewDirectiryToolStripMenuItem.Click += new System.EventHandler(this.addNewDirectiryToolStripMenuItem_Click);
 			// 
 			// copyDirectoryToolStripMenuItem
 			// 
 			this.copyDirectoryToolStripMenuItem.Name = "copyDirectoryToolStripMenuItem";
-			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.copyDirectoryToolStripMenuItem.Text = "Скопіювати";
 			this.copyDirectoryToolStripMenuItem.Click += new System.EventHandler(this.copyDirectoryToolStripMenuItem_Click);
 			// 
 			// deleteDirectoryToolStripMenuItem
 			// 
 			this.deleteDirectoryToolStripMenuItem.Name = "deleteDirectoryToolStripMenuItem";
-			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
 			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
 			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
 			// 

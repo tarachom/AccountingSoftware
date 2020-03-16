@@ -28,6 +28,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 
 using System.Xml.XPath;
@@ -44,42 +45,7 @@ namespace Configurator
 
 		public Configuration Conf { get; set; }
 
-		//public void SaveConf()
-		//{
-		//	//Save
-		//	Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
-
-		//	//Comparison
-		//	ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
-		//	Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
-
-		//	//Code Generation
-		//	Configuration.Generation(Conf.PathToXmlFileConfiguration,
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
-
-		//	//Аналіз таблиць і полів конфігурації та бази даних
-		//	Configuration.ComparisonGeneration(
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
-
-		//	//Create SQL
-		//	Configuration.ComparisonGeneration(
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
-		//		@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
-
-		//	//Read SQL
-		//	List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
-
-		//	//Execute
-		//	foreach (string sqlText in SqlList)
-		//	{
-		//		Program.Kernel.DataBase.ExecuteSQL(sqlText);
-		//	}
-
-		//}
+		#region LoadTreeConfiguration
 
 		public void LoadConstants(TreeNode rootNode)
 		{
@@ -412,6 +378,16 @@ namespace Configurator
 			registersAccumulationNode.Expand();
 		}
 
+		public void LoadTreeAsync()
+		{
+			if (treeConfiguration.InvokeRequired)
+			{
+				treeConfiguration.Invoke(new Action(LoadTree));
+			}
+		}
+
+		#endregion
+
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
 			Program.Kernel = new Kernel();
@@ -419,8 +395,9 @@ namespace Configurator
 
 			Conf = Program.Kernel.Conf;
 
-			LoadTree();
-			
+			Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
+			thread.Start();
+
 			DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
 			DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
@@ -447,16 +424,12 @@ namespace Configurator
 
 		}
 
-		private void treeConfiguration_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-		{
-			if (e.Node.Tag != null)
-				MessageBox.Show(e.Node.Tag.ToString());
-		}
-
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			Program.Kernel.Close();
 		}
+
+		#region CallBack
 
 		bool CallBack_IsExistConstantsBlock(string name)
 		{
@@ -704,6 +677,8 @@ namespace Configurator
 			LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
 		}
 
+		#endregion
+
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DirectoryForm directoryForm = new DirectoryForm();
@@ -836,7 +811,7 @@ namespace Configurator
 			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
 			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
 			{
-				foreach (ConfigurationConstants constants in block.Constants.Values) 
+				foreach (ConfigurationConstants constants in block.Constants.Values)
 				{
 					string fullName = block.BlockName + "." + constants.Name;
 					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));

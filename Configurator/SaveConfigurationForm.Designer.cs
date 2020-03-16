@@ -48,16 +48,16 @@
 			this.panel2.Controls.Add(this.buttonClose);
 			this.panel2.Controls.Add(this.buttonSave);
 			this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.panel2.Location = new System.Drawing.Point(10, 402);
+			this.panel2.Location = new System.Drawing.Point(10, 509);
 			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(780, 38);
+			this.panel2.Size = new System.Drawing.Size(821, 38);
 			this.panel2.TabIndex = 13;
 			// 
 			// buttonAnalize
 			// 
 			this.buttonAnalize.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonAnalize.ForeColor = System.Drawing.Color.ForestGreen;
-			this.buttonAnalize.Location = new System.Drawing.Point(373, 3);
+			this.buttonAnalize.Location = new System.Drawing.Point(3, 3);
 			this.buttonAnalize.Name = "buttonAnalize";
 			this.buttonAnalize.Size = new System.Drawing.Size(109, 32);
 			this.buttonAnalize.TabIndex = 4;
@@ -69,7 +69,7 @@
 			// 
 			this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.buttonClose.Location = new System.Drawing.Point(668, 3);
+			this.buttonClose.Location = new System.Drawing.Point(709, 3);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(109, 32);
 			this.buttonClose.TabIndex = 3;
@@ -81,7 +81,7 @@
 			// 
 			this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-			this.buttonSave.Location = new System.Drawing.Point(488, 3);
+			this.buttonSave.Location = new System.Drawing.Point(118, 3);
 			this.buttonSave.Name = "buttonSave";
 			this.buttonSave.Size = new System.Drawing.Size(150, 32);
 			this.buttonSave.TabIndex = 2;
@@ -95,19 +95,20 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.panel1.Controls.Add(this.richTextBoxInfo);
-			this.panel1.Location = new System.Drawing.Point(10, 56);
+			this.panel1.Location = new System.Drawing.Point(10, 44);
 			this.panel1.Name = "panel1";
-			this.panel1.Size = new System.Drawing.Size(783, 343);
+			this.panel1.Size = new System.Drawing.Size(824, 462);
 			this.panel1.TabIndex = 14;
 			// 
 			// richTextBoxInfo
 			// 
+			this.richTextBoxInfo.BackColor = System.Drawing.SystemColors.Info;
 			this.richTextBoxInfo.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.richTextBoxInfo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.richTextBoxInfo.Location = new System.Drawing.Point(0, 0);
 			this.richTextBoxInfo.Name = "richTextBoxInfo";
 			this.richTextBoxInfo.ReadOnly = true;
-			this.richTextBoxInfo.Size = new System.Drawing.Size(783, 343);
+			this.richTextBoxInfo.Size = new System.Drawing.Size(824, 462);
 			this.richTextBoxInfo.TabIndex = 0;
 			this.richTextBoxInfo.Text = "";
 			// 
@@ -118,7 +119,7 @@
 			this.panel3.Controls.Add(this.checkBoxReplacement);
 			this.panel3.Location = new System.Drawing.Point(10, 4);
 			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(783, 46);
+			this.panel3.Size = new System.Drawing.Size(824, 34);
 			this.panel3.TabIndex = 15;
 			// 
 			// checkBoxReplacement
@@ -128,17 +129,16 @@
 			this.checkBoxReplacement.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.checkBoxReplacement.Location = new System.Drawing.Point(3, 9);
 			this.checkBoxReplacement.Name = "checkBoxReplacement";
-			this.checkBoxReplacement.Size = new System.Drawing.Size(473, 17);
+			this.checkBoxReplacement.Size = new System.Drawing.Size(308, 17);
 			this.checkBoxReplacement.TabIndex = 0;
-			this.checkBoxReplacement.Text = "Заміщати колонки якщо неможлива реструктуризація. Інакше створення копії колонки." +
-    "";
+			this.checkBoxReplacement.Text = "Заміщати колонки якщо неможлива реструктуризація. ";
 			this.checkBoxReplacement.UseVisualStyleBackColor = true;
 			// 
 			// SaveConfigurationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(841, 557);
 			this.Controls.Add(this.panel3);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
