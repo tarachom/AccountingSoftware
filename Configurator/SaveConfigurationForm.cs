@@ -354,7 +354,7 @@ namespace Configurator
 			else
 				while (nodeSQL.MoveNext())
 				{
-					ApendLine(nodeSQL.Current.Value, "");
+					ApendLine(" - " + nodeSQL.Current.Value, "");
 				}
 
 			buttonSave.Invoke(new Action(() => buttonSave.Enabled = true));
@@ -378,7 +378,7 @@ namespace Configurator
 				foreach (string sqlText in SqlList)
 				{
 					int resultSQL = Program.Kernel.DataBase.ExecuteSQL(sqlText);
-					ApendLine(" -> " + sqlText + " [" + resultSQL.ToString() + "]", "");
+					ApendLine(" --> " + sqlText + " [" + resultSQL.ToString() + "]", "");
 				}
 
 			ApendLine("\n[ Генерування коду ]", "", "\n");

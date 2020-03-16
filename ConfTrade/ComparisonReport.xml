@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>ццц</Name>
-    <Table>tab_a16</Table>
-    <IsExist>yes</IsExist>
-    <Control_Field>
-      <Name>dddx</Name>
-      <NameInTable>col_a4</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <Coincide>clear</Coincide>
-        <DataTypeCreate>integer</DataTypeCreate>
-      </Type>
-    </Control_Field>
-  </Control_Table>
-  <Control_Table>
     <Type>Constants</Type>
     <Name>Константи</Name>
     <Table>tab_constants</Table>
@@ -3033,7 +3018,7 @@
   </Control_Table>
   <Control_Table>
     <Type>Directory</Type>
-    <Name>ццц</Name>
+    <Name>ццйцц</Name>
     <Table>tab_a16</Table>
     <IsExist>yes</IsExist>
     <Control_Field>
@@ -3058,71 +3043,6 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
-    <Control_Field>
-      <Name>dddd</Name>
-      <NameInTable>col_a3</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>pointer</ConfType>
-        <DataType>uuid</DataType>
-        <UdtName>uuid</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_Field>
-      <Name>dddx</Name>
-      <NameInTable>col_a4</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>enum</ConfType>
-        <DataType>integer</DataType>
-        <UdtName>int4</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_TabularParts>
-      <Name>ццц</Name>
-      <Table>tab_a47</Table>
-      <IsExist>yes</IsExist>
-      <Control_Field>
-        <Name>ццц</Name>
-        <NameInTable>col_a3</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>pointer</ConfType>
-          <DataType>uuid</DataType>
-          <UdtName>uuid</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-    </Control_TabularParts>
-    <Control_TabularParts>
-      <Name>eqweq</Name>
-      <Table>tab_a48</Table>
-      <IsExist>yes</IsExist>
-      <Control_Field>
-        <Name>asdasd</Name>
-        <NameInTable>col_a1</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>enum</ConfType>
-          <DataType>integer</DataType>
-          <UdtName>int4</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-      <Control_Field>
-        <Name>qweqw</Name>
-        <NameInTable>col_a2</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>pointer</ConfType>
-          <DataType>uuid</DataType>
-          <UdtName>uuid</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-    </Control_TabularParts>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

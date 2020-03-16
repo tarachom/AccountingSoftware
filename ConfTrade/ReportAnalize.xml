@@ -1,8 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Таблиця ццц (tab_a16), поле dddx (col_a4). </info>
-  <info>Очищення колонки! Втрата даних!</info>
-  <sql>BEGIN;</sql>
-  <sql>UPDATE tab_a16 SET col_a4 = NULL;</sql>
-  <sql>COMMIT;</sql>
-</root>
+<root />

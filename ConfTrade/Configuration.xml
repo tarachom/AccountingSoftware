@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>16.03.2020 18:23:58</DateTimeSave>
+  <DateTimeSave>16.03.2020 19:46:32</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -2658,7 +2658,7 @@
       </Views>
     </Directory>
     <Directory>
-      <Name>ццц</Name>
+      <Name>ццйцц</Name>
       <Table>tab_a16</Table>
       <Desc>
       </Desc>
@@ -2675,65 +2675,8 @@
           <Type>string</Type>
           <Desc>Код</Desc>
         </Field>
-        <Field>
-          <Name>dddd</Name>
-          <NameInTable>col_a3</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Валюти</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>dddx</Name>
-          <NameInTable>col_a4</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Перелічення</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
       </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>ццц</Name>
-          <Table>tab_a47</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>ццц</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.МестаХранения</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>eqweq</Name>
-          <Table>tab_a48</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>asdasd</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення.Перелічення</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>qweqw</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Категории</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
+      <TabularParts />
       <Views>
         <View>
           <Name>Список</Name>
