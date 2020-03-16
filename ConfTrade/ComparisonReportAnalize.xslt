@@ -124,9 +124,10 @@ limitations under the License.
     <xsl:for-each select="$Control_Field">
 
       <xsl:choose>
-        <xsl:when test="IsExist = 'yes'">
+       <xsl:when test="IsExist = 'yes'">
 
-          <xsl:if test="Type/Coincide = 'no'">
+        <xsl:choose>
+          <xsl:when test="Type/Coincide = 'no'">
 
             <info>Таблиця <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>), поле <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/><xsl:text>). </xsl:text>
               <xsl:text>Перетворити тип даних </xsl:text>(<xsl:value-of select="Type/DataType"/>, <xsl:value-of select="Type/UdtName"/>)<xsl:text disable-output-escaping="yes"> -&gt; </xsl:text> <xsl:value-of select="Type/ConfType"/></info>
@@ -619,10 +620,42 @@ limitations under the License.
                 <info>ПОМИЛКА! Не вдалось знайти спосіб реструктуризації для даного типу.</info>
               </xsl:otherwise>
             </xsl:choose>
-          </xsl:if>
 
-        </xsl:when>
-        <xsl:when test="IsExist = 'no'">
+          </xsl:when>
+          <xsl:when test="Type/Coincide = 'clear'">
+            
+            <info>Таблиця <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>), поле <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/><xsl:text>). </xsl:text></info>
+            
+            <xsl:choose>
+              <xsl:when test="$ReplacementColumn = 'yes'">
+                <info>Очищення колонки! Втрата даних!</info>
+                <sql>BEGIN;</sql>
+                <sql>
+                  <xsl:text>UPDATE </xsl:text>
+                  <xsl:value-of select="$TableName"/>
+                  <xsl:text> SET </xsl:text>
+                  <xsl:value-of select="NameInTable"/>
+                  <xsl:text> = NULL;</xsl:text>
+                </sql>
+                <sql>COMMIT;</sql>
+              </xsl:when>
+              <xsl:otherwise>
+                <info>Реструкторизація неможлива, створення копії колонки!</info>
+                <sql>BEGIN;</sql>
+                <xsl:call-template name="Template_CopyColumn">
+                  <xsl:with-param name="TableName" select="$TableName" />
+                  <xsl:with-param name="FieldNameInTable" select="NameInTable" />
+                  <xsl:with-param name="DataTypeCreate" select="Type/DataTypeCreate" />
+                </xsl:call-template>
+                <sql>COMMIT;</sql>
+              </xsl:otherwise>
+            </xsl:choose>
+            
+          </xsl:when>
+        </xsl:choose>
+         
+       </xsl:when>
+       <xsl:when test="IsExist = 'no'">
 
           <xsl:for-each select="FieldCreate">
             <info>Додати колонку <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/>, тип <xsl:value-of select="DataType"/>)  в таблицю <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>)</info>
@@ -639,7 +672,7 @@ limitations under the License.
           </xsl:for-each>
 
         </xsl:when>
-        <xsl:when test="IsExist = 'delete'">
+       <xsl:when test="IsExist = 'delete'">
 
           <info>Видалити колонку <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/>)  в таблиці <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>)</info>
           <sql>

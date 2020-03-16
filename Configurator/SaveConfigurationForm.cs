@@ -185,6 +185,20 @@ namespace Configurator
 					ApendLine("\t Нове Поле: ", nodeFieldName.Value);
 				}
 
+				XPathNodeIterator nodeDirectoryClearField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'yes']/Type[Coincide = 'clear']");
+				if (nodeDirectoryClearField.Count > 0 && flag == false)
+				{
+					XPathNavigator nodeName = nodeDirectoryClearField.Current.SelectSingleNode("Name");
+					XPathNavigator nodeType = nodeDirectoryClearField.Current.SelectSingleNode("Type");
+					ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+					flag = true;
+				}
+				while (nodeDirectoryClearField.MoveNext())
+				{
+					XPathNavigator nodeFieldName = nodeDirectoryClearField.Current.SelectSingleNode("../Name");
+					ApendLine("\t Поле: ", nodeFieldName.Value, " -> змінений тип даних. Можлива втрата даних, або колонка буде скопійована!");
+				}
+
 				XPathNodeIterator nodeDirectoryExistField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'yes']/Type[Coincide = 'no']");
 				if (nodeDirectoryExistField.Count > 0 && flag == false)
 				{

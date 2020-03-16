@@ -367,8 +367,102 @@ limitations under the License.
   </xsl:template>
 
   <xsl:template name="SecondConfigurationFields">
+    <xsl:param name="InfoSchemaTableList" />
+    <xsl:param name="DocumentConfigurationFieldNodes" />
+    <xsl:param name="SecondConfigurationFieldsNodes" />
+    <xsl:param name="Type" />
+    <xsl:param name="Name" />
+    <xsl:param name="TableName" />
 
+    <xsl:for-each select="$SecondConfigurationFieldsNodes">
+      <xsl:variable name="SecondConfFieldName" select="Name" />
+      <xsl:variable name="SecondConfFieldNameInTable" select="NameInTable" />
+      <xsl:variable name="SecondConfFieldType" select="Type" />
 
+      <xsl:variable name="CountField" select="count($DocumentConfigurationFieldNodes[Name = $SecondConfFieldName])" />
+
+      <xsl:choose>
+        <xsl:when test="$CountField = 0">
+
+          <Control_Table>
+            <Type>
+              <xsl:value-of select="$Type"/>
+              <xsl:text>.TablePart</xsl:text>
+            </Type>
+            <Name>
+              <xsl:value-of select="$Name"/>
+            </Name>
+            <Table>
+              <xsl:value-of select="$TableName"/>
+            </Table>
+            <IsExist>yes</IsExist>
+            <Control_Field>
+              <Name>
+                <xsl:value-of select="$SecondConfFieldName"/>
+              </Name>
+              <NameInTable>
+                <xsl:value-of select="$SecondConfFieldNameInTable"/>
+              </NameInTable>
+              <IsExist>delete</IsExist>
+            </Control_Field>
+          </Control_Table>
+
+        </xsl:when>
+        <xsl:otherwise>
+
+          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'enum'">
+
+            <!-- Вказівник з копії конфігурації -->
+            <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
+
+            <!-- Вказівник з конфігурації за умови що типи не відрізняються -->
+            <xsl:variable name="DocumentConfigurationPointer" select="$DocumentConfigurationFieldNodes[Name = $SecondConfFieldName and Type = $SecondConfFieldType]/Pointer" />
+
+            <xsl:if test="$SecondConfFieldPointer != $DocumentConfigurationPointer">
+
+              <Control_Table>
+                <Type>
+                  <xsl:value-of select="$Type"/>
+                  <xsl:text>.TablePart</xsl:text>
+                </Type>
+                <Name>
+                  <xsl:value-of select="$Name"/>
+                </Name>
+                <Table>
+                  <xsl:value-of select="$TableName"/>
+                </Table>
+                <IsExist>yes</IsExist>
+                <Control_Field>
+                  <Name>
+                    <xsl:value-of select="$SecondConfFieldName"/>
+                  </Name>
+                  <NameInTable>
+                    <xsl:value-of select="$SecondConfFieldNameInTable"/>
+                  </NameInTable>
+                  <IsExist>yes</IsExist>
+                  <Type>
+                    <Coincide>clear</Coincide>
+
+                    <xsl:choose>
+                      <xsl:when test="$SecondConfFieldType = 'pointer'">
+                        <DataTypeCreate>uuid</DataTypeCreate>
+                      </xsl:when>
+                      <xsl:when test="$SecondConfFieldType = 'enum'">
+                        <DataTypeCreate>integer</DataTypeCreate>
+                      </xsl:when>
+                    </xsl:choose>
+
+                  </Type>
+                </Control_Field>
+              </Control_Table>
+
+            </xsl:if>
+          </xsl:if>
+
+        </xsl:otherwise>
+      </xsl:choose>
+
+    </xsl:for-each>
 
   </xsl:template>
 
@@ -404,6 +498,20 @@ limitations under the License.
         </Control_Table>
       </xsl:if>
 
+      <xsl:if test="$CountObject = 1">
+
+        <xsl:call-template name="SecondConfigurationFields">
+          <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+          <xsl:with-param name="DocumentConfigurationFieldNodes"
+                          select="$DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/Fields/Field" />
+          <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
+          <xsl:with-param name="Type" select="$Type"/>
+          <xsl:with-param name="Name" select="$SecondConfDirectoryName" />
+          <xsl:with-param name="TableName" select="$SecondConfDirectoryTable" />
+        </xsl:call-template>
+
+      </xsl:if>
+
       <xsl:for-each select="TabularParts/TablePart">
         <xsl:variable name="SecondConfTablePartName" select="Name" />
         <xsl:variable name="SecondConfTablePartTable" select="Table" />
@@ -434,49 +542,16 @@ limitations under the License.
           </xsl:when>
           <xsl:otherwise>
 
-            <xsl:for-each select="Fields/Field">
-              <xsl:variable name="SecondConfFieldName" select="Name" />
-              <xsl:variable name="SecondConfFieldNameInTable" select="NameInTable" />
-
-              <xsl:variable name="CountField" select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
-                           TabularParts/TablePart[Name = $SecondConfTablePartName]/
-                           Fields/Field[Name = $SecondConfFieldName])" />
-
-              <xsl:choose>
-                <xsl:when test="$CountField = 0">
-                  
-                  <Control_Table>
-                    <Type>
-                      <xsl:value-of select="$Type"/>
-                      <xsl:text>.TablePart</xsl:text>
-                    </Type>
-                    <Name>
-                      <xsl:value-of select="$SecondConfTablePartName"/>
-                    </Name>
-                    <Table>
-                      <xsl:value-of select="$SecondConfTablePartTable"/>
-                    </Table>
-                    <IsExist>yes</IsExist>
-                    <Control_Field>
-                      <Name>
-                        <xsl:value-of select="$SecondConfFieldName"/>
-                      </Name>
-                      <NameInTable>
-                        <xsl:value-of select="$SecondConfFieldNameInTable"/>
-                      </NameInTable>
-                      <IsExist>delete</IsExist>
-                    </Control_Field>
-                  </Control_Table>
-                
-                </xsl:when>
-                <xsl:otherwise>
-
-                
-                
-                </xsl:otherwise>
-              </xsl:choose>
-
-            </xsl:for-each>
+            <xsl:call-template name="SecondConfigurationFields">
+              <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+              <xsl:with-param name="DocumentConfigurationFieldNodes"
+                              select="$DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
+                                TabularParts/TablePart[Name = $SecondConfTablePartName]/Fields/Field" />
+              <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
+              <xsl:with-param name="Type" select="$Type"/>
+              <xsl:with-param name="Name" select="$SecondConfTablePartName" />
+              <xsl:with-param name="TableName" select="$SecondConfTablePartTable" />
+            </xsl:call-template>
 
           </xsl:otherwise>
         </xsl:choose>
