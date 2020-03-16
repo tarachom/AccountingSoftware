@@ -747,7 +747,7 @@ namespace Configurator
 					List<string> ListPointers = Conf.SearchForPointers("Довідники." + directoryName);
 					if (ListPointers.Count == 0)
 					{
-						Program.Kernel.DataBase.DeleteConfigurationDirectory(Conf.Directories[directoryName]);
+						//Program.Kernel.DataBase.DeleteConfigurationDirectory(Conf.Directories[directoryName]);
 
 						Conf.Directories.Remove(directoryName);
 						LoadTree();

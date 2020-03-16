@@ -277,7 +277,7 @@ namespace Configurator
 					ApendLine(nodeInfo.Current.Value, "");
 				}
 
-			ApendLine("[ Команди SQL ]", "", "\n");
+			ApendLine("\n[ Команди SQL ]", "", "\n");
 
 			XPathNodeIterator nodeSQL = xPathDocNavigator.Select("/root/sql");
 			if (nodeSQL.Count == 0)

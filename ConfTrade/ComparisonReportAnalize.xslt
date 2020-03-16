@@ -685,6 +685,16 @@ limitations under the License.
             </xsl:for-each>
 
           </xsl:when>
+          <xsl:when test="IsExist = 'delete'">
+
+            <info>Видалити таблицю <xsl:value-of select="$DirectoryName"/> (<xsl:value-of select="$TableName"/>)</info>
+            <sql>
+              <xsl:text>DROP TABLE </xsl:text>
+              <xsl:value-of select="$TableName"/>
+              <xsl:text>;</xsl:text>
+            </sql>
+            
+          </xsl:when>
         </xsl:choose>
 
         <xsl:for-each select="Control_TabularParts">
@@ -729,6 +739,17 @@ limitations under the License.
               </xsl:for-each>
 
             </xsl:when>
+            <xsl:when test="IsExist = 'delete'">
+
+              <info>Видалити таблицю <xsl:value-of select="$DirectoryName"/> (<xsl:value-of select="$TableName"/>)</info>
+              <sql>
+                <xsl:text>DROP TABLE </xsl:text>
+                <xsl:value-of select="$TabularParts_TableName"/>
+                <xsl:text>;</xsl:text>
+              </sql>
+
+            </xsl:when>
+            
           </xsl:choose>
 
         </xsl:for-each>
