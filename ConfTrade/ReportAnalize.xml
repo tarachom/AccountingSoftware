@@ -1,13 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Видалити таблицю ОСТАННІЙ (tab_a50)</info>
-  <sql>DROP TABLE tab_a50;</sql>
-  <info>Видалити таблицю asdas (tab_a51)</info>
-  <sql>DROP TABLE tab_a51;</sql>
-  <info>Видалити таблицю Список (tab_a65)</info>
-  <sql>DROP TABLE tab_a65;</sql>
-  <info>Видалити таблицю Нова (tab_a57)</info>
-  <sql>DROP TABLE tab_a57;</sql>
-  <info>Видалити таблицю sdfasdf (tab_a71)</info>
-  <sql>DROP TABLE tab_a71;</sql>
-</root>
+<root />

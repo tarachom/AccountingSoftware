@@ -377,8 +377,13 @@ limitations under the License.
         <xsl:variable name="CountDirectory"
              select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName])" />
 
-        <xsl:if test="$CountDirectory = 0">
+         <xsl:variable name="CountTableInfoSchema"
+             select="count($InfoSchemaTableList[Name = $SecondConfDirectoryTable])" />
+        
+        <!-- Якщо довідник відсутній в конфігурації, але є наявна таблиця в базі даних -->
+        <xsl:if test="$CountDirectory = 0 and $CountTableInfoSchema = 1">
           <Control_Table>
+            <Type>Directory</Type>
             <Name>
               <xsl:value-of select="$SecondConfDirectoryName"/>
             </Name>
@@ -397,8 +402,13 @@ limitations under the License.
              select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName]/
                            TabularParts/TablePart[Name = $SecondConfTablePartName])" />
 
-          <xsl:if test="$CountDirectoryTablePart = 0 or $CountDirectory = 0">
+          <xsl:variable name="CountTablePartInfoSchema"
+             select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
+          
+          <!-- Якщо таблична частина відсутня або довідник відсутній в конфігурації та є наявна таблиця в базі даних -->
+          <xsl:if test="($CountDirectoryTablePart = 0 or $CountDirectory = 0) and $CountTablePartInfoSchema = 1">
             <Control_Table>
+              <Type>Directory.TablePart</Type>
               <Name>
                 <xsl:value-of select="$SecondConfTablePartName"/>
               </Name>

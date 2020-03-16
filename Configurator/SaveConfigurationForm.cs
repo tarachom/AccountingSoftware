@@ -58,6 +58,8 @@ namespace Configurator
 					return "Константи";
 				case "Directory":
 					return "Довідник";
+				case "Directory.TablePart":
+					return "Довідник.Таблична частина";
 				case "Document":
 					return "Документ";
 				case "RegisterInformation":
@@ -100,6 +102,16 @@ namespace Configurator
 
 			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+			XPathNodeIterator nodeDeleteDirectory = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'delete']");
+			while (nodeDeleteDirectory.MoveNext())
+			{
+				XPathNavigator nodeName = nodeDeleteDirectory.Current.SelectSingleNode("Name");
+				XPathNavigator nodeTable = nodeDeleteDirectory.Current.SelectSingleNode("Table");
+				XPathNavigator nodeType = nodeDeleteDirectory.Current.SelectSingleNode("Type");
+
+				ApendLine("Видалений " + GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+			}
 
 			XPathNodeIterator nodeNewDirectory = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'no']");
 			while (nodeNewDirectory.MoveNext())
