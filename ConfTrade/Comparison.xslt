@@ -366,6 +366,12 @@ limitations under the License.
 
   </xsl:template>
 
+  <xsl:template name="SecondConfigurationFields">
+
+
+
+  </xsl:template>
+
   <xsl:template name="SecondConfiguration">
     <xsl:param name="InfoSchemaTableList" />
     <xsl:param name="DocumentConfigurationNodes" />
@@ -402,29 +408,78 @@ limitations under the License.
         <xsl:variable name="SecondConfTablePartName" select="Name" />
         <xsl:variable name="SecondConfTablePartTable" select="Table" />
 
-        <xsl:variable name="CountDirectoryTablePart"
-           select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
+        <xsl:variable name="CountTablePart" select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
                            TabularParts/TablePart[Name = $SecondConfTablePartName])" />
 
-        <xsl:variable name="CountTablePartInfoSchema"
-           select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
+        <xsl:variable name="CountTablePartInfoSchema" select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
 
-        <!-- Якщо таблична частина відсутня або обєкт відсутній в конфігурації та є наявна таблиця в базі даних -->
-        <xsl:if test="($CountDirectoryTablePart = 0 or $CountObject = 0) and $CountTablePartInfoSchema = 1">
-          <Control_Table>
-            <Type>
-              <xsl:value-of select="$Type"/>
-              <xsl:text>.TablePart</xsl:text>
-            </Type>
-            <Name>
-              <xsl:value-of select="$SecondConfTablePartName"/>
-            </Name>
-            <Table>
-              <xsl:value-of select="$SecondConfTablePartTable"/>
-            </Table>
-            <IsExist>delete</IsExist>
-          </Control_Table>
-        </xsl:if>
+        <xsl:choose>
+
+          <!-- Якщо таблична частина відсутня або обєкт відсутній в конфігурації та є наявна таблиця в базі даних -->
+          <xsl:when test="($CountTablePart = 0 or $CountObject = 0) and $CountTablePartInfoSchema = 1">
+            <Control_Table>
+              <Type>
+                <xsl:value-of select="$Type"/>
+                <xsl:text>.TablePart</xsl:text>
+              </Type>
+              <Name>
+                <xsl:value-of select="$SecondConfTablePartName"/>
+              </Name>
+              <Table>
+                <xsl:value-of select="$SecondConfTablePartTable"/>
+              </Table>
+              <IsExist>delete</IsExist>
+            </Control_Table>
+
+          </xsl:when>
+          <xsl:otherwise>
+
+            <xsl:for-each select="Fields/Field">
+              <xsl:variable name="SecondConfFieldName" select="Name" />
+              <xsl:variable name="SecondConfFieldNameInTable" select="NameInTable" />
+
+              <xsl:variable name="CountField" select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
+                           TabularParts/TablePart[Name = $SecondConfTablePartName]/
+                           Fields/Field[Name = $SecondConfFieldName])" />
+
+              <xsl:choose>
+                <xsl:when test="$CountField = 0">
+                  
+                  <Control_Table>
+                    <Type>
+                      <xsl:value-of select="$Type"/>
+                      <xsl:text>.TablePart</xsl:text>
+                    </Type>
+                    <Name>
+                      <xsl:value-of select="$SecondConfTablePartName"/>
+                    </Name>
+                    <Table>
+                      <xsl:value-of select="$SecondConfTablePartTable"/>
+                    </Table>
+                    <IsExist>yes</IsExist>
+                    <Control_Field>
+                      <Name>
+                        <xsl:value-of select="$SecondConfFieldName"/>
+                      </Name>
+                      <NameInTable>
+                        <xsl:value-of select="$SecondConfFieldNameInTable"/>
+                      </NameInTable>
+                      <IsExist>delete</IsExist>
+                    </Control_Field>
+                  </Control_Table>
+                
+                </xsl:when>
+                <xsl:otherwise>
+
+                
+                
+                </xsl:otherwise>
+              </xsl:choose>
+
+            </xsl:for-each>
+
+          </xsl:otherwise>
+        </xsl:choose>
 
       </xsl:for-each>
 

@@ -1,6 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <Control_Table>
+    <Type>Directory</Type>
+    <Name>sdfs</Name>
+    <Table>tab_a16</Table>
+    <IsExist>delete</IsExist>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>ййй</Name>
+    <Table>tab_a47</Table>
+    <IsExist>delete</IsExist>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>івафіва</Name>
+    <Table>tab_a48</Table>
+    <IsExist>delete</IsExist>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory</Type>
+    <Name>іваіваів</Name>
+    <Table>tab_a49</Table>
+    <IsExist>delete</IsExist>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>вапвап</Name>
+    <Table>tab_a56</Table>
+    <IsExist>delete</IsExist>
+  </Control_Table>
+  <Control_Table>
     <Type>Constants</Type>
     <Name>Константи</Name>
     <Table>tab_constants</Table>
@@ -3015,77 +3045,6 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>sdfs</Name>
-    <Table>tab_a16</Table>
-    <IsExist>yes</IsExist>
-    <Control_Field>
-      <Name>Назва</Name>
-      <NameInTable>col_a1</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_Field>
-      <Name>Код</Name>
-      <NameInTable>col_a2</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_Field>
-      <Name>sdfasd</Name>
-      <NameInTable>col_a3</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_TabularParts>
-      <Name>sdfasd</Name>
-      <Table>tab_a47</Table>
-      <IsExist>yes</IsExist>
-      <Control_Field>
-        <Name>sdfasd</Name>
-        <NameInTable>col_a4</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>string</ConfType>
-          <DataType>text</DataType>
-          <UdtName>text</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-    </Control_TabularParts>
-    <Control_TabularParts>
-      <Name>sasdfa</Name>
-      <Table>tab_a48</Table>
-      <IsExist>yes</IsExist>
-      <Control_Field>
-        <Name>sdfasdfa</Name>
-        <NameInTable>col_a1</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>string</ConfType>
-          <DataType>text</DataType>
-          <UdtName>text</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-    </Control_TabularParts>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

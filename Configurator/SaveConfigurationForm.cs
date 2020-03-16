@@ -157,6 +157,20 @@ namespace Configurator
 			{
 				bool flag = false;
 
+				XPathNodeIterator nodeDirectoryDeleteField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'delete']");
+				if (nodeDirectoryDeleteField.Count > 0)
+				{
+					XPathNavigator nodeName = nodeDirectoryExist.Current.SelectSingleNode("Name");
+					XPathNavigator nodeType = nodeDirectoryExist.Current.SelectSingleNode("Type");
+					ApendLine(GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
+					flag = true;
+				}
+				while (nodeDirectoryDeleteField.MoveNext())
+				{
+					XPathNavigator nodeFieldName = nodeDirectoryDeleteField.Current.SelectSingleNode("Name");
+					ApendLine("\t Видалене Поле: ", nodeFieldName.Value);
+				}
+
 				XPathNodeIterator nodeDirectoryNewField = nodeDirectoryExist.Current.Select("Control_Field[IsExist = 'no']");
 				if (nodeDirectoryNewField.Count > 0)
 				{

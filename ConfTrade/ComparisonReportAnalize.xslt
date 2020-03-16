@@ -639,6 +639,19 @@ limitations under the License.
           </xsl:for-each>
 
         </xsl:when>
+        <xsl:when test="IsExist = 'delete'">
+
+          <info>Видалити колонку <xsl:value-of select="Name"/> (<xsl:value-of select="NameInTable"/>)  в таблиці <xsl:value-of select="$Name"/> (<xsl:value-of select="$TableName"/>)</info>
+          <sql>
+            <xsl:text>ALTER TABLE </xsl:text>
+            <xsl:value-of select="$TableName"/>
+            <xsl:text> DROP COLUMN "</xsl:text>
+            <xsl:value-of select="NameInTable"/>
+            <xsl:text>" </xsl:text>
+            <xsl:text>;</xsl:text>
+          </sql>
+
+        </xsl:when>
       </xsl:choose>
 
     </xsl:for-each>

@@ -1,2 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <info>Видалити таблицю sdfs (tab_a16)</info>
+  <sql>DROP TABLE tab_a16;</sql>
+  <info>Видалити таблицю ййй (tab_a47)</info>
+  <sql>DROP TABLE tab_a47;</sql>
+  <info>Видалити таблицю івафіва (tab_a48)</info>
+  <sql>DROP TABLE tab_a48;</sql>
+  <info>Видалити таблицю іваіваів (tab_a49)</info>
+  <sql>DROP TABLE tab_a49;</sql>
+  <info>Видалити таблицю вапвап (tab_a56)</info>
+  <sql>DROP TABLE tab_a56;</sql>
+</root>
