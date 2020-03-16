@@ -56,16 +56,31 @@ namespace Configurator
 			{
 				case "Constants":
 					return "Константи";
+
 				case "Directory":
 					return "Довідник";
+
 				case "Directory.TablePart":
 					return "Довідник.Таблична частина";
+
 				case "Document":
 					return "Документ";
+
+				case "Document.TablePart":
+					return "Документ.Таблична частина";
+
 				case "RegisterInformation":
 					return "Регістер відомостей";
+
+				case "RegisterInformation.TablePart":
+					return "Регістер відомостей.Таблична частина";
+
 				case "RegisterAccumulation":
 					return "Регістер накопичення";
+
+				case "RegisterAccumulation.TablePart":
+					return "Регістер накопичення.Таблична частина";
+
 				default:
 					return "<Невідомий тип>";
 			}

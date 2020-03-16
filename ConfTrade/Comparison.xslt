@@ -362,6 +362,70 @@ limitations under the License.
 
   </xsl:template>
 
+  <xsl:template name="SecondConfiguration">
+    <xsl:param name="InfoSchemaTableList" />
+    <xsl:param name="DocumentConfigurationNodes" />
+    <xsl:param name="SecondConfigurationNodes" />
+    <xsl:param name="Type" />
+
+    <xsl:for-each select="$SecondConfigurationNodes">
+      <xsl:variable name="SecondConfDirectoryName" select="Name" />
+      <xsl:variable name="SecondConfDirectoryTable" select="Table" />
+
+      <xsl:variable name="CountObject"
+           select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName])" />
+
+      <xsl:variable name="CountTableInfoSchema"
+          select="count($InfoSchemaTableList[Name = $SecondConfDirectoryTable])" />
+
+      <!-- Якщо обєкт відсутній в конфігурації, але є наявна таблиця в базі даних -->
+      <xsl:if test="$CountObject = 0 and $CountTableInfoSchema = 1">
+        <Control_Table>
+          <Type>
+            <xsl:value-of select="$Type"/>
+          </Type>
+          <Name>
+            <xsl:value-of select="$SecondConfDirectoryName"/>
+          </Name>
+          <Table>
+            <xsl:value-of select="$SecondConfDirectoryTable"/>
+          </Table>
+          <IsExist>delete</IsExist>
+        </Control_Table>
+      </xsl:if>
+
+      <xsl:for-each select="TabularParts/TablePart">
+        <xsl:variable name="SecondConfTablePartName" select="Name" />
+        <xsl:variable name="SecondConfTablePartTable" select="Table" />
+
+        <xsl:variable name="CountDirectoryTablePart"
+           select="count($DocumentConfigurationNodes[Name = $SecondConfDirectoryName]/
+                           TabularParts/TablePart[Name = $SecondConfTablePartName])" />
+
+        <xsl:variable name="CountTablePartInfoSchema"
+           select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
+
+        <!-- Якщо таблична частина відсутня або обєкт відсутній в конфігурації та є наявна таблиця в базі даних -->
+        <xsl:if test="($CountDirectoryTablePart = 0 or $CountObject = 0) and $CountTablePartInfoSchema = 1">
+          <Control_Table>
+            <Type>
+              <xsl:value-of select="$Type"/>.TablePart
+            </Type>
+            <Name>
+              <xsl:value-of select="$SecondConfTablePartName"/>
+            </Name>
+            <Table>
+              <xsl:value-of select="$SecondConfTablePartTable"/>
+            </Table>
+            <IsExist>delete</IsExist>
+          </Control_Table>
+        </xsl:if>
+
+      </xsl:for-each>
+
+    </xsl:for-each>
+  </xsl:template>
+
   <xsl:template match="/">
 
     <root>
@@ -370,59 +434,34 @@ limitations under the License.
       <xsl:variable name="documentConfiguration" select="document('Configuration.xml')" />
       <xsl:variable name="documentSecondConfiguration" select="document($SecondConfiguration)" />
 
-      <xsl:for-each select="$documentSecondConfiguration/Configuration/Directories/Directory">
-        <xsl:variable name="SecondConfDirectoryName" select="Name" />
-        <xsl:variable name="SecondConfDirectoryTable" select="Table" />
+      <xsl:call-template name="SecondConfiguration">
+        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/Directories/Directory" />
+        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/Directories/Directory" />
+        <xsl:with-param name="Type">Directory</xsl:with-param>
+      </xsl:call-template>
 
-        <xsl:variable name="CountDirectory"
-             select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName])" />
+      <xsl:call-template name="SecondConfiguration">
+        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/Documents/Document" />
+        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/Documents/Document" />
+        <xsl:with-param name="Type">Document</xsl:with-param>
+      </xsl:call-template>
 
-         <xsl:variable name="CountTableInfoSchema"
-             select="count($InfoSchemaTableList[Name = $SecondConfDirectoryTable])" />
-        
-        <!-- Якщо довідник відсутній в конфігурації, але є наявна таблиця в базі даних -->
-        <xsl:if test="$CountDirectory = 0 and $CountTableInfoSchema = 1">
-          <Control_Table>
-            <Type>Directory</Type>
-            <Name>
-              <xsl:value-of select="$SecondConfDirectoryName"/>
-            </Name>
-            <Table>
-              <xsl:value-of select="$SecondConfDirectoryTable"/>
-            </Table>
-            <IsExist>delete</IsExist>
-          </Control_Table>
-        </xsl:if>
-
-        <xsl:for-each select="TabularParts/TablePart">
-          <xsl:variable name="SecondConfTablePartName" select="Name" />
-          <xsl:variable name="SecondConfTablePartTable" select="Table" />
-
-          <xsl:variable name="CountDirectoryTablePart"
-             select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName]/
-                           TabularParts/TablePart[Name = $SecondConfTablePartName])" />
-
-          <xsl:variable name="CountTablePartInfoSchema"
-             select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
-          
-          <!-- Якщо таблична частина відсутня або довідник відсутній в конфігурації та є наявна таблиця в базі даних -->
-          <xsl:if test="($CountDirectoryTablePart = 0 or $CountDirectory = 0) and $CountTablePartInfoSchema = 1">
-            <Control_Table>
-              <Type>Directory.TablePart</Type>
-              <Name>
-                <xsl:value-of select="$SecondConfTablePartName"/>
-              </Name>
-              <Table>
-                <xsl:value-of select="$SecondConfTablePartTable"/>
-              </Table>
-              <IsExist>delete</IsExist>
-            </Control_Table>
-          </xsl:if>
-
-        </xsl:for-each>
-
-      </xsl:for-each>
-
+      <xsl:call-template name="SecondConfiguration">
+        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersInformation/RegisterInformation" />
+        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersInformation/RegisterInformation" />
+        <xsl:with-param name="Type">RegisterInformation</xsl:with-param>
+      </xsl:call-template>
+      
+      <xsl:call-template name="SecondConfiguration">
+        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
+        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
+        <xsl:with-param name="Type">RegisterAccumulation</xsl:with-param>
+      </xsl:call-template>
+      
       <xsl:for-each select="document('Configuration.xml')/Configuration/ConstantsBlocks">
         <xsl:variable name="ConfObjName">Константи</xsl:variable>
         <xsl:variable name="ConfObjTable">tab_constants</xsl:variable>

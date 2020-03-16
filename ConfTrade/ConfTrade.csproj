@@ -49,7 +49,6 @@
     <Compile Include="CodeGeneration.cs" />
     <Compile Include="ConfTrade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="test_Список.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CodeGeneration.xslt">
@@ -62,7 +61,6 @@
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />
     <Content Include="ReportAnalize.xml" />
-    <Content Include="test_Список.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">

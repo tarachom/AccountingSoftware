@@ -186,7 +186,7 @@ namespace ConfTrade
 
 					Stream output = response.OutputStream;
 
-					string res = Run();
+					string res = ""; // Run();
 
 					//Console.WriteLine(res);
 
