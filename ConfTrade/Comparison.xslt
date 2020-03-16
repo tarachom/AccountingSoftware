@@ -416,8 +416,7 @@ limitations under the License.
             <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
 
             <!-- Вказівник з конфігурації за умови що типи не відрізняються -->
-            <xsl:variable name="DocumentConfigurationPointer" 
-                 select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable and Type = $SecondConfFieldType]/Pointer" />
+            <xsl:variable name="DocumentConfigurationPointer" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable and Type = $SecondConfFieldType]/Pointer" />
 
             <xsl:if test="$SecondConfFieldPointer != $DocumentConfigurationPointer">
 
@@ -503,8 +502,7 @@ limitations under the License.
 
         <xsl:call-template name="SecondConfigurationFields">
           <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
-          <xsl:with-param name="DocumentConfigurationFieldNodes"
-                          select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/Fields/Field" />
+          <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/Fields/Field" />
           <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
           <xsl:with-param name="Type" select="$Type"/>
           <xsl:with-param name="Name" select="$SecondConfDirectoryName" />
@@ -517,9 +515,7 @@ limitations under the License.
         <xsl:variable name="SecondConfTablePartName" select="Name" />
         <xsl:variable name="SecondConfTablePartTable" select="Table" />
 
-        <xsl:variable name="CountTablePart" select="count($DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/
-                           TabularParts/TablePart[Table = $SecondConfTablePartTable])" />
-
+        <xsl:variable name="CountTablePart" select="count($DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/TabularParts/TablePart[Table = $SecondConfTablePartTable])" />
         <xsl:variable name="CountTablePartInfoSchema" select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
 
         <xsl:choose>
@@ -546,9 +542,7 @@ limitations under the License.
 
             <xsl:call-template name="SecondConfigurationFields">
               <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
-              <xsl:with-param name="DocumentConfigurationFieldNodes"
-                              select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/
-                                TabularParts/TablePart[Table = $SecondConfTablePartTable]/Fields/Field" />
+              <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/TabularParts/TablePart[Table = $SecondConfTablePartTable]/Fields/Field" />
               <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
               <xsl:with-param name="Type" select="$Type"/>
               <xsl:with-param name="Name" select="$SecondConfTablePartName" />
