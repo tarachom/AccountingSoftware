@@ -71,6 +71,11 @@ namespace AccountingSoftware
 		public string PathToXmlFileConfiguration { get; set; }
 
 		/// <summary>
+		/// Шлях до копії хмл файлу конфігурації
+		/// </summary>
+		public string PathToCopyXmlFileConfiguration { get; set; } //???
+
+		/// <summary>
 		/// Блоки констант
 		/// </summary>
 		public Dictionary<string, ConfigurationConstantsBlock> ConstantsBlock { get; }
@@ -131,6 +136,8 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region Append
+
 		public void AppendConstants(string blockName, ConfigurationConstants constants)
 		{
 			ConstantsBlock[blockName].Constants.Add(constants.Name, constants);
@@ -186,6 +193,8 @@ namespace AccountingSoftware
 		{
 			RegistersAccumulation.Add(registersAccumulation.Name, registersAccumulation);
 		}
+
+		#endregion
 
 		/// <summary>
 		/// Пошук ссилок довідників і документів
@@ -670,49 +679,7 @@ namespace AccountingSoftware
 			return errorList;
 		}
 
-		/// <summary>
-		/// Зберігає інформацію про схему бази даних в ХМЛ файл
-		/// </summary>
-		/// <param name="InformationSchema">Схема</param>
-		/// <param name="pathToSave">Шлях до файлу</param>
-		public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
-		{
-			XmlDocument xmlComparisonDocument = new XmlDocument();
-			xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
-
-			XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
-			xmlComparisonDocument.AppendChild(nodeInformationSchema);
-
-			foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
-			{
-				XmlElement nodeInformationSchemaTable = xmlComparisonDocument.CreateElement("Table");
-				nodeInformationSchema.AppendChild(nodeInformationSchemaTable);
-
-				XmlElement nodeInformationSchemaTableName = xmlComparisonDocument.CreateElement("Name");
-				nodeInformationSchemaTableName.InnerText = informationSchemaTable.Value.TableName;
-				nodeInformationSchemaTable.AppendChild(nodeInformationSchemaTableName);
-
-				foreach (KeyValuePair<string, ConfigurationInformationSchema_Column> informationSchemaColumn in informationSchemaTable.Value.Columns)
-				{
-					XmlElement nodeInformationSchemaColumn = xmlComparisonDocument.CreateElement("Column");
-					nodeInformationSchemaTable.AppendChild(nodeInformationSchemaColumn);
-
-					XmlElement nodeInformationSchemaColumnName = xmlComparisonDocument.CreateElement("Name");
-					nodeInformationSchemaColumnName.InnerText = informationSchemaColumn.Value.ColumnName;
-					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnName);
-
-					XmlElement nodeInformationSchemaColumnDataType = xmlComparisonDocument.CreateElement("DataType");
-					nodeInformationSchemaColumnDataType.InnerText = informationSchemaColumn.Value.DataType;
-					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnDataType);
-
-					XmlElement nodeInformationSchemaColumnUdtName = xmlComparisonDocument.CreateElement("UdtName");
-					nodeInformationSchemaColumnUdtName.InnerText = informationSchemaColumn.Value.UdtName;
-					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
-				}
-			}
-
-			xmlComparisonDocument.Save(pathToSave);
-		}
+		#region Load
 
 		/// <summary>
 		/// Завантаження конфігурації
@@ -995,15 +962,12 @@ namespace AccountingSoftware
 			}
 		}
 
-		/// <summary>
-		/// Збереження конфігурації
-		/// </summary>
-		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
-		/// <param name="Conf">Конфігурація</param>
+		#endregion
+
+		#region Save
+
 		public static void Save(string pathToConf, Configuration Conf)
 		{
-			//string pathToCopyConf = CopyConfigurationFile(pathToConf);
-
 			XmlDocument xmlConfDocument = new XmlDocument();
 			xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
@@ -1025,8 +989,6 @@ namespace AccountingSoftware
 			SaveRegistersAccumulation(Conf.RegistersAccumulation, xmlConfDocument, rootNode);
 
 			xmlConfDocument.Save(pathToConf);
-
-			//ComparisonCopyAndNewConfigurationFile(pathToConf, pathToCopyConf);
 		}
 
 		private static void SaveConfigurationInfo(Configuration Conf, XmlDocument xmlConfDocument, XmlElement rootNode)
@@ -1428,7 +1390,55 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static string CopyConfigurationFile(string pathToConf) // ??
+		/// <summary>
+		/// Зберігає інформацію про схему бази даних в ХМЛ файл
+		/// </summary>
+		/// <param name="InformationSchema">Схема</param>
+		/// <param name="pathToSave">Шлях до файлу</param>
+		public static void SaveInformationSchema(ConfigurationInformationSchema InformationSchema, string pathToSave)
+		{
+			XmlDocument xmlComparisonDocument = new XmlDocument();
+			xmlComparisonDocument.AppendChild(xmlComparisonDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
+
+			XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
+			xmlComparisonDocument.AppendChild(nodeInformationSchema);
+
+			foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
+			{
+				XmlElement nodeInformationSchemaTable = xmlComparisonDocument.CreateElement("Table");
+				nodeInformationSchema.AppendChild(nodeInformationSchemaTable);
+
+				XmlElement nodeInformationSchemaTableName = xmlComparisonDocument.CreateElement("Name");
+				nodeInformationSchemaTableName.InnerText = informationSchemaTable.Value.TableName;
+				nodeInformationSchemaTable.AppendChild(nodeInformationSchemaTableName);
+
+				foreach (KeyValuePair<string, ConfigurationInformationSchema_Column> informationSchemaColumn in informationSchemaTable.Value.Columns)
+				{
+					XmlElement nodeInformationSchemaColumn = xmlComparisonDocument.CreateElement("Column");
+					nodeInformationSchemaTable.AppendChild(nodeInformationSchemaColumn);
+
+					XmlElement nodeInformationSchemaColumnName = xmlComparisonDocument.CreateElement("Name");
+					nodeInformationSchemaColumnName.InnerText = informationSchemaColumn.Value.ColumnName;
+					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnName);
+
+					XmlElement nodeInformationSchemaColumnDataType = xmlComparisonDocument.CreateElement("DataType");
+					nodeInformationSchemaColumnDataType.InnerText = informationSchemaColumn.Value.DataType;
+					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnDataType);
+
+					XmlElement nodeInformationSchemaColumnUdtName = xmlComparisonDocument.CreateElement("UdtName");
+					nodeInformationSchemaColumnUdtName.InnerText = informationSchemaColumn.Value.UdtName;
+					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
+				}
+			}
+
+			xmlComparisonDocument.Save(pathToSave);
+		}
+
+		#endregion
+
+		#region Comparison
+
+		public static string CreateCopyConfigurationFile(string pathToConf)
 		{
 			if (File.Exists(pathToConf))
 			{
@@ -1438,22 +1448,25 @@ namespace AccountingSoftware
 
 				File.Copy(pathToConf, pathToCopyConf);
 
-				return pathToCopyConf;
+				return fileNewName;
 			}
 			else
 				throw new FileNotFoundException(pathToConf);
 		}
 
-		private static void ComparisonCopyAndNewConfigurationFile(string pathToConf, string pathToCopyConf)
+		/// <summary>
+		/// Порівняти з конфігурацією з файлу
+		/// </summary>
+		/// <param name="pathToConf"></param>
+		private static void CompareToConfigurationFromFile(Configuration Conf, string pathToSecondConf)
 		{
-			//1. Пошук видалених довідників
-			//..
+			Configuration SecondConfiguration = new Configuration();
+			Configuration.Load(pathToSecondConf, SecondConfiguration);
 
-			//2. Видалення в базі таблиць видалених довідників
-			//..
+			foreach (KeyValuePair<string, ConfigurationDirectories> directoryConf in Conf.Directories)
+			{
 
-			//Видалення копії конфігурації
-			File.Delete(pathToCopyConf);
+			}
 		}
 
 		public static void Generation(string pathToConf, string pathToTemplate, string pathToSaveCode)
@@ -1464,14 +1477,17 @@ namespace AccountingSoftware
 			xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
 		}
 
-		public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode)
+		public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveXml, string SecondConfigurationFileName)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);	
+			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);
 
-			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveCode, System.IO.FileMode.Create);
+			XsltArgumentList xsltArgumentList = new XsltArgumentList();
+			xsltArgumentList.AddParam("SecondConfiguration", "", SecondConfigurationFileName);
 
-			xsltCodeGnerator.Transform(pathToXML, null, fileStream);
+			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveXml, System.IO.FileMode.Create);
+			
+			xsltCodeGnerator.Transform(pathToXML, xsltArgumentList, fileStream);
 
 			fileStream.Close();
 		}
@@ -1492,10 +1508,10 @@ namespace AccountingSoftware
 			fileStream.Close();
 		}
 
-		public static void Comparison(string pathToSave, Configuration Conf, ConfigurationInformationSchema InformationSchema)
-		{
+		//public static void Comparison(string pathToSave, Configuration Conf, ConfigurationInformationSchema InformationSchema)
+		//{
 
-		}
+		//}
 
 		public static List<string> ListComparisonSql(string pathToXML)
 		{
@@ -1513,5 +1529,7 @@ namespace AccountingSoftware
 
 			return slqList;
 		}
+
+		#endregion
 	}
 }

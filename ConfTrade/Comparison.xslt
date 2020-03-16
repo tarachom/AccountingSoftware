@@ -26,6 +26,8 @@ limitations under the License.
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
 
+  <xsl:param name="SecondConfiguration" />
+
   <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
   <msxsl:script implements-prefix="utils" language="C#">
     <![CDATA[
@@ -71,7 +73,7 @@ limitations under the License.
               <UdtName>
                 <xsl:value-of select="$InfoSchemaFieldUdtName"/>
               </UdtName>
-              
+
               <xsl:if test="$ConfFieldType = 'string'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'text' and $InfoSchemaFieldUdtName = 'text'">
@@ -191,7 +193,7 @@ limitations under the License.
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:if>
-              
+
               <xsl:if test="$ConfFieldType = 'pointer'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
@@ -232,7 +234,7 @@ limitations under the License.
           </xsl:when>
           <xsl:otherwise>
             <IsExist>no</IsExist>
-            
+
             <xsl:call-template name="FieldCreate">
               <xsl:with-param name="ConfFieldName" select="Name" />
               <xsl:with-param name="ConfFieldNameInTable" select="$ConfFieldName" />
@@ -365,18 +367,63 @@ limitations under the License.
     <root>
 
       <xsl:variable name="InfoSchemaTableList" select="InformationSchema/Table" />
-        
+      <xsl:variable name="documentConfiguration" select="document('Configuration.xml')" />
+      <xsl:variable name="documentSecondConfiguration" select="document($SecondConfiguration)" />
+
+      <xsl:for-each select="$documentSecondConfiguration/Configuration/Directories/Directory">
+        <xsl:variable name="SecondConfDirectoryName" select="Name" />
+        <xsl:variable name="SecondConfDirectoryTable" select="Table" />
+
+        <xsl:variable name="CountDirectory"
+             select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName])" />
+
+        <xsl:if test="$CountDirectory = 0">
+          <Control_Table>
+            <Name>
+              <xsl:value-of select="$SecondConfDirectoryName"/>
+            </Name>
+            <Table>
+              <xsl:value-of select="$SecondConfDirectoryTable"/>
+            </Table>
+            <IsExist>delete</IsExist>
+          </Control_Table>
+        </xsl:if>
+
+        <xsl:for-each select="TabularParts/TablePart">
+          <xsl:variable name="SecondConfTablePartName" select="Name" />
+          <xsl:variable name="SecondConfTablePartTable" select="Table" />
+
+          <xsl:variable name="CountDirectoryTablePart"
+             select="count($documentConfiguration/Configuration/Directories/Directory[Name = $SecondConfDirectoryName]/
+                           TabularParts/TablePart[Name = $SecondConfTablePartName])" />
+
+          <xsl:if test="$CountDirectoryTablePart = 0 or $CountDirectory = 0">
+            <Control_Table>
+              <Name>
+                <xsl:value-of select="$SecondConfTablePartName"/>
+              </Name>
+              <Table>
+                <xsl:value-of select="$SecondConfTablePartTable"/>
+              </Table>
+              <IsExist>delete</IsExist>
+            </Control_Table>
+          </xsl:if>
+
+        </xsl:for-each>
+
+      </xsl:for-each>
+
       <xsl:for-each select="document('Configuration.xml')/Configuration/ConstantsBlocks">
         <xsl:variable name="ConfObjName">Константи</xsl:variable>
         <xsl:variable name="ConfObjTable">tab_constants</xsl:variable>
-        
+
         <Control_Table>
           <Type>Constants</Type>
           <Name>
-              <xsl:value-of select="$ConfObjName"/>
+            <xsl:value-of select="$ConfObjName"/>
           </Name>
           <Table>
-              <xsl:value-of select="$ConfObjTable"/>
+            <xsl:value-of select="$ConfObjTable"/>
           </Table>
 
           <xsl:choose>
@@ -408,18 +455,18 @@ limitations under the License.
           </xsl:choose>
 
           <xsl:for-each select="//ConstantsBlock/Constants/Constant">
-            
+
             <xsl:call-template name="TabularPartsControl">
               <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
               <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
             </xsl:call-template>
-             
+
           </xsl:for-each>
 
         </Control_Table>
 
       </xsl:for-each>
-      
+
       <xsl:for-each select="document('Configuration.xml')/Configuration/Directories/Directory">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
@@ -519,7 +566,7 @@ limitations under the License.
         </Control_Table>
 
       </xsl:for-each>
-    
+
       <xsl:for-each select="document('Configuration.xml')/Configuration/RegistersInformation/RegisterInformation">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
@@ -541,7 +588,7 @@ limitations under the License.
                 <xsl:with-param name="ConfigurationFieldList" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfDirectoryTable]/Column" />
               </xsl:call-template>
-            
+
             </xsl:when>
             <xsl:otherwise>
               <IsExist>no</IsExist>
@@ -564,7 +611,7 @@ limitations under the License.
         </Control_Table>
 
       </xsl:for-each>
-    
+
       <xsl:for-each select="document('Configuration.xml')/Configuration/RegistersAccumulation/RegisterAccumulation">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
@@ -609,7 +656,7 @@ limitations under the License.
         </Control_Table>
 
       </xsl:for-each>
-    
+
     </root>
 
   </xsl:template>

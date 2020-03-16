@@ -3487,9 +3487,9 @@
       <NameInTable>col_b3</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>time</ConfType>
-        <DataType>time without time zone</DataType>
-        <UdtName>time</UdtName>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -3509,9 +3509,20 @@
       <NameInTable>col_b5</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>boolean</ConfType>
-        <DataType>boolean</DataType>
-        <UdtName>bool</UdtName>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>апвіаі</Name>
+      <NameInTable>col_b6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -3584,6 +3595,17 @@
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
+      <Control_Field>
+        <Name>xcvzxc</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
     <Control_TabularParts>
       <Name>sdfasdf</Name>
@@ -3616,9 +3638,9 @@
         <NameInTable>col_a1</NameInTable>
         <IsExist>yes</IsExist>
         <Type>
-          <ConfType>pointer</ConfType>
-          <DataType>uuid</DataType>
-          <UdtName>uuid</UdtName>
+          <ConfType>numeric</ConfType>
+          <DataType>numeric</DataType>
+          <UdtName>numeric</UdtName>
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
@@ -3662,6 +3684,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>dfsdfs</Name>
+      <NameInTable>col_a4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Товари</Name>
       <Table>tab_a56</Table>
@@ -3674,6 +3707,33 @@
           <ConfType>pointer</ConfType>
           <DataType>uuid</DataType>
           <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>sdasd</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>asdfasd</Name>
+      <Table>tab_a75</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>dfasdfad</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
@@ -3771,6 +3831,34 @@
         </Type>
       </Control_Field>
     </Control_TabularParts>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory</Type>
+    <Name>sadfasd</Name>
+    <Table>tab_a74</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>
@@ -5390,9 +5478,9 @@
       <NameInTable>col5</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
+        <ConfType>boolean</ConfType>
+        <DataType>boolean</DataType>
+        <UdtName>bool</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>

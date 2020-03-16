@@ -106,6 +106,7 @@
 			this.richTextBoxInfo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			this.richTextBoxInfo.Location = new System.Drawing.Point(0, 0);
 			this.richTextBoxInfo.Name = "richTextBoxInfo";
+			this.richTextBoxInfo.ReadOnly = true;
 			this.richTextBoxInfo.Size = new System.Drawing.Size(783, 343);
 			this.richTextBoxInfo.TabIndex = 0;
 			this.richTextBoxInfo.Text = "";
