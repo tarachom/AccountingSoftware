@@ -47,7 +47,7 @@
 			this.addNewRegistersInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStripDirectory = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +70,7 @@
 			this.splitContainerBase.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.menuStripTop.SuspendLayout();
-			this.contextMenuStrip1.SuspendLayout();
+			this.contextMenuStripDirectory.SuspendLayout();
 			this.contextMenuStrip2.SuspendLayout();
 			this.contextMenuStripDocument.SuspendLayout();
 			this.contextMenuStripConstantBlock.SuspendLayout();
@@ -259,41 +259,41 @@
 			this.saveConfigurationToolStripMenuItem.Text = "SaveConfiguration";
 			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
-			// contextMenuStrip1
+			// contextMenuStripDirectory
 			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+			this.contextMenuStripDirectory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openDirectoryToolStripMenuItem,
             this.addNewDirectiryToolStripMenuItem,
             this.copyDirectoryToolStripMenuItem,
             this.deleteDirectoryToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(151, 92);
+			this.contextMenuStripDirectory.Name = "contextMenuStrip1";
+			this.contextMenuStripDirectory.Size = new System.Drawing.Size(181, 114);
 			// 
 			// openDirectoryToolStripMenuItem
 			// 
 			this.openDirectoryToolStripMenuItem.Name = "openDirectoryToolStripMenuItem";
-			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.openDirectoryToolStripMenuItem.Text = "Відкрити";
 			this.openDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryToolStripMenuItem_Click);
 			// 
 			// addNewDirectiryToolStripMenuItem
 			// 
 			this.addNewDirectiryToolStripMenuItem.Name = "addNewDirectiryToolStripMenuItem";
-			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.addNewDirectiryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.addNewDirectiryToolStripMenuItem.Text = "Додати новий";
 			this.addNewDirectiryToolStripMenuItem.Click += new System.EventHandler(this.addNewDirectiryToolStripMenuItem_Click);
 			// 
 			// copyDirectoryToolStripMenuItem
 			// 
 			this.copyDirectoryToolStripMenuItem.Name = "copyDirectoryToolStripMenuItem";
-			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.copyDirectoryToolStripMenuItem.Text = "Скопіювати";
 			this.copyDirectoryToolStripMenuItem.Click += new System.EventHandler(this.copyDirectoryToolStripMenuItem_Click);
 			// 
 			// deleteDirectoryToolStripMenuItem
 			// 
 			this.deleteDirectoryToolStripMenuItem.Name = "deleteDirectoryToolStripMenuItem";
-			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+			this.deleteDirectoryToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
 			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
 			// 
@@ -372,12 +372,12 @@
 			this.contextMenuStripRegistersAccumulation.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openItemRegistersAccumulation});
 			this.contextMenuStripRegistersAccumulation.Name = "contextMenuStripRegistersInformation";
-			this.contextMenuStripRegistersAccumulation.Size = new System.Drawing.Size(181, 48);
+			this.contextMenuStripRegistersAccumulation.Size = new System.Drawing.Size(123, 26);
 			// 
 			// openItemRegistersAccumulation
 			// 
 			this.openItemRegistersAccumulation.Name = "openItemRegistersAccumulation";
-			this.openItemRegistersAccumulation.Size = new System.Drawing.Size(180, 22);
+			this.openItemRegistersAccumulation.Size = new System.Drawing.Size(122, 22);
 			this.openItemRegistersAccumulation.Text = "Відкрити";
 			this.openItemRegistersAccumulation.Click += new System.EventHandler(this.openItemRegistersAccumulation_Click);
 			// 
@@ -403,7 +403,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
 			this.menuStripTop.ResumeLayout(false);
 			this.menuStripTop.PerformLayout();
-			this.contextMenuStrip1.ResumeLayout(false);
+			this.contextMenuStripDirectory.ResumeLayout(false);
 			this.contextMenuStrip2.ResumeLayout(false);
 			this.contextMenuStripDocument.ResumeLayout(false);
 			this.contextMenuStripConstantBlock.ResumeLayout(false);
@@ -423,7 +423,7 @@
 		private System.Windows.Forms.MenuStrip menuStripTop;
 		private System.Windows.Forms.ToolStripMenuItem ConfigToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addDirectoryToolStripMenuItem;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripDirectory;
 		private System.Windows.Forms.ToolStripMenuItem openDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addNewDirectiryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem copyDirectoryToolStripMenuItem;

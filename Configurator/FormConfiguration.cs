@@ -111,7 +111,7 @@ namespace Configurator
 			{
 				TreeNode directoryNode = rootNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
 				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
-				directoryNode.ContextMenuStrip = contextMenuStrip1;
+				directoryNode.ContextMenuStrip = contextMenuStripDirectory;
 				directoryNode.SelectedImageIndex = 18;
 				directoryNode.ImageIndex = 18;
 
@@ -747,8 +747,6 @@ namespace Configurator
 					List<string> ListPointers = Conf.SearchForPointers("Довідники." + directoryName);
 					if (ListPointers.Count == 0)
 					{
-						//Program.Kernel.DataBase.DeleteConfigurationDirectory(Conf.Directories[directoryName]);
-
 						Conf.Directories.Remove(directoryName);
 						LoadTree();
 					}

@@ -987,25 +987,25 @@ namespace AccountingSoftware
 			return informationSchema;
 		}
 
-		public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
-		{
-			BeginTransaction();
-			string baseQuery = "DROP TABLE IF EXISTS ";
-			string SqlQuery = baseQuery + configurationDirectory.Table;
+		//public void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory)
+		//{
+		//	BeginTransaction();
+		//	string baseQuery = "DROP TABLE IF EXISTS ";
+		//	string SqlQuery = baseQuery + configurationDirectory.Table;
 
-			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
-			nCommand.ExecuteNonQuery();
+		//	NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
+		//	nCommand.ExecuteNonQuery();
 
-			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts)
-			{
-				SqlQuery = baseQuery + configurationObjectTablePart.Value.Table;
+		//	foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in configurationDirectory.TabularParts)
+		//	{
+		//		SqlQuery = baseQuery + configurationObjectTablePart.Value.Table;
 
-				nCommand = new NpgsqlCommand(SqlQuery, Connection);
-				nCommand.ExecuteNonQuery();
-			}
+		//		nCommand = new NpgsqlCommand(SqlQuery, Connection);
+		//		nCommand.ExecuteNonQuery();
+		//	}
 
-			CommitTransaction();
-		}
+		//	CommitTransaction();
+		//}
 
 		public int ExecuteSQL(string SqlQuery)
 		{

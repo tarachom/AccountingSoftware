@@ -95,7 +95,6 @@ namespace AccountingSoftware
 
 		#endregion
 
-		void DeleteConfigurationDirectory(ConfigurationDirectories configurationDirectory);
 		ConfigurationInformationSchema SelectInformationSchema();
 		bool IfExistsTable(string tableName);
 		bool IfExistsColumn(string tableName, string columnName);

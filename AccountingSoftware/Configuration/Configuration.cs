@@ -76,6 +76,11 @@ namespace AccountingSoftware
 		public string PathToCopyXmlFileConfiguration { get; set; } //???
 
 		/// <summary>
+		/// Шлях до тимчасового хмл файлу конфігурації
+		/// </summary>
+		public string PathToTempXmlFileConfiguration { get; set; } //???
+
+		/// <summary>
 		/// Блоки констант
 		/// </summary>
 		public Dictionary<string, ConfigurationConstantsBlock> ConstantsBlock { get; }
@@ -214,6 +219,16 @@ namespace AccountingSoftware
 				throw new Exception("Назва для пошуку має бути 'Довідники.<Назва довідника>' або 'Документи.<Назва документу>'");
 
 			List<string> ListPointer = new List<string>();
+
+			//Перевірити константи
+			foreach (ConfigurationConstantsBlock constantsBlockItem in ConstantsBlock.Values)
+			{
+				foreach (ConfigurationConstants constantsItem in constantsBlockItem.Constants.Values)
+				{
+					if (constantsItem.Type == "pointer" && constantsItem.Pointer == searchName)
+						ListPointer.Add("Константа (Блок " + constantsBlockItem.BlockName + "): " + constantsItem.Name + "." + constantsItem.Name);
+				}
+			}
 
 			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на цей довідник
 			foreach (ConfigurationDirectories directoryItem in Directories.Values)
@@ -1438,7 +1453,13 @@ namespace AccountingSoftware
 
 		#region Comparison
 
-		public static string CreateCopyConfigurationFile(string pathToConf)
+		/// <summary>
+		/// Функція створює копію конфігурації в тій самій папці що і конфігурація
+		/// </summary>
+		/// <param name="pathToConf">Шлях до конфігурації</param>
+		/// <param name="oldCopyConf">Шлях попередньої копії, якщо така є</param>
+		/// <returns>Назву файлу копії</returns>
+		public static string CreateCopyConfigurationFile(string pathToConf, string oldCopyConf = "")
 		{
 			if (File.Exists(pathToConf))
 			{
@@ -1448,6 +1469,13 @@ namespace AccountingSoftware
 
 				File.Copy(pathToConf, pathToCopyConf);
 
+				if (!String.IsNullOrEmpty(oldCopyConf))
+				{
+					string pathToOldCopyConf = Path.Combine(dirName, oldCopyConf);
+					if (File.Exists(pathToOldCopyConf))
+						File.Delete(pathToOldCopyConf);
+				}
+
 				return fileNewName;
 			}
 			else
@@ -1455,21 +1483,76 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
-		/// Порівняти з конфігурацією з файлу
+		/// Функція створює тимчасовий файл конфігурації
 		/// </summary>
-		/// <param name="pathToConf"></param>
-		private static void CompareToConfigurationFromFile(Configuration Conf, string pathToSecondConf)
+		/// <param name="pathToConf">Шлях до конфігурації</param>
+		/// <param name="oldTempConf">Шлях попередньої копії, якщо така є</param>
+		/// <returns>Шлях до файлу</returns>
+		public static string GetTempPathToConfigurationFile(string pathToConf, string oldTempConf = "")
 		{
-			Configuration SecondConfiguration = new Configuration();
-			Configuration.Load(pathToSecondConf, SecondConfiguration);
-
-			foreach (KeyValuePair<string, ConfigurationDirectories> directoryConf in Conf.Directories)
+			if (File.Exists(pathToConf))
 			{
+				string dirName = Path.GetDirectoryName(pathToConf);
+				string fileTempName = Path.GetFileNameWithoutExtension(pathToConf) + "_tmp_" + Guid.NewGuid().ToString() + ".xml";
+				string pathToTempConf = Path.Combine(dirName, fileTempName);
 
+				if (!String.IsNullOrEmpty(oldTempConf))
+				{
+					if (File.Exists(oldTempConf))
+						File.Delete(oldTempConf);
+				}
+
+				return pathToTempConf;
 			}
+			else
+				throw new FileNotFoundException(pathToConf);
 		}
 
-		public static void Generation(string pathToConf, string pathToTemplate, string pathToSaveCode)
+		/// <summary>
+		/// Функція перезаписує файл конфігурації тичасовим файлом конфи. Також видаляє копію та темп файл.
+		/// </summary>
+		/// <param name="pathToConf"></param>
+		/// <param name="pathToTempConf"></param>
+		/// <param name="pathToCopyConf"></param>
+		public static void RewriteConfigurationFileFromTempFile(string pathToConf, string pathToTempConf, string pathToCopyConf)
+		{
+			if (File.Exists(pathToConf))
+				File.Delete(pathToConf);
+
+			if (File.Exists(pathToTempConf))
+			{
+				File.Copy(pathToTempConf, pathToConf);
+				File.Delete(pathToTempConf);
+			}
+
+			if (File.Exists(pathToCopyConf))
+				File.Delete(pathToCopyConf);
+		}
+
+		/// <summary>
+		/// Функція видаляє тимчасові файли
+		/// </summary>
+		/// <param name="pathToCopyConf"></param>
+		/// <param name="pathToTempConf"></param>
+		public static void ClearCopyAndTempConfigurationFile(string pathToConf, string pathToCopyConf, string pathToTempConf)
+		{
+			string dirName = Path.GetDirectoryName(pathToConf);
+			string pathToOldCopyConf = Path.Combine(dirName, pathToCopyConf);
+
+			if (File.Exists(pathToOldCopyConf))
+				File.Delete(pathToOldCopyConf);
+
+			if (File.Exists(pathToTempConf))
+				File.Delete(pathToTempConf);
+		}
+
+		/// <summary>
+		/// Функція генерує код на основі конфігурації
+		/// </summary>
+		/// <param name="pathToConf"></param>
+		/// <param name="pathToTemplate"></param>
+		/// <param name="pathToSaveCode"></param>
+		public static void GenerationCode(string pathToConf, string pathToTemplate, string pathToSaveCode)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
 			xsltCodeGnerator.Load(pathToTemplate);
@@ -1477,17 +1560,27 @@ namespace AccountingSoftware
 			xsltCodeGnerator.Transform(pathToConf, pathToSaveCode);
 		}
 
-		public static void ComparisonGeneration(string pathToXML, string pathToTemplate, string pathToSaveXml, string SecondConfigurationFileName)
+		/// <summary>
+		/// Функція генерує ХМЛ файл на основі порівняння з базою даних та новою і старою конфігураціями
+		/// </summary>
+		/// <param name="pathToInformationSchemaXML">Шлях до ХМЛ фалу схеми бази даних</param>
+		/// <param name="pathToTemplate">Шлях до шаблону</param>
+		/// <param name="pathToSaveXml">Шлях куди зберігати результати</param>
+		/// <param name="сonfigurationFileName">Назва файлу конфігурації</param>
+		/// <param name="secondConfigurationFileName">Назва попередньої копії конфігурації</param>
+		public static void Comparison(string pathToInformationSchemaXML, string pathToTemplate, string pathToSaveXml,
+			string сonfigurationFileName, string secondConfigurationFileName)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
 			xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(true, true), null);
 
 			XsltArgumentList xsltArgumentList = new XsltArgumentList();
-			xsltArgumentList.AddParam("SecondConfiguration", "", SecondConfigurationFileName);
+			xsltArgumentList.AddParam("Configuration", "", сonfigurationFileName);
+			xsltArgumentList.AddParam("SecondConfiguration", "", secondConfigurationFileName);
 
 			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveXml, System.IO.FileMode.Create);
-			
-			xsltCodeGnerator.Transform(pathToXML, xsltArgumentList, fileStream);
+
+			xsltCodeGnerator.Transform(pathToInformationSchemaXML, xsltArgumentList, fileStream);
 
 			fileStream.Close();
 		}
@@ -1507,11 +1600,6 @@ namespace AccountingSoftware
 
 			fileStream.Close();
 		}
-
-		//public static void Comparison(string pathToSave, Configuration Conf, ConfigurationInformationSchema InformationSchema)
-		//{
-
-		//}
 
 		public static List<string> ListComparisonSql(string pathToXML)
 		{

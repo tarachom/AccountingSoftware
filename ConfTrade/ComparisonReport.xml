@@ -54,9 +54,9 @@
       <NameInTable>const_5</NameInTable>
       <IsExist>yes</IsExist>
       <Type>
-        <ConfType>integer</ConfType>
-        <DataType>integer</DataType>
-        <UdtName>int4</UdtName>
+        <ConfType>empty_pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
@@ -3015,6 +3015,77 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory</Type>
+    <Name>sdfs</Name>
+    <Table>tab_a16</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>sdfasd</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>sdfasd</Name>
+      <Table>tab_a47</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>sdfasd</Name>
+        <NameInTable>col_a4</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>sasdfa</Name>
+      <Table>tab_a48</Table>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>sdfasdfa</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

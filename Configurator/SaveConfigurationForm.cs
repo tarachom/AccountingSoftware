@@ -94,8 +94,11 @@ namespace Configurator
 			Conf.PathToCopyXmlFileConfiguration = Configuration.CreateCopyConfigurationFile(Conf.PathToXmlFileConfiguration);
 			ApendLine(" --> " + Conf.PathToCopyXmlFileConfiguration, "\n");
 
-			ApendLine("2. Збереження конфігурації у файл", "");
-			Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
+			Conf.PathToTempXmlFileConfiguration = Configuration.GetTempPathToConfigurationFile(Conf.PathToXmlFileConfiguration);
+
+			ApendLine("2. Збереження конфігурації у тимчасовий файл", "");
+			Configuration.Save(Conf.PathToTempXmlFileConfiguration, Conf);
+			ApendLine(" --> " + Conf.PathToTempXmlFileConfiguration, "\n");
 
 			ApendLine("3. Отримання структури бази даних", "");
 			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
@@ -104,10 +107,11 @@ namespace Configurator
 			ApendLine("4. Порівняння конфігурації та бази даних", "", "\n");
 			try
 			{
-				Configuration.ComparisonGeneration(
+				Configuration.Comparison(
 					@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
 					@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
 					@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+					Conf.PathToTempXmlFileConfiguration,
 					Conf.PathToCopyXmlFileConfiguration);
 			}
 			catch (Exception ex)
@@ -270,18 +274,26 @@ namespace Configurator
 
 			string replacementColumn = (checkBoxReplacement.Checked ? "yes" : "no");
 
-			//ApendLine("1. Збереження конфігурації у файл", "");
-			//Configuration.Save(Conf.PathToXmlFileConfiguration, Conf);
+			ApendLine("1. Створення копії файлу конфігурації", "");
+			Conf.PathToCopyXmlFileConfiguration = Configuration.CreateCopyConfigurationFile(Conf.PathToXmlFileConfiguration, Conf.PathToCopyXmlFileConfiguration);
+			ApendLine(" --> " + Conf.PathToCopyXmlFileConfiguration, "\n");
+
+			Conf.PathToTempXmlFileConfiguration = Configuration.GetTempPathToConfigurationFile(Conf.PathToXmlFileConfiguration, Conf.PathToTempXmlFileConfiguration);
+
+			ApendLine("2. Збереження конфігурації у тимчасовий файл", "");
+			Configuration.Save(Conf.PathToTempXmlFileConfiguration, Conf);
+			ApendLine(" --> " + Conf.PathToTempXmlFileConfiguration, "\n");
 
 			ApendLine("2. Отримання структури бази даних", "");
 			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
 			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
 
 			ApendLine("3. Порівняння конфігурації та бази даних", "");
-			Configuration.ComparisonGeneration(
+			Configuration.Comparison(
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+				Conf.PathToTempXmlFileConfiguration,
 				Conf.PathToCopyXmlFileConfiguration);
 
 			ApendLine("4. Створення команд SQL", "", "\n");
@@ -342,11 +354,15 @@ namespace Configurator
 				}
 
 			ApendLine("\n[ Генерування коду ]", "", "\n");
-
-			//Code Generation
-			Configuration.Generation(Conf.PathToXmlFileConfiguration,
+			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+
+			ApendLine("Видалення тимчасових файлів", "", "\n");
+			Configuration.RewriteConfigurationFileFromTempFile(
+				Conf.PathToXmlFileConfiguration, 
+				Conf.PathToTempXmlFileConfiguration,
+				Conf.PathToCopyXmlFileConfiguration);
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
 		}
@@ -388,6 +404,14 @@ namespace Configurator
 		private void buttonClose_Click(object sender, EventArgs e)
 		{
 			this.Hide();
+		}
+
+		private void SaveConfigurationForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			Configuration.ClearCopyAndTempConfigurationFile(
+				Conf.PathToXmlFileConfiguration,
+				Conf.PathToCopyXmlFileConfiguration,
+				Conf.PathToTempXmlFileConfiguration);
 		}
 	}
 }

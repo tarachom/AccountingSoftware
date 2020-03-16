@@ -26,6 +26,10 @@ limitations under the License.
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="xml" indent="yes" />
 
+  <!-- Файл конфігурації -->
+  <xsl:param name="Configuration" />
+
+  <!-- Файл попередньої копії конфігурації -->
   <xsl:param name="SecondConfiguration" />
 
   <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
@@ -409,7 +413,8 @@ limitations under the License.
         <xsl:if test="($CountDirectoryTablePart = 0 or $CountObject = 0) and $CountTablePartInfoSchema = 1">
           <Control_Table>
             <Type>
-              <xsl:value-of select="$Type"/>.TablePart
+              <xsl:value-of select="$Type"/>
+              <xsl:text>.TablePart</xsl:text>
             </Type>
             <Name>
               <xsl:value-of select="$SecondConfTablePartName"/>
@@ -431,7 +436,7 @@ limitations under the License.
     <root>
 
       <xsl:variable name="InfoSchemaTableList" select="InformationSchema/Table" />
-      <xsl:variable name="documentConfiguration" select="document('Configuration.xml')" />
+      <xsl:variable name="documentConfiguration" select="document($Configuration)" />
       <xsl:variable name="documentSecondConfiguration" select="document($SecondConfiguration)" />
 
       <xsl:call-template name="SecondConfiguration">
@@ -454,15 +459,15 @@ limitations under the License.
         <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersInformation/RegisterInformation" />
         <xsl:with-param name="Type">RegisterInformation</xsl:with-param>
       </xsl:call-template>
-      
+
       <xsl:call-template name="SecondConfiguration">
         <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
         <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
         <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
         <xsl:with-param name="Type">RegisterAccumulation</xsl:with-param>
       </xsl:call-template>
-      
-      <xsl:for-each select="document('Configuration.xml')/Configuration/ConstantsBlocks">
+
+      <xsl:for-each select="$documentConfiguration/Configuration/ConstantsBlocks">
         <xsl:variable name="ConfObjName">Константи</xsl:variable>
         <xsl:variable name="ConfObjTable">tab_constants</xsl:variable>
 
@@ -516,7 +521,7 @@ limitations under the License.
 
       </xsl:for-each>
 
-      <xsl:for-each select="document('Configuration.xml')/Configuration/Directories/Directory">
+      <xsl:for-each select="$documentConfiguration/Configuration/Directories/Directory">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
 
@@ -566,7 +571,7 @@ limitations under the License.
 
       </xsl:for-each>
 
-      <xsl:for-each select="document('Configuration.xml')/Configuration/Documents/Document">
+      <xsl:for-each select="$documentConfiguration/Configuration/Documents/Document">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
 
@@ -616,7 +621,7 @@ limitations under the License.
 
       </xsl:for-each>
 
-      <xsl:for-each select="document('Configuration.xml')/Configuration/RegistersInformation/RegisterInformation">
+      <xsl:for-each select="$documentConfiguration/Configuration/RegistersInformation/RegisterInformation">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
 
@@ -661,7 +666,7 @@ limitations under the License.
 
       </xsl:for-each>
 
-      <xsl:for-each select="document('Configuration.xml')/Configuration/RegistersAccumulation/RegisterAccumulation">
+      <xsl:for-each select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
 

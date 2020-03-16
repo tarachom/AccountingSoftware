@@ -146,6 +146,7 @@
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "SaveConfigurationForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaveConfigurationForm_FormClosing);
 			this.Load += new System.EventHandler(this.SaveConfigurationForm_Load);
 			this.panel2.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);

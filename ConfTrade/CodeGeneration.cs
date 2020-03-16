@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 16.03.2020 15:07:37
+ * Дата конфігурації: 16.03.2020 16:34:04
  *
  */
 
@@ -56,7 +56,7 @@ namespace ConfTrade_v1_1
                 Константи.Основні.ОсновнийСклад = new Довідники.МестаХранения_Pointer(fieldValue["const_2"]);
                 Константи.Основні.Перелічення = (fieldValue["const_3"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)fieldValue["const_3"] : 0;
                 Константи.Основні.Склад = fieldValue["const_4"].ToString();
-                Константи.Додаткові.A = (fieldValue["const_5"] != DBNull.Value) ? (int)fieldValue["const_5"] : 0;
+                Константи.Додаткові.A = new EmptyPointer();
                 Константи.Додаткові.B = fieldValue["const_6"].ToString();
                 Константи.ПоштовіНастройки.іваіваddd = new EmptyPointer();
                 Константи.ПоштовіНастройки.ваіва = fieldValue["const_8"].ToString();
@@ -295,15 +295,15 @@ namespace ConfTrade_v1_1.Константи
     
     static class Додаткові
     {
-        private static int _A;
-        public static int A
+        private static EmptyPointer _A;
+        public static EmptyPointer A
         {
             get { return _A; }
             set
             {
                 _A = value;
                 if (!Config.StartInit)
-                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_5", _A);
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "const_5", _A.ToString());
             }
         }
         private static string _B;
@@ -5988,6 +5988,221 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "Назва", "Код", "Родитель" },
              new string[] { "string", "string", "pointer" },
              "Довідники.Групи_МестаХранения_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "sdfs"
+    
+    class sdfs_Objest : DirectoryObject
+    {
+        public sdfs_Objest() : base(Config.Kernel, "tab_a16",
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        {
+            Назва = "";
+            Код = "";
+            sdfasd = "";
+            
+            //Табличні частини
+            sdfasd_TablePart = new sdfs_sdfasd_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                sdfasd = base.FieldValue["col_a3"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = sdfasd;
+            
+            BaseSave();
+        }
+        
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public sdfs_Pointer GetDirectoryPointer()
+        {
+            sdfs_Pointer directoryPointer = new sdfs_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        public string sdfasd { get; set; }
+        
+        //Табличні частини
+        public sdfs_sdfasd_TablePart sdfasd_TablePart { get; set; }
+        
+    }
+    
+    
+    class sdfs_Pointer : DirectoryPointer
+    {
+        public sdfs_Pointer(object uid = null) : base(Config.Kernel, "tab_a16")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public sdfs_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a16")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public sdfs_Objest GetDirectoryObject()
+        {
+            sdfs_Objest sdfsObjestItem = new sdfs_Objest();
+            sdfsObjestItem.Read(base.UnigueID);
+            return sdfsObjestItem;
+        }
+    }
+    
+    
+    class sdfs_Select : DirectorySelect, IDisposable
+    {
+        public sdfs_Select() : base(Config.Kernel, "tab_a16",
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "sdfasd" }) { }
+    
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new sdfs_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public sdfs_Pointer Current { get; private set; }
+        
+        public sdfs_Pointer FindByField(string name, object value)
+        {
+            sdfs_Pointer itemPointer = new sdfs_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<sdfs_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<sdfs_Pointer> directoryPointerList = new List<sdfs_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+                directoryPointerList.Add(new sdfs_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      
+    class sdfs_sdfasd_TablePart : DirectoryTablePart
+    {
+        public sdfs_sdfasd_TablePart(sdfs_Objest owner) : base(Config.Kernel, "tab_a47",
+             new string[] { "col_a4" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Record>();
+        }
+        
+        public sdfs_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.sdfasd = fieldValue["col_a4"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a4", record.sdfasd);
+                    
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+        
+        
+        public class Record : DirectoryTablePartRecord
+        {
+            public Record()
+            {
+                sdfasd = "";
+                
+            }
+        
+            
+            public Record(
+                string _sdfasd = "")
+            {
+                sdfasd = _sdfasd;
+                
+            }
+            public string sdfasd { get; set; }
+            
+        }
+    }
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class sdfs_Список_View : DirectoryView
+    {
+        public sdfs_Список_View() : base(Config.Kernel, "tab_a16", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "Довідники.sdfs_Список")
         {
             
         }
