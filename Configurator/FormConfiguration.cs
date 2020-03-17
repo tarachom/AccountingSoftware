@@ -49,6 +49,15 @@ namespace Configurator
 
 		#region LoadTreeConfiguration
 
+		public void LoadConstant(TreeNode rootNode , ConfigurationConstants confConstant)
+		{
+			TreeNode constantNode = rootNode.Nodes.Add(confConstant.Name, confConstant.Name);
+			constantNode.ContextMenuStrip = contextMenuStripConstant;
+			constantNode.Tag = confConstant;
+			constantNode.SelectedImageIndex = 15;
+			constantNode.ImageIndex = 15;
+		}
+
 		public void LoadConstants(TreeNode rootNode)
 		{
 			rootNode.Nodes.Clear();
@@ -60,13 +69,9 @@ namespace Configurator
 				contantsBlockNode.SelectedImageIndex = 13;
 				contantsBlockNode.ImageIndex = 13;
 
-				foreach (KeyValuePair<string, ConfigurationConstants> ConfConstants in ConfConstantsBlock.Value.Constants)
+				foreach (ConfigurationConstants ConfConstants in ConfConstantsBlock.Value.Constants.Values)
 				{
-					TreeNode constantNode = contantsBlockNode.Nodes.Add(ConfConstants.Key, ConfConstants.Value.Name);
-					constantNode.ContextMenuStrip = contextMenuStripConstatnt;
-					constantNode.Tag = ConfConstants.Value;
-					constantNode.SelectedImageIndex = 15;
-					constantNode.ImageIndex = 15;
+					LoadConstant(contantsBlockNode, ConfConstants);
 				}
 			}
 		}
@@ -220,61 +225,119 @@ namespace Configurator
 			}
 		}
 
+		public void LoadRegisterInformation(TreeNode rootNode, ConfigurationRegistersInformation confRegisterInformation)
+		{
+			TreeNode registerInformationNode = rootNode.Nodes.Add(confRegisterInformation.Name, confRegisterInformation.Name);
+			registerInformationNode.ContextMenuStrip = contextMenuStripRegistersInformation;
+			registerInformationNode.SelectedImageIndex = 13;
+			registerInformationNode.ImageIndex = 13;
+
+			TreeNode dimensionFieldsNode = registerInformationNode.Nodes.Add("DimensionFields", "Виміри");
+			dimensionFieldsNode.SelectedImageIndex = 9;
+			dimensionFieldsNode.ImageIndex = 9;
+
+			//Поля вимірів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfDimensionFields in confRegisterInformation.DimensionFields)
+			{
+				string info = (ConfDimensionFields.Value.Type == "pointer" || ConfDimensionFields.Value.Type == "enum") ?
+					" -> " + ConfDimensionFields.Value.Pointer : "";
+
+				TreeNode fieldNode = dimensionFieldsNode.Nodes.Add(ConfDimensionFields.Key, ConfDimensionFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
+
+			TreeNode resourcesFieldsNode = registerInformationNode.Nodes.Add("ResourcesFields", "Ресурси");
+			resourcesFieldsNode.SelectedImageIndex = 9;
+			resourcesFieldsNode.ImageIndex = 9;
+
+			//Поля ресурсів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfResourcesFields in confRegisterInformation.ResourcesFields)
+			{
+				string info = (ConfResourcesFields.Value.Type == "pointer" || ConfResourcesFields.Value.Type == "enum") ?
+					" -> " + ConfResourcesFields.Value.Pointer : "";
+
+				TreeNode fieldNode = resourcesFieldsNode.Nodes.Add(ConfResourcesFields.Key, ConfResourcesFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
+
+			TreeNode propertyFieldsNode = registerInformationNode.Nodes.Add("PropertyFields", "Поля");
+			propertyFieldsNode.SelectedImageIndex = 9;
+			propertyFieldsNode.ImageIndex = 9;
+
+			//Поля реквізитів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfPropertyFields in confRegisterInformation.PropertyFields)
+			{
+				string info = (ConfPropertyFields.Value.Type == "pointer" || ConfPropertyFields.Value.Type == "enum") ?
+					" -> " + ConfPropertyFields.Value.Pointer : "";
+
+				TreeNode fieldNode = propertyFieldsNode.Nodes.Add(ConfPropertyFields.Key, ConfPropertyFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
+		}
+
 		public void LoadRegistersInformation(TreeNode rootNode)
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationRegistersInformation> ConfRegistersInformation in Conf.RegistersInformation)
+			foreach (ConfigurationRegistersInformation ConfRegistersInformation in Conf.RegistersInformation.Values)
 			{
-				TreeNode registerInformationNode = rootNode.Nodes.Add(ConfRegistersInformation.Key, ConfRegistersInformation.Value.Name);
-				registerInformationNode.ContextMenuStrip = contextMenuStripRegistersInformation;
-				registerInformationNode.SelectedImageIndex = 13;
-				registerInformationNode.ImageIndex = 13;
+				LoadRegisterInformation(rootNode, ConfRegistersInformation);
+			}
+		}
 
-				TreeNode dimensionFieldsNode = registerInformationNode.Nodes.Add("DimensionFields", "Виміри");
-				dimensionFieldsNode.SelectedImageIndex = 9;
-				dimensionFieldsNode.ImageIndex = 9;
+		public void LoadRegisterAccumulation(TreeNode rootNode, ConfigurationRegistersAccumulation confRegisterAccumulation)
+		{
+			TreeNode registerAccumulationNode = rootNode.Nodes.Add(confRegisterAccumulation.Name, confRegisterAccumulation.Name);
+			registerAccumulationNode.ContextMenuStrip = contextMenuStripRegistersAccumulation;
+			registerAccumulationNode.SelectedImageIndex = 13;
+			registerAccumulationNode.ImageIndex = 13;
 
-				//Поля вимірів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfDimensionFields in ConfRegistersInformation.Value.DimensionFields)
-				{
-					string info = (ConfDimensionFields.Value.Type == "pointer" || ConfDimensionFields.Value.Type == "enum") ?
-						" -> " + ConfDimensionFields.Value.Pointer : "";
+			TreeNode dimensionFieldsNode = registerAccumulationNode.Nodes.Add("DimensionFields", "Виміри");
+			dimensionFieldsNode.SelectedImageIndex = 9;
+			dimensionFieldsNode.ImageIndex = 9;
 
-					TreeNode fieldNode = dimensionFieldsNode.Nodes.Add(ConfDimensionFields.Key, ConfDimensionFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
+			//Поля вимірів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfDimensionFields in confRegisterAccumulation.DimensionFields)
+			{
+				string info = (ConfDimensionFields.Value.Type == "pointer" || ConfDimensionFields.Value.Type == "enum") ?
+					" -> " + ConfDimensionFields.Value.Pointer : "";
 
-				TreeNode resourcesFieldsNode = registerInformationNode.Nodes.Add("ResourcesFields", "Ресурси");
-				resourcesFieldsNode.SelectedImageIndex = 9;
-				resourcesFieldsNode.ImageIndex = 9;
+				TreeNode fieldNode = dimensionFieldsNode.Nodes.Add(ConfDimensionFields.Key, ConfDimensionFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
 
-				//Поля ресурсів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfResourcesFields in ConfRegistersInformation.Value.ResourcesFields)
-				{
-					string info = (ConfResourcesFields.Value.Type == "pointer" || ConfResourcesFields.Value.Type == "enum") ?
-						" -> " + ConfResourcesFields.Value.Pointer : "";
+			TreeNode resourcesFieldsNode = registerAccumulationNode.Nodes.Add("ResourcesFields", "Ресурси");
+			resourcesFieldsNode.SelectedImageIndex = 9;
+			resourcesFieldsNode.ImageIndex = 9;
 
-					TreeNode fieldNode = resourcesFieldsNode.Nodes.Add(ConfResourcesFields.Key, ConfResourcesFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
+			//Поля ресурсів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfResourcesFields in confRegisterAccumulation.ResourcesFields)
+			{
+				string info = (ConfResourcesFields.Value.Type == "pointer" || ConfResourcesFields.Value.Type == "enum") ?
+					" -> " + ConfResourcesFields.Value.Pointer : "";
 
-				TreeNode propertyFieldsNode = registerInformationNode.Nodes.Add("PropertyFields", "Поля");
-				propertyFieldsNode.SelectedImageIndex = 9;
-				propertyFieldsNode.ImageIndex = 9;
+				TreeNode fieldNode = resourcesFieldsNode.Nodes.Add(ConfResourcesFields.Key, ConfResourcesFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
 
-				//Поля реквізитів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfPropertyFields in ConfRegistersInformation.Value.PropertyFields)
-				{
-					string info = (ConfPropertyFields.Value.Type == "pointer" || ConfPropertyFields.Value.Type == "enum") ?
-						" -> " + ConfPropertyFields.Value.Pointer : "";
+			TreeNode propertyFieldsNode = registerAccumulationNode.Nodes.Add("PropertyFields", "Поля");
+			propertyFieldsNode.SelectedImageIndex = 9;
+			propertyFieldsNode.ImageIndex = 9;
 
-					TreeNode fieldNode = propertyFieldsNode.Nodes.Add(ConfPropertyFields.Key, ConfPropertyFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
+			//Поля реквізитів
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfPropertyFields in confRegisterAccumulation.PropertyFields)
+			{
+				string info = (ConfPropertyFields.Value.Type == "pointer" || ConfPropertyFields.Value.Type == "enum") ?
+					" -> " + ConfPropertyFields.Value.Pointer : "";
+
+				TreeNode fieldNode = propertyFieldsNode.Nodes.Add(ConfPropertyFields.Key, ConfPropertyFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
 			}
 		}
 
@@ -282,57 +345,9 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> ConfRegistersAccumulation in Conf.RegistersAccumulation)
+			foreach (ConfigurationRegistersAccumulation ConfRegistersAccumulation in Conf.RegistersAccumulation.Values)
 			{
-				TreeNode registerAccumulationNode = rootNode.Nodes.Add(ConfRegistersAccumulation.Key, ConfRegistersAccumulation.Value.Name);
-				registerAccumulationNode.ContextMenuStrip = contextMenuStripRegistersAccumulation;
-				registerAccumulationNode.SelectedImageIndex = 13;
-				registerAccumulationNode.ImageIndex = 13;
-
-				TreeNode dimensionFieldsNode = registerAccumulationNode.Nodes.Add("DimensionFields", "Виміри");
-				dimensionFieldsNode.SelectedImageIndex = 9;
-				dimensionFieldsNode.ImageIndex = 9;
-
-				//Поля вимірів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfDimensionFields in ConfRegistersAccumulation.Value.DimensionFields)
-				{
-					string info = (ConfDimensionFields.Value.Type == "pointer" || ConfDimensionFields.Value.Type == "enum") ?
-						" -> " + ConfDimensionFields.Value.Pointer : "";
-
-					TreeNode fieldNode = dimensionFieldsNode.Nodes.Add(ConfDimensionFields.Key, ConfDimensionFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
-
-				TreeNode resourcesFieldsNode = registerAccumulationNode.Nodes.Add("ResourcesFields", "Ресурси");
-				resourcesFieldsNode.SelectedImageIndex = 9;
-				resourcesFieldsNode.ImageIndex = 9;
-
-				//Поля ресурсів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfResourcesFields in ConfRegistersAccumulation.Value.ResourcesFields)
-				{
-					string info = (ConfResourcesFields.Value.Type == "pointer" || ConfResourcesFields.Value.Type == "enum") ?
-						" -> " + ConfResourcesFields.Value.Pointer : "";
-
-					TreeNode fieldNode = resourcesFieldsNode.Nodes.Add(ConfResourcesFields.Key, ConfResourcesFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
-
-				TreeNode propertyFieldsNode = registerAccumulationNode.Nodes.Add("PropertyFields", "Поля");
-				propertyFieldsNode.SelectedImageIndex = 9;
-				propertyFieldsNode.ImageIndex = 9;
-
-				//Поля реквізитів
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfPropertyFields in ConfRegistersAccumulation.Value.PropertyFields)
-				{
-					string info = (ConfPropertyFields.Value.Type == "pointer" || ConfPropertyFields.Value.Type == "enum") ?
-						" -> " + ConfPropertyFields.Value.Pointer : "";
-
-					TreeNode fieldNode = propertyFieldsNode.Nodes.Add(ConfPropertyFields.Key, ConfPropertyFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
+				LoadRegisterAccumulation(rootNode, ConfRegistersAccumulation);
 			}
 		}
 
@@ -1052,6 +1067,61 @@ namespace Configurator
 			}
 		}
 
+		private void copyConstant_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
+				ConfigurationConstantsBlock configurationConstantsBlock = configurationConstants.Block;
+
+				string constantName = configurationConstants.Name;
+
+				string constantCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					constantCopyName = constantName + "_Копія_" + i.ToString();
+					if (!configurationConstantsBlock.Constants.ContainsKey(constantCopyName))
+						break;
+				}
+
+				ConfigurationConstants configurationCopyConstants = new ConfigurationConstants(constantCopyName,
+					Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields()),
+					configurationConstants.Type, configurationConstantsBlock, configurationConstants.Pointer, configurationConstants.Desc);
+
+				foreach (ConfigurationObjectTablePart confTablePartOriginal in configurationConstants.TabularParts.Values)
+				{
+					ConfigurationObjectTablePart confTablePartCopy = new
+						ConfigurationObjectTablePart(confTablePartOriginal.Name, Configuration.GetNewUnigueTableName(Program.Kernel),
+						confTablePartOriginal.Desc);
+
+					configurationCopyConstants.TabularParts.Add(confTablePartCopy.Name, confTablePartCopy);
+
+					foreach (ConfigurationObjectField confTablePartFieldOriginal in confTablePartOriginal.Fields.Values)
+					{
+						ConfigurationObjectField confFieldCopy = new
+							ConfigurationObjectField(confTablePartFieldOriginal.Name, confTablePartFieldOriginal.NameInTable,
+							confTablePartFieldOriginal.Type, confTablePartFieldOriginal.Pointer, confTablePartFieldOriginal.Desc);
+
+						confTablePartCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
+					}
+				}
+
+				Conf.AppendConstants(configurationConstantsBlock.BlockName, configurationCopyConstants);
+
+				LoadConstant(treeConfiguration.Nodes["root"].Nodes["Contants"].Nodes[configurationConstantsBlock.BlockName], configurationCopyConstants);
+			}
+		}
+
+		private void addConstant_Click(object sender, EventArgs e)
+		{
+			addConstatntsToolStripMenuItem_Click(sender, e);
+		}
+
+		private void deleteConstant_Click(object sender, EventArgs e)
+		{
+
+		}
+
 		#endregion
 
 		#region Контекстне меню регістер відомостей
@@ -1124,7 +1194,7 @@ namespace Configurator
 					confRegisterCopy.PropertyFields.Add(confFieldCopy.Name, confFieldCopy);
 				}
 
-				LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
+				LoadRegisterInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"], confRegisterCopy);
 			}
 		}
 
@@ -1218,7 +1288,7 @@ namespace Configurator
 					confRegisterCopy.PropertyFields.Add(confFieldCopy.Name, confFieldCopy);
 				}
 
-				LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
+				LoadRegisterAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"], confRegisterCopy);
 			}
 		}
 
@@ -1244,35 +1314,11 @@ namespace Configurator
 
 		#region Головне меню
 
-		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			DirectoryForm directoryForm = new DirectoryForm();
-			directoryForm.CallBack = CallBack_Update_Directory;
-			directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
-			directoryForm.Show();
-		}
-
 		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			SaveConfigurationForm saveConfigurationForm = new SaveConfigurationForm();
 			saveConfigurationForm.Conf = Conf;
 			saveConfigurationForm.ShowDialog();
-		}
-
-		private void addEnumToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			EnumForm enumForm = new EnumForm();
-			enumForm.CallBack = CallBack_Update_Enum;
-			enumForm.CallBack_IsExistEnums = CallBack_IsExistEnumName;
-			enumForm.Show();
-		}
-
-		private void addNewDocumentToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			DocumentForm documentForm = new DocumentForm();
-			documentForm.CallBack = CallBack_Update_Document;
-			documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
-			documentForm.Show();
 		}
 
 		private void addContantsBlockToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1285,21 +1331,35 @@ namespace Configurator
 
 		private void addConstatntsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
-			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
-			{
-				foreach (ConfigurationConstants constants in block.Constants.Values)
-				{
-					string fullName = block.BlockName + "." + constants.Name;
-					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
-				}
-			}
-
 			ConstantsForm constantsForm = new ConstantsForm();
 			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
 			constantsForm.CallBack = CallBack_Update_Constants;
-			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", ConstantsAllFields);
+			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields());
 			constantsForm.Show();
+		}
+
+		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DirectoryForm directoryForm = new DirectoryForm();
+			directoryForm.CallBack = CallBack_Update_Directory;
+			directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
+			directoryForm.Show();
+		}
+
+		private void addNewDocumentToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DocumentForm documentForm = new DocumentForm();
+			documentForm.CallBack = CallBack_Update_Document;
+			documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
+			documentForm.Show();
+		}
+
+		private void addEnumToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			EnumForm enumForm = new EnumForm();
+			enumForm.CallBack = CallBack_Update_Enum;
+			enumForm.CallBack_IsExistEnums = CallBack_IsExistEnumName;
+			enumForm.Show();
 		}
 
 		private void addNewRegistersInformationToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1316,6 +1376,25 @@ namespace Configurator
 			registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
 			registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
 			registersAccumulationForm.Show();
+		}
+
+		#endregion
+
+		#region Функції
+
+		private Dictionary<string, ConfigurationObjectField> GetConstantsAllFields()
+		{
+			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
+			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
+			{
+				foreach (ConfigurationConstants constants in block.Constants.Values)
+				{
+					string fullName = block.BlockName + "." + constants.Name;
+					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
+				}
+			}
+
+			return ConstantsAllFields;
 		}
 
 		#endregion
