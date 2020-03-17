@@ -45,6 +45,8 @@ namespace Configurator
 
 		public Configuration Conf { get; set; }
 
+		private TreeNode nodeSel { get; set; }
+
 		#region LoadTreeConfiguration
 
 		public void LoadConstants(TreeNode rootNode)
@@ -188,7 +190,7 @@ namespace Configurator
 			foreach (KeyValuePair<string, ConfigurationEnums> ConfEnum in Conf.Enums)
 			{
 				TreeNode enumNode = rootNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
-				enumNode.ContextMenuStrip = contextMenuStrip2;
+				enumNode.ContextMenuStrip = contextMenuStripEnum;
 				enumNode.SelectedImageIndex = 13;
 				enumNode.ImageIndex = 13;
 
@@ -421,12 +423,16 @@ namespace Configurator
 				ListViewItem j = new ListViewItem(new string[] { "test", "test" }, 13);
 				listView1.Items.Add(j);
 			}
-
 		}
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			Program.Kernel.Close();
+		}
+
+		private void treeConfiguration_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		{
+			nodeSel = e.Node;
 		}
 
 		#region CallBack
@@ -679,13 +685,7 @@ namespace Configurator
 
 		#endregion
 
-		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			DirectoryForm directoryForm = new DirectoryForm();
-			directoryForm.CallBack = CallBack_Update_Directory;
-			directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
-			directoryForm.Show();
-		}
+		#region Контекстне меню довідник
 
 		private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
@@ -701,14 +701,68 @@ namespace Configurator
 			}
 		}
 
-		private void addNewDirectiryToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			addDirectoryToolStripMenuItem_Click(sender, e);
-		}
-
 		private void copyDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
+			if (nodeSel != null)
+			{
+				string directoryName = nodeSel.Name;
 
+				string directoryCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					directoryCopyName = directoryName + "_Копія_" + i.ToString();
+					if (!Conf.Directories.ContainsKey(directoryCopyName))
+						break;
+				}
+
+				ConfigurationDirectories confDirectoriesOriginal = Conf.Directories[directoryName];
+
+				ConfigurationDirectories confDirectoriesCopy = new
+					ConfigurationDirectories(directoryCopyName, Configuration.GetNewUnigueTableName(Program.Kernel),
+					confDirectoriesOriginal.Desc);
+
+				Conf.AppendDirectory(confDirectoriesCopy);
+
+				foreach (ConfigurationObjectField confFieldOriginal in confDirectoriesOriginal.Fields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confDirectoriesCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectTablePart confTablePartOriginal in confDirectoriesOriginal.TabularParts.Values)
+				{
+					ConfigurationObjectTablePart confTablePartCopy = new
+						ConfigurationObjectTablePart(confTablePartOriginal.Name, Configuration.GetNewUnigueTableName(Program.Kernel),
+						confTablePartOriginal.Desc);
+
+					confDirectoriesCopy.TabularParts.Add(confTablePartCopy.Name, confTablePartCopy);
+
+					foreach (ConfigurationObjectField confTablePartFieldOriginal in confTablePartOriginal.Fields.Values)
+					{
+						ConfigurationObjectField confFieldCopy = new
+							ConfigurationObjectField(confTablePartFieldOriginal.Name, confTablePartFieldOriginal.NameInTable,
+							confTablePartFieldOriginal.Type, confTablePartFieldOriginal.Pointer, confTablePartFieldOriginal.Desc);
+
+						confTablePartCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
+					}
+				}
+
+				foreach (ConfigurationObjectView confViewOriginal in confDirectoriesOriginal.Views.Values)
+				{
+					ConfigurationObjectView confViewCopy = new ConfigurationObjectView(confViewOriginal.Name,
+						confViewOriginal.Table, confViewOriginal.Desc);
+
+					confDirectoriesCopy.Views.Add(confViewCopy.Name, confViewCopy);
+
+					foreach (KeyValuePair<string, string> confViewField in confViewOriginal.Fields)
+						confViewCopy.Fields.Add(confViewField.Key, confViewField.Value);
+				}
+
+				LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
+			}
 		}
 
 		private void deleteDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -722,8 +776,11 @@ namespace Configurator
 					List<string> ListPointers = Conf.SearchForPointers("Довідники." + directoryName);
 					if (ListPointers.Count == 0)
 					{
-						Conf.Directories.Remove(directoryName);
-						LoadTree();
+						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+						{
+							Conf.Directories.Remove(directoryName);
+							LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
+						}
 					}
 					else
 					{
@@ -734,24 +791,24 @@ namespace Configurator
 
 						textListPointer += "\nВидалитити неможливо";
 
-						MessageBox.Show(textListPointer, "Знайденно " + ListPointers.Count.ToString() + " вказівники на довідник", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						MessageBox.Show(textListPointer, "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
 			}
 		}
 
-		private TreeNode nodeSel { get; set; }
-
-		private void treeConfiguration_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+		private void addNewDirectiryToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			nodeSel = e.Node;
+			addDirectoryToolStripMenuItem_Click(sender, e);
 		}
 
-		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+		#endregion
+
+		#region Контекстне меню перелічення
+
+		private void addEnumItem_Click(object sender, EventArgs e)
 		{
-			SaveConfigurationForm saveConfigurationForm = new SaveConfigurationForm();
-			saveConfigurationForm.Conf = Conf;
-			saveConfigurationForm.ShowDialog();
+			addEnumToolStripMenuItem_Click(sender, e);
 		}
 
 		private void openEnumItem_Click(object sender, EventArgs e)
@@ -768,6 +825,269 @@ namespace Configurator
 			}
 		}
 
+		private void copyEnumItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string enumName = nodeSel.Name;
+
+				string enumCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					enumCopyName = enumName + "_Копія_" + i.ToString();
+					if (!Conf.Enums.ContainsKey(enumCopyName))
+						break;
+				}
+
+				ConfigurationEnums confEnumsOriginal = Conf.Enums[enumName];
+
+				ConfigurationEnums confEnumsCopy = new ConfigurationEnums(enumCopyName, 0, confEnumsOriginal.Desc);
+				Conf.AppendEnum(confEnumsCopy);
+
+				foreach (ConfigurationEnumField confEnumFieldOriginal in confEnumsOriginal.Fields.Values)
+				{
+					confEnumsCopy.AppendField(new ConfigurationEnumField(confEnumFieldOriginal.Name,
+						confEnumFieldOriginal.Value, confEnumFieldOriginal.Desc));
+
+					if (confEnumFieldOriginal.Value > confEnumsCopy.SerialNumber)
+						confEnumsCopy.SerialNumber = confEnumFieldOriginal.Value;
+				}
+
+				LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
+			}
+		}
+
+		private void deleteEnumItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string enumName = nodeSel.Name;
+
+				if (Conf.Enums.ContainsKey(enumName))
+				{
+					List<string> ListPointers = Conf.SearchForPointersEnum("Перелічення." + enumName);
+					if (ListPointers.Count == 0)
+					{
+						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+						{
+							Conf.Enums.Remove(enumName);
+							LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
+						}
+					}
+					else
+					{
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на перелічення \"" + enumName + "\":\n";
+
+						foreach (string item in ListPointers)
+							textListPointer += " -> " + item + "\n";
+
+						textListPointer += "\nВидалитити неможливо";
+
+						MessageBox.Show(textListPointer, "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+		}
+
+		#endregion
+
+		#region Контекстне меню документ
+
+		private void openDocumentItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string documentName = nodeSel.Name;
+
+				DocumentForm documentForm = new DocumentForm();
+				documentForm.ConfDocument = Conf.Documents[documentName];
+				documentForm.CallBack = CallBack_Update_Document;
+				documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
+				documentForm.Show();
+			}
+		}
+
+		private void addDocumentItem_Click(object sender, EventArgs e)
+		{
+			addNewDocumentToolStripMenuItem_Click(sender, e);
+		}
+
+		private void copyDocumentItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string documentName = nodeSel.Name;
+
+				string documentCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					documentCopyName = documentName + "_Копія_" + i.ToString();
+					if (!Conf.Directories.ContainsKey(documentCopyName))
+						break;
+				}
+
+				ConfigurationDocuments confDocumentsOriginal = Conf.Documents[documentName];
+
+				ConfigurationDocuments confDocumentsCopy = new
+					ConfigurationDocuments(documentCopyName, Configuration.GetNewUnigueTableName(Program.Kernel),
+					confDocumentsOriginal.Desc);
+
+				Conf.AppendDocument(confDocumentsCopy);
+
+				foreach (ConfigurationObjectField confFieldOriginal in confDocumentsOriginal.Fields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confDocumentsCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectTablePart confTablePartOriginal in confDocumentsOriginal.TabularParts.Values)
+				{
+					ConfigurationObjectTablePart confTablePartCopy = new
+						ConfigurationObjectTablePart(confTablePartOriginal.Name, Configuration.GetNewUnigueTableName(Program.Kernel),
+						confTablePartOriginal.Desc);
+
+					confDocumentsCopy.TabularParts.Add(confTablePartCopy.Name, confTablePartCopy);
+
+					foreach (ConfigurationObjectField confTablePartFieldOriginal in confTablePartOriginal.Fields.Values)
+					{
+						ConfigurationObjectField confFieldCopy = new
+							ConfigurationObjectField(confTablePartFieldOriginal.Name, confTablePartFieldOriginal.NameInTable,
+							confTablePartFieldOriginal.Type, confTablePartFieldOriginal.Pointer, confTablePartFieldOriginal.Desc);
+
+						confTablePartCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
+					}
+				}
+
+				LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
+			}
+		}
+
+		private void deleteDocumentItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string documentName = nodeSel.Name;
+
+				if (Conf.Documents.ContainsKey(documentName))
+				{
+					List<string> ListPointers = Conf.SearchForPointers("Документи." + documentName);
+					if (ListPointers.Count == 0)
+					{
+						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+						{
+							Conf.Documents.Remove(documentName);
+							LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
+						}
+					}
+					else
+					{
+						string textListPointer = "Знайденно " + ListPointers.Count.ToString() + " вказівники на документ \"" + documentName + "\":\n";
+
+						foreach (string item in ListPointers)
+							textListPointer += " -> " + item + "\n";
+
+						textListPointer += "\nВидалитити неможливо";
+
+						MessageBox.Show(textListPointer, "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+		}
+
+		#endregion
+
+		#region Контекстне меню блок констант
+
+		private void OpenConstantBlock_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string constantsBlockName = nodeSel.Name;
+
+				ConstantsBlockForm constantsBlockForm = new ConstantsBlockForm();
+				constantsBlockForm.ConstantsBlock = Conf.ConstantsBlock[constantsBlockName];
+				constantsBlockForm.CallBack_IsExistConstantsBlock = CallBack_IsExistConstantsBlock;
+				constantsBlockForm.CallBack = CallBack_Update_ConstantsBlock;
+				constantsBlockForm.Show();
+			}
+		}
+
+		#endregion
+
+		#region Контекстне меню констант
+
+		private void openConstatnt_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
+
+				ConstantsForm constantsForm = new ConstantsForm();
+				constantsForm.Constants = configurationConstants;
+				constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
+				constantsForm.CallBack = CallBack_Update_Constants;
+				constantsForm.Show();
+			}
+		}
+
+		#endregion
+
+		#region Контекстне меню регістер відомостей
+
+		private void openItemRegistersInformation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersInformationName = nodeSel.Name;
+
+				RegistersInformationForm registersInformationForm = new RegistersInformationForm();
+				registersInformationForm.ConfRegistersInformation = Conf.RegistersInformation[registersInformationName];
+				registersInformationForm.CallBack = CallBack_Update_RegistersInformation;
+				registersInformationForm.CallBack_IsExistRegistersInformation = CallBack_IsExistRegistersInformation;
+				registersInformationForm.Show();
+			}
+		}
+
+		#endregion
+
+		#region Контекстне меню регістер накопичення
+
+		private void openItemRegistersAccumulation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersAccumulationName = nodeSel.Name;
+
+				RegistersAccumulationForm registersAccumulationForm = new RegistersAccumulationForm();
+				registersAccumulationForm.ConfRegistersAccumulation = Conf.RegistersAccumulation[registersAccumulationName];
+				registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
+				registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
+				registersAccumulationForm.Show();
+			}
+		}
+
+		#endregion
+
+		#region Головне меню
+
+		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DirectoryForm directoryForm = new DirectoryForm();
+			directoryForm.CallBack = CallBack_Update_Directory;
+			directoryForm.CallBack_IsExistDirectoryName = CallBack_IsExistDirectoryName;
+			directoryForm.Show();
+		}
+
+		private void saveConfigurationToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveConfigurationForm saveConfigurationForm = new SaveConfigurationForm();
+			saveConfigurationForm.Conf = Conf;
+			saveConfigurationForm.ShowDialog();
+		}
+
 		private void addEnumToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			EnumForm enumForm = new EnumForm();
@@ -782,20 +1102,6 @@ namespace Configurator
 			documentForm.CallBack = CallBack_Update_Document;
 			documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
 			documentForm.Show();
-		}
-
-		private void openDocumentItem_Click(object sender, EventArgs e)
-		{
-			if (nodeSel != null)
-			{
-				string documentName = nodeSel.Name;
-
-				DocumentForm documentForm = new DocumentForm();
-				documentForm.ConfDocument = Conf.Documents[documentName];
-				documentForm.CallBack = CallBack_Update_Document;
-				documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
-				documentForm.Show();
-			}
 		}
 
 		private void addContantsBlockToolStripMenuItem_Click(object sender, EventArgs e)
@@ -825,48 +1131,6 @@ namespace Configurator
 			constantsForm.Show();
 		}
 
-		private void OpenConstantBlock_Click(object sender, EventArgs e)
-		{
-			if (nodeSel != null)
-			{
-				string constantsBlockName = nodeSel.Name;
-
-				ConstantsBlockForm constantsBlockForm = new ConstantsBlockForm();
-				constantsBlockForm.ConstantsBlock = Conf.ConstantsBlock[constantsBlockName];
-				constantsBlockForm.CallBack_IsExistConstantsBlock = CallBack_IsExistConstantsBlock;
-				constantsBlockForm.CallBack = CallBack_Update_ConstantsBlock;
-				constantsBlockForm.Show();
-			}
-		}
-
-		private void openConstatnt_Click(object sender, EventArgs e)
-		{
-			if (nodeSel != null)
-			{
-				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
-
-				ConstantsForm constantsForm = new ConstantsForm();
-				constantsForm.Constants = configurationConstants;
-				constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
-				constantsForm.CallBack = CallBack_Update_Constants;
-				constantsForm.Show();
-			}
-		}
-
-		private void openItemRegistersInformation_Click(object sender, EventArgs e)
-		{
-			if (nodeSel != null)
-			{
-				string registersInformationName = nodeSel.Name;
-
-				RegistersInformationForm registersInformationForm = new RegistersInformationForm();
-				registersInformationForm.ConfRegistersInformation = Conf.RegistersInformation[registersInformationName];
-				registersInformationForm.CallBack = CallBack_Update_RegistersInformation;
-				registersInformationForm.CallBack_IsExistRegistersInformation = CallBack_IsExistRegistersInformation;
-				registersInformationForm.Show();
-			}
-		}
-
 		private void addNewRegistersInformationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			RegistersInformationForm registersInformationForm = new RegistersInformationForm();
@@ -883,18 +1147,7 @@ namespace Configurator
 			registersAccumulationForm.Show();
 		}
 
-		private void openItemRegistersAccumulation_Click(object sender, EventArgs e)
-		{
-			if (nodeSel != null)
-			{
-				string registersAccumulationName = nodeSel.Name;
 
-				RegistersAccumulationForm registersAccumulationForm = new RegistersAccumulationForm();
-				registersAccumulationForm.ConfRegistersAccumulation = Conf.RegistersAccumulation[registersAccumulationName];
-				registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
-				registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
-				registersAccumulationForm.Show();
-			}
-		}
+		#endregion
 	}
 }

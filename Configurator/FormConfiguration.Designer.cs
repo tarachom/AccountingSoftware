@@ -52,7 +52,7 @@
 			this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.contextMenuStripEnum = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openEnumItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripDocument = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,6 +64,12 @@
 			this.openItemRegistersInformation = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripRegistersAccumulation = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteEnumItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.copyEnumItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addEnumItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.copyDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -71,7 +77,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
 			this.menuStripTop.SuspendLayout();
 			this.contextMenuStripDirectory.SuspendLayout();
-			this.contextMenuStrip2.SuspendLayout();
+			this.contextMenuStripEnum.SuspendLayout();
 			this.contextMenuStripDocument.SuspendLayout();
 			this.contextMenuStripConstantBlock.SuspendLayout();
 			this.contextMenuStripConstatnt.SuspendLayout();
@@ -286,7 +292,7 @@
 			// 
 			this.copyDirectoryToolStripMenuItem.Name = "copyDirectoryToolStripMenuItem";
 			this.copyDirectoryToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
-			this.copyDirectoryToolStripMenuItem.Text = "Скопіювати";
+			this.copyDirectoryToolStripMenuItem.Text = "Копіювати";
 			this.copyDirectoryToolStripMenuItem.Click += new System.EventHandler(this.copyDirectoryToolStripMenuItem_Click);
 			// 
 			// deleteDirectoryToolStripMenuItem
@@ -296,31 +302,37 @@
 			this.deleteDirectoryToolStripMenuItem.Text = "Видалити";
 			this.deleteDirectoryToolStripMenuItem.Click += new System.EventHandler(this.deleteDirectoryToolStripMenuItem_Click);
 			// 
-			// contextMenuStrip2
+			// contextMenuStripEnum
 			// 
-			this.contextMenuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openEnumItem});
-			this.contextMenuStrip2.Name = "contextMenuStrip2";
-			this.contextMenuStrip2.Size = new System.Drawing.Size(123, 26);
+			this.contextMenuStripEnum.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openEnumItem,
+            this.addEnumItem,
+            this.copyEnumItem,
+            this.deleteEnumItem});
+			this.contextMenuStripEnum.Name = "contextMenuStrip2";
+			this.contextMenuStripEnum.Size = new System.Drawing.Size(151, 92);
 			// 
 			// openEnumItem
 			// 
 			this.openEnumItem.Name = "openEnumItem";
-			this.openEnumItem.Size = new System.Drawing.Size(122, 22);
+			this.openEnumItem.Size = new System.Drawing.Size(150, 22);
 			this.openEnumItem.Text = "Відкрити";
 			this.openEnumItem.Click += new System.EventHandler(this.openEnumItem_Click);
 			// 
 			// contextMenuStripDocument
 			// 
 			this.contextMenuStripDocument.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openDocumentItem});
+            this.openDocumentItem,
+            this.addDocumentItem,
+            this.copyDocumentItem,
+            this.deleteDocumentItem});
 			this.contextMenuStripDocument.Name = "contextMenuStripDocument";
-			this.contextMenuStripDocument.Size = new System.Drawing.Size(123, 26);
+			this.contextMenuStripDocument.Size = new System.Drawing.Size(181, 114);
 			// 
 			// openDocumentItem
 			// 
 			this.openDocumentItem.Name = "openDocumentItem";
-			this.openDocumentItem.Size = new System.Drawing.Size(122, 22);
+			this.openDocumentItem.Size = new System.Drawing.Size(180, 22);
 			this.openDocumentItem.Text = "Відкрити";
 			this.openDocumentItem.Click += new System.EventHandler(this.openDocumentItem_Click);
 			// 
@@ -380,6 +392,48 @@
 			this.openItemRegistersAccumulation.Text = "Відкрити";
 			this.openItemRegistersAccumulation.Click += new System.EventHandler(this.openItemRegistersAccumulation_Click);
 			// 
+			// deleteEnumItem
+			// 
+			this.deleteEnumItem.Name = "deleteEnumItem";
+			this.deleteEnumItem.Size = new System.Drawing.Size(150, 22);
+			this.deleteEnumItem.Text = "Видалити";
+			this.deleteEnumItem.Click += new System.EventHandler(this.deleteEnumItem_Click);
+			// 
+			// copyEnumItem
+			// 
+			this.copyEnumItem.Name = "copyEnumItem";
+			this.copyEnumItem.Size = new System.Drawing.Size(150, 22);
+			this.copyEnumItem.Text = "Копіювати";
+			this.copyEnumItem.Click += new System.EventHandler(this.copyEnumItem_Click);
+			// 
+			// addEnumItem
+			// 
+			this.addEnumItem.Name = "addEnumItem";
+			this.addEnumItem.Size = new System.Drawing.Size(150, 22);
+			this.addEnumItem.Text = "Додати новий";
+			this.addEnumItem.Click += new System.EventHandler(this.addEnumItem_Click);
+			// 
+			// addDocumentItem
+			// 
+			this.addDocumentItem.Name = "addDocumentItem";
+			this.addDocumentItem.Size = new System.Drawing.Size(180, 22);
+			this.addDocumentItem.Text = "Додати новий";
+			this.addDocumentItem.Click += new System.EventHandler(this.addDocumentItem_Click);
+			// 
+			// copyDocumentItem
+			// 
+			this.copyDocumentItem.Name = "copyDocumentItem";
+			this.copyDocumentItem.Size = new System.Drawing.Size(180, 22);
+			this.copyDocumentItem.Text = "Копіювати";
+			this.copyDocumentItem.Click += new System.EventHandler(this.copyDocumentItem_Click);
+			// 
+			// deleteDocumentItem
+			// 
+			this.deleteDocumentItem.Name = "deleteDocumentItem";
+			this.deleteDocumentItem.Size = new System.Drawing.Size(180, 22);
+			this.deleteDocumentItem.Text = "Видалити";
+			this.deleteDocumentItem.Click += new System.EventHandler(this.deleteDocumentItem_Click);
+			// 
 			// FormConfiguration
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -403,7 +457,7 @@
 			this.menuStripTop.ResumeLayout(false);
 			this.menuStripTop.PerformLayout();
 			this.contextMenuStripDirectory.ResumeLayout(false);
-			this.contextMenuStrip2.ResumeLayout(false);
+			this.contextMenuStripEnum.ResumeLayout(false);
 			this.contextMenuStripDocument.ResumeLayout(false);
 			this.contextMenuStripConstantBlock.ResumeLayout(false);
 			this.contextMenuStripConstatnt.ResumeLayout(false);
@@ -428,7 +482,7 @@
 		private System.Windows.Forms.ToolStripMenuItem copyDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deleteDirectoryToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem saveConfigurationToolStripMenuItem;
-		private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripEnum;
 		private System.Windows.Forms.ToolStripMenuItem openEnumItem;
 		private System.Windows.Forms.ToolStripMenuItem addEnumToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addNewDocumentToolStripMenuItem;
@@ -450,6 +504,12 @@
 		private System.Windows.Forms.ToolStripMenuItem addNewToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripRegistersAccumulation;
 		private System.Windows.Forms.ToolStripMenuItem openItemRegistersAccumulation;
+		private System.Windows.Forms.ToolStripMenuItem copyEnumItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteEnumItem;
+		private System.Windows.Forms.ToolStripMenuItem addEnumItem;
+		private System.Windows.Forms.ToolStripMenuItem addDocumentItem;
+		private System.Windows.Forms.ToolStripMenuItem copyDocumentItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteDocumentItem;
 	}
 }
 

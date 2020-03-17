@@ -3,7 +3,7 @@
   <Name>ConfTrade 1.1</Name>
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>Yurik</Author>
-  <DateTimeSave>16.03.2020 22:45:42</DateTimeSave>
+  <DateTimeSave>17.03.2020 09:03:31</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основні</Name>
@@ -2848,23 +2848,6 @@
     </Enum>
   </Enums>
   <Documents>
-    <Document>
-      <Name>Testв</Name>
-      <Table>test</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>erwerw</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Единици</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts />
-    </Document>
     <Document>
       <Name>РасходнаяНакладная</Name>
       <Table>tab_a512</Table>

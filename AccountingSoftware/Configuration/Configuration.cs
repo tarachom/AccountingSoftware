@@ -342,6 +342,16 @@ namespace AccountingSoftware
 
 			List<string> ListPointer = new List<string>();
 
+			//Перевірити константи
+			foreach (ConfigurationConstantsBlock constantsBlockItem in ConstantsBlock.Values)
+			{
+				foreach (ConfigurationConstants constantsItem in constantsBlockItem.Constants.Values)
+				{
+					if (constantsItem.Type == "enum" && constantsItem.Pointer == searchName)
+						ListPointer.Add("Константа (Блок " + constantsBlockItem.BlockName + "): " + constantsItem.Name + "." + constantsItem.Name);
+				}
+			}
+
 			//Перевірити поля довідників та поля табличних частин чи часом вони не ссилаються на перелічення
 			foreach (ConfigurationDirectories directoryItem in Directories.Values)
 			{

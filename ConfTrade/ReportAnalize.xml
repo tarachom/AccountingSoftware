@@ -1,11 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Таблиця Testв (test), поле erwerw (col_a1). Перетворити тип даних (integer, int4) -> pointer</info>
-  <info>Заміна колонки! Втрата даних!</info>
-  <sql>BEGIN;</sql>
-  <info> ->  Видалити колонку col_a1 в таблиці test</info>
-  <sql>ALTER TABLE test DROP COLUMN "col_a1";</sql>
-  <info> ->  Додати колонку col_a1 в таблицю test</info>
-  <sql>ALTER TABLE test ADD COLUMN "col_a1" uuid;</sql>
-  <sql>COMMIT;</sql>
+  <info>Видалити таблицю Договір2_Копія_1 (tab_a16)</info>
+  <sql>DROP TABLE tab_a16;</sql>
+  <info>Видалити таблицю Товари (tab_a47)</info>
+  <sql>DROP TABLE tab_a47;</sql>
+  <info>Видалити таблицю Договор_Копія_1 (tab_a48)</info>
+  <sql>DROP TABLE tab_a48;</sql>
+  <info>Видалити таблицю Тест (tab_a49)</info>
+  <sql>DROP TABLE tab_a49;</sql>
+  <info>Видалити таблицю Инвентаризация_Копія_1 (tab_a50)</info>
+  <sql>DROP TABLE tab_a50;</sql>
+  <info>Видалити таблицю Товари (tab_a51)</info>
+  <sql>DROP TABLE tab_a51;</sql>
+  <info>Видалити таблицю РозхіднийКасовийОрдер_Копія_1 (tab_a54)</info>
+  <sql>DROP TABLE tab_a54;</sql>
+  <info>Видалити таблицю ПрихіднийКасовийОрдер_Копія_1 (tab_a56)</info>
+  <sql>DROP TABLE tab_a56;</sql>
+  <info>Видалити таблицю ПриходнаяНакладная_Копія_1 (tab_a57)</info>
+  <sql>DROP TABLE tab_a57;</sql>
+  <info>Видалити таблицю Товари (tab_a58)</info>
+  <sql>DROP TABLE tab_a58;</sql>
+  <info>Видалити таблицю РасходнаяНакладная_Копія_1 (tab_a59)</info>
+  <sql>DROP TABLE tab_a59;</sql>
+  <info>Видалити таблицю Товари (tab_a61)</info>
+  <sql>DROP TABLE tab_a61;</sql>
 </root>
