@@ -85,6 +85,8 @@ namespace Configurator
 				Constants = new ConfigurationConstants();
 				textBoxNameInTable.Text = NewNameInTable;
 				IsNew = true;
+
+				SelectBlockItem();
 			}
 			else
 			{
@@ -95,11 +97,7 @@ namespace Configurator
 				textBoxNameInTable.Text = Constants.NameInTable;
 				textBoxDesc.Text = Constants.Desc;
 
-				for (int i = 0; i < comboBoxBlock.Items.Count; i++)
-				{
-					if (ConstantsBlock == comboBoxBlock.Items[i].ToString())
-						comboBoxBlock.SelectedItem = comboBoxBlock.Items[i];
-				}
+				SelectBlockItem();
 
 				for (int i = 0; i < comboBoxFieldType.Items.Count; i++)
 				{
@@ -138,8 +136,21 @@ namespace Configurator
 
 				LoadTabularPartsList();
 
-				IsNew = false;				
+				IsNew = false;
 			}
+		}
+
+		private void SelectBlockItem()
+		{
+			if (!String.IsNullOrEmpty(ConstantsBlock))
+				for (int i = 0; i < comboBoxBlock.Items.Count; i++)
+				{
+					if (ConstantsBlock == comboBoxBlock.Items[i].ToString())
+					{
+						comboBoxBlock.SelectedItem = comboBoxBlock.Items[i];
+						break;
+					}
+				}
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)

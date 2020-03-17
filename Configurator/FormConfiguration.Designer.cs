@@ -63,7 +63,7 @@
 			this.copyDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripConstantBlock = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.OpenConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
+			this.openConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripConstant = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openConstant = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripRegistersInformation = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -79,6 +79,9 @@
 			this.copyConstant = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteConstant = new System.Windows.Forms.ToolStripMenuItem();
 			this.addConstant = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
+			this.addConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewConstant = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -390,16 +393,19 @@
 			// contextMenuStripConstantBlock
 			// 
 			this.contextMenuStripConstantBlock.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.OpenConstantBlock});
+            this.openConstantBlock,
+            this.addConstantBlock,
+            this.addNewConstant,
+            this.deleteConstantBlock});
 			this.contextMenuStripConstantBlock.Name = "contextMenuConstantBlock";
-			this.contextMenuStripConstantBlock.Size = new System.Drawing.Size(123, 26);
+			this.contextMenuStripConstantBlock.Size = new System.Drawing.Size(201, 114);
 			// 
-			// OpenConstantBlock
+			// openConstantBlock
 			// 
-			this.OpenConstantBlock.Name = "OpenConstantBlock";
-			this.OpenConstantBlock.Size = new System.Drawing.Size(122, 22);
-			this.OpenConstantBlock.Text = "Відкрити";
-			this.OpenConstantBlock.Click += new System.EventHandler(this.OpenConstantBlock_Click);
+			this.openConstantBlock.Name = "openConstantBlock";
+			this.openConstantBlock.Size = new System.Drawing.Size(200, 22);
+			this.openConstantBlock.Text = "Відкрити";
+			this.openConstantBlock.Click += new System.EventHandler(this.OpenConstantBlock_Click);
 			// 
 			// contextMenuStripConstant
 			// 
@@ -409,12 +415,12 @@
             this.copyConstant,
             this.deleteConstant});
 			this.contextMenuStripConstant.Name = "contextMenuConstantBlock";
-			this.contextMenuStripConstant.Size = new System.Drawing.Size(181, 114);
+			this.contextMenuStripConstant.Size = new System.Drawing.Size(143, 92);
 			// 
 			// openConstant
 			// 
 			this.openConstant.Name = "openConstant";
-			this.openConstant.Size = new System.Drawing.Size(180, 22);
+			this.openConstant.Size = new System.Drawing.Size(142, 22);
 			this.openConstant.Text = "Відкрити";
 			this.openConstant.Click += new System.EventHandler(this.openConstatnt_Click);
 			// 
@@ -497,23 +503,44 @@
 			// copyConstant
 			// 
 			this.copyConstant.Name = "copyConstant";
-			this.copyConstant.Size = new System.Drawing.Size(180, 22);
+			this.copyConstant.Size = new System.Drawing.Size(142, 22);
 			this.copyConstant.Text = "Копіювати";
 			this.copyConstant.Click += new System.EventHandler(this.copyConstant_Click);
 			// 
 			// deleteConstant
 			// 
 			this.deleteConstant.Name = "deleteConstant";
-			this.deleteConstant.Size = new System.Drawing.Size(180, 22);
+			this.deleteConstant.Size = new System.Drawing.Size(142, 22);
 			this.deleteConstant.Text = "Видалити";
 			this.deleteConstant.Click += new System.EventHandler(this.deleteConstant_Click);
 			// 
 			// addConstant
 			// 
 			this.addConstant.Name = "addConstant";
-			this.addConstant.Size = new System.Drawing.Size(180, 22);
+			this.addConstant.Size = new System.Drawing.Size(142, 22);
 			this.addConstant.Text = "Додати нову";
 			this.addConstant.Click += new System.EventHandler(this.addConstant_Click);
+			// 
+			// deleteConstantBlock
+			// 
+			this.deleteConstantBlock.Name = "deleteConstantBlock";
+			this.deleteConstantBlock.Size = new System.Drawing.Size(200, 22);
+			this.deleteConstantBlock.Text = "Видалити";
+			this.deleteConstantBlock.Click += new System.EventHandler(this.deleteConstantBlock_Click);
+			// 
+			// addConstantBlock
+			// 
+			this.addConstantBlock.Name = "addConstantBlock";
+			this.addConstantBlock.Size = new System.Drawing.Size(200, 22);
+			this.addConstantBlock.Text = "Додати новий блок";
+			this.addConstantBlock.Click += new System.EventHandler(this.addConstantBlock_Click);
+			// 
+			// addNewConstant
+			// 
+			this.addNewConstant.Name = "addNewConstant";
+			this.addNewConstant.Size = new System.Drawing.Size(200, 22);
+			this.addNewConstant.Text = "Додати нову константу";
+			this.addNewConstant.Click += new System.EventHandler(this.addNewConstant_Click);
 			// 
 			// FormConfiguration
 			// 
@@ -576,7 +603,7 @@
 		private System.Windows.Forms.ToolStripMenuItem addContantsBlockToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem addConstatntsToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripConstantBlock;
-		private System.Windows.Forms.ToolStripMenuItem OpenConstantBlock;
+		private System.Windows.Forms.ToolStripMenuItem openConstantBlock;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripConstant;
 		private System.Windows.Forms.ToolStripMenuItem openConstant;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripRegistersInformation;
@@ -600,6 +627,9 @@
 		private System.Windows.Forms.ToolStripMenuItem addConstant;
 		private System.Windows.Forms.ToolStripMenuItem copyConstant;
 		private System.Windows.Forms.ToolStripMenuItem deleteConstant;
+		private System.Windows.Forms.ToolStripMenuItem addConstantBlock;
+		private System.Windows.Forms.ToolStripMenuItem deleteConstantBlock;
+		private System.Windows.Forms.ToolStripMenuItem addNewConstant;
 	}
 }
 

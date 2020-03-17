@@ -1,8 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Додати колонку Контрагент_Копія_1 (col_a7, тип uuid)  в таблицю Константи (tab_constants)</info>
-  <sql>ALTER TABLE tab_constants ADD COLUMN "col_a7" uuid;</sql>
-  <info>Створити таблицю Історія (tab_a48)</info>
-  <sql>CREATE TABLE tab_a48 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a1" timestamp without time zone, "col_a2" text, PRIMARY KEY(uid));</sql>
-  <sql>CREATE INDEX ON tab_a48 (owner);</sql>
-</root>
+<root />

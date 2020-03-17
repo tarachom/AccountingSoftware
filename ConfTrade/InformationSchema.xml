@@ -97,6 +97,16 @@
       <DataType>integer</DataType>
       <UdtName>int4</UdtName>
     </Column>
+    <Column>
+      <Name>col_a7</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_b2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
   </Table>
   <Table>
     <Name>tab_a60</Name>
@@ -1737,6 +1747,29 @@
       <Name>col_a3</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a48</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>

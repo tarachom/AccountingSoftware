@@ -26,7 +26,7 @@ limitations under the License.
  *
  * Конфігурації "ConfTrade 1.1"
  * Автор Yurik
- * Дата конфігурації: 17.03.2020 20:50:21
+ * Дата конфігурації: 17.03.2020 22:04:22
  *
  */
 
@@ -47,7 +47,7 @@ namespace ConfTrade_v1_1
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a1", "const_2", "const_3", "const_4", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6" }, fieldValue);
+                 new string[] { "col_a1", "const_2", "const_3", "const_4", "col_a7", "const_5", "const_6", "const_7", "const_8", "const_9", "const_10", "const_11", "const_12", "const_13", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_b2" }, fieldValue);
             
             if (IsSelect)
             {
@@ -56,6 +56,7 @@ namespace ConfTrade_v1_1
                 Константи.Основні.ОсновнийСклад = new Довідники.МестаХранения_Pointer(fieldValue["const_2"]);
                 Константи.Основні.Перелічення = (fieldValue["const_3"] != DBNull.Value) ? (Перелічення.ВидиКонтрагентов)fieldValue["const_3"] : 0;
                 Константи.Основні.Склад = fieldValue["const_4"].ToString();
+                Константи.Основні.Контрагент_Копія_1 = new Довідники.Контрагенти_Pointer(fieldValue["col_a7"]);
                 Константи.Додаткові.A = new EmptyPointer();
                 Константи.Додаткові.B = fieldValue["const_6"].ToString();
                 Константи.ПоштовіНастройки.іваіваddd = new EmptyPointer();
@@ -70,6 +71,7 @@ namespace ConfTrade_v1_1
                 Константи.Робот.Стан = fieldValue["col_a4"].ToString();
                 Константи.Робот.Коментар = fieldValue["col_a5"].ToString();
                 Константи.Робот.Число = (fieldValue["col_a6"] != DBNull.Value) ? (int)fieldValue["col_a6"] : 0;
+                Константи.werqwe.sdfasd = fieldValue["col_b2"].ToString();
                 
                 StartInit = false;
             }
@@ -124,6 +126,17 @@ namespace ConfTrade_v1_1.Константи
                 _Склад = value;
                 if (!Config.StartInit)
                     Config.Kernel.DataBase.SaveConstants("tab_constants", "const_4", _Склад);
+            }
+        }
+        private static Довідники.Контрагенти_Pointer _Контрагент_Копія_1;
+        public static Довідники.Контрагенти_Pointer Контрагент_Копія_1
+        {
+            get { return _Контрагент_Копія_1; }
+            set
+            {
+                _Контрагент_Копія_1 = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a7", _Контрагент_Копія_1.ToString());
             }
         }
         
@@ -287,6 +300,88 @@ namespace ConfTrade_v1_1.Константи
                 }
                 public DateTime Дата { get; set; }
                 public string Значенн { get; set; }
+                
+            }            
+        }
+          
+        public class Контрагент_Копія_1_Історія_TablePart : ConstantsTablePart
+        {
+            public Контрагент_Копія_1_Історія_TablePart() : base(Config.Kernel, "tab_a48",
+                 new string[] { "col_a1", "col_a2" }) 
+            {
+                Records = new List<Історія_Record>();
+            }
+                
+            public List<Історія_Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Історія_Record record = new Історія_Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
+                    record.Значення = fieldValue["col_a2"].ToString();
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (Історія_Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a1", record.Дата);
+                        fieldValue.Add("col_a2", record.Значення);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class Історія_Record : ConstantsTablePartRecord
+            {
+                public Історія_Record()
+                {
+                    Дата = DateTime.MinValue;
+                    Значення = "";
+                    
+                }
+        
+                
+                public Історія_Record(
+                    DateTime?  _Дата = null, string _Значення = "")
+                {
+                    Дата = _Дата ?? DateTime.MinValue;
+                    Значення = _Значення;
+                    
+                }
+                public DateTime Дата { get; set; }
+                public string Значення { get; set; }
                 
             }            
         }
@@ -462,6 +557,22 @@ namespace ConfTrade_v1_1.Константи
                 _Число = value;
                 if (!Config.StartInit)
                     Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a6", _Число);
+            }
+        }
+             
+    }
+    
+    static class werqwe
+    {
+        private static string _sdfasd;
+        public static string sdfasd
+        {
+            get { return _sdfasd; }
+            set
+            {
+                _sdfasd = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b2", _sdfasd);
             }
         }
              

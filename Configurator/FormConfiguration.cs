@@ -49,7 +49,7 @@ namespace Configurator
 
 		#region LoadTreeConfiguration
 
-		public void LoadConstant(TreeNode rootNode , ConfigurationConstants confConstant)
+		public void LoadConstant(TreeNode rootNode, ConfigurationConstants confConstant)
 		{
 			TreeNode constantNode = rootNode.Nodes.Add(confConstant.Name, confConstant.Name);
 			constantNode.ContextMenuStrip = contextMenuStripConstant;
@@ -1049,6 +1049,34 @@ namespace Configurator
 			}
 		}
 
+		private void deleteConstantBlock_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string constantsBlockName = nodeSel.Name;
+
+				if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+				{
+					Conf.ConstantsBlock.Remove(constantsBlockName);
+					treeConfiguration.Nodes["root"].Nodes["Contants"].Nodes[constantsBlockName].Remove();
+				}
+			}
+		}
+
+		private void addConstantBlock_Click(object sender, EventArgs e)
+		{
+			addContantsBlockToolStripMenuItem_Click(sender, e);
+		}
+
+		private void addNewConstant_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string constantsBlockName = nodeSel.Name;
+				AddNewConstants(constantsBlockName);
+			}
+		}
+
 		#endregion
 
 		#region Контекстне меню констант
@@ -1114,12 +1142,30 @@ namespace Configurator
 
 		private void addConstant_Click(object sender, EventArgs e)
 		{
-			addConstatntsToolStripMenuItem_Click(sender, e);
+			if (nodeSel != null)
+			{
+				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
+				ConfigurationConstantsBlock configurationConstantsBlock = configurationConstants.Block;
+
+				AddNewConstants(configurationConstantsBlock.BlockName);
+			}
 		}
 
 		private void deleteConstant_Click(object sender, EventArgs e)
 		{
+			if (nodeSel != null)
+			{
+				ConfigurationConstants configurationConstants = (ConfigurationConstants)nodeSel.Tag;
+				ConfigurationConstantsBlock configurationConstantsBlock = configurationConstants.Block;
 
+				if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+				{
+					configurationConstantsBlock.Constants.Remove(configurationConstants.Name);
+
+					treeConfiguration.Nodes["root"].Nodes["Contants"].Nodes[configurationConstantsBlock.BlockName].
+						Nodes[configurationConstants.Name].Remove();
+				}
+			}
 		}
 
 		#endregion
@@ -1331,11 +1377,7 @@ namespace Configurator
 
 		private void addConstatntsToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			ConstantsForm constantsForm = new ConstantsForm();
-			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
-			constantsForm.CallBack = CallBack_Update_Constants;
-			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields());
-			constantsForm.Show();
+			AddNewConstants();
 		}
 
 		private void addDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1382,6 +1424,16 @@ namespace Configurator
 
 		#region Функції
 
+		private void AddNewConstants(string defaultBlockName = "")
+		{
+			ConstantsForm constantsForm = new ConstantsForm();
+			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
+			constantsForm.CallBack = CallBack_Update_Constants;
+			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields());
+			constantsForm.ConstantsBlock = defaultBlockName;
+			constantsForm.Show();
+		}
+
 		private Dictionary<string, ConfigurationObjectField> GetConstantsAllFields()
 		{
 			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
@@ -1397,6 +1449,9 @@ namespace Configurator
 			return ConstantsAllFields;
 		}
 
+
 		#endregion
+
+
 	}
 }
