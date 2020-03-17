@@ -1,27 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Видалити таблицю Договір2_Копія_1 (tab_a16)</info>
-  <sql>DROP TABLE tab_a16;</sql>
-  <info>Видалити таблицю Товари (tab_a47)</info>
-  <sql>DROP TABLE tab_a47;</sql>
-  <info>Видалити таблицю Договор_Копія_1 (tab_a48)</info>
-  <sql>DROP TABLE tab_a48;</sql>
-  <info>Видалити таблицю Тест (tab_a49)</info>
-  <sql>DROP TABLE tab_a49;</sql>
-  <info>Видалити таблицю Инвентаризация_Копія_1 (tab_a50)</info>
-  <sql>DROP TABLE tab_a50;</sql>
-  <info>Видалити таблицю Товари (tab_a51)</info>
-  <sql>DROP TABLE tab_a51;</sql>
-  <info>Видалити таблицю РозхіднийКасовийОрдер_Копія_1 (tab_a54)</info>
-  <sql>DROP TABLE tab_a54;</sql>
-  <info>Видалити таблицю ПрихіднийКасовийОрдер_Копія_1 (tab_a56)</info>
-  <sql>DROP TABLE tab_a56;</sql>
-  <info>Видалити таблицю ПриходнаяНакладная_Копія_1 (tab_a57)</info>
-  <sql>DROP TABLE tab_a57;</sql>
-  <info>Видалити таблицю Товари (tab_a58)</info>
-  <sql>DROP TABLE tab_a58;</sql>
-  <info>Видалити таблицю РасходнаяНакладная_Копія_1 (tab_a59)</info>
-  <sql>DROP TABLE tab_a59;</sql>
-  <info>Видалити таблицю Товари (tab_a61)</info>
-  <sql>DROP TABLE tab_a61;</sql>
-</root>
+<root />

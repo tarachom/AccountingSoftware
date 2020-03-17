@@ -922,7 +922,7 @@ namespace Configurator
 				for (int i = 1; i < 100; i++)
 				{
 					documentCopyName = documentName + "_Копія_" + i.ToString();
-					if (!Conf.Directories.ContainsKey(documentCopyName))
+					if (!Conf.Documents.ContainsKey(documentCopyName))
 						break;
 				}
 
