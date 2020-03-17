@@ -1132,8 +1132,8 @@ namespace Configurator
 
 						confTablePartCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
 					}
-				}
-
+				} 
+				
 				Conf.AppendConstants(configurationConstantsBlock.BlockName, configurationCopyConstants);
 
 				LoadConstant(treeConfiguration.Nodes["root"].Nodes["Contants"].Nodes[configurationConstantsBlock.BlockName], configurationCopyConstants);
