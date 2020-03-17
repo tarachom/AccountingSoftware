@@ -43,14 +43,14 @@
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.comboBoxRegisterType = new System.Windows.Forms.ComboBox();
+			this.label2 = new System.Windows.Forms.Label();
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxTable = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
-			this.comboBoxRegisterType = new System.Windows.Forms.ComboBox();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -210,6 +210,25 @@
 			this.splitContainer1.SplitterDistance = 266;
 			this.splitContainer1.TabIndex = 4;
 			// 
+			// comboBoxRegisterType
+			// 
+			this.comboBoxRegisterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxRegisterType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxRegisterType.FormattingEnabled = true;
+			this.comboBoxRegisterType.Location = new System.Drawing.Point(88, 83);
+			this.comboBoxRegisterType.Name = "comboBoxRegisterType";
+			this.comboBoxRegisterType.Size = new System.Drawing.Size(291, 21);
+			this.comboBoxRegisterType.TabIndex = 7;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(9, 86);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(73, 13);
+			this.label2.TabIndex = 6;
+			this.label2.Text = "Тип регістру:";
+			// 
 			// textBoxDesc
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -265,25 +284,6 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// label2
-			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(9, 86);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(73, 13);
-			this.label2.TabIndex = 6;
-			this.label2.Text = "Тип регістру:";
-			// 
-			// comboBoxRegisterType
-			// 
-			this.comboBoxRegisterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxRegisterType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.comboBoxRegisterType.FormattingEnabled = true;
-			this.comboBoxRegisterType.Location = new System.Drawing.Point(88, 83);
-			this.comboBoxRegisterType.Name = "comboBoxRegisterType";
-			this.comboBoxRegisterType.Size = new System.Drawing.Size(291, 21);
-			this.comboBoxRegisterType.TabIndex = 7;
-			// 
 			// RegistersAccumulationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,7 +294,7 @@
 			this.KeyPreview = true;
 			this.Name = "RegistersAccumulationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "Регістер відомостей";
+			this.Text = "Регістер накопичення";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablePartForm_KeyDown);
 			this.panel1.ResumeLayout(false);

@@ -56,6 +56,7 @@
 			// buttonAnalize
 			// 
 			this.buttonAnalize.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.buttonAnalize.Enabled = false;
 			this.buttonAnalize.ForeColor = System.Drawing.Color.ForestGreen;
 			this.buttonAnalize.Location = new System.Drawing.Point(3, 3);
 			this.buttonAnalize.Name = "buttonAnalize";
@@ -80,6 +81,7 @@
 			// buttonSave
 			// 
 			this.buttonSave.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.buttonSave.Enabled = false;
 			this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
 			this.buttonSave.Location = new System.Drawing.Point(118, 3);
 			this.buttonSave.Name = "buttonSave";

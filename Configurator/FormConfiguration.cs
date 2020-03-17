@@ -1051,6 +1051,81 @@ namespace Configurator
 			}
 		}
 
+		private void addItemRegistersInformation_Click(object sender, EventArgs e)
+		{
+			addNewRegistersInformationToolStripMenuItem_Click(sender, e);
+		}
+
+		private void copyItemRegistersInformation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registerName = nodeSel.Name;
+
+				string registerCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					registerCopyName = registerName + "_Копія_" + i.ToString();
+					if (!Conf.RegistersInformation.ContainsKey(registerCopyName))
+						break;
+				}
+
+				ConfigurationRegistersInformation confRegisterOriginal = Conf.RegistersInformation[registerName];
+
+				ConfigurationRegistersInformation confRegisterCopy = new
+					ConfigurationRegistersInformation(registerCopyName, Configuration.GetNewUnigueTableName(Program.Kernel),
+					confRegisterOriginal.Desc);
+
+				Conf.AppendRegistersInformation(confRegisterCopy);
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.DimensionFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.DimensionFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.ResourcesFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.ResourcesFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.PropertyFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.PropertyFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
+			}
+		}
+
+		private void deleteItemRegistersInformation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersName = nodeSel.Name;
+
+				if (Conf.RegistersInformation.ContainsKey(registersName))
+				{
+					if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						Conf.RegistersInformation.Remove(registersName);
+						LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
+					}
+				}
+			}
+		}
+
 		#endregion
 
 		#region Контекстне меню регістер накопичення
@@ -1066,6 +1141,81 @@ namespace Configurator
 				registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
 				registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
 				registersAccumulationForm.Show();
+			}
+		}
+
+		private void addItemRegistersAccumulation_Click(object sender, EventArgs e)
+		{
+			addNewRegisterAccumulationToolStripMenuItem_Click(sender, e);
+		}
+
+		private void copyItemRegistersAccumulation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registerName = nodeSel.Name;
+
+				string registerCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					registerCopyName = registerName + "_Копія_" + i.ToString();
+					if (!Conf.RegistersAccumulation.ContainsKey(registerCopyName))
+						break;
+				}
+
+				ConfigurationRegistersAccumulation confRegisterOriginal = Conf.RegistersAccumulation[registerName];
+
+				ConfigurationRegistersAccumulation confRegisterCopy = new
+					ConfigurationRegistersAccumulation(registerCopyName, Configuration.GetNewUnigueTableName(Program.Kernel),
+					confRegisterOriginal.TypeRegistersAccumulation, confRegisterOriginal.Desc);
+
+				Conf.AppendRegistersAccumulation(confRegisterCopy);
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.DimensionFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.DimensionFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.ResourcesFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.ResourcesFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				foreach (ConfigurationObjectField confFieldOriginal in confRegisterOriginal.PropertyFields.Values)
+				{
+					ConfigurationObjectField confFieldCopy = new
+						ConfigurationObjectField(confFieldOriginal.Name, confFieldOriginal.NameInTable,
+						confFieldOriginal.Type, confFieldOriginal.Pointer, confFieldOriginal.Desc);
+
+					confRegisterCopy.PropertyFields.Add(confFieldCopy.Name, confFieldCopy);
+				}
+
+				LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
+			}
+		}
+
+		private void deleteItemRegistersAccumulation_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string registersName = nodeSel.Name;
+
+				if (Conf.RegistersAccumulation.ContainsKey(registersName))
+				{
+					if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+					{
+						Conf.RegistersAccumulation.Remove(registersName);
+						LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
+					}
+				}
 			}
 		}
 
@@ -1139,14 +1289,13 @@ namespace Configurator
 			registersInformationForm.Show();
 		}
 
-		private void addNewToolStripMenuItem_Click(object sender, EventArgs e)
+		private void addNewRegisterAccumulationToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			RegistersAccumulationForm registersAccumulationForm = new RegistersAccumulationForm();
 			registersAccumulationForm.CallBack = CallBack_Update_RegistersAccumulation;
 			registersAccumulationForm.CallBack_IsExistRegistersAccumulation = CallBack_IsExistRegistersAccumulation;
 			registersAccumulationForm.Show();
 		}
-
 
 		#endregion
 	}

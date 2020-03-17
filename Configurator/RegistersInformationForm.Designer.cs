@@ -36,6 +36,8 @@
 			this.buttonAddField = new System.Windows.Forms.Button();
 			this.contextMenuStripAddField = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.addDimensionField = new System.Windows.Forms.ToolStripMenuItem();
+			this.addResourcesField = new System.Windows.Forms.ToolStripMenuItem();
+			this.addPropertyField = new System.Windows.Forms.ToolStripMenuItem();
 			this.label1 = new System.Windows.Forms.Label();
 			this.buttonSave = new System.Windows.Forms.Button();
 			this.panel2 = new System.Windows.Forms.Panel();
@@ -47,8 +49,6 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.addResourcesField = new System.Windows.Forms.ToolStripMenuItem();
-			this.addPropertyField = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -121,9 +121,23 @@
 			// addDimensionField
 			// 
 			this.addDimensionField.Name = "addDimensionField";
-			this.addDimensionField.Size = new System.Drawing.Size(180, 22);
+			this.addDimensionField.Size = new System.Drawing.Size(112, 22);
 			this.addDimensionField.Text = "Вимір";
 			this.addDimensionField.Click += new System.EventHandler(this.addDimensionField_Click);
+			// 
+			// addResourcesField
+			// 
+			this.addResourcesField.Name = "addResourcesField";
+			this.addResourcesField.Size = new System.Drawing.Size(112, 22);
+			this.addResourcesField.Text = "Ресурс";
+			this.addResourcesField.Click += new System.EventHandler(this.addResourcesField_Click);
+			// 
+			// addPropertyField
+			// 
+			this.addPropertyField.Name = "addPropertyField";
+			this.addPropertyField.Size = new System.Drawing.Size(112, 22);
+			this.addPropertyField.Text = "Поле";
+			this.addPropertyField.Click += new System.EventHandler(this.addPropertyField_Click);
 			// 
 			// label1
 			// 
@@ -247,20 +261,6 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// addResourcesField
-			// 
-			this.addResourcesField.Name = "addResourcesField";
-			this.addResourcesField.Size = new System.Drawing.Size(180, 22);
-			this.addResourcesField.Text = "Ресурс";
-			this.addResourcesField.Click += new System.EventHandler(this.addResourcesField_Click);
-			// 
-			// addPropertyField
-			// 
-			this.addPropertyField.Name = "addPropertyField";
-			this.addPropertyField.Size = new System.Drawing.Size(180, 22);
-			this.addPropertyField.Text = "Поле";
-			this.addPropertyField.Click += new System.EventHandler(this.addPropertyField_Click);
-			// 
 			// RegistersInformationForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -271,7 +271,7 @@
 			this.KeyPreview = true;
 			this.Name = "RegistersInformationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
-			this.Text = "Регістер накопичення";
+			this.Text = "Регістер відомостей";
 			this.Load += new System.EventHandler(this.TablePartForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TablePartForm_KeyDown);
 			this.panel1.ResumeLayout(false);

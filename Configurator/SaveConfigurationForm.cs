@@ -294,6 +294,8 @@ namespace Configurator
 					}
 				}
 			}
+
+			buttonAnalize.Invoke(new Action(() => buttonAnalize.Enabled = true));
 		}
 
 		void SaveAnalizeAndCreateSQL()
@@ -357,6 +359,7 @@ namespace Configurator
 					ApendLine(" - " + nodeSQL.Current.Value, "");
 				}
 
+			buttonAnalize.Invoke(new Action(() => buttonAnalize.Enabled = true));
 			buttonSave.Invoke(new Action(() => buttonSave.Enabled = true));
 		}
 
@@ -411,22 +414,22 @@ namespace Configurator
 		{
 			Thread thread = new Thread(new ThreadStart(SaveAndAnalize));
 			thread.Start();
-
-			buttonSave.Enabled = false;
 		}
 
 		private void buttonAnalize_Click(object sender, EventArgs e)
 		{
+			buttonAnalize.Enabled = false;
+
 			Thread thread = new Thread(new ThreadStart(SaveAnalizeAndCreateSQL));
 			thread.Start();
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
-			Thread thread = new Thread(new ThreadStart(ExecuteSQLAndGenerateCode));
-			thread.Start();
-
 			buttonSave.Enabled = false;
+
+			Thread thread = new Thread(new ThreadStart(ExecuteSQLAndGenerateCode));
+			thread.Start();			
 		}
 
 		private void buttonClose_Click(object sender, EventArgs e)
