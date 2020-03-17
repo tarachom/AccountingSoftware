@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Створити таблицю Перший_Копія_1 (tab_b12)</info>
-  <sql>CREATE TABLE tab_b12 (uid uuid NOT NULL,  "col_field1" timestamp without time zone,  "col_a1" uuid,  "col_a3" uuid,  "col_a4" uuid,  "col_field2" numeric,  "col_a8" numeric,  "col_field3" text,  "col_a2" integer,  "col_a5" text, PRIMARY KEY(uid));</sql>
+  <info>Видалити таблицю Перший_Копія_1 (tab_b11)</info>
+  <sql>DROP TABLE tab_b11;</sql>
+  <info>Видалити таблицю Перший_Копія_1 (tab_b12)</info>
+  <sql>DROP TABLE tab_b12;</sql>
 </root>

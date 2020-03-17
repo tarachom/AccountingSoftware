@@ -71,69 +71,114 @@ namespace Configurator
 			}
 		}
 
+		public void LoadDirectory(TreeNode rootNode, ConfigurationDirectories confDirectory)
+		{
+			TreeNode directoryNode = rootNode.Nodes.Add(confDirectory.Name, confDirectory.Name);
+			directoryNode.Tag = "Directory=" + confDirectory.Name;
+			directoryNode.ContextMenuStrip = contextMenuStripDirectory;
+			directoryNode.SelectedImageIndex = 18;
+			directoryNode.ImageIndex = 18;
+
+			//Поля
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in confDirectory.Fields)
+			{
+				string info = (ConfFields.Value.Type == "pointer" || ConfFields.Value.Type == "enum") ?
+					" -> " + ConfFields.Value.Pointer : "";
+
+				TreeNode fieldNode = directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
+
+			TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
+			directoriTabularPartsNode.SelectedImageIndex = 4;
+			directoriTabularPartsNode.ImageIndex = 4;
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDirectory.TabularParts)
+			{
+				TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+				directoriTablePartNode.SelectedImageIndex = 13;
+				directoriTablePartNode.ImageIndex = 13;
+
+				//Поля
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+				{
+					string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
+						" -> " + ConfTablePartFields.Value.Pointer : "";
+
+					TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
+				}
+			}
+
+			TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
+			directoriViewsNode.SelectedImageIndex = 8;
+			directoriViewsNode.ImageIndex = 8;
+
+			foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in confDirectory.Views)
+			{
+				TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
+				directoriViewNode.SelectedImageIndex = 9;
+				directoriViewNode.ImageIndex = 9;
+
+				//Поля
+				foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
+				{
+					TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
+
+					fieldNode.SelectedImageIndex = 15;
+					fieldNode.ImageIndex = 15;
+				}
+			}
+		}
+
 		public void LoadDirectories(TreeNode rootNode)
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationDirectories> ConfDirectory in Conf.Directories)
+			foreach (ConfigurationDirectories ConfDirectory in Conf.Directories.Values)
 			{
-				TreeNode directoryNode = rootNode.Nodes.Add(ConfDirectory.Key, ConfDirectory.Value.Name);
-				directoryNode.Tag = "Directory=" + ConfDirectory.Key;
-				directoryNode.ContextMenuStrip = contextMenuStripDirectory;
-				directoryNode.SelectedImageIndex = 18;
-				directoryNode.ImageIndex = 18;
+				LoadDirectory(rootNode, ConfDirectory);
+			}
+		}
 
-				//Поля
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDirectory.Value.Fields)
-				{
-					string info = (ConfFields.Value.Type == "pointer" || ConfFields.Value.Type == "enum") ?
+		public void LoadDocument(TreeNode rootNode, ConfigurationDocuments confDocument)
+		{
+			TreeNode documentNode = rootNode.Nodes.Add(confDocument.Name, confDocument.Name);
+			documentNode.ContextMenuStrip = contextMenuStripDocument;
+			documentNode.SelectedImageIndex = 1;
+			documentNode.ImageIndex = 1;
+
+			//Поля
+			foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in confDocument.Fields)
+			{
+				string info = (ConfFields.Value.Type == "pointer" || ConfFields.Value.Type == "enum") ?
 						" -> " + ConfFields.Value.Pointer : "";
 
-					TreeNode fieldNode = directoryNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
+				TreeNode fieldNode = documentNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
+				fieldNode.SelectedImageIndex = 15;
+				fieldNode.ImageIndex = 15;
+			}
+
+			TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
+			documentTabularPartsNode.SelectedImageIndex = 4;
+			documentTabularPartsNode.ImageIndex = 4;
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDocument.TabularParts)
+			{
+				TreeNode documentTablePartNode = documentTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+				documentTablePartNode.ImageIndex = 1;
+
+				//Поля
+				foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+				{
+					string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
+						" -> " + ConfTablePartFields.Value.Pointer : "";
+
+					TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
 					fieldNode.SelectedImageIndex = 15;
 					fieldNode.ImageIndex = 15;
-				}
-
-				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
-				directoriTabularPartsNode.SelectedImageIndex = 4;
-				directoriTabularPartsNode.ImageIndex = 4;
-
-				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDirectory.Value.TabularParts)
-				{
-					TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
-					directoriTablePartNode.SelectedImageIndex = 13;
-					directoriTablePartNode.ImageIndex = 13;
-
-					//Поля
-					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
-					{
-						string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
-							" -> " + ConfTablePartFields.Value.Pointer : "";
-
-						TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-						fieldNode.SelectedImageIndex = 15;
-						fieldNode.ImageIndex = 15;
-					}
-				}
-
-				TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
-				directoriViewsNode.SelectedImageIndex = 8;
-				directoriViewsNode.ImageIndex = 8;
-
-				foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in ConfDirectory.Value.Views)
-				{
-					TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
-					directoriViewNode.SelectedImageIndex = 9;
-					directoriViewNode.ImageIndex = 9;
-
-					//Поля
-					foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
-					{
-						TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
-
-						fieldNode.SelectedImageIndex = 15;
-						fieldNode.ImageIndex = 15;
-					}
 				}
 			}
 		}
@@ -142,44 +187,26 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationDocuments> ConfDocuments in Conf.Documents)
+			foreach (ConfigurationDocuments ConfDocuments in Conf.Documents.Values)
 			{
-				TreeNode documentNode = rootNode.Nodes.Add(ConfDocuments.Key, ConfDocuments.Value.Name);
-				documentNode.ContextMenuStrip = contextMenuStripDocument;
-				documentNode.SelectedImageIndex = 1;
-				documentNode.ImageIndex = 1;
+				LoadDocument(rootNode, ConfDocuments);
+			}
+		}
 
-				//Поля
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfFields in ConfDocuments.Value.Fields)
-				{
-					string info = (ConfFields.Value.Type == "pointer" || ConfFields.Value.Type == "enum") ?
-							" -> " + ConfFields.Value.Pointer : "";
+		public void LoadEnum(TreeNode rootNode, ConfigurationEnums confEnum)
+		{
+			TreeNode enumNode = rootNode.Nodes.Add(confEnum.Name, confEnum.Name);
+			enumNode.ContextMenuStrip = contextMenuStripEnum;
+			enumNode.SelectedImageIndex = 13;
+			enumNode.ImageIndex = 13;
 
-					TreeNode fieldNode = documentNode.Nodes.Add(ConfFields.Key, ConfFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
+			//Поля
+			foreach (KeyValuePair<string, ConfigurationEnumField> ConfEnumFields in confEnum.Fields)
+			{
+				TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.Value.ToString(), ConfEnumFields.Value.Name);
 
-				TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
-				documentTabularPartsNode.SelectedImageIndex = 4;
-				documentTabularPartsNode.ImageIndex = 4;
-
-				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in ConfDocuments.Value.TabularParts)
-				{
-					TreeNode documentTablePartNode = documentTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
-					documentTablePartNode.ImageIndex = 1;
-
-					//Поля
-					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
-					{
-						string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
-							" -> " + ConfTablePartFields.Value.Pointer : "";
-
-						TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-						fieldNode.SelectedImageIndex = 15;
-						fieldNode.ImageIndex = 15;
-					}
-				}
+				enumFieldNode.SelectedImageIndex = 15;
+				enumFieldNode.ImageIndex = 15;
 			}
 		}
 
@@ -187,21 +214,9 @@ namespace Configurator
 		{
 			rootNode.Nodes.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationEnums> ConfEnum in Conf.Enums)
+			foreach (ConfigurationEnums ConfEnum in Conf.Enums.Values)
 			{
-				TreeNode enumNode = rootNode.Nodes.Add(ConfEnum.Key, ConfEnum.Value.Name);
-				enumNode.ContextMenuStrip = contextMenuStripEnum;
-				enumNode.SelectedImageIndex = 13;
-				enumNode.ImageIndex = 13;
-
-				//Поля
-				foreach (KeyValuePair<string, ConfigurationEnumField> ConfEnumFields in ConfEnum.Value.Fields)
-				{
-					TreeNode enumFieldNode = enumNode.Nodes.Add(ConfEnumFields.Value.Value.ToString(), ConfEnumFields.Value.Name);
-
-					enumFieldNode.SelectedImageIndex = 15;
-					enumFieldNode.ImageIndex = 15;
-				}
+				LoadEnum(rootNode, ConfEnum);
 			}
 		}
 
@@ -761,7 +776,7 @@ namespace Configurator
 						confViewCopy.Fields.Add(confViewField.Key, confViewField.Value);
 				}
 
-				LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
+				LoadDirectory(treeConfiguration.Nodes["root"].Nodes["Directories"], confDirectoriesCopy);
 			}
 		}
 
@@ -779,7 +794,8 @@ namespace Configurator
 						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 						{
 							Conf.Directories.Remove(directoryName);
-							LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
+							treeConfiguration.Nodes["root"].Nodes["Directories"].Nodes[directoryName].Remove();
+							//LoadDirectories(treeConfiguration.Nodes["root"].Nodes["Directories"]);
 						}
 					}
 					else
@@ -853,7 +869,7 @@ namespace Configurator
 						confEnumsCopy.SerialNumber = confEnumFieldOriginal.Value;
 				}
 
-				LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
+				LoadEnum(treeConfiguration.Nodes["root"].Nodes["Enums"], confEnumsCopy);
 			}
 		}
 
@@ -871,7 +887,9 @@ namespace Configurator
 						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 						{
 							Conf.Enums.Remove(enumName);
-							LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
+
+							treeConfiguration.Nodes["root"].Nodes["Enums"].Nodes[enumName].Remove();
+							//LoadEnums(treeConfiguration.Nodes["root"].Nodes["Enums"]);
 						}
 					}
 					else
@@ -961,7 +979,7 @@ namespace Configurator
 					}
 				}
 
-				LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
+				LoadDocument(treeConfiguration.Nodes["root"].Nodes["Documents"], confDocumentsCopy);
 			}
 		}
 
@@ -979,7 +997,8 @@ namespace Configurator
 						if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 						{
 							Conf.Documents.Remove(documentName);
-							LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
+							treeConfiguration.Nodes["root"].Nodes["Documents"].Nodes[documentName].Remove();
+							//LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
 						}
 					}
 					else
@@ -1120,7 +1139,8 @@ namespace Configurator
 					if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 					{
 						Conf.RegistersInformation.Remove(registersName);
-						LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
+						treeConfiguration.Nodes["root"].Nodes["RegistersInformation"].Nodes[registersName].Remove();
+						//LoadRegistersInformation(treeConfiguration.Nodes["root"].Nodes["RegistersInformation"]);
 					}
 				}
 			}
@@ -1213,7 +1233,8 @@ namespace Configurator
 					if (MessageBox.Show("Видалити?", "Повідомлення", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
 					{
 						Conf.RegistersAccumulation.Remove(registersName);
-						LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
+						treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"].Nodes[registersName].Remove();
+						//LoadRegistersAccumulation(treeConfiguration.Nodes["root"].Nodes["RegistersAccumulation"]);
 					}
 				}
 			}
