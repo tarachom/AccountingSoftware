@@ -201,6 +201,8 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region Function
+
 		/// <summary>
 		/// Пошук ссилок довідників і документів
 		/// </summary>
@@ -704,6 +706,8 @@ namespace AccountingSoftware
 			return errorList;
 		}
 
+		#endregion
+
 		#region Load
 
 		/// <summary>
@@ -713,6 +717,15 @@ namespace AccountingSoftware
 		/// <param name="Conf">Конфігурація</param>
 		public static void Load(string pathToConf, Configuration Conf)
 		{
+			if (!File.Exists(pathToConf))
+			{
+				Configuration EmptyConf = new Configuration();
+				EmptyConf.Name = "Нова конфігурація";
+				EmptyConf.NameSpace = "НоваКонфігурація_1_0";
+
+				Save(pathToConf, EmptyConf);
+			}
+
 			XPathDocument xPathDoc = new XPathDocument(pathToConf);
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 

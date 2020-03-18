@@ -269,7 +269,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                 StartInit = true;
                 <xsl:for-each select="$Constants">
                   <xsl:text>Константи.</xsl:text><xsl:value-of select="../../Name"/><xsl:text>.</xsl:text><xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
+                  <xsl:text>_Const = </xsl:text>
                   <xsl:call-template name="ReadFieldValue">
                     <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
                   </xsl:call-template>;
@@ -289,16 +289,16 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         <xsl:text>private static </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> _</xsl:text>
-        <xsl:value-of select="Name"/>;
+        <xsl:value-of select="Name"/>_Const;
         <xsl:text>public static </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> </xsl:text>
-        <xsl:value-of select="Name"/>
+        <xsl:value-of select="Name"/>_Const
         {
-            get { return _<xsl:value-of select="Name"/>; }
+            get { return _<xsl:value-of select="Name"/>_Const; }
             set
             {
-                _<xsl:value-of select="Name"/> = value;
+                _<xsl:value-of select="Name"/>_Const = value;
                 if (!Config.StartInit)
                     Config.Kernel.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
                     <xsl:if test="Type = 'enum'">
@@ -306,6 +306,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                     </xsl:if>
                     <xsl:text>_</xsl:text>
                     <xsl:value-of select="Name"/>
+                    <xsl:text>_Const</xsl:text>
                     <xsl:choose>
                       <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.ToString()</xsl:text>

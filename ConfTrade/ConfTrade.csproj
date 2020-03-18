@@ -57,6 +57,7 @@
     <Content Include="Comparison.xslt" />
     <Content Include="ComparisonReport.xml" />
     <Content Include="Configuration.xml" />
+    <Content Include="Configuration_Trade.xml" />
     <Content Include="Function.xslt" />
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />

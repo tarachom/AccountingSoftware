@@ -55,14 +55,7 @@ namespace ConfTrade
 			Conf.Config.Kernel.Open();
 			Conf.Config.InitAllConstants();
 
-			Console.WriteLine(Константи.Основні.Перелічення);
-
-			Константи.Основні.Перелічення = Conf.Перелічення.ВидиКонтрагентов.Безналоговые;
-			Константи.Робот.Старт = DateTime.Now;
-
-			Константи.Робот.Число = 1000;
-
-			Console.WriteLine(Константи.Основні.Перелічення);
+			Константи.Test2.Test_Const = "";
 
 			Console.ReadLine();
 

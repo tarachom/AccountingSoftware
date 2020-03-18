@@ -64,8 +64,14 @@
 			this.deleteDocumentItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripConstantBlock = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
+			this.addConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewConstant = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripConstant = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openConstant = new System.Windows.Forms.ToolStripMenuItem();
+			this.addConstant = new System.Windows.Forms.ToolStripMenuItem();
+			this.copyConstant = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteConstant = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripRegistersInformation = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openItemRegistersInformation = new System.Windows.Forms.ToolStripMenuItem();
 			this.addItemRegistersInformation = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,12 +82,6 @@
 			this.addItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
-			this.copyConstant = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteConstant = new System.Windows.Forms.ToolStripMenuItem();
-			this.addConstant = new System.Windows.Forms.ToolStripMenuItem();
-			this.deleteConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
-			this.addConstantBlock = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNewConstant = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
 			this.splitContainerBase.Panel1.SuspendLayout();
 			this.splitContainerBase.Panel2.SuspendLayout();
@@ -208,14 +208,14 @@
 			// ConfigToolStripMenuItem
 			// 
 			this.ConfigToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addDirectoryToolStripMenuItem,
-            this.addEnumToolStripMenuItem,
-            this.addNewDocumentToolStripMenuItem,
+            this.saveConfigurationToolStripMenuItem,
             this.addContantsBlockToolStripMenuItem,
             this.addConstatntsToolStripMenuItem,
+            this.addDirectoryToolStripMenuItem,
+            this.addNewDocumentToolStripMenuItem,
+            this.addEnumToolStripMenuItem,
             this.addNewRegistersInformationToolStripMenuItem,
-            this.addNewRegisterAccumulationToolStripMenuItem,
-            this.saveConfigurationToolStripMenuItem});
+            this.addNewRegisterAccumulationToolStripMenuItem});
 			this.ConfigToolStripMenuItem.Name = "ConfigToolStripMenuItem";
 			this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
 			this.ConfigToolStripMenuItem.Text = "Конфігурація";
@@ -223,57 +223,57 @@
 			// addDirectoryToolStripMenuItem
 			// 
 			this.addDirectoryToolStripMenuItem.Name = "addDirectoryToolStripMenuItem";
-			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addDirectoryToolStripMenuItem.Text = "Додати новий довідник";
+			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addDirectoryToolStripMenuItem.Text = "Новий довідник";
 			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
 			// 
 			// addEnumToolStripMenuItem
 			// 
 			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
-			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addEnumToolStripMenuItem.Text = "Додати нове перелічення";
+			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addEnumToolStripMenuItem.Text = "Нове перелічення";
 			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
 			// 
 			// addNewDocumentToolStripMenuItem
 			// 
 			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
-			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addNewDocumentToolStripMenuItem.Text = "Додати новий документ";
+			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addNewDocumentToolStripMenuItem.Text = "Новий документ";
 			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
 			// 
 			// addContantsBlockToolStripMenuItem
 			// 
 			this.addContantsBlockToolStripMenuItem.Name = "addContantsBlockToolStripMenuItem";
-			this.addContantsBlockToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addContantsBlockToolStripMenuItem.Text = "Додати новий блок констант";
+			this.addContantsBlockToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addContantsBlockToolStripMenuItem.Text = "Новий блок констант";
 			this.addContantsBlockToolStripMenuItem.Click += new System.EventHandler(this.addContantsBlockToolStripMenuItem_Click);
 			// 
 			// addConstatntsToolStripMenuItem
 			// 
 			this.addConstatntsToolStripMenuItem.Name = "addConstatntsToolStripMenuItem";
-			this.addConstatntsToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addConstatntsToolStripMenuItem.Text = "Додати нову константу";
+			this.addConstatntsToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addConstatntsToolStripMenuItem.Text = "Нова константа";
 			this.addConstatntsToolStripMenuItem.Click += new System.EventHandler(this.addConstatntsToolStripMenuItem_Click);
 			// 
 			// addNewRegistersInformationToolStripMenuItem
 			// 
 			this.addNewRegistersInformationToolStripMenuItem.Name = "addNewRegistersInformationToolStripMenuItem";
-			this.addNewRegistersInformationToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addNewRegistersInformationToolStripMenuItem.Text = "Додати новий регістер відомостей";
+			this.addNewRegistersInformationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addNewRegistersInformationToolStripMenuItem.Text = "Новий регістер відомостей";
 			this.addNewRegistersInformationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegistersInformationToolStripMenuItem_Click);
 			// 
 			// addNewRegisterAccumulationToolStripMenuItem
 			// 
 			this.addNewRegisterAccumulationToolStripMenuItem.Name = "addNewRegisterAccumulationToolStripMenuItem";
-			this.addNewRegisterAccumulationToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.addNewRegisterAccumulationToolStripMenuItem.Text = "Додати новий регістер накопичення";
+			this.addNewRegisterAccumulationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addNewRegisterAccumulationToolStripMenuItem.Text = "Новий регістер накопичення";
 			this.addNewRegisterAccumulationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegisterAccumulationToolStripMenuItem_Click);
 			// 
 			// saveConfigurationToolStripMenuItem
 			// 
 			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(274, 22);
-			this.saveConfigurationToolStripMenuItem.Text = "SaveConfiguration";
+			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.saveConfigurationToolStripMenuItem.Text = "Зберегти конфігурацію";
 			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
 			// contextMenuStripDirectory
@@ -398,7 +398,7 @@
             this.addNewConstant,
             this.deleteConstantBlock});
 			this.contextMenuStripConstantBlock.Name = "contextMenuConstantBlock";
-			this.contextMenuStripConstantBlock.Size = new System.Drawing.Size(201, 114);
+			this.contextMenuStripConstantBlock.Size = new System.Drawing.Size(201, 92);
 			// 
 			// openConstantBlock
 			// 
@@ -406,6 +406,27 @@
 			this.openConstantBlock.Size = new System.Drawing.Size(200, 22);
 			this.openConstantBlock.Text = "Відкрити";
 			this.openConstantBlock.Click += new System.EventHandler(this.OpenConstantBlock_Click);
+			// 
+			// addConstantBlock
+			// 
+			this.addConstantBlock.Name = "addConstantBlock";
+			this.addConstantBlock.Size = new System.Drawing.Size(200, 22);
+			this.addConstantBlock.Text = "Додати новий блок";
+			this.addConstantBlock.Click += new System.EventHandler(this.addConstantBlock_Click);
+			// 
+			// addNewConstant
+			// 
+			this.addNewConstant.Name = "addNewConstant";
+			this.addNewConstant.Size = new System.Drawing.Size(200, 22);
+			this.addNewConstant.Text = "Додати нову константу";
+			this.addNewConstant.Click += new System.EventHandler(this.addNewConstant_Click);
+			// 
+			// deleteConstantBlock
+			// 
+			this.deleteConstantBlock.Name = "deleteConstantBlock";
+			this.deleteConstantBlock.Size = new System.Drawing.Size(200, 22);
+			this.deleteConstantBlock.Text = "Видалити";
+			this.deleteConstantBlock.Click += new System.EventHandler(this.deleteConstantBlock_Click);
 			// 
 			// contextMenuStripConstant
 			// 
@@ -423,6 +444,27 @@
 			this.openConstant.Size = new System.Drawing.Size(142, 22);
 			this.openConstant.Text = "Відкрити";
 			this.openConstant.Click += new System.EventHandler(this.openConstatnt_Click);
+			// 
+			// addConstant
+			// 
+			this.addConstant.Name = "addConstant";
+			this.addConstant.Size = new System.Drawing.Size(142, 22);
+			this.addConstant.Text = "Додати нову";
+			this.addConstant.Click += new System.EventHandler(this.addConstant_Click);
+			// 
+			// copyConstant
+			// 
+			this.copyConstant.Name = "copyConstant";
+			this.copyConstant.Size = new System.Drawing.Size(142, 22);
+			this.copyConstant.Text = "Копіювати";
+			this.copyConstant.Click += new System.EventHandler(this.copyConstant_Click);
+			// 
+			// deleteConstant
+			// 
+			this.deleteConstant.Name = "deleteConstant";
+			this.deleteConstant.Size = new System.Drawing.Size(142, 22);
+			this.deleteConstant.Text = "Видалити";
+			this.deleteConstant.Click += new System.EventHandler(this.deleteConstant_Click);
 			// 
 			// contextMenuStripRegistersInformation
 			// 
@@ -499,48 +541,6 @@
 			this.deleteItemRegistersAccumulation.Size = new System.Drawing.Size(150, 22);
 			this.deleteItemRegistersAccumulation.Text = "Видалити";
 			this.deleteItemRegistersAccumulation.Click += new System.EventHandler(this.deleteItemRegistersAccumulation_Click);
-			// 
-			// copyConstant
-			// 
-			this.copyConstant.Name = "copyConstant";
-			this.copyConstant.Size = new System.Drawing.Size(142, 22);
-			this.copyConstant.Text = "Копіювати";
-			this.copyConstant.Click += new System.EventHandler(this.copyConstant_Click);
-			// 
-			// deleteConstant
-			// 
-			this.deleteConstant.Name = "deleteConstant";
-			this.deleteConstant.Size = new System.Drawing.Size(142, 22);
-			this.deleteConstant.Text = "Видалити";
-			this.deleteConstant.Click += new System.EventHandler(this.deleteConstant_Click);
-			// 
-			// addConstant
-			// 
-			this.addConstant.Name = "addConstant";
-			this.addConstant.Size = new System.Drawing.Size(142, 22);
-			this.addConstant.Text = "Додати нову";
-			this.addConstant.Click += new System.EventHandler(this.addConstant_Click);
-			// 
-			// deleteConstantBlock
-			// 
-			this.deleteConstantBlock.Name = "deleteConstantBlock";
-			this.deleteConstantBlock.Size = new System.Drawing.Size(200, 22);
-			this.deleteConstantBlock.Text = "Видалити";
-			this.deleteConstantBlock.Click += new System.EventHandler(this.deleteConstantBlock_Click);
-			// 
-			// addConstantBlock
-			// 
-			this.addConstantBlock.Name = "addConstantBlock";
-			this.addConstantBlock.Size = new System.Drawing.Size(200, 22);
-			this.addConstantBlock.Text = "Додати новий блок";
-			this.addConstantBlock.Click += new System.EventHandler(this.addConstantBlock_Click);
-			// 
-			// addNewConstant
-			// 
-			this.addNewConstant.Name = "addNewConstant";
-			this.addNewConstant.Size = new System.Drawing.Size(200, 22);
-			this.addNewConstant.Text = "Додати нову константу";
-			this.addNewConstant.Click += new System.EventHandler(this.addNewConstant_Click);
 			// 
 			// FormConfiguration
 			// 
