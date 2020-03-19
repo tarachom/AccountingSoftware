@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.listBoxFields = new System.Windows.Forms.ListBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel8 = new System.Windows.Forms.Panel();
@@ -48,15 +49,19 @@
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.checkBoxHierarchical = new System.Windows.Forms.CheckBox();
+			this.comboBoxHierarchical = new System.Windows.Forms.ComboBox();
+			this.label7 = new System.Windows.Forms.Label();
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxTable = new System.Windows.Forms.TextBox();
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.label7 = new System.Windows.Forms.Label();
-			this.comboBoxHierarchical = new System.Windows.Forms.ComboBox();
-			this.checkBoxHierarchical = new System.Windows.Forms.CheckBox();
+			this.contextMenuStripField = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyFiled = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStripTablePart = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyTablePart = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1.SuspendLayout();
 			this.panel8.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -69,10 +74,13 @@
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			this.contextMenuStripField.SuspendLayout();
+			this.contextMenuStripTablePart.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listBoxFields
 			// 
+			this.listBoxFields.ContextMenuStrip = this.contextMenuStripField;
 			this.listBoxFields.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listBoxFields.FormattingEnabled = true;
 			this.listBoxFields.Location = new System.Drawing.Point(0, 0);
@@ -155,6 +163,7 @@
 			// 
 			// listBoxTabularParts
 			// 
+			this.listBoxTabularParts.ContextMenuStrip = this.contextMenuStripTablePart;
 			this.listBoxTabularParts.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.listBoxTabularParts.FormattingEnabled = true;
 			this.listBoxTabularParts.Location = new System.Drawing.Point(0, 0);
@@ -292,6 +301,36 @@
 			this.splitContainer1.SplitterDistance = 266;
 			this.splitContainer1.TabIndex = 4;
 			// 
+			// checkBoxHierarchical
+			// 
+			this.checkBoxHierarchical.AutoSize = true;
+			this.checkBoxHierarchical.Location = new System.Drawing.Point(85, 151);
+			this.checkBoxHierarchical.Name = "checkBoxHierarchical";
+			this.checkBoxHierarchical.Size = new System.Drawing.Size(130, 17);
+			this.checkBoxHierarchical.TabIndex = 8;
+			this.checkBoxHierarchical.Text = "Ієрархічний довідник";
+			this.checkBoxHierarchical.UseVisualStyleBackColor = true;
+			this.checkBoxHierarchical.CheckedChanged += new System.EventHandler(this.checkBoxHierarchical_CheckedChanged);
+			// 
+			// comboBoxHierarchical
+			// 
+			this.comboBoxHierarchical.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxHierarchical.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxHierarchical.FormattingEnabled = true;
+			this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 174);
+			this.comboBoxHierarchical.Name = "comboBoxHierarchical";
+			this.comboBoxHierarchical.Size = new System.Drawing.Size(459, 21);
+			this.comboBoxHierarchical.TabIndex = 7;
+			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(11, 177);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(57, 13);
+			this.label7.TabIndex = 6;
+			this.label7.Text = "Довідник:";
+			// 
 			// textBoxDesc
 			// 
 			this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -347,35 +386,33 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// label7
+			// contextMenuStripField
 			// 
-			this.label7.AutoSize = true;
-			this.label7.Location = new System.Drawing.Point(11, 177);
-			this.label7.Name = "label7";
-			this.label7.Size = new System.Drawing.Size(57, 13);
-			this.label7.TabIndex = 6;
-			this.label7.Text = "Довідник:";
+			this.contextMenuStripField.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyFiled});
+			this.contextMenuStripField.Name = "contextMenuStripField";
+			this.contextMenuStripField.Size = new System.Drawing.Size(133, 26);
 			// 
-			// comboBoxHierarchical
+			// copyFiled
 			// 
-			this.comboBoxHierarchical.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-			this.comboBoxHierarchical.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.comboBoxHierarchical.FormattingEnabled = true;
-			this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 174);
-			this.comboBoxHierarchical.Name = "comboBoxHierarchical";
-			this.comboBoxHierarchical.Size = new System.Drawing.Size(459, 21);
-			this.comboBoxHierarchical.TabIndex = 7;
+			this.copyFiled.Name = "copyFiled";
+			this.copyFiled.Size = new System.Drawing.Size(132, 22);
+			this.copyFiled.Text = "Копіювати";
+			this.copyFiled.Click += new System.EventHandler(this.copyFiled_Click);
 			// 
-			// checkBoxHierarchical
+			// contextMenuStripTablePart
 			// 
-			this.checkBoxHierarchical.AutoSize = true;
-			this.checkBoxHierarchical.Location = new System.Drawing.Point(85, 151);
-			this.checkBoxHierarchical.Name = "checkBoxHierarchical";
-			this.checkBoxHierarchical.Size = new System.Drawing.Size(130, 17);
-			this.checkBoxHierarchical.TabIndex = 8;
-			this.checkBoxHierarchical.Text = "Ієрархічний довідник";
-			this.checkBoxHierarchical.UseVisualStyleBackColor = true;
-			this.checkBoxHierarchical.CheckedChanged += new System.EventHandler(this.checkBoxHierarchical_CheckedChanged);
+			this.contextMenuStripTablePart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyTablePart});
+			this.contextMenuStripTablePart.Name = "contextMenuStripField";
+			this.contextMenuStripTablePart.Size = new System.Drawing.Size(133, 26);
+			// 
+			// copyTablePart
+			// 
+			this.copyTablePart.Name = "copyTablePart";
+			this.copyTablePart.Size = new System.Drawing.Size(180, 22);
+			this.copyTablePart.Text = "Копіювати";
+			this.copyTablePart.Click += new System.EventHandler(this.copyTablePart_Click);
 			// 
 			// DirectoryForm
 			// 
@@ -406,6 +443,8 @@
 			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
+			this.contextMenuStripField.ResumeLayout(false);
+			this.contextMenuStripTablePart.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -441,5 +480,9 @@
 		private System.Windows.Forms.ComboBox comboBoxHierarchical;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.CheckBox checkBoxHierarchical;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripField;
+		private System.Windows.Forms.ToolStripMenuItem copyFiled;
+		private System.Windows.Forms.ContextMenuStrip contextMenuStripTablePart;
+		private System.Windows.Forms.ToolStripMenuItem copyTablePart;
 	}
 }

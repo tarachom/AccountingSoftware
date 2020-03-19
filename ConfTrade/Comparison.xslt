@@ -371,6 +371,7 @@ limitations under the License.
     <xsl:param name="DocumentConfigurationFieldNodes" />
     <xsl:param name="SecondConfigurationFieldsNodes" />
     <xsl:param name="Type" />
+    <!-- Document, Directiory ... -->
     <xsl:param name="Name" />
     <xsl:param name="TableName" />
 
@@ -409,18 +410,18 @@ limitations under the License.
 
         </xsl:when>
         <xsl:otherwise>
-          
+
           <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer' or $SecondConfFieldType = 'enum'">
 
-            <!-- Вказівник з копії конфігурації -->
-            <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
+            <xsl:variable name="DocumentConfigurationType" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable]/Type" />
 
             <!-- Вказівник з конфігурації за умови що типи не відрізняються -->
             <xsl:variable name="DocumentConfigurationPointer" select="$DocumentConfigurationFieldNodes
                                 [NameInTable = $SecondConfFieldNameInTable and Type = $SecondConfFieldType]/Pointer" />
 
-            <xsl:variable name="DocumentConfigurationType" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable]/Type" />
-            
+            <!-- Вказівник з копії конфігурації -->
+            <xsl:variable name="SecondConfFieldPointer" select="Pointer" />
+
             <xsl:if test="($SecondConfFieldPointer != $DocumentConfigurationPointer) or 
               ($SecondConfFieldType = 'empty_pointer' and $DocumentConfigurationType = 'pointer') or
               ($SecondConfFieldType = 'pointer' and $DocumentConfigurationType = 'empty_pointer')">
@@ -476,6 +477,7 @@ limitations under the License.
     <xsl:param name="DocumentConfigurationNodes" />
     <xsl:param name="SecondConfigurationNodes" />
     <xsl:param name="Type" />
+    <xsl:param name="AnalizeField" />
 
     <xsl:for-each select="$SecondConfigurationNodes">
       <xsl:variable name="SecondConfDirectoryName" select="Name" />
@@ -505,14 +507,18 @@ limitations under the License.
 
       <xsl:if test="$CountObject = 1">
 
-        <xsl:call-template name="SecondConfigurationFields">
-          <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
-          <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/Fields/Field" />
-          <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
-          <xsl:with-param name="Type" select="$Type"/>
-          <xsl:with-param name="Name" select="$SecondConfDirectoryName" />
-          <xsl:with-param name="TableName" select="$SecondConfDirectoryTable" />
-        </xsl:call-template>
+        <!--<xsl:if test="$AnalizeField = 'yes'">-->
+
+          <xsl:call-template name="SecondConfigurationFields">
+            <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+            <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/Fields/Field" />
+            <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
+            <xsl:with-param name="Type" select="$Type"/>
+            <xsl:with-param name="Name" select="$SecondConfDirectoryName" />
+            <xsl:with-param name="TableName" select="$SecondConfDirectoryTable" />
+          </xsl:call-template>
+
+        <!--</xsl:if>-->
 
       </xsl:if>
 
@@ -527,7 +533,7 @@ limitations under the License.
 
           <!-- Якщо таблична частина відсутня або обєкт відсутній в конфігурації та є наявна таблиця в базі даних -->
           <xsl:when test="($CountTablePart = 0 or $CountObject = 0) and $CountTablePartInfoSchema = 1">
-            
+
             <Control_Table>
               <Type>
                 <xsl:value-of select="$Type"/>
@@ -616,7 +622,7 @@ limitations under the License.
               <IsExist>yes</IsExist>
 
               <xsl:call-template name="FieldsControl">
-                <xsl:with-param name="ConfigurationFieldList" select="//ConstantsBlock/Constants/Constant" />
+                <xsl:with-param name="ConfigurationFieldList" select="ConstantsBlock/./Constants/Constant" />
                 <xsl:with-param name="InfoSchemaFieldList" select="$InfoSchemaTableList[Name = $ConfObjTable]/Column" />
               </xsl:call-template>
 
@@ -626,7 +632,7 @@ limitations under the License.
 
               <TableCreate>
 
-                <xsl:for-each select="//ConstantsBlock/Constants/Constant">
+                <xsl:for-each select="ConstantsBlock/./Constants/Constant">
                   <xsl:call-template name="FieldCreate">
                     <xsl:with-param name="ConfFieldName" select="Name" />
                     <xsl:with-param name="ConfFieldNameInTable" select="NameInTable" />
@@ -639,7 +645,7 @@ limitations under the License.
             </xsl:otherwise>
           </xsl:choose>
 
-          <xsl:for-each select="//ConstantsBlock/Constants/Constant">
+          <xsl:for-each select="ConstantsBlock/./Constants/Constant">
 
             <xsl:call-template name="TabularPartsControl">
               <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
@@ -649,6 +655,19 @@ limitations under the License.
           </xsl:for-each>
 
         </Control_Table>
+
+        <xsl:if test="$InfoSchemaTableList[Name = $ConfObjTable]">
+
+          <xsl:call-template name="SecondConfigurationFields">
+            <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+            <xsl:with-param name="DocumentConfigurationFieldNodes" select="ConstantsBlock/./Constants/Constant" />
+            <xsl:with-param name="SecondConfigurationFieldsNodes" select="$documentSecondConfiguration/Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
+            <xsl:with-param name="Type">Constants</xsl:with-param>
+            <xsl:with-param name="Name" select="$ConfObjName" />
+            <xsl:with-param name="TableName" select="$ConfObjTable" />
+          </xsl:call-template>
+
+        </xsl:if>
 
       </xsl:for-each>
 

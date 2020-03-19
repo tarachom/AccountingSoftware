@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>19.03.2020 15:43:06</DateTimeSave>
+  <DateTimeSave>19.03.2020 15:01:30</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -26,60 +26,15 @@
               </Desc>
               <Fields>
                 <Field>
-                  <Name>цукцу1</Name>
+                  <Name>цукцу</Name>
                   <NameInTable>col_a1</NameInTable>
                   <Type>string</Type>
                   <Desc>
                   </Desc>
                 </Field>
                 <Field>
-                  <Name>цкцук2</Name>
+                  <Name>цкцук</Name>
                   <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-          </TabularParts>
-        </Constant>
-      </Constants>
-    </ConstantsBlock>
-    <ConstantsBlock>
-      <Name>Test2</Name>
-      <Desc>
-      </Desc>
-      <Constants>
-        <Constant>
-          <Name>Test</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Desc>
-          </Desc>
-          <Type>string</Type>
-          <TabularParts>
-            <TablePart>
-              <Name>sasdfs</Name>
-              <Table>tab_a01</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>s2</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-                <Field>
-                  <Name>w1</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-                <Field>
-                  <Name>we</Name>
-                  <NameInTable>col_a3</NameInTable>
                   <Type>string</Type>
                   <Desc>
                   </Desc>

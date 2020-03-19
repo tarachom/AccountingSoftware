@@ -119,6 +119,13 @@ namespace Configurator
 			this.Hide();
 		}
 
+		private void checkBoxHierarchical_CheckedChanged(object sender, EventArgs e)
+		{
+			comboBoxHierarchical.Enabled = checkBoxHierarchical.Checked;
+		}
+
+		#region Callback
+
 		bool CallBack_IsExistFieldName(string name)
 		{
 			return ConfDirectory.Fields.ContainsKey(name);
@@ -200,6 +207,10 @@ namespace Configurator
 			LoadViewsList();
 		}
 
+		#endregion
+
+		#region buttonAdd (Field, TabularParts, Views)
+
 		private void buttonAddField_Click(object sender, EventArgs e)
 		{
 			FieldForm fieldForm = new FieldForm();
@@ -225,6 +236,10 @@ namespace Configurator
 			viewForm.CallBack_IsExistView = CallBack_IsExistView;
 			viewForm.Show();
 		}
+
+		#endregion
+
+		#region Load List (Field, TabularParts, Views)
 
 		void LoadFieldList()
 		{
@@ -255,6 +270,10 @@ namespace Configurator
 				listBoxViews.Items.Add(configurationObjectView.Value.Name);
 			}
 		}
+
+		#endregion
+
+		#region Mouse & KeyDown
 
 		private void listBoxFields_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
@@ -354,9 +373,85 @@ namespace Configurator
 			}
 		}
 
-		private void checkBoxHierarchical_CheckedChanged(object sender, EventArgs e)
+		#endregion
+
+		#region Контекстне меню для поля
+
+		private void copyFiled_Click(object sender, EventArgs e)
 		{
-			comboBoxHierarchical.Enabled = checkBoxHierarchical.Checked;
+			if (listBoxFields.SelectedItem != null)
+			{
+				string fieldName = listBoxFields.SelectedItem.ToString();
+
+				string fieldCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					fieldCopyName = fieldName + "_Копія_" + i.ToString();
+					if (!ConfDirectory.Fields.ContainsKey(fieldCopyName))
+						break;
+				}
+
+				ConfigurationObjectField ConfFieldOriginal = ConfDirectory.Fields[fieldName];
+
+				ConfigurationObjectField ConfFieldCopy = new ConfigurationObjectField(fieldCopyName,
+					Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields),
+					ConfFieldOriginal.Type, ConfFieldOriginal.Pointer, ConfFieldOriginal.Desc);
+
+				ConfDirectory.AppendField(ConfFieldCopy);
+
+				LoadFieldList();
+			}
+			else
+			{
+				if (listBoxFields.Items.Count > 0)
+					MessageBox.Show("Виберіть елемент", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
 		}
+
+		#endregion
+
+		#region Контекстне меню для таблиної частини
+
+		private void copyTablePart_Click(object sender, EventArgs e)
+		{
+			if (listBoxTabularParts.SelectedItem != null)
+			{
+				string tablePartName = listBoxTabularParts.SelectedItem.ToString();
+
+				string tablePartCopyName = "";
+				for (int i = 1; i < 100; i++)
+				{
+					tablePartCopyName = tablePartName + "_Копія_" + i.ToString();
+					if (!ConfDirectory.TabularParts.ContainsKey(tablePartCopyName))
+						break;
+				}
+
+				ConfigurationObjectTablePart ConfTablePartOriginal = ConfDirectory.TabularParts[tablePartName];
+
+				ConfigurationObjectTablePart ConfTablePartCopy = new ConfigurationObjectTablePart(tablePartCopyName,
+					Configuration.GetNewUnigueTableName(Program.Kernel), ConfTablePartOriginal.Desc);
+
+				ConfDirectory.AppendTablePart(ConfTablePartCopy);
+
+				foreach (ConfigurationObjectField ConfFieldOriginal in ConfTablePartOriginal.Fields.Values) 
+				{
+					ConfigurationObjectField ConfFieldCopy = new ConfigurationObjectField(ConfFieldOriginal.Name,
+					ConfFieldOriginal.NameInTable, ConfFieldOriginal.Type, ConfFieldOriginal.Pointer, ConfFieldOriginal.Desc);
+
+					ConfTablePartCopy.AppendField(ConfFieldCopy);
+				}
+
+				LoadTabularPartsList();
+			}
+			else
+			{
+				if (listBoxTabularParts.Items.Count > 0)
+					MessageBox.Show("Виберіть елемент", "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+		}
+
+		#endregion
+
+		
 	}
 }

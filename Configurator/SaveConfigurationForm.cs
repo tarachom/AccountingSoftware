@@ -57,6 +57,9 @@ namespace Configurator
 				case "Constants":
 					return "Константи";
 
+				case "Constants.TablePart":
+					return "Константи.Таблична частина";
+
 				case "Directory":
 					return "Довідник";
 
@@ -384,16 +387,16 @@ namespace Configurator
 					ApendLine(" --> " + sqlText + " [" + resultSQL.ToString() + "]", "");
 				}
 
-			ApendLine("\n[ Генерування коду ]", "", "\n");
-			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
-
-			ApendLine("Видалення тимчасових файлів", "", "\n");
+			ApendLine("\nЗбереження конфігурації та видалення тимчасових файлів", "", "\n");
 			Configuration.RewriteConfigurationFileFromTempFile(
 				Conf.PathToXmlFileConfiguration, 
 				Conf.PathToTempXmlFileConfiguration,
 				Conf.PathToCopyXmlFileConfiguration);
+
+			ApendLine("\n[ Генерування коду ]", "", "\n");
+			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
 		}
