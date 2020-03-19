@@ -55,8 +55,6 @@ namespace ConfTrade
 			Conf.Config.Kernel.Open();
 			Conf.Config.InitAllConstants();
 
-			Константи.Test2.Test_Const = "";
-
 			Console.ReadLine();
 
 			listHttpContext = new List<HttpListenerContext>();

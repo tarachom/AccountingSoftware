@@ -45,13 +45,13 @@ namespace ConfTrade
 		
 		static void Test2()
 		{
-			Документи.Договір2_Товари_TablePart.Record record1 = new Документи.Договір2_Товари_TablePart.Record();
+			//Документи.Договір2_Товари_TablePart.Record record1 = new Документи.Договір2_Товари_TablePart.Record();
 
-			РегістриВідомостей.Валюти_RecordsSet валюти_RecordsSet = new РегістриВідомостей.Валюти_RecordsSet();
-			foreach (РегістриВідомостей.Валюти_RecordsSet.Record record in валюти_RecordsSet.Records) 
-			{
+			//РегістриВідомостей.Валюти_RecordsSet валюти_RecordsSet = new РегістриВідомостей.Валюти_RecordsSet();
+			//foreach (РегістриВідомостей.Валюти_RecordsSet.Record record in валюти_RecordsSet.Records) 
+			//{
 				
-			}
+			//}
 			
 			//Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
 			//Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
@@ -111,14 +111,14 @@ namespace ConfTrade
 			//3. Вибрати потомків
 			//4. Вибрати Номенклатуру поточного родітеля
 
-			Довідники.Групи_Номенклатура_Список_View групиНоменклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
-			групиНоменклатура_Список_View.QuerySelect.Where.Add(
-				new Where(групиНоменклатура_Список_View.Alias["Родитель"], Comparison.EQ, new EmptyPointer()));
+			//Довідники.Групи_Номенклатура_Список_View групиНоменклатура_Список_View = new Довідники.Групи_Номенклатура_Список_View();
+			//групиНоменклатура_Список_View.QuerySelect.Where.Add(
+			//	new Where(групиНоменклатура_Список_View.Alias["Родитель"], Comparison.EQ, new EmptyPointer()));
 
-			Довідники.Номенклатура_Список_View номенклатура_Список_View = new Довідники.Номенклатура_Список_View();
+			//Довідники.Номенклатура_Список_View номенклатура_Список_View = new Довідники.Номенклатура_Список_View();
 
-			Довідники.Групи_МестаХранения_Список_View групи_МестаХранения_Список_View = new Довідники.Групи_МестаХранения_Список_View();
-			групи_МестаХранения_Список_View.Read();
+			//Довідники.Групи_МестаХранения_Список_View групи_МестаХранения_Список_View = new Довідники.Групи_МестаХранения_Список_View();
+			//групи_МестаХранения_Список_View.Read();
 
 
 			return "";
@@ -126,15 +126,15 @@ namespace ConfTrade
 
 		static string Run3()
 		{
-			Довідники.Валюти_Список_View валюти_Список_View = new Довідники.Валюти_Список_View();
-			валюти_Список_View.QuerySelect.CreateTempTable = true;
-			валюти_Список_View.Read();
+			//Довідники.Валюти_Список_View валюти_Список_View = new Довідники.Валюти_Список_View();
+			//валюти_Список_View.QuerySelect.CreateTempTable = true;
+			//валюти_Список_View.Read();
 
-			Довідники.КлассификаторЕдИзм_Список_View классификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
-			классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
-				new Where("owner", Comparison.EQ, "(SELECT uid FROM " + валюти_Список_View.QuerySelect.TempTable + ")", true));
+			//Довідники.КлассификаторЕдИзм_Список_View классификаторЕдИзм_Список_View = new Довідники.КлассификаторЕдИзм_Список_View();
+			//классификаторЕдИзм_Список_View.QuerySelect.Where.Add(
+			//	new Where("owner", Comparison.EQ, "(SELECT uid FROM " + валюти_Список_View.QuerySelect.TempTable + ")", true));
 
-			классификаторЕдИзм_Список_View.Read();
+			//классификаторЕдИзм_Список_View.Read();
 
 			return "";
 		}

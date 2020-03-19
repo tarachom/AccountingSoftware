@@ -353,5 +353,10 @@ namespace Configurator
 				}
 			}
 		}
+
+		private void checkBoxHierarchical_CheckedChanged(object sender, EventArgs e)
+		{
+			comboBoxHierarchical.Enabled = checkBoxHierarchical.Checked;
+		}
 	}
 }

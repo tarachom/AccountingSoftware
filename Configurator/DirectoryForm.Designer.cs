@@ -54,6 +54,9 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
+			this.label7 = new System.Windows.Forms.Label();
+			this.comboBoxHierarchical = new System.Windows.Forms.ComboBox();
+			this.checkBoxHierarchical = new System.Windows.Forms.CheckBox();
 			this.panel1.SuspendLayout();
 			this.panel8.SuspendLayout();
 			this.panel3.SuspendLayout();
@@ -276,6 +279,9 @@
 			// 
 			// splitContainer1.Panel2
 			// 
+			this.splitContainer1.Panel2.Controls.Add(this.checkBoxHierarchical);
+			this.splitContainer1.Panel2.Controls.Add(this.comboBoxHierarchical);
+			this.splitContainer1.Panel2.Controls.Add(this.label7);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
 			this.splitContainer1.Panel2.Controls.Add(this.label5);
 			this.splitContainer1.Panel2.Controls.Add(this.textBoxTable);
@@ -341,6 +347,36 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
+			// label7
+			// 
+			this.label7.AutoSize = true;
+			this.label7.Location = new System.Drawing.Point(11, 177);
+			this.label7.Name = "label7";
+			this.label7.Size = new System.Drawing.Size(57, 13);
+			this.label7.TabIndex = 6;
+			this.label7.Text = "Довідник:";
+			// 
+			// comboBoxHierarchical
+			// 
+			this.comboBoxHierarchical.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxHierarchical.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.comboBoxHierarchical.FormattingEnabled = true;
+			this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 174);
+			this.comboBoxHierarchical.Name = "comboBoxHierarchical";
+			this.comboBoxHierarchical.Size = new System.Drawing.Size(459, 21);
+			this.comboBoxHierarchical.TabIndex = 7;
+			// 
+			// checkBoxHierarchical
+			// 
+			this.checkBoxHierarchical.AutoSize = true;
+			this.checkBoxHierarchical.Location = new System.Drawing.Point(85, 151);
+			this.checkBoxHierarchical.Name = "checkBoxHierarchical";
+			this.checkBoxHierarchical.Size = new System.Drawing.Size(130, 17);
+			this.checkBoxHierarchical.TabIndex = 8;
+			this.checkBoxHierarchical.Text = "Ієрархічний довідник";
+			this.checkBoxHierarchical.UseVisualStyleBackColor = true;
+			this.checkBoxHierarchical.CheckedChanged += new System.EventHandler(this.checkBoxHierarchical_CheckedChanged);
+			// 
 			// DirectoryForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -402,5 +438,8 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Panel panel8;
 		private System.Windows.Forms.ListBox listBoxViews;
+		private System.Windows.Forms.ComboBox comboBoxHierarchical;
+		private System.Windows.Forms.Label label7;
+		private System.Windows.Forms.CheckBox checkBoxHierarchical;
 	}
 }

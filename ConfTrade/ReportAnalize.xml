@@ -1,2 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <info>Створити таблицю Test_Копія_2 (tab_a59)</info>
+  <sql>CREATE TABLE tab_a59 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text,  "col_a3" integer, PRIMARY KEY(uid));</sql>
+  <info>Створити таблицю Test (tab_a61)</info>
+  <sql>CREATE TABLE tab_a61 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a1" text, "col_a2" uuid, PRIMARY KEY(uid));</sql>
+  <sql>CREATE INDEX ON tab_a61 (owner);</sql>
+  <info>Створити таблицю Test_Копія_3 (tab_a65)</info>
+  <sql>CREATE TABLE tab_a65 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text,  "col_a3" integer, PRIMARY KEY(uid));</sql>
+  <info>Створити таблицю Test (tab_a66)</info>
+  <sql>CREATE TABLE tab_a66 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a1" text, "col_a2" uuid, PRIMARY KEY(uid));</sql>
+  <sql>CREATE INDEX ON tab_a66 (owner);</sql>
+  <info>Створити таблицю Test_Копія_4 (tab_a67)</info>
+  <sql>CREATE TABLE tab_a67 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text,  "col_a3" integer, PRIMARY KEY(uid));</sql>
+  <info>Створити таблицю Test (tab_a68)</info>
+  <sql>CREATE TABLE tab_a68 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a1" text, "col_a2" uuid, PRIMARY KEY(uid));</sql>
+  <sql>CREATE INDEX ON tab_a68 (owner);</sql>
+</root>
