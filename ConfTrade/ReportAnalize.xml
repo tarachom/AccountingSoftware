@@ -1,5 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Додати колонку we (col_a3, тип text)  в таблицю sasdfs (tab_a01)</info>
-  <sql>ALTER TABLE tab_a01 ADD COLUMN "col_a3" text;</sql>
+  <info>Видалити колонку Test (col_a2)  в таблиці Константи (tab_constants)</info>
+  <sql>ALTER TABLE tab_constants DROP COLUMN "col_a2" ;</sql>
+  <info>Видалити колонку qwerqwerq (col_a1)  в таблиці Константи (tab_constants)</info>
+  <sql>ALTER TABLE tab_constants DROP COLUMN "col_a1" ;</sql>
+  <info>Видалити таблицю werqwe (tab_a01)</info>
+  <sql>DROP TABLE tab_a01;</sql>
+  <info>Видалити таблицю werqw (tab_a02)</info>
+  <sql>DROP TABLE tab_a02;</sql>
 </root>

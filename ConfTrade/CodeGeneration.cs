@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 19.03.2020 15:43:06
+ * Дата конфігурації: 19.03.2020 17:10:47
  *
  */
 
@@ -48,13 +48,11 @@ namespace ConfTrade_v1_1
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 new string[] { "col_a2", "col_a1" }, fieldValue);
+                 new string[] {  }, fieldValue);
             
             if (IsSelect)
             {
                 StartInit = true;
-                Константи.Test.Test_Const = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                Константи.Test2.Test_Const = fieldValue["col_a1"].ToString();
                 
                 StartInit = false;
             }
@@ -67,203 +65,7 @@ namespace ConfTrade_v1_1.Константи
     
     static class Test
     {
-        private static Довідники.Test_Pointer _Test_Const;
-        public static Довідники.Test_Pointer Test_Const
-        {
-            get { return _Test_Const; }
-            set
-            {
-                _Test_Const = value;
-                if (!Config.StartInit)
-                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a2", _Test_Const.ToString());
-            }
-        }
-        
-        public class Test_цукц_TablePart : ConstantsTablePart
-        {
-            public Test_цукц_TablePart() : base(Config.Kernel, "tab_a71",
-                 new string[] { "col_a1", "col_a2" }) 
-            {
-                Records = new List<цукц_Record>();
-            }
-                
-            public List<цукц_Record> Records { get; set; }
-        
-            public void Read()
-            {
-                Records.Clear();
-                base.BaseRead();
-
-                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-                {
-                    цукц_Record record = new цукц_Record();
-                    
-                    record.UID = (Guid)fieldValue["uid"];
-                    
-                    record.цукцу1 = fieldValue["col_a1"].ToString();
-                    record.цкцук2 = fieldValue["col_a2"].ToString();
-                    
-                    Records.Add(record);
-                }
-            
-                base.BaseClear();
-            }
-        
-            public void Save(bool clear_all_before_save /*= true*/) 
-            {
-                if (Records.Count > 0)
-                {
-                    base.BaseBeginTransaction();
-                
-                    if (clear_all_before_save)
-                        base.BaseDelete();
-
-                    foreach (цукц_Record record in Records)
-                    {
-                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                        fieldValue.Add("col_a1", record.цукцу1);
-                        fieldValue.Add("col_a2", record.цкцук2);
-                        
-                        base.BaseSave(record.UID, fieldValue);
-                    }
-                
-                    base.BaseCommitTransaction();
-                }
-            }
-        
-            public void Delete()
-            {
-                base.BaseBeginTransaction();
-                base.BaseCommitTransaction();
-            }
-            
-            public class цукц_Record : ConstantsTablePartRecord
-            {
-                public цукц_Record()
-                {
-                    цукцу1 = "";
-                    цкцук2 = "";
-                    
-                }
-        
-                
-                public цукц_Record(
-                    string _цукцу1 = "", string _цкцук2 = "")
-                {
-                    цукцу1 = _цукцу1;
-                    цкцук2 = _цкцук2;
-                    
-                }
-                public string цукцу1 { get; set; }
-                public string цкцук2 { get; set; }
-                
-            }            
-        }
-               
-    }
-    
-    static class Test2
-    {
-        private static string _Test_Const;
-        public static string Test_Const
-        {
-            get { return _Test_Const; }
-            set
-            {
-                _Test_Const = value;
-                if (!Config.StartInit)
-                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a1", _Test_Const);
-            }
-        }
-        
-        public class Test_sasdfs_TablePart : ConstantsTablePart
-        {
-            public Test_sasdfs_TablePart() : base(Config.Kernel, "tab_a01",
-                 new string[] { "col_a1", "col_a2", "col_a3" }) 
-            {
-                Records = new List<sasdfs_Record>();
-            }
-                
-            public List<sasdfs_Record> Records { get; set; }
-        
-            public void Read()
-            {
-                Records.Clear();
-                base.BaseRead();
-
-                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-                {
-                    sasdfs_Record record = new sasdfs_Record();
-                    
-                    record.UID = (Guid)fieldValue["uid"];
-                    
-                    record.s2 = fieldValue["col_a1"].ToString();
-                    record.w1 = fieldValue["col_a2"].ToString();
-                    record.we = fieldValue["col_a3"].ToString();
-                    
-                    Records.Add(record);
-                }
-            
-                base.BaseClear();
-            }
-        
-            public void Save(bool clear_all_before_save /*= true*/) 
-            {
-                if (Records.Count > 0)
-                {
-                    base.BaseBeginTransaction();
-                
-                    if (clear_all_before_save)
-                        base.BaseDelete();
-
-                    foreach (sasdfs_Record record in Records)
-                    {
-                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                        fieldValue.Add("col_a1", record.s2);
-                        fieldValue.Add("col_a2", record.w1);
-                        fieldValue.Add("col_a3", record.we);
-                        
-                        base.BaseSave(record.UID, fieldValue);
-                    }
-                
-                    base.BaseCommitTransaction();
-                }
-            }
-        
-            public void Delete()
-            {
-                base.BaseBeginTransaction();
-                base.BaseCommitTransaction();
-            }
-            
-            public class sasdfs_Record : ConstantsTablePartRecord
-            {
-                public sasdfs_Record()
-                {
-                    s2 = "";
-                    w1 = "";
-                    we = "";
-                    
-                }
-        
-                
-                public sasdfs_Record(
-                    string _s2 = "", string _w1 = "", string _we = "")
-                {
-                    s2 = _s2;
-                    w1 = _w1;
-                    we = _we;
-                    
-                }
-                public string s2 { get; set; }
-                public string w1 { get; set; }
-                public string we { get; set; }
-                
-            }            
-        }
-               
+             
     }
     
 }
