@@ -114,24 +114,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_a02</Name>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a61</Name>
     <Column>
       <Name>owner</Name>
@@ -147,24 +129,6 @@
       <Name>col_a2</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a01</Name>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
     </Column>
     <Column>
       <Name>uid</Name>
@@ -252,44 +216,39 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_constants</Name>
+    <Name>tab_a69</Name>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
     <Column>
       <Name>uid</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
     <Column>
-      <Name>col_a1</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
     <Column>
-      <Name>col_a2</Name>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
   </Table>
   <Table>
-    <Name>tab_a69</Name>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
+    <Name>tab_constants</Name>
     <Column>
       <Name>uid</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>

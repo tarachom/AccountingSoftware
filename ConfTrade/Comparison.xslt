@@ -32,17 +32,6 @@ limitations under the License.
   <!-- Файл попередньої копії конфігурації -->
   <xsl:param name="SecondConfiguration" />
 
-  <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
-  <msxsl:script implements-prefix="utils" language="C#">
-    <![CDATA[
-      public string ToLower(string stringValue)
-      {
-          return String.IsNullOrEmpty(stringValue) ? String.Empty : stringValue.ToLower();
-      }
-    ]]>
-  </msxsl:script>
-  -->
-
   <xsl:template name="FieldsControl">
     <xsl:param name="InfoSchemaFieldList" />
     <xsl:param name="ConfigurationFieldList" />
@@ -483,29 +472,8 @@ limitations under the License.
       <xsl:variable name="SecondConfTablePartName" select="Name" />
       <xsl:variable name="SecondConfTablePartTable" select="Table" />
 
-      <table>
-        <xsl:value-of select="$SecondConfTablePartTable"/>
-      </table>
-      <count>
-        <xsl:value-of select="count($DocumentConfigurationTabularParts)"/>
-      </count>
       <xsl:variable name="CountTablePart" select="count($DocumentConfigurationTabularParts[Table = $SecondConfTablePartTable])" />
       <xsl:variable name="CountTablePartInfoSchema" select="count($InfoSchemaTableList[Name = $SecondConfTablePartTable])" />
-
-      <info>
-        <type>
-          <xsl:value-of select="$Type"/>
-        </type>
-        <count>
-          <xsl:value-of select="$CountTablePart"/>
-        </count>
-        <count2>
-          <xsl:value-of select="$CountTablePartInfoSchema"/>
-        </count2>
-        <ex>
-          <xsl:value-of select="$IsExistOwner"/>
-        </ex>
-      </info>
 
       <xsl:choose>
 

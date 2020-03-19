@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>19.03.2020 17:10:47</DateTimeSave>
+  <DateTimeSave>19.03.2020 17:19:22</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -252,7 +252,7 @@
           <Name>івфіва</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
+          <Pointer>Перелічення.qq</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -284,6 +284,21 @@
               <NameInTable>col_a2</NameInTable>
               <Type>pointer</Type>
               <Pointer>Довідники.Test</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>asdAS</Name>
+          <Table>tab_a03</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>asdAS</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>string</Type>
               <Desc>
               </Desc>
             </Field>
@@ -417,8 +432,14 @@
         <Field>
           <Name>івфіва</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
+          <Type>empty_pointer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>rfserw</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Type>string</Type>
           <Desc>
           </Desc>
         </Field>
@@ -476,6 +497,20 @@
       </Desc>
       <SerialNumber>0</SerialNumber>
       <Fields />
+    </Enum>
+    <Enum>
+      <Name>qq</Name>
+      <Desc>
+      </Desc>
+      <SerialNumber>1</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>qq</Name>
+          <Value>1</Value>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
     </Enum>
   </Enums>
   <Documents>

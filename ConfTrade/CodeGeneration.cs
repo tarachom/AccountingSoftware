@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 19.03.2020 17:10:47
+ * Дата конфігурації: 19.03.2020 17:19:22
  *
  */
 
@@ -747,6 +747,7 @@ namespace ConfTrade_v1_1.Довідники
             
             //Табличні частини
             Test_TablePart = new Test_Копія_3_Test_TablePart(this);
+            asdAS_TablePart = new Test_Копія_3_asdAS_TablePart(this);
             
         }
         
@@ -756,7 +757,7 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
+                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.qq)base.FieldValue["col_a3"] : 0;
                 івфіва2 = (base.FieldValue["col_a4"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a4"] : 0;
                 
                 BaseClear();
@@ -789,11 +790,12 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
+        public Перелічення.qq івфіва { get; set; }
         public Перелічення.Test івфіва2 { get; set; }
         
         //Табличні частини
         public Test_Копія_3_Test_TablePart Test_TablePart { get; set; }
+        public Test_Копія_3_asdAS_TablePart asdAS_TablePart { get; set; }
         
     }
     
@@ -935,6 +937,89 @@ namespace ConfTrade_v1_1.Довідники
             }
             public string Test { get; set; }
             public Довідники.Test_Pointer кцукц { get; set; }
+            
+        }
+    }
+      
+    class Test_Копія_3_asdAS_TablePart : DirectoryTablePart
+    {
+        public Test_Копія_3_asdAS_TablePart(Test_Копія_3_Objest owner) : base(Config.Kernel, "tab_a03",
+             new string[] { "col_a3" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Record>();
+        }
+        
+        public Test_Копія_3_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.asdAS = fieldValue["col_a3"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a3", record.asdAS);
+                    
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+        
+        
+        public class Record : DirectoryTablePartRecord
+        {
+            public Record()
+            {
+                asdAS = "";
+                
+            }
+        
+            
+            public Record(
+                string _asdAS = "")
+            {
+                asdAS = _asdAS;
+                
+            }
+            public string asdAS { get; set; }
             
         }
     }
@@ -1190,11 +1275,12 @@ namespace ConfTrade_v1_1.Довідники
     class Test_Копія_5_Objest : DirectoryObject
     {
         public Test_Копія_5_Objest() : base(Config.Kernel, "tab_a69",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4" }) 
         {
             Назва = "";
             Код = "";
-            івфіва = 0;
+            івфіва = new EmptyPointer();
+            rfserw = "";
             
             //Табличні частини
             Test_TablePart = new Test_Копія_5_Test_TablePart(this);
@@ -1207,7 +1293,8 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
+                івфіва = new EmptyPointer();
+                rfserw = base.FieldValue["col_a4"].ToString();
                 
                 BaseClear();
                 return true;
@@ -1220,7 +1307,8 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
+            base.FieldValue["col_a3"] = івфіва.ToString();
+            base.FieldValue["col_a4"] = rfserw;
             
             BaseSave();
         }
@@ -1238,7 +1326,8 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
+        public EmptyPointer івфіва { get; set; }
+        public string rfserw { get; set; }
         
         //Табличні частини
         public Test_Копія_5_Test_TablePart Test_TablePart { get; set; }
@@ -1270,8 +1359,8 @@ namespace ConfTrade_v1_1.Довідники
     class Test_Копія_5_Select : DirectorySelect, IDisposable
     {
         public Test_Копія_5_Select() : base(Config.Kernel, "tab_a69",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
+            new string[] { "Назва", "Код", "івфіва", "rfserw" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -1413,6 +1502,12 @@ namespace ConfTrade_v1_1.Перелічення
     public enum Test
     {
          
+    }
+    
+    
+    public enum qq
+    {
+         qq = 1
     }
     
     

@@ -1,0 +1,12 @@
+﻿
+
+  <!-- xmlns:msxsl="urn:schemas-microsoft-com:xslt" xmlns:utils="urn:myExtension" exclude-result-prefixes="msxsl"
+  <msxsl:script implements-prefix="utils" language="C#">
+    <![CDATA[
+      public string ToLower(string stringValue)
+      {
+          return String.IsNullOrEmpty(stringValue) ? String.Empty : stringValue.ToLower();
+      }
+    ]]>
+  </msxsl:script>
+  -->

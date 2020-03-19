@@ -95,6 +95,7 @@
     <Compile Include="AccountingSoftware\UnigueID.cs" />
     <Content Include="back_up\Old\code.txt" />
     <Content Include="back_up\Old\XSLTFile1.xslt" />
+    <Content Include="back_up\TextFile1.txt" />
     <Content Include="back_up\XmlSerialization.cs.txt" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
