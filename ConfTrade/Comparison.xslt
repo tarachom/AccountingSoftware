@@ -309,6 +309,7 @@ limitations under the License.
   <xsl:template name="TabularPartsControl">
     <xsl:param name="InfoSchemaTableList" />
     <xsl:param name="ConfigurationTablePartList" />
+    <xsl:param name="IsCreateOwner" />
 
     <xsl:for-each select="$ConfigurationTablePartList">
       <xsl:variable name="ConTablePart" select="Name" />
@@ -321,7 +322,9 @@ limitations under the License.
         <Table>
           <xsl:value-of select="$ConfTablePartTable"/>
         </Table>
-
+        <IsCreateOwner>
+          <xsl:value-of select="$IsCreateOwner"/>
+        </IsCreateOwner>
         <xsl:choose>
           <xsl:when test="$InfoSchemaTableList[Name = $ConfTablePartTable]">
             <IsExist>yes</IsExist>
@@ -623,6 +626,7 @@ limitations under the License.
             <xsl:call-template name="TabularPartsControl">
               <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
               <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+              <xsl:with-param name="IsCreateOwner">no</xsl:with-param>
             </xsl:call-template>
 
           </xsl:for-each>
@@ -705,6 +709,7 @@ limitations under the License.
           <xsl:call-template name="TabularPartsControl">
             <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
             <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+            <xsl:with-param name="IsCreateOwner">yes</xsl:with-param>
           </xsl:call-template>
 
         </Control_Table>
@@ -762,6 +767,7 @@ limitations under the License.
           <xsl:call-template name="TabularPartsControl">
             <xsl:with-param name="ConfigurationTablePartList" select="TabularParts/TablePart" />
             <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+            <xsl:with-param name="IsCreateOwner">yes</xsl:with-param>
           </xsl:call-template>
 
         </Control_Table>

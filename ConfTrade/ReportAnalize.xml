@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Створити таблицю asdAS (tab_a03)</info>
-  <sql>CREATE TABLE tab_a03 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a3" text, PRIMARY KEY(uid));</sql>
-  <sql>CREATE INDEX ON tab_a03 (owner);</sql>
+  <info>Створити таблицю asdAS (tab_a05)</info>
+  <sql>CREATE TABLE tab_a05 (uid uuid NOT NULL, "col_a2" text, PRIMARY KEY(uid));</sql>
 </root>

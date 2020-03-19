@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 19.03.2020 17:19:22
+ * Дата конфігурації: 19.03.2020 18:28:23
  *
  */
 
@@ -48,11 +48,12 @@ namespace ConfTrade_v1_1
             
             Dictionary<string, object> fieldValue = new Dictionary<string, object>();
             bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 new string[] {  }, fieldValue);
+                 new string[] { "col_a1" }, fieldValue);
             
             if (IsSelect)
             {
                 StartInit = true;
+                Константи.Test.dfsdfs_Const = new Довідники.Test_Pointer(fieldValue["col_a1"]);
                 
                 StartInit = false;
             }
@@ -65,7 +66,254 @@ namespace ConfTrade_v1_1.Константи
     
     static class Test
     {
-             
+        private static Довідники.Test_Pointer _dfsdfs_Const;
+        public static Довідники.Test_Pointer dfsdfs_Const
+        {
+            get { return _dfsdfs_Const; }
+            set
+            {
+                _dfsdfs_Const = value;
+                if (!Config.StartInit)
+                    Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a1", _dfsdfs_Const.ToString());
+            }
+        }
+        
+        public class dfsdfs_Історія_TablePart : ConstantsTablePart
+        {
+            public dfsdfs_Історія_TablePart() : base(Config.Kernel, "tab_a01",
+                 new string[] { "col_a1", "col_a2" }) 
+            {
+                Records = new List<Історія_Record>();
+            }
+                
+            public List<Історія_Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Історія_Record record = new Історія_Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
+                    record.Значенн = fieldValue["col_a2"].ToString();
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (Історія_Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a1", record.Дата);
+                        fieldValue.Add("col_a2", record.Значенн);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class Історія_Record : ConstantsTablePartRecord
+            {
+                public Історія_Record()
+                {
+                    Дата = DateTime.MinValue;
+                    Значенн = "";
+                    
+                }
+        
+                
+                public Історія_Record(
+                    DateTime?  _Дата = null, string _Значенн = "")
+                {
+                    Дата = _Дата ?? DateTime.MinValue;
+                    Значенн = _Значенн;
+                    
+                }
+                public DateTime Дата { get; set; }
+                public string Значенн { get; set; }
+                
+            }            
+        }
+          
+        public class dfsdfs_sdsdsd_TablePart : ConstantsTablePart
+        {
+            public dfsdfs_sdsdsd_TablePart() : base(Config.Kernel, "tab_a02",
+                 new string[] { "col_a1" }) 
+            {
+                Records = new List<sdsdsd_Record>();
+            }
+                
+            public List<sdsdsd_Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    sdsdsd_Record record = new sdsdsd_Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.ssdsdsd = fieldValue["col_a1"].ToString();
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (sdsdsd_Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a1", record.ssdsdsd);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class sdsdsd_Record : ConstantsTablePartRecord
+            {
+                public sdsdsd_Record()
+                {
+                    ssdsdsd = "";
+                    
+                }
+        
+                
+                public sdsdsd_Record(
+                    string _ssdsdsd = "")
+                {
+                    ssdsdsd = _ssdsdsd;
+                    
+                }
+                public string ssdsdsd { get; set; }
+                
+            }            
+        }
+          
+        public class dfsdfs_asdAS_TablePart : ConstantsTablePart
+        {
+            public dfsdfs_asdAS_TablePart() : base(Config.Kernel, "tab_a05",
+                 new string[] { "col_a2" }) 
+            {
+                Records = new List<asdAS_Record>();
+            }
+                
+            public List<asdAS_Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    asdAS_Record record = new asdAS_Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.AsdASDA = fieldValue["col_a2"].ToString();
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (asdAS_Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a2", record.AsdASDA);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class asdAS_Record : ConstantsTablePartRecord
+            {
+                public asdAS_Record()
+                {
+                    AsdASDA = "";
+                    
+                }
+        
+                
+                public asdAS_Record(
+                    string _AsdASDA = "")
+                {
+                    AsdASDA = _AsdASDA;
+                    
+                }
+                public string AsdASDA { get; set; }
+                
+            }            
+        }
+               
     }
     
 }
@@ -306,6 +554,7 @@ namespace ConfTrade_v1_1.Довідники
             
             //Табличні частини
             Test_TablePart = new Test_Копія_1_Test_TablePart(this);
+            sasa_TablePart = new Test_Копія_1_sasa_TablePart(this);
             
         }
         
@@ -350,6 +599,7 @@ namespace ConfTrade_v1_1.Довідники
         
         //Табличні частини
         public Test_Копія_1_Test_TablePart Test_TablePart { get; set; }
+        public Test_Копія_1_sasa_TablePart sasa_TablePart { get; set; }
         
     }
     
@@ -491,6 +741,89 @@ namespace ConfTrade_v1_1.Довідники
             }
             public string Test { get; set; }
             public Довідники.Test_Pointer кцукц { get; set; }
+            
+        }
+    }
+      
+    class Test_Копія_1_sasa_TablePart : DirectoryTablePart
+    {
+        public Test_Копія_1_sasa_TablePart(Test_Копія_1_Objest owner) : base(Config.Kernel, "tab_a04",
+             new string[] { "col_a1" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Record>();
+        }
+        
+        public Test_Копія_1_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.sass = fieldValue["col_a1"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.sass);
+                    
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+        
+        
+        public class Record : DirectoryTablePartRecord
+        {
+            public Record()
+            {
+                sass = "";
+                
+            }
+        
+            
+            public Record(
+                string _sass = "")
+            {
+                sass = _sass;
+                
+            }
+            public string sass { get; set; }
             
         }
     }

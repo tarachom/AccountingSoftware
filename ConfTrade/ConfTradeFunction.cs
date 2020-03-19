@@ -45,14 +45,18 @@ namespace ConfTrade
 		
 		static void Test2()
 		{
+
+			Довідники.Test_Test_TablePart test_Test_TablePart = new Довідники.Test_Test_TablePart(null);
+			
+
 			//Документи.Договір2_Товари_TablePart.Record record1 = new Документи.Договір2_Товари_TablePart.Record();
 
 			//РегістриВідомостей.Валюти_RecordsSet валюти_RecordsSet = new РегістриВідомостей.Валюти_RecordsSet();
 			//foreach (РегістриВідомостей.Валюти_RecordsSet.Record record in валюти_RecordsSet.Records) 
 			//{
-				
+
 			//}
-			
+
 			//Довідники.Номенклатура_Select номенклатура_Select = new Довідники.Номенклатура_Select();
 			//Довідники.Номенклатура_Pointer номенклатура_Pointer = номенклатура_Select.FindByField("Назва", 0);
 

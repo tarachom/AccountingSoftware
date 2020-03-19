@@ -52,6 +52,19 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a02</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a66</Name>
     <Column>
       <Name>col_a2</Name>
@@ -250,6 +263,11 @@
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
   </Table>
   <Table>
     <Name>tab_a50</Name>
@@ -293,6 +311,42 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a04</Name>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a03</Name>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a68</Name>
     <Column>
       <Name>owner</Name>
@@ -313,6 +367,29 @@
       <Name>col_a1</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a01</Name>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>date</DataType>
+      <UdtName>date</UdtName>
     </Column>
   </Table>
   <Table>

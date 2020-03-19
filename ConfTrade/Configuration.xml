@@ -4,13 +4,76 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>19.03.2020 17:19:22</DateTimeSave>
+  <DateTimeSave>19.03.2020 18:28:23</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
       <Desc>
       </Desc>
-      <Constants />
+      <Constants>
+        <Constant>
+          <Name>dfsdfs</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Test</Pointer>
+          <TabularParts>
+            <TablePart>
+              <Name>Історія</Name>
+              <Table>tab_a01</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Дата</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>date</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Значенн</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+            <TablePart>
+              <Name>sdsdsd</Name>
+              <Table>tab_a02</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>ssdsdsd</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+            <TablePart>
+              <Name>asdAS</Name>
+              <Table>tab_a05</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>AsdASDA</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
+        </Constant>
+      </Constants>
     </ConstantsBlock>
   </ConstantsBlocks>
   <Directories>
@@ -132,6 +195,21 @@
               <NameInTable>col_a2</NameInTable>
               <Type>pointer</Type>
               <Pointer>Довідники.Test</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+        <TablePart>
+          <Name>sasa</Name>
+          <Table>tab_a04</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>sass</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
               <Desc>
               </Desc>
             </Field>

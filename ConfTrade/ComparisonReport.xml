@@ -5,6 +5,76 @@
     <Name>Константи</Name>
     <Table>tab_constants</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>dfsdfs</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>Історія</Name>
+      <Table>tab_a01</Table>
+      <IsCreateOwner>no</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>Дата</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>date</ConfType>
+          <DataType>date</DataType>
+          <UdtName>date</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Значенн</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>sdsdsd</Name>
+      <Table>tab_a02</Table>
+      <IsCreateOwner>no</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>ssdsdsd</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>asdAS</Name>
+      <Table>tab_a05</Table>
+      <IsCreateOwner>no</IsCreateOwner>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>AsdASDA</Name>
+          <NameInTable>col_a2</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </TableCreate>
+    </Control_TabularParts>
   </Control_Table>
   <Control_Table>
     <Type>Directory</Type>
@@ -47,6 +117,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a56</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -113,6 +184,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a58</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -133,6 +205,23 @@
           <ConfType>pointer</ConfType>
           <DataType>uuid</DataType>
           <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>sasa</Name>
+      <Table>tab_a04</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>sass</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
           <Coincide>yes</Coincide>
         </Type>
       </Control_Field>
@@ -179,6 +268,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a61</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -256,6 +346,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a66</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -283,15 +374,19 @@
     <Control_TabularParts>
       <Name>asdAS</Name>
       <Table>tab_a03</Table>
-      <IsExist>no</IsExist>
-      <TableCreate>
-        <FieldCreate>
-          <Name>asdAS</Name>
-          <NameInTable>col_a3</NameInTable>
+      <IsCreateOwner>yes</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>asdAS</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>string</ConfType>
           <DataType>text</DataType>
-        </FieldCreate>
-      </TableCreate>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Table>
   <Control_Table>
@@ -357,6 +452,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a68</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -434,6 +530,7 @@
     <Control_TabularParts>
       <Name>Test</Name>
       <Table>tab_a70</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
         <Name>Test</Name>
@@ -459,54 +556,6 @@
       </Control_Field>
     </Control_TabularParts>
   </Control_Table>
-  <table>tab_a56</table>
-  <count>1</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
-  <table>tab_a58</table>
-  <count>1</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
-  <table>tab_a61</table>
-  <count>1</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
-  <table>tab_a66</table>
-  <count>2</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
-  <table>tab_a68</table>
-  <count>1</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
-  <table>tab_a70</table>
-  <count>1</count>
-  <info>
-    <type>Directory</type>
-    <count>1</count>
-    <count2>1</count2>
-    <ex>1</ex>
-  </info>
   <Control_Table>
     <Type>Document</Type>
     <Name>Test</Name>
