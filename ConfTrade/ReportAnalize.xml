@@ -1,8 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Таблиця Test2_Копія_1 (tab_a06), поле івфіва (col_a3). </info>
-  <info>Очищення колонки! Втрата даних!</info>
-  <sql>BEGIN;</sql>
-  <sql>UPDATE tab_a06 SET col_a3 = NULL;</sql>
-  <sql>COMMIT;</sql>
+  <info>Видалити таблицю Test2 (tab_a03)</info>
+  <sql>DROP TABLE tab_a03;</sql>
+  <info>Видалити таблицю Test (tab_a04)</info>
+  <sql>DROP TABLE tab_a04;</sql>
+  <info>Видалити таблицю Test2_Копія_1 (tab_a06)</info>
+  <sql>DROP TABLE tab_a06;</sql>
+  <info>Видалити таблицю Test (tab_a07)</info>
+  <sql>DROP TABLE tab_a07;</sql>
+  <info>Видалити таблицю Test_Копія_1 (tab_a08)</info>
+  <sql>DROP TABLE tab_a08;</sql>
+  <info>Видалити таблицю Test (tab_a09)</info>
+  <sql>DROP TABLE tab_a09;</sql>
+  <info>Видалити таблицю Test_Копія_2 (tab_a10)</info>
+  <sql>DROP TABLE tab_a10;</sql>
+  <info>Видалити таблицю Test (tab_a11)</info>
+  <sql>DROP TABLE tab_a11;</sql>
+  <info>Видалити таблицю Test2_Копія_2 (tab_a12)</info>
+  <sql>DROP TABLE tab_a12;</sql>
+  <info>Видалити таблицю Test (tab_a13)</info>
+  <sql>DROP TABLE tab_a13;</sql>
 </root>

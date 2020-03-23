@@ -68,7 +68,10 @@
     <Content Include="ReportAnalize.xml" />
     <Content Include="TextFile1.txt" />
     <Content Include="WebServer\Xml\default.xml" />
-    <Content Include="WebServer\Xslt\Довідник_Номенклатура.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Номенклатура\Delete.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Номенклатура\Edit.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Номенклатура\Add.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Номенклатура\List.xslt" />
     <Content Include="WebServer\Xslt\default.xslt" />
   </ItemGroup>
   <ItemGroup>

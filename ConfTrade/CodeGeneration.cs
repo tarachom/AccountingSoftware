@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 22.03.2020 10:47:27
+ * Дата конфігурації: 23.03.2020 17:04:02
  *
  */
 
@@ -541,19 +541,15 @@ namespace ConfTrade_v1_1.Довідники
     
     #endregion
     
-    #region DIRECTORY "Test2"
+    #region DIRECTORY "Номенклатура"
     
-    class Test2_Objest : DirectoryObject
+    class Номенклатура_Objest : DirectoryObject
     {
-        public Test2_Objest() : base(Config.Kernel, "tab_a03",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
+        public Номенклатура_Objest() : base(Config.Kernel, "tab_a14",
+             new string[] { "col_a1", "col_a2" }) 
         {
             Назва = "";
             Код = "";
-            івфіва = 0;
-            
-            //Табличні частини
-            Test_TablePart = new Test2_Test_TablePart(this);
             
         }
         
@@ -563,7 +559,6 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
                 
                 BaseClear();
                 return true;
@@ -576,7 +571,6 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
             
             BaseSave();
         }
@@ -586,1052 +580,80 @@ namespace ConfTrade_v1_1.Довідники
             base.BaseDelete();
         }
         
-        public Test2_Pointer GetDirectoryPointer()
+        public Номенклатура_Pointer GetDirectoryPointer()
         {
-            Test2_Pointer directoryPointer = new Test2_Pointer(UnigueID.UGuid);
+            Номенклатура_Pointer directoryPointer = new Номенклатура_Pointer(UnigueID.UGuid);
             return directoryPointer;
         }
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
-        
-        //Табличні частини
-        public Test2_Test_TablePart Test_TablePart { get; set; }
         
     }
     
     
-    class Test2_Pointer : DirectoryPointer
+    class Номенклатура_Pointer : DirectoryPointer
     {
-        public Test2_Pointer(object uid = null) : base(Config.Kernel, "tab_a03")
+        public Номенклатура_Pointer(object uid = null) : base(Config.Kernel, "tab_a14")
         {
             base.Init(new UnigueID(uid), null);
         }
         
-        public Test2_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a03")
+        public Номенклатура_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a14")
         {
             base.Init(uid, fields);
         }
         
-        public Test2_Objest GetDirectoryObject()
+        public Номенклатура_Objest GetDirectoryObject()
         {
-            Test2_Objest Test2ObjestItem = new Test2_Objest();
-            Test2ObjestItem.Read(base.UnigueID);
-            return Test2ObjestItem;
+            Номенклатура_Objest НоменклатураObjestItem = new Номенклатура_Objest();
+            НоменклатураObjestItem.Read(base.UnigueID);
+            return НоменклатураObjestItem;
         }
     }
     
     
-    class Test2_Select : DirectorySelect, IDisposable
+    class Номенклатура_Select : DirectorySelect, IDisposable
     {
-        public Test2_Select() : base(Config.Kernel, "tab_a03",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
+        public Номенклатура_Select() : base(Config.Kernel, "tab_a14",
+            new string[] { "col_a1", "col_a2" },
+            new string[] { "Назва", "Код" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
         public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
         
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Номенклатура_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
 
-        public Test2_Pointer Current { get; private set; }
+        public Номенклатура_Pointer Current { get; private set; }
         
-        public Test2_Pointer FindByField(string name, object value)
+        public Номенклатура_Pointer FindByField(string name, object value)
         {
-            Test2_Pointer itemPointer = new Test2_Pointer();
+            Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
             DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
         
-        public List<Test2_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        public List<Номенклатура_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
-            List<Test2_Pointer> directoryPointerList = new List<Test2_Pointer>();
+            List<Номенклатура_Pointer> directoryPointerList = new List<Номенклатура_Pointer>();
             foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new Test2_Pointer(directoryPointer.UnigueID));
+                directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
     }
     
-      
-    class Test2_Test_TablePart : DirectoryTablePart
-    {
-        public Test2_Test_TablePart(Test2_Objest owner) : base(Config.Kernel, "tab_a04",
-             new string[] { "col_a1", "col_a2" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test2_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Test = fieldValue["col_a1"].ToString();
-                record.кцукц = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Test);
-                    fieldValue.Add("col_a2", record.кцукц.ToString());
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                Test = "";
-                кцукц = new Довідники.Test_Pointer();
-                
-            }
-        
-            
-            public Record(
-                string _Test = "", Довідники.Test_Pointer _кцукц = null)
-            {
-                Test = _Test;
-                кцукц = _кцукц ?? new Довідники.Test_Pointer();
-                
-            }
-            public string Test { get; set; }
-            public Довідники.Test_Pointer кцукц { get; set; }
-            
-        }
-    }
       ///<summary>
     ///Список.
     ///</summary>
-    class Test2_Список_View : DirectoryView
+    class Номенклатура_Список_View : DirectoryView
     {
-        public Test2_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
-             "Довідники.Test2_Список")
-        {
-            
-        }
-        
-    }
-      
-    
-    #endregion
-    
-    #region DIRECTORY "Test2_Копія_1"
-    
-    class Test2_Копія_1_Objest : DirectoryObject
-    {
-        public Test2_Копія_1_Objest() : base(Config.Kernel, "tab_a06",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
-        {
-            Назва = "";
-            Код = "";
-            івфіва = 0;
-            
-            //Табличні частини
-            Test_TablePart = new Test2_Копія_1_Test_TablePart(this);
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_a1"].ToString();
-                Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.qq)base.FieldValue["col_a3"] : 0;
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["col_a1"] = Назва;
-            base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Test2_Копія_1_Pointer GetDirectoryPointer()
-        {
-            Test2_Копія_1_Pointer directoryPointer = new Test2_Копія_1_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Перелічення.qq івфіва { get; set; }
-        
-        //Табличні частини
-        public Test2_Копія_1_Test_TablePart Test_TablePart { get; set; }
-        
-    }
-    
-    
-    class Test2_Копія_1_Pointer : DirectoryPointer
-    {
-        public Test2_Копія_1_Pointer(object uid = null) : base(Config.Kernel, "tab_a06")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public Test2_Копія_1_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a06")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public Test2_Копія_1_Objest GetDirectoryObject()
-        {
-            Test2_Копія_1_Objest Test2_Копія_1ObjestItem = new Test2_Копія_1_Objest();
-            Test2_Копія_1ObjestItem.Read(base.UnigueID);
-            return Test2_Копія_1ObjestItem;
-        }
-    }
-    
-    
-    class Test2_Копія_1_Select : DirectorySelect, IDisposable
-    {
-        public Test2_Копія_1_Select() : base(Config.Kernel, "tab_a06",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
-    
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test2_Копія_1_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public Test2_Копія_1_Pointer Current { get; private set; }
-        
-        public Test2_Копія_1_Pointer FindByField(string name, object value)
-        {
-            Test2_Копія_1_Pointer itemPointer = new Test2_Копія_1_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<Test2_Копія_1_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<Test2_Копія_1_Pointer> directoryPointerList = new List<Test2_Копія_1_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new Test2_Копія_1_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-    class Test2_Копія_1_Test_TablePart : DirectoryTablePart
-    {
-        public Test2_Копія_1_Test_TablePart(Test2_Копія_1_Objest owner) : base(Config.Kernel, "tab_a07",
-             new string[] { "col_a1", "col_a2" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test2_Копія_1_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Test = fieldValue["col_a1"].ToString();
-                record.кцукц = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Test);
-                    fieldValue.Add("col_a2", record.кцукц.ToString());
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                Test = "";
-                кцукц = new Довідники.Test_Pointer();
-                
-            }
-        
-            
-            public Record(
-                string _Test = "", Довідники.Test_Pointer _кцукц = null)
-            {
-                Test = _Test;
-                кцукц = _кцукц ?? new Довідники.Test_Pointer();
-                
-            }
-            public string Test { get; set; }
-            public Довідники.Test_Pointer кцукц { get; set; }
-            
-        }
-    }
-      ///<summary>
-    ///Список.
-    ///</summary>
-    class Test2_Копія_1_Список_View : DirectoryView
-    {
-        public Test2_Копія_1_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
-             "Довідники.Test2_Копія_1_Список")
-        {
-            
-        }
-        
-    }
-      
-    
-    #endregion
-    
-    #region DIRECTORY "Test_Копія_1"
-    
-    class Test_Копія_1_Objest : DirectoryObject
-    {
-        public Test_Копія_1_Objest() : base(Config.Kernel, "tab_a08",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
-        {
-            Назва = "";
-            Код = "";
-            івфіва = 0;
-            
-            //Табличні частини
-            Test_TablePart = new Test_Копія_1_Test_TablePart(this);
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_a1"].ToString();
-                Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["col_a1"] = Назва;
-            base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Test_Копія_1_Pointer GetDirectoryPointer()
-        {
-            Test_Копія_1_Pointer directoryPointer = new Test_Копія_1_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
-        
-        //Табличні частини
-        public Test_Копія_1_Test_TablePart Test_TablePart { get; set; }
-        
-    }
-    
-    
-    class Test_Копія_1_Pointer : DirectoryPointer
-    {
-        public Test_Копія_1_Pointer(object uid = null) : base(Config.Kernel, "tab_a08")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public Test_Копія_1_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a08")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public Test_Копія_1_Objest GetDirectoryObject()
-        {
-            Test_Копія_1_Objest Test_Копія_1ObjestItem = new Test_Копія_1_Objest();
-            Test_Копія_1ObjestItem.Read(base.UnigueID);
-            return Test_Копія_1ObjestItem;
-        }
-    }
-    
-    
-    class Test_Копія_1_Select : DirectorySelect, IDisposable
-    {
-        public Test_Копія_1_Select() : base(Config.Kernel, "tab_a08",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
-    
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test_Копія_1_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public Test_Копія_1_Pointer Current { get; private set; }
-        
-        public Test_Копія_1_Pointer FindByField(string name, object value)
-        {
-            Test_Копія_1_Pointer itemPointer = new Test_Копія_1_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<Test_Копія_1_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<Test_Копія_1_Pointer> directoryPointerList = new List<Test_Копія_1_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new Test_Копія_1_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-    class Test_Копія_1_Test_TablePart : DirectoryTablePart
-    {
-        public Test_Копія_1_Test_TablePart(Test_Копія_1_Objest owner) : base(Config.Kernel, "tab_a09",
-             new string[] { "col_a1", "col_a2" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test_Копія_1_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Test = fieldValue["col_a1"].ToString();
-                record.кцукц = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Test);
-                    fieldValue.Add("col_a2", record.кцукц.ToString());
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                Test = "";
-                кцукц = new Довідники.Test_Pointer();
-                
-            }
-        
-            
-            public Record(
-                string _Test = "", Довідники.Test_Pointer _кцукц = null)
-            {
-                Test = _Test;
-                кцукц = _кцукц ?? new Довідники.Test_Pointer();
-                
-            }
-            public string Test { get; set; }
-            public Довідники.Test_Pointer кцукц { get; set; }
-            
-        }
-    }
-      ///<summary>
-    ///Список.
-    ///</summary>
-    class Test_Копія_1_Список_View : DirectoryView
-    {
-        public Test_Копія_1_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
-             "Довідники.Test_Копія_1_Список")
-        {
-            
-        }
-        
-    }
-      
-    
-    #endregion
-    
-    #region DIRECTORY "Test_Копія_2"
-    
-    class Test_Копія_2_Objest : DirectoryObject
-    {
-        public Test_Копія_2_Objest() : base(Config.Kernel, "tab_a10",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
-        {
-            Назва = "";
-            Код = "";
-            івфіва = 0;
-            
-            //Табличні частини
-            Test_TablePart = new Test_Копія_2_Test_TablePart(this);
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_a1"].ToString();
-                Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["col_a1"] = Назва;
-            base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Test_Копія_2_Pointer GetDirectoryPointer()
-        {
-            Test_Копія_2_Pointer directoryPointer = new Test_Копія_2_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
-        
-        //Табличні частини
-        public Test_Копія_2_Test_TablePart Test_TablePart { get; set; }
-        
-    }
-    
-    
-    class Test_Копія_2_Pointer : DirectoryPointer
-    {
-        public Test_Копія_2_Pointer(object uid = null) : base(Config.Kernel, "tab_a10")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public Test_Копія_2_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a10")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public Test_Копія_2_Objest GetDirectoryObject()
-        {
-            Test_Копія_2_Objest Test_Копія_2ObjestItem = new Test_Копія_2_Objest();
-            Test_Копія_2ObjestItem.Read(base.UnigueID);
-            return Test_Копія_2ObjestItem;
-        }
-    }
-    
-    
-    class Test_Копія_2_Select : DirectorySelect, IDisposable
-    {
-        public Test_Копія_2_Select() : base(Config.Kernel, "tab_a10",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
-    
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test_Копія_2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public Test_Копія_2_Pointer Current { get; private set; }
-        
-        public Test_Копія_2_Pointer FindByField(string name, object value)
-        {
-            Test_Копія_2_Pointer itemPointer = new Test_Копія_2_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<Test_Копія_2_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<Test_Копія_2_Pointer> directoryPointerList = new List<Test_Копія_2_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new Test_Копія_2_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-    class Test_Копія_2_Test_TablePart : DirectoryTablePart
-    {
-        public Test_Копія_2_Test_TablePart(Test_Копія_2_Objest owner) : base(Config.Kernel, "tab_a11",
-             new string[] { "col_a1", "col_a2" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test_Копія_2_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Test = fieldValue["col_a1"].ToString();
-                record.кцукц = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Test);
-                    fieldValue.Add("col_a2", record.кцукц.ToString());
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                Test = "";
-                кцукц = new Довідники.Test_Pointer();
-                
-            }
-        
-            
-            public Record(
-                string _Test = "", Довідники.Test_Pointer _кцукц = null)
-            {
-                Test = _Test;
-                кцукц = _кцукц ?? new Довідники.Test_Pointer();
-                
-            }
-            public string Test { get; set; }
-            public Довідники.Test_Pointer кцукц { get; set; }
-            
-        }
-    }
-      ///<summary>
-    ///Список.
-    ///</summary>
-    class Test_Копія_2_Список_View : DirectoryView
-    {
-        public Test_Копія_2_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
-             "Довідники.Test_Копія_2_Список")
-        {
-            
-        }
-        
-    }
-      
-    
-    #endregion
-    
-    #region DIRECTORY "Test2_Копія_2"
-    
-    class Test2_Копія_2_Objest : DirectoryObject
-    {
-        public Test2_Копія_2_Objest() : base(Config.Kernel, "tab_a12",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
-        {
-            Назва = "";
-            Код = "";
-            івфіва = 0;
-            
-            //Табличні частини
-            Test_TablePart = new Test2_Копія_2_Test_TablePart(this);
-            
-        }
-        
-        public bool Read(UnigueID uid)
-        {
-            if (BaseRead(uid))
-            {
-                Назва = base.FieldValue["col_a1"].ToString();
-                Код = base.FieldValue["col_a2"].ToString();
-                івфіва = (base.FieldValue["col_a3"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a3"] : 0;
-                
-                BaseClear();
-                return true;
-            }
-            else
-                return false;
-        }
-        
-        public void Save()
-        {
-            base.FieldValue["col_a1"] = Назва;
-            base.FieldValue["col_a2"] = Код;
-            base.FieldValue["col_a3"] = (int)івфіва;
-            
-            BaseSave();
-        }
-        
-        public void Delete()
-        {
-            base.BaseDelete();
-        }
-        
-        public Test2_Копія_2_Pointer GetDirectoryPointer()
-        {
-            Test2_Копія_2_Pointer directoryPointer = new Test2_Копія_2_Pointer(UnigueID.UGuid);
-            return directoryPointer;
-        }
-        
-        public string Назва { get; set; }
-        public string Код { get; set; }
-        public Перелічення.Test івфіва { get; set; }
-        
-        //Табличні частини
-        public Test2_Копія_2_Test_TablePart Test_TablePart { get; set; }
-        
-    }
-    
-    
-    class Test2_Копія_2_Pointer : DirectoryPointer
-    {
-        public Test2_Копія_2_Pointer(object uid = null) : base(Config.Kernel, "tab_a12")
-        {
-            base.Init(new UnigueID(uid), null);
-        }
-        
-        public Test2_Копія_2_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a12")
-        {
-            base.Init(uid, fields);
-        }
-        
-        public Test2_Копія_2_Objest GetDirectoryObject()
-        {
-            Test2_Копія_2_Objest Test2_Копія_2ObjestItem = new Test2_Копія_2_Objest();
-            Test2_Копія_2ObjestItem.Read(base.UnigueID);
-            return Test2_Копія_2ObjestItem;
-        }
-    }
-    
-    
-    class Test2_Копія_2_Select : DirectorySelect, IDisposable
-    {
-        public Test2_Копія_2_Select() : base(Config.Kernel, "tab_a12",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "івфіва" }) { }
-    
-        public bool Select() { return base.BaseSelect(); }
-        
-        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
-        
-        public bool MoveNext() { if (MoveToPosition()) { Current = new Test2_Копія_2_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
-
-        public Test2_Копія_2_Pointer Current { get; private set; }
-        
-        public Test2_Копія_2_Pointer FindByField(string name, object value)
-        {
-            Test2_Копія_2_Pointer itemPointer = new Test2_Копія_2_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-        
-        public List<Test2_Копія_2_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
-        {
-            List<Test2_Копія_2_Pointer> directoryPointerList = new List<Test2_Копія_2_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
-                directoryPointerList.Add(new Test2_Копія_2_Pointer(directoryPointer.UnigueID));
-            return directoryPointerList;
-        }
-    }
-    
-      
-    class Test2_Копія_2_Test_TablePart : DirectoryTablePart
-    {
-        public Test2_Копія_2_Test_TablePart(Test2_Копія_2_Objest owner) : base(Config.Kernel, "tab_a13",
-             new string[] { "col_a1", "col_a2" }) 
-        {
-            if (owner == null) throw new Exception("owner null");
-            
-            Owner = owner;
-            Records = new List<Record>();
-        }
-        
-        public Test2_Копія_2_Objest Owner { get; private set; }
-        
-        public List<Record> Records { get; set; }
-        
-        public void Read()
-        {
-            Records.Clear();
-            base.BaseRead(Owner.UnigueID);
-
-            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
-            {
-                Record record = new Record();
-                record.UID = (Guid)fieldValue["uid"];
-                
-                record.Test = fieldValue["col_a1"].ToString();
-                record.кцукц = new Довідники.Test_Pointer(fieldValue["col_a2"]);
-                
-                Records.Add(record);
-            }
-            
-            base.BaseClear();
-        }
-        
-        public void Save(bool clear_all_before_save /*= true*/) 
-        {
-            if (Records.Count > 0)
-            {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
-
-                foreach (Record record in Records)
-                {
-                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-
-                    fieldValue.Add("col_a1", record.Test);
-                    fieldValue.Add("col_a2", record.кцукц.ToString());
-                    
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
-            }
-        }
-        
-        public void Delete()
-        {
-            base.BaseBeginTransaction();
-            base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
-        }
-        
-        
-        public class Record : DirectoryTablePartRecord
-        {
-            public Record()
-            {
-                Test = "";
-                кцукц = new Довідники.Test_Pointer();
-                
-            }
-        
-            
-            public Record(
-                string _Test = "", Довідники.Test_Pointer _кцукц = null)
-            {
-                Test = _Test;
-                кцукц = _кцукц ?? new Довідники.Test_Pointer();
-                
-            }
-            public string Test { get; set; }
-            public Довідники.Test_Pointer кцукц { get; set; }
-            
-        }
-    }
-      ///<summary>
-    ///Список.
-    ///</summary>
-    class Test2_Копія_2_Список_View : DirectoryView
-    {
-        public Test2_Копія_2_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
-             "Довідники.Test2_Копія_2_Список")
+        public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "Довідники.Номенклатура_Список")
         {
             
         }
