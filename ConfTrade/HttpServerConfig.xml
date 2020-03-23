@@ -1,16 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <root>
 
-  <ConfObject Name="default">
-    
-    <Command Name="List">
-      <Param Name="Offset" />
-      <Param Name="Limit" />
-    </Command>
-    
-  </ConfObject>
+  <ConfObject Name="default" />
   
-  <ConfObject Name="Довідник.Номенклатура">
+  <ConfObject Name="Довідник_Номенклатура">
 
     <Command Name="List">
       <Param Name="Offset" />

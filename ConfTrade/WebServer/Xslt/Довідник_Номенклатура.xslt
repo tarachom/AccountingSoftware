@@ -4,7 +4,9 @@
 
   <xsl:template match="/">
 
-    <h1>OK</h1>
+    <h1>Довідник Номенклатура</h1>
+
+    
 
   </xsl:template>
 

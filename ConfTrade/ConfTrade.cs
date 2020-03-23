@@ -49,16 +49,29 @@ namespace ConfTrade
 		public static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
 		public static Stack<HttpListenerContext> stackHttpContext = new Stack<HttpListenerContext>();
 
+		public static Encoding Win1251 = Encoding.GetEncoding("windows-1251");
+
+		static string ConvertUrl(string url)
+		{
+			return Encoding.UTF8.GetString(Win1251.GetBytes(url));
+		}
+
+		static string ConvertUrl2(string url)
+		{
+			return Win1251.GetString(Encoding.UTF8.GetBytes(url));
+		}
+
 		static void Main(string[] args)
 		{
-			Conf.Config.Kernel = new Kernel();
-			Conf.Config.Kernel.Open();
-			Conf.Config.InitAllConstants();
+			stackHttpContext = new Stack<HttpListenerContext>();
 
 			httpServerConfig = new HttpServerConfig();
 			httpServerConfig.ReadXml(@"D:\VS\Project\AccountingSoftware\ConfTrade\HttpServerConfig.xml");
 
-			stackHttpContext = new Stack<HttpListenerContext>();
+			Conf.Config.Kernel = new Kernel();
+			Conf.Config.Kernel.Open();
+			Conf.Config.InitAllConstants();
+
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
 			threadWebServer.Start();
@@ -114,10 +127,8 @@ namespace ConfTrade
 					HttpListenerRequest request = context.Request;
 					HttpListenerResponse response = context.Response;
 
-					Console.WriteLine(HttpUtility.UrlDecode(context.Request.Url.Query));
-
 					response.ContentType = "text/html";
-					response.ContentEncoding = Encoding.UTF8;
+					//response.ContentEncoding = Encoding.UTF8;
 
 					if (context.Request.Url.LocalPath != "/")
 					{
@@ -126,23 +137,21 @@ namespace ConfTrade
 						continue;
 					}
 
-					string[] allKeys = request.QueryString.AllKeys;
-
 					string confObjectName = "";
 					string cmdName = "";
 
-					foreach (string key in allKeys)
+					foreach (string key in request.QueryString.AllKeys)
 					{
 						switch (key)
 						{
 							case "confobj":
 								{
-									confObjectName = HttpUtility.UrlDecode(request.QueryString["confobj"], Encoding.UTF8);
+									confObjectName = ConvertUrl(request.QueryString["confobj"]);
 									break;
 								}
 							case "cmd":
 								{
-									cmdName = HttpUtility.UrlDecode(request.QueryString["cmd"]);
+									cmdName = ConvertUrl(request.QueryString["cmd"]);
 									break;
 								}
 							default:
@@ -166,7 +175,7 @@ namespace ConfTrade
 					if (String.IsNullOrEmpty(cmdName) ||
 						(cmdName != "default" && !ConfObject.Commands.ContainsKey(cmdName)))
 					{
-						context.Response.Redirect("/?confobj=" + confObjectName + "&cmd=default");
+						context.Response.Redirect("/?confobj=" + Uri.EscapeUriString(confObjectName) + "&cmd=default");
 						context.Response.Close();
 						continue;
 					}
@@ -184,16 +193,19 @@ namespace ConfTrade
 						}
 					}
 
-					Console.WriteLine(command.Name);
-
-					if (command.Params.Count > 0)
+					if (command != null)
 					{
-						foreach (string key in allKeys)
+						Console.WriteLine(command.Name);
+
+						if (command.Params.Count > 0)
 						{
-							if (command.Params.ContainsKey(key))
+							foreach (string key in request.QueryString.AllKeys)
 							{
-								command.Params[key] = request.QueryString[key];
-								Console.WriteLine(key + " = " + command.Params[key]);
+								if (command.Params.ContainsKey(key))
+								{
+									command.Params[key] = ConvertUrl(request.QueryString[key]);
+									Console.WriteLine(key + " = " + command.Params[key]);
+								}
 							}
 						}
 					}

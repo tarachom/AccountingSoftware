@@ -8,27 +8,15 @@ using System.Xml.Xsl;
 
 namespace ConfTrade
 {
-	public class Function
+	public partial class Function
 	{
 		public void @default(Stream output, HttpServerConfig.ConfObject.Command command)
 		{
 			XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
+			xslCompiledTransform.Load(@"../../WebServer/Xslt/default.xslt");
 
-			switch (command.Name)
-			{
-				case "List":
-					{
-						xslCompiledTransform.Load(@"../../WebServer/XSLT/default.List.xslt");
-
-						StringReader sr = new StringReader("<root></root>");
-						XmlReader xr = XmlReader.Create(sr);
-
-						XsltArgumentList xsltArgumentList = new XsltArgumentList();
-						xslCompiledTransform.Transform(xr, xsltArgumentList, output);
-
-						break;
-					}
-			}
+			XsltArgumentList xsltArgumentList = new XsltArgumentList();
+			xslCompiledTransform.Transform(@"../../WebServer/Xml/default.xml", xsltArgumentList, output);
 		}
 	}
 }
