@@ -39,7 +39,7 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.Test_Список_View m_1 = new Довідники.Test_Список_View();
+            Довідники.Test2_Копія_2_Список_View m_1 = new Довідники.Test2_Копія_2_Список_View();
             
             sb.Append(m_1.Read());
             

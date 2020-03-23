@@ -42,12 +42,11 @@ namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
-		
+
+
+
 		static void Test2()
 		{
-
-			Довідники.Test_Test_TablePart test_Test_TablePart = new Довідники.Test_Test_TablePart(null);
-			
 
 			//Документи.Договір2_Товари_TablePart.Record record1 = new Документи.Договір2_Товари_TablePart.Record();
 
@@ -78,7 +77,7 @@ namespace ConfTrade
 
 		static string Run4()
 		{
-		Console.WriteLine(	Conf.Config.Kernel.DataBase.Test());
+			Console.WriteLine(Conf.Config.Kernel.DataBase.Test());
 
 			/*
 			Довідники.test_Objest test_Objest = new Довідники.test_Objest();

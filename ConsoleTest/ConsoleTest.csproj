@@ -43,8 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeGeneration.cs" />
-    <Compile Include="CSharp\Довідники.Номенклатура_Список2.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,7 +55,6 @@
     <Content Include="CreateTemplate.xslt" />
     <Content Include="result_sql.txt" />
     <Content Include="SqlBuild.xslt" />
-    <Content Include="XSLT\Довідники.Номенклатура_Список2.xslt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountingSoftware.csproj">
@@ -65,6 +62,9 @@
       <Name>AccountingSoftware</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="CSharp\" />
+    <Folder Include="XSLT\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

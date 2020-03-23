@@ -43,11 +43,11 @@ namespace ConfTrade
 {
 	public partial class ConfTrade
 	{
+		public static HttpServerConfig httpServerConfig { get; set; }
+
 		public static readonly object readonly_lock = new object();
-
-		AutoResetEvent autoResetEvent = new AutoResetEvent(false);
-
-		public static List<HttpListenerContext> listHttpContext { get; set; }
+		public static AutoResetEvent autoResetEvent = new AutoResetEvent(false);
+		public static Stack<HttpListenerContext> stackHttpContext = new Stack<HttpListenerContext>();
 
 		static void Main(string[] args)
 		{
@@ -55,17 +55,16 @@ namespace ConfTrade
 			Conf.Config.Kernel.Open();
 			Conf.Config.InitAllConstants();
 
-			Console.ReadLine();
+			httpServerConfig = new HttpServerConfig();
+			httpServerConfig.ReadXml(@"D:\VS\Project\AccountingSoftware\ConfTrade\HttpServerConfig.xml");
 
-			listHttpContext = new List<HttpListenerContext>();
+			stackHttpContext = new Stack<HttpListenerContext>();
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
 			threadWebServer.Start();
 
 			Thread thread = new Thread(new ThreadStart(Test));
 			thread.Start();
-
-			Run4();
 
 			Console.ReadLine();
 		}
@@ -86,8 +85,10 @@ namespace ConfTrade
 
 				lock (readonly_lock)
 				{
-					listHttpContext.Add(context);
+					stackHttpContext.Push(context);
 				}
+
+				autoResetEvent.Set();
 			}
 
 			//listener.Stop();
@@ -97,120 +98,113 @@ namespace ConfTrade
 		{
 			while (true)
 			{
-				HttpListenerContext context = null;
+				HttpListenerContext context;
 
 				lock (readonly_lock)
 				{
-					if (listHttpContext.Count > 0)
-					{
-						context = listHttpContext[0];
-						listHttpContext.RemoveAt(0);
-					}
+					context = (stackHttpContext.Count > 0) ? stackHttpContext.Pop() : null;
 				}
 
-				if (context != null)
+				if (context == null)
+				{
+					autoResetEvent.WaitOne();
+				}
+				else
 				{
 					HttpListenerRequest request = context.Request;
-					Console.WriteLine(" ->");
+					HttpListenerResponse response = context.Response;
 
-					Console.WriteLine(context.Request.Headers.Count);
+					Console.WriteLine(HttpUtility.UrlDecode(context.Request.Url.Query));
 
-					Console.WriteLine(context.Request.ProtocolVersion);
-					Console.WriteLine(context.Request.Url.LocalPath);
+					response.ContentType = "text/html";
+					response.ContentEncoding = Encoding.UTF8;
 
-					//foreach (string key in context.Request.Headers.AllKeys)
-					//{
-					//	Console.WriteLine(key + " = " + context.Request.Headers[key]);
-					//}
-
-					bool isExist = false;
-
-					foreach (string key in request.QueryString.AllKeys)
+					if (context.Request.Url.LocalPath != "/")
 					{
-						Console.WriteLine(key + " = " + request.QueryString[key].ToString());
+						context.Response.Redirect("/" + context.Request.Url.Query);
+						context.Response.Close();
+						continue;
+					}
 
-						if (key == "cmd")
+					string[] allKeys = request.QueryString.AllKeys;
+
+					string confObjectName = "";
+					string cmdName = "";
+
+					foreach (string key in allKeys)
+					{
+						switch (key)
 						{
-							isExist = true;
+							case "confobj":
+								{
+									confObjectName = HttpUtility.UrlDecode(request.QueryString["confobj"], Encoding.UTF8);
+									break;
+								}
+							case "cmd":
+								{
+									cmdName = HttpUtility.UrlDecode(request.QueryString["cmd"]);
+									break;
+								}
+							default:
+								break;
 						}
 					}
 
-					if (!isExist)
+					Console.WriteLine(confObjectName);
+					Console.WriteLine(cmdName);
+
+					if (String.IsNullOrEmpty(confObjectName) ||
+						(confObjectName != "default" && !httpServerConfig.ConfObjects.ContainsKey(confObjectName)))
 					{
+						context.Response.Redirect("/?confobj=default");
 						context.Response.Close();
 						continue;
 					}
 
-					if (!(context.Request.Url.LocalPath == "/"))
+					HttpServerConfig.ConfObject ConfObject = httpServerConfig.ConfObjects[confObjectName];
+
+					if (String.IsNullOrEmpty(cmdName) ||
+						(cmdName != "default" && !ConfObject.Commands.ContainsKey(cmdName)))
 					{
+						context.Response.Redirect("/?confobj=" + confObjectName + "&cmd=default");
 						context.Response.Close();
 						continue;
 					}
 
-					if (request.HttpMethod == "POST")
+					HttpServerConfig.ConfObject.Command command = null;
+
+					if (cmdName != "default")
+						command = ConfObject.Commands[cmdName];
+					else
 					{
-						string documentContents;
-						using (Stream receiveStream = request.InputStream)
+						foreach (string firstKey in ConfObject.Commands.Keys)
 						{
-							using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+							command = ConfObject.Commands[firstKey];
+							break;
+						}
+					}
+
+					Console.WriteLine(command.Name);
+
+					if (command.Params.Count > 0)
+					{
+						foreach (string key in allKeys)
+						{
+							if (command.Params.ContainsKey(key))
 							{
-								documentContents = readStream.ReadToEnd();
+								command.Params[key] = request.QueryString[key];
+								Console.WriteLine(key + " = " + command.Params[key]);
 							}
 						}
-						Console.WriteLine($"Recived request for {request.Url}");
-						Console.WriteLine(documentContents);
-
-						Dictionary<string, string> postParams = new Dictionary<string, string>();
-						string[] rawParams = documentContents.Split('&');
-						foreach (string param in rawParams)
-						{
-							string[] kvPair = param.Split('=');
-							string key = kvPair[0];
-							string value = HttpUtility.UrlDecode(kvPair[1]);
-							postParams.Add(key, value);
-							Console.WriteLine(key + " = " + value);
-						}
 					}
 
-					HttpListenerResponse response = context.Response;
-					response.ContentType = "text/html";
+					Function function = new Function();
+					function.GetType().GetMethod(confObjectName).Invoke(function, new object[] { response.OutputStream, command });
 
-					Stream output = response.OutputStream;
-
-					string res = ""; // Run();
-
-					//Console.WriteLine(res);
-
-					StringReader sr = new StringReader(res);
-					XmlReader xr = XmlReader.Create(sr);
-
-					XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
-					xslCompiledTransform.Load(@"../../test_Список.xslt");
-
-					XsltArgumentList xsltArgumentList = new XsltArgumentList();
-
-					try
-					{
-						xslCompiledTransform.Transform(xr, xsltArgumentList, output);
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
-
-					try
-					{
-						output.Close();
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine(e.Message);
-					}
+					context.Response.Close();
 				}
-
-				//Console.WriteLine(DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss"));
-				Thread.Sleep(10);
 			}
 		}
+
 	}
 }

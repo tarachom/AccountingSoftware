@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Створити таблицю asdAS (tab_a05)</info>
-  <sql>CREATE TABLE tab_a05 (uid uuid NOT NULL, "col_a2" text, PRIMARY KEY(uid));</sql>
+  <info>Таблиця Test2_Копія_1 (tab_a06), поле івфіва (col_a3). </info>
+  <info>Очищення колонки! Втрата даних!</info>
+  <sql>BEGIN;</sql>
+  <sql>UPDATE tab_a06 SET col_a3 = NULL;</sql>
+  <sql>COMMIT;</sql>
 </root>

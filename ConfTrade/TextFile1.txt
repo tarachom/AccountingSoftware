@@ -1,0 +1,34 @@
+﻿//foreach (string key in context.Request.Headers.AllKeys)
+					//{
+					//	Console.WriteLine(" - " + key + " = " + context.Request.Headers[key]);
+					//}
+
+					//foreach (string key in context.Request.AcceptTypes)
+					//{
+					//	Console.WriteLine(" ! " + key + " = " + context.Request.Headers[key]);
+					//}
+					//
+					//if (request.HttpMethod == "POST")
+					//{
+					//	string documentContents;
+					//	using (Stream receiveStream = request.InputStream)
+					//	{
+					//		using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+					//		{
+					//			documentContents = readStream.ReadToEnd();
+					//		}
+					//	}
+					//	Console.WriteLine($"Recived request for {request.Url}");
+					//	Console.WriteLine(documentContents);
+
+					//	Dictionary<string, string> postParams = new Dictionary<string, string>();
+					//	string[] rawParams = documentContents.Split('&');
+					//	foreach (string param in rawParams)
+					//	{
+					//		string[] kvPair = param.Split('=');
+					//		string key = kvPair[0];
+					//		string value = HttpUtility.UrlDecode(kvPair[1]);
+					//		postParams.Add(key, value);
+					//		Console.WriteLine(key + " = " + value);
+					//	}
+					//}

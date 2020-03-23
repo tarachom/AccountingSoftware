@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+
+  <ConfObject Name="default">
+    
+    <Command Name="List">
+      <Param Name="Offset" />
+      <Param Name="Limit" />
+    </Command>
+    
+  </ConfObject>
+  
+  <ConfObject Name="Довідник.Номенклатура">
+
+    <Command Name="List">
+      <Param Name="Offset" />
+      <Param Name="Limit" />
+    </Command>
+
+    <Command Name="Add" />
+
+    <Command Name="Delete">
+      <Param Name="UID" />
+    </Command>
+
+    <Command Name="Edit">
+      <Param Name="UID" />
+    </Command>
+
+  </ConfObject>
+
+</root>

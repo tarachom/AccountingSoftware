@@ -39,17 +39,23 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.Test_Список_View m_1 = new Довідники.Test_Список_View();
+            Довідники.Test2_Копія_1_Список_View m_1 = new Довідники.Test2_Копія_1_Список_View();
             
             sb.Append(m_1.Read());
             
             
             sb.Append(@"<Enums>
 <Enum>
-  <Name>Test</Name>
+  <Name>qq</Name>
   <Desc></Desc>
-  <SerialNumber>0</SerialNumber>
-  <Fields />
+  <SerialNumber>1</SerialNumber>
+  <Fields>
+    <Field>
+      <Name>qq</Name>
+      <Value>1</Value>
+      <Desc></Desc>
+    </Field>
+  </Fields>
 </Enum>
 </Enums>
 ");

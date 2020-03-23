@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>19.03.2020 18:28:23</DateTimeSave>
+  <DateTimeSave>22.03.2020 10:47:27</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -145,13 +145,19 @@
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
+            <Field>
+              <Name>івфіва</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
+            </Field>
           </Fields>
         </View>
       </Views>
     </Directory>
     <Directory>
-      <Name>Test_Копія_1</Name>
-      <Table>tab_a57</Table>
+      <Name>Test2</Name>
+      <Table>tab_a03</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -179,98 +185,11 @@
       <TabularParts>
         <TablePart>
           <Name>Test</Name>
-          <Table>tab_a58</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Test</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>кцукц</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Test</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-        <TablePart>
-          <Name>sasa</Name>
           <Table>tab_a04</Table>
           <Desc>
           </Desc>
           <Fields>
             <Field>
-              <Name>sass</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <Views>
-        <View>
-          <Name>Список</Name>
-          <Table>tab_a49</Table>
-          <Desc>Список</Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Код</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
-            </Field>
-          </Fields>
-        </View>
-      </Views>
-    </Directory>
-    <Directory>
-      <Name>Test_Копія_2</Name>
-      <Table>tab_a59</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-        </Field>
-        <Field>
-          <Name>івфіва</Name>
-          <NameInTable>col_a3</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Test</Name>
-          <Table>tab_a61</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
               <Name>Test</Name>
               <NameInTable>col_a1</NameInTable>
               <Type>string</Type>
@@ -304,13 +223,19 @@
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
+            <Field>
+              <Name>івфіва</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
+            </Field>
           </Fields>
         </View>
       </Views>
     </Directory>
     <Directory>
-      <Name>Test_Копія_3</Name>
-      <Table>tab_a65</Table>
+      <Name>Test2_Копія_1</Name>
+      <Table>tab_a06</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -334,19 +259,11 @@
           <Desc>
           </Desc>
         </Field>
-        <Field>
-          <Name>івфіва2</Name>
-          <NameInTable>col_a4</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
           <Name>Test</Name>
-          <Table>tab_a66</Table>
+          <Table>tab_a07</Table>
           <Desc>
           </Desc>
           <Fields>
@@ -367,45 +284,36 @@
             </Field>
           </Fields>
         </TablePart>
-        <TablePart>
-          <Name>asdAS</Name>
-          <Table>tab_a03</Table>
-          <Desc>
-          </Desc>
+      </TabularParts>
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a49</Table>
+          <Desc>Список</Desc>
           <Fields>
             <Field>
-              <Name>asdAS</Name>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>івфіва</Name>
               <NameInTable>col_a3</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <Views>
-        <View>
-          <Name>Список</Name>
-          <Table>tab_a49</Table>
-          <Desc>Список</Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Код</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
+              <Type>enum</Type>
+              <Pointer>Перелічення.qq</Pointer>
             </Field>
           </Fields>
         </View>
       </Views>
     </Directory>
     <Directory>
-      <Name>Test_Копія_4</Name>
-      <Table>tab_a67</Table>
+      <Name>Test_Копія_1</Name>
+      <Table>tab_a08</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -429,25 +337,11 @@
           <Desc>
           </Desc>
         </Field>
-        <Field>
-          <Name>івфіва_Копія_1</Name>
-          <NameInTable>col_a4</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>Код_Копія_1</Name>
-          <NameInTable>col_a5</NameInTable>
-          <Type>integer</Type>
-          <Desc>Код</Desc>
-        </Field>
       </Fields>
       <TabularParts>
         <TablePart>
           <Name>Test</Name>
-          <Table>tab_a68</Table>
+          <Table>tab_a09</Table>
           <Desc>
           </Desc>
           <Fields>
@@ -485,13 +379,19 @@
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
+            <Field>
+              <Name>івфіва</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
+            </Field>
           </Fields>
         </View>
       </Views>
     </Directory>
     <Directory>
-      <Name>Test_Копія_5</Name>
-      <Table>tab_a69</Table>
+      <Name>Test_Копія_2</Name>
+      <Table>tab_a10</Table>
       <Desc>
       </Desc>
       <Fields>
@@ -510,14 +410,8 @@
         <Field>
           <Name>івфіва</Name>
           <NameInTable>col_a3</NameInTable>
-          <Type>empty_pointer</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>rfserw</Name>
-          <NameInTable>col_a4</NameInTable>
-          <Type>string</Type>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Test</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -525,7 +419,7 @@
       <TabularParts>
         <TablePart>
           <Name>Test</Name>
-          <Table>tab_a70</Table>
+          <Table>tab_a11</Table>
           <Desc>
           </Desc>
           <Fields>
@@ -562,6 +456,90 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>івфіва</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>Test2_Копія_2</Name>
+      <Table>tab_a12</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+        <Field>
+          <Name>івфіва</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Test</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>Test</Name>
+          <Table>tab_a13</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>Test</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>кцукц</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Test</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a49</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>івфіва</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
             </Field>
           </Fields>
         </View>

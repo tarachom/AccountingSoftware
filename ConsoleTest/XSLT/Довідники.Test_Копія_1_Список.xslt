@@ -9,7 +9,7 @@
   <title>HTML</title>
   <body>
     <table border="1">
-      <xsl:for-each select="root/Довідники.Test_Список/row">
+      <xsl:for-each select="root/Довідники.Test_Копія_1_Список/row">
       <tr>
         <td><xsl:value-of select="Назва"/></td>
         <td><xsl:value-of select="Код"/></td>
