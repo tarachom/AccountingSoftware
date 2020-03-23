@@ -13,11 +13,11 @@
     <Command Name="Add" />
 
     <Command Name="Delete">
-      <Param Name="UID" />
+      <Param Name="Uid" />
     </Command>
 
     <Command Name="Edit">
-      <Param Name="UID" />
+      <Param Name="Uid" />
     </Command>
 
   </ConfObject>

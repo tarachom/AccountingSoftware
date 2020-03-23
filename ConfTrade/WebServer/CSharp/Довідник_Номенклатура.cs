@@ -25,8 +25,8 @@ namespace ConfTrade
 			xslCompiledTransform.Load(@"../../WebServer/Xslt/Довідник_Номенклатура/" + command.Name + ".xslt");
 
 			XsltArgumentList xsltArgumentList = new XsltArgumentList();
-			xsltArgumentList.AddParam("ConfObject", "", "Довідник_Номенклатура");
-			xsltArgumentList.AddParam("Cmd", "", command.Name);
+			xsltArgumentList.AddParam("confobj", "", "Довідник_Номенклатура");
+			xsltArgumentList.AddParam("cmd", "", command.Name);
 
 			foreach (string key in command.Params.Keys)
 				xsltArgumentList.AddParam(key, "", command.Params[key]);
@@ -63,7 +63,23 @@ namespace ConfTrade
 
 				case "Delete":
 					{
-						XmlData += "";
+						string Uid = command.Params["Uid"];
+
+						if (String.IsNullOrEmpty(Uid))
+						{
+							XmlData += "<info>Error Uid</info>";
+							break;
+						}
+
+						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
+						if (номенклатура_Objest.Read(new UnigueID(Uid)))
+						{
+							номенклатура_Objest.Delete();
+							XmlData += "<info>Ok delete</info>";
+						}
+						else
+							XmlData += "<info>Error read Uid</info>";
+
 						break;
 					}
 			}
