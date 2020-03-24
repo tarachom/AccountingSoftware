@@ -9,7 +9,7 @@
   <xsl:param name="Limit" />
 
   <xsl:template match="/">
-    
+
     <h1>Довідник Номенклатура</h1>
 
     <div class="btn-group">
@@ -36,17 +36,21 @@
                 <label for="name">Назва:</label>
                 <input type="text" class="form-control" placeholder="Назва" name="Name"></input>
               </div>
+              <div class="form-group">
+                <label for="name">Ціна:</label>
+                <input type="text" class="form-control" placeholder="Ціна" name="Cena"></input>
+              </div>
             </form>
 
             <script type="text/javascript">
               function SendForm() {
-                $.post("http://localhost/5555/?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=Add",
-                  $("#SendForm").serialize(),
-                  function(data, status) { $("#StatusInfo").html(data); }
-                );
+              $.post("http://localhost/5555/?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=Add",
+              $("#SendForm").serialize(),
+              function(data, status) { $("#StatusInfo").html(data); }
+              );
               }
             </script>
-            
+
           </div>
 
           <div class="modal-footer">
@@ -68,7 +72,7 @@
 
           <div class="modal-body">
             <p style="color:red;" id="StatusInfo"></p>
-                        
+
           </div>
 
           <div class="modal-footer">
@@ -78,36 +82,35 @@
         </div>
       </div>
     </div>
-    
+
     <div class="table-responsive">
 
-      <table class="table table-bordered table-sm">
-        <xsl:for-each select="root/Довідники.Номенклатура_Список/row">
+      <table class="table table-bordered table-sm table-hover">
+        <col width="10%" />
+        <col width="80%" />
+        <col width="10%" />
+        <thead class="thead-light">
           <tr>
-
-            <td>
-              <xsl:value-of select="Назва"/>
-            </td>
-            <td>
-              <xsl:value-of select="Код"/>
-            </td>
-            <td>
-              <a>
-                <xsl:attribute name="href">
-                  <xsl:text>?confobj=</xsl:text>
-                  <xsl:value-of select="$confobj"/>
-                  <xsl:text>&amp;cmd=Edit&amp;Uid=</xsl:text>
-                  <xsl:value-of select="uid"/>
-                </xsl:attribute>
-                <xsl:text>Редагувати</xsl:text>
-              </a>
-            </td>
-            <td>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#DeleteModal">Видалити</button>
-            </td>
-
+            <th>Код</th>
+            <th>Назва</th>
+            <th>Ціна</th>
           </tr>
-        </xsl:for-each>
+        </thead>
+        <tbody>
+          <xsl:for-each select="root/Довідники.Номенклатура_Список/row">
+            <tr>
+              <td>
+                <xsl:value-of select="Код"/>
+              </td>
+              <td>
+                <xsl:value-of select="Назва"/>
+              </td>
+              <td>
+                <xsl:value-of select="Ціна"/>
+              </td>
+            </tr>
+          </xsl:for-each>
+        </tbody>
       </table>
 
     </div>

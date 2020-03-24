@@ -1,23 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Видалити таблицю Test2 (tab_a03)</info>
-  <sql>DROP TABLE tab_a03;</sql>
-  <info>Видалити таблицю Test (tab_a04)</info>
-  <sql>DROP TABLE tab_a04;</sql>
-  <info>Видалити таблицю Test2_Копія_1 (tab_a06)</info>
-  <sql>DROP TABLE tab_a06;</sql>
-  <info>Видалити таблицю Test (tab_a07)</info>
-  <sql>DROP TABLE tab_a07;</sql>
-  <info>Видалити таблицю Test_Копія_1 (tab_a08)</info>
-  <sql>DROP TABLE tab_a08;</sql>
-  <info>Видалити таблицю Test (tab_a09)</info>
-  <sql>DROP TABLE tab_a09;</sql>
-  <info>Видалити таблицю Test_Копія_2 (tab_a10)</info>
-  <sql>DROP TABLE tab_a10;</sql>
-  <info>Видалити таблицю Test (tab_a11)</info>
-  <sql>DROP TABLE tab_a11;</sql>
-  <info>Видалити таблицю Test2_Копія_2 (tab_a12)</info>
-  <sql>DROP TABLE tab_a12;</sql>
-  <info>Видалити таблицю Test (tab_a13)</info>
-  <sql>DROP TABLE tab_a13;</sql>
+  <info>Додати колонку Ціна (col_a3, тип integer)  в таблицю Номенклатура (tab_a14)</info>
+  <sql>ALTER TABLE tab_a14 ADD COLUMN "col_a3" integer;</sql>
 </root>

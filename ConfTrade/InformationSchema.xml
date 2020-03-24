@@ -47,29 +47,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_a04</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a50</Name>
     <Column>
       <Name>uid</Name>
@@ -130,75 +107,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_a06</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a07</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a09</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a05</Name>
     <Column>
       <Name>uid</Name>
@@ -209,98 +117,6 @@
       <Name>col_a2</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a08</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a10</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a11</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a12</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
     </Column>
   </Table>
   <Table>
@@ -324,52 +140,6 @@
       <Name>col_a2</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a03</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a13</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
     </Column>
   </Table>
   <Table>

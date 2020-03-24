@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 23.03.2020 17:04:02
+ * Дата конфігурації: 24.03.2020 18:00:49
  *
  */
 
@@ -546,10 +546,11 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a14",
-             new string[] { "col_a1", "col_a2" }) 
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
             Код = "";
+            Ціна = 0;
             
         }
         
@@ -559,6 +560,7 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
+                Ціна = (base.FieldValue["col_a3"] != DBNull.Value) ? (int)base.FieldValue["col_a3"] : 0;
                 
                 BaseClear();
                 return true;
@@ -571,6 +573,7 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = Ціна;
             
             BaseSave();
         }
@@ -588,6 +591,7 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
+        public int Ціна { get; set; }
         
     }
     
@@ -616,8 +620,8 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Select : DirectorySelect, IDisposable
     {
         public Номенклатура_Select() : base(Config.Kernel, "tab_a14",
-            new string[] { "col_a1", "col_a2" },
-            new string[] { "Назва", "Код" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "Ціна" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -650,9 +654,9 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Список_View : DirectoryView
     {
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
-             new string[] { "col_a1", "col_a2" },
-             new string[] { "Назва", "Код" },
-             new string[] { "string", "string" },
+             new string[] { "col_a1", "col_a2", "col_a3" },
+             new string[] { "Назва", "Код", "Ціна" },
+             new string[] { "string", "string", "integer" },
              "Довідники.Номенклатура_Список")
         {
             

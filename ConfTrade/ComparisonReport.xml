@@ -173,66 +173,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>Test2</Name>
-    <Table>tab_a03</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Test</Name>
-    <Table>tab_a04</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>Test2_Копія_1</Name>
-    <Table>tab_a06</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Test</Name>
-    <Table>tab_a07</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>Test_Копія_1</Name>
-    <Table>tab_a08</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Test</Name>
-    <Table>tab_a09</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>Test_Копія_2</Name>
-    <Table>tab_a10</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Test</Name>
-    <Table>tab_a11</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory</Type>
-    <Name>Test2_Копія_2</Name>
-    <Table>tab_a12</Table>
-    <IsExist>delete</IsExist>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Test</Name>
-    <Table>tab_a13</Table>
-    <IsExist>delete</IsExist>
+    <Control_Field>
+      <Name>Ціна</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>Ціна</Name>
+        <NameInTable>col_a3</NameInTable>
+        <ConfType>integer</ConfType>
+        <DataType>integer</DataType>
+      </FieldCreate>
+    </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

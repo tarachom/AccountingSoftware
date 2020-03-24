@@ -49,6 +49,7 @@ namespace ConfTrade
 						номенклатура_Objest.New();
 						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
 						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
+						номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
 						номенклатура_Objest.Save();
 
 						XmlData += "<info>" + "Додано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";

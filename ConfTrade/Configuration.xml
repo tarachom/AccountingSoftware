@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>23.03.2020 17:04:02</DateTimeSave>
+  <DateTimeSave>24.03.2020 18:00:49</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -173,6 +173,13 @@
           <Type>string</Type>
           <Desc>Код</Desc>
         </Field>
+        <Field>
+          <Name>Ціна</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -190,6 +197,11 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Ціна</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>integer</Type>
             </Field>
           </Fields>
         </View>
