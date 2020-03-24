@@ -19,21 +19,21 @@ namespace ConfTrade
 {
 	public partial class Function
 	{
-		public void Довідник_Номенклатура(Stream output, HttpServerConfig.ConfObject.Command command)
+		public void Довідник_Номенклатура(Stream output, CommandParamsValue commandParamsValue)
 		{
 			XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
-			xslCompiledTransform.Load(@"../../WebServer/Xslt/Довідник_Номенклатура/" + command.Name + ".xslt");
+			xslCompiledTransform.Load(@"../../WebServer/Xslt/Довідник_Номенклатура/" + commandParamsValue.Name + ".xslt");
 
 			XsltArgumentList xsltArgumentList = new XsltArgumentList();
 			xsltArgumentList.AddParam("confobj", "", "Довідник_Номенклатура");
-			xsltArgumentList.AddParam("cmd", "", command.Name);
+			xsltArgumentList.AddParam("cmd", "", commandParamsValue.Name);
 
-			foreach (string key in command.Params.Keys)
-				xsltArgumentList.AddParam(key, "", command.Params[key]);
+			foreach (string key in commandParamsValue.Get_Params.Keys)
+				xsltArgumentList.AddParam(key, "", commandParamsValue.Get_Params[key]);
 
 			string XmlData = "<root>";
 
-			switch (command.Name)
+			switch (commandParamsValue.Name)
 			{
 				case "List":
 					{
@@ -63,7 +63,7 @@ namespace ConfTrade
 
 				case "Delete":
 					{
-						string Uid = command.Params["Uid"];
+						string Uid = commandParamsValue.Get_Params["Uid"];
 
 						if (String.IsNullOrEmpty(Uid))
 						{

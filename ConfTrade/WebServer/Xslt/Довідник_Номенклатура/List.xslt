@@ -19,6 +19,7 @@
         <table border="1">
           <xsl:for-each select="root/Довідники.Номенклатура_Список/row">
             <tr>
+              
               <td>
                 <xsl:value-of select="uid"/>
               </td>
@@ -33,15 +34,28 @@
                   <xsl:attribute name="href">
                     <xsl:text>?confobj=</xsl:text>
                     <xsl:value-of select="$confobj"/>
+                    <xsl:text>&amp;cmd=Edit&amp;Uid=</xsl:text>
+                    <xsl:value-of select="uid"/>
+                  </xsl:attribute>
+                  <xsl:text>Редагувати</xsl:text>
+                </a>
+              </td>
+              <td>
+                <a>
+                  <xsl:attribute name="href">
+                    <xsl:text>?confobj=</xsl:text>
+                    <xsl:value-of select="$confobj"/>
                     <xsl:text>&amp;cmd=Delete&amp;Uid=</xsl:text>
                     <xsl:value-of select="uid"/>
                   </xsl:attribute>
                   <xsl:text>Видалити</xsl:text>
                 </a>
               </td>
+              
             </tr>
           </xsl:for-each>
         </table>
+        
       </body>
     </html>
     

@@ -56,10 +56,10 @@ namespace ConfTrade
 			return Encoding.UTF8.GetString(Win1251.GetBytes(url));
 		}
 
-		static string ConvertUrl2(string url)
-		{
-			return Win1251.GetString(Encoding.UTF8.GetBytes(url));
-		}
+		//static string ConvertUrl2(string url)
+		//{
+		//	return Win1251.GetString(Encoding.UTF8.GetBytes(url));
+		//}
 
 		static void Main(string[] args)
 		{
@@ -128,7 +128,7 @@ namespace ConfTrade
 					HttpListenerResponse response = context.Response;
 
 					response.ContentType = "text/html";
-					//response.ContentEncoding = Encoding.UTF8;
+					response.ContentEncoding = Encoding.UTF8;
 
 					if (context.Request.Url.LocalPath != "/")
 					{
@@ -180,38 +180,60 @@ namespace ConfTrade
 						continue;
 					}
 
-					HttpServerConfig.ConfObject.Command command = null;
+					CommandParamsValue commandParamsValue = null;
 
 					if (cmdName != "default")
-						command = ConfObject.Commands[cmdName];
+						commandParamsValue = ConfObject.Commands[cmdName].GetCommandParamsValue();
 					else
 					{
-						foreach (string firstKey in ConfObject.Commands.Keys)
-						{
-							command = ConfObject.Commands[firstKey];
-							break;
-						}
+						if (ConfObject.FirstCommand != null)
+							commandParamsValue = ConfObject.FirstCommand.GetCommandParamsValue();
 					}
 
-					if (command != null)
+					if (commandParamsValue != null)
 					{
-						Console.WriteLine(command.Name);
+						Console.WriteLine(commandParamsValue.Name);
 
-						if (command.Params.Count > 0)
+						if (commandParamsValue.Get_Params.Count > 0)
 						{
 							foreach (string key in request.QueryString.AllKeys)
 							{
-								if (command.Params.ContainsKey(key))
+								if (commandParamsValue.Get_Params.ContainsKey(key))
 								{
-									command.Params[key] = ConvertUrl(request.QueryString[key]);
-									Console.WriteLine(key + " = " + command.Params[key]);
+									commandParamsValue.Get_Params[key] = ConvertUrl(request.QueryString[key]);
+									Console.WriteLine(key + " = " + commandParamsValue.Get_Params[key]);
 								}
+							}
+						}
+
+						if (request.HttpMethod == "POST")
+						{
+							string documentContents;
+							using (Stream receiveStream = request.InputStream)
+							{
+								using (StreamReader readStream = new StreamReader(receiveStream, Encoding.UTF8))
+								{
+									documentContents = readStream.ReadToEnd();
+								}
+							}
+							Console.WriteLine($"Recived request for {request.Url}");
+							Console.WriteLine(documentContents);
+
+							//Dictionary<string, string> postParams = new Dictionary<string, string>();
+							string[] rawParams = documentContents.Split('&');
+							foreach (string param in rawParams)
+							{
+								string[] kvPair = param.Split('=');
+								string key = kvPair[0];
+								string value = HttpUtility.UrlDecode(kvPair[1]);
+								commandParamsValue.Post_Params.Add(key, value);
+								Console.WriteLine(key + " = " + value);
 							}
 						}
 					}
 
 					Function function = new Function();
-					function.GetType().GetMethod(confObjectName).Invoke(function, new object[] { response.OutputStream, command });
+					function.GetType().GetMethod(confObjectName).Invoke(function, new object[] { response.OutputStream, commandParamsValue });
 
 					context.Response.Close();
 				}

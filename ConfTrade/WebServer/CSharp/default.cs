@@ -10,7 +10,7 @@ namespace ConfTrade
 {
 	public partial class Function
 	{
-		public void @default(Stream output, HttpServerConfig.ConfObject.Command command)
+		public void @default(Stream output, CommandParamsValue commandParamsValue)
 		{
 			XslCompiledTransform xslCompiledTransform = new XslCompiledTransform();
 			xslCompiledTransform.Load(@"../../WebServer/Xslt/default.xslt");
