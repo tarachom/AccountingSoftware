@@ -47,11 +47,11 @@ namespace ConfTrade
 					{
 						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
 						номенклатура_Objest.New();
-						номенклатура_Objest.Код = "1";
-						номенклатура_Objest.Назва = "Товар 1";
+						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
+						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
 						номенклатура_Objest.Save();
 
-						XmlData += "<info>" + "Ok: " + номенклатура_Objest.UnigueID.ToString() + "</info>";
+						XmlData += "<info>" + "Додано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
 						break;
 					}
 
@@ -89,7 +89,14 @@ namespace ConfTrade
 			StringReader stringReader = new StringReader(XmlData);
 			XmlReader xmlReader = XmlReader.Create(stringReader);
 
-			xslCompiledTransform.Transform(xmlReader, xsltArgumentList, output);
+			try
+			{
+				xslCompiledTransform.Transform(xmlReader, xsltArgumentList, output);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
 		}
 	}
 }

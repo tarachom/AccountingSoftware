@@ -4,12 +4,8 @@
 
   <xsl:template match="/">
 
-    <h1>Довідник Номенклатура</h1>
-
-    <p>
-      <xsl:value-of select="/root/info"/>
-    </p>
-
+    <xsl:value-of select="/root/info"/>
+    
   </xsl:template>
 
 </xsl:stylesheet>

@@ -6,23 +6,31 @@
 
     <h1>Список</h1>
 
-    <ul>
+    <xsl:for-each select="root/group">
+      
+      <div class="list-group">
 
-      <xsl:for-each select="root/item">
+        <p>
+          <xsl:value-of select="name"/>
+        </p>
+        
+        <xsl:for-each select="item">
 
-        <li>
-          <a>
+          <a class="list-group-item list-group-item-action">
             <xsl:attribute name="href">
-              <xsl:text>?confobj=</xsl:text>
-              <xsl:value-of select="text()"/>
+              <xsl:text>javascript:Load('container', '?confobj=</xsl:text>
+              <xsl:value-of select="@src"/>
+              <xsl:text>')</xsl:text>
             </xsl:attribute>
+            <img src="Images/list.ico" />
+            <xsl:text> </xsl:text>
             <xsl:value-of select="text()"/>
           </a>
-        </li>
 
-      </xsl:for-each>
+        </xsl:for-each>
+      </div>
 
-    </ul>
+    </xsl:for-each>
 
   </xsl:template>
 
