@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>25.03.2020 13:40:00</DateTimeSave>
+  <DateTimeSave>25.03.2020 13:55:41</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -228,27 +228,6 @@
           <NameInTable>col_b1</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>масив</Name>
-          <NameInTable>col_b2</NameInTable>
-          <Type>string[]</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>масив_число</Name>
-          <NameInTable>col_b3</NameInTable>
-          <Type>integer[]</Type>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
-          <Name>масив_число_кома</Name>
-          <NameInTable>col_b4</NameInTable>
-          <Type>numeric[]</Type>
           <Desc>
           </Desc>
         </Field>

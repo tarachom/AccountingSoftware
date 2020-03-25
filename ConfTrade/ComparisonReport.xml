@@ -261,38 +261,38 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>Номенклатура</Name>
+    <Table>tab_a14</Table>
+    <IsExist>yes</IsExist>
     <Control_Field>
       <Name>масив</Name>
       <NameInTable>col_b2</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string[]</ConfType>
-        <DataType>ARRAY</DataType>
-        <UdtName>_text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
+      <IsExist>delete</IsExist>
     </Control_Field>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>Номенклатура</Name>
+    <Table>tab_a14</Table>
+    <IsExist>yes</IsExist>
     <Control_Field>
       <Name>масив_число</Name>
       <NameInTable>col_b3</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>integer[]</ConfType>
-        <DataType>ARRAY</DataType>
-        <UdtName>_int4</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
+      <IsExist>delete</IsExist>
     </Control_Field>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory.TablePart</Type>
+    <Name>Номенклатура</Name>
+    <Table>tab_a14</Table>
+    <IsExist>yes</IsExist>
     <Control_Field>
       <Name>масив_число_кома</Name>
       <NameInTable>col_b4</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>numeric[]</ConfType>
-        <DataType>ARRAY</DataType>
-        <UdtName>_numeric</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
+      <IsExist>delete</IsExist>
     </Control_Field>
   </Control_Table>
   <Control_Table>

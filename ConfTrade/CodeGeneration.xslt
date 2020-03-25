@@ -218,6 +218,52 @@ limitations under the License.
      </xsl:choose>
   </xsl:template>
 
+  <!-- Для перетворення поля в ХМЛ стрічку -->
+  <xsl:template name="SerializeFieldValue">
+    <xsl:text>"&lt;</xsl:text><xsl:value-of select="Name"/><xsl:text>&gt;" + </xsl:text>
+    <xsl:choose>
+      <xsl:when test="Type = 'enum'">
+        <xsl:text>((int)</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'boolean'">
+        <xsl:text>(</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string'">
+        <xsl:text>"&lt;![CDATA[" + </xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string[]'">
+        <xsl:text>ArrayToXml&lt;string&gt;.Convert(</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer[]'">
+        <xsl:text>ArrayToXml&lt;int&gt;.Convert(</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'numeric[]'">
+        <xsl:text>ArrayToXml&lt;decimal&gt;.Convert(</xsl:text>
+      </xsl:when>
+    </xsl:choose>
+    <xsl:value-of select="Name"/>
+    <xsl:choose>
+      <xsl:when test="Type = 'enum'">
+        <xsl:text>).ToString()</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'boolean'">
+        <xsl:text> == true ? "1" : "0")</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'integer' or Type = 'numeric' or 
+                Type = 'date' or Type = 'datetime' or Type = 'time' or
+                Type = 'pointer' or Type = 'empty_pointer'">
+        <xsl:text>.ToString()</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string'">
+        <xsl:text> + "]]&gt;"</xsl:text>
+      </xsl:when>
+      <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]'">
+        <xsl:text>).ToString()</xsl:text>
+      </xsl:when>
+    </xsl:choose> 
+    <xsl:text> + "&lt;/</xsl:text><xsl:value-of select="Name"/><xsl:text>&gt;" </xsl:text>
+  </xsl:template>
+  
   <!-- Документування коду -->
   <xsl:template name="CommentSummary">
     <xsl:variable name="normalize_space_Desc" select="normalize-space(Desc)" />
@@ -550,56 +596,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public string Serialize()
         {
-            return "&lt;<xsl:value-of select="$DirectoryName"/>&gt;" +
-            <xsl:text>"&lt;uid&gt;" + base.UnigueID.ToString() + "&lt;/uid&gt;"</xsl:text> +
-            <xsl:for-each select="Fields/Field">
-              <xsl:text>"&lt;</xsl:text>
-              <xsl:value-of select="Name"/>
-              <xsl:text>&gt;" + </xsl:text>
-              <xsl:choose>
-                <xsl:when test="Type = 'enum'">
-                  <xsl:text>((int)</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text>(</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text>"&lt;![CDATA[" + </xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]'">
-                  <xsl:text>ArrayToXml&lt;string&gt;.Convert(</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer[]'">
-                  <xsl:text>ArrayToXml&lt;int&gt;.Convert(</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'numeric[]'">
-                  <xsl:text>ArrayToXml&lt;decimal&gt;.Convert(</xsl:text>
-                </xsl:when>
-              </xsl:choose>
-              <xsl:value-of select="Name"/>
-              <xsl:choose>
-                <xsl:when test="Type = 'enum'">
-                  <xsl:text>).ToString()</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'boolean'">
-                  <xsl:text> == true ? "1" : "0")</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'integer' or Type = 'numeric' or 
-                          Type = 'date' or Type = 'datetime' or Type = 'time' or
-                          Type = 'pointer' or Type = 'empty_pointer'">
-                  <xsl:text>.ToString()</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string'">
-                  <xsl:text> + "]]&gt;"</xsl:text>
-                </xsl:when>
-                <xsl:when test="Type = 'string[]' or Type = 'integer[]' or Type = 'numeric[]'">
-                  <xsl:text>).ToString()</xsl:text>
-                </xsl:when>
-              </xsl:choose> 
-              <xsl:text> + "&lt;/</xsl:text><xsl:value-of select="Name"/>&gt;" +
-            </xsl:for-each>
-            <xsl:text>"&lt;/</xsl:text>
-            <xsl:value-of select="$DirectoryName"/>&gt;";
+            return 
+            "&lt;<xsl:value-of select="$DirectoryName"/>&gt;" +
+               <xsl:text>"&lt;uid&gt;" + base.UnigueID.ToString() + "&lt;/uid&gt;"</xsl:text> +
+               <xsl:for-each select="Fields/Field">
+                 <xsl:call-template name="SerializeFieldValue" /> +
+               </xsl:for-each>
+            <xsl:text>"&lt;/</xsl:text><xsl:value-of select="$DirectoryName"/>&gt;";
         }
 
         public void Delete()
