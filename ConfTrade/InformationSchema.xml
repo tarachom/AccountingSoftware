@@ -199,20 +199,5 @@
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
-    <Column>
-      <Name>col_b2</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_b3</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_int4</UdtName>
-    </Column>
-    <Column>
-      <Name>col_b4</Name>
-      <DataType>ARRAY</DataType>
-      <UdtName>_numeric</UdtName>
-    </Column>
   </Table>
 </InformationSchema>

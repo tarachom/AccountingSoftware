@@ -1,9 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Видалити колонку масив (col_b2)  в таблиці Номенклатура (tab_a14)</info>
-  <sql>ALTER TABLE tab_a14 DROP COLUMN "col_b2" ;</sql>
-  <info>Видалити колонку масив_число (col_b3)  в таблиці Номенклатура (tab_a14)</info>
-  <sql>ALTER TABLE tab_a14 DROP COLUMN "col_b3" ;</sql>
-  <info>Видалити колонку масив_число_кома (col_b4)  в таблиці Номенклатура (tab_a14)</info>
-  <sql>ALTER TABLE tab_a14 DROP COLUMN "col_b4" ;</sql>
-</root>
+<root />

@@ -190,7 +190,9 @@ limitations under the License.
           <xsl:text> : new decimal[] { }</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'boolean'">
-          <xsl:text>(bool)</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"]</xsl:text>
+          <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>bool.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text> : false</xsl:text>
         </xsl:when>
         <xsl:when test="Type = 'time'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
@@ -587,7 +589,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                  <xsl:text>.ToString()</xsl:text>
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>

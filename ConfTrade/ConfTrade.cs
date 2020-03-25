@@ -236,7 +236,8 @@ namespace ConfTrade
 							string[] rawParams = documentContents.Split('&');
 							foreach (string param in rawParams)
 							{
-								string[] kvPair = param.Split('=');
+								string paramModifice = param.Replace("+", " ");
+								string[] kvPair = paramModifice.Split('=');
 								string key = Uri.UnescapeDataString((request.ContentEncoding.WebName == Win1251.WebName) ? ConvertUrl(kvPair[0]) : kvPair[0]);
 								string value = Uri.UnescapeDataString((request.ContentEncoding.WebName == Win1251.WebName) ? ConvertUrl(kvPair[1]) : kvPair[1]);
 								commandParamsValue.Post_Params.Add(key, value);

@@ -22,6 +22,10 @@
       <Param Name="Uid" />
     </Command>
 
+    <Command Name="Save">
+      <Param Name="Uid" />
+    </Command>
+    
   </ConfObject>
 
   

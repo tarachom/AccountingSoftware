@@ -263,39 +263,6 @@
     </Control_Field>
   </Control_Table>
   <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Номенклатура</Name>
-    <Table>tab_a14</Table>
-    <IsExist>yes</IsExist>
-    <Control_Field>
-      <Name>масив</Name>
-      <NameInTable>col_b2</NameInTable>
-      <IsExist>delete</IsExist>
-    </Control_Field>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Номенклатура</Name>
-    <Table>tab_a14</Table>
-    <IsExist>yes</IsExist>
-    <Control_Field>
-      <Name>масив_число</Name>
-      <NameInTable>col_b3</NameInTable>
-      <IsExist>delete</IsExist>
-    </Control_Field>
-  </Control_Table>
-  <Control_Table>
-    <Type>Directory.TablePart</Type>
-    <Name>Номенклатура</Name>
-    <Table>tab_a14</Table>
-    <IsExist>yes</IsExist>
-    <Control_Field>
-      <Name>масив_число_кома</Name>
-      <NameInTable>col_b4</NameInTable>
-      <IsExist>delete</IsExist>
-    </Control_Field>
-  </Control_Table>
-  <Control_Table>
     <Type>Document</Type>
     <Name>Test</Name>
     <Table>tab_a50</Table>

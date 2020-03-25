@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 25.03.2020 13:55:41
+ * Дата конфігурації: 25.03.2020 14:59:40
  *
  */
 
@@ -584,7 +584,7 @@ namespace ConfTrade_v1_1.Довідники
                 Дата = (base.FieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a6"].ToString()) : DateTime.MinValue;
                 ДатаЧас = (base.FieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a7"].ToString()) : DateTime.MinValue;
                 Час = (base.FieldValue["col_a8"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_a8"].ToString()) : DateTime.MinValue.TimeOfDay;
-                Логічний = (bool)base.FieldValue["col_a9"];
+                Логічний = (base.FieldValue["col_a9"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a9"].ToString()) : false;
                 Вказівник = new Довідники.Test_Pointer(base.FieldValue["col_b1"]);
                 
                 BaseClear();
@@ -605,7 +605,7 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a7"] = ДатаЧас;
             base.FieldValue["col_a8"] = Час;
             base.FieldValue["col_a9"] = Логічний;
-            base.FieldValue["col_b1"] = Вказівник.ToString();
+            base.FieldValue["col_b1"] = Вказівник.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -711,9 +711,9 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Список_View : DirectoryView
     {
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "Ціна" },
-             new string[] { "string", "string", "numeric" },
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
+             new string[] { "Назва", "Код", "Ціна", "Кво" },
+             new string[] { "string", "string", "numeric", "integer" },
              "Довідники.Номенклатура_Список")
         {
             

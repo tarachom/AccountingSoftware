@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>25.03.2020 13:55:41</DateTimeSave>
+  <DateTimeSave>25.03.2020 14:59:40</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -253,6 +253,11 @@
               <Name>Ціна</Name>
               <NameInTable>col_a3</NameInTable>
               <Type>numeric</Type>
+            </Field>
+            <Field>
+              <Name>Кво</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>integer</Type>
             </Field>
           </Fields>
         </View>

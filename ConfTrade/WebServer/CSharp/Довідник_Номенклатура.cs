@@ -38,6 +38,8 @@ namespace ConfTrade
 				case "List":
 					{
 						Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
+						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
+						m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
 						XmlData += m_1.Read();
 
 						break;
@@ -50,6 +52,7 @@ namespace ConfTrade
 						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
 						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
 						номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
+						номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
 						номенклатура_Objest.Save();
 
 						XmlData += "<info>" + "Додано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
@@ -58,7 +61,50 @@ namespace ConfTrade
 
 				case "Edit":
 					{
-						XmlData += "";
+						string Uid = commandParamsValue.Get_Params["Uid"];
+
+						if (String.IsNullOrEmpty(Uid))
+						{
+							XmlData += "<info>Error Uid</info>";
+							break;
+						}
+
+						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
+						if (номенклатура_Objest.Read(new UnigueID(Uid)))
+						{
+							XmlData += номенклатура_Objest.Serialize();
+						}
+						else
+							XmlData += "<info>Error read Uid</info>";
+
+						break;
+					}
+
+				case "Save":
+					{
+						string Uid = commandParamsValue.Get_Params["Uid"];
+
+						if (String.IsNullOrEmpty(Uid))
+						{
+							XmlData += "<info>Error Uid</info>";
+							break;
+						}
+
+						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
+						if (номенклатура_Objest.Read(new UnigueID(Uid)))
+						{
+							номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
+							номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
+							номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
+							номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
+							номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
+							номенклатура_Objest.Save();
+
+							XmlData += "<info>" + "Записано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
+						}
+						else
+							XmlData += "<info>Error read Uid</info>";
+
 						break;
 					}
 
