@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>24.03.2020 18:00:49</DateTimeSave>
+  <DateTimeSave>25.03.2020 13:40:00</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -176,7 +176,79 @@
         <Field>
           <Name>Ціна</Name>
           <NameInTable>col_a3</NameInTable>
+          <Type>numeric</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Кво</Name>
+          <NameInTable>col_a4</NameInTable>
           <Type>integer</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Перелічення1</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Test</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Дата</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Type>date</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>ДатаЧас</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Час</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Type>time</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Логічний</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Вказівник</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Test</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>масив</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>string[]</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>масив_число</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>integer[]</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>масив_число_кома</Name>
+          <NameInTable>col_b4</NameInTable>
+          <Type>numeric[]</Type>
           <Desc>
           </Desc>
         </Field>
@@ -201,7 +273,7 @@
             <Field>
               <Name>Ціна</Name>
               <NameInTable>col_a3</NameInTable>
-              <Type>integer</Type>
+              <Type>numeric</Type>
             </Field>
           </Fields>
         </View>

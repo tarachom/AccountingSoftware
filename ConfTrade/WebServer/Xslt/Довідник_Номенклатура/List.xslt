@@ -12,7 +12,7 @@
 
     <h1>Довідник Номенклатура</h1>
 
-    <div class="btn-group">
+    <div class="btn-group" style="margin-bottom:10px;">
       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddNewModal">Новий</button>
     </div>
 
@@ -82,7 +82,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="table-responsive">
 
       <table class="table table-bordered table-sm table-hover">

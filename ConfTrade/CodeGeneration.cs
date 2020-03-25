@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 24.03.2020 18:00:49
+ * Дата конфігурації: 25.03.2020 13:40:00
  *
  */
 
@@ -360,7 +360,17 @@ namespace ConfTrade_v1_1.Довідники
             
             BaseSave();
         }
-        
+
+        public string Serialize()
+        {
+            return "<Test>" +
+            "<uid>" + base.UnigueID.ToString() + "</uid>" +
+            "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>" +
+            "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>" +
+            "<івфіва>" + ((int)івфіва).ToString() + "</івфіва>" +
+            "</Test>";
+        }
+
         public void Delete()
         {
             base.BaseDelete();
@@ -546,11 +556,21 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a14",
-             new string[] { "col_a1", "col_a2", "col_a3" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" }) 
         {
             Назва = "";
             Код = "";
             Ціна = 0;
+            Кво = 0;
+            Перелічення1 = 0;
+            Дата = DateTime.MinValue;
+            ДатаЧас = DateTime.MinValue;
+            Час = DateTime.MinValue.TimeOfDay;
+            Логічний = false;
+            Вказівник = new Довідники.Test_Pointer();
+            масив = new string[] { };
+            масив_число = new int[] { };
+            масив_число_кома = new decimal[] { };
             
         }
         
@@ -560,7 +580,17 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
-                Ціна = (base.FieldValue["col_a3"] != DBNull.Value) ? (int)base.FieldValue["col_a3"] : 0;
+                Ціна = (base.FieldValue["col_a3"] != DBNull.Value) ? (decimal)base.FieldValue["col_a3"] : 0;
+                Кво = (base.FieldValue["col_a4"] != DBNull.Value) ? (int)base.FieldValue["col_a4"] : 0;
+                Перелічення1 = (base.FieldValue["col_a5"] != DBNull.Value) ? (Перелічення.Test)base.FieldValue["col_a5"] : 0;
+                Дата = (base.FieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a6"].ToString()) : DateTime.MinValue;
+                ДатаЧас = (base.FieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a7"].ToString()) : DateTime.MinValue;
+                Час = (base.FieldValue["col_a8"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_a8"].ToString()) : DateTime.MinValue.TimeOfDay;
+                Логічний = (bool)base.FieldValue["col_a9"];
+                Вказівник = new Довідники.Test_Pointer(base.FieldValue["col_b1"]);
+                масив = (base.FieldValue["col_b2"] != DBNull.Value) ? (string[])base.FieldValue["col_b2"] : new string[] { };
+                масив_число = (base.FieldValue["col_b3"] != DBNull.Value) ? (int[])base.FieldValue["col_b3"] : new int[] { };
+                масив_число_кома = (base.FieldValue["col_b4"] != DBNull.Value) ? (decimal[])base.FieldValue["col_b4"] : new decimal[] { };
                 
                 BaseClear();
                 return true;
@@ -574,10 +604,40 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
             base.FieldValue["col_a3"] = Ціна;
+            base.FieldValue["col_a4"] = Кво;
+            base.FieldValue["col_a5"] = (int)Перелічення1;
+            base.FieldValue["col_a6"] = Дата;
+            base.FieldValue["col_a7"] = ДатаЧас;
+            base.FieldValue["col_a8"] = Час;
+            base.FieldValue["col_a9"] = Логічний;
+            base.FieldValue["col_b1"] = Вказівник.ToString();
+            base.FieldValue["col_b2"] = масив;
+            base.FieldValue["col_b3"] = масив_число;
+            base.FieldValue["col_b4"] = масив_число_кома;
             
             BaseSave();
         }
-        
+
+        public string Serialize()
+        {
+            return "<Номенклатура>" +
+            "<uid>" + base.UnigueID.ToString() + "</uid>" +
+            "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>" +
+            "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>" +
+            "<Ціна>" + Ціна.ToString() + "</Ціна>" +
+            "<Кво>" + Кво.ToString() + "</Кво>" +
+            "<Перелічення1>" + ((int)Перелічення1).ToString() + "</Перелічення1>" +
+            "<Дата>" + Дата.ToString() + "</Дата>" +
+            "<ДатаЧас>" + ДатаЧас.ToString() + "</ДатаЧас>" +
+            "<Час>" + Час.ToString() + "</Час>" +
+            "<Логічний>" + (Логічний == true ? "1" : "0") + "</Логічний>" +
+            "<Вказівник>" + Вказівник.ToString() + "</Вказівник>" +
+            "<масив>" + ArrayToXml<string>.Convert(масив).ToString() + "</масив>" +
+            "<масив_число>" + ArrayToXml<int>.Convert(масив_число).ToString() + "</масив_число>" +
+            "<масив_число_кома>" + ArrayToXml<decimal>.Convert(масив_число_кома).ToString() + "</масив_число_кома>" +
+            "</Номенклатура>";
+        }
+
         public void Delete()
         {
             base.BaseDelete();
@@ -591,7 +651,17 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
-        public int Ціна { get; set; }
+        public decimal Ціна { get; set; }
+        public int Кво { get; set; }
+        public Перелічення.Test Перелічення1 { get; set; }
+        public DateTime Дата { get; set; }
+        public DateTime ДатаЧас { get; set; }
+        public TimeSpan Час { get; set; }
+        public bool Логічний { get; set; }
+        public Довідники.Test_Pointer Вказівник { get; set; }
+        public string[] масив { get; set; }
+        public int[] масив_число { get; set; }
+        public decimal[] масив_число_кома { get; set; }
         
     }
     
@@ -620,8 +690,8 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Select : DirectorySelect, IDisposable
     {
         public Номенклатура_Select() : base(Config.Kernel, "tab_a14",
-            new string[] { "col_a1", "col_a2", "col_a3" },
-            new string[] { "Назва", "Код", "Ціна" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3", "col_b4" },
+            new string[] { "Назва", "Код", "Ціна", "Кво", "Перелічення1", "Дата", "ДатаЧас", "Час", "Логічний", "Вказівник", "масив", "масив_число", "масив_число_кома" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -656,7 +726,7 @@ namespace ConfTrade_v1_1.Довідники
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
              new string[] { "col_a1", "col_a2", "col_a3" },
              new string[] { "Назва", "Код", "Ціна" },
-             new string[] { "string", "string", "integer" },
+             new string[] { "string", "string", "numeric" },
              "Довідники.Номенклатура_Список")
         {
             

@@ -32,3 +32,30 @@
 					//		Console.WriteLine(key + " = " + value);
 					//	}
 					//}
+
+
+
+					public void Deserialize(string xmlSerializeData)
+		{
+			StringReader stringReader = new StringReader(xmlSerializeData);
+			XPathDocument xPathDoc = new XPathDocument(stringReader);
+			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+			XPathNavigator rootNode = xPathDocNavigator.SelectSingleNode("Номенклатура");
+			if (rootNode != null)
+			{
+				XPathNavigator uidNode = rootNode.SelectSingleNode("uid");
+				if (uidNode != null)
+				{
+
+				}
+
+				XPathNavigator НазваNode = rootNode.SelectSingleNode("Назва");
+				if (НазваNode != null)
+				{
+					Назва = НазваNode.Value;
+				}
+			}
+
+			Назва = "";
+		}

@@ -1,5 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Додати колонку Ціна (col_a3, тип integer)  в таблицю Номенклатура (tab_a14)</info>
-  <sql>ALTER TABLE tab_a14 ADD COLUMN "col_a3" integer;</sql>
-</root>
+<root />

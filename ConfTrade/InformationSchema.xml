@@ -159,5 +159,60 @@
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>numeric</DataType>
+      <UdtName>numeric</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a5</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a6</Name>
+      <DataType>date</DataType>
+      <UdtName>date</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a7</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a8</Name>
+      <DataType>time without time zone</DataType>
+      <UdtName>time</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a9</Name>
+      <DataType>boolean</DataType>
+      <UdtName>bool</UdtName>
+    </Column>
+    <Column>
+      <Name>col_b1</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_b2</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_b3</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_int4</UdtName>
+    </Column>
+    <Column>
+      <Name>col_b4</Name>
+      <DataType>ARRAY</DataType>
+      <UdtName>_numeric</UdtName>
+    </Column>
   </Table>
 </InformationSchema>
