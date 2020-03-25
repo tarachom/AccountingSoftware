@@ -16,7 +16,7 @@
         <td><xsl:value-of select="Ціна"/></td>
         <td><xsl:value-of select="Кво"/></td>
         <td><xsl:value-of select="ДатаСтворення"/></td>
-        <td><xsl:call-template name="GetNameSelect"><xsl:with-param name="pointer">Перелічення.Test</xsl:with-param><xsl:with-param name="value" select="Перелічення1" /></xsl:call-template></td>
+        <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Довідники.Валюти_Список" /><xsl:with-param name="uid" select="Валюта" /></xsl:call-template></td>
         <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Довідники.Test_Список" /><xsl:with-param name="uid" select="Вказівник" /></xsl:call-template></td>
       </tr>
       </xsl:for-each>

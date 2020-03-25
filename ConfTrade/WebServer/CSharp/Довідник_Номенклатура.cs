@@ -48,6 +48,10 @@ namespace ConfTrade
 
 						string TempTable = m_1.QuerySelect.TempTable;
 
+						Довідники.Валюти_Список_View m_6 = new Довідники.Валюти_Список_View();
+						m_6.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Валюта"] + " FROM " + TempTable, true));
+						XmlData += m_6.Read();
+
 						Довідники.Test_Список_View m_7 = new Довідники.Test_Список_View();
 						m_7.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Вказівник"] + " FROM " + TempTable, true));
 						XmlData += m_7.Read();
@@ -100,12 +104,14 @@ namespace ConfTrade
 							}
 						}
 
-						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
 						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
 						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
 						номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
 						номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
 						номенклатура_Objest.ДатаСтворення = DateTime.Now;
+
+						номенклатура_Objest.Валюта = new Довідники.Валюти_Select().FindByField("Код", "2");
+
 						номенклатура_Objest.Save();
 
 						XmlData += "<info>" + "Записано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
@@ -139,6 +145,8 @@ namespace ConfTrade
 
 			StringReader stringReader = new StringReader(XmlData);
 			XmlReader xmlReader = XmlReader.Create(stringReader);
+
+			//Console.WriteLine(XmlData);
 
 			try
 			{

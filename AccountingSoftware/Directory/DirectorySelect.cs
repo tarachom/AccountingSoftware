@@ -117,7 +117,7 @@ namespace AccountingSoftware
 			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
 			Query querySelect = new Query(Table);
-			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
+			querySelect.Where.Add(new Where(Alias[fieldName], Comparison.EQ, fieldValue));
 
 			bool isFind = Kernel.DataBase.FindDirectoryPointer(querySelect, ref directoryPointer);
 
@@ -134,7 +134,7 @@ namespace AccountingSoftware
 			Query querySelect = new Query(Table);
 			querySelect.Limit = limit;
 			querySelect.Offset = offset;
-			QuerySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
+			querySelect.Where.Add(new Where(Alias[fieldName], Comparison.EQ, fieldValue));
 
 			Kernel.DataBase.SelectDirectoryPointers(querySelect, directoryPointerList);
 

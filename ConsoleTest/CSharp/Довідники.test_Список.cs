@@ -44,16 +44,6 @@ namespace ConfTrade
             sb.Append(m_1.Read());
             
             
-            sb.Append(@"<Enums>
-<Enum>
-  <Name>Test</Name>
-  <Desc></Desc>
-  <SerialNumber>0</SerialNumber>
-  <Fields />
-</Enum>
-</Enums>
-");
-            
             sb.Append("</root>");
             return sb.ToString();
         }

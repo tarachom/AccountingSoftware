@@ -13,7 +13,7 @@
 
   <xsl:template match="/">
 
-    <h1>Довідник Номенклатура</h1>
+    <h1>Довідник Валюти</h1>
 
     <div class="btn-group" style="margin-bottom:10px;">
       <button onclick="OpenModalForm('Add', '')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalForm">Новий</button>
@@ -27,26 +27,15 @@
 
       <table class="table table-bordered table-sm table-hover">
         <col width="10%" />
-        <col width="40%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
-        <col width="10%" />
+        <col width="90%" />
         <thead class="thead-light">
           <tr>
             <th>Код</th>
             <th>Назва</th>
-            <th>Ціна</th>
-            <th>Кво</th>
-            <th>Сума</th>
-            <th>Створений</th>
-            <th>Валюта</th>
-            <th>Вказівник</th>
           </tr>
         </thead>
         <tbody>
-          <xsl:for-each select="root/Довідники.Номенклатура_Список/row">
+          <xsl:for-each select="root/Довідники.Валюти_Список/row">
             <tr>
               <td>
                 <xsl:value-of select="Код"/>
@@ -62,34 +51,6 @@
                     </xsl:otherwise>
                   </xsl:choose>
                 </a>
-              </td>
-              <td>
-                <xsl:value-of select="Ціна"/>
-              </td>
-              <td>
-                <xsl:value-of select="Кво"/>
-              </td>
-              <td>
-                <xsl:value-of select="Ціна*Кво"/>
-              </td>
-              <td>
-                <xsl:value-of select="ДатаСтворення"/>
-              </td>
-              <td>
-                <xsl:if test="normalize-space(Валюта) != ''">
-                  <xsl:call-template name="GetNameOd">
-                    <xsl:with-param name="list" select="/root/Довідники.Валюти_Список" />
-                    <xsl:with-param name="uid" select="Валюта" />
-                  </xsl:call-template>
-                </xsl:if>
-              </td>
-              <td>
-                <xsl:if test="normalize-space(Вказівник) != ''">
-                  <xsl:call-template name="GetNameOd">
-                    <xsl:with-param name="list" select="/root/Довідники.Test_Список" />
-                    <xsl:with-param name="uid" select="Вказівник" />
-                  </xsl:call-template>
-                </xsl:if>
               </td>
             </tr>
           </xsl:for-each>

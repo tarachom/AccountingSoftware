@@ -686,7 +686,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public <xsl:value-of select="$DirectoryName"/>_Pointer FindByField(string name, object value)
         {
             <xsl:value-of select="$DirectoryName"/>_Pointer itemPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
@@ -694,7 +694,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt; directoryPointerList = new List&lt;<xsl:value-of select="$DirectoryName"/>_Pointer&gt;();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new <xsl:value-of select="$DirectoryName"/>_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }

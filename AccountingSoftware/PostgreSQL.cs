@@ -371,7 +371,7 @@ namespace AccountingSoftware
 			QuerySelect.Limit = 1;
 
 			string query = QuerySelect.Construct();
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 

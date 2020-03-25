@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 25.03.2020 21:29:29
+ * Дата конфігурації: 25.03.2020 22:07:41
  *
  */
 
@@ -431,7 +431,7 @@ namespace ConfTrade_v1_1.Довідники
         public Test_Pointer FindByField(string name, object value)
         {
             Test_Pointer itemPointer = new Test_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
@@ -439,7 +439,7 @@ namespace ConfTrade_v1_1.Довідники
         public List<Test_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Test_Pointer> directoryPointerList = new List<Test_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Test_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -557,7 +557,7 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a14",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3" }) 
         {
             Назва = "";
             Код = "";
@@ -570,6 +570,7 @@ namespace ConfTrade_v1_1.Довідники
             Логічний = false;
             Вказівник = new Довідники.Test_Pointer();
             ДатаСтворення = DateTime.MinValue;
+            Валюта = new Довідники.Валюти_Pointer();
             
         }
         
@@ -588,6 +589,7 @@ namespace ConfTrade_v1_1.Довідники
                 Логічний = (base.FieldValue["col_a9"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a9"].ToString()) : false;
                 Вказівник = new Довідники.Test_Pointer(base.FieldValue["col_b1"]);
                 ДатаСтворення = (base.FieldValue["col_b2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b2"].ToString()) : DateTime.MinValue;
+                Валюта = new Довідники.Валюти_Pointer(base.FieldValue["col_b3"]);
                 
                 BaseClear();
                 return true;
@@ -609,6 +611,7 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a9"] = Логічний;
             base.FieldValue["col_b1"] = Вказівник.UnigueID.UGuid;
             base.FieldValue["col_b2"] = ДатаСтворення;
+            base.FieldValue["col_b3"] = Валюта.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -629,6 +632,7 @@ namespace ConfTrade_v1_1.Довідники
                "<Логічний>" + (Логічний == true ? "1" : "0") + "</Логічний>"  +
                "<Вказівник>" + Вказівник.ToString() + "</Вказівник>"  +
                "<ДатаСтворення>" + ДатаСтворення.ToString() + "</ДатаСтворення>"  +
+               "<Валюта>" + Валюта.ToString() + "</Валюта>"  +
                "</Номенклатура>";
         }
 
@@ -654,6 +658,7 @@ namespace ConfTrade_v1_1.Довідники
         public bool Логічний { get; set; }
         public Довідники.Test_Pointer Вказівник { get; set; }
         public DateTime ДатаСтворення { get; set; }
+        public Довідники.Валюти_Pointer Валюта { get; set; }
         
     }
     
@@ -682,8 +687,8 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Select : DirectorySelect, IDisposable
     {
         public Номенклатура_Select() : base(Config.Kernel, "tab_a14",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" },
-            new string[] { "Назва", "Код", "Ціна", "Кво", "Перелічення1", "Дата", "ДатаЧас", "Час", "Логічний", "Вказівник", "ДатаСтворення" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2", "col_b3" },
+            new string[] { "Назва", "Код", "Ціна", "Кво", "Перелічення1", "Дата", "ДатаЧас", "Час", "Логічний", "Вказівник", "ДатаСтворення", "Валюта" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -696,7 +701,7 @@ namespace ConfTrade_v1_1.Довідники
         public Номенклатура_Pointer FindByField(string name, object value)
         {
             Номенклатура_Pointer itemPointer = new Номенклатура_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
             if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
             return itemPointer;
         }
@@ -704,7 +709,7 @@ namespace ConfTrade_v1_1.Довідники
         public List<Номенклатура_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
         {
             List<Номенклатура_Pointer> directoryPointerList = new List<Номенклатура_Pointer>();
-            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(base.Alias[name], value, limit, offset)) 
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
                 directoryPointerList.Add(new Номенклатура_Pointer(directoryPointer.UnigueID));
             return directoryPointerList;
         }
@@ -716,10 +721,142 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Список_View : DirectoryView
     {
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_b2", "col_a5", "col_b1" },
-             new string[] { "Назва", "Код", "Ціна", "Кво", "ДатаСтворення", "Перелічення1", "Вказівник" },
-             new string[] { "string", "string", "numeric", "integer", "datetime", "enum", "pointer" },
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_b2", "col_b3", "col_b1" },
+             new string[] { "Назва", "Код", "Ціна", "Кво", "ДатаСтворення", "Валюта", "Вказівник" },
+             new string[] { "string", "string", "numeric", "integer", "datetime", "pointer", "pointer" },
              "Довідники.Номенклатура_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "Валюти"
+    
+    class Валюти_Objest : DirectoryObject
+    {
+        public Валюти_Objest() : base(Config.Kernel, "tab_a03",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            Назва = "";
+            Код = "";
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            
+            BaseSave();
+        }
+
+        public string Serialize()
+        {
+            return 
+            "<Валюти>" +
+               "<uid>" + base.UnigueID.ToString() + "</uid>" +
+               "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
+               "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "</Валюти>";
+        }
+
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public Валюти_Pointer GetDirectoryPointer()
+        {
+            Валюти_Pointer directoryPointer = new Валюти_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        
+    }
+    
+    
+    class Валюти_Pointer : DirectoryPointer
+    {
+        public Валюти_Pointer(object uid = null) : base(Config.Kernel, "tab_a03")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public Валюти_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a03")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public Валюти_Objest GetDirectoryObject()
+        {
+            Валюти_Objest ВалютиObjestItem = new Валюти_Objest();
+            ВалютиObjestItem.Read(base.UnigueID);
+            return ВалютиObjestItem;
+        }
+    }
+    
+    
+    class Валюти_Select : DirectorySelect, IDisposable
+    {
+        public Валюти_Select() : base(Config.Kernel, "tab_a03",
+            new string[] { "col_a1", "col_a2" },
+            new string[] { "Назва", "Код" }) { }
+    
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Валюти_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public Валюти_Pointer Current { get; private set; }
+        
+        public Валюти_Pointer FindByField(string name, object value)
+        {
+            Валюти_Pointer itemPointer = new Валюти_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<Валюти_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Валюти_Pointer> directoryPointerList = new List<Валюти_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Валюти_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class Валюти_Список_View : DirectoryView
+    {
+        public Валюти_Список_View() : base(Config.Kernel, "tab_a03", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "Довідники.Валюти_Список")
         {
             
         }

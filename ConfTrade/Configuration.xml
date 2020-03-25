@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>25.03.2020 21:29:29</DateTimeSave>
+  <DateTimeSave>25.03.2020 22:07:41</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -232,6 +232,14 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>Валюта</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -266,16 +274,56 @@
               <Type>datetime</Type>
             </Field>
             <Field>
-              <Name>Перелічення1</Name>
-              <NameInTable>col_a5</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення.Test</Pointer>
+              <Name>Валюта</Name>
+              <NameInTable>col_b3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Валюти</Pointer>
             </Field>
             <Field>
               <Name>Вказівник</Name>
               <NameInTable>col_b1</NameInTable>
               <Type>pointer</Type>
               <Pointer>Довідники.Test</Pointer>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>Валюти</Name>
+      <Table>tab_a03</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a03</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
             </Field>
           </Fields>
         </View>
