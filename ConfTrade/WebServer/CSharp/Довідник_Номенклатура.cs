@@ -40,7 +40,17 @@ namespace ConfTrade
 						Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
 						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
 						m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
+
+						m_1.QuerySelect.CreateTempTable = true;
+						Dictionary<string, string> Alias = m_1.Alias;
+
 						XmlData += m_1.Read();
+
+						string TempTable = m_1.QuerySelect.TempTable;
+
+						Довідники.Test_Список_View m_7 = new Довідники.Test_Список_View();
+						m_7.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Вказівник"] + " FROM " + TempTable, true));
+						XmlData += m_7.Read();
 
 						break;
 					}
@@ -48,14 +58,7 @@ namespace ConfTrade
 				case "Add":
 					{
 						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
-						номенклатура_Objest.New();
-						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
-						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
-						номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
-						номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
-						номенклатура_Objest.Save();
-
-						XmlData += "<info>" + "Додано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
+						XmlData += номенклатура_Objest.Serialize();
 						break;
 					}
 
@@ -71,9 +74,7 @@ namespace ConfTrade
 
 						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
 						if (номенклатура_Objest.Read(new UnigueID(Uid)))
-						{
 							XmlData += номенклатура_Objest.Serialize();
-						}
 						else
 							XmlData += "<info>Error read Uid</info>";
 
@@ -84,27 +85,30 @@ namespace ConfTrade
 					{
 						string Uid = commandParamsValue.Get_Params["Uid"];
 
+						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
+
 						if (String.IsNullOrEmpty(Uid))
 						{
-							XmlData += "<info>Error Uid</info>";
-							break;
-						}
-
-						Довідники.Номенклатура_Objest номенклатура_Objest = new Довідники.Номенклатура_Objest();
-						if (номенклатура_Objest.Read(new UnigueID(Uid)))
-						{
-							номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
-							номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
-							номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
-							номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
-							номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
-							номенклатура_Objest.Save();
-
-							XmlData += "<info>" + "Записано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
+							номенклатура_Objest.New();
 						}
 						else
-							XmlData += "<info>Error read Uid</info>";
+						{
+							if (!номенклатура_Objest.Read(new UnigueID(Uid)))
+							{
+								XmlData += "<info>Error read Uid</info>";
+								break;
+							}
+						}
 
+						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
+						номенклатура_Objest.Код = commandParamsValue.Post_Params["Code"];
+						номенклатура_Objest.Назва = commandParamsValue.Post_Params["Name"];
+						номенклатура_Objest.Ціна = int.Parse(commandParamsValue.Post_Params["Cena"]);
+						номенклатура_Objest.Кво = int.Parse(commandParamsValue.Post_Params["Kvo"]);
+						номенклатура_Objest.ДатаСтворення = DateTime.Now;
+						номенклатура_Objest.Save();
+
+						XmlData += "<info>" + "Записано. Ід " + номенклатура_Objest.UnigueID.ToString() + "</info>";
 						break;
 					}
 

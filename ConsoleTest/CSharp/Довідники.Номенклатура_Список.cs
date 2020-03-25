@@ -41,8 +41,29 @@ namespace ConfTrade
             
             Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
             
+            m_1.QuerySelect.CreateTempTable = true;
+            Dictionary<string, string> Alias = m_1.Alias;
+              
             sb.Append(m_1.Read());
             
+            
+              
+            string TempTable = m_1.QuerySelect.TempTable;
+              
+            Довідники.Test_Список_View m_7 = new Довідники.Test_Список_View();
+            m_7.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Вказівник"] + " FROM " + TempTable, true));
+            sb.Append(m_7.Read());
+            
+                
+            sb.Append(@"<Enums>
+<Enum>
+  <Name>Test</Name>
+  <Desc></Desc>
+  <SerialNumber>0</SerialNumber>
+  <Fields />
+</Enum>
+</Enums>
+");
             
             sb.Append("</root>");
             return sb.ToString();

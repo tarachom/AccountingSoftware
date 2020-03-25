@@ -199,5 +199,10 @@
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
+    <Column>
+      <Name>col_b2</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
+    </Column>
   </Table>
 </InformationSchema>

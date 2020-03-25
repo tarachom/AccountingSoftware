@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 25.03.2020 14:59:40
+ * Дата конфігурації: 25.03.2020 21:29:29
  *
  */
 
@@ -539,9 +539,9 @@ namespace ConfTrade_v1_1.Довідники
     class Test_Список_View : DirectoryView
     {
         public Test_Список_View() : base(Config.Kernel, "tab_a49", 
-             new string[] { "col_a1", "col_a2", "col_a3" },
-             new string[] { "Назва", "Код", "івфіва" },
-             new string[] { "string", "string", "enum" },
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
              "Довідники.Test_Список")
         {
             
@@ -557,7 +557,7 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Objest : DirectoryObject
     {
         public Номенклатура_Objest() : base(Config.Kernel, "tab_a14",
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" }) 
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" }) 
         {
             Назва = "";
             Код = "";
@@ -569,6 +569,7 @@ namespace ConfTrade_v1_1.Довідники
             Час = DateTime.MinValue.TimeOfDay;
             Логічний = false;
             Вказівник = new Довідники.Test_Pointer();
+            ДатаСтворення = DateTime.MinValue;
             
         }
         
@@ -586,6 +587,7 @@ namespace ConfTrade_v1_1.Довідники
                 Час = (base.FieldValue["col_a8"] != DBNull.Value) ? TimeSpan.Parse(base.FieldValue["col_a8"].ToString()) : DateTime.MinValue.TimeOfDay;
                 Логічний = (base.FieldValue["col_a9"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a9"].ToString()) : false;
                 Вказівник = new Довідники.Test_Pointer(base.FieldValue["col_b1"]);
+                ДатаСтворення = (base.FieldValue["col_b2"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_b2"].ToString()) : DateTime.MinValue;
                 
                 BaseClear();
                 return true;
@@ -606,6 +608,7 @@ namespace ConfTrade_v1_1.Довідники
             base.FieldValue["col_a8"] = Час;
             base.FieldValue["col_a9"] = Логічний;
             base.FieldValue["col_b1"] = Вказівник.UnigueID.UGuid;
+            base.FieldValue["col_b2"] = ДатаСтворення;
             
             BaseSave();
         }
@@ -625,6 +628,7 @@ namespace ConfTrade_v1_1.Довідники
                "<Час>" + Час.ToString() + "</Час>"  +
                "<Логічний>" + (Логічний == true ? "1" : "0") + "</Логічний>"  +
                "<Вказівник>" + Вказівник.ToString() + "</Вказівник>"  +
+               "<ДатаСтворення>" + ДатаСтворення.ToString() + "</ДатаСтворення>"  +
                "</Номенклатура>";
         }
 
@@ -649,6 +653,7 @@ namespace ConfTrade_v1_1.Довідники
         public TimeSpan Час { get; set; }
         public bool Логічний { get; set; }
         public Довідники.Test_Pointer Вказівник { get; set; }
+        public DateTime ДатаСтворення { get; set; }
         
     }
     
@@ -677,8 +682,8 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Select : DirectorySelect, IDisposable
     {
         public Номенклатура_Select() : base(Config.Kernel, "tab_a14",
-            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1" },
-            new string[] { "Назва", "Код", "Ціна", "Кво", "Перелічення1", "Дата", "ДатаЧас", "Час", "Логічний", "Вказівник" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" },
+            new string[] { "Назва", "Код", "Ціна", "Кво", "Перелічення1", "Дата", "ДатаЧас", "Час", "Логічний", "Вказівник", "ДатаСтворення" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -711,9 +716,9 @@ namespace ConfTrade_v1_1.Довідники
     class Номенклатура_Список_View : DirectoryView
     {
         public Номенклатура_Список_View() : base(Config.Kernel, "tab_a14", 
-             new string[] { "col_a1", "col_a2", "col_a3", "col_a4" },
-             new string[] { "Назва", "Код", "Ціна", "Кво" },
-             new string[] { "string", "string", "numeric", "integer" },
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_b2", "col_a5", "col_b1" },
+             new string[] { "Назва", "Код", "Ціна", "Кво", "ДатаСтворення", "Перелічення1", "Вказівник" },
+             new string[] { "string", "string", "numeric", "integer", "datetime", "enum", "pointer" },
              "Довідники.Номенклатура_Список")
         {
             

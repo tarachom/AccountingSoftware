@@ -430,29 +430,29 @@ namespace Configurator
 			Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
 			thread.Start();
 
-			DataGridViewRow dataGridViewRow = new DataGridViewRow();
+			//DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
-			DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
-			dataGridViewTextBoxCell.Value = "TExt";
+			//DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
+			//dataGridViewTextBoxCell.Value = "TExt";
 
-			DataGridViewButtonCell dataGridViewButtonCell = new DataGridViewButtonCell();
-			dataGridViewButtonCell.FlatStyle = FlatStyle.Flat;
-			dataGridViewButtonCell.Value = "TExt";
+			//DataGridViewButtonCell dataGridViewButtonCell = new DataGridViewButtonCell();
+			//dataGridViewButtonCell.FlatStyle = FlatStyle.Flat;
+			//dataGridViewButtonCell.Value = "TExt";
 
-			dataGridViewRow.Cells.Add(dataGridViewTextBoxCell);
-			dataGridViewRow.Cells.Add(dataGridViewButtonCell);
+			//dataGridViewRow.Cells.Add(dataGridViewTextBoxCell);
+			//dataGridViewRow.Cells.Add(dataGridViewButtonCell);
 
-			dataGridView1.Rows.Add(dataGridViewRow);
+			//dataGridView1.Rows.Add(dataGridViewRow);
 
 
-			ColumnHeader ch = listView1.Columns.Add("name", "Name", 150);
-			ColumnHeader ch2 = listView1.Columns.Add("name2", "Name2", 150);
+			//ColumnHeader ch = listView1.Columns.Add("name", "Name", 150);
+			//ColumnHeader ch2 = listView1.Columns.Add("name2", "Name2", 150);
 
-			for (int i = 0; i < 10; i++)
-			{
-				ListViewItem j = new ListViewItem(new string[] { "test", "test" }, 13);
-				listView1.Items.Add(j);
-			}
+			//for (int i = 0; i < 10; i++)
+			//{
+			//	ListViewItem j = new ListViewItem(new string[] { "test", "test" }, 13);
+			//	listView1.Items.Add(j);
+			//}
 		}
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)

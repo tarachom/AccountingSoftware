@@ -62,12 +62,14 @@
     <Content Include="HttpServerConfig.xml" />
     <Content Include="Configuration.xml" />
     <Content Include="Configuration_Trade.xml" />
-    <Content Include="Function.xslt" />
+    <Content Include="WebServer\Xslt\Function.xslt" />
     <Content Include="InformationSchema.xml" />
     <Content Include="README.txt" />
     <Content Include="ReportAnalize.xml" />
     <Content Include="TextFile1.txt" />
     <Content Include="WebServer\Xml\default.xml" />
+    <Content Include="WebServer\Xslt\ModalForm.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Номенклатура\ModalFormBody.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Номенклатура\Save.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Номенклатура\Delete.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Номенклатура\Edit.xslt" />

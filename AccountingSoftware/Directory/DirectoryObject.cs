@@ -41,6 +41,8 @@ namespace AccountingSoftware
 
 			foreach (string field in FieldArray)
 				FieldValue.Add(field, null);
+
+			UnigueID = new UnigueID(Guid.Empty);
 		}
 
 		private Kernel Kernel { get; set; }

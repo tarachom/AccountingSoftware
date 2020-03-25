@@ -39,14 +39,14 @@
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.menuStripTop = new System.Windows.Forms.MenuStrip();
 			this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addContantsBlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addConstatntsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addNewDocumentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewRegistersInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewRegisterAccumulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.contextMenuStripDirectory = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -168,6 +168,7 @@
 			this.dataGridView1.ReadOnly = true;
 			this.dataGridView1.Size = new System.Drawing.Size(534, 231);
 			this.dataGridView1.TabIndex = 1;
+			this.dataGridView1.Visible = false;
 			// 
 			// Column1
 			// 
@@ -194,6 +195,7 @@
 			this.listView1.TabIndex = 0;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
+			this.listView1.Visible = false;
 			// 
 			// menuStripTop
 			// 
@@ -220,26 +222,12 @@
 			this.ConfigToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
 			this.ConfigToolStripMenuItem.Text = "Конфігурація";
 			// 
-			// addDirectoryToolStripMenuItem
+			// saveConfigurationToolStripMenuItem
 			// 
-			this.addDirectoryToolStripMenuItem.Name = "addDirectoryToolStripMenuItem";
-			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-			this.addDirectoryToolStripMenuItem.Text = "Новий довідник";
-			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
-			// 
-			// addEnumToolStripMenuItem
-			// 
-			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
-			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-			this.addEnumToolStripMenuItem.Text = "Нове перелічення";
-			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
-			// 
-			// addNewDocumentToolStripMenuItem
-			// 
-			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
-			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-			this.addNewDocumentToolStripMenuItem.Text = "Новий документ";
-			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
+			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
+			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.saveConfigurationToolStripMenuItem.Text = "Зберегти конфігурацію";
+			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
 			// addContantsBlockToolStripMenuItem
 			// 
@@ -255,6 +243,27 @@
 			this.addConstatntsToolStripMenuItem.Text = "Нова константа";
 			this.addConstatntsToolStripMenuItem.Click += new System.EventHandler(this.addConstatntsToolStripMenuItem_Click);
 			// 
+			// addDirectoryToolStripMenuItem
+			// 
+			this.addDirectoryToolStripMenuItem.Name = "addDirectoryToolStripMenuItem";
+			this.addDirectoryToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addDirectoryToolStripMenuItem.Text = "Новий довідник";
+			this.addDirectoryToolStripMenuItem.Click += new System.EventHandler(this.addDirectoryToolStripMenuItem_Click);
+			// 
+			// addNewDocumentToolStripMenuItem
+			// 
+			this.addNewDocumentToolStripMenuItem.Name = "addNewDocumentToolStripMenuItem";
+			this.addNewDocumentToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addNewDocumentToolStripMenuItem.Text = "Новий документ";
+			this.addNewDocumentToolStripMenuItem.Click += new System.EventHandler(this.addNewDocumentToolStripMenuItem_Click);
+			// 
+			// addEnumToolStripMenuItem
+			// 
+			this.addEnumToolStripMenuItem.Name = "addEnumToolStripMenuItem";
+			this.addEnumToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+			this.addEnumToolStripMenuItem.Text = "Нове перелічення";
+			this.addEnumToolStripMenuItem.Click += new System.EventHandler(this.addEnumToolStripMenuItem_Click);
+			// 
 			// addNewRegistersInformationToolStripMenuItem
 			// 
 			this.addNewRegistersInformationToolStripMenuItem.Name = "addNewRegistersInformationToolStripMenuItem";
@@ -268,13 +277,6 @@
 			this.addNewRegisterAccumulationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
 			this.addNewRegisterAccumulationToolStripMenuItem.Text = "Новий регістер накопичення";
 			this.addNewRegisterAccumulationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegisterAccumulationToolStripMenuItem_Click);
-			// 
-			// saveConfigurationToolStripMenuItem
-			// 
-			this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-			this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
-			this.saveConfigurationToolStripMenuItem.Text = "Зберегти конфігурацію";
-			this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
 			// 
 			// contextMenuStripDirectory
 			// 

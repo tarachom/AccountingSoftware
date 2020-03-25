@@ -261,6 +261,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>ДатаСтворення</Name>
+      <NameInTable>col_b2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

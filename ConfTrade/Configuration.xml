@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>25.03.2020 14:59:40</DateTimeSave>
+  <DateTimeSave>25.03.2020 21:29:29</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -145,12 +145,6 @@
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
-            <Field>
-              <Name>івфіва</Name>
-              <NameInTable>col_a3</NameInTable>
-              <Type>enum</Type>
-              <Pointer>Перелічення.Test</Pointer>
-            </Field>
           </Fields>
         </View>
       </Views>
@@ -231,6 +225,13 @@
           <Desc>
           </Desc>
         </Field>
+        <Field>
+          <Name>ДатаСтворення</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -258,6 +259,23 @@
               <Name>Кво</Name>
               <NameInTable>col_a4</NameInTable>
               <Type>integer</Type>
+            </Field>
+            <Field>
+              <Name>ДатаСтворення</Name>
+              <NameInTable>col_b2</NameInTable>
+              <Type>datetime</Type>
+            </Field>
+            <Field>
+              <Name>Перелічення1</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>enum</Type>
+              <Pointer>Перелічення.Test</Pointer>
+            </Field>
+            <Field>
+              <Name>Вказівник</Name>
+              <NameInTable>col_b1</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Test</Pointer>
             </Field>
           </Fields>
         </View>
