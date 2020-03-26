@@ -313,6 +313,66 @@
     </Control_Field>
   </Control_Table>
   <Control_Table>
+    <Type>Directory</Type>
+    <Name>ОдиниціВиміру</Name>
+    <Table>tab_a04</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>Код</Name>
+        <NameInTable>col_a2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory</Type>
+    <Name>Організації</Name>
+    <Table>tab_a06</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a3</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>Код</Name>
+        <NameInTable>col_a4</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+  </Control_Table>
+  <Control_Table>
+    <Type>Directory</Type>
+    <Name>Контрагенти</Name>
+    <Table>tab_a07</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a5</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+      <FieldCreate>
+        <Name>Код</Name>
+        <NameInTable>col_a6</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+  </Control_Table>
+  <Control_Table>
     <Type>Document</Type>
     <Name>Test</Name>
     <Table>tab_a50</Table>

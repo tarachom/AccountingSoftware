@@ -60,7 +60,7 @@
     </Content>
     <Content Include="Comparison.xslt" />
     <Content Include="ComparisonReport.xml" />
-    <Content Include="HttpServerConfig.xml" />
+    <Content Include="WebServer\HttpServerConfig.xml" />
     <Content Include="Configuration.xml" />
     <Content Include="Configuration_Trade.xml" />
     <Content Include="WebServer\Xslt\Function.xslt" />

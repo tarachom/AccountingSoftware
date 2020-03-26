@@ -61,7 +61,7 @@ namespace ConfTrade
 			stackHttpContext = new Stack<HttpListenerContext>();
 
 			httpServerConfig = new HttpServerConfig();
-			httpServerConfig.ReadXml(@"D:\VS\Project\AccountingSoftware\ConfTrade\HttpServerConfig.xml");
+			httpServerConfig.ReadXml(@"D:\VS\Project\AccountingSoftware\ConfTrade\WebServer\HttpServerConfig.xml");
 
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
