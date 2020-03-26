@@ -556,6 +556,20 @@ namespace AccountingSoftware
 			return xml;
 		}
 
+		public void DeleteDirectoryViewTempTable(DirectoryView directoryView)
+		{
+			if (directoryView.QuerySelect.CreateTempTable == true && 
+				directoryView.QuerySelect.TempTable != "" &&
+			 	directoryView.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
+			{
+				string query = "DROP TABLE IF EXISTS " + directoryView.QuerySelect.TempTable;
+				Console.WriteLine(query);
+
+				NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+				nCommand.ExecuteNonQueryAsync();
+			}
+		}
+
 		#endregion
 
 		#region Document

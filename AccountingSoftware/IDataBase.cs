@@ -61,6 +61,7 @@ namespace AccountingSoftware
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
 		string SelectDirectoryView(DirectoryView directoryView);
+		void DeleteDirectoryViewTempTable(DirectoryView directoryView);
 
 		#endregion
 
