@@ -61,6 +61,11 @@ namespace AccountingSoftware
 			return (UnigueID.UGuid == Guid.Empty);
 		}
 
+		public Guid GetPointer()
+		{
+			return UnigueID.UGuid;
+		}
+
 		public override string ToString()
 		{
 			return UnigueID.UGuid.ToString();

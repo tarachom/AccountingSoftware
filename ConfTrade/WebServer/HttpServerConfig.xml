@@ -54,12 +54,14 @@
   <ConfObject Name="Довідник_Контрагенти">
 
     <Command Name="List">
+      <Param Name="Parent" />
       <Param Name="Offset" />
       <Param Name="Limit" />
     </Command>
 
     <Command Name="Add" />
-
+    <Command Name="AddGroup" />
+    
     <Command Name="Delete">
       <Param Name="Uid" />
     </Command>
@@ -68,10 +70,18 @@
       <Param Name="Uid" />
     </Command>
 
+    <Command Name="EditGroup">
+      <Param Name="Uid" />
+    </Command>
+    
     <Command Name="Save">
       <Param Name="Uid" />
     </Command>
 
+    <Command Name="SaveGroup">
+      <Param Name="Uid" />
+    </Command>
+    
   </ConfObject>
   
 </root>

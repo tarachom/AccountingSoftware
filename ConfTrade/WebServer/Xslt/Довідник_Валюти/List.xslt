@@ -16,7 +16,7 @@
     <h1>Довідник Валюти</h1>
 
     <div class="btn-group" style="margin-bottom:10px;">
-      <button onclick="OpenModalForm('Add', '')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalForm">Новий</button>
+      <button onclick="OpenModalForm('Add', 'Save', '')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalForm">Новий</button>
     </div>
 
     <xsl:call-template name="ModalForm">
@@ -41,7 +41,7 @@
                 <xsl:value-of select="Код"/>
               </td>
               <td>
-                <a href="#" onclick="OpenModalForm('Edit', '{uid}')" data-toggle="modal" data-target="#ModalForm">
+                <a href="#" onclick="OpenModalForm('Edit', 'Save', '{uid}')" data-toggle="modal" data-target="#ModalForm">
                   <xsl:choose>
                     <xsl:when test="normalize-space(Назва) != ''">
                       <xsl:value-of select="Назва"/>

@@ -1,7 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root>
-  <info>Додати колонку Група (col_a3, тип uuid)  в таблицю Контрагенти (tab_a07)</info>
-  <sql>ALTER TABLE tab_a07 ADD COLUMN "col_a3" uuid;</sql>
-  <info>Створити таблицю Контрагенти_Групи (tab_a08)</info>
-  <sql>CREATE TABLE tab_a08 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text, PRIMARY KEY(uid));</sql>
-</root>
+<root />

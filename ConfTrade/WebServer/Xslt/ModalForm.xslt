@@ -18,14 +18,16 @@
             <div id="ModalFormBody"></div>
             <script type="text/javascript">
               var modalFormUid = "";
-              function OpenModalForm(cmd, uid) {
+              var modalFormSaveCmd = "";
+              function OpenModalForm(cmd, saveCmd, uid) {
               $("#ModalFormTitle").html( (cmd == "Edit" ? "Редагувати" : "Новий") + " елемент");
               $("#ModalFormStatusInfo").html("");
               Load("ModalFormBody", "?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=" + cmd + "&amp;Uid=" + uid);
-              modalFormUid = uid; }
+              modalFormUid = uid;
+              modalFormSaveCmd = saveCmd; }
 
               function SendModalForm() {
-              Send("?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=Save&amp;Uid=" + modalFormUid,
+              Send("?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=" + modalFormSaveCmd + "&amp;Uid=" + modalFormUid,
               $("#ModalFormSendForm").serialize(),
               function(data, status) { $("#ModalFormStatusInfo").html(data); }); }
             </script>

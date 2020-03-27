@@ -37,17 +37,34 @@ namespace ConfTrade
 			{
 				case "List":
 					{
-						Довідники.Контрагенти_Список_View m_1 = new Довідники.Контрагенти_Список_View();
-						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
+						string ParentUid = commandParamsValue.Get_Params["Parent"];
 
+						Довідники.Контрагенти_Групи_Pointer контрагенти_Групи_Pointer = new 
+							Довідники.Контрагенти_Групи_Pointer(new UnigueID(ParentUid != "" ? ParentUid : Guid.Empty.ToString()));
+
+						Довідники.Контрагенти_Групи_Список_View m_parent = new Довідники.Контрагенти_Групи_Список_View();
+						m_parent.QuerySelect.Where.Add(new Where(m_parent.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
+						XmlData += m_parent.Read();
+
+						Довідники.Контрагенти_Список_View m_1 = new Довідники.Контрагенти_Список_View();
+						m_1.QuerySelect.Where.Add(new Where(m_1.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
+						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
 						XmlData += m_1.Read();
+
 						break;
 					}
 
 				case "Add":
 					{
-						Довідники.Контрагенти_Objest Контрагенти_Objest = new Довідники.Контрагенти_Objest();
-						XmlData += Контрагенти_Objest.Serialize();
+						Довідники.Контрагенти_Objest контрагенти_Objest = new Довідники.Контрагенти_Objest();
+						XmlData += контрагенти_Objest.Serialize();
+						break;
+					}
+
+				case "AddGroup":
+					{
+						Довідники.Контрагенти_Групи_Objest контрагенти_Групи_Objest = new Довідники.Контрагенти_Групи_Objest();
+						XmlData += контрагенти_Групи_Objest.Serialize();
 						break;
 					}
 
@@ -64,6 +81,25 @@ namespace ConfTrade
 						Довідники.Контрагенти_Objest контрагенти_Objest = new Довідники.Контрагенти_Objest();
 						if (контрагенти_Objest.Read(new UnigueID(Uid)))
 							XmlData += контрагенти_Objest.Serialize();
+						else
+							XmlData += "<info>Error read Uid</info>";
+
+						break;
+					}
+
+				case "EditGroup":
+					{
+						string Uid = commandParamsValue.Get_Params["Uid"];
+
+						if (String.IsNullOrEmpty(Uid))
+						{
+							XmlData += "<info>Error Uid</info>";
+							break;
+						}
+
+						Довідники.Контрагенти_Групи_Objest контрагенти_Групи_Objest = new Довідники.Контрагенти_Групи_Objest();
+						if (контрагенти_Групи_Objest.Read(new UnigueID(Uid)))
+							XmlData += контрагенти_Групи_Objest.Serialize();
 						else
 							XmlData += "<info>Error read Uid</info>";
 
@@ -101,6 +137,34 @@ namespace ConfTrade
 						контрагенти_Objest.Save();
 
 						XmlData += "<info>" + "Записано. Ід " + контрагенти_Objest.UnigueID.ToString() + "</info>";
+						break;
+					}
+
+				case "SaveGroup":
+					{
+						string Uid = commandParamsValue.Get_Params["Uid"];
+
+						Довідники.Контрагенти_Групи_Objest контрагенти_Групи_Objest = new Довідники.Контрагенти_Групи_Objest();
+
+						if (String.IsNullOrEmpty(Uid))
+						{
+							контрагенти_Групи_Objest.New();
+						}
+						else
+						{
+							if (!контрагенти_Групи_Objest.Read(new UnigueID(Uid)))
+							{
+								XmlData += "<info>Error read Uid</info>";
+								break;
+							}
+						}
+
+						контрагенти_Групи_Objest.Код = commandParamsValue.Post_Params["Code"];
+						контрагенти_Групи_Objest.Назва = commandParamsValue.Post_Params["Name"];
+
+						контрагенти_Групи_Objest.Save();
+
+						XmlData += "<info>" + "Записано. Ід " + контрагенти_Групи_Objest.UnigueID.ToString() + "</info>";
 						break;
 					}
 

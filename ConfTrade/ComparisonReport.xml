@@ -420,34 +420,53 @@
     <Control_Field>
       <Name>Група</Name>
       <NameInTable>col_a3</NameInTable>
-      <IsExist>no</IsExist>
-      <FieldCreate>
-        <Name>Група</Name>
-        <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>pointer</ConfType>
         <DataType>uuid</DataType>
-      </FieldCreate>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
     </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>Directory</Type>
     <Name>Контрагенти_Групи</Name>
     <Table>tab_a08</Table>
-    <IsExist>no</IsExist>
-    <TableCreate>
-      <FieldCreate>
-        <Name>Назва</Name>
-        <NameInTable>col_a1</NameInTable>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>Назва</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-      <FieldCreate>
-        <Name>Код</Name>
-        <NameInTable>col_a2</NameInTable>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Код</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
         <ConfType>string</ConfType>
         <DataType>text</DataType>
-      </FieldCreate>
-    </TableCreate>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Група</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>Document</Type>

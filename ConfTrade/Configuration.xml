@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>27.03.2020 13:12:12</DateTimeSave>
+  <DateTimeSave>27.03.2020 14:05:47</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -477,6 +477,12 @@
               <NameInTable>col_a2</NameInTable>
               <Type>boolean</Type>
             </Field>
+            <Field>
+              <Name>Група</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти_Групи</Pointer>
+            </Field>
           </Fields>
         </View>
       </Views>
@@ -499,6 +505,14 @@
           <Type>string</Type>
           <Desc>Код</Desc>
         </Field>
+        <Field>
+          <Name>Група</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти_Групи</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -516,6 +530,12 @@
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Група</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти_Групи</Pointer>
             </Field>
           </Fields>
         </View>

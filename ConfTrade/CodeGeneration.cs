@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 27.03.2020 13:12:12
+ * Дата конфігурації: 27.03.2020 14:05:47
  *
  */
 
@@ -1264,9 +1264,9 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Список_View : DirectoryView
     {
         public Контрагенти_Список_View() : base(Config.Kernel, "tab_a07", 
-             new string[] { "col_a5", "col_a6", "col_a1", "col_a2" },
-             new string[] { "Назва", "Код", "Постачальник", "Покупець" },
-             new string[] { "string", "string", "boolean", "boolean" },
+             new string[] { "col_a5", "col_a6", "col_a1", "col_a2", "col_a3" },
+             new string[] { "Назва", "Код", "Постачальник", "Покупець", "Група" },
+             new string[] { "string", "string", "boolean", "boolean", "pointer" },
              "Довідник_Контрагенти_Список")
         {
             
@@ -1282,10 +1282,11 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Групи_Objest : DirectoryObject
     {
         public Контрагенти_Групи_Objest() : base(Config.Kernel, "tab_a08",
-             new string[] { "col_a1", "col_a2" }) 
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
             Код = "";
+            Група = new Довідники.Контрагенти_Групи_Pointer();
             
         }
         
@@ -1295,6 +1296,7 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
+                Група = new Довідники.Контрагенти_Групи_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
                 return true;
@@ -1307,6 +1309,7 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = Група.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -1318,6 +1321,7 @@ namespace ConfTrade_v1_1.Довідники
                "<uid>" + base.UnigueID.ToString() + "</uid>" +
                "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
                "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "<Група>" + Група.ToString() + "</Група>"  +
                "</Контрагенти_Групи>";
         }
 
@@ -1334,6 +1338,7 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
+        public Довідники.Контрагенти_Групи_Pointer Група { get; set; }
         
     }
     
@@ -1362,8 +1367,8 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Групи_Select : DirectorySelect, IDisposable
     {
         public Контрагенти_Групи_Select() : base(Config.Kernel, "tab_a08",
-            new string[] { "col_a1", "col_a2" },
-            new string[] { "Назва", "Код" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "Група" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -1396,9 +1401,9 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Групи_Список_View : DirectoryView
     {
         public Контрагенти_Групи_Список_View() : base(Config.Kernel, "tab_a08", 
-             new string[] { "col_a1", "col_a2" },
-             new string[] { "Назва", "Код" },
-             new string[] { "string", "string" },
+             new string[] { "col_a1", "col_a2", "col_a3" },
+             new string[] { "Назва", "Код", "Група" },
+             new string[] { "string", "string", "pointer" },
              "Довідник_Контрагенти_Групи_Список")
         {
             
