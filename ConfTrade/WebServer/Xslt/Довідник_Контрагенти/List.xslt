@@ -39,7 +39,7 @@
             <th>Група</th>
           </tr>
           
-          <xsl:for-each select="root/parents/parent">
+          <xsl:for-each select="root/parents/row">
             <xsl:sort data-type="number" select="level" order="descending"/>
             <tr>
               <th>

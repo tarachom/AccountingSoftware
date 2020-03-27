@@ -56,12 +56,12 @@ namespace ConfTrade
 								if (Група_Objest != null)
 								{
 									XmlData +=
-										"<parent>\n" +
+										"<row>\n" +
 										"	<level>" + level.ToString() + "</level>\n" +
 										"	<puid>" + Група_Objest.Група.UnigueID.ToString() + "</puid>\n" +
 										"	<Код>" + Група_Objest.Код + "</Код>\n" +
 										"	<Назва>" + Група_Objest.Назва + "</Назва>\n" +
-										"</parent>\n";
+										"</row>\n";
 
 									Група = Група_Objest.Група;
 									level++;
@@ -74,8 +74,6 @@ namespace ConfTrade
 							}
 
 							XmlData += "</parents>\n";
-
-							Console.WriteLine(XmlData);
 						}
 
 						Довідники.Контрагенти_Групи_Список_View m_parent = new Довідники.Контрагенти_Групи_Список_View();
