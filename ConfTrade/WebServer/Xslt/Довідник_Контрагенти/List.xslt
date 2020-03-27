@@ -6,7 +6,7 @@
   <xsl:param name="cmd" />
 
   <xsl:param name="Parent" />
-  
+
   <xsl:param name="Offset" />
   <xsl:param name="Limit" />
 
@@ -25,7 +25,7 @@
     <xsl:call-template name="ModalForm">
       <xsl:with-param name="confobj" select="$confobj" />
     </xsl:call-template>
-    
+
     <div class="table-responsive">
 
       <table class="table table-bordered table-sm table-hover">
@@ -38,6 +38,31 @@
             <th>Код</th>
             <th>Група</th>
           </tr>
+          
+          <xsl:for-each select="root/parents/parent">
+            <xsl:sort data-type="number" select="level" order="descending"/>
+            <tr>
+              <th>
+                <img src="/Images/open_folder.png" />
+              </th>
+              <th>
+                <xsl:value-of select="Код"/>
+              </th>
+              <th>
+                <a href="#" onclick="Load('container', '?confobj={$confobj}&amp;cmd=List&amp;Parent={puid}');">
+                  <xsl:choose>
+                    <xsl:when test="normalize-space(Назва) != ''">
+                      <xsl:value-of select="Назва"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                      <xsl:text>&lt;...&gt;</xsl:text>
+                    </xsl:otherwise>
+                  </xsl:choose>
+                </a>
+              </th>
+            </tr>
+          </xsl:for-each>
+        
         </thead>
         <tbody>
           <xsl:for-each select="root/Довідник_Контрагенти_Групи_Список/row">
@@ -66,11 +91,12 @@
               </td>
             </tr>
           </xsl:for-each>
+
         </tbody>
       </table>
 
     </div>
-    
+
     <div class="table-responsive">
 
       <table class="table table-bordered table-sm table-hover">

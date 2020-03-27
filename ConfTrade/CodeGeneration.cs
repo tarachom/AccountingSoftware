@@ -929,10 +929,10 @@ namespace ConfTrade_v1_1.Довідники
         
         public List<Record> Records { get; set; }
 
-        public string RecordsToXml()
-        {
+        //public string RecordsToXml()
+        //{
 
-        }
+        //}
 
         public void Read()
         {
