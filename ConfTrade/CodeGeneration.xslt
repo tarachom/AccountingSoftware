@@ -865,7 +865,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                </xsl:if>
                <xsl:text>"</xsl:text><xsl:value-of select="Type"/><xsl:text>"</xsl:text>
              </xsl:for-each> },
-             "Довідники.<xsl:value-of select="$ViewsFullName"/>")
+             "Довідник_<xsl:value-of select="$ViewsFullName"/>")
         {
             <!--
             base.QuerySelect.PrimaryField = "<xsl:value-of select="PrimaryField"/>";

@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>26.03.2020 23:18:53</DateTimeSave>
+  <DateTimeSave>27.03.2020 13:12:12</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Test</Name>
@@ -427,6 +427,28 @@
           <Type>string</Type>
           <Desc>Код</Desc>
         </Field>
+        <Field>
+          <Name>Постачальник</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Покупець</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>boolean</Type>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Група</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Контрагенти_Групи</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
       </Fields>
       <TabularParts />
       <Views>
@@ -443,6 +465,56 @@
             <Field>
               <Name>Код</Name>
               <NameInTable>col_a6</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Постачальник</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>boolean</Type>
+            </Field>
+            <Field>
+              <Name>Покупець</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>boolean</Type>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>Контрагенти_Групи</Name>
+      <Table>tab_a08</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a08</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
               <Type>string</Type>
             </Field>
           </Fields>

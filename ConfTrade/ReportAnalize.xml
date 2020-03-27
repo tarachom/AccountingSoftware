@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Створити таблицю ОдиниціВиміру (tab_a04)</info>
-  <sql>CREATE TABLE tab_a04 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text, PRIMARY KEY(uid));</sql>
-  <info>Створити таблицю Організації (tab_a06)</info>
-  <sql>CREATE TABLE tab_a06 (uid uuid NOT NULL,  "col_a3" text,  "col_a4" text, PRIMARY KEY(uid));</sql>
-  <info>Створити таблицю Контрагенти (tab_a07)</info>
-  <sql>CREATE TABLE tab_a07 (uid uuid NOT NULL,  "col_a5" text,  "col_a6" text, PRIMARY KEY(uid));</sql>
+  <info>Додати колонку Група (col_a3, тип uuid)  в таблицю Контрагенти (tab_a07)</info>
+  <sql>ALTER TABLE tab_a07 ADD COLUMN "col_a3" uuid;</sql>
+  <info>Створити таблицю Контрагенти_Групи (tab_a08)</info>
+  <sql>CREATE TABLE tab_a08 (uid uuid NOT NULL,  "col_a1" text,  "col_a2" text, PRIMARY KEY(uid));</sql>
 </root>

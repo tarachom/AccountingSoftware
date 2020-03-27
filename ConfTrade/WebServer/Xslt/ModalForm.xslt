@@ -6,7 +6,7 @@
     <xsl:param name="confobj" />
     
     <div class="modal fade" id="ModalForm">
-      <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
 
           <div class="modal-header">

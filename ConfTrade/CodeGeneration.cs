@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 26.03.2020 23:18:53
+ * Дата конфігурації: 27.03.2020 13:12:12
  *
  */
 
@@ -542,7 +542,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "Довідники.Test_Список")
+             "Довідник_Test_Список")
         {
             
         }
@@ -724,7 +724,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_b2", "col_b3", "col_b1" },
              new string[] { "Назва", "Код", "Ціна", "Кво", "ДатаСтворення", "Валюта", "Вказівник" },
              new string[] { "string", "string", "numeric", "integer", "datetime", "pointer", "pointer" },
-             "Довідники.Номенклатура_Список")
+             "Довідник_Номенклатура_Список")
         {
             
         }
@@ -856,7 +856,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "Довідники.Валюти_Список")
+             "Довідник_Валюти_Список")
         {
             
         }
@@ -988,7 +988,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "Довідники.ОдиниціВиміру_Список")
+             "Довідник_ОдиниціВиміру_Список")
         {
             
         }
@@ -1120,7 +1120,7 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "col_a3", "col_a4" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "Довідники.Організації_Список")
+             "Довідник_Організації_Список")
         {
             
         }
@@ -1135,10 +1135,13 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Objest : DirectoryObject
     {
         public Контрагенти_Objest() : base(Config.Kernel, "tab_a07",
-             new string[] { "col_a5", "col_a6" }) 
+             new string[] { "col_a5", "col_a6", "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
             Код = "";
+            Постачальник = false;
+            Покупець = false;
+            Група = new Довідники.Контрагенти_Групи_Pointer();
             
         }
         
@@ -1148,6 +1151,9 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a5"].ToString();
                 Код = base.FieldValue["col_a6"].ToString();
+                Постачальник = (base.FieldValue["col_a1"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a1"].ToString()) : false;
+                Покупець = (base.FieldValue["col_a2"] != DBNull.Value) ? bool.Parse(base.FieldValue["col_a2"].ToString()) : false;
+                Група = new Довідники.Контрагенти_Групи_Pointer(base.FieldValue["col_a3"]);
                 
                 BaseClear();
                 return true;
@@ -1160,6 +1166,9 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a5"] = Назва;
             base.FieldValue["col_a6"] = Код;
+            base.FieldValue["col_a1"] = Постачальник;
+            base.FieldValue["col_a2"] = Покупець;
+            base.FieldValue["col_a3"] = Група.UnigueID.UGuid;
             
             BaseSave();
         }
@@ -1171,6 +1180,9 @@ namespace ConfTrade_v1_1.Довідники
                "<uid>" + base.UnigueID.ToString() + "</uid>" +
                "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
                "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "<Постачальник>" + (Постачальник == true ? "1" : "0") + "</Постачальник>"  +
+               "<Покупець>" + (Покупець == true ? "1" : "0") + "</Покупець>"  +
+               "<Група>" + Група.ToString() + "</Група>"  +
                "</Контрагенти>";
         }
 
@@ -1187,6 +1199,9 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
+        public bool Постачальник { get; set; }
+        public bool Покупець { get; set; }
+        public Довідники.Контрагенти_Групи_Pointer Група { get; set; }
         
     }
     
@@ -1215,8 +1230,8 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Select : DirectorySelect, IDisposable
     {
         public Контрагенти_Select() : base(Config.Kernel, "tab_a07",
-            new string[] { "col_a5", "col_a6" },
-            new string[] { "Назва", "Код" }) { }
+            new string[] { "col_a5", "col_a6", "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "Постачальник", "Покупець", "Група" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -1249,10 +1264,142 @@ namespace ConfTrade_v1_1.Довідники
     class Контрагенти_Список_View : DirectoryView
     {
         public Контрагенти_Список_View() : base(Config.Kernel, "tab_a07", 
-             new string[] { "col_a5", "col_a6" },
+             new string[] { "col_a5", "col_a6", "col_a1", "col_a2" },
+             new string[] { "Назва", "Код", "Постачальник", "Покупець" },
+             new string[] { "string", "string", "boolean", "boolean" },
+             "Довідник_Контрагенти_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "Контрагенти_Групи"
+    
+    class Контрагенти_Групи_Objest : DirectoryObject
+    {
+        public Контрагенти_Групи_Objest() : base(Config.Kernel, "tab_a08",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            Назва = "";
+            Код = "";
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            
+            BaseSave();
+        }
+
+        public string Serialize()
+        {
+            return 
+            "<Контрагенти_Групи>" +
+               "<uid>" + base.UnigueID.ToString() + "</uid>" +
+               "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
+               "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "</Контрагенти_Групи>";
+        }
+
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public Контрагенти_Групи_Pointer GetDirectoryPointer()
+        {
+            Контрагенти_Групи_Pointer directoryPointer = new Контрагенти_Групи_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        
+    }
+    
+    
+    class Контрагенти_Групи_Pointer : DirectoryPointer
+    {
+        public Контрагенти_Групи_Pointer(object uid = null) : base(Config.Kernel, "tab_a08")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public Контрагенти_Групи_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a08")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public Контрагенти_Групи_Objest GetDirectoryObject()
+        {
+            Контрагенти_Групи_Objest Контрагенти_ГрупиObjestItem = new Контрагенти_Групи_Objest();
+            Контрагенти_ГрупиObjestItem.Read(base.UnigueID);
+            return Контрагенти_ГрупиObjestItem;
+        }
+    }
+    
+    
+    class Контрагенти_Групи_Select : DirectorySelect, IDisposable
+    {
+        public Контрагенти_Групи_Select() : base(Config.Kernel, "tab_a08",
+            new string[] { "col_a1", "col_a2" },
+            new string[] { "Назва", "Код" }) { }
+    
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new Контрагенти_Групи_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public Контрагенти_Групи_Pointer Current { get; private set; }
+        
+        public Контрагенти_Групи_Pointer FindByField(string name, object value)
+        {
+            Контрагенти_Групи_Pointer itemPointer = new Контрагенти_Групи_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<Контрагенти_Групи_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<Контрагенти_Групи_Pointer> directoryPointerList = new List<Контрагенти_Групи_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new Контрагенти_Групи_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class Контрагенти_Групи_Список_View : DirectoryView
+    {
+        public Контрагенти_Групи_Список_View() : base(Config.Kernel, "tab_a08", 
+             new string[] { "col_a1", "col_a2" },
              new string[] { "Назва", "Код" },
              new string[] { "string", "string" },
-             "Довідники.Контрагенти_Список")
+             "Довідник_Контрагенти_Групи_Список")
         {
             
         }

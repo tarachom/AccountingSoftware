@@ -27,8 +27,31 @@
     </Command>
     
   </ConfObject>
-
+  
   <ConfObject Name="Довідник_Валюти">
+
+    <Command Name="List">
+      <Param Name="Offset" />
+      <Param Name="Limit" />
+    </Command>
+
+    <Command Name="Add" />
+
+    <Command Name="Delete">
+      <Param Name="Uid" />
+    </Command>
+
+    <Command Name="Edit">
+      <Param Name="Uid" />
+    </Command>
+
+    <Command Name="Save">
+      <Param Name="Uid" />
+    </Command>
+
+  </ConfObject>
+
+  <ConfObject Name="Довідник_Контрагенти">
 
     <Command Name="List">
       <Param Name="Offset" />

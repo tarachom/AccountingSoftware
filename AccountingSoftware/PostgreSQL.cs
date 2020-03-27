@@ -52,7 +52,7 @@ namespace AccountingSoftware
 
 			if (!(result != null && result.ToString() == "Exist"))
 				ExecuteSQL("CREATE TYPE public.uuid_and_string AS(uuid uuid, string text)");
-			
+
 			//foreach (string sqlQuery in StartSQL)
 			//	ExecuteSQL(sqlQuery);
 
@@ -522,19 +522,19 @@ namespace AccountingSoftware
 						case "string[]":
 							{
 								string[] mas = (string[])reader[field];
-								foreach (string elem in mas) xml += "<elem><![CDATA[" + elem + "]]></elem>";
+								foreach (string elem in mas) xml += "<e><![CDATA[" + elem + "]]></e>";
 								break;
 							}
 						case "integer[]":
 							{
 								int[] mas = (int[])reader[field];
-								foreach (int elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
+								foreach (int elem in mas) xml += "<e>" + elem.ToString() + "</e>";
 								break;
 							}
 						case "numeric[]":
 							{
 								decimal[] mas = (decimal[])reader[field];
-								foreach (decimal elem in mas) xml += "<elem>" + elem.ToString() + "</elem>";
+								foreach (decimal elem in mas) xml += "<e>" + elem.ToString() + "</e>";
 								break;
 							}
 						default:
@@ -558,7 +558,7 @@ namespace AccountingSoftware
 
 		public void DeleteDirectoryViewTempTable(DirectoryView directoryView)
 		{
-			if (directoryView.QuerySelect.CreateTempTable == true && 
+			if (directoryView.QuerySelect.CreateTempTable == true &&
 				directoryView.QuerySelect.TempTable != "" &&
 			 	directoryView.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
 			{

@@ -35,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <xsl:for-each select="root/Довідники.Валюти_Список/row">
+          <xsl:for-each select="root/Довідник_Валюти_Список/row">
             <tr>
               <td>
                 <xsl:value-of select="Код"/>
