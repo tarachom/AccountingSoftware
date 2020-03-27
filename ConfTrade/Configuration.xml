@@ -4,151 +4,9 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>27.03.2020 14:05:47</DateTimeSave>
-  <ConstantsBlocks>
-    <ConstantsBlock>
-      <Name>Test</Name>
-      <Desc>
-      </Desc>
-      <Constants>
-        <Constant>
-          <Name>dfsdfs</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Desc>
-          </Desc>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Test</Pointer>
-          <TabularParts>
-            <TablePart>
-              <Name>Історія</Name>
-              <Table>tab_a01</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>Дата</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>date</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-                <Field>
-                  <Name>Значенн</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-            <TablePart>
-              <Name>sdsdsd</Name>
-              <Table>tab_a02</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>ssdsdsd</Name>
-                  <NameInTable>col_a1</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-            <TablePart>
-              <Name>asdAS</Name>
-              <Table>tab_a05</Table>
-              <Desc>
-              </Desc>
-              <Fields>
-                <Field>
-                  <Name>AsdASDA</Name>
-                  <NameInTable>col_a2</NameInTable>
-                  <Type>string</Type>
-                  <Desc>
-                  </Desc>
-                </Field>
-              </Fields>
-            </TablePart>
-          </TabularParts>
-        </Constant>
-      </Constants>
-    </ConstantsBlock>
-  </ConstantsBlocks>
+  <DateTimeSave>27.03.2020 16:05:53</DateTimeSave>
+  <ConstantsBlocks />
   <Directories>
-    <Directory>
-      <Name>Test</Name>
-      <Table>tab_a49</Table>
-      <Desc>
-      </Desc>
-      <Fields>
-        <Field>
-          <Name>Назва</Name>
-          <NameInTable>col_a1</NameInTable>
-          <Type>string</Type>
-          <Desc>Назва</Desc>
-        </Field>
-        <Field>
-          <Name>Код</Name>
-          <NameInTable>col_a2</NameInTable>
-          <Type>string</Type>
-          <Desc>Код</Desc>
-        </Field>
-        <Field>
-          <Name>івфіва</Name>
-          <NameInTable>col_a3</NameInTable>
-          <Type>enum</Type>
-          <Pointer>Перелічення.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-      </Fields>
-      <TabularParts>
-        <TablePart>
-          <Name>Test</Name>
-          <Table>tab_a56</Table>
-          <Desc>
-          </Desc>
-          <Fields>
-            <Field>
-              <Name>Test</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-              <Desc>
-              </Desc>
-            </Field>
-            <Field>
-              <Name>кцукц</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Test</Pointer>
-              <Desc>
-              </Desc>
-            </Field>
-          </Fields>
-        </TablePart>
-      </TabularParts>
-      <Views>
-        <View>
-          <Name>Список</Name>
-          <Table>tab_a49</Table>
-          <Desc>Список</Desc>
-          <Fields>
-            <Field>
-              <Name>Назва</Name>
-              <NameInTable>col_a1</NameInTable>
-              <Type>string</Type>
-            </Field>
-            <Field>
-              <Name>Код</Name>
-              <NameInTable>col_a2</NameInTable>
-              <Type>string</Type>
-            </Field>
-          </Fields>
-        </View>
-      </Views>
-    </Directory>
     <Directory>
       <Name>Номенклатура</Name>
       <Table>tab_a14</Table>
@@ -218,14 +76,6 @@
           </Desc>
         </Field>
         <Field>
-          <Name>Вказівник</Name>
-          <NameInTable>col_b1</NameInTable>
-          <Type>pointer</Type>
-          <Pointer>Довідники.Test</Pointer>
-          <Desc>
-          </Desc>
-        </Field>
-        <Field>
           <Name>ДатаСтворення</Name>
           <NameInTable>col_b2</NameInTable>
           <Type>datetime</Type>
@@ -237,6 +87,14 @@
           <NameInTable>col_b3</NameInTable>
           <Type>pointer</Type>
           <Pointer>Довідники.Валюти</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+        <Field>
+          <Name>Група</Name>
+          <NameInTable>col_b4</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Номенклатура_Групи</Pointer>
           <Desc>
           </Desc>
         </Field>
@@ -278,12 +136,6 @@
               <NameInTable>col_b3</NameInTable>
               <Type>pointer</Type>
               <Pointer>Довідники.Валюти</Pointer>
-            </Field>
-            <Field>
-              <Name>Вказівник</Name>
-              <NameInTable>col_b1</NameInTable>
-              <Type>pointer</Type>
-              <Pointer>Довідники.Test</Pointer>
             </Field>
           </Fields>
         </View>
@@ -514,7 +366,30 @@
           </Desc>
         </Field>
       </Fields>
-      <TabularParts />
+      <TabularParts>
+        <TablePart>
+          <Name>Ієрархія</Name>
+          <Table>tab_a01</Table>
+          <Desc>Таблична частина для збереження ієрархії вкладеності групи.</Desc>
+          <Fields>
+            <Field>
+              <Name>Рівень</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>integer</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>Група</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Контрагенти_Групи</Pointer>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
       <Views>
         <View>
           <Name>Список</Name>
@@ -536,6 +411,60 @@
               <NameInTable>col_a3</NameInTable>
               <Type>pointer</Type>
               <Pointer>Довідники.Контрагенти_Групи</Pointer>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>Номенклатура_Групи</Name>
+      <Table>tab_a09</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+        <Field>
+          <Name>Група</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Номенклатура_Групи</Pointer>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a08</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Група</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>pointer</Type>
+              <Pointer>Довідники.Номенклатура_Групи</Pointer>
             </Field>
           </Fields>
         </View>

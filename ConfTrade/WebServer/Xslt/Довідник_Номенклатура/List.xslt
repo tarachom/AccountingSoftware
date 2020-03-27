@@ -27,8 +27,7 @@
 
       <table class="table table-bordered table-sm table-hover">
         <col width="10%" />
-        <col width="40%" />
-        <col width="10%" />
+        <col width="50%" />
         <col width="10%" />
         <col width="10%" />
         <col width="10%" />
@@ -42,7 +41,6 @@
             <th>Сума</th>
             <th>Створений</th>
             <th>Валюта</th>
-            <th>Вказівник</th>
           </tr>
         </thead>
         <tbody>
@@ -80,14 +78,6 @@
                   <xsl:call-template name="GetNameOd">
                     <xsl:with-param name="list" select="/root/Довідники.Валюти_Список" />
                     <xsl:with-param name="uid" select="Валюта" />
-                  </xsl:call-template>
-                </xsl:if>
-              </td>
-              <td>
-                <xsl:if test="normalize-space(Вказівник) != ''">
-                  <xsl:call-template name="GetNameOd">
-                    <xsl:with-param name="list" select="/root/Довідники.Test_Список" />
-                    <xsl:with-param name="uid" select="Вказівник" />
                   </xsl:call-template>
                 </xsl:if>
               </td>

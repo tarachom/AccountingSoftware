@@ -81,8 +81,10 @@ namespace AccountingSoftware
 
 		protected void BaseSave(Guid UID, UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
-			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Guid recordUnigueID = Guid.NewGuid(); //(UID == null ? Guid.NewGuid() : UID);	
+
 			Kernel.DataBase.InsertDirectoryTablePartRecords(recordUnigueID, ownerUnigueID, Table, FieldArray, fieldValue);
 		}
 	}
 }
+

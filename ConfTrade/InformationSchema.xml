@@ -1,19 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <InformationSchema>
   <Table>
-    <Name>tab_a02</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a54</Name>
     <Column>
       <Name>uid</Name>
@@ -27,6 +14,52 @@
       <Name>uid</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a01</Name>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>integer</DataType>
+      <UdtName>int4</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a09</Name>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>
@@ -66,11 +99,6 @@
     <Name>tab_constants</Name>
     <Column>
       <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
@@ -121,7 +149,7 @@
       <UdtName>time</UdtName>
     </Column>
     <Column>
-      <Name>col_b1</Name>
+      <Name>col_b4</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
     </Column>
@@ -185,29 +213,6 @@
     </Column>
   </Table>
   <Table>
-    <Name>tab_a49</Name>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a3</Name>
-      <DataType>integer</DataType>
-      <UdtName>int4</UdtName>
-    </Column>
-  </Table>
-  <Table>
     <Name>tab_a03</Name>
     <Column>
       <Name>col_a1</Name>
@@ -259,65 +264,6 @@
       <Name>uid</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a05</Name>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a01</Name>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>date</DataType>
-      <UdtName>date</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a56</Name>
-    <Column>
-      <Name>owner</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
     </Column>
   </Table>
 </InformationSchema>

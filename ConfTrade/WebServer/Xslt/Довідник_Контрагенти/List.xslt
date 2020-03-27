@@ -29,10 +29,12 @@
     <div class="table-responsive">
 
       <table class="table table-bordered table-sm table-hover">
+        <col width="1%" />
         <col width="10%" />
-        <col width="90%" />
+        <col width="80%" />
         <thead class="thead-light">
           <tr>
+            <th></th>
             <th>Код</th>
             <th>Група</th>
           </tr>
@@ -40,6 +42,9 @@
         <tbody>
           <xsl:for-each select="root/Довідник_Контрагенти_Групи_Список/row">
             <tr>
+              <td>
+                <img src="/Images/folder.png" />
+              </td>
               <td>
                 <xsl:value-of select="Код"/>
               </td>
@@ -69,12 +74,14 @@
     <div class="table-responsive">
 
       <table class="table table-bordered table-sm table-hover">
+        <col width="1%" />
         <col width="10%" />
         <col width="70%" />
         <col width="10%" />
         <col width="10%" />
         <thead class="thead-light">
           <tr>
+            <th></th>
             <th>Код</th>
             <th>Назва</th>
             <th>Постачальник</th>
@@ -84,6 +91,9 @@
         <tbody>
           <xsl:for-each select="root/Довідник_Контрагенти_Список/row">
             <tr>
+              <td>
+                <img src="/Images/element.png" />
+              </td>
               <td>
                 <xsl:value-of select="Код"/>
               </td>

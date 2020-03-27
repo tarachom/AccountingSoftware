@@ -651,8 +651,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
-            <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID);
-            return <xsl:value-of select="$DirectoryName"/>ObjestItem;
+            return <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
     }
     
@@ -768,7 +767,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:choose>
                         <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                          <xsl:text>.ToString()</xsl:text>
+                          <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>
                       </xsl:choose>
                       <xsl:text>)</xsl:text>;

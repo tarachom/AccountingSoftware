@@ -52,10 +52,6 @@ namespace ConfTrade
 						m_6.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Валюта"] + " FROM " + TempTable, true));
 						XmlData += m_6.Read();
 
-						Довідники.Test_Список_View m_7 = new Довідники.Test_Список_View();
-						m_7.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Вказівник"] + " FROM " + TempTable, true));
-						XmlData += m_7.Read();
-
 						m_1.DeleteTempTable();
 						break;
 					}
