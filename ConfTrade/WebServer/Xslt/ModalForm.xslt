@@ -20,7 +20,7 @@
               var modalFormUid = "";
               var modalFormSaveCmd = "";
               function OpenModalForm(cmd, saveCmd, uid) {
-              $("#ModalFormTitle").html( (cmd == "Edit" ? "Редагувати" : "Новий") + " елемент");
+              $("#ModalFormTitle").html( (cmd == "Edit" ? "Редагувати" : "Новий") + " елемент" );
               $("#ModalFormStatusInfo").html("");
               Load("ModalFormBody", "?confobj=<xsl:value-of select="$confobj"/>&amp;cmd=" + cmd + "&amp;Uid=" + uid);
               modalFormUid = uid;

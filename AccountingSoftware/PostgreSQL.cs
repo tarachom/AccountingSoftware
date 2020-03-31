@@ -380,6 +380,33 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
+		public string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field)
+		{
+			QuerySelect.Field.Add(field);
+			QuerySelect.Where.Add(new Where("uid", Comparison.EQ, uid));
+
+			string query = QuerySelect.Construct();
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", uid));
+
+			Console.WriteLine("uid = " + uid.ToString());
+
+			string value = "";
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				value = reader[field].ToString();
+				Console.WriteLine(field);
+				Console.WriteLine(value);
+			}
+			reader.Close();
+
+			return value;
+		}
+
 		public bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer)
 		{
 			QuerySelect.Limit = 1;

@@ -59,6 +59,11 @@
       <Param Name="Limit" />
     </Command>
 
+    <Command Name="ListGroup">
+      <Param Name="Parent" />
+      <Param Name="CurrentGroup" />
+    </Command>
+    
     <Command Name="Add" />
     <Command Name="AddGroup" />
     

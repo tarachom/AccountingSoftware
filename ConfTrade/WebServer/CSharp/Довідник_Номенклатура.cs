@@ -37,10 +37,14 @@ namespace ConfTrade
 			{
 				case "List":
 					{
+						TimeSpan ts = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts);
+
 						Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
-						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
-						m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
-						m_1.QuerySelect.Limit = 10;
+						//m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
+						//m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
+						m_1.QuerySelect.Order.Add(m_1.Alias["ДатаСтворення"], SelectOrder.DESC);
+						//m_1.QuerySelect.Limit = 10;
 						m_1.QuerySelect.CreateTempTable = true;
 						
 						XmlData += m_1.Read();
@@ -53,6 +57,10 @@ namespace ConfTrade
 						XmlData += m_6.Read();
 
 						m_1.DeleteTempTable();
+
+						TimeSpan ts2 = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts2 + " = " + (ts2 - ts) + "; " + (ts2 - ts).TotalSeconds + "; " + (ts2 - ts).Milliseconds);
+
 						break;
 					}
 

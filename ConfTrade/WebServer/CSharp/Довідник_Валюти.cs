@@ -37,11 +37,18 @@ namespace ConfTrade
 			{
 				case "List":
 					{
+						TimeSpan ts = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts);
+
 						Довідники.Валюти_Список_View m_1 = new Довідники.Валюти_Список_View();
 						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
 						m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
 
 						XmlData += m_1.Read();
+
+						TimeSpan ts2 = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts2 + " = " + (ts2 - ts) + "; " + (ts2 - ts).TotalSeconds + "; " + (ts2 - ts).Milliseconds);
+
 						break;
 					}
 

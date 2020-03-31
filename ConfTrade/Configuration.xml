@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>31.03.2020 10:18:56</DateTimeSave>
+  <DateTimeSave>31.03.2020 10:53:01</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основний</Name>
@@ -184,6 +184,21 @@
                   <Name>Виконано</Name>
                   <NameInTable>col_a1</NameInTable>
                   <Type>boolean</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+            <TablePart>
+              <Name>ІсторіяЗапускуВебСервера</Name>
+              <Table>tab_a10</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>ДатаЗапуску</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>datetime</Type>
                   <Desc>
                   </Desc>
                 </Field>
@@ -658,14 +673,45 @@
         </View>
       </Views>
     </Directory>
+    <Directory>
+      <Name>ІсторіяЗапускуВебСервера</Name>
+      <Table>tab_a11</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>ДатаЗапуску</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>datetime</Type>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
+      <TabularParts />
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a11</Table>
+          <Desc>Список</Desc>
+          <Fields />
+        </View>
+      </Views>
+    </Directory>
   </Directories>
   <Enums>
     <Enum>
       <Name>Test</Name>
       <Desc>
       </Desc>
-      <SerialNumber>0</SerialNumber>
-      <Fields />
+      <SerialNumber>1</SerialNumber>
+      <Fields>
+        <Field>
+          <Name>er</Name>
+          <Value>1</Value>
+          <Desc>
+          </Desc>
+        </Field>
+      </Fields>
     </Enum>
     <Enum>
       <Name>qq</Name>
@@ -712,13 +758,37 @@
       <Desc>
       </Desc>
       <DimensionFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>a</Name>
+            <NameInTable>col_a1</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </DimensionFields>
       <ResourcesFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>a1</Name>
+            <NameInTable>col_a2</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </ResourcesFields>
       <PropertyFields>
-        <Fields />
+        <Fields>
+          <Field>
+            <Name>a3</Name>
+            <NameInTable>col_a3</NameInTable>
+            <Type>string</Type>
+            <Desc>
+            </Desc>
+          </Field>
+        </Fields>
       </PropertyFields>
     </RegisterInformation>
   </RegistersInformation>

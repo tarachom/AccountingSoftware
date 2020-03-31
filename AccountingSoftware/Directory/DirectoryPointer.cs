@@ -66,6 +66,11 @@ namespace AccountingSoftware
 			return UnigueID.UGuid;
 		}
 
+		protected string GetView(Guid uid, string field)
+		{
+			return Kernel.DataBase.GetViewDirectoryPointers(new Query(Table), uid, field);
+		}
+
 		public override string ToString()
 		{
 			return UnigueID.UGuid.ToString();

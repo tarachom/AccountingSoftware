@@ -217,13 +217,30 @@
       <Control_Field>
         <Name>Виконано</Name>
         <NameInTable>col_a1</NameInTable>
-        <IsExist>no</IsExist>
-        <FieldCreate>
-          <Name>Виконано</Name>
-          <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>boolean</ConfType>
           <DataType>boolean</DataType>
-        </FieldCreate>
+          <UdtName>bool</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>ІсторіяЗапускуВебСервера</Name>
+      <Table>tab_a10</Table>
+      <IsCreateOwner>no</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>ДатаЗапуску</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>datetime</ConfType>
+          <DataType>timestamp without time zone</DataType>
+          <UdtName>timestamp</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
       </Control_Field>
     </Control_TabularParts>
   </Control_Table>
@@ -617,6 +634,23 @@
     </Control_Field>
   </Control_Table>
   <Control_Table>
+    <Type>Directory</Type>
+    <Name>ІсторіяЗапускуВебСервера</Name>
+    <Table>tab_a11</Table>
+    <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>ДатаЗапуску</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>datetime</ConfType>
+        <DataType>timestamp without time zone</DataType>
+        <UdtName>timestamp</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+  </Control_Table>
+  <Control_Table>
     <Type>Document</Type>
     <Name>Test</Name>
     <Table>tab_a50</Table>
@@ -649,6 +683,39 @@
     <Name>Test</Name>
     <Table>tab_a51</Table>
     <IsExist>yes</IsExist>
+    <Control_Field>
+      <Name>a</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>a</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>a1</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>a1</Name>
+        <NameInTable>col_a2</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
+    <Control_Field>
+      <Name>a3</Name>
+      <NameInTable>col_a3</NameInTable>
+      <IsExist>no</IsExist>
+      <FieldCreate>
+        <Name>a3</Name>
+        <NameInTable>col_a3</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </Control_Field>
   </Control_Table>
   <Control_Table>
     <Type>RegisterAccumulation</Type>

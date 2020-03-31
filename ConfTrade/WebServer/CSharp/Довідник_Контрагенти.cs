@@ -37,6 +37,9 @@ namespace ConfTrade
 			{
 				case "List":
 					{
+						TimeSpan ts = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts);
+
 						string ParentUid = commandParamsValue.Get_Params["Parent"];
 						if (ParentUid == "") ParentUid = Guid.Empty.ToString();
 
@@ -78,13 +81,78 @@ namespace ConfTrade
 
 						Довідники.Контрагенти_Групи_Список_View m_parent = new Довідники.Контрагенти_Групи_Список_View();
 						m_parent.QuerySelect.Where.Add(new Where(m_parent.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
-						m_parent.QuerySelect.Where.Add(new Where(Comparison.AND, m_parent.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
+						m_parent.QuerySelect.Order.Add(m_parent.Alias["Код"], SelectOrder.ASC);
 						XmlData += m_parent.Read();
 
 						Довідники.Контрагенти_Список_View m_1 = new Довідники.Контрагенти_Список_View();
 						m_1.QuerySelect.Where.Add(new Where(m_1.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
 						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
 						XmlData += m_1.Read();
+
+						TimeSpan ts2 = DateTime.Now.TimeOfDay;
+						Console.WriteLine(ts2 + " = " + (ts2 - ts) + "; " + (ts2 - ts).TotalSeconds + "; " + (ts2 - ts).Milliseconds);
+
+						break;
+					}
+
+				case "ListGroup":
+					{
+						string ParentUid = commandParamsValue.Get_Params["Parent"];
+						if (ParentUid == "") ParentUid = Guid.Empty.ToString();
+
+						string CurrentGroupUid = commandParamsValue.Get_Params["CurrentGroup"];
+						if (CurrentGroupUid == "") CurrentGroupUid = Guid.Empty.ToString();
+
+						Довідники.Контрагенти_Групи_Pointer ParentUid_Pointer = new
+							Довідники.Контрагенти_Групи_Pointer(new UnigueID(ParentUid));
+
+						Довідники.Контрагенти_Групи_Pointer CurrentGroupUid_Pointer = new
+							Довідники.Контрагенти_Групи_Pointer(new UnigueID(CurrentGroupUid));
+
+						if (!ParentUid_Pointer.IsEmpty())
+						{
+							XmlData += "<parents>\n";
+
+							Довідники.Контрагенти_Групи_Pointer Група = ParentUid_Pointer;
+							int level = 0;
+
+							while (!Група.IsEmpty())
+							{
+								Довідники.Контрагенти_Групи_Objest Група_Objest = Група.GetDirectoryObject();
+								if (Група_Objest != null)
+								{
+									XmlData +=
+										"<row>\n" +
+										"	<level>" + level.ToString() + "</level>\n" +
+										"	<puid>" + Група_Objest.Група.UnigueID.ToString() + "</puid>\n" +
+										"	<Код>" + Група_Objest.Код + "</Код>\n" +
+										"	<Назва>" + Група_Objest.Назва + "</Назва>\n" +
+										"</row>\n";
+
+									Група = Група_Objest.Група;
+									level++;
+								}
+
+								if (level > 10)
+								{
+									break;
+								}
+							}
+
+							XmlData += "</parents>\n";
+						}
+
+						Довідники.Контрагенти_Групи_Список_View m_parent = new Довідники.Контрагенти_Групи_Список_View();
+						m_parent.QuerySelect.Where.Add(new Where(m_parent.Alias["Група"], Comparison.EQ, ParentUid_Pointer.GetPointer(), false));
+						
+						if (!CurrentGroupUid_Pointer.IsEmpty())
+						{
+							m_parent.QuerySelect.Where.Add(
+								new Where(Comparison.AND, "uid", Comparison.NOT, CurrentGroupUid_Pointer.GetPointer(), false));
+						}
+
+						m_parent.QuerySelect.Order.Add(m_parent.Alias["Код"], SelectOrder.ASC);
+						XmlData += m_parent.Read();
 
 						break;
 					}
@@ -198,29 +266,12 @@ namespace ConfTrade
 
 						контрагенти_Групи_Objest.Код = commandParamsValue.Post_Params["Code"];
 						контрагенти_Групи_Objest.Назва = commandParamsValue.Post_Params["Name"];
-						контрагенти_Групи_Objest.Група = new Довідники.Контрагенти_Групи_Select().FindByField("Код", "2");
+
+						контрагенти_Групи_Objest.Група = new Довідники.Контрагенти_Групи_Pointer(
+							commandParamsValue.Post_Params["Group"] != "" ? new UnigueID(commandParamsValue.Post_Params["Group"]) :
+							new UnigueID(Guid.Empty));
+
 						контрагенти_Групи_Objest.Save();
-
-						//Довідники.Контрагенти_Групи_Pointer Група = контрагенти_Групи_Objest.Група;
-						//int level = 0;
-
-						//while (!Група.IsEmpty())
-						//{
-						//	Довідники.Контрагенти_Групи_Objest Група_Objest = Група.GetDirectoryObject();
-						//	if (Група_Objest != null)
-						//	{
-						//		контрагенти_Групи_Objest.Ієрархія_TablePart.Records.Add(
-						//			new Довідники.Контрагенти_Групи_Ієрархія_TablePart.Record(level, Група));
-
-						//		Група = Група_Objest.Група;
-						//		level++;
-						//	}
-
-						//	if (level > 10)
-						//		throw new Exception("Level > 10!");
-						//}
-
-						//контрагенти_Групи_Objest.Ієрархія_TablePart.Save(true);
 
 						XmlData += "<info>" + "Записано. Ід " + контрагенти_Групи_Objest.UnigueID.ToString() + "</info>";
 						break;

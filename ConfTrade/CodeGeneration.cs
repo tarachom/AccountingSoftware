@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 31.03.2020 10:18:56
+ * Дата конфігурації: 31.03.2020 10:53:01
  *
  */
 
@@ -454,6 +454,83 @@ namespace ConfTrade_v1_1.Константи
                 public string БлокДаних { get; set; }
                 public Довідники.Контрагенти_Pointer Користувач { get; set; }
                 public bool Виконано { get; set; }
+                
+            }            
+        }
+          
+        public class ФормуванняЗвітів_ІсторіяЗапускуВебСервера_TablePart : ConstantsTablePart
+        {
+            public ФормуванняЗвітів_ІсторіяЗапускуВебСервера_TablePart() : base(Config.Kernel, "tab_a10",
+                 new string[] { "col_a2" }) 
+            {
+                Records = new List<Record>();
+            }
+                
+            public List<Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Record record = new Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.ДатаЗапуску = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"].ToString()) : DateTime.MinValue;
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a2", record.ДатаЗапуску);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class Record : ConstantsTablePartRecord
+            {
+                public Record()
+                {
+                    ДатаЗапуску = DateTime.MinValue;
+                    
+                }
+        
+                
+                public Record(
+                    DateTime?  _ДатаЗапуску = null)
+                {
+                    ДатаЗапуску = _ДатаЗапуску ?? DateTime.MinValue;
+                    
+                }
+                public DateTime ДатаЗапуску { get; set; }
                 
             }            
         }
@@ -1233,6 +1310,7 @@ namespace ConfTrade_v1_1.Довідники
                "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
                "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
                "<Група>" + Група.ToString() + "</Група>"  +
+               "<Група_Назва>" + Група.GetView() + "</Група_Назва>" +
                "</Контрагенти_Групи>";
         }
 
@@ -1273,6 +1351,11 @@ namespace ConfTrade_v1_1.Довідники
         {
             Контрагенти_Групи_Objest Контрагенти_ГрупиObjestItem = new Контрагенти_Групи_Objest();
             return Контрагенти_ГрупиObjestItem.Read(base.UnigueID) ? Контрагенти_ГрупиObjestItem : null;
+        }
+
+        public string GetView()
+        {
+            return base.GetView(base.UnigueID.UGuid, "col_a1");
         }
     }
     
@@ -1555,6 +1638,132 @@ namespace ConfTrade_v1_1.Довідники
     
     #endregion
     
+    #region DIRECTORY "ІсторіяЗапускуВебСервера"
+    
+    class ІсторіяЗапускуВебСервера_Objest : DirectoryObject
+    {
+        public ІсторіяЗапускуВебСервера_Objest() : base(Config.Kernel, "tab_a11",
+             new string[] { "col_a3" }) 
+        {
+            ДатаЗапуску = DateTime.MinValue;
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                ДатаЗапуску = (base.FieldValue["col_a3"] != DBNull.Value) ? DateTime.Parse(base.FieldValue["col_a3"].ToString()) : DateTime.MinValue;
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a3"] = ДатаЗапуску;
+            
+            BaseSave();
+        }
+
+        public string Serialize()
+        {
+            return 
+            "<ІсторіяЗапускуВебСервера>" +
+               "<uid>" + base.UnigueID.ToString() + "</uid>" +
+               "<ДатаЗапуску>" + ДатаЗапуску.ToString() + "</ДатаЗапуску>"  +
+               "</ІсторіяЗапускуВебСервера>";
+        }
+
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public ІсторіяЗапускуВебСервера_Pointer GetDirectoryPointer()
+        {
+            ІсторіяЗапускуВебСервера_Pointer directoryPointer = new ІсторіяЗапускуВебСервера_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public DateTime ДатаЗапуску { get; set; }
+        
+    }
+    
+    
+    class ІсторіяЗапускуВебСервера_Pointer : DirectoryPointer
+    {
+        public ІсторіяЗапускуВебСервера_Pointer(object uid = null) : base(Config.Kernel, "tab_a11")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public ІсторіяЗапускуВебСервера_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a11")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public ІсторіяЗапускуВебСервера_Objest GetDirectoryObject()
+        {
+            ІсторіяЗапускуВебСервера_Objest ІсторіяЗапускуВебСервераObjestItem = new ІсторіяЗапускуВебСервера_Objest();
+            return ІсторіяЗапускуВебСервераObjestItem.Read(base.UnigueID) ? ІсторіяЗапускуВебСервераObjestItem : null;
+        }
+    }
+    
+    
+    class ІсторіяЗапускуВебСервера_Select : DirectorySelect, IDisposable
+    {
+        public ІсторіяЗапускуВебСервера_Select() : base(Config.Kernel, "tab_a11",
+            new string[] { "col_a3" },
+            new string[] { "ДатаЗапуску" }) { }
+    
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new ІсторіяЗапускуВебСервера_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public ІсторіяЗапускуВебСервера_Pointer Current { get; private set; }
+        
+        public ІсторіяЗапускуВебСервера_Pointer FindByField(string name, object value)
+        {
+            ІсторіяЗапускуВебСервера_Pointer itemPointer = new ІсторіяЗапускуВебСервера_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<ІсторіяЗапускуВебСервера_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<ІсторіяЗапускуВебСервера_Pointer> directoryPointerList = new List<ІсторіяЗапускуВебСервера_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new ІсторіяЗапускуВебСервера_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class ІсторіяЗапускуВебСервера_Список_View : DirectoryView
+    {
+        public ІсторіяЗапускуВебСервера_Список_View() : base(Config.Kernel, "tab_a11", 
+             new string[] {  },
+             new string[] {  },
+             new string[] {  },
+             "Довідник_ІсторіяЗапускуВебСервера_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
 }
 
 namespace ConfTrade_v1_1.Перелічення
@@ -1562,7 +1771,7 @@ namespace ConfTrade_v1_1.Перелічення
     
     public enum Test
     {
-         
+         er = 1
     }
     
     
@@ -1683,7 +1892,7 @@ namespace ConfTrade_v1_1.РегістриВідомостей
     class Test_RecordsSet : RegisterInformationRecordsSet
     {
         public Test_RecordsSet() : base(Config.Kernel, "tab_a51",
-             new string[] {  }) 
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Records = new List<Record>();
             Filter = new SelectFilter();
@@ -1696,6 +1905,12 @@ namespace ConfTrade_v1_1.РегістриВідомостей
             Records.Clear();
             
             
+            if (Filter.a != null)
+            {
+                base.BaseFilter.Add(new Where("col_a1", Comparison.EQ, Filter.a, false));
+                
+            }
+            
 
             base.BaseRead();
             
@@ -1705,6 +1920,9 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 
                 record.UID = (Guid)fieldValue["uid"];
                   
+                record.a = fieldValue["col_a1"].ToString();
+                record.a1 = fieldValue["col_a2"].ToString();
+                record.a3 = fieldValue["col_a3"].ToString();
                 
                 Records.Add(record);
             }
@@ -1725,6 +1943,9 @@ namespace ConfTrade_v1_1.РегістриВідомостей
                 {
                     Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
+                    fieldValue.Add("col_a1", record.a);
+                    fieldValue.Add("col_a2", record.a1);
+                    fieldValue.Add("col_a3", record.a3);
                     
                     base.BaseSave(record.UID, fieldValue);
                 }
@@ -1747,9 +1968,15 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             public Record()
             {
+                a = "";
+                a1 = "";
+                a3 = "";
                 
             }
         
+            public string a { get; set; }
+            public string a1 { get; set; }
+            public string a3 { get; set; }
             
         }
     
@@ -1757,9 +1984,11 @@ namespace ConfTrade_v1_1.РегістриВідомостей
         {
             public SelectFilter()
             {
+                 a = null;
                  
             }
         
+            public string a { get; set; }
             
         }
     }

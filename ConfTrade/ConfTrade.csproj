@@ -76,6 +76,7 @@
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\Delete.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\EditGroup.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\Edit.xslt" />
+    <Content Include="WebServer\Xslt\Довідник_Контрагенти\ListGroup.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\List.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\ModalFormBody.xslt" />
     <Content Include="WebServer\Xslt\Довідник_Контрагенти\SaveGroup.xslt" />

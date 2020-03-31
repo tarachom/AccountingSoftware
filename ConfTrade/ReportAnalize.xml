@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Додати колонку Виконано (col_a1, тип boolean)  в таблицю ЗвітиКористувачів (tab_a05)</info>
-  <sql>ALTER TABLE tab_a05 ADD COLUMN "col_a1" boolean;</sql>
+  <info>Додати колонку a (col_a1, тип text)  в таблицю Test (tab_a51)</info>
+  <sql>ALTER TABLE tab_a51 ADD COLUMN "col_a1" text;</sql>
+  <info>Додати колонку a1 (col_a2, тип text)  в таблицю Test (tab_a51)</info>
+  <sql>ALTER TABLE tab_a51 ADD COLUMN "col_a2" text;</sql>
+  <info>Додати колонку a3 (col_a3, тип text)  в таблицю Test (tab_a51)</info>
+  <sql>ALTER TABLE tab_a51 ADD COLUMN "col_a3" text;</sql>
 </root>

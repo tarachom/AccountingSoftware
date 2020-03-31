@@ -37,6 +37,7 @@ using System.Web;
 using AccountingSoftware;
 using Conf = ConfTrade_v1_1;
 using Константи = ConfTrade_v1_1.Константи;
+using Довідники = ConfTrade_v1_1.Довідники;
 
 //Конфігурація Торгівля
 namespace ConfTrade
@@ -66,28 +67,42 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
-			Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart ЗвітиКористувачів =
-				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart();
+			Константи.РегламентніЗавдання.ФормуванняЗвітів_ІсторіяЗапускуВебСервера_TablePart ІсторіяЗапускуВебСервера =
+				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ІсторіяЗапускуВебСервера_TablePart();
 
-			ЗвітиКористувачів.Records.Add(
-				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record(
-					DateTime.Now, "Report", "", null, false));
+			ІсторіяЗапускуВебСервера.Records.Add(
+				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ІсторіяЗапускуВебСервера_TablePart.Record(
+					DateTime.Now));
 
-			ЗвітиКористувачів.Save(false);
+			ІсторіяЗапускуВебСервера.Save(false);
 
-			ЗвітиКористувачів.Read();
-			foreach (Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record record in ЗвітиКористувачів.Records)
-			{
-				record.Виконано = true;
-				Console.WriteLine(record.UID + "|" + record.Дата + "|" + record.Звіт);
-			}
+			Довідники.ІсторіяЗапускуВебСервера_Objest ІсторіяЗапускуВебСервераДов = new Довідники.ІсторіяЗапускуВебСервера_Objest();
+			ІсторіяЗапускуВебСервераДов.New();
+			ІсторіяЗапускуВебСервераДов.ДатаЗапуску = DateTime.Now;
+			ІсторіяЗапускуВебСервераДов.Save();
+
+			//Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart ЗвітиКористувачів =
+			//	new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart();
+
+			//ЗвітиКористувачів.Records.Add(
+			//	new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record(
+			//		DateTime.Now, "Report", "", null, false));
+
+			//ЗвітиКористувачів.Save(false);
+
+			//ЗвітиКористувачів.Read();
+			//foreach (Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record record in ЗвітиКористувачів.Records)
+			//{
+			//	record.Виконано = true;
+			//	Console.WriteLine(record.UID + "|" + record.Дата + "|" + record.Звіт);
+			//}
 			//ЗвітиКористувачів.Save(true);
 
 			//Conf.Константи.Основний.a1_Історія_TablePart a1_Історія = new Константи.Основний.a1_Історія_TablePart();
 			//a1_Історія.Records.Add(new Константи.Основний.a1_Історія_TablePart.Історія_Record(DateTime.Now, "text"));
 			//a1_Історія.Save(false);
 
-			Console.ReadLine();
+			//Console.ReadLine();
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
 			threadWebServer.Start();
