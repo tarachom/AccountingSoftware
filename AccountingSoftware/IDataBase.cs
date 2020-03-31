@@ -38,6 +38,7 @@ namespace AccountingSoftware
 		#region Constants
 
 		bool SelectAllConstants(string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		bool SelectConstants(string table, string field, Dictionary<string, object> fieldValue);
 		void SaveConstants(string table, string field, object fieldValue);
 
 		void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
@@ -96,11 +97,14 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region InformationShema
+
 		ConfigurationInformationSchema SelectInformationSchema();
 		bool IfExistsTable(string tableName);
 		bool IfExistsColumn(string tableName, string columnName);
 		int ExecuteSQL(string SqlQuery);
 
+		#endregion
 
 		string Test();
 	}

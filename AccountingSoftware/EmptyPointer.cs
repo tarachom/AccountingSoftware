@@ -31,13 +31,23 @@ namespace AccountingSoftware
 	/// </summary>
 	public class EmptyPointer
 	{
+		/// <summary>
+		/// Пустий вказівник
+		/// </summary>
 		public EmptyPointer()
 		{
 			UnigueID = new UnigueID(Guid.Empty);
 		}
 
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
 		public UnigueID UnigueID { get; private set; }
 
+		/// <summary>
+		/// UnigueID.UGuid.ToString()
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return UnigueID.UGuid.ToString();

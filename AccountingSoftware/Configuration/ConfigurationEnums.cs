@@ -21,7 +21,6 @@ limitations under the License.
 Сайт:     find.org.ua
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware

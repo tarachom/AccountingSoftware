@@ -27,8 +27,15 @@ using System.Text;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Конструктор SELECT запиту
+	/// </summary>
 	public class Query
 	{
+		/// <summary>
+		/// Конструктор SELECT запиту
+		/// </summary>
+		/// <param name="table">Таблиця</param>
 		public Query(string table)
 		{
 			Field = new List<string>();
@@ -85,37 +92,36 @@ namespace AccountingSoftware
 		/// </summary>
 		public int Offset { get; set; }
 
+		/// <summary>
+		/// Збирає запит
+		/// </summary>
+		/// <returns>Повертає запит</returns>
 		public string Construct()
 		{
-			StringBuilder sb = new StringBuilder();
+			string query = "";
 
-			if (CreateTempTable == true) 
+			if (CreateTempTable == true)
 			{
 				TempTable = "tmp_" + Guid.NewGuid().ToString().Replace("-", "");
-				sb.AppendLine("CREATE TEMP TABLE " + TempTable /*+ " ON COMMIT DROP"*/);
-				sb.AppendLine("AS ");
+				query = "CREATE TEMP TABLE " + TempTable + " AS \n";
 			}
 
-			sb.Append("SELECT uid ");
+			query += "SELECT uid";
 
 			if (Field.Count > 0)
 			{
 				foreach (string field in Field)
-				{
-					sb.Append(", " + field);
-				}
+					query += ", " + field;
 			}
 
-			sb.AppendLine("");
-			sb.Append("FROM " + Table + " ");
+			query += "\nFROM " + Table;
 
 			if (Where.Count > 0)
 			{
 				int count = 0;
 				int lenght = Where.Count;
 
-				sb.AppendLine("");
-				sb.Append("WHERE ");
+				query += "\nWHERE ";
 
 				foreach (Where field in Where)
 				{
@@ -124,62 +130,54 @@ namespace AccountingSoftware
 					if (count > 1)
 					{
 						if (field.ComparisonPreceding != Comparison.Empty)
-							sb.Append(field.ComparisonPreceding + " ");
+							query += " " + field.ComparisonPreceding;
 					}
 
-					sb.Append(field.Name);
+					query += " " + field.Name;
 
 					switch (field.Comparison)
 					{
 						case Comparison.EQ:
 							{
-								if (field.UsingSQLToValue)
-								    sb.Append(" = " + field.Value + " ");
-								else
-									sb.Append(" = @" + field.Name + " ");
+								query += " = " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								break;
 							}
-							break;
 
 						case Comparison.IN:
+						case Comparison.NOT_IN:
 							{
-								if (field.UsingSQLToValue)
-									sb.Append(" IN (" + field.Value + ") ");
-								else
-									sb.Append(" IN (@" + field.Name + ") ");
+								query += (field.Comparison == Comparison.NOT_IN ? " NOT" : "") + 
+									" IN (" + (field.UsingSQLToValue ? field.Value : "@" + field.Name) + ")";
+								break;
 							}
-							break;
 
 						case Comparison.NOT:
 							{
-								if (field.UsingSQLToValue)
-									sb.Append(" != " + field.Value + " ");
-								else
-									sb.Append(" != @" + field.Name + " ");
+								query += " != " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								break;
 							}
-							break;
 
 						case Comparison.ISNULL:
 						case Comparison.NOTNULL:
 							{
 								if (field.UsingSQLToValue)
-									sb.Append(" " + field.Comparison + " ");
+									query += " " + field.Comparison;
+								else
+									query += " /* For ISNULL and NOTNULL set UsingSQLToValue = true */ ";
+								break;
 							}
-							break;
 
 						default:
 							{
-								if (field.UsingSQLToValue)
-									sb.Append(" " + field.Comparison + " " + field.Value + " ");
-								else
-									sb.Append(" " + field.Comparison + "  @" + field.Name + " ");
+								query += " " + field.Comparison + " " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								break;
 							}
-							break;
 					}
 
 					if (count < lenght)
 					{
 						if (field.ComparisonNext != Comparison.Empty)
-							sb.Append(field.ComparisonNext + " ");
+							query += " " + field.ComparisonNext;
 					}
 				}
 			}
@@ -187,39 +185,38 @@ namespace AccountingSoftware
 			if (Order.Count > 0)
 			{
 				int count = 0;
-
-				sb.AppendLine();
-				sb.Append("ORDER BY ");
+				query += "\nORDER BY ";
 
 				foreach (KeyValuePair<string, SelectOrder> field in Order)
 				{
-					if (count > 0)
-						sb.Append(", ");
-
-					sb.Append(field.Key + " " + field.Value + " ");
-
+					query += (count > 0 ? ", " : "") + field.Key + " " + field.Value;
 					count++;
 				}
 			}
 
 			if (Limit > 0)
-			{
-				sb.AppendLine();
-				sb.Append("LIMIT " + Limit.ToString() + " ");
-			}
+				query += "\nLIMIT " + Limit.ToString();
 
 			if (Offset > 0)
-			{
-				sb.AppendLine();
-				sb.Append("OFFSET " + Offset.ToString() + " ");
-			}
+				query += "\nOFFSET " + Offset.ToString();
 
-			return sb.ToString();
+			return query;
 		}
 	}
 
+	/// <summary>
+	/// Умови відбору
+	/// </summary>
 	public class Where
 	{
+		/// <summary>
+		/// Умова відбору
+		/// </summary>
+		/// <param name="name">Назва поля</param>
+		/// <param name="comparison">Тип порівняння</param>
+		/// <param name="value">Значення поля</param>
+		/// <param name="usingSQLToValue">Використання запиту SQL в якості значення поля</param>
+		/// <param name="comparisonNext">Звязок між блоками відборів</param>
 		public Where(string name, Comparison comparison, object value, bool usingSQLToValue = false, Comparison comparisonNext = Comparison.Empty)
 		{
 			ComparisonPreceding = Comparison.Empty;
@@ -230,6 +227,14 @@ namespace AccountingSoftware
 			ComparisonNext = comparisonNext;
 		}
 
+		/// <summary>
+		/// Умова відбору
+		/// </summary>
+		/// <param name="comparisonPreceding">Звязок між блоками відборів</param>
+		/// <param name="name">Назва поля</param>
+		/// <param name="comparison">Тип порівняння</param>
+		/// <param name="value">Значення поля</param>
+		/// <param name="usingSQLToValue">Використання запиту SQL в якості значення поля</param>
 		public Where(Comparison comparisonPreceding, string name, Comparison comparison, object value, bool usingSQLToValue = false)
 		{
 			ComparisonPreceding = comparisonPreceding;
@@ -240,24 +245,61 @@ namespace AccountingSoftware
 			ComparisonNext = Comparison.Empty;
 		}
 
+		/// <summary>
+		/// Назва поля
+		/// </summary>
 		public string Name { get; set; }
 
+		/// <summary>
+		/// Значення поля
+		/// </summary>
 		public object Value { get; set; }
 
+		/// <summary>
+		/// Тип порівняння
+		/// </summary>
 		public Comparison Comparison { get; set; }
 
+		/// <summary>
+		/// Звязок між блоками відборів
+		/// </summary>
 		public Comparison ComparisonPreceding { get; set; }
 
+		/// <summary>
+		/// Звязок між блоками відборів
+		/// </summary>
 		public Comparison ComparisonNext { get; set; }
 
+		/// <summary>
+		/// Використання запиту SQL в якості значення поля
+		/// </summary>
 		public bool UsingSQLToValue { get; set; }
 	}
 
+	/// <summary>
+	/// Тип порівняння
+	/// </summary>
 	public enum Comparison
 	{
+		/// <summary>
+		/// И
+		/// </summary>
 		AND,
+
+		/// <summary>
+		/// ИЛИ
+		/// </summary>
 		OR,
+
+		/// <summary>
+		/// НЕ
+		/// </summary>
 		NOT,
+
+		/// <summary>
+		/// НЕ В Списку
+		/// </summary>
+		NOT_IN,
 
 		/// <summary>
 		/// В списку
@@ -267,7 +309,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// =
 		/// </summary>
-		EQ, 
+		EQ,
 
 		/// <summary>
 		/// &lt;
@@ -279,7 +321,14 @@ namespace AccountingSoftware
 		/// </summary>
 		QT,
 
+		/// <summary>
+		/// Тільки для UsingSQLToValue = true
+		/// </summary>
 		ISNULL,
+
+		/// <summary>
+		/// Тільки для UsingSQLToValue = true
+		/// </summary>
 		NOTNULL,
 
 		/// <summary>
@@ -288,6 +337,9 @@ namespace AccountingSoftware
 		Empty
 	}
 
+	/// <summary>
+	/// Сортування
+	/// </summary>
 	public enum SelectOrder
 	{
 		ASC,

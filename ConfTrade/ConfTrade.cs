@@ -65,8 +65,12 @@ namespace ConfTrade
 
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
-			Conf.Config.InitAllConstants();
 
+			//Conf.Константи.Основний.a1_Історія_TablePart a1_Історія = new Константи.Основний.a1_Історія_TablePart();
+			//a1_Історія.Records.Add(new Константи.Основний.a1_Історія_TablePart.Історія_Record(DateTime.Now, "text"));
+			//a1_Історія.Save(false);
+
+			//Console.ReadLine();
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
 			threadWebServer.Start();

@@ -21,7 +21,6 @@ limitations under the License.
 Сайт:     find.org.ua
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware
@@ -31,6 +30,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationConstantsBlock
 	{
+		/// <summary>
+		/// Блок констант
+		/// </summary>
 		public ConfigurationConstantsBlock()
 		{
 			Constants = new Dictionary<string, ConfigurationConstants>();

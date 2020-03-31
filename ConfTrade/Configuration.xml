@@ -4,8 +4,136 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>27.03.2020 16:05:53</DateTimeSave>
-  <ConstantsBlocks />
+  <DateTimeSave>31.03.2020 09:46:02</DateTimeSave>
+  <ConstantsBlocks>
+    <ConstantsBlock>
+      <Name>Основний</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>a1</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+          <TabularParts>
+            <TablePart>
+              <Name>Історія</Name>
+              <Table>tab_a02</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Дата</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>datetime</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Значення</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
+        </Constant>
+        <Constant>
+          <Name>a2</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>integer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a3</Name>
+          <NameInTable>col_a4</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>numeric</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a4</Name>
+          <NameInTable>col_a5</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>boolean</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a5</Name>
+          <NameInTable>col_a6</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>date</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a6</Name>
+          <NameInTable>col_a7</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>datetime</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a7</Name>
+          <NameInTable>col_a8</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>time</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a8</Name>
+          <NameInTable>col_a9</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>enum</Type>
+          <Pointer>Перелічення.Test</Pointer>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a9</Name>
+          <NameInTable>col_b1</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>empty_pointer</Type>
+          <TabularParts />
+        </Constant>
+        <Constant>
+          <Name>a10</Name>
+          <NameInTable>col_b2</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string[]</Type>
+          <TabularParts />
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>Другий</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>ОсновнаФірма</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>pointer</Type>
+          <Pointer>Довідники.Організації</Pointer>
+          <TabularParts />
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+  </ConstantsBlocks>
   <Directories>
     <Directory>
       <Name>Номенклатура</Name>

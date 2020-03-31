@@ -76,7 +76,7 @@
               <td>
                 <xsl:if test="normalize-space(Валюта) != ''">
                   <xsl:call-template name="GetNameOd">
-                    <xsl:with-param name="list" select="/root/Довідники.Валюти_Список" />
+                    <xsl:with-param name="list" select="/root/Довідник_Валюти_Список" />
                     <xsl:with-param name="uid" select="Валюта" />
                   </xsl:call-template>
                 </xsl:if>

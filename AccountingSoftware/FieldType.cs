@@ -26,23 +26,45 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Типи даних полів
+	/// </summary>
 	public class FieldType
 	{
+		/// <summary>
+		/// Типи даних полів
+		/// </summary>
+		/// <param name="confTypeName">Тип даних в конфігурації</param>
+		/// <param name="viewTypeName">Представлення типу даних в списку</param>
 		public FieldType(string confTypeName, string viewTypeName)
 		{
 			ConfTypeName = confTypeName;
 			ViewTypeName = viewTypeName;
 		}
 
+		/// <summary>
+		/// Тип даних в конфігурації
+		/// </summary>
 		public string ConfTypeName { get; set; }
 
+		/// <summary>
+		/// Представлення типу даних в списку
+		/// </summary>
 		public string ViewTypeName { get; set; }
 
+		/// <summary>
+		/// ViewTypeName
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return ViewTypeName;
 		}
 
+		/// <summary>
+		/// Функція повертає повний список типів даних які використовується в конфігурації
+		/// </summary>
+		/// <returns>Список типів даних</returns>
 		public static List<FieldType> DefaultList()
 		{
 			List<FieldType> fieldTypes = new List<FieldType>();

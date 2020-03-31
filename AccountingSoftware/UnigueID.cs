@@ -25,6 +25,9 @@ using System;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Унікальний ідентифікатор
+	/// </summary>
 	public class UnigueID
 	{
 		/// <summary>
@@ -40,6 +43,11 @@ namespace AccountingSoftware
 			Table = table;
 		}
 
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
+		/// <param name="uGuid">Унікальний ідентифікатор як object</param>
+		/// <param name="table">Таблиця задається у випадку составного типу</param>
 		public UnigueID(object uGuid, string table = "")
 		{
 			if (uGuid != null && uGuid != DBNull.Value)
@@ -65,10 +73,20 @@ namespace AccountingSoftware
 			Table = table;
 		}
 
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
 		public Guid UGuid { get; private set; }
 
+		/// <summary>
+		/// Таблиця задається у випадку составного типу
+		/// </summary>
 		public string Table { get; private set; }
 
+		/// <summary>
+		/// Повертає Унікальний ідентифікатор у формі тексту
+		/// </summary>
+		/// <returns></returns>
 		public override string ToString()
 		{
 			return UGuid.ToString();

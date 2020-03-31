@@ -21,7 +21,6 @@ limitations under the License.
 Сайт:     find.org.ua
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware
@@ -31,6 +30,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationInformationSchema
 	{
+		/// <summary>
+		/// Структура таблиць і стовбців бази даних
+		/// </summary>
 		public ConfigurationInformationSchema()
 		{
 			Tables = new Dictionary<string, ConfigurationInformationSchema_Table>();
@@ -51,9 +53,7 @@ namespace AccountingSoftware
 		public void Append(string table, string column, string dataType, string udtName)
 		{
 			if (!Tables.ContainsKey(table))
-			{
 				Tables.Add(table, new ConfigurationInformationSchema_Table(table));
-			}
 
 			Tables[table].Columns.Add(column, new ConfigurationInformationSchema_Column(column, dataType, udtName));
 		}

@@ -39,7 +39,7 @@ namespace ConfTrade
 					{
 						Довідники.Валюти_Список_View m_1 = new Довідники.Валюти_Список_View();
 						m_1.QuerySelect.Order.Add(m_1.Alias["Код"], SelectOrder.ASC);
-						//m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
+						m_1.QuerySelect.Order.Add(m_1.Alias["Назва"], SelectOrder.ASC);
 
 						XmlData += m_1.Read();
 						break;

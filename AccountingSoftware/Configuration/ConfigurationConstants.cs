@@ -21,7 +21,6 @@ limitations under the License.
 Сайт:     find.org.ua
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware
@@ -31,11 +30,23 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationConstants
 	{
+		/// <summary>
+		/// Константа
+		/// </summary>
 		public ConfigurationConstants()
 		{
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 		}
 
+		/// <summary>
+		/// Константа
+		/// </summary>
+		/// <param name="name">Назва</param>
+		/// <param name="nameInTable">Назва в таблиці</param>
+		/// <param name="type">Тип даних</param>
+		/// <param name="block">Блок</param>
+		/// <param name="pointer">Вказівник</param>
+		/// <param name="desc">Опис</param>
 		public ConfigurationConstants(string name, string nameInTable, string type, ConfigurationConstantsBlock block, string pointer = "", string desc = "") : this()
 		{
 			Name = name;
@@ -46,6 +57,9 @@ namespace AccountingSoftware
 			Desc = desc;
 		}
 
+		/// <summary>
+		/// Блок
+		/// </summary>
 		public ConfigurationConstantsBlock Block { get; set; }
 
 		/// <summary>

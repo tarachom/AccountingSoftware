@@ -31,6 +31,12 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class ConstantsTablePart
 	{
+		/// <summary>
+		/// Константа Таблична частина
+		/// </summary>
+		/// <param name="kernel">Ядро</param>
+		/// <param name="table">Таблиця</param>
+		/// <param name="fieldsArray">Масив полів</param>
 		public ConstantsTablePart(Kernel kernel, string table, string[] fieldsArray)
 		{
 			Kernel = kernel;
@@ -40,19 +46,37 @@ namespace AccountingSoftware
 			FieldValueList = new List<Dictionary<string, object>>();
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Масив полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Масив полів та значеннь
+		/// </summary>
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		/// <summary>
+		/// Очистити вн. масив
+		/// </summary>
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
 		}
 
+		/// <summary>
+		/// Прочитати значення у вн. масив
+		/// </summary>
 		protected void BaseRead()
 		{
 			BaseClear();
@@ -74,14 +98,22 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
+		/// <summary>
+		/// Очистити табличну частину
+		/// </summary>
 		protected void BaseDelete()
 		{
 			Kernel.DataBase.DeleteConstantsTablePartRecords(Table);
 		}
 
+		/// <summary>
+		/// Записати значення в базу
+		/// </summary>
+		/// <param name="UID"></param>
+		/// <param name="fieldValue"></param>
 		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
-			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);
 			Kernel.DataBase.InsertConstantsTablePartRecords(recordUnigueID, Table, FieldArray, fieldValue);
 		}
 	}

@@ -84,7 +84,7 @@ namespace AccountingSoftware
 
 		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
-			Guid recordUnigueID = (UID == null ? Guid.NewGuid() : UID);
+			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);
 			Kernel.DataBase.InsertRegisterAccumulationRecords(recordUnigueID, Table, FieldArray, fieldValue);
 		}
 	}

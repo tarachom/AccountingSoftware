@@ -21,7 +21,6 @@ limitations under the License.
 Сайт:     find.org.ua
 */
 
-using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware
@@ -31,6 +30,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public class ConfigurationRegistersAccumulation : ConfigurationObject
 	{
+		/// <summary>
+		/// Регістри накопичення
+		/// </summary>
 		public ConfigurationRegistersAccumulation()
 		{
 			DimensionFields = new Dictionary<string, ConfigurationObjectField>();
@@ -48,11 +50,13 @@ namespace AccountingSoftware
 		{
 			Name = name;
 			Table = table;
-			Desc = desc;
-
 			TypeRegistersAccumulation = type;
+			Desc = desc;
 		}
 
+		/// <summary>
+		/// Тип регістру
+		/// </summary>
 		public TypeRegistersAccumulation TypeRegistersAccumulation { get; set; }
 
 		/// <summary>
@@ -70,6 +74,8 @@ namespace AccountingSoftware
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> PropertyFields { get; }
 
+		#region Append
+
 		public void AppendDimensionField(ConfigurationObjectField field)
 		{
 			DimensionFields.Add(field.Name, field);
@@ -84,8 +90,13 @@ namespace AccountingSoftware
 		{
 			PropertyFields.Add(field.Name, field);
 		}
+
+		#endregion
 	}
 
+	/// <summary>
+	/// Тип регістру
+	/// </summary>
 	public enum TypeRegistersAccumulation
 	{
 		/// <summary>
@@ -94,7 +105,7 @@ namespace AccountingSoftware
 		Residues = 1,
 
 		/// <summary>
-		/// Оборот
+		/// Обороти
 		/// </summary>
 		Turnover = 2
 	}

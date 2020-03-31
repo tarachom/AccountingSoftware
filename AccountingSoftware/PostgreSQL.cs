@@ -140,10 +140,28 @@ namespace AccountingSoftware
 			if (reader.Read())
 			{
 				foreach (string field in fieldArray)
-				{
 					fieldValue.Add(field, reader[field]);
-				}
 
+				isSelect = true;
+			}
+			reader.Close();
+
+			return isSelect;
+		}
+
+		public bool SelectConstants(string table, string field, Dictionary<string, object> fieldValue)
+		{
+			string query = "SELECT " + field + " FROM " + table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Empty));
+
+			bool isSelect = false;
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				fieldValue.Add(field, reader[field]);
 				isSelect = true;
 			}
 			reader.Close();
@@ -168,9 +186,7 @@ namespace AccountingSoftware
 			string query = "SELECT uid";
 
 			foreach (string field in fieldArray)
-			{
 				query += ", " + field;
-			}
 
 			query += " FROM " + table;
 			//Console.WriteLine(query);
@@ -186,9 +202,7 @@ namespace AccountingSoftware
 				fieldValue.Add("uid", reader["uid"]);
 
 				foreach (string field in fieldArray)
-				{
 					fieldValue.Add(field, reader[field]);
-				}
 			}
 			reader.Close();
 		}
@@ -417,9 +431,7 @@ namespace AccountingSoftware
 				fieldValue.Add("uid", reader["uid"]);
 
 				foreach (string field in fieldArray)
-				{
 					fieldValue.Add(field, reader[field]);
-				}
 			}
 			reader.Close();
 		}
@@ -444,9 +456,7 @@ namespace AccountingSoftware
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
 
 			nCommand.ExecuteNonQuery();
 		}

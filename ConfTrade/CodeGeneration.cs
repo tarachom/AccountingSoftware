@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 27.03.2020 16:05:53
+ * Дата конфігурації: 31.03.2020 09:46:02
  *
  */
 
@@ -41,27 +41,294 @@ namespace ConfTrade_v1_1
     {
         public static Kernel Kernel { get; set; }
         
-        public static bool StartInit { get; set; }
-        
-        public static void InitAllConstants()
-        {
-            
-            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
-            bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 new string[] {  }, fieldValue);
-            
-            if (IsSelect)
-            {
-                StartInit = true;
-                
-                StartInit = false;
-            }
-        }
     }
 }
 
 namespace ConfTrade_v1_1.Константи
 {
+    
+    static class Основний
+    {
+        public static void ReadAll()
+        {
+            
+            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+            bool IsSelect = Config.Kernel.DataBase.SelectAllConstants("tab_constants",
+                 new string[] { "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7", "col_a8", "col_a9", "col_b1", "col_b2" }, fieldValue);
+            
+            if (IsSelect)
+            {
+                m_a1_Const = fieldValue["col_a2"].ToString();
+                m_a2_Const = (fieldValue["col_a3"] != DBNull.Value) ? (int)fieldValue["col_a3"] : 0;
+                m_a3_Const = (fieldValue["col_a4"] != DBNull.Value) ? (decimal)fieldValue["col_a4"] : 0;
+                m_a4_Const = (fieldValue["col_a5"] != DBNull.Value) ? bool.Parse(fieldValue["col_a5"].ToString()) : false;
+                m_a5_Const = (fieldValue["col_a6"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a6"].ToString()) : DateTime.MinValue;
+                m_a6_Const = (fieldValue["col_a7"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a7"].ToString()) : DateTime.MinValue;
+                m_a7_Const = (fieldValue["col_a8"] != DBNull.Value) ? TimeSpan.Parse(fieldValue["col_a8"].ToString()) : DateTime.MinValue.TimeOfDay;
+                m_a8_Const = (fieldValue["col_a9"] != DBNull.Value) ? (Перелічення.Test)fieldValue["col_a9"] : 0;
+                m_a9_Const = new EmptyPointer();
+                m_a10_Const = (fieldValue["col_b2"] != DBNull.Value) ? (string[])fieldValue["col_b2"] : new string[] { };
+                
+            }
+        }
+        
+        
+        public static string m_a1_Const = "";
+        public static string a1_Const
+        {
+            get
+            {
+                return m_a1_Const;
+            }
+            set
+            {
+                m_a1_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a2", m_a1_Const);
+            }
+        }
+        
+        public static int m_a2_Const = 0;
+        public static int a2_Const
+        {
+            get
+            {
+                return m_a2_Const;
+            }
+            set
+            {
+                m_a2_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a3", m_a2_Const);
+            }
+        }
+        
+        public static decimal m_a3_Const = 0;
+        public static decimal a3_Const
+        {
+            get
+            {
+                return m_a3_Const;
+            }
+            set
+            {
+                m_a3_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a4", m_a3_Const);
+            }
+        }
+        
+        public static bool m_a4_Const = false;
+        public static bool a4_Const
+        {
+            get
+            {
+                return m_a4_Const;
+            }
+            set
+            {
+                m_a4_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a5", m_a4_Const);
+            }
+        }
+        
+        public static DateTime m_a5_Const = DateTime.MinValue;
+        public static DateTime a5_Const
+        {
+            get
+            {
+                return m_a5_Const;
+            }
+            set
+            {
+                m_a5_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a6", m_a5_Const);
+            }
+        }
+        
+        public static DateTime m_a6_Const = DateTime.MinValue;
+        public static DateTime a6_Const
+        {
+            get
+            {
+                return m_a6_Const;
+            }
+            set
+            {
+                m_a6_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a7", m_a6_Const);
+            }
+        }
+        
+        public static TimeSpan m_a7_Const = DateTime.MinValue.TimeOfDay;
+        public static TimeSpan a7_Const
+        {
+            get
+            {
+                return m_a7_Const;
+            }
+            set
+            {
+                m_a7_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a8", m_a7_Const);
+            }
+        }
+        
+        public static Перелічення.Test m_a8_Const = 0;
+        public static Перелічення.Test a8_Const
+        {
+            get
+            {
+                return m_a8_Const;
+            }
+            set
+            {
+                m_a8_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a9", (int)m_a8_Const);
+            }
+        }
+        
+        public static EmptyPointer m_a9_Const = new EmptyPointer();
+        public static EmptyPointer a9_Const
+        {
+            get
+            {
+                return m_a9_Const;
+            }
+            set
+            {
+                m_a9_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b1", m_a9_Const.UnigueID.UGuid);
+            }
+        }
+        
+        public static string[] m_a10_Const = new string[] { };
+        public static string[] a10_Const
+        {
+            get
+            {
+                return m_a10_Const;
+            }
+            set
+            {
+                m_a10_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b2", m_a10_Const);
+            }
+        }
+        
+        public class a1_Історія_TablePart : ConstantsTablePart
+        {
+            public a1_Історія_TablePart() : base(Config.Kernel, "tab_a02",
+                 new string[] { "col_a1", "col_a2" }) 
+            {
+                Records = new List<Історія_Record>();
+            }
+                
+            public List<Історія_Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Історія_Record record = new Історія_Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.Дата = (fieldValue["col_a1"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a1"].ToString()) : DateTime.MinValue;
+                    record.Значення = fieldValue["col_a2"].ToString();
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (Історія_Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a1", record.Дата);
+                        fieldValue.Add("col_a2", record.Значення);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class Історія_Record : ConstantsTablePartRecord
+            {
+                public Історія_Record()
+                {
+                    Дата = DateTime.MinValue;
+                    Значення = "";
+                    
+                }
+        
+                
+                public Історія_Record(
+                    DateTime?  _Дата = null, string _Значення = "")
+                {
+                    Дата = _Дата ?? DateTime.MinValue;
+                    Значення = _Значення;
+                    
+                }
+                public DateTime Дата { get; set; }
+                public string Значення { get; set; }
+                
+            }            
+        }
+               
+    }
+    
+    static class Другий
+    {
+        public static void ReadAll()
+        {
+            
+            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+            bool IsSelect = Config.Kernel.DataBase.SelectAllConstants("tab_constants",
+                 new string[] { "col_a1" }, fieldValue);
+            
+            if (IsSelect)
+            {
+                m_ОсновнаФірма_Const = new Довідники.Організації_Pointer(fieldValue["col_a1"]);
+                
+            }
+        }
+        
+        
+        public static Довідники.Організації_Pointer m_ОсновнаФірма_Const = new Довідники.Організації_Pointer();
+        public static Довідники.Організації_Pointer ОсновнаФірма_Const
+        {
+            get
+            {
+                return m_ОсновнаФірма_Const;
+            }
+            set
+            {
+                m_ОсновнаФірма_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_a1", m_ОсновнаФірма_Const.UnigueID.UGuid);
+            }
+        }
+             
+    }
     
 }
 
@@ -928,12 +1195,7 @@ namespace ConfTrade_v1_1.Довідники
         public Контрагенти_Групи_Objest Owner { get; private set; }
         
         public List<Record> Records { get; set; }
-
-        //public string RecordsToXml()
-        //{
-
-        //}
-
+        
         public void Read()
         {
             Records.Clear();

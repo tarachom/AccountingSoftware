@@ -296,7 +296,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     static class Config
     {
         public static Kernel Kernel { get; set; }
-        
+        <!--
         public static bool StartInit { get; set; }
         
         public static void InitAllConstants()
@@ -322,9 +322,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                     <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
                   </xsl:call-template>;
                 </xsl:for-each>
-                StartInit = false;
+                StartInit = false; 
             }
-        }
+        }-->
     }
 }
 
@@ -333,33 +333,62 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
     static class <xsl:value-of select="Name"/>
     {
+        public static void ReadAll()
+        {
+            <xsl:variable name="Constants" select="Constants/Constant" />
+            Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+            bool IsSelect = Config.Kernel.DataBase.SelectAllConstants("tab_constants",
+                 <xsl:text>new string[] { </xsl:text>
+                 <xsl:for-each select="$Constants">
+                   <xsl:if test="position() != 1">
+                     <xsl:text>, </xsl:text>
+                   </xsl:if>
+                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                 </xsl:for-each> }, fieldValue);
+            
+            if (IsSelect)
+            {
+                <xsl:for-each select="$Constants">
+                  <xsl:text>m_</xsl:text>
+                  <xsl:value-of select="Name"/>
+                  <xsl:text>_Const = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+            }
+        }
+        
         <xsl:for-each select="Constants/Constant">
-        <xsl:text>private static </xsl:text>
-        <xsl:call-template name="FieldType" />
-        <xsl:text> _</xsl:text>
-        <xsl:value-of select="Name"/>_Const;
+        public static <xsl:call-template name="FieldType" />
+        <xsl:text> m_</xsl:text>
+        <xsl:value-of select="Name"/>
+        <xsl:text>_Const = </xsl:text>
+        <xsl:call-template name="DefaultFieldValue" />;
         <xsl:text>public static </xsl:text>
         <xsl:call-template name="FieldType" />
         <xsl:text> </xsl:text>
         <xsl:value-of select="Name"/>_Const
         {
-            get { return _<xsl:value-of select="Name"/>_Const; }
+            get
+            {
+                return m_<xsl:value-of select="Name"/>_Const;
+            }
             set
             {
-                _<xsl:value-of select="Name"/>_Const = value;
-                if (!Config.StartInit)
-                    Config.Kernel.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-                    <xsl:if test="Type = 'enum'">
-                        <xsl:text>(int)</xsl:text>      
-                    </xsl:if>
-                    <xsl:text>_</xsl:text>
-                    <xsl:value-of select="Name"/>
-                    <xsl:text>_Const</xsl:text>
-                    <xsl:choose>
-                      <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
-                      </xsl:when>
-                    </xsl:choose>);
+                m_<xsl:value-of select="Name"/>_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "<xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                <xsl:if test="Type = 'enum'">
+                    <xsl:text>(int)</xsl:text>      
+                </xsl:if>
+                <xsl:text>m_</xsl:text>
+                <xsl:value-of select="Name"/>
+                <xsl:text>_Const</xsl:text>
+                <xsl:choose>
+                  <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:text>.UnigueID.UGuid</xsl:text>
+                  </xsl:when>
+                </xsl:choose>);
             }
         }
         </xsl:for-each>

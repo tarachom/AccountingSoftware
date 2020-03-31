@@ -78,6 +78,7 @@ namespace ConfTrade
 
 						Довідники.Контрагенти_Групи_Список_View m_parent = new Довідники.Контрагенти_Групи_Список_View();
 						m_parent.QuerySelect.Where.Add(new Where(m_parent.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
+						m_parent.QuerySelect.Where.Add(new Where(Comparison.AND, m_parent.Alias["Група"], Comparison.EQ, контрагенти_Групи_Pointer.GetPointer(), false));
 						XmlData += m_parent.Read();
 
 						Довідники.Контрагенти_Список_View m_1 = new Довідники.Контрагенти_Список_View();
