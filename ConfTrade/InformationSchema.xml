@@ -18,6 +18,11 @@
       <UdtName>uuid</UdtName>
     </Column>
     <Column>
+      <Name>col_b3</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
       <Name>col_a9</Name>
       <DataType>integer</DataType>
       <UdtName>int4</UdtName>
@@ -61,6 +66,34 @@
       <Name>col_b1</Name>
       <DataType>uuid</DataType>
       <UdtName>uuid</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a05</Name>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a5</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>timestamp without time zone</DataType>
+      <UdtName>timestamp</UdtName>
     </Column>
   </Table>
   <Table>

@@ -66,11 +66,28 @@ namespace ConfTrade
 			Conf.Config.Kernel = new Kernel();
 			Conf.Config.Kernel.Open();
 
+			Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart ЗвітиКористувачів =
+				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart();
+
+			ЗвітиКористувачів.Records.Add(
+				new Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record(
+					DateTime.Now, "Report", "", null, false));
+
+			ЗвітиКористувачів.Save(false);
+
+			ЗвітиКористувачів.Read();
+			foreach (Константи.РегламентніЗавдання.ФормуванняЗвітів_ЗвітиКористувачів_TablePart.Record record in ЗвітиКористувачів.Records)
+			{
+				record.Виконано = true;
+				Console.WriteLine(record.UID + "|" + record.Дата + "|" + record.Звіт);
+			}
+			//ЗвітиКористувачів.Save(true);
+
 			//Conf.Константи.Основний.a1_Історія_TablePart a1_Історія = new Константи.Основний.a1_Історія_TablePart();
 			//a1_Історія.Records.Add(new Константи.Основний.a1_Історія_TablePart.Історія_Record(DateTime.Now, "text"));
 			//a1_Історія.Save(false);
 
-			//Console.ReadLine();
+			Console.ReadLine();
 
 			Thread threadWebServer = new Thread(new ThreadStart(WebServer));
 			threadWebServer.Start();

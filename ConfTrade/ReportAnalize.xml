@@ -1,2 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<root />
+<root>
+  <info>Додати колонку Виконано (col_a1, тип boolean)  в таблицю ЗвітиКористувачів (tab_a05)</info>
+  <sql>ALTER TABLE tab_a05 ADD COLUMN "col_a1" boolean;</sql>
+</root>

@@ -126,6 +126,17 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>ФормуванняЗвітів</Name>
+      <NameInTable>col_b3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
     <Control_TabularParts>
       <Name>Історія</Name>
       <Table>tab_a02</Table>
@@ -152,6 +163,67 @@
           <UdtName>text</UdtName>
           <Coincide>yes</Coincide>
         </Type>
+      </Control_Field>
+    </Control_TabularParts>
+    <Control_TabularParts>
+      <Name>ЗвітиКористувачів</Name>
+      <Table>tab_a05</Table>
+      <IsCreateOwner>no</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>Дата</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>datetime</ConfType>
+          <DataType>timestamp without time zone</DataType>
+          <UdtName>timestamp</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Звіт</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>БлокДаних</Name>
+        <NameInTable>col_a4</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Користувач</Name>
+        <NameInTable>col_a5</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>pointer</ConfType>
+          <DataType>uuid</DataType>
+          <UdtName>uuid</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Виконано</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>no</IsExist>
+        <FieldCreate>
+          <Name>Виконано</Name>
+          <NameInTable>col_a1</NameInTable>
+          <ConfType>boolean</ConfType>
+          <DataType>boolean</DataType>
+        </FieldCreate>
       </Control_Field>
     </Control_TabularParts>
   </Control_Table>

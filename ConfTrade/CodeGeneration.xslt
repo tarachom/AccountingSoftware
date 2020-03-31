@@ -360,7 +360,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         }
         
         <xsl:for-each select="Constants/Constant">
-        public static <xsl:call-template name="FieldType" />
+        static <xsl:call-template name="FieldType" />
         <xsl:text> m_</xsl:text>
         <xsl:value-of select="Name"/>
         <xsl:text>_Const = </xsl:text>
@@ -412,10 +412,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                    <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
                  </xsl:for-each> }) 
             {
-                Records = new List&lt;<xsl:value-of select="$TablePartName"/>_Record&gt;();
+                Records = new List&lt;Record&gt;();
             }
                 
-            public List&lt;<xsl:value-of select="$TablePartName"/>_Record&gt; Records { get; set; }
+            public List&lt;Record&gt; Records { get; set; }
         
             public void Read()
             {
@@ -424,7 +424,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 
                 foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
                 {
-                    <xsl:value-of select="$TablePartName"/>_Record record = new <xsl:value-of select="$TablePartName"/>_Record();
+                    Record record = new Record();
                     
                     record.UID = (Guid)fieldValue["uid"];
                     
@@ -451,7 +451,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                     if (clear_all_before_save)
                         base.BaseDelete();
 
-                    foreach (<xsl:value-of select="$TablePartName"/>_Record record in Records)
+                    foreach (Record record in Records)
                     {
                         Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
 
@@ -460,7 +460,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                           <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                           <xsl:choose>
                             <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                              <xsl:text>.ToString()</xsl:text>
+                              <xsl:text>.UnigueID.UGuid</xsl:text>
                             </xsl:when>
                           </xsl:choose>
                           <xsl:text>)</xsl:text>;
@@ -478,9 +478,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 base.BaseCommitTransaction();
             }
             
-            public class <xsl:value-of select="$TablePartName"/>_Record : ConstantsTablePartRecord
+            public class Record : ConstantsTablePartRecord
             {
-                public <xsl:value-of select="$TablePartName"/>_Record()
+                public Record()
                 {
                     <xsl:for-each select="Fields/Field">
                       <xsl:value-of select="Name"/>
@@ -490,7 +490,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 }
         
                 <xsl:if test="count(Fields/Field) > 0">
-                public <xsl:value-of select="$TablePartName"/>_Record(
+                public Record(
                     <xsl:for-each select="Fields/Field">
                       <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
                       <xsl:call-template name="FieldType" />

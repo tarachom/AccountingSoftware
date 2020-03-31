@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>31.03.2020 09:46:02</DateTimeSave>
+  <DateTimeSave>31.03.2020 10:18:56</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основний</Name>
@@ -130,6 +130,66 @@
           <Type>pointer</Type>
           <Pointer>Довідники.Організації</Pointer>
           <TabularParts />
+        </Constant>
+      </Constants>
+    </ConstantsBlock>
+    <ConstantsBlock>
+      <Name>РегламентніЗавдання</Name>
+      <Desc>
+      </Desc>
+      <Constants>
+        <Constant>
+          <Name>ФормуванняЗвітів</Name>
+          <NameInTable>col_b3</NameInTable>
+          <Desc>
+          </Desc>
+          <Type>string</Type>
+          <TabularParts>
+            <TablePart>
+              <Name>ЗвітиКористувачів</Name>
+              <Table>tab_a05</Table>
+              <Desc>
+              </Desc>
+              <Fields>
+                <Field>
+                  <Name>Дата</Name>
+                  <NameInTable>col_a2</NameInTable>
+                  <Type>datetime</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Звіт</Name>
+                  <NameInTable>col_a3</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>БлокДаних</Name>
+                  <NameInTable>col_a4</NameInTable>
+                  <Type>string</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Користувач</Name>
+                  <NameInTable>col_a5</NameInTable>
+                  <Type>pointer</Type>
+                  <Pointer>Довідники.Контрагенти</Pointer>
+                  <Desc>
+                  </Desc>
+                </Field>
+                <Field>
+                  <Name>Виконано</Name>
+                  <NameInTable>col_a1</NameInTable>
+                  <Type>boolean</Type>
+                  <Desc>
+                  </Desc>
+                </Field>
+              </Fields>
+            </TablePart>
+          </TabularParts>
         </Constant>
       </Constants>
     </ConstantsBlock>

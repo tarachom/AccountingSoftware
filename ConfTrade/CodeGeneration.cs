@@ -27,7 +27,7 @@ limitations under the License.
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 31.03.2020 09:46:02
+ * Дата конфігурації: 31.03.2020 10:18:56
  *
  */
 
@@ -73,7 +73,7 @@ namespace ConfTrade_v1_1.Константи
         }
         
         
-        public static string m_a1_Const = "";
+        static string m_a1_Const = "";
         public static string a1_Const
         {
             get
@@ -87,7 +87,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static int m_a2_Const = 0;
+        static int m_a2_Const = 0;
         public static int a2_Const
         {
             get
@@ -101,7 +101,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static decimal m_a3_Const = 0;
+        static decimal m_a3_Const = 0;
         public static decimal a3_Const
         {
             get
@@ -115,7 +115,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static bool m_a4_Const = false;
+        static bool m_a4_Const = false;
         public static bool a4_Const
         {
             get
@@ -129,7 +129,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static DateTime m_a5_Const = DateTime.MinValue;
+        static DateTime m_a5_Const = DateTime.MinValue;
         public static DateTime a5_Const
         {
             get
@@ -143,7 +143,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static DateTime m_a6_Const = DateTime.MinValue;
+        static DateTime m_a6_Const = DateTime.MinValue;
         public static DateTime a6_Const
         {
             get
@@ -157,7 +157,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static TimeSpan m_a7_Const = DateTime.MinValue.TimeOfDay;
+        static TimeSpan m_a7_Const = DateTime.MinValue.TimeOfDay;
         public static TimeSpan a7_Const
         {
             get
@@ -171,7 +171,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static Перелічення.Test m_a8_Const = 0;
+        static Перелічення.Test m_a8_Const = 0;
         public static Перелічення.Test a8_Const
         {
             get
@@ -185,7 +185,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static EmptyPointer m_a9_Const = new EmptyPointer();
+        static EmptyPointer m_a9_Const = new EmptyPointer();
         public static EmptyPointer a9_Const
         {
             get
@@ -199,7 +199,7 @@ namespace ConfTrade_v1_1.Константи
             }
         }
         
-        public static string[] m_a10_Const = new string[] { };
+        static string[] m_a10_Const = new string[] { };
         public static string[] a10_Const
         {
             get
@@ -218,10 +218,10 @@ namespace ConfTrade_v1_1.Константи
             public a1_Історія_TablePart() : base(Config.Kernel, "tab_a02",
                  new string[] { "col_a1", "col_a2" }) 
             {
-                Records = new List<Історія_Record>();
+                Records = new List<Record>();
             }
                 
-            public List<Історія_Record> Records { get; set; }
+            public List<Record> Records { get; set; }
         
             public void Read()
             {
@@ -230,7 +230,7 @@ namespace ConfTrade_v1_1.Константи
 
                 foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
                 {
-                    Історія_Record record = new Історія_Record();
+                    Record record = new Record();
                     
                     record.UID = (Guid)fieldValue["uid"];
                     
@@ -252,7 +252,7 @@ namespace ConfTrade_v1_1.Константи
                     if (clear_all_before_save)
                         base.BaseDelete();
 
-                    foreach (Історія_Record record in Records)
+                    foreach (Record record in Records)
                     {
                         Dictionary<string, object> fieldValue = new Dictionary<string, object>();
 
@@ -272,9 +272,9 @@ namespace ConfTrade_v1_1.Константи
                 base.BaseCommitTransaction();
             }
             
-            public class Історія_Record : ConstantsTablePartRecord
+            public class Record : ConstantsTablePartRecord
             {
-                public Історія_Record()
+                public Record()
                 {
                     Дата = DateTime.MinValue;
                     Значення = "";
@@ -282,7 +282,7 @@ namespace ConfTrade_v1_1.Константи
                 }
         
                 
-                public Історія_Record(
+                public Record(
                     DateTime?  _Дата = null, string _Значення = "")
                 {
                     Дата = _Дата ?? DateTime.MinValue;
@@ -314,7 +314,7 @@ namespace ConfTrade_v1_1.Константи
         }
         
         
-        public static Довідники.Організації_Pointer m_ОсновнаФірма_Const = new Довідники.Організації_Pointer();
+        static Довідники.Організації_Pointer m_ОсновнаФірма_Const = new Довідники.Організації_Pointer();
         public static Довідники.Організації_Pointer ОсновнаФірма_Const
         {
             get
@@ -328,6 +328,136 @@ namespace ConfTrade_v1_1.Константи
             }
         }
              
+    }
+    
+    static class РегламентніЗавдання
+    {
+        public static void ReadAll()
+        {
+            
+            Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+            bool IsSelect = Config.Kernel.DataBase.SelectAllConstants("tab_constants",
+                 new string[] { "col_b3" }, fieldValue);
+            
+            if (IsSelect)
+            {
+                m_ФормуванняЗвітів_Const = fieldValue["col_b3"].ToString();
+                
+            }
+        }
+        
+        
+        static string m_ФормуванняЗвітів_Const = "";
+        public static string ФормуванняЗвітів_Const
+        {
+            get
+            {
+                return m_ФормуванняЗвітів_Const;
+            }
+            set
+            {
+                m_ФормуванняЗвітів_Const = value;
+                Config.Kernel.DataBase.SaveConstants("tab_constants", "col_b3", m_ФормуванняЗвітів_Const);
+            }
+        }
+        
+        public class ФормуванняЗвітів_ЗвітиКористувачів_TablePart : ConstantsTablePart
+        {
+            public ФормуванняЗвітів_ЗвітиКористувачів_TablePart() : base(Config.Kernel, "tab_a05",
+                 new string[] { "col_a2", "col_a3", "col_a4", "col_a5", "col_a1" }) 
+            {
+                Records = new List<Record>();
+            }
+                
+            public List<Record> Records { get; set; }
+        
+            public void Read()
+            {
+                Records.Clear();
+                base.BaseRead();
+
+                foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+                {
+                    Record record = new Record();
+                    
+                    record.UID = (Guid)fieldValue["uid"];
+                    
+                    record.Дата = (fieldValue["col_a2"] != DBNull.Value) ? DateTime.Parse(fieldValue["col_a2"].ToString()) : DateTime.MinValue;
+                    record.Звіт = fieldValue["col_a3"].ToString();
+                    record.БлокДаних = fieldValue["col_a4"].ToString();
+                    record.Користувач = new Довідники.Контрагенти_Pointer(fieldValue["col_a5"]);
+                    record.Виконано = (fieldValue["col_a1"] != DBNull.Value) ? bool.Parse(fieldValue["col_a1"].ToString()) : false;
+                    
+                    Records.Add(record);
+                }
+            
+                base.BaseClear();
+            }
+        
+            public void Save(bool clear_all_before_save /*= true*/) 
+            {
+                if (Records.Count > 0)
+                {
+                    base.BaseBeginTransaction();
+                
+                    if (clear_all_before_save)
+                        base.BaseDelete();
+
+                    foreach (Record record in Records)
+                    {
+                        Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                        fieldValue.Add("col_a2", record.Дата);
+                        fieldValue.Add("col_a3", record.Звіт);
+                        fieldValue.Add("col_a4", record.БлокДаних);
+                        fieldValue.Add("col_a5", record.Користувач.UnigueID.UGuid);
+                        fieldValue.Add("col_a1", record.Виконано);
+                        
+                        base.BaseSave(record.UID, fieldValue);
+                    }
+                
+                    base.BaseCommitTransaction();
+                }
+            }
+        
+            public void Delete()
+            {
+                base.BaseBeginTransaction();
+                base.BaseCommitTransaction();
+            }
+            
+            public class Record : ConstantsTablePartRecord
+            {
+                public Record()
+                {
+                    Дата = DateTime.MinValue;
+                    Звіт = "";
+                    БлокДаних = "";
+                    Користувач = new Довідники.Контрагенти_Pointer();
+                    Виконано = false;
+                    
+                }
+        
+                
+                public Record(
+                    DateTime?  _Дата = null, string _Звіт = "", string _БлокДаних = "", Довідники.Контрагенти_Pointer _Користувач = null, bool _Виконано = false)
+                {
+                    Дата = _Дата ?? DateTime.MinValue;
+                    Звіт = _Звіт;
+                    БлокДаних = _БлокДаних;
+                    Користувач = _Користувач ?? new Довідники.Контрагенти_Pointer();
+                    Виконано = _Виконано;
+                    
+                }
+                public DateTime Дата { get; set; }
+                public string Звіт { get; set; }
+                public string БлокДаних { get; set; }
+                public Довідники.Контрагенти_Pointer Користувач { get; set; }
+                public bool Виконано { get; set; }
+                
+            }            
+        }
+               
     }
     
 }
