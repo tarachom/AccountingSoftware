@@ -39,7 +39,7 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
+            Довідники.Контрагенти_Групи_Список_View m_1 = new Довідники.Контрагенти_Групи_Список_View();
             
             m_1.QuerySelect.CreateTempTable = true;
             Dictionary<string, string> Alias = m_1.Alias;
@@ -50,9 +50,9 @@ namespace ConfTrade
               
             string TempTable = m_1.QuerySelect.TempTable;
               
-            Довідники.Валюти_Список_View m_6 = new Довідники.Валюти_Список_View();
-            m_6.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Валюта"] + " FROM " + TempTable, true));
-            sb.Append(m_6.Read());
+            Довідники.Контрагенти_Групи_Список_View m_3 = new Довідники.Контрагенти_Групи_Список_View();
+            m_3.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Група"] + " FROM " + TempTable, true));
+            sb.Append(m_3.Read());
             
                 
             sb.Append("</root>");

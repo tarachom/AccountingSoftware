@@ -39,22 +39,11 @@ namespace ConfTrade
             StringBuilder sb = new StringBuilder();
             sb.Append("<root>");
             
-            Довідники.Номенклатура_Список_View m_1 = new Довідники.Номенклатура_Список_View();
+            Довідники.ОдиниціВиміру_Список_View m_1 = new Довідники.ОдиниціВиміру_Список_View();
             
-            m_1.QuerySelect.CreateTempTable = true;
-            Dictionary<string, string> Alias = m_1.Alias;
-              
             sb.Append(m_1.Read());
             
             
-              
-            string TempTable = m_1.QuerySelect.TempTable;
-              
-            Довідники.Валюти_Список_View m_6 = new Довідники.Валюти_Список_View();
-            m_6.QuerySelect.Where.Add(new Where("uid", Comparison.IN, "SELECT DISTINCT " + Alias["Валюта"] + " FROM " + TempTable, true));
-            sb.Append(m_6.Read());
-            
-                
             sb.Append("</root>");
             return sb.ToString();
         }

@@ -1254,21 +1254,6 @@ namespace AccountingSoftware
 						}
 					}
 				}
-
-				/*
-				XmlElement nodeWhere = xmlConfDocument.CreateElement("Where"); // ??
-				nodeView.AppendChild(nodeWhere);
-
-				foreach (string field in view.Value.Where)
-				{
-					XmlElement nodeField = xmlConfDocument.CreateElement("Field");
-					nodeWhere.AppendChild(nodeField);
-
-					XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
-					nodeFieldNameInTable.InnerText = field;
-					nodeField.AppendChild(nodeFieldNameInTable);
-				}
-				*/
 			}
 		}
 
@@ -1600,7 +1585,7 @@ namespace AccountingSoftware
 			xsltArgumentList.AddParam("Configuration", "", сonfigurationFileName);
 			xsltArgumentList.AddParam("SecondConfiguration", "", secondConfigurationFileName);
 
-			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveXml, System.IO.FileMode.Create);
+			FileStream fileStream = new FileStream(pathToSaveXml, FileMode.Create);
 
 			xsltCodeGnerator.Transform(pathToInformationSchemaXML, xsltArgumentList, fileStream);
 
@@ -1616,7 +1601,7 @@ namespace AccountingSoftware
 			xsltArgumentList.AddParam("ReplacementColumn", "", replacementColumn);
 			xsltArgumentList.AddParam("KeyUID", "", DateTime.Now.ToString("dd_MM_yyyy_HH_mm_ss"));
 
-			System.IO.FileStream fileStream = new System.IO.FileStream(pathToSaveCode, System.IO.FileMode.Create);
+			FileStream fileStream = new FileStream(pathToSaveCode, FileMode.Create);
 
 			xsltCodeGnerator.Transform(pathToXML, xsltArgumentList, fileStream);
 

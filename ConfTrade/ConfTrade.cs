@@ -283,7 +283,8 @@ namespace ConfTrade
 					}
 
 					Function function = new Function();
-					function.GetType().GetMethod(confObjectName).Invoke(function, new object[] { response.OutputStream, commandParamsValue });
+					function.GetType().GetMethod(confObjectName).Invoke(function, new object[] { 
+						response.OutputStream, commandParamsValue });
 
 					context.Response.StatusCode = 200;
 					context.Response.StatusDescription = "ok";

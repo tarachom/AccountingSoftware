@@ -9,14 +9,13 @@
   <title>HTML</title>
   <body>
     <table border="1">
-      <xsl:for-each select="root/Довідники.Номенклатура_Список/row">
+      <xsl:for-each select="root/Довідники.Контрагенти_Список/row">
       <tr>
         <td><xsl:value-of select="Назва"/></td>
         <td><xsl:value-of select="Код"/></td>
-        <td><xsl:value-of select="Ціна"/></td>
-        <td><xsl:value-of select="Кво"/></td>
-        <td><xsl:value-of select="ДатаСтворення"/></td>
-        <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Довідники.Валюти_Список" /><xsl:with-param name="uid" select="Валюта" /></xsl:call-template></td>
+        <td><xsl:value-of select="Постачальник"/></td>
+        <td><xsl:value-of select="Покупець"/></td>
+        <td><xsl:call-template name="GetNameOd"><xsl:with-param name="list" select="/root/Довідники.Контрагенти_Групи_Список" /><xsl:with-param name="uid" select="Група" /></xsl:call-template></td>
       </tr>
       </xsl:for-each>
       </table>

@@ -30,6 +30,8 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.listBoxFields = new System.Windows.Forms.ListBox();
+			this.contextMenuStripField = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyFiled = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel8 = new System.Windows.Forms.Panel();
 			this.listBoxViews = new System.Windows.Forms.ListBox();
@@ -38,6 +40,8 @@
 			this.label6 = new System.Windows.Forms.Label();
 			this.panel7 = new System.Windows.Forms.Panel();
 			this.listBoxTabularParts = new System.Windows.Forms.ListBox();
+			this.contextMenuStripTablePart = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyTablePart = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel6 = new System.Windows.Forms.Panel();
 			this.buttonAddTablePart = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
@@ -58,14 +62,12 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
 			this.label3 = new System.Windows.Forms.Label();
-			this.contextMenuStripField = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.copyFiled = new System.Windows.Forms.ToolStripMenuItem();
-			this.contextMenuStripTablePart = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.copyTablePart = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStripField.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.panel8.SuspendLayout();
 			this.panel3.SuspendLayout();
 			this.panel7.SuspendLayout();
+			this.contextMenuStripTablePart.SuspendLayout();
 			this.panel6.SuspendLayout();
 			this.panel5.SuspendLayout();
 			this.panel4.SuspendLayout();
@@ -74,8 +76,6 @@
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
-			this.contextMenuStripField.SuspendLayout();
-			this.contextMenuStripTablePart.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// listBoxFields
@@ -89,6 +89,20 @@
 			this.listBoxFields.TabIndex = 0;
 			this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
 			this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
+			// 
+			// contextMenuStripField
+			// 
+			this.contextMenuStripField.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyFiled});
+			this.contextMenuStripField.Name = "contextMenuStripField";
+			this.contextMenuStripField.Size = new System.Drawing.Size(133, 26);
+			// 
+			// copyFiled
+			// 
+			this.copyFiled.Name = "copyFiled";
+			this.copyFiled.Size = new System.Drawing.Size(132, 22);
+			this.copyFiled.Text = "Копіювати";
+			this.copyFiled.Click += new System.EventHandler(this.copyFiled_Click);
 			// 
 			// panel1
 			// 
@@ -172,6 +186,20 @@
 			this.listBoxTabularParts.TabIndex = 1;
 			this.listBoxTabularParts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxTabularParts_KeyDown);
 			this.listBoxTabularParts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxTabularParts_MouseDoubleClick);
+			// 
+			// contextMenuStripTablePart
+			// 
+			this.contextMenuStripTablePart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyTablePart});
+			this.contextMenuStripTablePart.Name = "contextMenuStripField";
+			this.contextMenuStripTablePart.Size = new System.Drawing.Size(133, 26);
+			// 
+			// copyTablePart
+			// 
+			this.copyTablePart.Name = "copyTablePart";
+			this.copyTablePart.Size = new System.Drawing.Size(132, 22);
+			this.copyTablePart.Text = "Копіювати";
+			this.copyTablePart.Click += new System.EventHandler(this.copyTablePart_Click);
 			// 
 			// panel6
 			// 
@@ -315,6 +343,7 @@
 			// comboBoxHierarchical
 			// 
 			this.comboBoxHierarchical.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+			this.comboBoxHierarchical.Enabled = false;
 			this.comboBoxHierarchical.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.comboBoxHierarchical.FormattingEnabled = true;
 			this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 174);
@@ -386,34 +415,6 @@
 			this.label3.TabIndex = 0;
 			this.label3.Text = "Назва:";
 			// 
-			// contextMenuStripField
-			// 
-			this.contextMenuStripField.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyFiled});
-			this.contextMenuStripField.Name = "contextMenuStripField";
-			this.contextMenuStripField.Size = new System.Drawing.Size(133, 26);
-			// 
-			// copyFiled
-			// 
-			this.copyFiled.Name = "copyFiled";
-			this.copyFiled.Size = new System.Drawing.Size(132, 22);
-			this.copyFiled.Text = "Копіювати";
-			this.copyFiled.Click += new System.EventHandler(this.copyFiled_Click);
-			// 
-			// contextMenuStripTablePart
-			// 
-			this.contextMenuStripTablePart.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.copyTablePart});
-			this.contextMenuStripTablePart.Name = "contextMenuStripField";
-			this.contextMenuStripTablePart.Size = new System.Drawing.Size(133, 26);
-			// 
-			// copyTablePart
-			// 
-			this.copyTablePart.Name = "copyTablePart";
-			this.copyTablePart.Size = new System.Drawing.Size(180, 22);
-			this.copyTablePart.Text = "Копіювати";
-			this.copyTablePart.Click += new System.EventHandler(this.copyTablePart_Click);
-			// 
 			// DirectoryForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,11 +428,13 @@
 			this.Text = "Довідник";
 			this.Load += new System.EventHandler(this.DirectoryForm_Load);
 			this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DirectoryForm_KeyDown);
+			this.contextMenuStripField.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel8.ResumeLayout(false);
 			this.panel3.ResumeLayout(false);
 			this.panel3.PerformLayout();
 			this.panel7.ResumeLayout(false);
+			this.contextMenuStripTablePart.ResumeLayout(false);
 			this.panel6.ResumeLayout(false);
 			this.panel6.PerformLayout();
 			this.panel5.ResumeLayout(false);
@@ -443,8 +446,6 @@
 			this.splitContainer1.Panel2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
-			this.contextMenuStripField.ResumeLayout(false);
-			this.contextMenuStripTablePart.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}

@@ -202,6 +202,7 @@ namespace AccountingSoftware
 
 			return query;
 		}
+
 	}
 
 	/// <summary>

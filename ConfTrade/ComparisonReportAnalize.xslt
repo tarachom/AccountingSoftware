@@ -233,7 +233,7 @@ limitations under the License.
                       <xsl:value-of select="$TableName"/>
                       <xsl:text> SET </xsl:text>
                       <xsl:value-of select="NameInTable"/>
-                      <xsl:value-of select="concat(' = (SELECT array_agg(', 't.', NameInTable, '_old_', $KeyUID,') FROM ')"/>
+                      <xsl:value-of select="concat(' = (SELECT array_agg(', 't.', NameInTable, '_old_', $KeyUID, ') FROM ')"/>
                       <xsl:value-of select="$TableName"/>
                       <xsl:text> AS t WHERE t.uid = </xsl:text>
                       <xsl:value-of select="$TableName"/>
