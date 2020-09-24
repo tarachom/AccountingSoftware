@@ -65,7 +65,7 @@ namespace AccountingSoftware
 
 		protected int Position { get; private set; }
 
-		protected Dictionary<string, string> Alias { get; }
+		public Dictionary<string, string> Alias { get; }
 
 		protected DirectoryPointer DirectoryPointerPosition { get; private set; }
 

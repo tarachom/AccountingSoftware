@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <info>Створити таблицю Історія (tab_a34)</info>
-  <sql>CREATE TABLE tab_a34 (uid uuid NOT NULL, "col_a1" timestamp without time zone, "col_a2" text, PRIMARY KEY(uid));</sql>
+  <info>Створити таблицю Проекти (tab_a36)</info>
+  <sql>CREATE TABLE tab_a36 (uid uuid NOT NULL,  "col_a1" text, PRIMARY KEY(uid));</sql>
+  <info>Створити таблицю Інформація (tab_a37)</info>
+  <sql>CREATE TABLE tab_a37 (uid uuid NOT NULL, owner uuid NOT NULL, "col_a3" date, "col_a4" text, "col_a5" text, PRIMARY KEY(uid));</sql>
+  <sql>CREATE INDEX ON tab_a37 (owner);</sql>
 </root>

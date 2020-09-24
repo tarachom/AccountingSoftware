@@ -225,21 +225,29 @@
       <Name>Історія</Name>
       <Table>tab_a34</Table>
       <IsCreateOwner>no</IsCreateOwner>
-      <IsExist>no</IsExist>
-      <TableCreate>
-        <FieldCreate>
-          <Name>Дата</Name>
-          <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>Дата</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>datetime</ConfType>
           <DataType>timestamp without time zone</DataType>
-        </FieldCreate>
-        <FieldCreate>
-          <Name>Значення</Name>
-          <NameInTable>col_a2</NameInTable>
+          <UdtName>timestamp</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>Значення</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
           <ConfType>string</ConfType>
           <DataType>text</DataType>
-        </FieldCreate>
-      </TableCreate>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
     <Control_TabularParts>
       <Name>ЗвітиКористувачів</Name>
@@ -870,6 +878,39 @@
       <Table>tab_a15</Table>
       <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>цкцу</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>ййц</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>кукеук</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
     </Control_TabularParts>
   </Control_Table>
   <Control_Table>
@@ -899,46 +940,13 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
-    <Control_Field>
-      <Name>чсмчс</Name>
-      <NameInTable>col_a3</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_Field>
-      <Name>чсмчсм</Name>
-      <NameInTable>col_a4</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
-    <Control_Field>
-      <Name>gt646</Name>
-      <NameInTable>col_a5</NameInTable>
-      <IsExist>yes</IsExist>
-      <Type>
-        <ConfType>string</ConfType>
-        <DataType>text</DataType>
-        <UdtName>text</UdtName>
-        <Coincide>yes</Coincide>
-      </Type>
-    </Control_Field>
     <Control_TabularParts>
-      <Name>чсмчс</Name>
-      <Table>tab_a22</Table>
+      <Name>sssdsds</Name>
+      <Table>tab_a35</Table>
       <IsCreateOwner>yes</IsCreateOwner>
       <IsExist>yes</IsExist>
       <Control_Field>
-        <Name>чсмчсм</Name>
+        <Name>sdsds</Name>
         <NameInTable>col_a1</NameInTable>
         <IsExist>yes</IsExist>
         <Type>
@@ -949,19 +957,8 @@
         </Type>
       </Control_Field>
       <Control_Field>
-        <Name>fghfdg</Name>
+        <Name>sdsdsd</Name>
         <NameInTable>col_a2</NameInTable>
-        <IsExist>yes</IsExist>
-        <Type>
-          <ConfType>string</ConfType>
-          <DataType>text</DataType>
-          <UdtName>text</UdtName>
-          <Coincide>yes</Coincide>
-        </Type>
-      </Control_Field>
-      <Control_Field>
-        <Name>fghfgh</Name>
-        <NameInTable>col_a3</NameInTable>
         <IsExist>yes</IsExist>
         <Type>
           <ConfType>string</ConfType>
@@ -1233,6 +1230,122 @@
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
+    <Control_Field>
+      <Name>апап</Name>
+      <NameInTable>col_a8</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>апапрап</Name>
+      <NameInTable>col_a9</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>апрапр</Name>
+      <NameInTable>col_b1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>куеуке</Name>
+      <NameInTable>col_b2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>укеуке</Name>
+      <NameInTable>col_b3</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>укеук</Name>
+      <NameInTable>col_b4</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>укеуккк</Name>
+      <NameInTable>col_b5</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+        <UdtName>text</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_TabularParts>
+      <Name>вапвапв</Name>
+      <Table>tab_a22</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
+      <IsExist>yes</IsExist>
+      <Control_Field>
+        <Name>вапвап</Name>
+        <NameInTable>col_a1</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>пвапв</Name>
+        <NameInTable>col_a2</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+      <Control_Field>
+        <Name>gthyjgfhjfg</Name>
+        <NameInTable>col_a3</NameInTable>
+        <IsExist>yes</IsExist>
+        <Type>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+          <UdtName>text</UdtName>
+          <Coincide>yes</Coincide>
+        </Type>
+      </Control_Field>
+    </Control_TabularParts>
   </Control_Table>
   <Control_Table>
     <Type>Directory</Type>
@@ -1263,6 +1376,46 @@
     </Control_Field>
   </Control_Table>
   <Control_Table>
+    <Type>Directory</Type>
+    <Name>Проекти</Name>
+    <Table>tab_a36</Table>
+    <IsExist>no</IsExist>
+    <TableCreate>
+      <FieldCreate>
+        <Name>Назва</Name>
+        <NameInTable>col_a1</NameInTable>
+        <ConfType>string</ConfType>
+        <DataType>text</DataType>
+      </FieldCreate>
+    </TableCreate>
+    <Control_TabularParts>
+      <Name>Інформація</Name>
+      <Table>tab_a37</Table>
+      <IsCreateOwner>yes</IsCreateOwner>
+      <IsExist>no</IsExist>
+      <TableCreate>
+        <FieldCreate>
+          <Name>ДатаЗапису</Name>
+          <NameInTable>col_a3</NameInTable>
+          <ConfType>date</ConfType>
+          <DataType>date</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Запис</Name>
+          <NameInTable>col_a4</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+        <FieldCreate>
+          <Name>Сайт</Name>
+          <NameInTable>col_a5</NameInTable>
+          <ConfType>string</ConfType>
+          <DataType>text</DataType>
+        </FieldCreate>
+      </TableCreate>
+    </Control_TabularParts>
+  </Control_Table>
+  <Control_Table>
     <Type>Document</Type>
     <Name>Test</Name>
     <Table>tab_a50</Table>
@@ -1286,6 +1439,61 @@
         <ConfType>integer</ConfType>
         <DataType>integer</DataType>
         <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Фірма</Name>
+      <NameInTable>col_a1</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>Склад</Name>
+      <NameInTable>col_a2</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>pointer</ConfType>
+        <DataType>uuid</DataType>
+        <UdtName>uuid</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ВклВикл</Name>
+      <NameInTable>col_a5</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>enum</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ПрихідВідПостачальника</Name>
+      <NameInTable>col_a6</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>enum</ConfType>
+        <DataType>integer</DataType>
+        <UdtName>int4</UdtName>
+        <Coincide>yes</Coincide>
+      </Type>
+    </Control_Field>
+    <Control_Field>
+      <Name>ЗагальнаСума</Name>
+      <NameInTable>col_a7</NameInTable>
+      <IsExist>yes</IsExist>
+      <Type>
+        <ConfType>numeric</ConfType>
+        <DataType>numeric</DataType>
+        <UdtName>numeric</UdtName>
         <Coincide>yes</Coincide>
       </Type>
     </Control_Field>
