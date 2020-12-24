@@ -20,6 +20,7 @@ namespace Configurator
 		private void ConfigurationSelectionForm_Load(object sender, EventArgs e)
 		{
 
+
 		}
 
 		private void listBoxConfiguration_MouseDoubleClick(object sender, MouseEventArgs e)
