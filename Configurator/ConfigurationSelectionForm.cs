@@ -38,7 +38,7 @@ namespace Configurator
 
 				XPathNodeIterator ConfigurationParamNodes = xPathDocNavigator.Select("/root/Configuration");
 				while (ConfigurationParamNodes.MoveNext())
-                {
+				{
 					ConfigurationParam ItemConfigurationParam = new ConfigurationParam();
 
 					XPathNavigator currentNode = ConfigurationParamNodes.Current;
@@ -54,7 +54,7 @@ namespace Configurator
 					ListConfigurationParam.Add(ItemConfigurationParam);
 				}
 			}
-        }
+		}
 
 		private void SaveConfigurationParamFromXML()
 		{
