@@ -20,7 +20,6 @@ namespace Configurator
 			InitializeComponent();
 
 			ListConfigurationParam = new List<ConfigurationParam>();
-			
 		}
 
 		private string PathToXML { get; set; }
@@ -43,6 +42,7 @@ namespace Configurator
 
 					XPathNavigator currentNode = ConfigurationParamNodes.Current;
 
+					ItemConfigurationParam.ConfigurationKey = currentNode.SelectSingleNode("Key").Value;
 					ItemConfigurationParam.ConfigurationName = currentNode.SelectSingleNode("Name").Value;
 					ItemConfigurationParam.ConfigurationPath = currentNode.SelectSingleNode("Path").Value;
 					ItemConfigurationParam.DataBaseServer = currentNode.SelectSingleNode("Server").Value;
@@ -68,6 +68,10 @@ namespace Configurator
 			{
 				XmlElement configurationNode = xmlConfParamDocument.CreateElement("Configuration");
 				rootNode.AppendChild(configurationNode);
+
+				XmlElement nodeKey = xmlConfParamDocument.CreateElement("Key");
+				nodeKey.InnerText = ItemConfigurationParam.ConfigurationKey;
+				configurationNode.AppendChild(nodeKey);
 
 				XmlElement nodeName = xmlConfParamDocument.CreateElement("Name");
 				nodeName.InnerText = ItemConfigurationParam.ConfigurationName;
@@ -113,23 +117,44 @@ namespace Configurator
 		{
 			PathToXML = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\ConfigurationParam.xml";
 
-			//ConfigurationParam itemConfigurationParam = new ConfigurationParam();
-			//itemConfigurationParam.ConfigurationName = "First";
-			//itemConfigurationParam.ConfigurationPath = @"E:\Project\AccountingSoftwareCloneVS\AccountingSoftware\ConfTrade\Configuration.xml";
-			//itemConfigurationParam.DataBaseServer = "localhost";
-			//itemConfigurationParam.DataBasePort = 5433;
-			//itemConfigurationParam.DataBaseLogin = "postgres";
-			//itemConfigurationParam.DataBasePassword = "1";
-			//itemConfigurationParam.DataBaseBaseName = "ConfTradeTest";
-
-			//ListConfigurationParam.Add(itemConfigurationParam);
-
-			//SaveConfigurationParamFromXML();
-
-			LoadConfigurationParamFromXML();
+            LoadConfigurationParamFromXML();
 
 			Fill_listBoxConfiguration();
 		}
+
+        #region CallBack
+
+		void CallBack_Update(ConfigurationParam itemConfigurationParam, bool isNew)
+        {
+			if (isNew)
+			{
+				ListConfigurationParam.Add(itemConfigurationParam);
+				SaveConfigurationParamFromXML();
+			}
+			else
+			{
+				foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+                {
+					if (ItemConfigurationParam.ConfigurationKey == itemConfigurationParam.ConfigurationKey)
+					{
+						ItemConfigurationParam.ConfigurationName = itemConfigurationParam.ConfigurationName;
+						ItemConfigurationParam.ConfigurationPath = itemConfigurationParam.ConfigurationPath;
+						ItemConfigurationParam.DataBaseServer = itemConfigurationParam.DataBaseServer;
+						ItemConfigurationParam.DataBaseLogin = itemConfigurationParam.DataBaseLogin;
+						ItemConfigurationParam.DataBasePassword = itemConfigurationParam.DataBasePassword;
+						ItemConfigurationParam.DataBaseBaseName = itemConfigurationParam.DataBaseBaseName;
+						ItemConfigurationParam.DataBasePort = itemConfigurationParam.DataBasePort;
+
+						SaveConfigurationParamFromXML();
+					}
+                }
+			}
+
+			LoadConfigurationParamFromXML();
+			Fill_listBoxConfiguration();
+		}
+
+		#endregion
 
 		private void listBoxConfiguration_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
@@ -138,26 +163,40 @@ namespace Configurator
 				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
 
 				ConfigurationSelectionParam configurationSelectionParamForm = new ConfigurationSelectionParam();
+				configurationSelectionParamForm.IsNew = false;
 				configurationSelectionParamForm.ItemConfigurationParam = itemConfigurationParam;
+				configurationSelectionParamForm.CallBack_Update = CallBack_Update;
 				configurationSelectionParamForm.ShowDialog();
-
-				//EnumFieldForm enumFieldForm = new EnumFieldForm();
-				//enumFieldForm.Field = ConfEnums.Fields[listBoxFields.SelectedItem.ToString()];
-				//enumFieldForm.CallBack_IsExistField = CallBack_IsExistField;
-				//enumFieldForm.CallBack = CallBack_Update_Field;
-				//enumFieldForm.Show();
 			}
 		}
 
 		private void buttonAddConf_Click(object sender, EventArgs e)
 		{
 			ConfigurationSelectionParam configurationSelectionParamForm = new ConfigurationSelectionParam();
+			configurationSelectionParamForm.IsNew = true;
+			configurationSelectionParamForm.CallBack_Update = CallBack_Update;
 			configurationSelectionParamForm.ShowDialog();
 		}
 
-		private void buttonEditConf_Click(object sender, EventArgs e)
+		private void buttonDelete_Click(object sender, EventArgs e)
 		{
+			if (listBoxConfiguration.SelectedItem != null)
+			{
+				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
 
+				foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+				{
+					if (ItemConfigurationParam.ConfigurationKey == itemConfigurationParam.ConfigurationKey)
+					{
+						ListConfigurationParam.Remove(ItemConfigurationParam);
+						
+						SaveConfigurationParamFromXML();
+						Fill_listBoxConfiguration();
+
+						break;
+					}
+				}
+			}
 		}
-	}
+    }
 }

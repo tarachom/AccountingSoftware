@@ -30,8 +30,8 @@
 		{
             this.listBoxConfiguration = new System.Windows.Forms.ListBox();
             this.buttonAddConf = new System.Windows.Forms.Button();
-            this.buttonEditConf = new System.Windows.Forms.Button();
             this.buttonOpenConf = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxConfiguration
@@ -45,23 +45,13 @@
             // 
             // buttonAddConf
             // 
-            this.buttonAddConf.Location = new System.Drawing.Point(520, 222);
+            this.buttonAddConf.Location = new System.Drawing.Point(520, 135);
             this.buttonAddConf.Name = "buttonAddConf";
             this.buttonAddConf.Size = new System.Drawing.Size(97, 30);
             this.buttonAddConf.TabIndex = 1;
             this.buttonAddConf.Text = "Додати";
             this.buttonAddConf.UseVisualStyleBackColor = true;
             this.buttonAddConf.Click += new System.EventHandler(this.buttonAddConf_Click);
-            // 
-            // buttonEditConf
-            // 
-            this.buttonEditConf.Location = new System.Drawing.Point(520, 258);
-            this.buttonEditConf.Name = "buttonEditConf";
-            this.buttonEditConf.Size = new System.Drawing.Size(97, 30);
-            this.buttonEditConf.TabIndex = 2;
-            this.buttonEditConf.Text = "Змінити";
-            this.buttonEditConf.UseVisualStyleBackColor = true;
-            this.buttonEditConf.Click += new System.EventHandler(this.buttonEditConf_Click);
             // 
             // buttonOpenConf
             // 
@@ -72,13 +62,23 @@
             this.buttonOpenConf.Text = "Відкрити";
             this.buttonOpenConf.UseVisualStyleBackColor = true;
             // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Location = new System.Drawing.Point(520, 171);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(97, 30);
+            this.buttonDelete.TabIndex = 4;
+            this.buttonDelete.Text = "Видалити";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
             // ConfigurationSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(622, 300);
+            this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonOpenConf);
-            this.Controls.Add(this.buttonEditConf);
             this.Controls.Add(this.buttonAddConf);
             this.Controls.Add(this.listBoxConfiguration);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -96,7 +96,7 @@
 
 		private System.Windows.Forms.ListBox listBoxConfiguration;
 		private System.Windows.Forms.Button buttonAddConf;
-		private System.Windows.Forms.Button buttonEditConf;
 		private System.Windows.Forms.Button buttonOpenConf;
-	}
+        private System.Windows.Forms.Button buttonDelete;
+    }
 }

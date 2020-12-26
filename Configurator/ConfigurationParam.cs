@@ -8,6 +8,8 @@ namespace Configurator
 {
 	public class ConfigurationParam
 	{
+		public string ConfigurationKey { get; set; }
+
 		public string ConfigurationName { get; set; }
 
 		public string ConfigurationPath { get; set; }
@@ -24,7 +26,7 @@ namespace Configurator
 
 		public override string ToString()
 		{
-			return ConfigurationName;
+			return String.IsNullOrWhiteSpace(ConfigurationName) ? "<>" : ConfigurationName;
 		}
 	}
 }
