@@ -31,8 +31,8 @@ namespace Configurator
 		{
 			ListConfigurationParam.Clear();
 
-			if (File.Exists(PathToXML))
-            {
+			if (File.Exists(PathToXML)) 
+			{
 				XPathDocument xPathDoc = new XPathDocument(PathToXML);
 				XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
