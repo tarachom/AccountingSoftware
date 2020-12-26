@@ -28,67 +28,67 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.listBoxConfiguration = new System.Windows.Forms.ListBox();
-			this.buttonAddConf = new System.Windows.Forms.Button();
-			this.buttonEditConf = new System.Windows.Forms.Button();
-			this.buttonOpenConf = new System.Windows.Forms.Button();
-			this.SuspendLayout();
-			// 
-			// listBoxConfiguration
-			// 
-			this.listBoxConfiguration.FormattingEnabled = true;
-			this.listBoxConfiguration.Location = new System.Drawing.Point(12, 12);
-			this.listBoxConfiguration.Name = "listBoxConfiguration";
-			this.listBoxConfiguration.Size = new System.Drawing.Size(502, 277);
-			this.listBoxConfiguration.TabIndex = 0;
-			this.listBoxConfiguration.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxConfiguration_MouseDoubleClick);
-			// 
-			// buttonAddConf
-			// 
-			this.buttonAddConf.Location = new System.Drawing.Point(520, 222);
-			this.buttonAddConf.Name = "buttonAddConf";
-			this.buttonAddConf.Size = new System.Drawing.Size(97, 30);
-			this.buttonAddConf.TabIndex = 1;
-			this.buttonAddConf.Text = "Додати";
-			this.buttonAddConf.UseVisualStyleBackColor = true;
-			this.buttonAddConf.Click += new System.EventHandler(this.buttonAddConf_Click);
-			// 
-			// buttonEditConf
-			// 
-			this.buttonEditConf.Location = new System.Drawing.Point(520, 258);
-			this.buttonEditConf.Name = "buttonEditConf";
-			this.buttonEditConf.Size = new System.Drawing.Size(97, 30);
-			this.buttonEditConf.TabIndex = 2;
-			this.buttonEditConf.Text = "Змінити";
-			this.buttonEditConf.UseVisualStyleBackColor = true;
-			this.buttonEditConf.Click += new System.EventHandler(this.buttonEditConf_Click);
-			// 
-			// buttonOpenConf
-			// 
-			this.buttonOpenConf.Location = new System.Drawing.Point(520, 12);
-			this.buttonOpenConf.Name = "buttonOpenConf";
-			this.buttonOpenConf.Size = new System.Drawing.Size(97, 30);
-			this.buttonOpenConf.TabIndex = 3;
-			this.buttonOpenConf.Text = "Відкрити";
-			this.buttonOpenConf.UseVisualStyleBackColor = true;
-			// 
-			// ConfigurationSelectionForm
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(622, 300);
-			this.Controls.Add(this.buttonOpenConf);
-			this.Controls.Add(this.buttonEditConf);
-			this.Controls.Add(this.buttonAddConf);
-			this.Controls.Add(this.listBoxConfiguration);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.MaximizeBox = false;
-			this.MinimizeBox = false;
-			this.Name = "ConfigurationSelectionForm";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Вибір конфігурації";
-			this.Load += new System.EventHandler(this.ConfigurationSelectionForm_Load);
-			this.ResumeLayout(false);
+            this.listBoxConfiguration = new System.Windows.Forms.ListBox();
+            this.buttonAddConf = new System.Windows.Forms.Button();
+            this.buttonEditConf = new System.Windows.Forms.Button();
+            this.buttonOpenConf = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // listBoxConfiguration
+            // 
+            this.listBoxConfiguration.FormattingEnabled = true;
+            this.listBoxConfiguration.Location = new System.Drawing.Point(12, 12);
+            this.listBoxConfiguration.Name = "listBoxConfiguration";
+            this.listBoxConfiguration.Size = new System.Drawing.Size(502, 277);
+            this.listBoxConfiguration.TabIndex = 0;
+            this.listBoxConfiguration.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxConfiguration_MouseDoubleClick);
+            // 
+            // buttonAddConf
+            // 
+            this.buttonAddConf.Location = new System.Drawing.Point(520, 222);
+            this.buttonAddConf.Name = "buttonAddConf";
+            this.buttonAddConf.Size = new System.Drawing.Size(97, 30);
+            this.buttonAddConf.TabIndex = 1;
+            this.buttonAddConf.Text = "Додати";
+            this.buttonAddConf.UseVisualStyleBackColor = true;
+            this.buttonAddConf.Click += new System.EventHandler(this.buttonAddConf_Click);
+            // 
+            // buttonEditConf
+            // 
+            this.buttonEditConf.Location = new System.Drawing.Point(520, 258);
+            this.buttonEditConf.Name = "buttonEditConf";
+            this.buttonEditConf.Size = new System.Drawing.Size(97, 30);
+            this.buttonEditConf.TabIndex = 2;
+            this.buttonEditConf.Text = "Змінити";
+            this.buttonEditConf.UseVisualStyleBackColor = true;
+            this.buttonEditConf.Click += new System.EventHandler(this.buttonEditConf_Click);
+            // 
+            // buttonOpenConf
+            // 
+            this.buttonOpenConf.Location = new System.Drawing.Point(520, 12);
+            this.buttonOpenConf.Name = "buttonOpenConf";
+            this.buttonOpenConf.Size = new System.Drawing.Size(97, 30);
+            this.buttonOpenConf.TabIndex = 3;
+            this.buttonOpenConf.Text = "Відкрити";
+            this.buttonOpenConf.UseVisualStyleBackColor = true;
+            // 
+            // ConfigurationSelectionForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(622, 300);
+            this.Controls.Add(this.buttonOpenConf);
+            this.Controls.Add(this.buttonEditConf);
+            this.Controls.Add(this.buttonAddConf);
+            this.Controls.Add(this.listBoxConfiguration);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "ConfigurationSelectionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Вибір конфігурації";
+            this.Load += new System.EventHandler(this.ConfigurationSelectionForm_Load);
+            this.ResumeLayout(false);
 
 		}
 
