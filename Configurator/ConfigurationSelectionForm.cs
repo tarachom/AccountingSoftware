@@ -28,7 +28,7 @@ namespace Configurator
 		private List<ConfigurationParam> ListConfigurationParam { get; set; }
 
 		private void LoadConfigurationParamFromXML()
-        {
+		{
 			ListConfigurationParam.Clear();
 
 			if (File.Exists(PathToXML))
@@ -57,7 +57,7 @@ namespace Configurator
         }
 
 		private void SaveConfigurationParamFromXML()
-        {
+		{
 			XmlDocument xmlConfParamDocument = new XmlDocument();
 			xmlConfParamDocument.AppendChild(xmlConfParamDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
