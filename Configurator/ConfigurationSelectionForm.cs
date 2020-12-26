@@ -113,18 +113,18 @@ namespace Configurator
 		{
 			PathToXML = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\ConfigurationParam.xml";
 
-			ConfigurationParam itemConfigurationParam = new ConfigurationParam();
-			itemConfigurationParam.ConfigurationName = "First";
-			itemConfigurationParam.ConfigurationPath = @"E:\Project\AccountingSoftwareCloneVS\AccountingSoftware\ConfTrade\Configuration.xml";
-			itemConfigurationParam.DataBaseServer = "localhost";
-			itemConfigurationParam.DataBasePort = 5433;
-			itemConfigurationParam.DataBaseLogin = "postgres";
-			itemConfigurationParam.DataBasePassword = "1";
-			itemConfigurationParam.DataBaseBaseName = "ConfTradeTest";
+			//ConfigurationParam itemConfigurationParam = new ConfigurationParam();
+			//itemConfigurationParam.ConfigurationName = "First";
+			//itemConfigurationParam.ConfigurationPath = @"E:\Project\AccountingSoftwareCloneVS\AccountingSoftware\ConfTrade\Configuration.xml";
+			//itemConfigurationParam.DataBaseServer = "localhost";
+			//itemConfigurationParam.DataBasePort = 5433;
+			//itemConfigurationParam.DataBaseLogin = "postgres";
+			//itemConfigurationParam.DataBasePassword = "1";
+			//itemConfigurationParam.DataBaseBaseName = "ConfTradeTest";
 
-			ListConfigurationParam.Add(itemConfigurationParam);
+			//ListConfigurationParam.Add(itemConfigurationParam);
 
-			SaveConfigurationParamFromXML();
+			//SaveConfigurationParamFromXML();
 
 			LoadConfigurationParamFromXML();
 
@@ -135,7 +135,11 @@ namespace Configurator
 		{
 			if (listBoxConfiguration.SelectedItem != null)
 			{
+				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
 
+				ConfigurationSelectionParam configurationSelectionParamForm = new ConfigurationSelectionParam();
+				configurationSelectionParamForm.ItemConfigurationParam = itemConfigurationParam;
+				configurationSelectionParamForm.ShowDialog();
 
 				//EnumFieldForm enumFieldForm = new EnumFieldForm();
 				//enumFieldForm.Field = ConfEnums.Fields[listBoxFields.SelectedItem.ToString()];
@@ -156,26 +160,4 @@ namespace Configurator
 
 		}
 	}
-
-	class ConfigurationParam
-	{
-		public string ConfigurationName { get; set; }
-
-		public string ConfigurationPath { get; set; }
-
-		public string DataBaseServer { get; set; }
-
-		public int DataBasePort { get; set; }
-
-		public string DataBaseLogin { get; set; }
-
-		public string DataBasePassword { get; set; }
-
-		public string DataBaseBaseName { get; set; }
-
-        public override string ToString()
-        {
-            return ConfigurationName;
-        }
-    }
 }
