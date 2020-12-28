@@ -28,5 +28,20 @@ namespace Configurator
 		{
 			return String.IsNullOrWhiteSpace(ConfigurationName) ? "<>" : ConfigurationName;
 		}
+
+		public ConfigurationParam Clone()
+        {
+			ConfigurationParam configurationParam = new ConfigurationParam();
+			configurationParam.ConfigurationKey = Guid.NewGuid().ToString();
+			configurationParam.ConfigurationName = ConfigurationName;
+			configurationParam.ConfigurationPath = ConfigurationPath;
+			configurationParam.DataBaseServer = DataBaseServer;
+			configurationParam.DataBaseLogin = DataBaseLogin;
+			configurationParam.DataBasePassword = DataBasePassword;
+			configurationParam.DataBaseBaseName = DataBaseBaseName;
+			configurationParam.DataBasePort = DataBasePort;
+			
+			return configurationParam;
+		}
 	}
 }

@@ -146,6 +146,7 @@ namespace Configurator
 						ItemConfigurationParam.DataBasePort = itemConfigurationParam.DataBasePort;
 
 						SaveConfigurationParamFromXML();
+						break;
 					}
                 }
 			}
@@ -196,6 +197,23 @@ namespace Configurator
 						break;
 					}
 				}
+			}
+		}
+
+        private void buttonOpenConf_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void buttonCopy_Click(object sender, EventArgs e)
+        {
+			if (listBoxConfiguration.SelectedItem != null)
+			{
+				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
+
+				ListConfigurationParam.Add(itemConfigurationParam.Clone());
+
+				SaveConfigurationParamFromXML();
+				Fill_listBoxConfiguration();
 			}
 		}
     }

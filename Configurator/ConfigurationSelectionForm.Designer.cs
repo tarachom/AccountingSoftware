@@ -32,6 +32,7 @@
             this.buttonAddConf = new System.Windows.Forms.Button();
             this.buttonOpenConf = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonCopy = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listBoxConfiguration
@@ -57,14 +58,15 @@
             // 
             this.buttonOpenConf.Location = new System.Drawing.Point(520, 12);
             this.buttonOpenConf.Name = "buttonOpenConf";
-            this.buttonOpenConf.Size = new System.Drawing.Size(97, 30);
+            this.buttonOpenConf.Size = new System.Drawing.Size(148, 30);
             this.buttonOpenConf.TabIndex = 3;
-            this.buttonOpenConf.Text = "Відкрити";
+            this.buttonOpenConf.Text = "Відкрити конфігуратор";
             this.buttonOpenConf.UseVisualStyleBackColor = true;
+            this.buttonOpenConf.Click += new System.EventHandler(this.buttonOpenConf_Click);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(520, 171);
+            this.buttonDelete.Location = new System.Drawing.Point(520, 258);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(97, 30);
             this.buttonDelete.TabIndex = 4;
@@ -72,11 +74,22 @@
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
+            // buttonCopy
+            // 
+            this.buttonCopy.Location = new System.Drawing.Point(520, 171);
+            this.buttonCopy.Name = "buttonCopy";
+            this.buttonCopy.Size = new System.Drawing.Size(97, 30);
+            this.buttonCopy.TabIndex = 5;
+            this.buttonCopy.Text = "Копіювати";
+            this.buttonCopy.UseVisualStyleBackColor = true;
+            this.buttonCopy.Click += new System.EventHandler(this.buttonCopy_Click);
+            // 
             // ConfigurationSelectionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(622, 300);
+            this.ClientSize = new System.Drawing.Size(675, 300);
+            this.Controls.Add(this.buttonCopy);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonOpenConf);
             this.Controls.Add(this.buttonAddConf);
@@ -98,5 +111,6 @@
 		private System.Windows.Forms.Button buttonAddConf;
 		private System.Windows.Forms.Button buttonOpenConf;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonCopy;
     }
 }
