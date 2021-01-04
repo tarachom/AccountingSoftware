@@ -422,8 +422,8 @@ namespace Configurator
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
-			Program.Kernel = new Kernel();
-			Program.Kernel.Open();
+			//Program.Kernel = new Kernel();
+			//Program.Kernel.Open();
 
 			Conf = Program.Kernel.Conf;
 

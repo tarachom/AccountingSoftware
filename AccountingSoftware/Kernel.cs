@@ -59,18 +59,17 @@ namespace AccountingSoftware
 			return DataBase.CreateDatabaseIfNotExist(Server, UserId, Password, Port, Database, out exception);
 		}
 
-		public void Open2(string connectionString)
+		public bool Open2(string PathToXmlFileConfiguration, string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			DataBase = new PostgreSQL();
-			DataBase.Open(connectionString);
-
-			Console.WriteLine("DataBase Open");
+			bool flagConnect = DataBase.Open2(Server, UserId, Password, Port, Database, out exception);
 
 			Conf = new Configuration();
-			Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
+			Conf.PathToXmlFileConfiguration = PathToXmlFileConfiguration;
+
 			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
 
-			Console.WriteLine("Configuration Load");
+			return flagConnect;
 		}
 
 		public void Close()

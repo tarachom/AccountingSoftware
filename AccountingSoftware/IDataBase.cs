@@ -31,7 +31,7 @@ namespace AccountingSoftware
 		void Open(string connectionString);
 		void Close();
 
-
+		bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 		bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception);
 		bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 

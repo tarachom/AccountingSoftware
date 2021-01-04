@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using AccountingSoftware;
 using System.Xml;
 using System.Xml.XPath;
+using System.IO;
 
 namespace Configurator
 {
@@ -105,24 +106,24 @@ namespace Configurator
 
 			ApendLine("3. Отримання структури бази даних", "");
 			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
-			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
+			Configuration.SaveInformationSchema(informationSchema, Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml");
 
 			ApendLine("4. Порівняння конфігурації та бази даних", "", "\n");
 			try
 			{
 				Configuration.Comparison(
-					@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
 					@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-					@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 					Conf.PathToTempXmlFileConfiguration,
-					Conf.PathToCopyXmlFileConfiguration);
+					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
 			}
 			catch (Exception ex)
 			{
 				ApendLine(ex.Message, "");
 			}
 
-			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml");
+			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
 			XPathNodeIterator nodeDeleteDirectory = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'delete']");
@@ -319,23 +320,23 @@ namespace Configurator
 
 			ApendLine("2. Отримання структури бази даних", "");
 			ConfigurationInformationSchema informationSchema = Program.Kernel.DataBase.SelectInformationSchema();
-			Configuration.SaveInformationSchema(informationSchema, @"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml");
+			Configuration.SaveInformationSchema(informationSchema, Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml");
 
 			ApendLine("3. Порівняння конфігурації та бази даних", "");
 			Configuration.Comparison(
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\InformationSchema.xml",
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 				Conf.PathToTempXmlFileConfiguration,
-				Conf.PathToCopyXmlFileConfiguration);
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
 
 			ApendLine("4. Створення команд SQL", "", "\n");
 			Configuration.ComparisonAnalizeGeneration(
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReport.xml",
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml", replacementColumn);
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) +  @"\ReportAnalize.xml", replacementColumn);
 
-			XPathDocument xPathDoc = new XPathDocument(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
 			XPathNodeIterator nodeInfo = xPathDocNavigator.Select("/root/info");
@@ -371,7 +372,7 @@ namespace Configurator
 			buttonSave.Invoke(new Action(() => buttonSave.Enabled = false));
 
 			//Read SQL
-			List<string> SqlList = Configuration.ListComparisonSql(@"D:\VS\Project\AccountingSoftware\ConfTrade\ReportAnalize.xml");
+			List<string> SqlList = Configuration.ListComparisonSql(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
 
 			ApendLine("\n[ Виконання SQL ]", "", "\n");
 
@@ -396,7 +397,7 @@ namespace Configurator
 			ApendLine("\n[ Генерування коду ]", "", "\n");
 			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
 				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.cs");
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
 		}

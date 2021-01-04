@@ -42,6 +42,32 @@ namespace AccountingSoftware
 			Start();
 		}
 
+		public bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		{
+			exception = null;
+
+			Connection = new NpgsqlConnection(
+				"Server=" + Server + ";" +
+				"User Id=" + UserId + ";" +
+				"Password=" + Password + ";" +
+				"Port=" + Port.ToString() + ";" +
+				"Database=" + Database + ";");
+
+			try
+			{
+				Connection.Open();
+
+				Start();
+
+				return true;
+			}
+			catch (Exception e)
+			{
+				exception = e;
+				return false;
+			}
+		}
+
 		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception)
 		{
 			Connection = new NpgsqlConnection(

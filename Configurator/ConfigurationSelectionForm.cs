@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Xml.XPath;
+using AccountingSoftware;
 
 namespace Configurator
 {
@@ -202,8 +203,29 @@ namespace Configurator
 
         private void buttonOpenConf_Click(object sender, EventArgs e)
         {
+			if (listBoxConfiguration.SelectedItem != null)
+			{
+				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
 
-        }
+				Exception exception = null;
+
+				Program.Kernel = new Kernel();
+
+				bool flag = Program.Kernel.Open2(
+					itemConfigurationParam.ConfigurationPath,
+
+					itemConfigurationParam.DataBaseServer,
+					itemConfigurationParam.DataBaseLogin,
+					itemConfigurationParam.DataBasePassword,
+					itemConfigurationParam.DataBasePort,
+					itemConfigurationParam.DataBaseBaseName, 
+					
+					out exception);
+
+				FormConfiguration formConfiguration = new FormConfiguration();
+				formConfiguration.Show();
+			}
+		}
 
         private void buttonCopy_Click(object sender, EventArgs e)
         {
