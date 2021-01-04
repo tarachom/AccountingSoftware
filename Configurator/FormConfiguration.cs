@@ -422,13 +422,16 @@ namespace Configurator
 
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
-			//Program.Kernel = new Kernel();
-			//Program.Kernel.Open();
+			ConfigurationSelectionForm configurationSelectionForm = new ConfigurationSelectionForm();
+			DialogResult dialogResult = configurationSelectionForm.ShowDialog();
 
-			Conf = Program.Kernel.Conf;
+			if (dialogResult == DialogResult.OK)
+			{
+				Conf = Program.Kernel.Conf;
 
-			Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
-			thread.Start();
+				Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
+				thread.Start();
+			}
 
 			//DataGridViewRow dataGridViewRow = new DataGridViewRow();
 
@@ -457,7 +460,8 @@ namespace Configurator
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
 		{
-			Program.Kernel.Close();
+			if (Program.Kernel != null)
+				Program.Kernel.Close();
 		}
 
 		private void treeConfiguration_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)

@@ -38,7 +38,7 @@ namespace Configurator
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new ConfigurationSelectionForm());
+			Application.Run(new FormConfiguration());
 		}
 
 		public static Kernel Kernel { get; set; }

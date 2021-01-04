@@ -222,8 +222,11 @@ namespace Configurator
 					
 					out exception);
 
-				FormConfiguration formConfiguration = new FormConfiguration();
-				formConfiguration.Show();
+				//FormConfiguration formConfiguration = new FormConfiguration();
+				//formConfiguration.Show();
+
+				this.DialogResult = DialogResult.OK;
+				this.Hide();
 			}
 		}
 

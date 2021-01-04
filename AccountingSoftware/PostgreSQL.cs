@@ -167,7 +167,11 @@ namespace AccountingSoftware
 
 		public void Close()
 		{
-			Connection.Close();
+			try
+			{
+				Connection.Close();
+			}
+			catch { }
 		}
 
 		#region UserType
