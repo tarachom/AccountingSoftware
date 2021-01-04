@@ -42,6 +42,86 @@ namespace AccountingSoftware
 			Start();
 		}
 
+		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception)
+		{
+			Connection = new NpgsqlConnection(
+				"Server=" + Server + ";" +
+				"User Id=" + UserId + ";" +
+				"Password=" + Password + ";" +
+				"Port=" + Port.ToString() + ";");
+
+			exception = null;
+
+			try
+			{
+				Connection.Open();
+				Connection.Close();
+
+				return true;
+			}
+			catch (Exception e)
+			{
+				exception = e;
+				return false;
+			}
+		}
+
+		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		{
+			exception = null;
+
+			Connection = new NpgsqlConnection(
+				"Server=" + Server + ";" +
+				"User Id=" + UserId + ";" +
+				"Password=" + Password + ";" +
+				"Port=" + Port.ToString() + ";");
+
+			try
+			{
+				Connection.Open();
+			}
+			catch (Exception e)
+			{
+				exception = e;
+				return false;
+			}
+
+			string sql = "SELECT EXISTS(" +
+				"SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower('" + Database + "'));";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(sql, Connection);
+
+			bool resultSql = false;
+
+			try
+			{
+				resultSql = (bool)nCommand.ExecuteScalar();
+			}
+			catch (Exception e)
+			{
+				exception = e;
+				return false;
+			}
+
+			if (!resultSql)
+			{
+				sql = "CREATE DATABASE " + Database;
+				nCommand = new NpgsqlCommand(sql, Connection);
+
+				try
+				{
+					nCommand.ExecuteNonQuery();
+				}
+				catch (Exception e)
+				{
+					exception = e;
+					return false;
+				}
+			}
+
+			return true;
+		}
+
 		private void Start()
 		{
 			//List<string> StartSQL = new List<string>();

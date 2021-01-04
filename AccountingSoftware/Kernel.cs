@@ -47,6 +47,32 @@ namespace AccountingSoftware
 			Console.WriteLine("Configuration Load");
 		}
 
+		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception)
+		{
+			DataBase = new PostgreSQL();
+			return DataBase.TryConnectToServer(Server, UserId, Password, Port, out exception);
+		}
+
+		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		{
+			DataBase = new PostgreSQL();
+			return DataBase.CreateDatabaseIfNotExist(Server, UserId, Password, Port, Database, out exception);
+		}
+
+		public void Open2(string connectionString)
+		{
+			DataBase = new PostgreSQL();
+			DataBase.Open(connectionString);
+
+			Console.WriteLine("DataBase Open");
+
+			Conf = new Configuration();
+			Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
+			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
+
+			Console.WriteLine("Configuration Load");
+		}
+
 		public void Close()
 		{
 			DataBase.Close();

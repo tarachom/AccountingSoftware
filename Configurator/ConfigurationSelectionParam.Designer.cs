@@ -33,16 +33,20 @@
 			this.labelPostgreSQLServer = new System.Windows.Forms.Label();
 			this.textBoxPostgreSQLServer = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
-			this.textBoxPostgreSQLLogin = new System.Windows.Forms.TextBox();
-			this.labelPostgreSQLLogin = new System.Windows.Forms.Label();
-			this.textBoxPostgreSQLPassword = new System.Windows.Forms.TextBox();
-			this.labelPostgreSQLPassword = new System.Windows.Forms.Label();
 			this.textBoxPostgreSQLDataBase = new System.Windows.Forms.TextBox();
 			this.labelPostgreSQLDataBase = new System.Windows.Forms.Label();
+			this.textBoxPostgreSQLPassword = new System.Windows.Forms.TextBox();
+			this.labelPostgreSQLPassword = new System.Windows.Forms.Label();
+			this.textBoxPostgreSQLLogin = new System.Windows.Forms.TextBox();
+			this.labelPostgreSQLLogin = new System.Windows.Forms.Label();
 			this.textBoxConfName = new System.Windows.Forms.TextBox();
 			this.labelConfName = new System.Windows.Forms.Label();
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
+			this.buttonConnect = new System.Windows.Forms.Button();
+			this.textBoxPostgreSQLPort = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
+			this.buttonTryConnect = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -80,6 +84,8 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.textBoxPostgreSQLPort);
+			this.groupBox1.Controls.Add(this.label1);
 			this.groupBox1.Controls.Add(this.textBoxPostgreSQLDataBase);
 			this.groupBox1.Controls.Add(this.labelPostgreSQLDataBase);
 			this.groupBox1.Controls.Add(this.textBoxPostgreSQLPassword);
@@ -90,26 +96,26 @@
 			this.groupBox1.Controls.Add(this.labelPostgreSQLServer);
 			this.groupBox1.Location = new System.Drawing.Point(17, 84);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(426, 135);
+			this.groupBox1.Size = new System.Drawing.Size(426, 156);
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "База даних PostgreSQL";
 			// 
-			// textBoxPostgreSQLLogin
+			// textBoxPostgreSQLDataBase
 			// 
-			this.textBoxPostgreSQLLogin.Location = new System.Drawing.Point(82, 45);
-			this.textBoxPostgreSQLLogin.Name = "textBoxPostgreSQLLogin";
-			this.textBoxPostgreSQLLogin.Size = new System.Drawing.Size(257, 20);
-			this.textBoxPostgreSQLLogin.TabIndex = 1;
+			this.textBoxPostgreSQLDataBase.Location = new System.Drawing.Point(82, 124);
+			this.textBoxPostgreSQLDataBase.Name = "textBoxPostgreSQLDataBase";
+			this.textBoxPostgreSQLDataBase.Size = new System.Drawing.Size(257, 20);
+			this.textBoxPostgreSQLDataBase.TabIndex = 3;
 			// 
-			// labelPostgreSQLLogin
+			// labelPostgreSQLDataBase
 			// 
-			this.labelPostgreSQLLogin.AutoSize = true;
-			this.labelPostgreSQLLogin.Location = new System.Drawing.Point(12, 48);
-			this.labelPostgreSQLLogin.Name = "labelPostgreSQLLogin";
-			this.labelPostgreSQLLogin.Size = new System.Drawing.Size(37, 13);
-			this.labelPostgreSQLLogin.TabIndex = 5;
-			this.labelPostgreSQLLogin.Text = "Логін:";
+			this.labelPostgreSQLDataBase.AutoSize = true;
+			this.labelPostgreSQLDataBase.Location = new System.Drawing.Point(12, 127);
+			this.labelPostgreSQLDataBase.Name = "labelPostgreSQLDataBase";
+			this.labelPostgreSQLDataBase.Size = new System.Drawing.Size(67, 13);
+			this.labelPostgreSQLDataBase.TabIndex = 7;
+			this.labelPostgreSQLDataBase.Text = "База даних:";
 			// 
 			// textBoxPostgreSQLPassword
 			// 
@@ -127,21 +133,21 @@
 			this.labelPostgreSQLPassword.TabIndex = 7;
 			this.labelPostgreSQLPassword.Text = "Пароль:";
 			// 
-			// textBoxPostgreSQLDataBase
+			// textBoxPostgreSQLLogin
 			// 
-			this.textBoxPostgreSQLDataBase.Location = new System.Drawing.Point(82, 97);
-			this.textBoxPostgreSQLDataBase.Name = "textBoxPostgreSQLDataBase";
-			this.textBoxPostgreSQLDataBase.Size = new System.Drawing.Size(257, 20);
-			this.textBoxPostgreSQLDataBase.TabIndex = 3;
+			this.textBoxPostgreSQLLogin.Location = new System.Drawing.Point(82, 45);
+			this.textBoxPostgreSQLLogin.Name = "textBoxPostgreSQLLogin";
+			this.textBoxPostgreSQLLogin.Size = new System.Drawing.Size(257, 20);
+			this.textBoxPostgreSQLLogin.TabIndex = 1;
 			// 
-			// labelPostgreSQLDataBase
+			// labelPostgreSQLLogin
 			// 
-			this.labelPostgreSQLDataBase.AutoSize = true;
-			this.labelPostgreSQLDataBase.Location = new System.Drawing.Point(12, 100);
-			this.labelPostgreSQLDataBase.Name = "labelPostgreSQLDataBase";
-			this.labelPostgreSQLDataBase.Size = new System.Drawing.Size(67, 13);
-			this.labelPostgreSQLDataBase.TabIndex = 7;
-			this.labelPostgreSQLDataBase.Text = "База даних:";
+			this.labelPostgreSQLLogin.AutoSize = true;
+			this.labelPostgreSQLLogin.Location = new System.Drawing.Point(12, 48);
+			this.labelPostgreSQLLogin.Name = "labelPostgreSQLLogin";
+			this.labelPostgreSQLLogin.Size = new System.Drawing.Size(37, 13);
+			this.labelPostgreSQLLogin.TabIndex = 5;
+			this.labelPostgreSQLLogin.Text = "Логін:";
 			// 
 			// textBoxConfName
 			// 
@@ -161,7 +167,7 @@
 			// 
 			// buttonOK
 			// 
-			this.buttonOK.Location = new System.Drawing.Point(17, 235);
+			this.buttonOK.Location = new System.Drawing.Point(17, 274);
 			this.buttonOK.Name = "buttonOK";
 			this.buttonOK.Size = new System.Drawing.Size(110, 28);
 			this.buttonOK.TabIndex = 3;
@@ -171,7 +177,7 @@
 			// 
 			// buttonClose
 			// 
-			this.buttonClose.Location = new System.Drawing.Point(529, 235);
+			this.buttonClose.Location = new System.Drawing.Point(529, 274);
 			this.buttonClose.Name = "buttonClose";
 			this.buttonClose.Size = new System.Drawing.Size(110, 28);
 			this.buttonClose.TabIndex = 8;
@@ -179,11 +185,49 @@
 			this.buttonClose.UseVisualStyleBackColor = true;
 			this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
 			// 
+			// buttonConnect
+			// 
+			this.buttonConnect.Location = new System.Drawing.Point(449, 211);
+			this.buttonConnect.Name = "buttonConnect";
+			this.buttonConnect.Size = new System.Drawing.Size(157, 28);
+			this.buttonConnect.TabIndex = 9;
+			this.buttonConnect.Text = "Створити базу даних";
+			this.buttonConnect.UseVisualStyleBackColor = true;
+			this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
+			// 
+			// textBoxPostgreSQLPort
+			// 
+			this.textBoxPostgreSQLPort.Location = new System.Drawing.Point(82, 97);
+			this.textBoxPostgreSQLPort.Name = "textBoxPostgreSQLPort";
+			this.textBoxPostgreSQLPort.Size = new System.Drawing.Size(257, 20);
+			this.textBoxPostgreSQLPort.TabIndex = 8;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 100);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(35, 13);
+			this.label1.TabIndex = 9;
+			this.label1.Text = "Порт:";
+			// 
+			// buttonTryConnect
+			// 
+			this.buttonTryConnect.Location = new System.Drawing.Point(449, 91);
+			this.buttonTryConnect.Name = "buttonTryConnect";
+			this.buttonTryConnect.Size = new System.Drawing.Size(157, 28);
+			this.buttonTryConnect.TabIndex = 10;
+			this.buttonTryConnect.Text = "Перевірити підключення";
+			this.buttonTryConnect.UseVisualStyleBackColor = true;
+			this.buttonTryConnect.Click += new System.EventHandler(this.buttonTryConnect_Click);
+			// 
 			// ConfigurationSelectionParam
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(651, 278);
+			this.ClientSize = new System.Drawing.Size(651, 315);
+			this.Controls.Add(this.buttonTryConnect);
+			this.Controls.Add(this.buttonConnect);
 			this.Controls.Add(this.buttonClose);
 			this.Controls.Add(this.buttonOK);
 			this.Controls.Add(this.textBoxConfName);
@@ -222,5 +266,9 @@
 		private System.Windows.Forms.Label labelConfName;
 		private System.Windows.Forms.Button buttonOK;
 		private System.Windows.Forms.Button buttonClose;
+		private System.Windows.Forms.Button buttonConnect;
+		private System.Windows.Forms.TextBox textBoxPostgreSQLPort;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button buttonTryConnect;
 	}
 }

@@ -21,13 +21,13 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     find.org.ua
 */
-  
+
 /*
  *
  * Конфігурації "Нова конфігурація"
  * Автор 
   
- * Дата конфігурації: 20.09.2020 16:50:20
+ * Дата конфігурації: 24.11.2020 19:12:56
  *
  */
 
@@ -1158,10 +1158,11 @@ namespace ConfTrade_v1_1.Довідники
     class Валюти_Objest : DirectoryObject
     {
         public Валюти_Objest() : base(Config.Kernel, "tab_a03",
-             new string[] { "col_a1", "col_a2" }) 
+             new string[] { "col_a1", "col_a2", "col_a3" }) 
         {
             Назва = "";
             Код = "";
+            fgdfgdfg = "";
             
             //Табличні частини
             ппп_TablePart = new Валюти_ппп_TablePart(this);
@@ -1174,6 +1175,7 @@ namespace ConfTrade_v1_1.Довідники
             {
                 Назва = base.FieldValue["col_a1"].ToString();
                 Код = base.FieldValue["col_a2"].ToString();
+                fgdfgdfg = base.FieldValue["col_a3"].ToString();
                 
                 BaseClear();
                 return true;
@@ -1186,6 +1188,7 @@ namespace ConfTrade_v1_1.Довідники
         {
             base.FieldValue["col_a1"] = Назва;
             base.FieldValue["col_a2"] = Код;
+            base.FieldValue["col_a3"] = fgdfgdfg;
             
             BaseSave();
         }
@@ -1197,6 +1200,7 @@ namespace ConfTrade_v1_1.Довідники
                "<uid>" + base.UnigueID.ToString() + "</uid>" +
                "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
                "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "<fgdfgdfg>" + "<![CDATA[" + fgdfgdfg + "]]>" + "</fgdfgdfg>"  +
                "</Валюти>";
         }
 
@@ -1213,6 +1217,7 @@ namespace ConfTrade_v1_1.Довідники
         
         public string Назва { get; set; }
         public string Код { get; set; }
+        public string fgdfgdfg { get; set; }
         
         //Табличні частини
         public Валюти_ппп_TablePart ппп_TablePart { get; set; }
@@ -1243,8 +1248,8 @@ namespace ConfTrade_v1_1.Довідники
     class Валюти_Select : DirectorySelect, IDisposable
     {
         public Валюти_Select() : base(Config.Kernel, "tab_a03",
-            new string[] { "col_a1", "col_a2" },
-            new string[] { "Назва", "Код" }) { }
+            new string[] { "col_a1", "col_a2", "col_a3" },
+            new string[] { "Назва", "Код", "fgdfgdfg" }) { }
     
         public bool Select() { return base.BaseSelect(); }
         
@@ -4187,6 +4192,256 @@ namespace ConfTrade_v1_1.Довідники
              new string[] { "Назва", "Код" },
              new string[] { "string", "" },
              "Довідник_Проекти_Список")
+        {
+            
+        }
+        
+    }
+      
+    
+    #endregion
+    
+    #region DIRECTORY "tyrter"
+    
+    class tyrter_Objest : DirectoryObject
+    {
+        public tyrter_Objest() : base(Config.Kernel, "tab_a38",
+             new string[] { "col_a1", "col_a2" }) 
+        {
+            Назва = "";
+            Код = "";
+            
+            //Табличні частини
+            rtrtye_TablePart = new tyrter_rtrtye_TablePart(this);
+            
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                Назва = base.FieldValue["col_a1"].ToString();
+                Код = base.FieldValue["col_a2"].ToString();
+                
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            base.FieldValue["col_a1"] = Назва;
+            base.FieldValue["col_a2"] = Код;
+            
+            BaseSave();
+        }
+
+        public string Serialize()
+        {
+            return 
+            "<tyrter>" +
+               "<uid>" + base.UnigueID.ToString() + "</uid>" +
+               "<Назва>" + "<![CDATA[" + Назва + "]]>" + "</Назва>"  +
+               "<Код>" + "<![CDATA[" + Код + "]]>" + "</Код>"  +
+               "</tyrter>";
+        }
+
+        public void Delete()
+        {
+            base.BaseDelete();
+        }
+        
+        public tyrter_Pointer GetDirectoryPointer()
+        {
+            tyrter_Pointer directoryPointer = new tyrter_Pointer(UnigueID.UGuid);
+            return directoryPointer;
+        }
+        
+        public string Назва { get; set; }
+        public string Код { get; set; }
+        
+        //Табличні частини
+        public tyrter_rtrtye_TablePart rtrtye_TablePart { get; set; }
+        
+    }
+    
+    
+    class tyrter_Pointer : DirectoryPointer
+    {
+        public tyrter_Pointer(object uid = null) : base(Config.Kernel, "tab_a38")
+        {
+            base.Init(new UnigueID(uid), null);
+        }
+        
+        public tyrter_Pointer(UnigueID uid, Dictionary<string, object> fields = null) : base(Config.Kernel, "tab_a38")
+        {
+            base.Init(uid, fields);
+        }
+        
+        public tyrter_Objest GetDirectoryObject()
+        {
+            tyrter_Objest tyrterObjestItem = new tyrter_Objest();
+            return tyrterObjestItem.Read(base.UnigueID) ? tyrterObjestItem : null;
+        }
+    }
+    
+    
+    class tyrter_Select : DirectorySelect, IDisposable
+    {
+        public tyrter_Select() : base(Config.Kernel, "tab_a38",
+            new string[] { "col_a1", "col_a2" },
+            new string[] { "Назва", "Код" }) { }
+    
+        public bool Select() { return base.BaseSelect(); }
+        
+        public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
+        
+        public bool MoveNext() { if (MoveToPosition()) { Current = new tyrter_Pointer(base.DirectoryPointerPosition.UnigueID, base.DirectoryPointerPosition.Fields); return true; } else { Current = null; return false; } }
+
+        public tyrter_Pointer Current { get; private set; }
+        
+        public tyrter_Pointer FindByField(string name, object value)
+        {
+            tyrter_Pointer itemPointer = new tyrter_Pointer();
+            DirectoryPointer directoryPointer = base.BaseFindByField(name, value);
+            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
+            return itemPointer;
+        }
+        
+        public List<tyrter_Pointer> FindListByField(string name, object value, int limit = 0, int offset = 0)
+        {
+            List<tyrter_Pointer> directoryPointerList = new List<tyrter_Pointer>();
+            foreach (DirectoryPointer directoryPointer in base.BaseFindListByField(name, value, limit, offset)) 
+                directoryPointerList.Add(new tyrter_Pointer(directoryPointer.UnigueID));
+            return directoryPointerList;
+        }
+    }
+    
+      
+    class tyrter_rtrtye_TablePart : DirectoryTablePart
+    {
+        public tyrter_rtrtye_TablePart(tyrter_Objest owner) : base(Config.Kernel, "tab_a39",
+             new string[] { "col_a1", "col_a2", "col_a3", "col_a4", "col_a5", "col_a6", "col_a7" }) 
+        {
+            if (owner == null) throw new Exception("owner null");
+            
+            Owner = owner;
+            Records = new List<Record>();
+        }
+        
+        public tyrter_Objest Owner { get; private set; }
+        
+        public List<Record> Records { get; set; }
+        
+        public void Read()
+        {
+            Records.Clear();
+            base.BaseRead(Owner.UnigueID);
+
+            foreach (Dictionary<string, object> fieldValue in base.FieldValueList) 
+            {
+                Record record = new Record();
+                record.UID = (Guid)fieldValue["uid"];
+                
+                record.rtyrety = fieldValue["col_a1"].ToString();
+                record.tytyu = fieldValue["col_a2"].ToString();
+                record.rtyrty = fieldValue["col_a3"].ToString();
+                record.rtyrt = fieldValue["col_a4"].ToString();
+                record.saads = fieldValue["col_a5"].ToString();
+                record.xzxczxc = fieldValue["col_a6"].ToString();
+                record.zxczxczxc = fieldValue["col_a7"].ToString();
+                
+                Records.Add(record);
+            }
+            
+            base.BaseClear();
+        }
+        
+        public void Save(bool clear_all_before_save /*= true*/) 
+        {
+            if (Records.Count > 0)
+            {
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete(Owner.UnigueID);
+
+                foreach (Record record in Records)
+                {
+                    Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+
+                    fieldValue.Add("col_a1", record.rtyrety);
+                    fieldValue.Add("col_a2", record.tytyu);
+                    fieldValue.Add("col_a3", record.rtyrty);
+                    fieldValue.Add("col_a4", record.rtyrt);
+                    fieldValue.Add("col_a5", record.saads);
+                    fieldValue.Add("col_a6", record.xzxczxc);
+                    fieldValue.Add("col_a7", record.zxczxczxc);
+                    
+                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
+                }
+                
+                base.BaseCommitTransaction();
+            }
+        }
+        
+        public void Delete()
+        {
+            base.BaseBeginTransaction();
+            base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
+        }
+        
+        
+        public class Record : DirectoryTablePartRecord
+        {
+            public Record()
+            {
+                rtyrety = "";
+                tytyu = "";
+                rtyrty = "";
+                rtyrt = "";
+                saads = "";
+                xzxczxc = "";
+                zxczxczxc = "";
+                
+            }
+        
+            
+            public Record(
+                string _rtyrety = "", string _tytyu = "", string _rtyrty = "", string _rtyrt = "", string _saads = "", string _xzxczxc = "", string _zxczxczxc = "")
+            {
+                rtyrety = _rtyrety;
+                tytyu = _tytyu;
+                rtyrty = _rtyrty;
+                rtyrt = _rtyrt;
+                saads = _saads;
+                xzxczxc = _xzxczxc;
+                zxczxczxc = _zxczxczxc;
+                
+            }
+            public string rtyrety { get; set; }
+            public string tytyu { get; set; }
+            public string rtyrty { get; set; }
+            public string rtyrt { get; set; }
+            public string saads { get; set; }
+            public string xzxczxc { get; set; }
+            public string zxczxczxc { get; set; }
+            
+        }
+    }
+      ///<summary>
+    ///Список.
+    ///</summary>
+    class tyrter_Список_View : DirectoryView
+    {
+        public tyrter_Список_View() : base(Config.Kernel, "tab_a38", 
+             new string[] { "col_a1", "col_a2" },
+             new string[] { "Назва", "Код" },
+             new string[] { "string", "string" },
+             "Довідник_tyrter_Список")
         {
             
         }

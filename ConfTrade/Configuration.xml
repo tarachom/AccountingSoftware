@@ -4,7 +4,7 @@
   <NameSpace>ConfTrade_v1_1</NameSpace>
   <Author>
   </Author>
-  <DateTimeSave>20.09.2020 16:50:20</DateTimeSave>
+  <DateTimeSave>24.11.2020 19:12:56</DateTimeSave>
   <ConstantsBlocks>
     <ConstantsBlock>
       <Name>Основний</Name>
@@ -476,6 +476,13 @@
           <NameInTable>col_a2</NameInTable>
           <Type>string</Type>
           <Desc>Код</Desc>
+        </Field>
+        <Field>
+          <Name>fgdfgdfg</Name>
+          <NameInTable>col_a3</NameInTable>
+          <Type>string</Type>
+          <Desc>
+          </Desc>
         </Field>
       </Fields>
       <TabularParts>
@@ -1166,15 +1173,13 @@ d(()&lt;&lt;&gt;&gt;&gt;&gt;&gt;&lt;&lt;!!!!!&lt;&lt;[CDATA[sdfsdfs</Desc>
           <Name>Дата</Name>
           <NameInTable>col_a3</NameInTable>
           <Type>date</Type>
-          <Desc>
-          </Desc>
+          <Desc>yyyy</Desc>
         </Field>
         <Field>
           <Name>Інформація</Name>
           <NameInTable>col_a4</NameInTable>
           <Type>string</Type>
-          <Desc>
-          </Desc>
+          <Desc>yyyyyy</Desc>
         </Field>
       </Fields>
       <TabularParts />
@@ -1442,6 +1447,100 @@ d(()&lt;&lt;&gt;&gt;&gt;&gt;&gt;&lt;&lt;!!!!!&lt;&lt;[CDATA[sdfsdfs</Desc>
             <Field>
               <Name>Код</Name>
               <NameInTable>col_a2</NameInTable>
+            </Field>
+          </Fields>
+        </View>
+      </Views>
+    </Directory>
+    <Directory>
+      <Name>tyrter</Name>
+      <Table>tab_a38</Table>
+      <Desc>
+      </Desc>
+      <Fields>
+        <Field>
+          <Name>Назва</Name>
+          <NameInTable>col_a1</NameInTable>
+          <Type>string</Type>
+          <Desc>Назва</Desc>
+        </Field>
+        <Field>
+          <Name>Код</Name>
+          <NameInTable>col_a2</NameInTable>
+          <Type>string</Type>
+          <Desc>Код</Desc>
+        </Field>
+      </Fields>
+      <TabularParts>
+        <TablePart>
+          <Name>rtrtye</Name>
+          <Table>tab_a39</Table>
+          <Desc>
+          </Desc>
+          <Fields>
+            <Field>
+              <Name>rtyrety</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+              <Desc>rtyr</Desc>
+            </Field>
+            <Field>
+              <Name>tytyu</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>rtyrty</Name>
+              <NameInTable>col_a3</NameInTable>
+              <Type>string</Type>
+              <Desc>rtyer</Desc>
+            </Field>
+            <Field>
+              <Name>rtyrt</Name>
+              <NameInTable>col_a4</NameInTable>
+              <Type>string</Type>
+              <Desc>yrtyer</Desc>
+            </Field>
+            <Field>
+              <Name>saads</Name>
+              <NameInTable>col_a5</NameInTable>
+              <Type>string</Type>
+              <Desc>asdas</Desc>
+            </Field>
+            <Field>
+              <Name>xzxczxc</Name>
+              <NameInTable>col_a6</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+            <Field>
+              <Name>zxczxczxc</Name>
+              <NameInTable>col_a7</NameInTable>
+              <Type>string</Type>
+              <Desc>
+              </Desc>
+            </Field>
+          </Fields>
+        </TablePart>
+      </TabularParts>
+      <Views>
+        <View>
+          <Name>Список</Name>
+          <Table>tab_a38</Table>
+          <Desc>Список</Desc>
+          <Fields>
+            <Field>
+              <Name>Назва</Name>
+              <NameInTable>col_a1</NameInTable>
+              <Type>string</Type>
+            </Field>
+            <Field>
+              <Name>Код</Name>
+              <NameInTable>col_a2</NameInTable>
+              <Type>string</Type>
             </Field>
           </Fields>
         </View>

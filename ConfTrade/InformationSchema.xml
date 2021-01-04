@@ -697,6 +697,24 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a38</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a08</Name>
     <Column>
       <Name>uid</Name>
@@ -766,6 +784,29 @@
     </Column>
     <Column>
       <Name>col_a8</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a03</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>
@@ -857,6 +898,54 @@
     </Column>
   </Table>
   <Table>
+    <Name>tab_a39</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a5</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a6</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a7</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
     <Name>tab_a23</Name>
     <Column>
       <Name>uid</Name>
@@ -877,24 +966,6 @@
       <Name>col_a2</Name>
       <DataType>numeric</DataType>
       <UdtName>numeric</UdtName>
-    </Column>
-  </Table>
-  <Table>
-    <Name>tab_a03</Name>
-    <Column>
-      <Name>uid</Name>
-      <DataType>uuid</DataType>
-      <UdtName>uuid</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a1</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
-    </Column>
-    <Column>
-      <Name>col_a2</Name>
-      <DataType>text</DataType>
-      <UdtName>text</UdtName>
     </Column>
   </Table>
   <Table>
@@ -1028,6 +1099,47 @@
     </Column>
     <Column>
       <Name>col_a2</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a36</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a1</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+  </Table>
+  <Table>
+    <Name>tab_a37</Name>
+    <Column>
+      <Name>uid</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>owner</Name>
+      <DataType>uuid</DataType>
+      <UdtName>uuid</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a3</Name>
+      <DataType>date</DataType>
+      <UdtName>date</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a4</Name>
+      <DataType>text</DataType>
+      <UdtName>text</UdtName>
+    </Column>
+    <Column>
+      <Name>col_a5</Name>
       <DataType>text</DataType>
       <UdtName>text</UdtName>
     </Column>

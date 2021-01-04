@@ -8,6 +8,13 @@ namespace Configurator
 {
 	public class ConfigurationParam
 	{
+		public ConfigurationParam()
+		{
+			DataBaseServer = "localhost";
+			DataBaseLogin = "postgres";
+			DataBasePort = 5432;
+		}
+
 		public string ConfigurationKey { get; set; }
 
 		public string ConfigurationName { get; set; }

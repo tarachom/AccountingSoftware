@@ -204,6 +204,7 @@ namespace Configurator
         {
 
         }
+
         private void buttonCopy_Click(object sender, EventArgs e)
         {
 			if (listBoxConfiguration.SelectedItem != null)
