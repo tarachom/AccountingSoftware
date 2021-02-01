@@ -113,7 +113,7 @@ namespace Configurator
 			{
 				Configuration.Comparison(
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
-					@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+					@"D:\Visual Studio\AccountingSoftware\ConfTrade\Comparison.xslt",
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 					Conf.PathToTempXmlFileConfiguration,
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
@@ -144,7 +144,7 @@ namespace Configurator
 				ApendLine("Новий " + GetNameFromType(nodeType.Value) + ": ", nodeName.Value);
 
 				InfoTableCreateFieldCreate(nodeNewDirectory.Current, "\t ");
-				richTextBoxInfo.AppendText("\n");
+				ApendLine("", "\n");
 
 				XPathNodeIterator nodeDirectoryTabularParts = nodeNewDirectory.Current.Select("Control_TabularParts");
 				while (nodeDirectoryTabularParts.MoveNext())
@@ -325,7 +325,7 @@ namespace Configurator
 			ApendLine("3. Порівняння конфігурації та бази даних", "");
 			Configuration.Comparison(
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\Comparison.xslt",
+				@"D:\Visual Studio\AccountingSoftware\ConfTrade\Comparison.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 				Conf.PathToTempXmlFileConfiguration,
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
@@ -333,7 +333,7 @@ namespace Configurator
 			ApendLine("4. Створення команд SQL", "", "\n");
 			Configuration.ComparisonAnalizeGeneration(
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
+				@"D:\Visual Studio\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) +  @"\ReportAnalize.xml", replacementColumn);
 
 			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
@@ -396,7 +396,7 @@ namespace Configurator
 
 			ApendLine("\n[ Генерування коду ]", "", "\n");
 			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
-				@"D:\VS\Project\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				@"D:\Visual Studio\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
