@@ -155,6 +155,12 @@ namespace Configurator
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
+			if (comboBoxBlock.SelectedItem == null)
+            {
+				MessageBox.Show("Потрібно вибрати блок", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
 			ConstantsBlock = comboBoxBlock.SelectedItem.ToString();
 
 			string name = textBoxName.Text;
