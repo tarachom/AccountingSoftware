@@ -21,6 +21,8 @@ namespace Configurator
 			InitializeComponent();
 		}
 
+		public const string PathToXsltTemplate = @"D:\VS\Project\AccountingSoftware\ConfTrade";
+
 		public Configuration Conf { get; set; }
 
 		private void ApendLine(string head, string bodySelect, string futer = "")
@@ -113,7 +115,7 @@ namespace Configurator
 			{
 				Configuration.Comparison(
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
-					@"D:\Visual Studio\AccountingSoftware\ConfTrade\Comparison.xslt",
+					PathToXsltTemplate + @"\Comparison.xslt",
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 					Conf.PathToTempXmlFileConfiguration,
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
@@ -325,7 +327,7 @@ namespace Configurator
 			ApendLine("3. Порівняння конфігурації та бази даних", "");
 			Configuration.Comparison(
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
-				@"D:\Visual Studio\AccountingSoftware\ConfTrade\Comparison.xslt",
+				PathToXsltTemplate + @"\Comparison.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
 				Conf.PathToTempXmlFileConfiguration,
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
@@ -333,7 +335,7 @@ namespace Configurator
 			ApendLine("4. Створення команд SQL", "", "\n");
 			Configuration.ComparisonAnalizeGeneration(
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
-				@"D:\Visual Studio\AccountingSoftware\ConfTrade\ComparisonReportAnalize.xslt",
+				PathToXsltTemplate + @"\ComparisonReportAnalize.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) +  @"\ReportAnalize.xml", replacementColumn);
 
 			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
@@ -396,7 +398,7 @@ namespace Configurator
 
 			ApendLine("\n[ Генерування коду ]", "", "\n");
 			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
-				@"D:\Visual Studio\AccountingSoftware\ConfTrade\CodeGeneration.xslt",
+				PathToXsltTemplate + @"\CodeGeneration.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
