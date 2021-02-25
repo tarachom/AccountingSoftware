@@ -23,7 +23,7 @@ limitations under the License.
 /*
 Автор:    Тарахомин Юрій Іванович
 Адреса:   Україна, м. Львів
-Сайт:     find.org.ua
+Сайт:     accounting.org.ua
 */
   </xsl:template>
   
