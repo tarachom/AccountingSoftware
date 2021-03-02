@@ -21,7 +21,7 @@ namespace Configurator
 			InitializeComponent();
 		}
 
-		public const string PathToXsltTemplate = @"D:\VS\Project\AccountingSoftware\ConfTrade";
+		public const string PathToXsltTemplate = @"D:\VS\Project\AccountingSoftware\Configurator";
 
 		public Configuration Conf { get; set; }
 
