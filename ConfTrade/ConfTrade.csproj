@@ -56,6 +56,25 @@
     <Compile Include="WebServer\CSharp\default.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="back_up\Comparison.xml" />
+    <Content Include="back_up\Configuration - Copy.xml" />
+    <Content Include="back_up\Configuration.xml" />
+    <Content Include="back_up\ConfigurationNew.xml" />
+    <Content Include="back_up\ConfTradeExample_code.txt" />
+    <Content Include="back_up\DirectoryEmptyPointer.cs.txt" />
+    <Content Include="back_up\DirectoryManager.cs.txt" />
+    <Content Include="back_up\DocumentEmptyPointer.cs.txt" />
+    <Content Include="back_up\generic_test.txt" />
+    <Content Include="back_up\info.txt" />
+    <Content Include="back_up\JobList.txt" />
+    <Content Include="back_up\Old\code.txt" />
+    <Content Include="back_up\Old\Comparison_CSharp_code.txt" />
+    <Content Include="back_up\Old\ConfigurationObjectType.cs.txt" />
+    <Content Include="back_up\Old\FieldValue.cs.txt" />
+    <Content Include="back_up\Old\README.txt" />
+    <Content Include="back_up\Old\XSLTFile1.xslt" />
+    <Content Include="back_up\TextFile1.txt" />
+    <Content Include="back_up\XmlSerialization.cs.txt" />
     <Content Include="CodeGeneration.xslt">
       <SubType>Designer</SubType>
     </Content>
@@ -106,6 +125,8 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="back_up\sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

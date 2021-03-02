@@ -60,14 +60,11 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstants.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDocuments.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationDirectories.cs" />
-    <Content Include="back_up\Old\ConfigurationObjectType.cs.txt" />
     <Compile Include="AccountingSoftware\Configuration\Configuration.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectTablePart.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
-    <Content Include="back_up\DirectoryEmptyPointer.cs.txt" />
-    <Content Include="back_up\DirectoryManager.cs.txt" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePart.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
@@ -77,9 +74,7 @@
     <Compile Include="AccountingSoftware\Directory\DirectoryObject.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryPointer.cs" />
     <Compile Include="AccountingSoftware\Directory\Directory.cs" />
-    <Content Include="back_up\Old\FieldValue.cs.txt" />
     <Compile Include="AccountingSoftware\EmptyPointer.cs" />
-    <Content Include="back_up\DocumentEmptyPointer.cs.txt" />
     <Compile Include="AccountingSoftware\Document\DocumentPointer.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentSelect.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentTablePart.cs" />
@@ -97,29 +92,10 @@
     <Compile Include="AccountingSoftware\Document\Document.cs" />
     <Compile Include="AccountingSoftware\Kernel.cs" />
     <Compile Include="AccountingSoftware\UnigueID.cs" />
-    <Content Include="back_up\Old\code.txt" />
-    <Content Include="back_up\Old\README.txt" />
-    <Content Include="back_up\Old\XSLTFile1.xslt" />
-    <Content Include="back_up\TextFile1.txt" />
-    <Content Include="back_up\XmlSerialization.cs.txt" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="back_up\Old\Comparison_CSharp_code.txt" />
-    <Content Include="back_up\Comparison.xml" />
-    <Content Include="back_up\Configuration - Copy.xml" />
-    <Content Include="back_up\Configuration.xml" />
-    <Content Include="back_up\ConfigurationNew.xml" />
-    <Content Include="back_up\ConfTradeExample_code.txt" />
-    <Content Include="back_up\generic_test.txt" />
-    <Content Include="back_up\info.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="back_up\sql" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AccountingSoftware\Journal\" />

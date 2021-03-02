@@ -211,6 +211,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CodeGeneration.xslt">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Comparison.xslt" />
+    <Content Include="ComparisonReportAnalize.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
