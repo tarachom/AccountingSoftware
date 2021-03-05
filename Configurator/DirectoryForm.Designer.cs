@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryForm));
 			this.listBoxFields = new System.Windows.Forms.ListBox();
 			this.contextMenuStripField = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyFiled = new System.Windows.Forms.ToolStripMenuItem();
@@ -422,6 +423,7 @@
 			this.ClientSize = new System.Drawing.Size(837, 591);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.Name = "DirectoryForm";
 			this.Padding = new System.Windows.Forms.Padding(10);

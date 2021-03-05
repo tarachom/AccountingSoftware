@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConstantsBlockForm));
 			this.textBoxDesc = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
 			this.textBoxName = new System.Windows.Forms.TextBox();
@@ -131,6 +132,7 @@
 			this.ClientSize = new System.Drawing.Size(584, 187);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.Name = "ConstantsBlockForm";
 			this.Padding = new System.Windows.Forms.Padding(10);

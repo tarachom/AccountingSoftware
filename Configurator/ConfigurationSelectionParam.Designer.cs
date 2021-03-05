@@ -28,11 +28,14 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigurationSelectionParam));
 			this.textBoxPathToFile = new System.Windows.Forms.TextBox();
 			this.labelPathToFile = new System.Windows.Forms.Label();
 			this.labelPostgreSQLServer = new System.Windows.Forms.Label();
 			this.textBoxPostgreSQLServer = new System.Windows.Forms.TextBox();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.textBoxPostgreSQLPort = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.textBoxPostgreSQLDataBase = new System.Windows.Forms.TextBox();
 			this.labelPostgreSQLDataBase = new System.Windows.Forms.Label();
 			this.textBoxPostgreSQLPassword = new System.Windows.Forms.TextBox();
@@ -44,8 +47,6 @@
 			this.buttonOK = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
 			this.buttonConnect = new System.Windows.Forms.Button();
-			this.textBoxPostgreSQLPort = new System.Windows.Forms.TextBox();
-			this.label1 = new System.Windows.Forms.Label();
 			this.buttonTryConnect = new System.Windows.Forms.Button();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
@@ -100,6 +101,22 @@
 			this.groupBox1.TabIndex = 2;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "База даних PostgreSQL";
+			// 
+			// textBoxPostgreSQLPort
+			// 
+			this.textBoxPostgreSQLPort.Location = new System.Drawing.Point(82, 97);
+			this.textBoxPostgreSQLPort.Name = "textBoxPostgreSQLPort";
+			this.textBoxPostgreSQLPort.Size = new System.Drawing.Size(257, 20);
+			this.textBoxPostgreSQLPort.TabIndex = 8;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(12, 100);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(35, 13);
+			this.label1.TabIndex = 9;
+			this.label1.Text = "Порт:";
 			// 
 			// textBoxPostgreSQLDataBase
 			// 
@@ -195,22 +212,6 @@
 			this.buttonConnect.UseVisualStyleBackColor = true;
 			this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
 			// 
-			// textBoxPostgreSQLPort
-			// 
-			this.textBoxPostgreSQLPort.Location = new System.Drawing.Point(82, 97);
-			this.textBoxPostgreSQLPort.Name = "textBoxPostgreSQLPort";
-			this.textBoxPostgreSQLPort.Size = new System.Drawing.Size(257, 20);
-			this.textBoxPostgreSQLPort.TabIndex = 8;
-			// 
-			// label1
-			// 
-			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 100);
-			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(35, 13);
-			this.label1.TabIndex = 9;
-			this.label1.Text = "Порт:";
-			// 
 			// buttonTryConnect
 			// 
 			this.buttonTryConnect.Location = new System.Drawing.Point(449, 91);
@@ -236,6 +237,7 @@
 			this.Controls.Add(this.labelPathToFile);
 			this.Controls.Add(this.textBoxPathToFile);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ConfigurationSelectionParam";

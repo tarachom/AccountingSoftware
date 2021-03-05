@@ -551,11 +551,12 @@
 			this.ClientSize = new System.Drawing.Size(862, 509);
 			this.Controls.Add(this.splitContainerBase);
 			this.Controls.Add(this.menuStripTop);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.MainMenuStrip = this.menuStripTop;
 			this.Name = "FormConfiguration";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "Form1";
+			this.Text = "Конфігуратор";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguration_FormClosing);
 			this.Load += new System.EventHandler(this.FormConfiguration_Load);

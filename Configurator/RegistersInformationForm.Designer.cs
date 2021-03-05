@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RegistersInformationForm));
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel5 = new System.Windows.Forms.Panel();
 			this.treeViewFields = new System.Windows.Forms.TreeView();
@@ -268,6 +269,7 @@
 			this.ClientSize = new System.Drawing.Size(837, 432);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.Name = "RegistersInformationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);

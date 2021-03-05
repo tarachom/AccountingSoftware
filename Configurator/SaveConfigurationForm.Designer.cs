@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SaveConfigurationForm));
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.buttonAnalize = new System.Windows.Forms.Button();
 			this.buttonClose = new System.Windows.Forms.Button();
@@ -144,10 +145,11 @@
 			this.Controls.Add(this.panel3);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.panel2);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "SaveConfigurationForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "SaveConfigurationForm";
+			this.Text = "Збереження змін в конфігурації та генерування коду";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaveConfigurationForm_FormClosing);
 			this.Load += new System.EventHandler(this.SaveConfigurationForm_Load);
 			this.panel2.ResumeLayout(false);

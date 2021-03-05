@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DocumentForm));
 			this.listBoxFields = new System.Windows.Forms.ListBox();
 			this.panel1 = new System.Windows.Forms.Panel();
 			this.panel7 = new System.Windows.Forms.Panel();
@@ -291,6 +292,7 @@
 			this.ClientSize = new System.Drawing.Size(837, 591);
 			this.Controls.Add(this.splitContainer1);
 			this.Controls.Add(this.panel2);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.KeyPreview = true;
 			this.Name = "DocumentForm";
 			this.Padding = new System.Windows.Forms.Padding(10);
