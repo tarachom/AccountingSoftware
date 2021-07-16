@@ -117,25 +117,25 @@ namespace Configurator
 				}
 			}
 
-			TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
-			directoriViewsNode.SelectedImageIndex = 8;
-			directoriViewsNode.ImageIndex = 8;
+			//TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
+			//directoriViewsNode.SelectedImageIndex = 8;
+			//directoriViewsNode.ImageIndex = 8;
 
-			foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in confDirectory.Views)
-			{
-				TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
-				directoriViewNode.SelectedImageIndex = 9;
-				directoriViewNode.ImageIndex = 9;
+			//foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in confDirectory.Views)
+			//{
+			//	TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
+			//	directoriViewNode.SelectedImageIndex = 9;
+			//	directoriViewNode.ImageIndex = 9;
 
-				//Поля
-				foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
-				{
-					TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
+			//	//Поля
+			//	foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
+			//	{
+			//		TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
 
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
-				}
-			}
+			//		fieldNode.SelectedImageIndex = 15;
+			//		fieldNode.ImageIndex = 15;
+			//	}
+			//}
 		}
 
 		public void LoadDirectories(TreeNode rootNode)
