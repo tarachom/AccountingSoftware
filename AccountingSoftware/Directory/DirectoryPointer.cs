@@ -61,7 +61,7 @@ namespace AccountingSoftware
 			return (UnigueID.UGuid == Guid.Empty);
 		}
 
-		public string BasePresentation(string[] fieldPresentation)
+		protected string BasePresentation(string[] fieldPresentation)
 		{
 			if (!IsEmpty() && fieldPresentation.Length != 0)
 			{

@@ -545,6 +545,12 @@ namespace AccountingSoftware
 			return isFind;
 		}
 
+		/// <summary>
+        /// Вибирає значення полів по вказівнику для представлення
+        /// </summary>
+        /// <param name="QuerySelect">Запит</param>
+        /// <param name="fieldPresentation">Поля які використовуються для представлення</param>
+        /// <returns></returns>
 		public string GetPresentation(Query QuerySelect, string[] fieldPresentation)
         {
 			string query = QuerySelect.Construct();
