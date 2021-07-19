@@ -818,6 +818,9 @@ namespace AccountingSoftware
 				string nameInTable = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
 				string type = fieldNodes.Current.SelectSingleNode("Type").Value;
 				string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
+				string isPresentationString = fieldNodes.Current.SelectSingleNode("IsPresentation").Value;
+
+				bool isPresentation = isPresentationString == "1";
 
 				string pointer = "";
 				if (type == "pointer" || type == "enum")
@@ -825,7 +828,7 @@ namespace AccountingSoftware
 					pointer = fieldNodes.Current.SelectSingleNode("Pointer").Value;
 				}
 
-				ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc);
+				ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc, isPresentation);
 
 				fields.Add(name, ConfObjectField);
 			}
@@ -1168,6 +1171,10 @@ namespace AccountingSoftware
 				XmlElement nodeFieldDesc = xmlConfDocument.CreateElement("Desc");
 				nodeFieldDesc.InnerText = field.Value.Desc;
 				nodeField.AppendChild(nodeFieldDesc);
+
+				XmlElement nodeFieldIsPresentation = xmlConfDocument.CreateElement("IsPresentation");
+				nodeFieldIsPresentation.InnerText = field.Value.IsPresentation ? "1" : "0";
+				nodeField.AppendChild(nodeFieldIsPresentation);
 			}
 		}
 

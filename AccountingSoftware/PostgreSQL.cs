@@ -545,6 +545,26 @@ namespace AccountingSoftware
 			return isFind;
 		}
 
+		public string GetPresentation(Query QuerySelect, string[] fieldPresentation)
+        {
+			string query = QuerySelect.Construct();
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			string presentation = "";
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				for (int i = 0; i < fieldPresentation.Length; i++)
+					presentation += (i > 0 ? "/" : "") + reader[fieldPresentation[i]].ToString();
+			}
+			reader.Close();
+
+			return presentation;
+		}
+
 		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = "SELECT uid ";

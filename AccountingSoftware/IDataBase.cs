@@ -61,6 +61,7 @@ namespace AccountingSoftware
 		void SelectDirectoryPointers(Query QuerySelect, List<DirectoryPointer> listDirectoryPointer);
 		string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field);
 		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer);
+		string GetPresentation(Query QuerySelect, string[] fieldPresentation);
 
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void InsertDirectoryTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);

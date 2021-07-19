@@ -682,6 +682,19 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
             return <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
+		
+		public string GetPresentation()
+        {
+		    return base.BasePresentation(
+			    <xsl:text>new string[] { </xsl:text>
+                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
+                   <xsl:if test="position() != 1">
+                     <xsl:text>, </xsl:text>
+                   </xsl:if>
+                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                 </xsl:for-each> }
+			);
+        }
     }
     
     <xsl:call-template name="CommentSummary" />

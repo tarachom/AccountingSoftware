@@ -128,6 +128,8 @@ namespace Configurator
 					}
 				}
 
+				checkBoxIsPresentation.Checked = ConfigurationObjectField.IsPresentation;
+
 				IsNew = false;
 			}
 		}
@@ -182,6 +184,8 @@ namespace Configurator
 			{
 				ConfigurationObjectField.Pointer = "";
 			}
+
+			ConfigurationObjectField.IsPresentation = checkBoxIsPresentation.Checked;
 
 			CallBack.Invoke(OriginalName, ConfigurationObjectField, IsNew, this.Tag);
 

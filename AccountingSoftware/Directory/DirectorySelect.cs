@@ -39,6 +39,8 @@ namespace AccountingSoftware
 			QuerySelect = new Query(table);
 			BaseSelectList = new List<DirectoryPointer>();
 
+			//Fields = fieldsNameInTableArray;
+
 			Alias = new Dictionary<string, string>();
 			for (int i = 0; i < fieldsNameInTableArray.Length; i++)
 			{
@@ -64,6 +66,8 @@ namespace AccountingSoftware
 		private string Table { get; set; }
 
 		protected int Position { get; private set; }
+
+		//private string[] Fields { get; set; }
 
 		public Dictionary<string, string> Alias { get; }
 
@@ -111,13 +115,13 @@ namespace AccountingSoftware
 
 		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
 		{
-			if (!Alias.ContainsKey(fieldName))
-				throw new Exception("Поле " + fieldName + " не знайдено!");
+			//if (!Alias.ContainsKey(fieldName))
+			//	throw new Exception("Поле " + fieldName + " не знайдено!");
 
 			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
 			Query querySelect = new Query(Table);
-			querySelect.Where.Add(new Where(Alias[fieldName], Comparison.EQ, fieldValue));
+			querySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
 
 			bool isFind = Kernel.DataBase.FindDirectoryPointer(querySelect, ref directoryPointer);
 
@@ -126,15 +130,15 @@ namespace AccountingSoftware
 
 		protected List<DirectoryPointer> BaseFindListByField(string fieldName, object fieldValue, int limit = 0, int offset = 0)
 		{
-			if (!Alias.ContainsKey(fieldName))
-				throw new Exception("Поле " + fieldName + " не знайдено!");
+			//if (!Alias.ContainsKey(fieldName))
+			//	throw new Exception("Поле " + fieldName + " не знайдено!");
 
 			List<DirectoryPointer> directoryPointerList = new List<DirectoryPointer>();
 
 			Query querySelect = new Query(Table);
 			querySelect.Limit = limit;
 			querySelect.Offset = offset;
-			querySelect.Where.Add(new Where(Alias[fieldName], Comparison.EQ, fieldValue));
+			querySelect.Where.Add(new Where(fieldName, Comparison.EQ, fieldValue));
 
 			Kernel.DataBase.SelectDirectoryPointers(querySelect, directoryPointerList);
 
