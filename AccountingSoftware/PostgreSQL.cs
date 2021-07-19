@@ -552,6 +552,9 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+
 			string presentation = "";
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
