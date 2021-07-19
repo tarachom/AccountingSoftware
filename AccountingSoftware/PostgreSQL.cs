@@ -574,6 +574,20 @@ namespace AccountingSoftware
 			return presentation;
 		}
 
+		public void DeleteDirectoryTempTable(DirectorySelect directorySelect)
+		{
+			if (directorySelect.QuerySelect.CreateTempTable == true &&
+				directorySelect.QuerySelect.TempTable != "" &&
+			 	directorySelect.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
+			{
+				string query = "DROP TABLE IF EXISTS " + directorySelect.QuerySelect.TempTable;
+				Console.WriteLine(query);
+
+				NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+				nCommand.ExecuteNonQuery();
+			}
+		}
+
 		public void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = "SELECT uid ";

@@ -153,5 +153,11 @@ namespace AccountingSoftware
 			BaseSelectList = null;
 			Position = 0;
 		}
+
+		public void DeleteTempTable()
+		{
+			Kernel.DataBase.DeleteDirectoryTempTable(this);
+			QuerySelect.CreateTempTable = false;
+		}
 	}
 }
