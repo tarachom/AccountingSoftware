@@ -240,6 +240,7 @@
             this.KeyPreview = true;
             this.Name = "FieldForm";
             this.Padding = new System.Windows.Forms.Padding(10);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Поле";
             this.Load += new System.EventHandler(this.FieldForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FieldForm_KeyDown);

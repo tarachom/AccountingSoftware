@@ -380,7 +380,7 @@ namespace AccountingSoftware
 				//Console.WriteLine(field + " = " + fields[field]);
 			}
 
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -409,7 +409,7 @@ namespace AccountingSoftware
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
 			}
 
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -425,7 +425,7 @@ namespace AccountingSoftware
 
 			query += " FROM " + table + " WHERE uid = @uid";
 
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
@@ -449,6 +449,7 @@ namespace AccountingSoftware
 		public void DeleteDirectoryObject(UnigueID unigueID, string table)
 		{
 			string query = "DELETE FROM " + table + " WHERE uid = @uid";
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
@@ -459,7 +460,7 @@ namespace AccountingSoftware
 		public void SelectDirectoryPointers(Query QuerySelect, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = QuerySelect.Construct();
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 

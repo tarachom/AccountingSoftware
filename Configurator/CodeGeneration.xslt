@@ -625,15 +625,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             BaseSave();
         }
 
-        public string Serialize()
+        public string Serialize(string root = "<xsl:value-of select="$DirectoryName"/>")
         {
             return 
-            "&lt;<xsl:value-of select="$DirectoryName"/>&gt;" +
+            "&lt;" + root + "&gt;" +
                <xsl:text>"&lt;uid&gt;" + base.UnigueID.ToString() + "&lt;/uid&gt;"</xsl:text> +
                <xsl:for-each select="Fields/Field">
                  <xsl:call-template name="SerializeFieldValue" /> +
                </xsl:for-each>
-            <xsl:text>"&lt;/</xsl:text><xsl:value-of select="$DirectoryName"/>&gt;";
+            <xsl:text>"&lt;/" + root + "&gt;"</xsl:text>;
         }
 
         public void Delete()
