@@ -484,7 +484,7 @@ namespace AccountingSoftware
 				}
 
 				DirectoryPointer elementPointer = new DirectoryPointer();
-				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields);
+				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields); //!!! Подумати як зробити Init protect
 
 				listDirectoryPointer.Add(elementPointer);
 			}
