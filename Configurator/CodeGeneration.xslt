@@ -296,16 +296,23 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     static class Config
     {
         public static Kernel Kernel { get; set; }
+		
+        public static void ReadAllConstants()
+        {
+            <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
+                   <xsl:text>Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
+            </xsl:for-each>
+        }
         <!--
         public static bool StartInit { get; set; }
         
         public static void InitAllConstants()
         {
-            <xsl:variable name="Constants" select="Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
+            <xsl:variable name="ConstantsAll" select="Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
             Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
             bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
                  <xsl:text>new string[] { </xsl:text>
-                 <xsl:for-each select="$Constants">
+                 <xsl:for-each select="$ConstantsAll">
                    <xsl:if test="position() != 1">
                      <xsl:text>, </xsl:text>
                    </xsl:if>
@@ -315,7 +322,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
             if (IsSelect)
             {
                 StartInit = true;
-                <xsl:for-each select="$Constants">
+                <xsl:for-each select="$ConstantsAll">
                   <xsl:text>Константи.</xsl:text><xsl:value-of select="../../Name"/><xsl:text>.</xsl:text><xsl:value-of select="Name"/>
                   <xsl:text>_Const = </xsl:text>
                   <xsl:call-template name="ReadFieldValue">
@@ -336,6 +343,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         public static void ReadAll()
         {
             <xsl:variable name="Constants" select="Constants/Constant" />
+		    <xsl:if test="count($Constants) &gt; 0">
             Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
             bool IsSelect = Config.Kernel.DataBase.SelectAllConstants("tab_constants",
                  <xsl:text>new string[] { </xsl:text>
@@ -357,6 +365,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                   </xsl:call-template>;
                 </xsl:for-each>
             }
+			</xsl:if>
         }
         
         <xsl:for-each select="Constants/Constant">
@@ -370,10 +379,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         <xsl:text> </xsl:text>
         <xsl:value-of select="Name"/>_Const
         {
-            get
-            {
-                return m_<xsl:value-of select="Name"/>_Const;
-            }
+            get { return m_<xsl:value-of select="Name"/>_Const; }
             set
             {
                 m_<xsl:value-of select="Name"/>_Const = value;
@@ -694,6 +700,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                    <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
                  </xsl:for-each> }
 			);
+        }
+		
+        public <xsl:value-of select="$DirectoryName"/>_Pointer GetEmptyPointer()
+        {
+            return new <xsl:value-of select="$DirectoryName"/>_Pointer();
         }
     }
     

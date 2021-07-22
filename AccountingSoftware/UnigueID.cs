@@ -84,6 +84,14 @@ namespace AccountingSoftware
 		public string Table { get; private set; }
 
 		/// <summary>
+		/// Встановлює пустий ідентифікатор, обнуляє ссилку
+		/// </summary>
+		public void SetEmpty()
+        {
+			UGuid = Guid.Empty;
+		}
+
+		/// <summary>
 		/// Повертає Унікальний ідентифікатор у формі тексту
 		/// </summary>
 		/// <returns></returns>
