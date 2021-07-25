@@ -69,7 +69,13 @@ namespace AccountingSoftware
 		/// <param name="table">Таблиця задається у випадку составного типу</param>
 		public UnigueID(string uGuid, string table = "")
 		{
-			UGuid = Guid.Parse(uGuid);
+			Guid resultUGuid;
+
+			if (Guid.TryParse(uGuid, out resultUGuid))
+				UGuid = resultUGuid;
+			else
+				UGuid = Guid.Empty;
+
 			Table = table;
 		}
 

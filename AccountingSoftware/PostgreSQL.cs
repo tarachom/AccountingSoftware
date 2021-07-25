@@ -81,7 +81,7 @@ namespace AccountingSoftware
 			try
 			{
 				Connection.Open();
-				Connection.Close();
+				//Connection.Close();
 
 				return true;
 			}
