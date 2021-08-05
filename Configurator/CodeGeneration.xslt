@@ -309,6 +309,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 {
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
+	#region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
     static class <xsl:value-of select="Name"/>
     {
         public static void ReadAll()
@@ -402,7 +403,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
                 {
                     Record record = new Record();
-                    
                     record.UID = (Guid)fieldValue["uid"];
                     
                     <xsl:for-each select="Fields/Field">
@@ -504,6 +504,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
           </xsl:for-each>
         </xsl:for-each>     
     }
+    #endregion
     </xsl:for-each>
 }
 
@@ -840,6 +841,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 namespace <xsl:value-of select="Configuration/NameSpace"/>.Перелічення
 {
     <xsl:for-each select="Configuration/Enums/Enum">
+    #region ENUM "<xsl:value-of select="Name"/>"
     <xsl:call-template name="CommentSummary" />
     public enum <xsl:value-of select="Name"/>
     {
@@ -854,7 +856,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Переліченн�
              </xsl:if>
          </xsl:for-each>
     }
-    
+    #endregion
     </xsl:for-each>
 }
 
