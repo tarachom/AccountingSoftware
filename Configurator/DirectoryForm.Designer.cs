@@ -131,6 +131,7 @@
             // listBoxViews
             // 
             this.listBoxViews.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxViews.Enabled = false;
             this.listBoxViews.FormattingEnabled = true;
             this.listBoxViews.Location = new System.Drawing.Point(0, 0);
             this.listBoxViews.Name = "listBoxViews";
@@ -150,6 +151,7 @@
             // 
             // buttonAddView
             // 
+            this.buttonAddView.Enabled = false;
             this.buttonAddView.Location = new System.Drawing.Point(105, 3);
             this.buttonAddView.Name = "buttonAddView";
             this.buttonAddView.Size = new System.Drawing.Size(55, 23);
@@ -161,6 +163,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.Enabled = false;
             this.label6.Location = new System.Drawing.Point(5, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 13);
