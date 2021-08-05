@@ -303,35 +303,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
                    <xsl:text>Константи.</xsl:text><xsl:value-of select="Name"/>.ReadAll();
             </xsl:for-each>
         }
-        <!--
-        public static bool StartInit { get; set; }
-        
-        public static void InitAllConstants()
-        {
-            <xsl:variable name="ConstantsAll" select="Configuration/ConstantsBlocks/ConstantsBlock/./Constants/Constant" />
-            Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-            bool IsSelect = Kernel.DataBase.SelectAllConstants("tab_constants",
-                 <xsl:text>new string[] { </xsl:text>
-                 <xsl:for-each select="$ConstantsAll">
-                   <xsl:if test="position() != 1">
-                     <xsl:text>, </xsl:text>
-                   </xsl:if>
-                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-                 </xsl:for-each> }, fieldValue);
-            
-            if (IsSelect)
-            {
-                StartInit = true;
-                <xsl:for-each select="$ConstantsAll">
-                  <xsl:text>Константи.</xsl:text><xsl:value-of select="../../Name"/><xsl:text>.</xsl:text><xsl:value-of select="Name"/>
-                  <xsl:text>_Const = </xsl:text>
-                  <xsl:call-template name="ReadFieldValue">
-                    <xsl:with-param name="BaseFieldContainer">fieldValue</xsl:with-param>
-                  </xsl:call-template>;
-                </xsl:for-each>
-                StartInit = false; 
-            }
-        }-->
     }
 }
 
@@ -541,34 +512,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
-    <!--
-    class <xsl:value-of select="$DirectoryName"/>_Manager : DirectoryManager
-    {
-        public <xsl:value-of select="$DirectoryName"/>_Manager() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
-            <xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="Fields/Field">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-            </xsl:for-each> },
-            <xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="Fields/Field">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
-            </xsl:for-each> }) { }
-
-        public <xsl:value-of select="$DirectoryName"/>_Pointer FindByField(string name, object value)
-        {
-            <xsl:value-of select="$DirectoryName"/>_Pointer itemPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer();
-            DirectoryPointer directoryPointer = base.BaseFindByField(base.Alias[name], value);
-            if (!directoryPointer.IsEmpty()) itemPointer.Init(directoryPointer.UnigueID);
-            return itemPointer;
-        }
-    }
-    -->
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
@@ -889,56 +832,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         }
     }
       </xsl:for-each> <!-- TableParts -->
-      
-      <xsl:for-each select="Views/View"> <!-- Views -->
-        <xsl:variable name="ViewsName" select="Name"/>
-        <xsl:variable name="ViewsFullName" select="concat($DirectoryName, '_', $ViewsName)"/>
-    
-    <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$ViewsFullName"/>_View : DirectoryView
-    {
-        public <xsl:value-of select="$ViewsFullName"/>_View() : base(Config.Kernel, "<xsl:value-of select="Table"/>", 
-             <xsl:text>new string[] { </xsl:text>
-             <xsl:for-each select="Fields/Field">
-               <xsl:if test="position() != 1">
-                 <xsl:text>, </xsl:text>
-               </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-             </xsl:for-each> },
-             <xsl:text>new string[] { </xsl:text>
-             <xsl:for-each select="Fields/Field">
-               <xsl:if test="position() != 1">
-                 <xsl:text>, </xsl:text>
-               </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
-             </xsl:for-each> },
-             <xsl:text>new string[] { </xsl:text>
-             <xsl:for-each select="Fields/Field">
-               <xsl:if test="position() != 1">
-                 <xsl:text>, </xsl:text>
-               </xsl:if>
-               <xsl:text>"</xsl:text><xsl:value-of select="Type"/><xsl:text>"</xsl:text>
-             </xsl:for-each> },
-             "Довідник_<xsl:value-of select="$ViewsFullName"/>")
-        {
-            <!--
-            base.QuerySelect.PrimaryField = "<xsl:value-of select="PrimaryField"/>";
-            -->
-            <!--
-            <xsl:for-each select="Where/Field">
-              <xsl:text>Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text> = new Where("</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>", Comparison.EQ, null)</xsl:text>;
-              <xsl:text>base.QuerySelect.Where.Add(Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>)</xsl:text>;
-            </xsl:for-each>
-            -->
-        }
-        <!--
-        <xsl:for-each select="Where/Field">
-          <xsl:text>public Where Where_</xsl:text><xsl:value-of select="NameInTable"/><xsl:text> { get; set; }</xsl:text>
-        </xsl:for-each>
-        -->
-    }
-      </xsl:for-each> <!-- Views -->
-    
+   
     #endregion
     </xsl:for-each>
 }
