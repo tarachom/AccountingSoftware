@@ -37,7 +37,7 @@ namespace AccountingSoftware
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
-			Views = new Dictionary<string, ConfigurationObjectView>();
+			//Views = new Dictionary<string, ConfigurationObjectView>();
 		}
 
 		/// <summary>
@@ -66,7 +66,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Візуалізації
 		/// </summary>
-		public Dictionary<string, ConfigurationObjectView> Views { get; }
+		//public Dictionary<string, ConfigurationObjectView> Views { get; }
 
 		/// <summary>
 		/// Додати нове поле
@@ -90,9 +90,9 @@ namespace AccountingSoftware
 		/// Додати нову візуалізацію
 		/// </summary>
 		/// <param name="view">Нова візуалізація</param>
-		public void AppendView(ConfigurationObjectView view)
-		{
-			Views.Add(view.Name, view);
-		}
+		//public void AppendView(ConfigurationObjectView view)
+		//{
+		//	Views.Add(view.Name, view);
+		//}
 	}
 }

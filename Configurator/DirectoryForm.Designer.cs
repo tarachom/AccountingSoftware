@@ -137,7 +137,7 @@
             this.listBoxViews.Name = "listBoxViews";
             this.listBoxViews.Size = new System.Drawing.Size(266, 107);
             this.listBoxViews.TabIndex = 0;
-            this.listBoxViews.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxViews_MouseDoubleClick);
+            //this.listBoxViews.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxViews_MouseDoubleClick);
             // 
             // panel3
             // 
@@ -158,7 +158,7 @@
             this.buttonAddView.TabIndex = 8;
             this.buttonAddView.Text = "Додати";
             this.buttonAddView.UseVisualStyleBackColor = true;
-            this.buttonAddView.Click += new System.EventHandler(this.buttonAddView_Click);
+            //this.buttonAddView.Click += new System.EventHandler(this.buttonAddView_Click);
             // 
             // label6
             // 

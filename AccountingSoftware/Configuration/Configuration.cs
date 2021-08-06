@@ -805,7 +805,7 @@ namespace AccountingSoftware
 
 				LoadTabularParts(ConfObjectDirectories.TabularParts, directoryNodes.Current);
 
-				LoadViews(ConfObjectDirectories.Views, directoryNodes.Current);
+				//LoadViews(ConfObjectDirectories.Views, directoryNodes.Current);
 			}
 		}
 
@@ -851,6 +851,7 @@ namespace AccountingSoftware
 			}
 		}
 
+		/*
 		private static void LoadViews(Dictionary<string, ConfigurationObjectView> views, XPathNavigator xPathDocNavigator)
 		{
 			XPathNodeIterator viewNodes = xPathDocNavigator.Select("Views/View");
@@ -873,17 +874,18 @@ namespace AccountingSoftware
 					ConfObjectView.Fields.Add(nameField, nameInTableField);
 				}
 
-				/*
-				XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
-				while (fieldWhere.MoveNext())
-				{
-					string nameInTableField = fieldWhere.Current.SelectSingleNode("NameInTable").Value;
+				//
+				//XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
+				//while (fieldWhere.MoveNext())
+				//{
+				//	string nameInTableField = fieldWhere.Current.SelectSingleNode("NameInTable").Value;
 
-					ConfObjectView.Where.Add(nameInTableField);
-				}
-				*/
+				//	ConfObjectView.Where.Add(nameInTableField);
+				//}
+				//
 			}
-		}
+		} 
+		*/
 
 		public static void LoadEnums(Configuration Conf, XPathNavigator xPathDocNavigator)
 		{
@@ -1135,7 +1137,7 @@ namespace AccountingSoftware
 
 				SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
 
-				SaveViews(ConfDirectory.Value.Views, ConfDirectory.Value, xmlConfDocument, nodeDirectory);
+				//SaveViews(ConfDirectory.Value.Views, ConfDirectory.Value, xmlConfDocument, nodeDirectory);
 			}
 		}
 
@@ -1204,6 +1206,7 @@ namespace AccountingSoftware
 			}
 		}
 
+		/*
 		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, ConfigurationDirectories confDirectory, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
 			XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
@@ -1263,6 +1266,7 @@ namespace AccountingSoftware
 				}
 			}
 		}
+		*/
 
 		private static void SaveEnums(Dictionary<string, ConfigurationEnums> enums, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{

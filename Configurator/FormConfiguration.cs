@@ -432,30 +432,6 @@ namespace Configurator
 				Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
 				thread.Start();
 			}
-
-			//DataGridViewRow dataGridViewRow = new DataGridViewRow();
-
-			//DataGridViewTextBoxCell dataGridViewTextBoxCell = new DataGridViewTextBoxCell();
-			//dataGridViewTextBoxCell.Value = "TExt";
-
-			//DataGridViewButtonCell dataGridViewButtonCell = new DataGridViewButtonCell();
-			//dataGridViewButtonCell.FlatStyle = FlatStyle.Flat;
-			//dataGridViewButtonCell.Value = "TExt";
-
-			//dataGridViewRow.Cells.Add(dataGridViewTextBoxCell);
-			//dataGridViewRow.Cells.Add(dataGridViewButtonCell);
-
-			//dataGridView1.Rows.Add(dataGridViewRow);
-
-
-			//ColumnHeader ch = listView1.Columns.Add("name", "Name", 150);
-			//ColumnHeader ch2 = listView1.Columns.Add("name2", "Name2", 150);
-
-			//for (int i = 0; i < 10; i++)
-			//{
-			//	ListViewItem j = new ListViewItem(new string[] { "test", "test" }, 13);
-			//	listView1.Items.Add(j);
-			//}
 		}
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
@@ -784,16 +760,16 @@ namespace Configurator
 					}
 				}
 
-				foreach (ConfigurationObjectView confViewOriginal in confDirectoriesOriginal.Views.Values)
-				{
-					ConfigurationObjectView confViewCopy = new ConfigurationObjectView(confViewOriginal.Name,
-						confViewOriginal.Table, confViewOriginal.Desc);
+				//foreach (ConfigurationObjectView confViewOriginal in confDirectoriesOriginal.Views.Values)
+				//{
+				//	ConfigurationObjectView confViewCopy = new ConfigurationObjectView(confViewOriginal.Name,
+				//		confViewOriginal.Table, confViewOriginal.Desc);
 
-					confDirectoriesCopy.Views.Add(confViewCopy.Name, confViewCopy);
+				//	confDirectoriesCopy.Views.Add(confViewCopy.Name, confViewCopy);
 
-					foreach (KeyValuePair<string, string> confViewField in confViewOriginal.Fields)
-						confViewCopy.Fields.Add(confViewField.Key, confViewField.Value);
-				}
+				//	foreach (KeyValuePair<string, string> confViewField in confViewOriginal.Fields)
+				//		confViewCopy.Fields.Add(confViewField.Key, confViewField.Value);
+				//}
 
 				LoadDirectory(treeConfiguration.Nodes["root"].Nodes["Directories"], confDirectoriesCopy);
 			}

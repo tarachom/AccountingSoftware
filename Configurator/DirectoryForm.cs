@@ -62,13 +62,13 @@ namespace Configurator
 				string newUnigueNameInTable_Code = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
 				ConfDirectory.AppendField(new ConfigurationObjectField("Код", newUnigueNameInTable_Code, "string", "", "Код"));
 
-				ConfigurationObjectView NewView = new ConfigurationObjectView("Список", textBoxTable.Text, "Список");
-				NewView.Fields.Add("Назва", newUnigueNameInTable_Name);
-				NewView.Fields.Add("Код", newUnigueNameInTable_Code);
-				ConfDirectory.AppendView(NewView);
+				//ConfigurationObjectView NewView = new ConfigurationObjectView("Список", textBoxTable.Text, "Список");
+				//NewView.Fields.Add("Назва", newUnigueNameInTable_Name);
+				//NewView.Fields.Add("Код", newUnigueNameInTable_Code);
+				//ConfDirectory.AppendView(NewView);
 
 				LoadFieldList();
-				LoadViewsList();
+				//LoadViewsList();
 			}
 			else
 			{
@@ -82,7 +82,7 @@ namespace Configurator
 
 				LoadFieldList();
 				LoadTabularPartsList();
-				LoadViewsList();
+				//LoadViewsList();
 			}
 		}
 
@@ -180,32 +180,32 @@ namespace Configurator
 			LoadTabularPartsList();
 		}
 
-		bool CallBack_IsExistView(string name)
-		{
-			return ConfDirectory.Views.ContainsKey(name);
-		}
+		//bool CallBack_IsExistView(string name)
+		//{
+		//	return ConfDirectory.Views.ContainsKey(name);
+		//}
 
-		void CallBack_Update_View(string originalName, ConfigurationObjectView configurationObjectView, bool isNew)
-		{
-			if (isNew)
-			{
-				ConfDirectory.AppendView(configurationObjectView);
-			}
-			else
-			{
-				if (originalName != configurationObjectView.Name)
-				{
-					ConfDirectory.Views.Remove(originalName);
-					ConfDirectory.AppendView(configurationObjectView);
-				}
-				else
-				{
-					ConfDirectory.Views[originalName] = configurationObjectView;
-				}
-			}
+		//void CallBack_Update_View(string originalName, ConfigurationObjectView configurationObjectView, bool isNew)
+		//{
+		//	if (isNew)
+		//	{
+		//		ConfDirectory.AppendView(configurationObjectView);
+		//	}
+		//	else
+		//	{
+		//		if (originalName != configurationObjectView.Name)
+		//		{
+		//			ConfDirectory.Views.Remove(originalName);
+		//			ConfDirectory.AppendView(configurationObjectView);
+		//		}
+		//		else
+		//		{
+		//			ConfDirectory.Views[originalName] = configurationObjectView;
+		//		}
+		//	}
 
-			LoadViewsList();
-		}
+		//	LoadViewsList();
+		//}
 
 		#endregion
 
@@ -228,14 +228,14 @@ namespace Configurator
 			tablePartForm.Show();
 		}
 
-		private void buttonAddView_Click(object sender, EventArgs e)
-		{
-			ViewForm viewForm = new ViewForm();
-			viewForm.ConfDirectory = ConfDirectory;
-			viewForm.CallBack = CallBack_Update_View;
-			viewForm.CallBack_IsExistView = CallBack_IsExistView;
-			viewForm.Show();
-		}
+		//private void buttonAddView_Click(object sender, EventArgs e)
+		//{
+		//	ViewForm viewForm = new ViewForm();
+		//	viewForm.ConfDirectory = ConfDirectory;
+		//	viewForm.CallBack = CallBack_Update_View;
+		//	viewForm.CallBack_IsExistView = CallBack_IsExistView;
+		//	viewForm.Show();
+		//}
 
 		#endregion
 
@@ -261,15 +261,15 @@ namespace Configurator
 			}
 		}
 
-		void LoadViewsList()
-		{
-			listBoxViews.Items.Clear();
+		//void LoadViewsList()
+		//{
+		//	listBoxViews.Items.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationObjectView> configurationObjectView in ConfDirectory.Views)
-			{
-				listBoxViews.Items.Add(configurationObjectView.Value.Name);
-			}
-		}
+		//	foreach (KeyValuePair<string, ConfigurationObjectView> configurationObjectView in ConfDirectory.Views)
+		//	{
+		//		listBoxViews.Items.Add(configurationObjectView.Value.Name);
+		//	}
+		//}
 
 		#endregion
 
@@ -300,19 +300,19 @@ namespace Configurator
 			}
 		}
 
-		private void listBoxViews_MouseDoubleClick(object sender, MouseEventArgs e)
-		{
-			if (listBoxViews.SelectedItem != null)
-			{
-				ViewForm viewForm = new ViewForm();
-				viewForm.ConfView = ConfDirectory.Views[listBoxViews.SelectedItem.ToString()];
-				viewForm.ConfDirectory = ConfDirectory;
-				viewForm.CallBack = CallBack_Update_View;
-				viewForm.CallBack_IsExistView = CallBack_IsExistView;
+		//private void listBoxViews_MouseDoubleClick(object sender, MouseEventArgs e)
+		//{
+		//	if (listBoxViews.SelectedItem != null)
+		//	{
+		//		ViewForm viewForm = new ViewForm();
+		//		viewForm.ConfView = ConfDirectory.Views[listBoxViews.SelectedItem.ToString()];
+		//		viewForm.ConfDirectory = ConfDirectory;
+		//		viewForm.CallBack = CallBack_Update_View;
+		//		viewForm.CallBack_IsExistView = CallBack_IsExistView;
 
-				viewForm.Show();
-			}
-		}
+		//		viewForm.Show();
+		//	}
+		//}
 
 		private void listBoxFields_KeyDown(object sender, KeyEventArgs e)
 		{
