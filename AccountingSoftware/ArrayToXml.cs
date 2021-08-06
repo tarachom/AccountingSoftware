@@ -21,11 +21,10 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Перетворює масив даних в ХМЛ стрічку виду "<e> значення 1 </e><e> значення 2 </e>"
+	/// Перетворює масив даних в ХМЛ стрічку виду "<e>значення 1</e><e>значення 2</e>"
 	/// </summary>
 	/// <typeparam name="T">Тип даних масиву</typeparam>
 	public static class ArrayToXml<T>

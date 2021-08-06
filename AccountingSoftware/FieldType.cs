@@ -70,8 +70,9 @@ namespace AccountingSoftware
 			List<FieldType> fieldTypes = new List<FieldType>();
 
 			fieldTypes.Add(new FieldType("string",        "[ string ] - Текст"));
-			fieldTypes.Add(new FieldType("integer",       "[ integer ] - Ціле число"));
-			fieldTypes.Add(new FieldType("numeric",       "[ numeric ] - Число з комою"));
+			fieldTypes.Add(new FieldType("integer",       "[ integer ] - Ціле число")); //От -2 147 483 648 до 2 147 483 647
+			//fieldTypes.Add(new FieldType("long",          "[ long ] - Велике ціле число")); //От -9 223 372 036 854 775 808 до 9 223 372 036 854 775 807
+			fieldTypes.Add(new FieldType("numeric",       "[ numeric ] - Число з комою")); //от ±1,0 x 10^-28 до ±7,92^28 x 1028 16 байт
 			fieldTypes.Add(new FieldType("boolean",       "[ boolean ] - Логічне значення"));
 			fieldTypes.Add(new FieldType("date",          "[ date ] - Дата"));
 			fieldTypes.Add(new FieldType("datetime",      "[ datetime ] - Дата та час"));
@@ -84,6 +85,13 @@ namespace AccountingSoftware
 			fieldTypes.Add(new FieldType("string[]",      "[ Текст1, Текст2, ... ] - [ string[] ] - Масив текстових даних"));
 			fieldTypes.Add(new FieldType("integer[]",     "[ Число1, Число2, ... ] - [ integer[] ] - Масив цілих чисел"));
 			fieldTypes.Add(new FieldType("numeric[]",     "[ Число1.0, Число2.0, ... ] - [ numeric[] ] - Масив чисел з комою"));
+
+			//character [ (n) ] - char [ (n) ] - fixed-length character string
+			//character varying [ (n) ] - varchar [ (n) ] - variable-length character string
+			//bytea - binary data (“byte array”)
+			//serial - autoincrementing four-byte integer
+			//xml
+			//uuid
 
 			return fieldTypes;
 		}
