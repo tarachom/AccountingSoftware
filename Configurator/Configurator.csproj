@@ -97,7 +97,6 @@
     <Compile Include="EnumFieldForm.Designer.cs">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NameValue.cs" />
     <Compile Include="RegistersAccumulationForm.cs">
       <SubType>Form</SubType>
     </Compile>

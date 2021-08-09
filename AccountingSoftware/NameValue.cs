@@ -21,7 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
-namespace Configurator
+namespace AccountingSoftware
 {
 	/// <summary>
 	/// Використовується для елементів ComboBox, коли потрібно задати відображення для обєкта

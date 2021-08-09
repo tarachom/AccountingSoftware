@@ -85,6 +85,7 @@
     <Compile Include="AccountingSoftware\FieldType.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\ArrayToXml.cs" />
+    <Compile Include="AccountingSoftware\NameValue.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Query.cs" />
     <Compile Include="AccountingSoftware\RegisterAccumulation\RegisterAccumulationRecordsSet.cs" />
