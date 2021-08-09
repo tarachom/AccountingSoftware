@@ -467,7 +467,7 @@ namespace AccountingSoftware
 			if (QuerySelect.Where.Count > 0)
 			{
 				foreach (Where field in QuerySelect.Where)
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 			}
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
@@ -530,7 +530,7 @@ namespace AccountingSoftware
 			if (QuerySelect.Where.Count > 0)
 			{
 				foreach (Where field in QuerySelect.Where)
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 			}
 
 			bool isFind = false;
@@ -560,7 +560,7 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
 			foreach (Where field in QuerySelect.Where)
-				nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 
 			string presentation = "";
 
@@ -663,7 +663,7 @@ namespace AccountingSoftware
 			{
 				if (field.UsingSQLToValue == false)
 				{
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 					Console.WriteLine(field.Name + " = " + field.Value);
 				}
 			}
@@ -871,7 +871,7 @@ namespace AccountingSoftware
 			if (select.QuerySelect.Where.Count > 0)
 			{
 				foreach (Where field in select.QuerySelect.Where)
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Name, field.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 			}
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
@@ -983,7 +983,7 @@ namespace AccountingSoftware
 			if (Filter.Count > 0)
 			{
 				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
@@ -1039,7 +1039,7 @@ namespace AccountingSoftware
 			if (Filter.Count > 0)
 			{
 				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
 			nCommand.ExecuteNonQuery();
@@ -1065,7 +1065,7 @@ namespace AccountingSoftware
 			if (Filter.Count > 0)
 			{
 				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
@@ -1121,7 +1121,7 @@ namespace AccountingSoftware
 			if (Filter.Count > 0)
 			{
 				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Name, ItemFilter.Value));
+					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
 			nCommand.ExecuteNonQuery();

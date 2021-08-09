@@ -44,6 +44,19 @@ namespace AccountingSoftware
 			Table = table;
 		}
 
+		private static int _ParamGuidState { get; set; }
+
+		/// <summary>
+		/// Функція повертає номер параметру.
+		/// Використовується для створення псевдоніму параметрів відбору.
+		/// </summary>
+		/// <returns></returns>
+		public static string GetParamGuid()
+        {
+			if (_ParamGuidState == 0) _ParamGuidState = 1;
+			return "p" + (_ParamGuidState++).ToString();
+		}
+
 		/// <summary>
 		/// Назва таблиці
 		/// </summary>
@@ -138,7 +151,7 @@ namespace AccountingSoftware
 					{
 						case Comparison.EQ:
 							{
-								query += " = " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								query += " = " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
 								break;
 							}
 
@@ -146,13 +159,13 @@ namespace AccountingSoftware
 						case Comparison.NOT_IN:
 							{
 								query += (field.Comparison == Comparison.NOT_IN ? " NOT" : "") + 
-									" IN (" + (field.UsingSQLToValue ? field.Value : "@" + field.Name) + ")";
+									" IN (" + (field.UsingSQLToValue ? field.Value : "@" + field.Alias) + ")";
 								break;
 							}
 
 						case Comparison.NOT:
 							{
-								query += " != " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								query += " != " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
 								break;
 							}
 
@@ -165,10 +178,38 @@ namespace AccountingSoftware
 									query += " /* For ISNULL and NOTNULL set UsingSQLToValue = true */ ";
 								break;
 							}
+						case Comparison.BETWEEN:
+							{
+								if (field.UsingSQLToValue)
+									query += " BETWEEN " + field.Value;
+								else
+									query += " /* For BETWEEN set UsingSQLToValue = true */ ";
+								break;
+							}
+						case Comparison.QT:
+							{
+								query += " > " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
+								break;
+							}
+						case Comparison.LT:
+							{
+								query += " < " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
+								break;
+							}
+						case Comparison.QT_EQ:
+							{
+								query += " >= " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
+								break;
+							}
+						case Comparison.LT_EQ:
+							{
+								query += " <= " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
+								break;
+							}
 
 						default:
 							{
-								query += " " + field.Comparison + " " + (field.UsingSQLToValue ? field.Value : "@" + field.Name);
+								query += " " + field.Comparison + " " + (field.UsingSQLToValue ? field.Value : "@" + field.Alias);
 								break;
 							}
 					}
@@ -225,6 +266,8 @@ namespace AccountingSoftware
 			Value = value;
 			UsingSQLToValue = usingSQLToValue;
 			ComparisonNext = comparisonNext;
+
+			Init();
 		}
 
 		/// <summary>
@@ -243,12 +286,24 @@ namespace AccountingSoftware
 			Value = value;
 			UsingSQLToValue = usingSQLToValue;
 			ComparisonNext = Comparison.Empty;
+
+			Init();
+		}
+
+		private void Init()
+        {
+			Alias = Name + "_" + Query.GetParamGuid();
 		}
 
 		/// <summary>
 		/// Назва поля
 		/// </summary>
 		public string Name { get; set; }
+
+		/// <summary>
+		/// Псевдонім
+		/// </summary>
+		public string Alias { get; private set; }
 
 		/// <summary>
 		/// Значення поля
@@ -307,19 +362,29 @@ namespace AccountingSoftware
 		IN,
 
 		/// <summary>
-		/// =
+		/// Рівне
 		/// </summary>
 		EQ,
 
 		/// <summary>
-		/// &lt;
+		/// Більше
+		/// </summary>
+		QT,
+
+		/// <summary>
+		/// Менше
 		/// </summary>
 		LT,
 
 		/// <summary>
-		/// >
+		/// Більше або рівне
 		/// </summary>
-		QT,
+		QT_EQ,
+
+		/// <summary>
+		/// Менше або рівне
+		/// </summary>
+		LT_EQ,
 
 		/// <summary>
 		/// Тільки для UsingSQLToValue = true
@@ -330,6 +395,11 @@ namespace AccountingSoftware
 		/// Тільки для UsingSQLToValue = true
 		/// </summary>
 		NOTNULL,
+
+		/// <summary>
+		/// a більше рівне x AND a менше рівне y
+		/// </summary>
+		BETWEEN,
 
 		/// <summary>
 		/// Пустий
