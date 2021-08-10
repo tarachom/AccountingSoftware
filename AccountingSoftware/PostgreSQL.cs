@@ -1200,33 +1200,5 @@ namespace AccountingSoftware
 
 		#endregion
 
-		#region Test
-
-		public string Test()
-		{
-			string sqlInser = "INSERT INTO tab_a47(owner, any_col) VALUES(@owner, @any_col)";
-			NpgsqlCommand nCommandInsert = new NpgsqlCommand(sqlInser, Connection);
-			nCommandInsert.Parameters.Add(new NpgsqlParameter("owner", Guid.NewGuid()));
-			nCommandInsert.Parameters.Add(new NpgsqlParameter("any_col", new uuid_and_string(Guid.NewGuid(), "tab2")));
-			nCommandInsert.ExecuteNonQuery();
-
-			string sql = "SELECT owner, any_col FROM tab_a47";
-			string result = "";
-
-			NpgsqlCommand nCommand = new NpgsqlCommand(sql, Connection);
-
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			while (reader.Read())
-			{
-				//uuid_and_string a = reader.GetFieldValue<uuid_and_string>(1);
-
-				result += reader["owner"].ToString() + ", " + reader["any_col"].ToString() + "\n";
-			}
-			reader.Close();
-
-			return result;
-		}
-
-		#endregion
 	}
 }

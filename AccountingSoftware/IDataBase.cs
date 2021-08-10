@@ -112,7 +112,5 @@ namespace AccountingSoftware
 		int ExecuteSQL(string SqlQuery);
 
 		#endregion
-
-		string Test();
 	}
 }
