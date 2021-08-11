@@ -61,15 +61,15 @@
             // 
             this.buttonOpenConf.Location = new System.Drawing.Point(520, 12);
             this.buttonOpenConf.Name = "buttonOpenConf";
-            this.buttonOpenConf.Size = new System.Drawing.Size(148, 30);
+            this.buttonOpenConf.Size = new System.Drawing.Size(97, 30);
             this.buttonOpenConf.TabIndex = 3;
-            this.buttonOpenConf.Text = "Відкрити конфігуратор";
+            this.buttonOpenConf.Text = "Відкрити";
             this.buttonOpenConf.UseVisualStyleBackColor = true;
             this.buttonOpenConf.Click += new System.EventHandler(this.buttonOpenConf_Click);
             // 
             // buttonDelete
             // 
-            this.buttonDelete.Location = new System.Drawing.Point(520, 258);
+            this.buttonDelete.Location = new System.Drawing.Point(520, 252);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(97, 30);
             this.buttonDelete.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 300);
+            this.ClientSize = new System.Drawing.Size(625, 292);
             this.Controls.Add(this.buttonCopy);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonOpenConf);
@@ -103,7 +103,7 @@
             this.MinimizeBox = false;
             this.Name = "ConfigurationSelectionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Вибір конфігурації";
+            this.Text = "Конфігуратор - Вибір конфігурації";
             this.Load += new System.EventHandler(this.ConfigurationSelectionForm_Load);
             this.ResumeLayout(false);
 

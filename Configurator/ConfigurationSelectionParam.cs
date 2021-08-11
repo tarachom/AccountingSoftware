@@ -23,15 +23,9 @@ limitations under the License.
 
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using AccountingSoftware;
+using System.IO;
 
 namespace Configurator
 {
@@ -133,5 +127,27 @@ namespace Configurator
 
 			MessageBox.Show(flag.ToString());
 		}
-	}
+
+        private void buttonSelectFile_Click(object sender, EventArgs e)
+        {
+			UpdateItemConfigurationParam();
+
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			openFileDialog.Filter = "XML|*.xml";
+			openFileDialog.Multiselect = false;
+
+			if (!String.IsNullOrEmpty(ItemConfigurationParam.ConfigurationPath))
+			{
+				openFileDialog.FileName = Path.GetFileName(ItemConfigurationParam.ConfigurationPath);
+				openFileDialog.InitialDirectory = Path.GetDirectoryName(ItemConfigurationParam.ConfigurationPath);
+			}
+			
+			DialogResult dialogResult = openFileDialog.ShowDialog();
+			if (dialogResult == DialogResult.OK)
+            {
+				ItemConfigurationParam.ConfigurationPath = openFileDialog.FileName;
+				textBoxPathToFile.Text = ItemConfigurationParam.ConfigurationPath;
+			}
+		}
+    }
 }

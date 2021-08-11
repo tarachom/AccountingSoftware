@@ -54,7 +54,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigurationParam.cs" />
     <Compile Include="ConfigurationSelectionForm.cs">
       <SubType>Form</SubType>
     </Compile>
