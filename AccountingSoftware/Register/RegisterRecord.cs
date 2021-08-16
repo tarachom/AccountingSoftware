@@ -34,6 +34,11 @@ namespace AccountingSoftware
 		public Guid UID { get; set; }
 
 		/// <summary>
+		/// Дата запису
+		/// </summary>
+		public DateTime Period { get; set; }
+
+		/// <summary>
 		/// Прибуток true, Витрата false
 		/// </summary>
 		public bool Income { get; set; }

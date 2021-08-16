@@ -722,6 +722,7 @@ limitations under the License.
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
 				<xsl:if test="$TableType = 'RegisterAccumulation'">
 					<!-- Прибуток true, Витрата false -->
+					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
 					<xsl:text>income bool NOT NULL, </xsl:text>
 					<xsl:text>owner uuid NOT NULL, </xsl:text>
 				</xsl:if>
@@ -735,6 +736,11 @@ limitations under the License.
                 <xsl:text>PRIMARY KEY(uid));</xsl:text>
               </sql>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">
+				  <sql>
+					  <xsl:text>CREATE INDEX ON </xsl:text>
+					  <xsl:value-of select="$TableName"/>
+					  <xsl:text> (period);</xsl:text>
+				  </sql>
 				 <sql>
 					<xsl:text>CREATE INDEX ON </xsl:text>
 					<xsl:value-of select="$TableName"/>

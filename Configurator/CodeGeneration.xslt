@@ -1382,6 +1382,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             {
                 Record record = new Record();
                 record.UID = (Guid)fieldValue["uid"];
+				record.Period = DateTime.Parse(fieldValue["period"].ToString());
                 record.Income = (bool)fieldValue["income"];
                 record.Owner = (Guid)fieldValue["owner"];
                 <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
@@ -1398,7 +1399,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseClear();
         }
         
-        public void Save(Guid owner) 
+        public void Save(DateTime period, Guid owner) 
         {
             if (Records.Count > 0)
             {
@@ -1416,7 +1417,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    base.BaseSave(record.UID, record.Income, record.Owner, fieldValue);
+                    base.BaseSave(record.UID, period, record.Income, record.Owner, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();

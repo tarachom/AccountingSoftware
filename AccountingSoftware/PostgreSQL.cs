@@ -1056,7 +1056,9 @@ namespace AccountingSoftware
 			Query QuerySelect = new Query(table);
 
 			//Прибуток true, Витрата false
+			QuerySelect.Field.Add("period");
 			QuerySelect.Field.Add("income");
+			QuerySelect.Field.Add("owner");
 
 			foreach (string fieldItem in fieldArray)
 				QuerySelect.Field.Add(fieldItem);
@@ -1080,8 +1082,9 @@ namespace AccountingSoftware
 				fieldValueList.Add(fieldValue);
 
 				fieldValue.Add("uid", reader["uid"]);
+				fieldValue.Add("period", reader["period"]);
 				fieldValue.Add("income", reader["income"]);
-				fieldValue.Add("owner", reader["income"]);
+				fieldValue.Add("owner", reader["owner"]);
 
 				foreach (string field in fieldArray)
 				{
@@ -1091,10 +1094,10 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertRegisterAccumulationRecords(Guid UID, string table, bool income, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertRegisterAccumulationRecords(Guid UID, string table, DateTime period, bool income, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "uid, income, owner";
-			string query_values = "@uid, @income, @owner";
+			string query_field = "uid, period, income, owner";
+			string query_values = "@uid, @period, @income, @owner";
 
 			foreach (string field in fieldArray)
 			{
@@ -1107,6 +1110,7 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
+			nCommand.Parameters.Add(new NpgsqlParameter("period", period));
 			nCommand.Parameters.Add(new NpgsqlParameter("income", income));
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 

@@ -82,10 +82,10 @@ namespace AccountingSoftware
 			Kernel.DataBase.DeleteRegisterAccumulationRecords(Table, owner);
 		}
 
-		protected void BaseSave(Guid UID, bool income, Guid owner, Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, DateTime period, bool income, Guid owner, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);
-			Kernel.DataBase.InsertRegisterAccumulationRecords(recordUnigueID, Table, income, owner, FieldArray, fieldValue);
+			Kernel.DataBase.InsertRegisterAccumulationRecords(recordUnigueID, Table, period, income, owner, FieldArray, fieldValue);
 		}
 	}
 }
