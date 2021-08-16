@@ -380,7 +380,6 @@ limitations under the License.
           <Control_Table>
             <Type>
               <xsl:value-of select="$Type"/>
-              <xsl:text>.TablePart</xsl:text>
             </Type>
             <Name>
               <xsl:value-of select="$Name"/>
@@ -504,7 +503,7 @@ limitations under the License.
             <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
             <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationTabularParts[Table = $SecondConfTablePartTable]/Fields/Field" />
             <xsl:with-param name="SecondConfigurationFieldsNodes" select="Fields/Field" />
-            <xsl:with-param name="Type" select="$Type"/>
+            <xsl:with-param name="Type" select="concat($Type, '.TablePart')"/>
             <xsl:with-param name="Name" select="$SecondConfTablePartName" />
             <xsl:with-param name="TableName" select="$SecondConfTablePartTable" />
           </xsl:call-template>
@@ -549,7 +548,7 @@ limitations under the License.
       </xsl:if>
 
       <xsl:if test="$CountObject = 1">
-
+		  
         <xsl:call-template name="SecondConfigurationFields">
           <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
           <xsl:with-param name="DocumentConfigurationFieldNodes" select="$DocumentConfigurationNodes[Table = $SecondConfDirectoryTable]/Fields/Field" />
@@ -824,15 +823,24 @@ limitations under the License.
 
         </Control_Table>
 
+		<xsl:call-template name="SecondConfigurationFields">
+			<xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+			<xsl:with-param name="DocumentConfigurationFieldNodes" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
+			<xsl:with-param name="SecondConfigurationFieldsNodes" select="$documentSecondConfiguration/Configuration/RegistersInformation/RegisterInformation[Name = $ConfDirectoryName]/*/Fields/Field" />
+			<xsl:with-param name="Type">RegisterInformation</xsl:with-param>
+			<xsl:with-param name="Name" select="$ConfDirectoryName" />
+			<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+		</xsl:call-template>
+		  
       </xsl:for-each>
 
-      <xsl:call-template name="SecondConfiguration">
-        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
-        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersInformation/RegisterInformation" />
-        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersInformation/RegisterInformation" />
-        <xsl:with-param name="Type">RegisterInformation</xsl:with-param>
-      </xsl:call-template>
-
+	  <xsl:call-template name="SecondConfiguration">
+		 <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+		 <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersInformation/RegisterInformation" />
+		 <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersInformation/RegisterInformation" />
+		 <xsl:with-param name="Type">RegisterInformation</xsl:with-param>
+	  </xsl:call-template>
+		
       <xsl:for-each select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation">
         <xsl:variable name="ConfDirectoryName" select="Name" />
         <xsl:variable name="ConfDirectoryTable" select="Table" />
@@ -875,16 +883,25 @@ limitations under the License.
           </xsl:choose>
 
         </Control_Table>
-
+		  
+		<xsl:call-template name="SecondConfigurationFields">
+			<xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+			<xsl:with-param name="DocumentConfigurationFieldNodes" select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field" />
+			<xsl:with-param name="SecondConfigurationFieldsNodes" select="$documentSecondConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation[Name = $ConfDirectoryName]/*/Fields/Field" />
+			<xsl:with-param name="Type">RegisterAccumulation</xsl:with-param>
+			<xsl:with-param name="Name" select="$ConfDirectoryName" />
+			<xsl:with-param name="TableName" select="$ConfDirectoryTable" />
+		</xsl:call-template>
+		  
       </xsl:for-each>
 
-      <xsl:call-template name="SecondConfiguration">
-        <xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
-        <xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
-        <xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
-        <xsl:with-param name="Type">RegisterAccumulation</xsl:with-param>
-      </xsl:call-template>
-
+	  <xsl:call-template name="SecondConfiguration">
+		<xsl:with-param name="InfoSchemaTableList" select="$InfoSchemaTableList" />
+		<xsl:with-param name="DocumentConfigurationNodes" select="$documentConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
+		<xsl:with-param name="SecondConfigurationNodes" select="$documentSecondConfiguration/Configuration/RegistersAccumulation/RegisterAccumulation" />
+		<xsl:with-param name="Type">RegisterAccumulation</xsl:with-param>
+	  </xsl:call-template>
+		
     </root>
 
   </xsl:template>

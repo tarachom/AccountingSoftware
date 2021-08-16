@@ -77,9 +77,9 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
-		protected void BaseDelete()
+		protected void BaseDelete(Guid owner)
 		{
-			Kernel.DataBase.DeleteRegisterAccumulationRecords(Table, BaseFilter);
+			Kernel.DataBase.DeleteRegisterAccumulationRecords(Table, owner);
 		}
 
 		protected void BaseSave(Guid UID, bool income, Guid owner, Dictionary<string, object> fieldValue)

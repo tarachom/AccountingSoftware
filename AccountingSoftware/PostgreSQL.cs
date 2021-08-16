@@ -1118,20 +1118,12 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteRegisterAccumulationRecords(string table, Guid owner, List<Where> Filter)
+		public void DeleteRegisterAccumulationRecords(string table, Guid owner)
 		{
-			Query QuerySelect = new Query(table);
-			QuerySelect.Where = Filter;
-
-			string query = "DELETE FROM " + table + " WHERE uid IN (\n" + QuerySelect.Construct() + "\n)";
+			string query = "DELETE FROM " + table + " WHERE owner = @owner";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-
-			if (Filter.Count > 0)
-			{
-				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
-			}
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 
 			nCommand.ExecuteNonQuery();
 		}

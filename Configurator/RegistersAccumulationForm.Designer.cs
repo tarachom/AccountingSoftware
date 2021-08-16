@@ -90,6 +90,7 @@
             this.treeViewFields.Size = new System.Drawing.Size(266, 344);
             this.treeViewFields.TabIndex = 0;
             this.treeViewFields.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewFields_NodeMouseDoubleClick);
+            this.treeViewFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewFields_KeyDown);
             // 
             // panel4
             // 

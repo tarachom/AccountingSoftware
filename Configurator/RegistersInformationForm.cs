@@ -107,6 +107,8 @@ namespace Configurator
 
 		private void LoadTreeViewFields()
 		{
+			treeViewFields.Nodes.Clear();
+
 			TreeNode rootNode = treeViewFields.Nodes.Add("root", "Поля");
 
 			TreeNode dimensionNode = rootNode.Nodes.Add("Dimension", "Виміри");
@@ -294,5 +296,41 @@ namespace Configurator
 			fieldForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfRegistersInformation.Table, GetAllField());
 			fieldForm.Show();
 		}
-	}
+
+        private void treeViewFields_KeyDown(object sender, KeyEventArgs e)
+        {
+			if (treeViewFields.SelectedNode != null && treeViewFields.SelectedNode.Tag != null)
+			{
+				Tuple<ConfigurationObjectField, string> tuple = (Tuple<ConfigurationObjectField, string>)treeViewFields.SelectedNode.Tag;
+				ConfigurationObjectField field = tuple.Item1;
+				string flagTag = tuple.Item2;
+
+				string question = "Видалити поле";
+
+				if (MessageBox.Show(question + " " + field.Name + "?", question + "?", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+				{
+					switch (flagTag)
+					{
+						case "Dimension":
+							{
+								ConfRegistersInformation.DimensionFields.Remove(field.Name);
+								break;
+							}
+						case "Resources":
+							{
+								ConfRegistersInformation.ResourcesFields.Remove(field.Name);
+								break;
+							}
+						case "Property":
+							{
+								ConfRegistersInformation.PropertyFields.Remove(field.Name);
+								break;
+							}
+					}
+
+					LoadTreeViewFields();
+				}
+			}
+		}
+    }
 }

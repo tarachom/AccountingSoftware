@@ -100,7 +100,7 @@ namespace AccountingSoftware
 
 		void SelectRegisterAccumulationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
 		void InsertRegisterAccumulationRecords(Guid UID, string table, bool income, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue);
-		void DeleteRegisterAccumulationRecords(string table, List<Where> Filter);
+		void DeleteRegisterAccumulationRecords(string table, Guid owner);
 
 		#endregion
 
