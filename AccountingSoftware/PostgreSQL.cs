@@ -39,7 +39,7 @@ namespace AccountingSoftware
 			Connection = new NpgsqlConnection(connectionString);
 			Connection.Open();
 
-			Start();
+			//Start();
 		}
 
 		public bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
@@ -57,7 +57,7 @@ namespace AccountingSoftware
 			{
 				Connection.Open();
 
-				Start();
+				//Start();
 
 				return true;
 			}
@@ -92,9 +92,10 @@ namespace AccountingSoftware
 			}
 		}
 
-		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase)
 		{
 			exception = null;
+			IsExistsDatabase = false;
 
 			Connection = new NpgsqlConnection(
 				"Server=" + Server + ";" +
@@ -121,7 +122,7 @@ namespace AccountingSoftware
 
 			try
 			{
-				resultSql = (bool)nCommand.ExecuteScalar();
+				IsExistsDatabase = resultSql = (bool)nCommand.ExecuteScalar();
 			}
 			catch (Exception e)
 			{
@@ -148,6 +149,7 @@ namespace AccountingSoftware
 			return true;
 		}
 
+		/*
 		private void Start()
 		{
 			//List<string> StartSQL = new List<string>();
@@ -164,7 +166,7 @@ namespace AccountingSoftware
 
 			Connection.MapComposite<uuid_and_string>("uuid_and_string");
 		}
-
+		*/
 		public void Close()
 		{
 			try
@@ -175,7 +177,7 @@ namespace AccountingSoftware
 		}
 
 		#region UserType
-
+		/*
 		public class uuid_and_string
 		{
 			public uuid_and_string() { }
@@ -197,7 +199,7 @@ namespace AccountingSoftware
 				return "('" + uuid.ToString() + "', '" + text + "')";
 			}
 		}
-
+		*/
 		#endregion
 
 		#region Transaction
@@ -1053,6 +1055,9 @@ namespace AccountingSoftware
 		{
 			Query QuerySelect = new Query(table);
 
+			//Прибуток true, Витрата false
+			QuerySelect.Field.Add("income");
+
 			foreach (string fieldItem in fieldArray)
 				QuerySelect.Field.Add(fieldItem);
 
@@ -1075,6 +1080,8 @@ namespace AccountingSoftware
 				fieldValueList.Add(fieldValue);
 
 				fieldValue.Add("uid", reader["uid"]);
+				fieldValue.Add("income", reader["income"]);
+				fieldValue.Add("owner", reader["income"]);
 
 				foreach (string field in fieldArray)
 				{
@@ -1084,10 +1091,10 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
-		public void InsertRegisterAccumulationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertRegisterAccumulationRecords(Guid UID, string table, bool income, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "uid";
-			string query_values = "@uid";
+			string query_field = "uid, income, owner";
+			string query_values = "@uid, @income, @owner";
 
 			foreach (string field in fieldArray)
 			{
@@ -1100,6 +1107,8 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
+			nCommand.Parameters.Add(new NpgsqlParameter("income", income));
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 
 			foreach (string field in fieldArray)
 			{
@@ -1109,7 +1118,7 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteRegisterAccumulationRecords(string table, List<Where> Filter)
+		public void DeleteRegisterAccumulationRecords(string table, Guid owner, List<Where> Filter)
 		{
 			Query QuerySelect = new Query(table);
 			QuerySelect.Where = Filter;

@@ -27,10 +27,20 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// 
+	/// Запис регістра
 	/// </summary>
 	public abstract class RegisterRecord
 	{
 		public Guid UID { get; set; }
+
+		/// <summary>
+		/// Прибуток true, Витрата false
+		/// </summary>
+		public bool Income { get; set; }
+
+		/// <summary>
+		/// Власник запису
+		/// </summary>
+		public Guid Owner { get; set; }
 	}
 }

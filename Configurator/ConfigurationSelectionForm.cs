@@ -130,6 +130,9 @@ namespace Configurator
 			
 			foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
 				listBoxConfiguration.Items.Add(ItemConfigurationParam);
+
+			if (listBoxConfiguration.Items.Count > 0)
+				listBoxConfiguration.SelectedIndex = 0;
 		}
 
 		private void ConfigurationSelectionForm_Load(object sender, EventArgs e)

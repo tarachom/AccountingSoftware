@@ -96,6 +96,7 @@ namespace Configurator
 		private void buttonConnect_Click(object sender, EventArgs e)
 		{
 			Exception exception = null;
+			bool IsExistsDatabase = false;
 
 			UpdateItemConfigurationParam();
 
@@ -106,7 +107,7 @@ namespace Configurator
 				ItemConfigurationParam.DataBaseLogin,
 				ItemConfigurationParam.DataBasePassword,
 				ItemConfigurationParam.DataBasePort,
-				ItemConfigurationParam.DataBaseBaseName, out exception);
+				ItemConfigurationParam.DataBaseBaseName, out exception, out IsExistsDatabase);
 
 			MessageBox.Show(flag.ToString());
 		}

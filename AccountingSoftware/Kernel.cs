@@ -52,10 +52,10 @@ namespace AccountingSoftware
 			return DataBase.TryConnectToServer(Server, UserId, Password, Port, out exception);
 		}
 
-		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase)
 		{
 			DataBase = new PostgreSQL();
-			return DataBase.CreateDatabaseIfNotExist(Server, UserId, Password, Port, Database, out exception);
+			return DataBase.CreateDatabaseIfNotExist(Server, UserId, Password, Port, Database, out exception, out IsExistsDatabase);
 		}
 
 		public bool Open2(string PathToXmlFileConfiguration, string Server, string UserId, string Password, int Port, string Database, out Exception exception)

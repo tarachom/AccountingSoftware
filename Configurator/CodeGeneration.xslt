@@ -1381,9 +1381,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
-                
                 record.UID = (Guid)fieldValue["uid"];
-                  
+                record.Income = (bool)fieldValue["income"];
+                record.Owner = (Guid)fieldValue["owner"];
                 <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                   <xsl:text>record.</xsl:text>
                   <xsl:value-of select="Name"/>
@@ -1398,14 +1398,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save = true) 
+        public void Save() 
         {
             if (Records.Count > 0)
             {
                 base.BaseBeginTransaction();
                 
-                if (clear_all_before_save)
-                    base.BaseDelete();
+                base.BaseDelete();
 
                 foreach (Record record in Records)
                 {
@@ -1419,7 +1418,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    base.BaseSave(record.UID, fieldValue);
+                    base.BaseSave(record.UID, record.Income, record.Owner, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
@@ -1446,7 +1445,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                   <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
             }
-        
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />

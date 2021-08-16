@@ -33,7 +33,7 @@ namespace AccountingSoftware
 
 		bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 		bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception);
-		bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
+		bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase);
 
 		void BeginTransaction();
 		void CommitTransaction();
@@ -99,7 +99,7 @@ namespace AccountingSoftware
 		#region RegisterAccumulation
 
 		void SelectRegisterAccumulationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList);
-		void InsertRegisterAccumulationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertRegisterAccumulationRecords(Guid UID, string table, bool income, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteRegisterAccumulationRecords(string table, List<Where> Filter);
 
 		#endregion
