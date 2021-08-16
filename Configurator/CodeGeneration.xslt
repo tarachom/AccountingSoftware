@@ -1398,15 +1398,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseClear();
         }
         
-        public void Save() 
+        public void Save(Guid owner) 
         {
             if (Records.Count > 0)
             {
                 base.BaseBeginTransaction();
-
+                base.BaseDelete(owner);
                 foreach (Record record in Records)
                 {
-                    base.BaseDelete(record.Owner);
                     Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
 
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
@@ -1423,14 +1422,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                 base.BaseCommitTransaction();
             }
         }
-        /*
-        public void Delete()
+
+        public void Delete(Guid owner)
         {
             base.BaseBeginTransaction();
-            base.BaseDelete();
+            base.BaseDelete(owner);
             base.BaseCommitTransaction();
         }
-        */
+
         public SelectFilter Filter { get; set; }
         
         <xsl:call-template name="CommentSummary" />
