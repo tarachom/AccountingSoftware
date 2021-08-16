@@ -1413,7 +1413,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
