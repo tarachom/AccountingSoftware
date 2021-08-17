@@ -1212,14 +1212,15 @@ namespace AccountingSoftware
 			foreach (KeyValuePair<string, object> param in paramQuery)
 				Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
 
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			NpgsqlDataReader reader = Command.ExecuteReader();
 			while (reader.Read())
 			{
-				informationSchema.Append(
-					reader["table_name"].ToString().ToLower(),
-					reader["column_name"].ToString().ToLower(),
-					reader["data_type"].ToString(),
-					reader["udt_name"].ToString());
+
+
+				Dictionary<string, object> val = new Dictionary<string, object>();
+
+				for(int i=0; i< reader. )
+				reader.GetSchemaTable()
 			}
 			reader.Close();
 
