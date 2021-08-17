@@ -28,16 +28,21 @@ namespace AccountingSoftware
 {
 	public interface IDataBase
 	{
-		void Open(string connectionString);
+        #region Open
+        void Open(string connectionString);
 		void Close();
 
 		bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 		bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception);
 		bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase);
+        #endregion
 
-		void BeginTransaction();
+        #region Transaction
+        void BeginTransaction();
 		void CommitTransaction();
 		void RollbackTransaction();
+
+		#endregion
 
 		#region Constants
 

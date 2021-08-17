@@ -1205,5 +1205,25 @@ namespace AccountingSoftware
 
 		#endregion
 
+		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery)
+        {
+			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);
+
+			foreach (KeyValuePair<string, object> param in paramQuery)
+				Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				informationSchema.Append(
+					reader["table_name"].ToString().ToLower(),
+					reader["column_name"].ToString().ToLower(),
+					reader["data_type"].ToString(),
+					reader["udt_name"].ToString());
+			}
+			reader.Close();
+
+		}
+
 	}
 }
