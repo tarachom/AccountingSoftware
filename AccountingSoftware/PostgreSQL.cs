@@ -1233,7 +1233,6 @@ namespace AccountingSoftware
 				listRow.Add(objRow);
 			}
 			reader.Close();
-
 		}
 
 	}
