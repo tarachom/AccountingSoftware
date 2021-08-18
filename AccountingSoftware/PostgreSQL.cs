@@ -1205,22 +1205,32 @@ namespace AccountingSoftware
 
 		#endregion
 
-		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery)
-        {
+		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow)
+		{
 			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);
 
-			foreach (KeyValuePair<string, object> param in paramQuery)
-				Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+			if (paramQuery != null)
+				foreach (KeyValuePair<string, object> param in paramQuery)
+					Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
 
 			NpgsqlDataReader reader = Command.ExecuteReader();
+
+			int columnsCount = reader.FieldCount;
+			columnsName = new string[columnsCount];
+
+			for (int n = 0; n < columnsCount; n++)
+				columnsName[n] = reader.GetName(n);
+
+			listRow = new List<object[]>();
+
 			while (reader.Read())
 			{
+				object[] objRow = new object[columnsCount];
 
+				for (int i = 0; i < columnsCount; i++)
+					objRow[i] = reader[i];
 
-				Dictionary<string, object> val = new Dictionary<string, object>();
-
-				for(int i=0; i< reader. )
-				reader.GetSchemaTable()
+				listRow.Add(objRow);
 			}
 			reader.Close();
 

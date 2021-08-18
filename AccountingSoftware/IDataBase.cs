@@ -117,5 +117,7 @@ namespace AccountingSoftware
 		int ExecuteSQL(string SqlQuery);
 
 		#endregion
+
+		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow);
 	}
 }

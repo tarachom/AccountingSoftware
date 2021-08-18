@@ -78,6 +78,8 @@
             this.addItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
+            this.вигрузкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
             this.splitContainerBase.Panel1.SuspendLayout();
             this.splitContainerBase.SuspendLayout();
@@ -144,7 +146,8 @@
             // menuStripTop
             // 
             this.menuStripTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ConfigToolStripMenuItem});
+            this.ConfigToolStripMenuItem,
+            this.вигрузкаToolStripMenuItem});
             this.menuStripTop.Location = new System.Drawing.Point(10, 10);
             this.menuStripTop.Name = "menuStripTop";
             this.menuStripTop.Size = new System.Drawing.Size(842, 24);
@@ -488,6 +491,21 @@
             this.deleteItemRegistersAccumulation.Text = "Видалити";
             this.deleteItemRegistersAccumulation.Click += new System.EventHandler(this.deleteItemRegistersAccumulation_Click);
             // 
+            // вигрузкаToolStripMenuItem
+            // 
+            this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem});
+            this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
+            this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.вигрузкаToolStripMenuItem.Text = "Вигрузка";
+            // 
+            // вигрузкаТаЗагрузкаДанихToolStripMenuItem
+            // 
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Name = "вигрузкаТаЗагрузкаДанихToolStripMenuItem";
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Text = "Вигрузка та загрузка даних";
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Click += new System.EventHandler(this.вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click);
+            // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -571,6 +589,8 @@
 		private System.Windows.Forms.ToolStripMenuItem addConstantBlock;
 		private System.Windows.Forms.ToolStripMenuItem deleteConstantBlock;
 		private System.Windows.Forms.ToolStripMenuItem addNewConstant;
-	}
+        private System.Windows.Forms.ToolStripMenuItem вигрузкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem вигрузкаТаЗагрузкаДанихToolStripMenuItem;
+    }
 }
 
