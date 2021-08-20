@@ -83,14 +83,13 @@ namespace Configurator
 
             for (int k = 0; k < columnsName.Length; k++)
             {
-                sw.WriteLine("<Колонка>");
-                sw.WriteLine("  <Назва>" + columnsName[k] + "</Назва>");
-                sw.WriteLine("  <КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
+                sw.Write("<Колонка>");
+                sw.Write("<Назва>" + columnsName[k] + "</Назва>");
+                sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
                 sw.WriteLine("</Колонка>");
             }
 
             sw.WriteLine("</Колонки>");
-
             sw.WriteLine("<Записи>");
 
             foreach (object[] o in listRow)
@@ -104,7 +103,6 @@ namespace Configurator
             }
 
             sw.WriteLine("</Записи>");
-
             sw.WriteLine("</ВигрузкаДаних>");
             sw.Close();
         }
