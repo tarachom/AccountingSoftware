@@ -81,11 +81,11 @@ namespace Configurator
             {
                 ApendLine(" --> Довідник: ", configurationDirectories.Name);
 
-                SaveTable(configurationDirectories.Table);
+                LoadTable(configurationDirectories.Table, configurationDirectories);
             }
         }
 
-        void LoadTable(string table)
+        void LoadTable(string table, ConfigurationDirectories configurationDirectory)
         {
             string pathToLoadBase = @"E:\ВигрузкаБази\" + table + ".xml";
 
@@ -96,14 +96,15 @@ namespace Configurator
 
             Dictionary<string, string> columnsList = LoadColumns(rootNode);
 
-            //Program.Kernel.DataBase.InsertSQL(table, );
+            XPathNavigator rowsNode = rootNode.SelectSingleNode("Записи");
+            LoadRows(rowsNode, table, columnsList, configurationDirectory);
         }
 
         Dictionary<string, string> LoadColumns(XPathNavigator rootNode)
         {
             Dictionary<string, string> columnsList = new Dictionary<string, string>();
 
-           XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
+            XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
             while (columnsNodeList.MoveNext())
             {
                 string columnNodeName = columnsNodeList.Current.SelectSingleNode("Назва").Value;
@@ -115,9 +116,66 @@ namespace Configurator
             return columnsList;
         }
 
-        void LoadRow(XPathNavigator rootNode)
+        void LoadRows(XPathNavigator rootNode, string table, Dictionary<string, string> columnsList, ConfigurationDirectories configurationDirectory)
         {
+            Dictionary<string, object> param = new Dictionary<string, object>();
 
+            XPathNodeIterator rowNodeList = rootNode.Select("row");
+            while (rowNodeList.MoveNext())
+            {
+                param.Clear();
+
+                foreach (KeyValuePair<string, string> columnItem in columnsList)
+                {
+                    string columnValue = rowNodeList.Current.SelectSingleNode(columnItem.Value).Value;
+
+                    string columnType = configurationDirectory.Fields[columnItem.Key].Type;
+
+                    object obj;
+
+                    switch (columnType)
+                    {
+                        case "integer":
+                        case "enum":
+                            {
+                                obj = int.Parse(columnValue);
+                                break;
+                            }
+                        case "numeric":
+                            {
+                                obj = decimal.Parse(columnValue);
+                                break;
+                            }
+                        case "boolean":
+                            {
+                                obj = bool.Parse(columnValue);
+                                break;
+                            }
+                        case "date":
+                        case "datetime":
+                        case "time":
+                            {
+                                obj = DateTime.Parse(columnValue);
+                                break;
+                            }
+                        case "pointer":
+                        case "empty_pointer":
+                            {
+                                obj = Guid.Parse(columnValue);
+                                break;
+                            }
+                        default:
+                            {
+                                throw new Exception("Error type");
+                            }
+                    }
+
+                    param.Add(columnItem.Key, obj);
+                }
+
+                ApendLine(" --> " + table + ": ", Program.Kernel.DataBase.InsertSQL(table, param).ToString());
+
+            }
         }
 
         void SaveTable(string table)
