@@ -24,14 +24,26 @@ namespace Configurator
 
         public Configuration Conf { get; set; }
 
-        private void buttonUnloadingData_Click(object sender, EventArgs e)
+        private void UnloadingAndLoadingData_Load(object sender, EventArgs e)
         {
             Conf = Program.Kernel.Conf;
+        }
 
+        private void buttonUnloadingData_Click(object sender, EventArgs e)
+        {
             Thread thread = new Thread(new ThreadStart(UnloadingData));
             thread.Start();
 
             buttonUnloadingData.Enabled = false;
+            richTextBoxInfo.Text = "";
+        }
+
+        private void buttonLoadingData_Click(object sender, EventArgs e)
+        {
+            Thread thread = new Thread(new ThreadStart(LoadingData));
+            thread.Start();
+
+            buttonLoadingData.Enabled = false;
             richTextBoxInfo.Text = "";
         }
 
@@ -61,7 +73,54 @@ namespace Configurator
             ApendLine("Готово!", "");
         }
 
-        private void SaveTable(string table)
+        void LoadingData()
+        {
+            ApendLine("ДОВІДНИКИ", "");
+
+            foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
+            {
+                ApendLine(" --> Довідник: ", configurationDirectories.Name);
+
+                SaveTable(configurationDirectories.Table);
+            }
+        }
+
+        void LoadTable(string table)
+        {
+            string pathToLoadBase = @"E:\ВигрузкаБази\" + table + ".xml";
+
+            XPathDocument xPathDoc = new XPathDocument(pathToLoadBase);
+            XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+            XPathNavigator rootNode = xPathDocNavigator.SelectSingleNode("/ВигрузкаДаних");
+
+            Dictionary<string, string> columnsList = LoadColumns(rootNode);
+
+            //Program.Kernel.DataBase.InsertSQL(table, );
+        }
+
+        Dictionary<string, string> LoadColumns(XPathNavigator rootNode)
+        {
+            Dictionary<string, string> columnsList = new Dictionary<string, string>();
+
+           XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
+            while (columnsNodeList.MoveNext())
+            {
+                string columnNodeName = columnsNodeList.Current.SelectSingleNode("Назва").Value;
+                string columnNodeAlias = columnsNodeList.Current.SelectSingleNode("КороткаНазва").Value;
+
+                columnsList.Add(columnNodeName, columnNodeAlias);
+            }
+
+            return columnsList;
+        }
+
+        void LoadRow(XPathNavigator rootNode)
+        {
+
+        }
+
+        void SaveTable(string table)
         {
             string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
 
@@ -134,5 +193,6 @@ namespace Configurator
                 richTextBoxInfo.ScrollToCaret();
             }
         }
+        
     }
 }

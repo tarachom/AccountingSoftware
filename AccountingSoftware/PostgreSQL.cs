@@ -1205,6 +1205,28 @@ namespace AccountingSoftware
 
 		#endregion
 
+		public int InsertSQL(string table, Dictionary<string, object> paramQuery)
+        {
+			string query_field = "";
+			string query_values = "";
+
+			foreach (string field in paramQuery.Keys)
+			{
+				query_field += (String.IsNullOrEmpty(query_field) ? "" : ", ") + field;
+				query_values += (String.IsNullOrEmpty(query_values) ? "" : ", ") + "@" + field;
+			}
+
+			string insertQuery = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")"; ;
+
+			NpgsqlCommand Command = new NpgsqlCommand(insertQuery, Connection);
+
+			if (paramQuery != null)
+				foreach (KeyValuePair<string, object> param in paramQuery)
+					Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+
+			return Command.ExecuteNonQuery();
+		}
+
 		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow)
 		{
 			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);

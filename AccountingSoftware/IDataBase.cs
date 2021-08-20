@@ -118,6 +118,8 @@ namespace AccountingSoftware
 
 		#endregion
 
+		int InsertSQL(string table, Dictionary<string, object> paramQuery);
+
 		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow);
 	}
 }
