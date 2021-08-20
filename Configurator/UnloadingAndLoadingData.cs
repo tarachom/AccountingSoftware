@@ -11,6 +11,7 @@ using System.Windows.Forms;
 
 using System.Xml.XPath;
 using AccountingSoftware;
+using System.IO;
 
 namespace Configurator
 {
@@ -36,26 +37,76 @@ namespace Configurator
 
         void UnloadingData()
         {
+            ApendLine("ДОВІДНИКИ", "");
+
             foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
             {
-                ApendLine("Довідник: ", configurationDirectories.Name);
+                ApendLine(" --> Довідник: ", configurationDirectories.Name);
 
                 SaveTable(configurationDirectories.Table);
             }
 
+            ApendLine("РЕГІСТРИ", "");
+
+            foreach (ConfigurationRegistersAccumulation configurationRegistersAccumulation in Conf.RegistersAccumulation.Values)
+            {
+                ApendLine(" --> Регістер накопичення: ", configurationRegistersAccumulation.Name);
+
+                SaveTable(configurationRegistersAccumulation.Table);
+            }
+
             buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));
+
+            ApendLine("", "");
+            ApendLine("Готово!", "");
         }
 
         private void SaveTable(string table)
         {
+            string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
+
             string[] columnsName;
             List<object[]> listRow;
 
             string query = "SELECT * FROM " + table;
-            ApendLine(query, "");
-            //Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+           
+            Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
 
+            StreamWriter sw = new StreamWriter(pathToUnloadBase);
+            sw.AutoFlush = true;
 
+            sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            sw.WriteLine("<ВигрузкаДаних>");
+            sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
+            
+            sw.WriteLine("<Колонки>");
+
+            for (int k = 0; k < columnsName.Length; k++)
+            {
+                sw.WriteLine("<Колонка>");
+                sw.WriteLine("  <Назва>" + columnsName[k] + "</Назва>");
+                sw.WriteLine("  <КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
+                sw.WriteLine("</Колонка>");
+            }
+
+            sw.WriteLine("</Колонки>");
+
+            sw.WriteLine("<Записи>");
+
+            foreach (object[] o in listRow)
+            {
+                sw.Write("<row>");
+
+                for (int i = 0; i < o.Length; i++)
+                    sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
+
+                sw.WriteLine("</row>");
+            }
+
+            sw.WriteLine("</Записи>");
+
+            sw.WriteLine("</ВигрузкаДаних>");
+            sw.Close();
         }
 
         private void ApendLine(string head, string bodySelect, string futer = "")
