@@ -195,7 +195,7 @@ namespace Configurator
 					return;
 				}
 				else
-					MessageBox.Show("Помилка: Ключ конфігурації '" + AutoOpenConfigurationKey + "' не знайдено!");
+					MessageBox.Show("Помилка: Ключ конфігурації '" + AutoOpenConfigurationKey + "' не знайдено!");				
 			}
 
 			Fill_listBoxConfiguration();

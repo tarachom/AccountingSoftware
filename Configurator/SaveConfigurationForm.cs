@@ -21,7 +21,7 @@ namespace Configurator
 			InitializeComponent();
 		}
 
-		public const string PathToXsltTemplate = @"E:\Project\AccountingSoftware_29_05_21\Configurator";
+		private string PathToXsltTemplate { get; set; }
 
 		public Configuration Conf { get; set; }
 
@@ -396,10 +396,12 @@ namespace Configurator
 				Conf.PathToTempXmlFileConfiguration,
 				Conf.PathToCopyXmlFileConfiguration);
 
+#if DEBUG
 			ApendLine("\n[ Генерування коду ]", "", "\n");
 			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
 				PathToXsltTemplate + @"\CodeGeneration.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
+#endif
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
 		}
@@ -418,6 +420,14 @@ namespace Configurator
 
 		private void SaveConfigurationForm_Load(object sender, EventArgs e)
 		{
+			string assemblyLocation = Path.GetDirectoryName(Application.ExecutablePath);
+
+#if DEBUG
+			PathToXsltTemplate = @"E:\Project\AccountingSoftware_29_05_21\Configurator";
+#else
+			PathToXsltTemplate = assemblyLocation;
+#endif
+
 			Thread thread = new Thread(new ThreadStart(SaveAndAnalize));
 			thread.Start();
 		}
