@@ -228,7 +228,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Comparison.xslt" />
-    <Content Include="ComparisonReportAnalize.xslt">
+    <Content Include="ComparisonAnalize.xslt">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="configurator.ico" />

@@ -116,7 +116,7 @@ namespace Configurator
 				Configuration.Comparison(
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
 					PathToXsltTemplate + @"\Comparison.xslt",
-					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
+					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\Comparison.xml",
 					Conf.PathToTempXmlFileConfiguration,
 					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
 			}
@@ -125,7 +125,7 @@ namespace Configurator
 				ApendLine(ex.Message, "");
 			}
 
-			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml");
+			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\Comparison.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
 			XPathNodeIterator nodeDeleteDirectory = xPathDocNavigator.Select("/root/Control_Table[IsExist = 'delete']");
@@ -328,17 +328,17 @@ namespace Configurator
 			Configuration.Comparison(
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\InformationSchema.xml",
 				PathToXsltTemplate + @"\Comparison.xslt",
-				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\Comparison.xml",
 				Conf.PathToTempXmlFileConfiguration,
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\" + Conf.PathToCopyXmlFileConfiguration);
 
 			ApendLine("4. Створення команд SQL", "", "\n");
 			Configuration.ComparisonAnalizeGeneration(
-				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonReport.xml",
-				PathToXsltTemplate + @"\ComparisonReportAnalize.xslt",
-				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) +  @"\ReportAnalize.xml", replacementColumn);
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\Comparison.xml",
+				PathToXsltTemplate + @"\ComparisonAnalize.xslt",
+				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonAnalize.xml", replacementColumn);
 
-			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
+			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonAnalize.xml");
 			XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
 
 			XPathNodeIterator nodeInfo = xPathDocNavigator.Select("/root/info");
@@ -374,7 +374,7 @@ namespace Configurator
 			buttonSave.Invoke(new Action(() => buttonSave.Enabled = false));
 
 			//Read SQL
-			List<string> SqlList = Configuration.ListComparisonSql(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ReportAnalize.xml");
+			List<string> SqlList = Configuration.ListComparisonSql(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\ComparisonAnalize.xml");
 
 			ApendLine("\n[ Виконання SQL ]", "", "\n");
 

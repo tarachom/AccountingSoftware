@@ -107,7 +107,14 @@ namespace Configurator
 				ItemConfigurationParam.DataBasePort,
 				ItemConfigurationParam.DataBaseBaseName, out exception, out IsExistsDatabase);
 
-			MessageBox.Show(flag.ToString());
+			if (flag)
+			{
+				MessageBox.Show("ОК. База створена!");
+			}
+			else
+			{
+				MessageBox.Show("Помилка! " + (exception != null ? exception.Message : ""));
+			}
 		}
 
 		private void buttonTryConnect_Click(object sender, EventArgs e)
@@ -124,7 +131,14 @@ namespace Configurator
 				ItemConfigurationParam.DataBasePassword,
 				ItemConfigurationParam.DataBasePort, out exception);
 
-			MessageBox.Show(flag.ToString());
+			if (flag)
+			{
+				MessageBox.Show("ОК. Є підключення!");
+			}
+			else
+			{
+				MessageBox.Show("Помилка! " + (exception != null ? exception.Message : ""));
+			}
 		}
 
 		/*

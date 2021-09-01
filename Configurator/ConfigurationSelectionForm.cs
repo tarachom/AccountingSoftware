@@ -186,13 +186,13 @@ namespace Configurator
 					{
 						this.DialogResult = DialogResult.OK;
 						this.Hide();
+
+						return;
 					}
 					else
                     {
 						MessageBox.Show("Помилка відкриття конфігурації: " + exception.Message);
-                    }
-
-					return;
+                    }	
 				}
 				else
 					MessageBox.Show("Помилка: Ключ конфігурації '" + AutoOpenConfigurationKey + "' не знайдено!");				

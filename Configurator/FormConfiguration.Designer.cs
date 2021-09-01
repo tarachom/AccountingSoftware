@@ -43,6 +43,8 @@
             this.addEnumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRegistersInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRegisterAccumulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вигрузкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripDirectory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -78,10 +80,10 @@
             this.addItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
-            this.вигрузкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBoxInfo = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
             this.splitContainerBase.Panel1.SuspendLayout();
+            this.splitContainerBase.Panel2.SuspendLayout();
             this.splitContainerBase.SuspendLayout();
             this.menuStripTop.SuspendLayout();
             this.contextMenuStripDirectory.SuspendLayout();
@@ -103,6 +105,10 @@
             // splitContainerBase.Panel1
             // 
             this.splitContainerBase.Panel1.Controls.Add(this.treeConfiguration);
+            // 
+            // splitContainerBase.Panel2
+            // 
+            this.splitContainerBase.Panel2.Controls.Add(this.richTextBoxInfo);
             this.splitContainerBase.Size = new System.Drawing.Size(842, 465);
             this.splitContainerBase.SplitterDistance = 265;
             this.splitContainerBase.TabIndex = 0;
@@ -224,6 +230,21 @@
             this.addNewRegisterAccumulationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
             this.addNewRegisterAccumulationToolStripMenuItem.Text = "Новий регістер накопичення";
             this.addNewRegisterAccumulationToolStripMenuItem.Click += new System.EventHandler(this.addNewRegisterAccumulationToolStripMenuItem_Click);
+            // 
+            // вигрузкаToolStripMenuItem
+            // 
+            this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem});
+            this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
+            this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.вигрузкаToolStripMenuItem.Text = "Вигрузка";
+            // 
+            // вигрузкаТаЗагрузкаДанихToolStripMenuItem
+            // 
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Name = "вигрузкаТаЗагрузкаДанихToolStripMenuItem";
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Text = "Вигрузка та загрузка даних";
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Click += new System.EventHandler(this.вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click);
             // 
             // contextMenuStripDirectory
             // 
@@ -491,20 +512,19 @@
             this.deleteItemRegistersAccumulation.Text = "Видалити";
             this.deleteItemRegistersAccumulation.Click += new System.EventHandler(this.deleteItemRegistersAccumulation_Click);
             // 
-            // вигрузкаToolStripMenuItem
+            // richTextBoxInfo
             // 
-            this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem});
-            this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
-            this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.вигрузкаToolStripMenuItem.Text = "Вигрузка";
-            // 
-            // вигрузкаТаЗагрузкаДанихToolStripMenuItem
-            // 
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Name = "вигрузкаТаЗагрузкаДанихToolStripMenuItem";
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Text = "Вигрузка та загрузка даних";
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Click += new System.EventHandler(this.вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click);
+            this.richTextBoxInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.richTextBoxInfo.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.richTextBoxInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBoxInfo.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.richTextBoxInfo.Location = new System.Drawing.Point(8, 8);
+            this.richTextBoxInfo.Name = "richTextBoxInfo";
+            this.richTextBoxInfo.ReadOnly = true;
+            this.richTextBoxInfo.Size = new System.Drawing.Size(562, 254);
+            this.richTextBoxInfo.TabIndex = 1;
+            this.richTextBoxInfo.Text = "";
             // 
             // FormConfiguration
             // 
@@ -523,6 +543,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormConfiguration_FormClosing);
             this.Load += new System.EventHandler(this.FormConfiguration_Load);
             this.splitContainerBase.Panel1.ResumeLayout(false);
+            this.splitContainerBase.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).EndInit();
             this.splitContainerBase.ResumeLayout(false);
             this.menuStripTop.ResumeLayout(false);
@@ -591,6 +612,7 @@
 		private System.Windows.Forms.ToolStripMenuItem addNewConstant;
         private System.Windows.Forms.ToolStripMenuItem вигрузкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem вигрузкаТаЗагрузкаДанихToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox richTextBoxInfo;
     }
 }
 

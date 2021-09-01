@@ -426,8 +426,38 @@ namespace Configurator
 
 		#endregion
 
+		private void ApendLine(string head, string bodySelect, string futer = "")
+		{
+			if (richTextBoxInfo.InvokeRequired)
+			{
+				richTextBoxInfo.Invoke(new Action<string, string, string>(ApendLine), head, bodySelect, futer);
+			}
+			else
+			{
+				richTextBoxInfo.AppendText(head);
+
+				if (!String.IsNullOrEmpty(bodySelect))
+				{
+					richTextBoxInfo.SelectionFont = new Font("Consolas"/*"Microsoft Sans Serif"*/, 12);
+					//richTextBoxInfo.SelectionColor = Color.DarkBlue;
+					richTextBoxInfo.AppendText(bodySelect);
+				}
+
+				if (!String.IsNullOrEmpty(bodySelect))
+				{
+					richTextBoxInfo.SelectionFont = new Font("Consolas", 12);
+					richTextBoxInfo.SelectionColor = Color.Black;
+				}
+
+				richTextBoxInfo.AppendText(" " + futer + "\n");
+				richTextBoxInfo.ScrollToCaret();
+			}
+		}
+
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
+			this.splitContainerBase.SplitterDistance = 400;
+
 			ConfigurationSelectionForm configurationSelectionForm = new ConfigurationSelectionForm();
 			configurationSelectionForm.AutoOpenConfigurationKey = AutoOpenConfigurationKey;
 			DialogResult dialogResult = configurationSelectionForm.ShowDialog();
@@ -438,10 +468,13 @@ namespace Configurator
 
 				Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
 				thread.Start();
+
+				ApendLine("Конфігурації: \t\t", Conf.Name);
+				ApendLine("Файл конфігурації: \t", Conf.PathToXmlFileConfiguration);
+				ApendLine("Автор: \t\t\t", Conf.Author);
 			}
             else
             {
-				MessageBox.Show("Помилка відкриття конфігурації");
 				Application.Exit();
             }
 		}
