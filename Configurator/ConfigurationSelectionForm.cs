@@ -41,8 +41,25 @@ namespace Configurator
 			ListConfigurationParam = new List<ConfigurationParam>();
 		}
 
+		/// <summary>
+		/// Ключ конфігурації яку потрібно відкрити автоматично без вибору в списку.
+		/// Ключ передається як параметр при запуску конфігуратора.
+		/// </summary>
+		public string AutoOpenConfigurationKey { get; set; }
+
+		/// <summary>
+		/// Шлях до списку баз баних
+		/// </summary>
 		private string PathToXML { get; set; }
 
+		/// <summary>
+		/// Шлях до конфігурації
+		/// </summary>
+		private string PathToConfXML { get; set; }
+
+		/// <summary>
+		/// Список баз даних
+		/// </summary>
 		private List<ConfigurationParam> ListConfigurationParam { get; set; }
 
 		private void LoadConfigurationParamFromXML()
@@ -63,7 +80,6 @@ namespace Configurator
 
 					ItemConfigurationParam.ConfigurationKey = currentNode.SelectSingleNode("Key").Value;
 					ItemConfigurationParam.ConfigurationName = currentNode.SelectSingleNode("Name").Value;
-					ItemConfigurationParam.ConfigurationPath = currentNode.SelectSingleNode("Path").Value;
 					ItemConfigurationParam.DataBaseServer = currentNode.SelectSingleNode("Server").Value;
 					ItemConfigurationParam.DataBasePort = int.Parse(currentNode.SelectSingleNode("Port").Value);
 					ItemConfigurationParam.DataBaseLogin = currentNode.SelectSingleNode("Login").Value;
@@ -95,10 +111,6 @@ namespace Configurator
 				XmlElement nodeName = xmlConfParamDocument.CreateElement("Name");
 				nodeName.InnerText = ItemConfigurationParam.ConfigurationName;
 				configurationNode.AppendChild(nodeName);
-
-				XmlElement nodePath = xmlConfParamDocument.CreateElement("Path");
-				nodePath.InnerText = ItemConfigurationParam.ConfigurationPath;
-				configurationNode.AppendChild(nodePath);
 
 				XmlElement nodeServer = xmlConfParamDocument.CreateElement("Server");
 				nodeServer.InnerText = ItemConfigurationParam.DataBaseServer;
@@ -137,11 +149,72 @@ namespace Configurator
 
 		private void ConfigurationSelectionForm_Load(object sender, EventArgs e)
 		{
-			PathToXML = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\ConfigurationParam.xml";
+			string assemblyLocation = Path.GetDirectoryName(Application.ExecutablePath);
 
-            LoadConfigurationParamFromXML();
+			PathToXML = assemblyLocation + "\\ConfigurationParam.xml";
+			PathToConfXML = assemblyLocation + "\\Confa.xml";
+
+#if DEBUG
+			//Конфігурація береться із папки Configurator
+			PathToConfXML = @"E:\Project\HomeFinaces\HomeFinances\Configurator\Confa.xml";
+#endif
+
+			LoadConfigurationParamFromXML();
+
+			if (!String.IsNullOrEmpty( AutoOpenConfigurationKey))
+            {
+				bool KeyFound = false;
+				ConfigurationParam ItemConfigurationParamFound = new ConfigurationParam();
+
+				foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+				{
+					if (ItemConfigurationParam.ConfigurationKey == AutoOpenConfigurationKey)
+                    {
+						ItemConfigurationParamFound = ItemConfigurationParam;
+						KeyFound = true;
+
+						break;
+					}
+				}
+
+				if (KeyFound)
+				{
+					Exception exception;
+					bool flagOpen = OpenConfiguration(ItemConfigurationParamFound, out exception);
+
+					if (flagOpen)
+					{
+						this.DialogResult = DialogResult.OK;
+						this.Hide();
+					}
+					else
+                    {
+						MessageBox.Show("Помилка відкриття конфігурації: " + exception.Message);
+                    }
+
+					return;
+				}
+				else
+					MessageBox.Show("Помилка: Ключ конфігурації '" + AutoOpenConfigurationKey + "' не знайдено!");
+			}
 
 			Fill_listBoxConfiguration();
+		}
+
+		private bool OpenConfiguration(ConfigurationParam itemConfigurationParam, out Exception exception )
+        {
+			Program.Kernel = new Kernel();
+
+			bool flagOpen = Program.Kernel.Open2(PathToConfXML,
+				itemConfigurationParam.DataBaseServer,
+				itemConfigurationParam.DataBaseLogin,
+				itemConfigurationParam.DataBasePassword,
+				itemConfigurationParam.DataBasePort,
+				itemConfigurationParam.DataBaseBaseName,
+
+				out exception);
+
+			return flagOpen;
 		}
 
         #region CallBack
@@ -160,7 +233,6 @@ namespace Configurator
 					if (ItemConfigurationParam.ConfigurationKey == itemConfigurationParam.ConfigurationKey)
 					{
 						ItemConfigurationParam.ConfigurationName = itemConfigurationParam.ConfigurationName;
-						ItemConfigurationParam.ConfigurationPath = itemConfigurationParam.ConfigurationPath;
 						ItemConfigurationParam.DataBaseServer = itemConfigurationParam.DataBaseServer;
 						ItemConfigurationParam.DataBaseLogin = itemConfigurationParam.DataBaseLogin;
 						ItemConfigurationParam.DataBasePassword = itemConfigurationParam.DataBasePassword;
@@ -231,26 +303,18 @@ namespace Configurator
 			{
 				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
 
-				Exception exception = null;
+				Exception exception;
+				bool flagOpen = OpenConfiguration(itemConfigurationParam, out exception);
 
-				Program.Kernel = new Kernel();
-
-				bool flag = Program.Kernel.Open2(
-					itemConfigurationParam.ConfigurationPath,
-
-					itemConfigurationParam.DataBaseServer,
-					itemConfigurationParam.DataBaseLogin,
-					itemConfigurationParam.DataBasePassword,
-					itemConfigurationParam.DataBasePort,
-					itemConfigurationParam.DataBaseBaseName, 
-					
-					out exception);
-
-				//FormConfiguration formConfiguration = new FormConfiguration();
-				//formConfiguration.Show();
-
-				this.DialogResult = DialogResult.OK;
-				this.Hide();
+				if (flagOpen)
+				{
+					this.DialogResult = DialogResult.OK;
+					this.Hide();
+				}
+				else
+				{
+					MessageBox.Show("Помилка відкриття конфігурації: " + exception.Message);
+				}
 			}
 		}
 
@@ -284,8 +348,6 @@ namespace Configurator
 
 		public string ConfigurationName { get; set; }
 
-		public string ConfigurationPath { get; set; }
-
 		public string DataBaseServer { get; set; }
 
 		public int DataBasePort { get; set; }
@@ -306,7 +368,6 @@ namespace Configurator
 			ConfigurationParam configurationParam = new ConfigurationParam();
 			configurationParam.ConfigurationKey = Guid.NewGuid().ToString();
 			configurationParam.ConfigurationName = ConfigurationName;
-			configurationParam.ConfigurationPath = ConfigurationPath;
 			configurationParam.DataBaseServer = DataBaseServer;
 			configurationParam.DataBaseLogin = DataBaseLogin;
 			configurationParam.DataBasePassword = DataBasePassword;

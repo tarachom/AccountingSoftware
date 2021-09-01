@@ -54,7 +54,6 @@ namespace Configurator
 				if (ItemConfigurationParam != null)
 				{
 					textBoxConfName.Text = ItemConfigurationParam.ConfigurationName;
-					textBoxPathToFile.Text = ItemConfigurationParam.ConfigurationPath;
 				}
 				else
 					new Exception("ItemConfigurationParam null");
@@ -70,7 +69,6 @@ namespace Configurator
 		private void UpdateItemConfigurationParam()
 		{
 			ItemConfigurationParam.ConfigurationName = textBoxConfName.Text;
-			ItemConfigurationParam.ConfigurationPath = textBoxPathToFile.Text;
 
 			ItemConfigurationParam.DataBaseServer = textBoxPostgreSQLServer.Text;
 			ItemConfigurationParam.DataBaseLogin = textBoxPostgreSQLLogin.Text;
@@ -129,6 +127,7 @@ namespace Configurator
 			MessageBox.Show(flag.ToString());
 		}
 
+		/*
         private void buttonSelectFile_Click(object sender, EventArgs e)
         {
 			UpdateItemConfigurationParam();
@@ -150,5 +149,6 @@ namespace Configurator
 				textBoxPathToFile.Text = ItemConfigurationParam.ConfigurationPath;
 			}
 		}
+		*/
     }
 }

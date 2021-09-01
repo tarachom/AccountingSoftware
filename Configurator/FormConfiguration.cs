@@ -43,6 +43,12 @@ namespace Configurator
 			InitializeComponent();
 		}
 
+		/// <summary>
+		/// Ключ конфігурації яку потрібно відкрити автоматично без вибору в списку.
+		/// Ключ передається як параметр при запуску конфігуратора.
+		/// </summary>
+		public string AutoOpenConfigurationKey { get; set; }
+
 		public Configuration Conf { get; set; }
 
 		private TreeNode nodeSel { get; set; }
@@ -423,6 +429,7 @@ namespace Configurator
 		private void FormConfiguration_Load(object sender, EventArgs e)
 		{
 			ConfigurationSelectionForm configurationSelectionForm = new ConfigurationSelectionForm();
+			configurationSelectionForm.AutoOpenConfigurationKey = AutoOpenConfigurationKey;
 			DialogResult dialogResult = configurationSelectionForm.ShowDialog();
 
 			if (dialogResult == DialogResult.OK)
@@ -432,6 +439,11 @@ namespace Configurator
 				Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
 				thread.Start();
 			}
+            else
+            {
+				MessageBox.Show("Помилка відкриття конфігурації");
+				Application.Exit();
+            }
 		}
 
 		private void FormConfiguration_FormClosing(object sender, FormClosingEventArgs e)
