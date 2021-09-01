@@ -57,9 +57,17 @@ namespace AccountingSoftware
 
 		public bool IsNew { get; private set; }
 
-		public void New()
+		/// <summary>
+		/// Новий елемент
+		/// </summary>
+		/// <param name="use_uid">01.09.2021 Добавив можливість вказувати uid для нових елементів довідника. Використовується для обміну</param>
+		public void New(UnigueID use_uid = null)
 		{
-			UnigueID = new UnigueID(Guid.NewGuid());
+			if (use_uid != null)
+				UnigueID = use_uid;
+			else
+				UnigueID = new UnigueID(Guid.NewGuid());
+
 			IsNew = true;
 		}
 
