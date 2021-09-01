@@ -149,7 +149,7 @@
             this.Name = "SaveConfigurationForm";
             this.Padding = new System.Windows.Forms.Padding(10);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Збереження змін в конфігурації";
+            this.Text = "Збереження конфігурації";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SaveConfigurationForm_FormClosing);
             this.Load += new System.EventHandler(this.SaveConfigurationForm_Load);
             this.panel2.ResumeLayout(false);

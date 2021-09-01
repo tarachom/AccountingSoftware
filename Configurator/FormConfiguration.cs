@@ -1480,8 +1480,8 @@ namespace Configurator
 
         private void вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
-			unloadingAndLoadingData.ShowDialog();
+			//UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
+			//unloadingAndLoadingData.ShowDialog();
 		}
     }
 }
