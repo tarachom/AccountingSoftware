@@ -129,7 +129,8 @@ namespace Configurator
 				ItemConfigurationParam.DataBaseServer,
 				ItemConfigurationParam.DataBaseLogin,
 				ItemConfigurationParam.DataBasePassword,
-				ItemConfigurationParam.DataBasePort, out exception);
+				ItemConfigurationParam.DataBasePort,
+				ItemConfigurationParam.DataBaseBaseName, out exception);
 
 			if (flag)
 			{

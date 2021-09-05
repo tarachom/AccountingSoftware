@@ -46,12 +46,10 @@ namespace AccountingSoftware
 		{
 			exception = null;
 
-			Connection = new NpgsqlConnection(
-				"Server=" + Server + ";" +
-				"User Id=" + UserId + ";" +
-				"Password=" + Password + ";" +
-				"Port=" + Port.ToString() + ";" +
-				"Database=" + Database + ";");
+			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
+			Console.WriteLine(conString);
+
+			Connection = new NpgsqlConnection(conString);
 
 			try
 			{
@@ -68,13 +66,12 @@ namespace AccountingSoftware
 			}
 		}
 
-		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception)
+		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
-			Connection = new NpgsqlConnection(
-				"Server=" + Server + ";" +
-				"User Id=" + UserId + ";" +
-				"Password=" + Password + ";" +
-				"Port=" + Port.ToString() + ";");
+			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
+			//Console.WriteLine(conString);
+
+			Connection = new NpgsqlConnection(conString);
 
 			exception = null;
 
@@ -97,11 +94,10 @@ namespace AccountingSoftware
 			exception = null;
 			IsExistsDatabase = false;
 
-			Connection = new NpgsqlConnection(
-				"Server=" + Server + ";" +
-				"User Id=" + UserId + ";" +
-				"Password=" + Password + ";" +
-				"Port=" + Port.ToString() + ";");
+			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
+			//Console.WriteLine(conString);
+
+			Connection = new NpgsqlConnection(conString);
 
 			try
 			{

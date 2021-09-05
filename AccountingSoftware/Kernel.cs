@@ -46,10 +46,10 @@ namespace AccountingSoftware
 			Console.WriteLine("Configuration Load");
 		}
 
-		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, out Exception exception)
+		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			DataBase = new PostgreSQL();
-			return DataBase.TryConnectToServer(Server, UserId, Password, Port, out exception);
+			return DataBase.TryConnectToServer(Server, UserId, Password, Port, Database, out exception);
 		}
 
 		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase)
