@@ -63,6 +63,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxTriggersAfterSave = new System.Windows.Forms.TextBox();
+            this.textBoxTriggersBeforeSave = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.contextMenuStripField.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -77,6 +82,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxFields
@@ -137,7 +143,6 @@
             this.listBoxViews.Name = "listBoxViews";
             this.listBoxViews.Size = new System.Drawing.Size(266, 107);
             this.listBoxViews.TabIndex = 0;
-            //this.listBoxViews.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxViews_MouseDoubleClick);
             // 
             // panel3
             // 
@@ -158,7 +163,6 @@
             this.buttonAddView.TabIndex = 8;
             this.buttonAddView.Text = "Додати";
             this.buttonAddView.UseVisualStyleBackColor = true;
-            //this.buttonAddView.Click += new System.EventHandler(this.buttonAddView_Click);
             // 
             // label6
             // 
@@ -320,6 +324,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.checkBoxHierarchical);
             this.splitContainer1.Panel2.Controls.Add(this.comboBoxHierarchical);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
@@ -336,7 +341,7 @@
             // checkBoxHierarchical
             // 
             this.checkBoxHierarchical.AutoSize = true;
-            this.checkBoxHierarchical.Location = new System.Drawing.Point(85, 151);
+            this.checkBoxHierarchical.Location = new System.Drawing.Point(85, 468);
             this.checkBoxHierarchical.Name = "checkBoxHierarchical";
             this.checkBoxHierarchical.Size = new System.Drawing.Size(130, 17);
             this.checkBoxHierarchical.TabIndex = 8;
@@ -350,7 +355,7 @@
             this.comboBoxHierarchical.Enabled = false;
             this.comboBoxHierarchical.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxHierarchical.FormattingEnabled = true;
-            this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 174);
+            this.comboBoxHierarchical.Location = new System.Drawing.Point(85, 491);
             this.comboBoxHierarchical.Name = "comboBoxHierarchical";
             this.comboBoxHierarchical.Size = new System.Drawing.Size(459, 21);
             this.comboBoxHierarchical.TabIndex = 7;
@@ -358,7 +363,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 177);
+            this.label7.Location = new System.Drawing.Point(11, 494);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(57, 13);
             this.label7.TabIndex = 6;
@@ -419,6 +424,51 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 48);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(76, 13);
+            this.label8.TabIndex = 9;
+            this.label8.Text = "Після запису:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.textBoxTriggersBeforeSave);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.textBoxTriggersAfterSave);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Location = new System.Drawing.Point(15, 151);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(529, 311);
+            this.groupBox1.TabIndex = 10;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Функції";
+            // 
+            // textBoxTriggersAfterSave
+            // 
+            this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(101, 45);
+            this.textBoxTriggersAfterSave.Name = "textBoxTriggersAfterSave";
+            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(422, 20);
+            this.textBoxTriggersAfterSave.TabIndex = 10;
+            // 
+            // textBoxTriggersBeforeSave
+            // 
+            this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(101, 19);
+            this.textBoxTriggersBeforeSave.Name = "textBoxTriggersBeforeSave";
+            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(422, 20);
+            this.textBoxTriggersBeforeSave.TabIndex = 12;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(6, 22);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(89, 13);
+            this.label9.TabIndex = 11;
+            this.label9.Text = "Перед записом:";
+            // 
             // DirectoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -452,6 +502,8 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -491,5 +543,10 @@
 		private System.Windows.Forms.ToolStripMenuItem copyFiled;
 		private System.Windows.Forms.ContextMenuStrip contextMenuStripTablePart;
 		private System.Windows.Forms.ToolStripMenuItem copyTablePart;
-	}
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox textBoxTriggersAfterSave;
+        private System.Windows.Forms.TextBox textBoxTriggersBeforeSave;
+        private System.Windows.Forms.Label label9;
+    }
 }

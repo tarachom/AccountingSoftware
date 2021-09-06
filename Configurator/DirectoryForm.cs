@@ -78,6 +78,9 @@ namespace Configurator
 				textBoxTable.Text = ConfDirectory.Table;
 				textBoxDesc.Text = ConfDirectory.Desc;
 
+				textBoxTriggersAfterSave.Text = ConfDirectory.TriggerFunctions.AfterSave;
+				textBoxTriggersBeforeSave.Text = ConfDirectory.TriggerFunctions.BeforeSave;
+
 				IsNewDirectory = false;
 
 				LoadFieldList();
@@ -108,6 +111,11 @@ namespace Configurator
 			ConfDirectory.Name = textBoxName.Text;
 			ConfDirectory.Table = textBoxTable.Text;
 			ConfDirectory.Desc = textBoxDesc.Text;
+
+			//Тригери
+			ConfDirectory.TriggerFunctions.BeforeSave = textBoxTriggersBeforeSave.Text;
+			ConfDirectory.TriggerFunctions.AfterSave = textBoxTriggersAfterSave.Text;
+
 
 			CallBack.Invoke(OriginalName, ConfDirectory, IsNewDirectory);
 

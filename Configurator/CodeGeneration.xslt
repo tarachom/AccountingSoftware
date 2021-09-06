@@ -572,7 +572,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
+		    <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
             BaseSave();
+			<xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
+                <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
         }
 
         public string Serialize(string root = "<xsl:value-of select="$DirectoryName"/>")

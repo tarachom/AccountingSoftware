@@ -21,6 +21,7 @@ limitations under the License.
 Сайт:     accounting.org.ua
 */
 
+using System;
 using System.Collections.Generic;
 
 namespace AccountingSoftware
@@ -38,6 +39,7 @@ namespace AccountingSoftware
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 			//Views = new Dictionary<string, ConfigurationObjectView>();
+			TriggerFunctions = new ConfigurationTriggerFunctions();
 		}
 
 		/// <summary>
@@ -67,6 +69,11 @@ namespace AccountingSoftware
 		/// Візуалізації
 		/// </summary>
 		//public Dictionary<string, ConfigurationObjectView> Views { get; }
+
+		/// <summary>
+		/// Тригери
+		/// </summary>
+		public ConfigurationTriggerFunctions TriggerFunctions { get; set; }
 
 		/// <summary>
 		/// Додати нове поле

@@ -806,6 +806,8 @@ namespace AccountingSoftware
 				LoadTabularParts(ConfObjectDirectories.TabularParts, directoryNodes.Current);
 
 				//LoadViews(ConfObjectDirectories.Views, directoryNodes.Current);
+
+				LoadTriggerFunctions(ConfObjectDirectories.TriggerFunctions, directoryNodes.Current);
 			}
 		}
 
@@ -886,6 +888,17 @@ namespace AccountingSoftware
 			}
 		} 
 		*/
+
+		private static void LoadTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XPathNavigator xPathDocNavigator)
+		{
+			XPathNavigator nodeTriggerFunctions = xPathDocNavigator.SelectSingleNode("TriggerFunctions");
+
+			XPathNavigator nodeBeforeSave = nodeTriggerFunctions.SelectSingleNode("BeforeSave");
+			triggerFunctions.BeforeSave = nodeBeforeSave.Value;
+
+			XPathNavigator nodeAfterSave = nodeTriggerFunctions.SelectSingleNode("AfterSave");
+			triggerFunctions.AfterSave = nodeAfterSave.Value;
+		}
 
 		public static void LoadEnums(Configuration Conf, XPathNavigator xPathDocNavigator)
 		{
@@ -1138,6 +1151,8 @@ namespace AccountingSoftware
 				SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
 
 				//SaveViews(ConfDirectory.Value.Views, ConfDirectory.Value, xmlConfDocument, nodeDirectory);
+
+				SaveTriggerFunctions(ConfDirectory.Value.TriggerFunctions, xmlConfDocument, nodeDirectory);
 			}
 		}
 
@@ -1267,6 +1282,20 @@ namespace AccountingSoftware
 			}
 		}
 		*/
+
+		private static void SaveTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement nodeTriggerFunctions = xmlConfDocument.CreateElement("TriggerFunctions");
+			rootNode.AppendChild(nodeTriggerFunctions);
+
+			XmlElement nodeBeforeSave = xmlConfDocument.CreateElement("BeforeSave");
+			nodeBeforeSave.InnerText = triggerFunctions.BeforeSave;
+			nodeTriggerFunctions.AppendChild(nodeBeforeSave);
+
+			XmlElement nodeAfterSave = xmlConfDocument.CreateElement("AfterSave");
+			nodeAfterSave.InnerText = triggerFunctions.AfterSave;
+			nodeTriggerFunctions.AppendChild(nodeAfterSave);
+		}
 
 		private static void SaveEnums(Dictionary<string, ConfigurationEnums> enums, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
