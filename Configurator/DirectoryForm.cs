@@ -80,6 +80,7 @@ namespace Configurator
 
 				textBoxTriggersAfterSave.Text = ConfDirectory.TriggerFunctions.AfterSave;
 				textBoxTriggersBeforeSave.Text = ConfDirectory.TriggerFunctions.BeforeSave;
+				textBoxTriggersBeforeDelete.Text = ConfDirectory.TriggerFunctions.BeforeDelete;
 
 				IsNewDirectory = false;
 
@@ -115,7 +116,7 @@ namespace Configurator
 			//Тригери
 			ConfDirectory.TriggerFunctions.BeforeSave = textBoxTriggersBeforeSave.Text;
 			ConfDirectory.TriggerFunctions.AfterSave = textBoxTriggersAfterSave.Text;
-
+			ConfDirectory.TriggerFunctions.BeforeDelete = textBoxTriggersBeforeDelete.Text;
 
 			CallBack.Invoke(OriginalName, ConfDirectory, IsNewDirectory);
 

@@ -594,7 +594,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public void Delete()
         {
-            base.BaseDelete();
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
+			base.BaseDelete();
         }
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()

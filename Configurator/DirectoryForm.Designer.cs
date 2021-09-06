@@ -68,6 +68,8 @@
             this.textBoxTriggersAfterSave = new System.Windows.Forms.TextBox();
             this.textBoxTriggersBeforeSave = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBoxTriggersBeforeDelete = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.contextMenuStripField.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel8.SuspendLayout();
@@ -347,6 +349,7 @@
             this.checkBoxHierarchical.TabIndex = 8;
             this.checkBoxHierarchical.Text = "Ієрархічний довідник";
             this.checkBoxHierarchical.UseVisualStyleBackColor = true;
+            this.checkBoxHierarchical.Visible = false;
             this.checkBoxHierarchical.CheckedChanged += new System.EventHandler(this.checkBoxHierarchical_CheckedChanged);
             // 
             // comboBoxHierarchical
@@ -359,6 +362,7 @@
             this.comboBoxHierarchical.Name = "comboBoxHierarchical";
             this.comboBoxHierarchical.Size = new System.Drawing.Size(459, 21);
             this.comboBoxHierarchical.TabIndex = 7;
+            this.comboBoxHierarchical.Visible = false;
             // 
             // label7
             // 
@@ -368,6 +372,7 @@
             this.label7.Size = new System.Drawing.Size(57, 13);
             this.label7.TabIndex = 6;
             this.label7.Text = "Довідник:";
+            this.label7.Visible = false;
             // 
             // textBoxDesc
             // 
@@ -435,29 +440,37 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBoxTriggersBeforeDelete);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.textBoxTriggersBeforeSave);
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textBoxTriggersAfterSave);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(15, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 311);
+            this.groupBox1.Size = new System.Drawing.Size(529, 115);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
             // 
             // textBoxTriggersAfterSave
             // 
-            this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(101, 45);
+            this.textBoxTriggersAfterSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(119, 45);
             this.textBoxTriggersAfterSave.Name = "textBoxTriggersAfterSave";
-            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(422, 20);
+            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(404, 20);
             this.textBoxTriggersAfterSave.TabIndex = 10;
             // 
             // textBoxTriggersBeforeSave
             // 
-            this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(101, 19);
+            this.textBoxTriggersBeforeSave.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(119, 19);
             this.textBoxTriggersBeforeSave.Name = "textBoxTriggersBeforeSave";
-            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(422, 20);
+            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(404, 20);
             this.textBoxTriggersBeforeSave.TabIndex = 12;
             // 
             // label9
@@ -468,6 +481,24 @@
             this.label9.Size = new System.Drawing.Size(89, 13);
             this.label9.TabIndex = 11;
             this.label9.Text = "Перед записом:";
+            // 
+            // textBoxTriggersBeforeDelete
+            // 
+            this.textBoxTriggersBeforeDelete.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTriggersBeforeDelete.Location = new System.Drawing.Point(119, 71);
+            this.textBoxTriggersBeforeDelete.Name = "textBoxTriggersBeforeDelete";
+            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersBeforeDelete.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(6, 74);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(107, 13);
+            this.label10.TabIndex = 13;
+            this.label10.Text = "Перед видаленням:";
             // 
             // DirectoryForm
             // 
@@ -548,5 +579,7 @@
         private System.Windows.Forms.TextBox textBoxTriggersAfterSave;
         private System.Windows.Forms.TextBox textBoxTriggersBeforeSave;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBoxTriggersBeforeDelete;
+        private System.Windows.Forms.Label label10;
     }
 }

@@ -898,6 +898,9 @@ namespace AccountingSoftware
 
 			XPathNavigator nodeAfterSave = nodeTriggerFunctions.SelectSingleNode("AfterSave");
 			triggerFunctions.AfterSave = nodeAfterSave.Value;
+
+			XPathNavigator nodeBeforeDelete = nodeTriggerFunctions.SelectSingleNode("BeforeDelete");
+			triggerFunctions.BeforeDelete = nodeBeforeDelete.Value;
 		}
 
 		public static void LoadEnums(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -1295,6 +1298,10 @@ namespace AccountingSoftware
 			XmlElement nodeAfterSave = xmlConfDocument.CreateElement("AfterSave");
 			nodeAfterSave.InnerText = triggerFunctions.AfterSave;
 			nodeTriggerFunctions.AppendChild(nodeAfterSave);
+
+			XmlElement nodeBeforeDelete = xmlConfDocument.CreateElement("BeforeDelete");
+			nodeBeforeDelete.InnerText = triggerFunctions.BeforeDelete;
+			nodeTriggerFunctions.AppendChild(nodeBeforeDelete);
 		}
 
 		private static void SaveEnums(Dictionary<string, ConfigurationEnums> enums, XmlDocument xmlConfDocument, XmlElement rootNode)

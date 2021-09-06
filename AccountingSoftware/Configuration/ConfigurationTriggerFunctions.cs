@@ -31,6 +31,6 @@ namespace AccountingSoftware
 
         public string AfterSave { get; set; }
 
-        public string Delete { get; set; }
+        public string BeforeDelete { get; set; }
     }
 }
