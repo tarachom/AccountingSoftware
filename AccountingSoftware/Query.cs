@@ -38,6 +38,8 @@ namespace AccountingSoftware
 		public Query(string table)
 		{
 			Field = new List<string>();
+			FieldAndAlias = new List<KeyValuePair<string, string>>();
+			Joins = new List<Join>();
 			Where = new List<Where>();
 			Order = new Dictionary<string, SelectOrder>();
 
@@ -52,7 +54,7 @@ namespace AccountingSoftware
 		/// </summary>
 		/// <returns></returns>
 		public static string GetParamGuid()
-        {
+		{
 			if (_ParamGuidState == 0) _ParamGuidState = 1;
 			return "p" + (_ParamGuidState++).ToString();
 		}
@@ -76,6 +78,13 @@ namespace AccountingSoftware
 		/// Які поля вибирати
 		/// </summary>
 		public List<string> Field { get; set; }
+
+		/// <summary>
+		/// Поля із псевдонімами
+		/// </summary>
+		public List<KeyValuePair<string, string>> FieldAndAlias { get; set; }
+
+		public List<Join> Joins { get; set; }
 
 		/// <summary>
 		/// Умови.
@@ -118,15 +127,31 @@ namespace AccountingSoftware
 				query = "CREATE TEMP TABLE " + TempTable + " AS \n";
 			}
 
-			query += "SELECT uid";
+			query += "SELECT " + Table + ".uid";
 
 			if (Field.Count > 0)
 			{
 				foreach (string field in Field)
-					query += ", " + field;
+					query += ", " + Table + "." + field;
+			}
+
+			if (FieldAndAlias.Count > 0)
+            {
+				foreach (KeyValuePair<string,string> field in FieldAndAlias)
+					query += ", " + field.Key + " AS " + field.Value;
 			}
 
 			query += "\nFROM " + Table;
+
+			if (Joins.Count > 0)
+            {
+				foreach (Join join in Joins)
+				{
+					query += "\nLEFT JOIN " + join.JoinTable_NameAndAlias.Key + " AS " + join.JoinTable_NameAndAlias.Value +
+						" ON " + join.ParentTable + "." + join.JoinField + " = " +
+						 join.JoinTable_NameAndAlias.Value  + ".uid ";
+				}
+			}
 
 			if (Where.Count > 0)
 			{
@@ -145,7 +170,7 @@ namespace AccountingSoftware
 							query += " " + field.ComparisonPreceding;
 					}
 
-					query += " " + field.Name;
+					query += " " + Table + "." + field.Name;
 
 					switch (field.Comparison)
 					{
@@ -158,7 +183,7 @@ namespace AccountingSoftware
 						case Comparison.IN:
 						case Comparison.NOT_IN:
 							{
-								query += (field.Comparison == Comparison.NOT_IN ? " NOT" : "") + 
+								query += (field.Comparison == Comparison.NOT_IN ? " NOT" : "") +
 									" IN (" + (field.UsingSQLToValue ? field.Value : "@" + field.Alias) + ")";
 								break;
 							}
@@ -229,7 +254,7 @@ namespace AccountingSoftware
 
 				foreach (KeyValuePair<string, SelectOrder> field in Order)
 				{
-					query += (count > 0 ? ", " : "") + field.Key + " " + field.Value;
+					query += (count > 0 ? ", " : "") + Table + "." + field.Key + " " + field.Value;
 					count++;
 				}
 			}
@@ -291,7 +316,7 @@ namespace AccountingSoftware
 		}
 
 		private void Init()
-        {
+		{
 			Alias = Name + "_" + Query.GetParamGuid();
 		}
 
@@ -329,6 +354,19 @@ namespace AccountingSoftware
 		/// Використання запиту SQL в якості значення поля
 		/// </summary>
 		public bool UsingSQLToValue { get; set; }
+	}
+
+	public class Join
+    {
+		public KeyValuePair<string, string> JoinTable_NameAndAlias { get; set; }
+
+		public string JoinField { get; set; }
+
+		public string ParentTable { get; set; }
+
+		//public string Table { get; set; }
+
+		//public string Field { get; set; }
 	}
 
 	/// <summary>

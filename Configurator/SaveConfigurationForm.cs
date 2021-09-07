@@ -396,12 +396,10 @@ namespace Configurator
 				Conf.PathToTempXmlFileConfiguration,
 				Conf.PathToCopyXmlFileConfiguration);
 
-#if DEBUG
 			ApendLine("\n[ Генерування коду ]", "", "\n");
 			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
 				PathToXsltTemplate + @"\CodeGeneration.xslt",
 				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
-#endif
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
 		}

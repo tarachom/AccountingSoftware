@@ -479,10 +479,13 @@ namespace AccountingSoftware
 
 					foreach (string field in QuerySelect.Field)
 						fields.Add(field, reader[field]);
+
+					foreach(KeyValuePair<string,string> field in QuerySelect.FieldAndAlias)
+						fields.Add(field.Value, reader[field.Value]);
 				}
 
 				DirectoryPointer elementPointer = new DirectoryPointer();
-				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields); //!!! Подумати як зробити Init protect
+				elementPointer.Init(new UnigueID((Guid)reader["uid"]), fields); //!!! Подумати як зробити Init protect
 
 				listDirectoryPointer.Add(elementPointer);
 			}
