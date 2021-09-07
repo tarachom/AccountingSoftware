@@ -946,6 +946,8 @@ namespace AccountingSoftware
 				LoadFields(configurationDocuments.Fields, documentsNode.Current);
 
 				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
+
+				LoadTriggerFunctions(configurationDocuments.TriggerFunctions, documentsNode.Current);
 			}
 		}
 
@@ -1374,6 +1376,8 @@ namespace AccountingSoftware
 				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument);
 
 				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
+
+				SaveTriggerFunctions(ConfDocument.Value.TriggerFunctions, xmlConfDocument, nodeDocument);
 			}
 		}
 

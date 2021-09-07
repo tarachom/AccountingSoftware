@@ -73,6 +73,10 @@ namespace Configurator
 				textBoxTable.Text = ConfDocument.Table;
 				textBoxDesc.Text = ConfDocument.Desc;
 
+				textBoxTriggersAfterSave.Text = ConfDocument.TriggerFunctions.AfterSave;
+				textBoxTriggersBeforeSave.Text = ConfDocument.TriggerFunctions.BeforeSave;
+				textBoxTriggersBeforeDelete.Text = ConfDocument.TriggerFunctions.BeforeDelete;
+
 				IsNewDocument = false;
 
 				LoadFieldList();
@@ -102,6 +106,11 @@ namespace Configurator
 			ConfDocument.Name = textBoxName.Text;
 			ConfDocument.Table = textBoxTable.Text;
 			ConfDocument.Desc = textBoxDesc.Text;
+
+			//Тригери
+			ConfDocument.TriggerFunctions.BeforeSave = textBoxTriggersBeforeSave.Text;
+			ConfDocument.TriggerFunctions.AfterSave = textBoxTriggersAfterSave.Text;
+			ConfDocument.TriggerFunctions.BeforeDelete = textBoxTriggersBeforeDelete.Text;
 
 			CallBack.Invoke(OriginalName, ConfDocument, IsNewDocument);
 
