@@ -674,7 +674,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
-        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>"<!--,
             <xsl:text>new string[] { </xsl:text>
             <xsl:for-each select="Fields/Field">
               <xsl:if test="position() != 1">
@@ -688,7 +688,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:text>, </xsl:text>
               </xsl:if>
               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
-            </xsl:for-each> }) { }
+            </xsl:for-each> }-->) { }
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
         
@@ -946,7 +946,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:for-each>
             BaseSave();
         }
-        
+
+        public <xsl:value-of select="$DocumentName"/>_Objest Copy()
+        {
+            <xsl:value-of select="$DocumentName"/>_Objest newCopy = new <xsl:value-of select="$DocumentName"/>_Objest();
+			newCopy.New();
+            <xsl:for-each select="Fields/Field">
+				<xsl:text>newCopy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+			</xsl:for-each>
+			return newCopy;
+        }
+
         public void Delete()
         {
             base.BaseDelete();

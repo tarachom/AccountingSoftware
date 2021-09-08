@@ -31,7 +31,7 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DirectorySelect
 	{
-		public DirectorySelect(Kernel kernel, string table, string[] fieldsNameInTableArray, string[] fieldsNameArray)
+		public DirectorySelect(Kernel kernel, string table/*, string[] fieldsNameInTableArray, string[] fieldsNameArray*/)
 		{
 			Kernel = kernel;
 			Table = table;
@@ -41,11 +41,11 @@ namespace AccountingSoftware
 
 			//Fields = fieldsNameInTableArray;
 
-			Alias = new Dictionary<string, string>();
-			for (int i = 0; i < fieldsNameInTableArray.Length; i++)
-			{
-				Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
-			}
+			//Alias = new Dictionary<string, string>();
+			//for (int i = 0; i < fieldsNameInTableArray.Length; i++)
+			//{
+			//	Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
+			//}
 		}
 
 		public Query QuerySelect { get; set; }
@@ -69,7 +69,7 @@ namespace AccountingSoftware
 
 		//private string[] Fields { get; set; }
 
-		public Dictionary<string, string> Alias { get; }
+		//public Dictionary<string, string> Alias { get; }
 
 		protected DirectoryPointer DirectoryPointerPosition { get; private set; }
 
