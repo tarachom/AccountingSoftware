@@ -396,12 +396,17 @@ namespace Configurator
 				Conf.PathToTempXmlFileConfiguration,
 				Conf.PathToCopyXmlFileConfiguration);
 
-			ApendLine("\n[ Генерування коду ]", "", "\n");
-			Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
-				PathToXsltTemplate + @"\CodeGeneration.xslt",
-				Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
+			if (File.Exists(PathToXsltTemplate + @"\CodeGeneration.xslt"))
+			{
+				ApendLine("\n[ Генерування коду ]", "", "\n");
+				Configuration.GenerationCode(Conf.PathToXmlFileConfiguration,
+					PathToXsltTemplate + @"\CodeGeneration.xslt",
+					Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\CodeGeneration.cs");
+			}
 
 			ApendLine("ГОТОВО!", "", "\n\n\n");
+
+			buttonAnalize.Invoke(new Action(() => buttonAnalize.Enabled = true));
 		}
 
 		private void InfoTableCreateFieldCreate(XPathNavigator xPathNavigator, string tab)
@@ -440,6 +445,7 @@ namespace Configurator
 
 		private void buttonSave_Click(object sender, EventArgs e)
 		{
+			buttonAnalize.Enabled = false;
 			buttonSave.Enabled = false;
 
 			Thread thread = new Thread(new ThreadStart(ExecuteSQLAndGenerateCode));
