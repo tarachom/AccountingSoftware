@@ -127,12 +127,12 @@ namespace AccountingSoftware
 				query = "CREATE TEMP TABLE " + TempTable + " AS \n";
 			}
 
-			query += "SELECT " + Table + ".uid";
+			query += "SELECT " + (Joins.Count > 0 ? Table + "." : "") + "uid";
 
 			if (Field.Count > 0)
 			{
 				foreach (string field in Field)
-					query += ", " + Table + "." + field;
+					query += ", " + (Joins.Count > 0 ? Table + "." : "") + field;
 			}
 
 			if (FieldAndAlias.Count > 0)
@@ -147,9 +147,16 @@ namespace AccountingSoftware
             {
 				foreach (Join join in Joins)
 				{
-					query += "\nLEFT JOIN " + join.JoinTable_NameAndAlias.Key + " AS " + join.JoinTable_NameAndAlias.Value +
-						" ON " + join.ParentTable + "." + join.JoinField + " = " +
-						 join.JoinTable_NameAndAlias.Value  + ".uid ";
+					query += "\n";
+
+					if (join.JoinType == JoinType.LEFT)
+						query += "LEFT ";
+					else if (join.JoinType == JoinType.RIGHT)
+						query += "RIGHT ";
+					else if (join.JoinType == JoinType.INNER)
+						query += "INNER ";
+
+					query += "JOIN " + join.JoinTable + " ON " + join.ParentTable + "." + join.JoinField + " = " + join.JoinTable + ".uid ";
 				}
 			}
 
@@ -254,7 +261,7 @@ namespace AccountingSoftware
 
 				foreach (KeyValuePair<string, SelectOrder> field in Order)
 				{
-					query += (count > 0 ? ", " : "") + Table + "." + field.Key + " " + field.Value;
+					query += (count > 0 ? ", " : "") + (Joins.Count > 0 ? Table + "." : "") + field.Key + " " + field.Value;
 					count++;
 				}
 			}
@@ -356,18 +363,53 @@ namespace AccountingSoftware
 		public bool UsingSQLToValue { get; set; }
 	}
 
+	/// <summary>
+	/// Приєднання таблиці
+	/// </summary>
 	public class Join
     {
-		public KeyValuePair<string, string> JoinTable_NameAndAlias { get; set; }
+		public Join()
+        {
+			JoinType = JoinType.LEFT;
+		}
 
+		public Join(string joinTable, string joinField, string parentTable, JoinType joinType = JoinType.LEFT)
+        {
+			JoinTable = joinTable;
+			JoinField = joinField;
+			ParentTable = parentTable;
+			JoinType = joinType;
+		}
+
+		/// <summary>
+		/// Таблиця яку треба приєднати. Перше значення це назва таблиці, друга це псевдонім
+		/// </summary>
+		//public KeyValuePair<string, string> JoinTable_NameAndAlias { get; set; }
+
+		public string JoinTable { get; set; }
+
+		/// <summary>
+		/// Поле з основної таблиці (ParentTable) із ключами
+		/// </summary>
 		public string JoinField { get; set; }
 
+		/// <summary>
+		/// Основна таблиця
+		/// </summary>
 		public string ParentTable { get; set; }
 
-		//public string Table { get; set; }
-
-		//public string Field { get; set; }
+		/// <summary>
+		/// Тип приєднання
+		/// </summary>
+		public JoinType JoinType { get; set; }
 	}
+
+	public enum JoinType
+    {
+		LEFT,
+		INNER,
+		RIGHT
+    }
 
 	/// <summary>
 	/// Тип порівняння
