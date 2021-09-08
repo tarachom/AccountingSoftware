@@ -241,4 +241,10 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+copy $(ProjectDir)CodeGeneration.xslt         $(TargetDir)CodeGeneration.xslt
+copy $(ProjectDir)Comparison.xslt                $(TargetDir)Comparison.xslt
+copy $(ProjectDir)ComparisonAnalize.xslt    $(TargetDir)ComparisonAnalize.xslt</PostBuildEvent>
+  </PropertyGroup>
 </Project>
