@@ -1009,6 +1009,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:call-template name="CommentSummary" />
     class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
     {
+        <xsl:for-each select="Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
         
         public bool Select() { return base.BaseSelect(); }
