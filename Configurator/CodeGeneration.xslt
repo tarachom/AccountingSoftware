@@ -293,7 +293,7 @@ using AccountingSoftware;
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>
 {
-    static class Config
+    public static class Config
     {
         public static Kernel Kernel { get; set; }
 		
@@ -310,7 +310,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 {
     <xsl:for-each select="Configuration/ConstantsBlocks/ConstantsBlock">
 	#region CONSTANTS BLOCK "<xsl:value-of select="Name"/>"
-    static class <xsl:value-of select="Name"/>
+    public static class <xsl:value-of select="Name"/>
     {
         public static void ReadAll()
         {
@@ -514,7 +514,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
+    public class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
@@ -634,7 +634,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     }
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
+    public class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
@@ -672,7 +672,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     }
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
+    public class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>"<!--,
             <xsl:text>new string[] { </xsl:text>
@@ -722,7 +722,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
+    public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
@@ -886,7 +886,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
+    public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
         public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
@@ -995,7 +995,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     }
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
+    public class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
     {
         public <xsl:value-of select="$DocumentName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
@@ -1016,7 +1016,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     }
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
+    public class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
     {
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
@@ -1037,7 +1037,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$TablePartFullName"/>_TablePart : DocumentTablePart
+    public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DocumentTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DocumentName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
@@ -1187,7 +1187,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
+    public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
@@ -1359,7 +1359,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     
     <xsl:call-template name="CommentSummary" />
-    class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterAccumulationRecordsSet
+    public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterAccumulationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
