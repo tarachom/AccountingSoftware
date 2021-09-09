@@ -940,11 +940,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               <xsl:value-of select="Name"/>
               <xsl:choose>
                 <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                  <xsl:text>.ToString()</xsl:text>
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
             BaseSave();
+			<xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
+                <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
         }
 
         public <xsl:value-of select="$DocumentName"/>_Objest Copy()
@@ -959,6 +965,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public void Delete()
         {
+		    <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
+            </xsl:if>
             base.BaseDelete();
         }
         
