@@ -177,7 +177,7 @@ namespace AccountingSoftware
 							query += " " + field.ComparisonPreceding;
 					}
 
-					query += " " + Table + "." + field.Name;
+					query += " " + (Joins.Count > 0 ? Table + "." : "") + field.Name;
 
 					switch (field.Comparison)
 					{

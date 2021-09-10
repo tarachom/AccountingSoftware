@@ -462,18 +462,15 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (QuerySelect.Where.Count > 0)
-			{
-				foreach (Where field in QuerySelect.Where)
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-			}
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
 				Dictionary<string, object> fields = null;
 
-				if (QuerySelect.Field.Count > 0)
+				if (QuerySelect.Field.Count > 0 || QuerySelect.FieldAndAlias.Count > 0)
 				{
 					fields = new Dictionary<string, object>();
 
@@ -862,30 +859,30 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void SelectDocumentPointer(DocumentSelect select, List<DocumentPointer> listDocumentPointer)
+		public void SelectDocumentPointer(Query QuerySelect, List<DocumentPointer> listDocumentPointer)
 		{
-			string query = select.QuerySelect.Construct();
-			//Console.WriteLine(query);
+			string query = QuerySelect.Construct();
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (select.QuerySelect.Where.Count > 0)
-			{
-				foreach (Where field in select.QuerySelect.Where)
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-			}
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
 				Dictionary<string, object> fields = null;
 
-				if (select.QuerySelect.Field.Count > 0)
+				if (QuerySelect.Field.Count > 0 || QuerySelect.FieldAndAlias.Count > 0)
 				{
 					fields = new Dictionary<string, object>();
 
-					foreach (string field in select.QuerySelect.Field)
+					foreach (string field in QuerySelect.Field)
 						fields.Add(field, reader[field]);
+
+					foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+						fields.Add(field.Value, reader[field.Value]);
 				}
 
 				DocumentPointer elementPointer = new DocumentPointer();
@@ -924,6 +921,33 @@ namespace AccountingSoftware
 				{
 					fieldValue.Add(field, reader[field]);
 				}
+			}
+			reader.Close();
+		}
+
+		public void SelectDocumentTablePartRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList)
+		{
+			string query = QuerySelect.Construct();
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fieldValue = new Dictionary<string, object>();
+				fieldValueList.Add(fieldValue);
+
+				fieldValue.Add("uid", reader["uid"]);
+
+				foreach (string field in QuerySelect.Field)
+					fieldValue.Add(field, reader[field]);
+
+				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();
 		}

@@ -85,9 +85,11 @@ namespace AccountingSoftware
 		bool SelectDocumentObject(DocumentObject documentObject/*??*/, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDocumentObject(UnigueID unigueID, string table);
 
-		void SelectDocumentPointer(DocumentSelect select, List<DocumentPointer> listDocumentPointer);
+		void SelectDocumentPointer(Query QuerySelect, List<DocumentPointer> listDocumentPointer);
 
 		void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
+		void SelectDocumentTablePartRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList);
+
 		void InsertDocumentTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDocumentTablePartRecords(UnigueID ownerUnigueID, string table);
 

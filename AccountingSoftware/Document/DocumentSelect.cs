@@ -78,7 +78,7 @@ namespace AccountingSoftware
 			DocumentPointerPosition = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectDocumentPointer(this, BaseSelectList);
+			Kernel.DataBase.SelectDocumentPointer(QuerySelect, BaseSelectList);
 
 			return Count() > 0;
 		}
