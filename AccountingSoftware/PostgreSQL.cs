@@ -964,7 +964,7 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-			//Console.WriteLine(query);
+			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
