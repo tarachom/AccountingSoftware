@@ -41,8 +41,7 @@ namespace AccountingSoftware
 			QuerySelect.Field.AddRange(fieldsArray);
 
 			FieldValueList = new List<Dictionary<string, object>>();
-			JoinFieldValueList = new List<Dictionary<string, string>>();
-			JoinFieldValueListD = new Dictionary<string, Dictionary<string, string>>();
+			JoinValue = new Dictionary<string, Dictionary<string, string>>();
 		}
 
 		public Query QuerySelect { get; set; }
@@ -55,9 +54,7 @@ namespace AccountingSoftware
 
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
-		public List<Dictionary<string, string>> JoinFieldValueList { get; private set; }
-
-		public Dictionary<string, Dictionary<string,string>> JoinFieldValueListD { get; private set; }
+		public Dictionary<string, Dictionary<string,string>> JoinValue { get; private set; }
 
 		protected void BaseClear()
 		{
@@ -68,8 +65,7 @@ namespace AccountingSoftware
 		{
 			BaseClear();
 
-			JoinFieldValueList.Clear();
-			JoinFieldValueListD.Clear();
+			JoinValue.Clear();
 
 			QuerySelect.Where.Clear();
 			QuerySelect.Where.Add(new Where("owner", Comparison.EQ, ownerUnigueID.UGuid));
@@ -81,7 +77,7 @@ namespace AccountingSoftware
 				foreach (Dictionary<string, object> fieldValue in FieldValueList)
                 {
 					Dictionary<string, string> joinFieldValue = new Dictionary<string, string>();
-					JoinFieldValueListD.Add(fieldValue["uid"].ToString(), joinFieldValue);
+					JoinValue.Add(fieldValue["uid"].ToString(), joinFieldValue);
 
 					foreach (KeyValuePair<string,string> fieldAndAlias in QuerySelect.FieldAndAlias)
 						joinFieldValue.Add(fieldAndAlias.Value, fieldValue[fieldAndAlias.Value].ToString());
