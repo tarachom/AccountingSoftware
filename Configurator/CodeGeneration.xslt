@@ -594,12 +594,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
         public <xsl:value-of select="$DirectoryName"/>_Objest Copy()
         {
-            <xsl:value-of select="$DirectoryName"/>_Objest newCopy = new <xsl:value-of select="$DirectoryName"/>_Objest();
-			newCopy.New();
+            <xsl:value-of select="$DirectoryName"/>_Objest copy = new <xsl:value-of select="$DirectoryName"/>_Objest();
+			copy.New();
             <xsl:for-each select="Fields/Field">
-				<xsl:text>newCopy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+				<xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
 			</xsl:for-each>
-			return newCopy;
+			return copy;
         }
 
         public void Delete()
@@ -955,12 +955,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
         public <xsl:value-of select="$DocumentName"/>_Objest Copy()
         {
-            <xsl:value-of select="$DocumentName"/>_Objest newCopy = new <xsl:value-of select="$DocumentName"/>_Objest();
-			newCopy.New();
+            <xsl:value-of select="$DocumentName"/>_Objest copy = new <xsl:value-of select="$DocumentName"/>_Objest();
+			copy.New();
             <xsl:for-each select="Fields/Field">
-				<xsl:text>newCopy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+				<xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
 			</xsl:for-each>
-			return newCopy;
+			return copy;
         }
 
         public void Delete()
