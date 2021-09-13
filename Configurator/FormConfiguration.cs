@@ -389,11 +389,11 @@ namespace Configurator
 
 			LoadEnums(enumsNode);
 
-			TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
-			journalsNode.SelectedImageIndex = 3;
-			journalsNode.ImageIndex = 3;
+			//TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
+			//journalsNode.SelectedImageIndex = 3;
+			//journalsNode.ImageIndex = 3;
 
-			//...
+			////...
 
 			TreeNode registersInformationNode = rootNode.Nodes.Add("RegistersInformation", "Регістри відомостей");
 			registersInformationNode.SelectedImageIndex = 3;

@@ -648,6 +648,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         
         public <xsl:value-of select="$DirectoryName"/>_Objest GetDirectoryObject()
         {
+            if (this.IsEmpty()) return null;
             <xsl:value-of select="$DirectoryName"/>_Objest <xsl:value-of select="$DirectoryName"/>ObjestItem = new <xsl:value-of select="$DirectoryName"/>_Objest();
             return <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
