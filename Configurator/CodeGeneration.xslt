@@ -1178,11 +1178,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     </xsl:for-each>
 }
 
-namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
-{
-
-}
-
 namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВідомостей
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
