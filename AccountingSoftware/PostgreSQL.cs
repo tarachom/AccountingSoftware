@@ -981,6 +981,8 @@ namespace AccountingSoftware
 		public void DeleteDocumentTablePartRecords(UnigueID ownerUnigueID, string table)
 		{
 			string query = "DELETE FROM " + table + " WHERE owner = @owner";
+			Console.WriteLine(query);
+			Console.WriteLine(" @owner = " + ownerUnigueID.UGuid);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));

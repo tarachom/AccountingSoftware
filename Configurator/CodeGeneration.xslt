@@ -421,38 +421,34 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         
             public void Save(bool clear_all_before_save /*= true*/) 
             {
-                if (Records.Count > 0)
+                base.BaseBeginTransaction();
+                
+                if (clear_all_before_save)
+                    base.BaseDelete();
+
+                foreach (Record record in Records)
                 {
-                    base.BaseBeginTransaction();
-                
-                    if (clear_all_before_save)
-                        base.BaseDelete();
+                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
 
-                    foreach (Record record in Records)
-                    {
-                        Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
-                        <xsl:for-each select="Fields/Field">
-                          <xsl:text>fieldValue.Add("</xsl:text>
-                          <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
-                          <xsl:choose>
-                            <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                              <xsl:text>.UnigueID.UGuid</xsl:text>
-                            </xsl:when>
-                          </xsl:choose>
-                          <xsl:text>)</xsl:text>;
-                        </xsl:for-each>
-                        base.BaseSave(record.UID, fieldValue);
-                    }
-                
-                    base.BaseCommitTransaction();
+                    <xsl:for-each select="Fields/Field">
+                        <xsl:text>fieldValue.Add("</xsl:text>
+                        <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                        <xsl:choose>
+                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                            <xsl:text>.UnigueID.UGuid</xsl:text>
+                        </xsl:when>
+                        </xsl:choose>
+                        <xsl:text>)</xsl:text>;
+                    </xsl:for-each>
+                    base.BaseSave(record.UID, fieldValue);
                 }
+                
+                base.BaseCommitTransaction();
             }
         
             public void Delete()
             {
-                base.BaseBeginTransaction();
-                base.BaseCommitTransaction();
+                base.BaseDelete();
             }
             
             public class Record : ConstantsTablePartRecord
@@ -770,39 +766,34 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         
         public void Save(bool clear_all_before_save /*= true*/) 
         {
-            if (Records.Count > 0)
+            base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
             {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
+                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
 
-                foreach (Record record in Records)
-                {
-                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
-                    <xsl:for-each select="Fields/Field">
-                      <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
-                          <xsl:text>.UnigueID.UGuid</xsl:text>
-                        </xsl:when>
-                      </xsl:choose>
-                      <xsl:text>)</xsl:text>;
-                    </xsl:for-each>
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
+                <xsl:for-each select="Fields/Field">
+                    <xsl:text>fieldValue.Add("</xsl:text>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:choose>
+                    <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
+                    </xsl:when>
+                    </xsl:choose>
+                    <xsl:text>)</xsl:text>;
+                </xsl:for-each>
+                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
+                
+            base.BaseCommitTransaction();
         }
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         <xsl:call-template name="CommentSummary" />
@@ -1087,42 +1078,37 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         
         public void Save(bool clear_all_before_save /*= true*/) 
         {
-            if (Records.Count > 0)
+            base.BaseBeginTransaction();
+                
+            if (clear_all_before_save)
+                base.BaseDelete(Owner.UnigueID);
+
+            foreach (Record record in Records)
             {
-                base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(Owner.UnigueID);
+                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
 
-                foreach (Record record in Records)
-                {
-                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
-                    <xsl:for-each select="Fields/Field">
-                      <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:choose>
-                        <xsl:when test="Type = 'pointer'">
-                          <xsl:text>.UnigueID.UGuid</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="Type = 'empty_pointer'">
-                          <xsl:text>.UnigueID.UGuid</xsl:text>
-                        </xsl:when>
-                      </xsl:choose>
-                      <xsl:text>)</xsl:text>;
-                    </xsl:for-each>
-                    base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
+                <xsl:for-each select="Fields/Field">
+                    <xsl:text>fieldValue.Add("</xsl:text>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:choose>
+                    <xsl:when test="Type = 'pointer'">
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
+                    </xsl:when>
+                    <xsl:when test="Type = 'empty_pointer'">
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
+                    </xsl:when>
+                    </xsl:choose>
+                    <xsl:text>)</xsl:text>;
+                </xsl:for-each>
+                base.BaseSave(record.UID, Owner.UnigueID, fieldValue);
             }
+                
+            base.BaseCommitTransaction();
         }
         
         public void Delete()
         {
-            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
-            base.BaseCommitTransaction();
         }
         
         <xsl:call-template name="CommentSummary" />
