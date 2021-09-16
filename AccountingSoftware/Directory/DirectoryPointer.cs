@@ -66,20 +66,14 @@ namespace AccountingSoftware
 			if (!IsEmpty() && fieldPresentation.Length != 0)
 			{
 				Query query = new Query(Table);
-
-				for (int i = 0; i < fieldPresentation.Length; i++)
-				{
-					query.Field.Add(fieldPresentation[i]);
-				}
-
+				query.Field.AddRange(fieldPresentation);
+				
 				query.Where.Add(new Where("uid", Comparison.EQ, UnigueID.UGuid));
 
-				return Kernel.DataBase.GetPresentation(query, fieldPresentation);
+				return Kernel.DataBase.GetDirectoryPresentation(query, fieldPresentation);
 			}
 			else
-			{
 				return "";
-			}
 		}
 
 		public Guid GetPointer()

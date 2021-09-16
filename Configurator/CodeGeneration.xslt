@@ -997,8 +997,26 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         public <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
         {
             base.Init(uid, fields);
-        } 
-        
+        }
+		
+		public string GetPresentation()
+        {
+		    return base.BasePresentation(
+			    <xsl:text>new string[] { </xsl:text>
+                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
+                   <xsl:if test="position() != 1">
+                     <xsl:text>, </xsl:text>
+                   </xsl:if>
+                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                 </xsl:for-each> }
+			);
+        }
+		
+        public <xsl:value-of select="$DocumentName"/>_Pointer GetEmptyPointer()
+        {
+            return new <xsl:value-of select="$DocumentName"/>_Pointer();
+        }
+		
         public <xsl:value-of select="$DocumentName"/>_Objest GetDocumentObject()
         {
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();

@@ -550,7 +550,7 @@ namespace AccountingSoftware
         /// <param name="QuerySelect">Запит</param>
         /// <param name="fieldPresentation">Поля які використовуються для представлення</param>
         /// <returns></returns>
-		public string GetPresentation(Query QuerySelect, string[] fieldPresentation)
+		public string GetDirectoryPresentation(Query QuerySelect, string[] fieldPresentation)
         {
 			string query = QuerySelect.Construct();
 			Console.WriteLine(query);
@@ -893,6 +893,34 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
+		/// <summary>
+		/// Вибирає значення полів по вказівнику для представлення
+		/// </summary>
+		/// <param name="QuerySelect">Запит</param>
+		/// <param name="fieldPresentation">Поля які використовуються для представлення</param>
+		/// <returns></returns>
+		public string GetDocumentPresentation(Query QuerySelect, string[] fieldPresentation)
+		{
+			string query = QuerySelect.Construct();
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
+
+			string presentation = "";
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			if (reader.Read())
+			{
+				for (int i = 0; i < fieldPresentation.Length; i++)
+					presentation += (i > 0 ? "/" : "") + reader[fieldPresentation[i]].ToString();
+			}
+			reader.Close();
+
+			return presentation;
+		}
 		public void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = "SELECT uid";

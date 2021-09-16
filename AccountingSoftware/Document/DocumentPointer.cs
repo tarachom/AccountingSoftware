@@ -53,6 +53,31 @@ namespace AccountingSoftware
 
 		public Dictionary<string, object> Fields { get; private set; }
 
+		public bool IsEmpty()
+		{
+			return (UnigueID.UGuid == Guid.Empty);
+		}
+
+		public Guid GetPointer()
+		{
+			return UnigueID.UGuid;
+		}
+
+		protected string BasePresentation(string[] fieldPresentation)
+		{
+			if (!IsEmpty() && fieldPresentation.Length != 0)
+			{
+				Query query = new Query(Table);
+				query.Field.AddRange(fieldPresentation);
+
+				query.Where.Add(new Where("uid", Comparison.EQ, UnigueID.UGuid));
+
+				return Kernel.DataBase.GetDocumentPresentation(query, fieldPresentation);
+			}
+			else
+				return "";
+		}
+
 		public void Delete()
 		{
 			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);

@@ -66,7 +66,7 @@ namespace AccountingSoftware
 		void SelectDirectoryPointers(Query QuerySelect, List<DirectoryPointer> listDirectoryPointer);
 		string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field);
 		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer);
-		string GetPresentation(Query QuerySelect, string[] fieldPresentation);
+		string GetDirectoryPresentation(Query QuerySelect, string[] fieldPresentation);
 		void DeleteDirectoryTempTable(DirectorySelect directorySelect);
 
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
@@ -86,6 +86,7 @@ namespace AccountingSoftware
 		void DeleteDocumentObject(UnigueID unigueID, string table);
 
 		void SelectDocumentPointer(Query QuerySelect, List<DocumentPointer> listDocumentPointer);
+		string GetDocumentPresentation(Query QuerySelect, string[] fieldPresentation);
 
 		void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void SelectDocumentTablePartRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList);
