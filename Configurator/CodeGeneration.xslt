@@ -1001,14 +1001,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		
 		public string GetPresentation()
         {
-		    return base.BasePresentation(
-			    <xsl:text>new string[] { </xsl:text>
-                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
-                   <xsl:if test="position() != 1">
-                     <xsl:text>, </xsl:text>
-                   </xsl:if>
-                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-                 </xsl:for-each> }
+		    return "<xsl:value-of select="$DocumentName"/> " + base.BasePresentation(
+			    <xsl:text>new string[] {</xsl:text>
+		        <xsl:if test="Fields/Field[Name='НомерДок']/NameInTable != ''">
+					<xsl:text>"</xsl:text><xsl:value-of select="Fields/Field[Name='НомерДок']/NameInTable"/><xsl:text>"</xsl:text>
+				</xsl:if>
+		        <xsl:if test="Fields/Field[Name='ДатаДок']/NameInTable != ''">
+					<xsl:if test="Fields/Field[Name='НомерДок']/NameInTable != ''"><xsl:text>, </xsl:text></xsl:if>
+					<xsl:text>"</xsl:text><xsl:value-of select="Fields/Field[Name='ДатаДок']/NameInTable"/><xsl:text>"</xsl:text>
+				</xsl:if>}
 			);
         }
 		
@@ -1220,7 +1221,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
               <xsl:when test="position() = 1">
                 base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                 <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                    <xsl:text>.ToString()</xsl:text>
+                    <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:if>
                 <xsl:text>, false))</xsl:text>;
                 <xsl:if test="$DimensionFieldsCount &gt; 1">
@@ -1231,14 +1232,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                 if (isExistPreceding)
                     base.BaseFilter.Add(new Where(Comparison.AND, "<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
                 else
                 {
                     base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
                     isExistPreceding = true; 
@@ -1286,7 +1287,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
@@ -1392,7 +1393,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
               <xsl:when test="position() = 1">
                 base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                 <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                    <xsl:text>.ToString()</xsl:text>
+                    <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:if>
                 <xsl:text>, false))</xsl:text>;
                 <xsl:if test="$DimensionFieldsCount &gt; 1">
@@ -1403,14 +1404,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                 if (isExistPreceding)
                     base.BaseFilter.Add(new Where(Comparison.AND, "<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
                 else
                 {
                     base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
                     <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.ToString()</xsl:text>
+                        <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>, false))</xsl:text>;
                     isExistPreceding = true; 

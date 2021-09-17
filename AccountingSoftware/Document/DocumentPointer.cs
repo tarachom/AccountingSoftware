@@ -72,7 +72,17 @@ namespace AccountingSoftware
 
 				query.Where.Add(new Where("uid", Comparison.EQ, UnigueID.UGuid));
 
-				return Kernel.DataBase.GetDocumentPresentation(query, fieldPresentation);
+				string presentatio = Kernel.DataBase.GetDocumentPresentation(query, fieldPresentation);
+				
+				string[] presentatio_split = presentatio.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+				if (presentatio_split.Length == 2)
+				{
+					return $"№{presentatio_split[0]} від {DateTime.Parse(presentatio_split[1]).ToShortDateString()}";
+				}
+				else if (presentatio_split.Length > 0)
+					return presentatio_split[0];
+				else
+					return "";
 			}
 			else
 				return "";
