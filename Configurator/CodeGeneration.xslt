@@ -1205,7 +1205,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             Records = new List&lt;Record&gt;();
             Filter = new SelectFilter();
         }
-        
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+		
         public List&lt;Record&gt; Records { get; set; }
         
         public void Read()
@@ -1377,7 +1379,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             Records = new List&lt;Record&gt;();
             Filter = new SelectFilter();
         }
-        
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+		
         public List&lt;Record&gt; Records { get; set; }
         
         public void Read()

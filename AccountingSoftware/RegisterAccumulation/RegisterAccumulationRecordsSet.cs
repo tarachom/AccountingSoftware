@@ -37,9 +37,16 @@ namespace AccountingSoftware
 			Table = table;
 			FieldArray = fieldsArray;
 
+			QuerySelect = new Query(Table);
+			QuerySelect.Field.AddRange(new string[] { "period", "income", "owner" });
+			QuerySelect.Field.AddRange(fieldsArray);
+
 			FieldValueList = new List<Dictionary<string, object>>();
+			JoinValue = new Dictionary<string, Dictionary<string, string>>();
 			BaseFilter = new List<Where>();
 		}
+
+		public Query QuerySelect { get; set; }
 
 		private Kernel Kernel { get; set; }
 
@@ -48,6 +55,8 @@ namespace AccountingSoftware
 		private string[] FieldArray { get; set; }
 
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
+
+		public Dictionary<string, Dictionary<string, string>> JoinValue { get; private set; }
 
 		protected List<Where> BaseFilter { get; }
 
@@ -59,7 +68,25 @@ namespace AccountingSoftware
 		protected void BaseRead()
 		{
 			BaseClear();
-			Kernel.DataBase.SelectRegisterAccumulationRecords(Table, FieldArray, BaseFilter, FieldValueList);
+
+			JoinValue.Clear();
+
+			QuerySelect.Where.Clear();
+			QuerySelect.Where.AddRange(BaseFilter);
+
+			Kernel.DataBase.SelectRegisterAccumulationRecords(QuerySelect, FieldValueList);
+
+			if (QuerySelect.FieldAndAlias.Count > 0)
+			{
+				foreach (Dictionary<string, object> fieldValue in FieldValueList)
+				{
+					Dictionary<string, string> joinFieldValue = new Dictionary<string, string>();
+					JoinValue.Add(fieldValue["uid"].ToString(), joinFieldValue);
+
+					foreach (KeyValuePair<string, string> fieldAndAlias in QuerySelect.FieldAndAlias)
+						joinFieldValue.Add(fieldAndAlias.Value, fieldValue[fieldAndAlias.Value].ToString());
+				}
+			}
 		}
 
 		protected void BaseBeginTransaction()

@@ -1104,27 +1104,15 @@ namespace AccountingSoftware
 
 		#region RegistersAccumulation
 
-		public void SelectRegisterAccumulationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
+		public void SelectRegisterAccumulationRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList)
 		{
-			Query QuerySelect = new Query(table);
-
-			//Прибуток true, Витрата false
-			QuerySelect.Field.Add("period");
-			QuerySelect.Field.Add("income");
-			QuerySelect.Field.Add("owner");
-
-			foreach (string fieldItem in fieldArray)
-				QuerySelect.Field.Add(fieldItem);
-
-			QuerySelect.Where = Filter;
-
 			string query = QuerySelect.Construct();
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (Filter.Count > 0)
+			if (QuerySelect.Where.Count > 0)
 			{
-				foreach (Where ItemFilter in Filter)
+				foreach (Where ItemFilter in QuerySelect.Where)
 					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
@@ -1135,14 +1123,12 @@ namespace AccountingSoftware
 				fieldValueList.Add(fieldValue);
 
 				fieldValue.Add("uid", reader["uid"]);
-				fieldValue.Add("period", reader["period"]);
-				fieldValue.Add("income", reader["income"]);
-				fieldValue.Add("owner", reader["owner"]);
 
-				foreach (string field in fieldArray)
-				{
+				foreach (string field in QuerySelect.Field)
 					fieldValue.Add(field, reader[field]);
-				}
+
+				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();
 		}
