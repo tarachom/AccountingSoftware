@@ -1,4 +1,4 @@
-Конфігуратор
+Конфігуратор та бібліотека AccountingSoftware
 
 База даних
 	PostgreSQL https://www.postgresql.org/
