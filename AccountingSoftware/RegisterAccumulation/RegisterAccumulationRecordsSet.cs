@@ -71,7 +71,7 @@ namespace AccountingSoftware
 
 			JoinValue.Clear();
 
-			QuerySelect.Where.Clear();
+			//QuerySelect.Where.Clear();
 			QuerySelect.Where.AddRange(BaseFilter);
 
 			Kernel.DataBase.SelectRegisterAccumulationRecords(QuerySelect, FieldValueList);
