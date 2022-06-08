@@ -1002,14 +1002,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		public string GetPresentation()
         {
 		    return "<xsl:value-of select="$DocumentName"/> " + base.BasePresentation(
-			    <xsl:text>new string[] {</xsl:text>
-		        <xsl:if test="Fields/Field[Name='НомерДок']/NameInTable != ''">
-					<xsl:text>"</xsl:text><xsl:value-of select="Fields/Field[Name='НомерДок']/NameInTable"/><xsl:text>"</xsl:text>
-				</xsl:if>
-		        <xsl:if test="Fields/Field[Name='ДатаДок']/NameInTable != ''">
-					<xsl:if test="Fields/Field[Name='НомерДок']/NameInTable != ''"><xsl:text>, </xsl:text></xsl:if>
-					<xsl:text>"</xsl:text><xsl:value-of select="Fields/Field[Name='ДатаДок']/NameInTable"/><xsl:text>"</xsl:text>
-				</xsl:if>}
+				<xsl:text>new string[] { </xsl:text>
+                 <xsl:for-each select="Fields/Field[IsPresentation=1]">
+                   <xsl:if test="position() != 1">
+                     <xsl:text>, </xsl:text>
+                   </xsl:if>
+                   <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+                </xsl:for-each> }
 			);
         }
 		

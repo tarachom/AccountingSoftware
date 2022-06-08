@@ -1266,6 +1266,13 @@ namespace AccountingSoftware
 			return Command.ExecuteNonQuery();
 		}
 
+		/// <summary>
+		/// Виконання запиту SELECT
+		/// </summary>
+		/// <param name="selectQuery">Запит</param>
+		/// <param name="paramQuery">Параметри запиту</param>
+		/// <param name="columnsName">Масив стовпців даних</param>
+		/// <param name="listRow">Список рядочків даних</param>
 		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow)
 		{
 			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);
