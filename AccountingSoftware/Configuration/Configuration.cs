@@ -36,6 +36,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public class Configuration
 	{
+		/// <summary>
+		/// Конструктор
+		/// </summary>
 		public Configuration()
 		{
 			ConstantsBlock = new Dictionary<string, ConfigurationConstantsBlock>();
@@ -49,10 +52,12 @@ namespace AccountingSoftware
 			ReservedUnigueColumnName = new Dictionary<string, List<string>>();
 		}
 
-		/// <summary>
-		/// Назва конфігурації
-		/// </summary>
-		public string Name { get; set; }
+        #region Поля
+
+        /// <summary>
+        /// Назва конфігурації
+        /// </summary>
+        public string Name { get; set; }
 
 		/// <summary>
 		/// Простір імен для конфігурації
@@ -109,14 +114,16 @@ namespace AccountingSoftware
 		/// </summary>
 		public Dictionary<string, ConfigurationRegistersAccumulation> RegistersAccumulation { get; }
 
-		#region Private_Function
+        #endregion
 
-		/// <summary>
-		/// Список зарезервованих назв таблиць.
-		/// Довідка: коли створюється новий довідник, чи документ 
-		/// для нього резервується нова унікальна назва таблиці в базі даних. 
-		/// </summary>
-		private List<string> ReservedUnigueTableName { get; set; }
+        #region Private_Function
+
+        /// <summary>
+        /// Список зарезервованих назв таблиць.
+        /// Довідка: коли створюється новий довідник, чи документ 
+        /// для нього резервується нова унікальна назва таблиці в базі даних. 
+        /// </summary>
+        private List<string> ReservedUnigueTableName { get; set; }
 
 		/// <summary>
 		/// Список зарезервованих назв стовпців.
@@ -124,6 +131,10 @@ namespace AccountingSoftware
 		/// </summary>
 		private Dictionary<string, List<string>> ReservedUnigueColumnName { get; set; }
 
+		/// <summary>
+		/// Масив з бук анг. алфавіту. Використовується для задання назви таблиці або стовпчика в базі даних
+		/// </summary>
+		/// <returns></returns>
 		private static string[] GetEnglishAlphabet()
 		{
 			return new string[]
@@ -133,21 +144,25 @@ namespace AccountingSoftware
 			};
 		}
 
-		private static void WriteLog(string txt)
-		{
-			File.AppendAllText(@"D:\log.txt", txt + "\n");
-		}
-
 		#endregion
 
 		#region Append
 
+		/// <summary>
+		/// Додати константу
+		/// </summary>
+		/// <param name="blockName"></param>
+		/// <param name="constants"></param>
 		public void AppendConstants(string blockName, ConfigurationConstants constants)
 		{
 			ConstantsBlock[blockName].Constants.Add(constants.Name, constants);
 			constants.Block = ConstantsBlock[blockName];
 		}
 
+		/// <summary>
+		/// Додати блок констант
+		/// </summary>
+		/// <param name="constantsBlock"></param>
 		public void AppendConstantsBlock(ConfigurationConstantsBlock constantsBlock)
 		{
 			ConstantsBlock.Add(constantsBlock.BlockName, constantsBlock);
@@ -707,7 +722,7 @@ namespace AccountingSoftware
 
 		#endregion
 
-		#region Load
+		#region Load (завантаження конфігурації з ХМЛ файлу)
 
 		/// <summary>
 		/// Завантаження конфігурації
@@ -1024,8 +1039,13 @@ namespace AccountingSoftware
 
 		#endregion
 
-		#region Save
+		#region Save (Збереження конфігурації в ХМЛ файл)
 
+		/// <summary>
+		/// Збереження конфігурації в файл
+		/// </summary>
+		/// <param name="pathToConf">Шлях до ХМЛ файлу конфігурації</param>
+		/// <param name="Conf">Конфігурація</param>
 		public static void Save(string pathToConf, Configuration Conf)
 		{
 			XmlDocument xmlConfDocument = new XmlDocument();
@@ -1465,6 +1485,7 @@ namespace AccountingSoftware
 
 		/// <summary>
 		/// Зберігає інформацію про схему бази даних в ХМЛ файл
+		/// Схема це реальна структура бази даних (таблиці, стовчики)
 		/// </summary>
 		/// <param name="InformationSchema">Схема</param>
 		/// <param name="pathToSave">Шлях до файлу</param>
@@ -1509,7 +1530,7 @@ namespace AccountingSoftware
 
 		#endregion
 
-		#region Comparison
+		#region Comparison (порівняння конфігурації і реальної структури бази даних, генерування коду, реструктуризація бази даних)
 
 		/// <summary>
 		/// Функція створює копію конфігурації в тій самій папці що і конфігурація
@@ -1567,11 +1588,11 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
-		/// Функція перезаписує файл конфігурації тичасовим файлом конфи. Також видаляє копію та темп файл.
+		/// Функція перезаписує файл конфігурації тимчасовим файлом конфи. Також видаляє копію та темп файл.
 		/// </summary>
-		/// <param name="pathToConf"></param>
-		/// <param name="pathToTempConf"></param>
-		/// <param name="pathToCopyConf"></param>
+		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
+		/// <param name="pathToTempConf">Шлях до тимчасового файлу конфігурації</param>
+		/// <param name="pathToCopyConf">Шлях до копії файлу конфігурації</param>
 		public static void RewriteConfigurationFileFromTempFile(string pathToConf, string pathToTempConf, string pathToCopyConf)
 		{
 			if (File.Exists(pathToConf))
@@ -1590,8 +1611,8 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Функція видаляє тимчасові файли
 		/// </summary>
-		/// <param name="pathToCopyConf"></param>
-		/// <param name="pathToTempConf"></param>
+		/// <param name="pathToCopyConf">Шлях до копії файлу конфігурації</param>
+		/// <param name="pathToTempConf">Шлях до тимчасового файлу конфігурації</param>
 		public static void ClearCopyAndTempConfigurationFile(string pathToConf, string pathToCopyConf, string pathToTempConf)
 		{
 			string dirName = Path.GetDirectoryName(pathToConf);
@@ -1607,9 +1628,9 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Функція генерує код на основі конфігурації
 		/// </summary>
-		/// <param name="pathToConf"></param>
-		/// <param name="pathToTemplate"></param>
-		/// <param name="pathToSaveCode"></param>
+		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
+		/// <param name="pathToTemplate">Шлях до шаблону</param>
+		/// <param name="pathToSaveCode">Шлях до файлу куди буде згенерований код</param>
 		public static void GenerationCode(string pathToConf, string pathToTemplate, string pathToSaveCode)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
@@ -1643,6 +1664,13 @@ namespace AccountingSoftware
 			fileStream.Close();
 		}
 
+		/// <summary>
+		/// Функція генерує ХМЛ файл з SQL запитами на основі файлу порівняння конфігурацій.
+		/// </summary>
+		/// <param name="pathToXML">Шлях до ХМЛ файлу, який згенерований функцією Comparison</param>
+		/// <param name="pathToTemplate">Шлях до шаблону</param>
+		/// <param name="pathToSaveCode">Шлях файлу куди буде збережений вихідний ХМЛ файл</param>
+		/// <param name="replacementColumn">Параметр для шаблону (чи потрібно заміщати стовпчики)</param>
 		public static void ComparisonAnalizeGeneration(string pathToXML, string pathToTemplate, string pathToSaveCode, string replacementColumn)
 		{
 			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
@@ -1659,6 +1687,11 @@ namespace AccountingSoftware
 			fileStream.Close();
 		}
 
+		/// <summary>
+		/// Функція зчитує згенерований список SQL запитів функцією ComparisonAnalizeGeneration
+		/// </summary>
+		/// <param name="pathToXML">Шлях до файлу який згенерувала функція ComparisonAnalizeGeneration</param>
+		/// <returns>Список SQL запитів</returns>
 		public static List<string> ListComparisonSql(string pathToXML)
 		{
 			List<string> slqList = new List<string>();

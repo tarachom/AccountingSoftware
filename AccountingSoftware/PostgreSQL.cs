@@ -489,6 +489,7 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
+		//??? Видалити
 		public string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field)
 		{
 			QuerySelect.Field.Add(field);

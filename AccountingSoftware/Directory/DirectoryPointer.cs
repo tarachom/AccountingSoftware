@@ -81,6 +81,7 @@ namespace AccountingSoftware
 			return UnigueID.UGuid;
 		}
 
+		//??? Видалити
 		protected string GetView(Guid uid, string field)
 		{
 			return Kernel.DataBase.GetViewDirectoryPointers(new Query(Table), uid, field);

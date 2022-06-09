@@ -29,6 +29,7 @@ namespace AccountingSoftware
 	/// <summary>
 	/// Довідник Візуалізація для вибірки даних
 	/// </summary>
+	/// ??? Видалити
 	public abstract class DirectoryView
 	{
 		public DirectoryView(Kernel kernel, string table, string[] fieldsNameInTableArray, 

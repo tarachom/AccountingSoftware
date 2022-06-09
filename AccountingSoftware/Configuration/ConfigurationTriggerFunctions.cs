@@ -25,12 +25,24 @@ using System;
 
 namespace AccountingSoftware
 {
+    /// <summary>
+    /// Тригери-функції які запускаються перед записом, після запису або перед видаленням обєктів (довідник, документ і т.д)
+    /// </summary>
     public class ConfigurationTriggerFunctions
     {
+        /// <summary>
+        /// Перед записом
+        /// </summary>
         public string BeforeSave { get; set; }
 
+        /// <summary>
+        /// Після запису
+        /// </summary>
         public string AfterSave { get; set; }
 
+        /// <summary>
+        /// Перед видаленням
+        /// </summary>
         public string BeforeDelete { get; set; }
     }
 }

@@ -27,6 +27,6 @@ namespace AccountingSoftware
 	//Це може бути або константа, або елементи довідника
 	public class ConfigurationObjectDefaultValue
 	{
-
+		//!! Не реалізовано
 	}
 }
