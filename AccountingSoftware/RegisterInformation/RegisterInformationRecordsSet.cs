@@ -27,7 +27,7 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// 
+	/// Регістр Інформації
 	/// </summary>
 	public abstract class RegisterInformationRecordsSet
 	{
@@ -41,21 +41,42 @@ namespace AccountingSoftware
 			BaseFilter = new List<Where>();
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Масив полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Масив значень полів
+		/// </summary>
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		/// <summary>
+		/// Відбір
+		/// </summary>
 		protected List<Where> BaseFilter { get; }
 
+		/// <summary>
+		/// Очищення вн. списків
+		/// </summary>
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
 		}
 
+		/// <summary>
+		/// Зчитування даних
+		/// </summary>
 		protected void BaseRead()
 		{
 			BaseClear();
@@ -77,11 +98,19 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
+		/// <summary>
+		/// Видалення записів
+		/// </summary>
 		protected void BaseDelete()
 		{
 			Kernel.DataBase.DeleteRegisterInformationRecords(Table, BaseFilter);
 		}
 
+		/// <summary>
+		/// Запис
+		/// </summary>
+		/// <param name="UID"> Унікальний ідентифікатор</param>
+		/// <param name="fieldValue">Значення полів</param>
 		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);

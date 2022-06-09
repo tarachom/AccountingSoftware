@@ -31,6 +31,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class RegisterRecord
 	{
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
 		public Guid UID { get; set; }
 
 		/// <summary>

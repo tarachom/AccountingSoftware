@@ -40,19 +40,38 @@ namespace AccountingSoftware
 			FieldValueList = new List<Dictionary<string, object>>();
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Масив назв полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Список даних
+		/// </summary>
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		/// <summary>
+		/// Очистити вн. списки
+		/// </summary>
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
 		}
 
+		/// <summary>
+		/// Зчитати дані з бази даних
+		/// </summary>
+		/// <param name="ownerUnigueID"></param>
 		protected void BaseRead(UnigueID ownerUnigueID)
 		{
 			BaseClear();
@@ -74,11 +93,22 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
+		/// <summary>
+		/// Видалити всі записи з таб. частини.
+		/// Функція очищає всю таб. частину
+		/// </summary>
+		/// <param name="ownerUnigueID">Унікальний ідентифікатор власника таб. частини</param>
 		protected void BaseDelete(UnigueID ownerUnigueID)
 		{
 			Kernel.DataBase.DeleteDirectoryTablePartRecords(ownerUnigueID, Table);
 		}
 
+		/// <summary>
+		/// Зберегти дані таб.частини. Добавляється один запис в таблицю.
+		/// </summary>
+		/// <param name="UID">Унікальний ідентифікатор запису</param>
+		/// <param name="ownerUnigueID">Унікальний ідентифікатор власника таб. частини</param>
+		/// <param name="fieldValue">Значення полів запису</param>
 		protected void BaseSave(Guid UID, UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);

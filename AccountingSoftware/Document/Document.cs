@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Документ
+	/// </summary>
 	public abstract class Document
 	{
 

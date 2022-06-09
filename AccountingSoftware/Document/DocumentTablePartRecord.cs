@@ -31,6 +31,9 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DocumentTablePartRecord
 	{
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
 		public Guid UID { get; set; }
 	}
 }

@@ -27,7 +27,7 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// 
+	/// Регістр накопичення
 	/// </summary>
 	public abstract class RegisterAccumulationRecordsSet
 	{
@@ -46,36 +46,63 @@ namespace AccountingSoftware
 			BaseFilter = new List<Where>();
 		}
 
+		/// <summary>
+		/// Запит SELECT
+		/// </summary>
 		public Query QuerySelect { get; set; }
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Список полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Значення полів
+		/// </summary>
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		/// <summary>
+		/// Додаткові поля
+		/// </summary>
 		public Dictionary<string, Dictionary<string, string>> JoinValue { get; private set; }
 
+		/// <summary>
+		/// Відбір
+		/// </summary>
 		protected List<Where> BaseFilter { get; }
 
+		/// <summary>
+		/// Очитска вн. списків
+		/// </summary>
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
+			JoinValue.Clear();
 		}
 
+		/// <summary>
+		/// Зчитування даних
+		/// </summary>
 		protected void BaseRead()
 		{
 			BaseClear();
 
-			JoinValue.Clear();
-
-			//QuerySelect.Where.Clear();
+			//QuerySelect.Where.Clear(); //???
 			QuerySelect.Where.AddRange(BaseFilter);
 
 			Kernel.DataBase.SelectRegisterAccumulationRecords(QuerySelect, FieldValueList);
 
+			//Зчитування додаткових полів
 			if (QuerySelect.FieldAndAlias.Count > 0)
 			{
 				foreach (Dictionary<string, object> fieldValue in FieldValueList)
@@ -104,11 +131,23 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
+		/// <summary>
+		/// Видалення записів для власника
+		/// </summary>
+		/// <param name="owner">Унікальний ідентифікатор власника</param>
 		protected void BaseDelete(Guid owner)
 		{
 			Kernel.DataBase.DeleteRegisterAccumulationRecords(Table, owner);
 		}
 
+		/// <summary>
+		/// Запис даних в регістр
+		/// </summary>
+		/// <param name="UID">Унікальний ідентифікатор</param>
+		/// <param name="period">Період - дата запису або дата документу</param>
+		/// <param name="income">Тип запису - прибуток чи зменшення</param>
+		/// <param name="owner">Власник запису</param>
+		/// <param name="fieldValue">Значення полів</param>
 		protected void BaseSave(Guid UID, DateTime period, bool income, Guid owner, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);

@@ -43,30 +43,59 @@ namespace AccountingSoftware
 				FieldValue.Add(field, null);
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Масив назв полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Значення полів
+		/// </summary>
 		protected Dictionary<string, object> FieldValue { get; set; }
 
+		/// <summary>
+		/// Унікальний ідентифікатор запису
+		/// </summary>
 		public UnigueID UnigueID { get; private set; }
 
+		/// <summary>
+		/// Чи це новий?
+		/// </summary>
 		public bool IsNew { get; private set; }
 
+		/// <summary>
+		/// Новий обєкт
+		/// </summary>
 		public void New()
 		{
 			UnigueID = new UnigueID(Guid.NewGuid());
 			IsNew = true;
 		}
 
+		/// <summary>
+		/// Очистка вн. списку
+		/// </summary>
 		protected void BaseClear()
 		{
 			foreach (string field in FieldArray)
 				FieldValue[field] = null;
 		}
 
+		/// <summary>
+		/// Зчитати дані
+		/// </summary>
+		/// <param name="uid">Унікальний ідентифікатор </param>
+		/// <returns></returns>
 		protected bool BaseRead(UnigueID uid)
 		{
 			if (uid == null || uid.UGuid == Guid.Empty)
@@ -83,6 +112,9 @@ namespace AccountingSoftware
 				return false;
 		}
 
+		/// <summary>
+		/// Зберегти дані
+		/// </summary>
 		protected void BaseSave()
 		{
 			if (IsNew)
@@ -97,6 +129,9 @@ namespace AccountingSoftware
 			BaseClear();
 		}
 
+		/// <summary>
+		/// Видалити запис
+		/// </summary>
 		protected void BaseDelete()
 		{
 			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);

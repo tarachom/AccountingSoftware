@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Документ Вказівник
+	/// </summary>
 	public class DocumentPointer
 	{
 		public DocumentPointer()
@@ -39,30 +42,60 @@ namespace AccountingSoftware
 			Kernel = kernel;
 		}
 
+		/// <summary>
+		/// Ініціалізація вказівника
+		/// </summary>
+		/// <param name="uid">Унікальний ідентифікатор</param>
+		/// <param name="fields">Поля які потрібно додатково зчитати</param>
 		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
 			UnigueID = uid;
 			Fields = fields;
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Унікальний ідентифікатор запису
+		/// </summary>
 		public UnigueID UnigueID { get; private set; }
 
+		/// <summary>
+		/// Поля які потрібно додатково зчитати
+		/// </summary>
 		public Dictionary<string, object> Fields { get; private set; }
 
+		/// <summary>
+		/// Чи пустий ідентифікатор?
+		/// </summary>
+		/// <returns></returns>
 		public bool IsEmpty()
 		{
 			return (UnigueID.UGuid == Guid.Empty);
 		}
 
+		/// <summary>
+		/// Отримати ідентифікатор
+		/// </summary>
+		/// <returns></returns>
 		public Guid GetPointer()
 		{
 			return UnigueID.UGuid;
 		}
 
+		/// <summary>
+		/// Представлення обєкта
+		/// </summary>
+		/// <param name="fieldPresentation">Масив полів які представляють обєкт (Наприклад Назва, Дата, Номер і т.д)</param>
+		/// <returns>Представлення обєкта</returns>
 		protected string BasePresentation(string[] fieldPresentation)
 		{
 			if (!IsEmpty() && fieldPresentation.Length != 0)
@@ -72,8 +105,11 @@ namespace AccountingSoftware
 
 				query.Where.Add(new Where("uid", Comparison.EQ, UnigueID.UGuid));
 
-				string presentatio = Kernel.DataBase.GetDocumentPresentation(query, fieldPresentation);
-				
+				string presentation = Kernel.DataBase.GetDocumentPresentation(query, fieldPresentation);
+
+				return presentation;
+
+				/*
 				string[] presentatio_split = presentatio.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
 				if (presentatio_split.Length == 2)
 				{
@@ -83,11 +119,15 @@ namespace AccountingSoftware
 					return presentatio_split[0];
 				else
 					return "";
+				*/
 			}
 			else
 				return "";
 		}
 
+		/// <summary>
+		/// Видалити запис
+		/// </summary>
 		public void Delete()
 		{
 			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);

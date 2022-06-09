@@ -44,34 +44,58 @@ namespace AccountingSoftware
 			JoinValue = new Dictionary<string, Dictionary<string, string>>();
 		}
 
+		/// <summary>
+		/// Запит SELECT
+		/// </summary>
 		public Query QuerySelect { get; set; }
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Масив назв полів
+		/// </summary>
 		private string[] FieldArray { get; set; }
 
+		/// <summary>
+		/// Значення полів
+		/// </summary>
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
+		/// <summary>
+		/// Значення додаткових полів
+		/// </summary>
 		public Dictionary<string, Dictionary<string,string>> JoinValue { get; private set; }
 
+		/// <summary>
+		/// Очистка вн. списків
+		/// </summary>
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
+			JoinValue.Clear();
 		}
 
+		//Зчитування даних
 		protected void BaseRead(UnigueID ownerUnigueID)
 		{
 			BaseClear();
 
-			JoinValue.Clear();
+			//JoinValue.Clear();
 
 			QuerySelect.Where.Clear();
 			QuerySelect.Where.Add(new Where("owner", Comparison.EQ, ownerUnigueID.UGuid));
 
 			Kernel.DataBase.SelectDocumentTablePartRecords(QuerySelect, FieldValueList);
 
+			//Якщо задані додаткові поля з псевдонімами, їх потрібно зчитати в список JoinValue
 			if (QuerySelect.FieldAndAlias.Count > 0)
             {
 				foreach (Dictionary<string, object> fieldValue in FieldValueList)
@@ -100,11 +124,21 @@ namespace AccountingSoftware
 			Kernel.DataBase.RollbackTransaction();
 		}
 
+		/// <summary>
+		/// Видалити всі дані з таб. частини
+		/// </summary>
+		/// <param name="ownerUnigueID">Унікальний ідентифікатор власника таб. частини</param>
 		protected void BaseDelete(UnigueID ownerUnigueID)
 		{
 			Kernel.DataBase.DeleteDocumentTablePartRecords(ownerUnigueID, Table);
 		}
 
+		/// <summary>
+		/// Зберегти один запис таб частини
+		/// </summary>
+		/// <param name="UID">Унікальний ідентифікатор запису</param>
+		/// <param name="ownerUnigueID">Унікальний ідентифікатор власника таб. частини</param>
+		/// <param name="fieldValue">Список значень полів</param>
 		protected void BaseSave(Guid UID, UnigueID ownerUnigueID, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);

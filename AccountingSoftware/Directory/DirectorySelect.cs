@@ -48,33 +48,62 @@ namespace AccountingSoftware
 			//}
 		}
 
+		/// <summary>
+		/// Запит SELECT
+		/// </summary>
 		public Query QuerySelect { get; set; }
 
+		/// <summary>
+		/// Перейти на початок вибірки
+		/// </summary>
 		public void MoveToFirst()
 		{
 			Position = 0;
 			MoveToPosition();
 		}
 
+		/// <summary>
+		/// Кількість елементів у вибірці
+		/// </summary>
+		/// <returns></returns>
 		public int Count()
 		{
 			return BaseSelectList.Count;
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Поточна позиція
+		/// </summary>
 		protected int Position { get; private set; }
 
 		//private string[] Fields { get; set; }
 
 		//public Dictionary<string, string> Alias { get; }
 
+		/// <summary>
+		/// Поточний вказівник
+		/// </summary>
 		protected DirectoryPointer DirectoryPointerPosition { get; private set; }
 
+		/// <summary>
+		/// Вибірка вказівників
+		/// </summary>
 		protected List<DirectoryPointer> BaseSelectList { get; private set; }
 
+		/// <summary>
+		/// Переміститися на одну позицію у вибірці
+		/// </summary>
+		/// <returns></returns>
 		protected bool MoveToPosition()
 		{
 			if (Position < BaseSelectList.Count)
@@ -90,6 +119,10 @@ namespace AccountingSoftware
 			}
 		}
 
+		/// <summary>
+		/// Вибрати дані
+		/// </summary>
+		/// <returns></returns>
 		protected bool BaseSelect()
 		{
 			Position = 0;
@@ -101,6 +134,10 @@ namespace AccountingSoftware
 			return Count() > 0;
 		}
 
+		/// <summary>
+		/// Вибрати один запис з бази даних
+		/// </summary>
+		/// <returns></returns>
 		protected bool BaseSelectSingle()
 		{
 			int oldLimitValue = QuerySelect.Limit;
@@ -113,6 +150,12 @@ namespace AccountingSoftware
 			return Count() > 0;
 		}
 
+		/// <summary>
+		/// Пошук по значенню поля (наприклад пошук по назві)
+		/// </summary>
+		/// <param name="fieldName">Назва поля в базі даних</param>
+		/// <param name="fieldValue">Значення поля</param>
+		/// <returns>Повертає перший знайдений вказівник</returns>
 		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
 		{
 			//if (!Alias.ContainsKey(fieldName))
@@ -128,6 +171,14 @@ namespace AccountingSoftware
 			return directoryPointer;
 		}
 
+		/// <summary>
+		/// Пошук по значенню поля (наприклад пошук по назві)
+		/// </summary>
+		/// <param name="fieldName">Назва поля в базі даних<</param>
+		/// <param name="fieldValue">Значення поля</param>
+		/// <param name="limit">Кількість елементів які можна вибрати</param>
+		/// <param name="offset">Зміщення від початку вибірки</param>
+		/// <returns>Повертає список знайдених вказівників</returns>
 		protected List<DirectoryPointer> BaseFindListByField(string fieldName, object fieldValue, int limit = 0, int offset = 0)
 		{
 			//if (!Alias.ContainsKey(fieldName))

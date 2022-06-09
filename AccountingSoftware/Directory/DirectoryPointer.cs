@@ -42,25 +42,51 @@ namespace AccountingSoftware
 			Kernel = kernel;
 		}
 
+		/// <summary>
+		/// Ініціалізація вказівника
+		/// </summary>
+		/// <param name="uid">Унікальний ідентифікатор</param>
+		/// <param name="fields">Поля які потрібно додатково зчитати з бази даних</param>
 		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
 			UnigueID = uid;
 			Fields = fields;
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		private Kernel Kernel { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
 		private string Table { get; set; }
 
+		/// <summary>
+		/// Унікальний ідентифікатор
+		/// </summary>
 		public UnigueID UnigueID { get; private set; }
 
+		/// <summary>
+		/// Поля які потрібно додатково зчитати з бази даних 
+		/// </summary>
 		public Dictionary<string, object> Fields { get; private set; }
 
+		/// <summary>
+		/// Чи це пустий ідентифікатор
+		/// </summary>
+		/// <returns></returns>
 		public bool IsEmpty()
 		{
 			return (UnigueID.UGuid == Guid.Empty);
 		}
 
+		/// <summary>
+		/// Отримати представлення вказівника
+		/// </summary>
+		/// <param name="fieldPresentation">Список полів які представляють вказівник (Назва, опис і т.д)</param>
+		/// <returns></returns>
 		protected string BasePresentation(string[] fieldPresentation)
 		{
 			if (!IsEmpty() && fieldPresentation.Length != 0)
@@ -76,6 +102,10 @@ namespace AccountingSoftware
 				return "";
 		}
 
+		/// <summary>
+		/// Отримати ункальний ідентифікатор у форматі Guid
+		/// </summary>
+		/// <returns></returns>
 		public Guid GetPointer()
 		{
 			return UnigueID.UGuid;

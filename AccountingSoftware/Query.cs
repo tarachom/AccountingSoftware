@@ -373,6 +373,13 @@ namespace AccountingSoftware
 			JoinType = JoinType.LEFT;
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="joinTable">Таблиця яку треба приєднати</param>
+		/// <param name="joinField">Поле з основної таблиці (ParentTable) із ключами</param>
+		/// <param name="parentTable">Основна таблиця</param>
+		/// <param name="joinType">Тип приєднання</param>
 		public Join(string joinTable, string joinField, string parentTable, JoinType joinType = JoinType.LEFT)
         {
 			JoinTable = joinTable;
@@ -382,10 +389,8 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
-		/// Таблиця яку треба приєднати. Перше значення це назва таблиці, друга це псевдонім
+		/// Таблиця яку треба приєднати.
 		/// </summary>
-		//public KeyValuePair<string, string> JoinTable_NameAndAlias { get; set; }
-
 		public string JoinTable { get; set; }
 
 		/// <summary>
@@ -404,6 +409,9 @@ namespace AccountingSoftware
 		public JoinType JoinType { get; set; }
 	}
 
+	/// <summary>
+	/// Тип приєднання
+	/// </summary>
 	public enum JoinType
     {
 		LEFT,

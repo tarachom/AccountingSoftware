@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Регістр
+	/// </summary>
 	public abstract class Register
 	{
 

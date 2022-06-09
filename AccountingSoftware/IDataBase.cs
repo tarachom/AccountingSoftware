@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Інтерфейс для роботи з базою даних.
+	/// </summary>
 	public interface IDataBase
 	{
         #region Open
@@ -73,7 +76,7 @@ namespace AccountingSoftware
 		void InsertDirectoryTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
 
-		string SelectDirectoryView(DirectoryView directoryView);
+		//string SelectDirectoryView(DirectoryView directoryView);
 		void DeleteDirectoryViewTempTable(DirectoryView directoryView);
 
 		#endregion

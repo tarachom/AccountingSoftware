@@ -25,13 +25,16 @@ using System;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Ядро
+	/// </summary>
 	public class Kernel
 	{
-		public Kernel()
-		{
-			
-		}
+		public Kernel() { /**/ }
 
+		/// <summary>
+		/// Не використовується
+		/// </summary>
 		public void Open()
 		{
 			DataBase = new PostgreSQL();
@@ -46,18 +49,50 @@ namespace AccountingSoftware
 			Console.WriteLine("Configuration Load");
 		}
 
+		/// <summary>
+		/// Перевірити підключення до сервера
+		/// </summary>
+		/// <param name="Server">Адреса сервера баз даних</param>
+		/// <param name="UserId">Користувач</param>
+		/// <param name="Password">Пароль</param>
+		/// <param name="Port">Порт</param>
+		/// <param name="Database">База даних</param>
+		/// <param name="exception">Помилка</param>
+		/// <returns></returns>
 		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			DataBase = new PostgreSQL();
 			return DataBase.TryConnectToServer(Server, UserId, Password, Port, Database, out exception);
 		}
 
+		/// <summary>
+		/// Створити базу даних
+		/// </summary>
+		/// <param name="Server">Адреса сервера баз даних</param>
+		/// <param name="UserId">Користувач</param>
+		/// <param name="Password">Пароль</param>
+		/// <param name="Port">Порт</param>
+		/// <param name="Database">База даних</param>
+		/// <param name="exception">Помилка</param>
+		/// <param name="IsExistsDatabase">Чи вже є?</param>
+		/// <returns>>True якщо все ок</returns>
 		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase)
 		{
 			DataBase = new PostgreSQL();
 			return DataBase.CreateDatabaseIfNotExist(Server, UserId, Password, Port, Database, out exception, out IsExistsDatabase);
 		}
 
+		/// <summary>
+		/// Підключення до сервера баз даних і завантаження конфігурації
+		/// </summary>
+		/// <param name="PathToXmlFileConfiguration">Шлях до файлу конфігурації</param>
+		/// <param name="Server">Адреса сервера баз даних</param>
+		/// <param name="UserId">Користувач</param>
+		/// <param name="Password">Пароль</param>
+		/// <param name="Port">Порт</param>
+		/// <param name="Database">База даних</param>
+		/// <param name="exception">Помилка</param>
+		/// <returns>True якщо підключення відбулось нормально</returns>
 		public bool Open2(string PathToXmlFileConfiguration, string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			DataBase = new PostgreSQL();
@@ -71,14 +106,23 @@ namespace AccountingSoftware
 			return flagConnect;
 		}
 
+		/// <summary>
+		/// Закрити підключення
+		/// </summary>
 		public void Close()
 		{
 			DataBase.Close();
 			Conf = null;
 		}
 
+		/// <summary>
+		/// Конфігурація
+		/// </summary>
 		public Configuration Conf { get; set; }
 
+		/// <summary>
+		/// Інтерфейс для роботи з базою даних
+		/// </summary>
 		public IDataBase DataBase { get; set; }
 	}
 }

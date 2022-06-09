@@ -26,6 +26,9 @@ using System.Collections.Generic;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Документ Вибірка вказівників
+	/// </summary>
 	public abstract class DocumentSelect
 	{
 		public DocumentSelect(Kernel kernel, string table)
@@ -36,27 +39,53 @@ namespace AccountingSoftware
 			BaseSelectList = new List<DocumentPointer>();
 		}
 
+		/// <summary>
+		/// Запит SELECT
+		/// </summary>
 		public Query QuerySelect { get; set; }
 
+		/// <summary>
+		/// Переміститися в початок вибірки
+		/// </summary>
 		public void MoveToFirst()
 		{
 			Position = 0;
 			MoveToPosition();
 		}
 
+		/// <summary>
+		/// Кількість елементів вибірки
+		/// </summary>
+		/// <returns></returns>
 		public int Count()
 		{
 			return BaseSelectList.Count;
 		}
 
+		/// <summary>
+		/// Ядро
+		/// </summary>
 		protected Kernel Kernel { get; private set; }
 
+		/// <summary>
+		/// Поточна позиція
+		/// </summary>
 		protected int Position { get; private set; }
 
+		/// <summary>
+		/// Поточний вказівник
+		/// </summary>
 		protected DocumentPointer DocumentPointerPosition { get; private set; }
 
+		/// <summary>
+		/// Список вибраних вказівників
+		/// </summary>
 		protected List<DocumentPointer> BaseSelectList { get; private set; }
 
+		/// <summary>
+		/// Переміститися на наступну позицію
+		/// </summary>
+		/// <returns></returns>
 		protected bool MoveToPosition()
 		{
 			if (Position < BaseSelectList.Count)
@@ -72,6 +101,10 @@ namespace AccountingSoftware
 			}
 		}
 
+		/// <summary>
+		/// Зчитати
+		/// </summary>
+		/// <returns></returns>
 		protected bool BaseSelect()
 		{
 			Position = 0;
@@ -83,6 +116,10 @@ namespace AccountingSoftware
 			return Count() > 0;
 		}
 
+		/// <summary>
+		/// Зчитати один вказівник
+		/// </summary>
+		/// <returns></returns>
 		protected bool BaseSelectSingle()
 		{
 			int oldLimitValue = QuerySelect.Limit;
