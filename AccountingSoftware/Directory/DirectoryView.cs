@@ -70,7 +70,7 @@ namespace AccountingSoftware
 
 		public string Read()
 		{
-			return Kernel.DataBase.SelectDirectoryView(this);
+			return "";// Kernel.DataBase.SelectDirectoryView(this);
 		}
 
 		public void DeleteTempTable()

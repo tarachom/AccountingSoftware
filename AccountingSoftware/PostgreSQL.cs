@@ -94,8 +94,7 @@ namespace AccountingSoftware
 			exception = null;
 			IsExistsDatabase = false;
 
-			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
-			//Console.WriteLine(conString);
+			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};"; //Database={Database};
 
 			Connection = new NpgsqlConnection(conString);
 

@@ -716,7 +716,7 @@ limitations under the License.
             <xsl:for-each select="TableCreate">
               <info>Створити таблицю <xsl:value-of select="$DirectoryName"/> (<xsl:value-of select="$TableName"/>)</info>
               <sql>
-                <xsl:text>CREATE TABLE </xsl:text>
+                <xsl:text>CREATE TABLE IF NOT EXISTS </xsl:text>
                 <xsl:value-of select="$TableName"/>
                 <xsl:text> (</xsl:text>
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
@@ -737,17 +737,23 @@ limitations under the License.
               </sql>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">
 				  <sql>
-					  <xsl:text>CREATE INDEX ON </xsl:text>
+					  <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
+					  <xsl:value-of select="$TableName"/>
+					  <xsl:text>_period_idx ON </xsl:text>
 					  <xsl:value-of select="$TableName"/>
 					  <xsl:text> (period);</xsl:text>
 				  </sql>
 				 <sql>
-					<xsl:text>CREATE INDEX ON </xsl:text>
+					<xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
+					<xsl:value-of select="$TableName"/>
+					<xsl:text>_income_idx ON </xsl:text>
 					<xsl:value-of select="$TableName"/>
 					<xsl:text> (income);</xsl:text>
 				 </sql>
 				 <sql>
-					<xsl:text>CREATE INDEX ON </xsl:text>
+					<xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
+					<xsl:value-of select="$TableName"/>
+					<xsl:text>_owner_idx ON </xsl:text>
 					<xsl:value-of select="$TableName"/>
 					<xsl:text> (owner);</xsl:text>
 				 </sql>
@@ -788,7 +794,7 @@ limitations under the License.
               <xsl:for-each select="TableCreate">
                 <info>Створити таблицю <xsl:value-of select="$TablePartName"/> (<xsl:value-of select="$TabularParts_TableName"/>)</info>
                 <sql>
-                  <xsl:text>CREATE TABLE </xsl:text>
+                  <xsl:text>CREATE TABLE IF NOT EXISTS </xsl:text>
                   <xsl:value-of select="$TabularParts_TableName"/>
                   <xsl:text> (</xsl:text>
                   <xsl:text>uid uuid NOT NULL, </xsl:text>
@@ -806,7 +812,9 @@ limitations under the License.
                 </sql>
                 <xsl:if test="$IsCreateOwnerField = 'yes'">
                   <sql>
-                    <xsl:text>CREATE INDEX ON </xsl:text>
+                    <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
+					<xsl:value-of select="$TabularParts_TableName"/>
+					<xsl:text>_owner_idx ON </xsl:text>
                     <xsl:value-of select="$TabularParts_TableName"/>
                     <xsl:text> (owner);</xsl:text>
                   </sql>
