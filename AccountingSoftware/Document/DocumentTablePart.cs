@@ -80,7 +80,7 @@ namespace AccountingSoftware
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
-			JoinValue.Clear();
+			//JoinValue.Clear();
 		}
 
 		//Зчитування даних
@@ -88,7 +88,7 @@ namespace AccountingSoftware
 		{
 			BaseClear();
 
-			//JoinValue.Clear();
+			JoinValue.Clear();
 
 			QuerySelect.Where.Clear();
 			QuerySelect.Where.Add(new Where("owner", Comparison.EQ, ownerUnigueID.UGuid));
