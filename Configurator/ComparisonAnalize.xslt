@@ -762,26 +762,14 @@ limitations under the License.
 				  </sql>
 			  </xsl:for-each>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">
-				  <sql>
-					  <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
-					  <xsl:value-of select="$TableName"/>
-					  <xsl:text>_period_idx ON </xsl:text>
-					  <xsl:value-of select="$TableName"/>
-					  <xsl:text> (period);</xsl:text>
-				  </sql>
 				 <sql>
-					<xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
-					<xsl:value-of select="$TableName"/>
-					<xsl:text>_income_idx ON </xsl:text>
-					<xsl:value-of select="$TableName"/>
-					<xsl:text> (income);</xsl:text>
+				    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
 				 </sql>
 				 <sql>
-					<xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
-					<xsl:value-of select="$TableName"/>
-					<xsl:text>_owner_idx ON </xsl:text>
-					<xsl:value-of select="$TableName"/>
-					<xsl:text> (owner);</xsl:text>
+					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_income_idx ON ', $TableName, ' (income);')"/>
+				 </sql>
+				 <sql>
+					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
 				 </sql>
 			  </xsl:if>
             </xsl:for-each>
@@ -838,16 +826,12 @@ limitations under the License.
                 </sql>
 				<xsl:for-each select="FieldCreate[Index = '1']">
 				  <sql>
-					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TabularParts_TableName, '_', NameInTable, '_idx ON ', $TabularParts_TableName, ' (', NameInTable, ');')"/>
 				  </sql>
 			    </xsl:for-each>
                 <xsl:if test="$IsCreateOwnerField = 'yes'">
                   <sql>
-                    <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
-					<xsl:value-of select="$TabularParts_TableName"/>
-					<xsl:text>_owner_idx ON </xsl:text>
-                    <xsl:value-of select="$TabularParts_TableName"/>
-                    <xsl:text> (owner);</xsl:text>
+					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TabularParts_TableName, '_owner_idx ON ', $TabularParts_TableName, ' (owner);')"/>
                   </sql>
                 </xsl:if>
               </xsl:for-each>
