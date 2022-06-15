@@ -669,7 +669,7 @@ limitations under the License.
 				    </sql>
 				</xsl:if>
 			</xsl:otherwise>
-		</xsl:choose>
+	   </xsl:choose>
 
        </xsl:when>
        <xsl:when test="IsExist = 'no'">
@@ -836,6 +836,11 @@ limitations under the License.
                   </xsl:for-each>
                   <xsl:text>PRIMARY KEY(uid));</xsl:text>
                 </sql>
+				<xsl:for-each select="FieldCreate[Index = '1']">
+				  <sql>
+					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+				  </sql>
+			    </xsl:for-each>
                 <xsl:if test="$IsCreateOwnerField = 'yes'">
                   <sql>
                     <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>
