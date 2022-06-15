@@ -46,6 +46,7 @@
             this.comboBoxEnums = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.comboBoxPointer = new System.Windows.Forms.ComboBox();
+            this.checkBoxIsIndex = new System.Windows.Forms.CheckBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -135,7 +136,7 @@
             this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonSave);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 274);
+            this.panel2.Location = new System.Drawing.Point(10, 296);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(572, 36);
             this.panel2.TabIndex = 12;
@@ -171,6 +172,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.checkBoxIsIndex);
             this.panel1.Controls.Add(this.checkBoxIsPresentation);
             this.panel1.Controls.Add(this.comboBoxEnums);
             this.panel1.Controls.Add(this.label6);
@@ -187,7 +189,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(10, 10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(572, 264);
+            this.panel1.Size = new System.Drawing.Size(572, 286);
             this.panel1.TabIndex = 16;
             // 
             // checkBoxIsPresentation
@@ -229,11 +231,21 @@
             this.comboBoxPointer.Size = new System.Drawing.Size(474, 21);
             this.comboBoxPointer.TabIndex = 17;
             // 
+            // checkBoxIsIndex
+            // 
+            this.checkBoxIsIndex.AutoSize = true;
+            this.checkBoxIsIndex.Location = new System.Drawing.Point(95, 254);
+            this.checkBoxIsIndex.Name = "checkBoxIsIndex";
+            this.checkBoxIsIndex.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxIsIndex.TabIndex = 21;
+            this.checkBoxIsIndex.Text = "Індексувати поле";
+            this.checkBoxIsIndex.UseVisualStyleBackColor = true;
+            // 
             // FieldForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 320);
+            this.ClientSize = new System.Drawing.Size(592, 342);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -270,5 +282,6 @@
 		private System.Windows.Forms.ComboBox comboBoxEnums;
 		private System.Windows.Forms.Label label6;
         private System.Windows.Forms.CheckBox checkBoxIsPresentation;
+        private System.Windows.Forms.CheckBox checkBoxIsIndex;
     }
 }

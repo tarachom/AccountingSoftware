@@ -41,7 +41,7 @@ namespace AccountingSoftware
 		/// <param name="type">Тип поля (Всі типи описані в класі FieldType)</param>
 		/// <param name="pointer">Вказівник</param>
 		/// <param name="desc">Опис</param>
-		public ConfigurationObjectField(string name, string nameInTable, string type, string pointer, string desc = "", bool isPresentation = false)
+		public ConfigurationObjectField(string name, string nameInTable, string type, string pointer, string desc = "", bool isPresentation = false, bool isIndex=false)
 		{
 			Name = name;
 			NameInTable = nameInTable;
@@ -49,6 +49,7 @@ namespace AccountingSoftware
 			Pointer = pointer;
 			Desc = desc;
 			IsPresentation = isPresentation;
+			IsIndex = isIndex;
 		}
 
 		/// <summary>
@@ -80,5 +81,10 @@ namespace AccountingSoftware
 		/// Використовувати поле для презентації в списках і формах
 		/// </summary>
 		public bool IsPresentation { get; set; }
+
+		/// <summary>
+		/// Індексувати поле
+		/// </summary>
+		public bool IsIndex { get; set; }
 	}
 }

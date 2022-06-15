@@ -836,8 +836,10 @@ namespace AccountingSoftware
 				string type = fieldNodes.Current.SelectSingleNode("Type").Value;
 				string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
 				string isPresentationString = fieldNodes.Current.SelectSingleNode("IsPresentation").Value;
+				string isIndexString = fieldNodes.Current.SelectSingleNode("IsIndex").Value;
 
 				bool isPresentation = isPresentationString == "1";
+				bool isIndex = isIndexString == "1";
 
 				string pointer = "";
 				if (type == "pointer" || type == "enum")
@@ -845,7 +847,7 @@ namespace AccountingSoftware
 					pointer = fieldNodes.Current.SelectSingleNode("Pointer").Value;
 				}
 
-				ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc, isPresentation);
+				ConfigurationObjectField ConfObjectField = new ConfigurationObjectField(name, nameInTable, type, pointer, desc, isPresentation, isIndex);
 
 				fields.Add(name, ConfObjectField);
 			}
@@ -1217,6 +1219,10 @@ namespace AccountingSoftware
 				XmlElement nodeFieldIsPresentation = xmlConfDocument.CreateElement("IsPresentation");
 				nodeFieldIsPresentation.InnerText = field.Value.IsPresentation ? "1" : "0";
 				nodeField.AppendChild(nodeFieldIsPresentation);
+
+				XmlElement nodeFieldIsIndex = xmlConfDocument.CreateElement("IsIndex");
+				nodeFieldIsIndex.InnerText = field.Value.IsIndex ? "1" : "0";
+				nodeField.AppendChild(nodeFieldIsIndex);
 			}
 		}
 
@@ -1497,6 +1503,7 @@ namespace AccountingSoftware
 			XmlElement nodeInformationSchema = xmlComparisonDocument.CreateElement("InformationSchema");
 			xmlComparisonDocument.AppendChild(nodeInformationSchema);
 
+			//Таблиці
 			foreach (KeyValuePair<string, ConfigurationInformationSchema_Table> informationSchemaTable in InformationSchema.Tables)
 			{
 				XmlElement nodeInformationSchemaTable = xmlComparisonDocument.CreateElement("Table");
@@ -1506,6 +1513,7 @@ namespace AccountingSoftware
 				nodeInformationSchemaTableName.InnerText = informationSchemaTable.Value.TableName;
 				nodeInformationSchemaTable.AppendChild(nodeInformationSchemaTableName);
 
+				//Стовпчики
 				foreach (KeyValuePair<string, ConfigurationInformationSchema_Column> informationSchemaColumn in informationSchemaTable.Value.Columns)
 				{
 					XmlElement nodeInformationSchemaColumn = xmlComparisonDocument.CreateElement("Column");
@@ -1522,6 +1530,17 @@ namespace AccountingSoftware
 					XmlElement nodeInformationSchemaColumnUdtName = xmlComparisonDocument.CreateElement("UdtName");
 					nodeInformationSchemaColumnUdtName.InnerText = informationSchemaColumn.Value.UdtName;
 					nodeInformationSchemaColumn.AppendChild(nodeInformationSchemaColumnUdtName);
+				}
+
+				//Індекси
+				foreach (KeyValuePair<string, ConfigurationInformationSchema_Index> informationSchemaIndex in informationSchemaTable.Value.Indexes)
+                {
+					XmlElement nodeInformationSchemaIndex = xmlComparisonDocument.CreateElement("Index");
+					nodeInformationSchemaTable.AppendChild(nodeInformationSchemaIndex);
+
+					XmlElement nodeInformationSchemaIndexName = xmlComparisonDocument.CreateElement("Name");
+					nodeInformationSchemaIndexName.InnerText = informationSchemaIndex.Value.IndexName;
+					nodeInformationSchemaIndex.AppendChild(nodeInformationSchemaIndexName);
 				}
 			}
 

@@ -129,6 +129,7 @@ namespace Configurator
 				}
 
 				checkBoxIsPresentation.Checked = ConfigurationObjectField.IsPresentation;
+				checkBoxIsIndex.Checked = ConfigurationObjectField.IsIndex;
 
 				IsNew = false;
 			}
@@ -186,6 +187,7 @@ namespace Configurator
 			}
 
 			ConfigurationObjectField.IsPresentation = checkBoxIsPresentation.Checked;
+			ConfigurationObjectField.IsIndex = checkBoxIsIndex.Checked;
 
 			CallBack.Invoke(OriginalName, ConfigurationObjectField, IsNew, this.Tag);
 

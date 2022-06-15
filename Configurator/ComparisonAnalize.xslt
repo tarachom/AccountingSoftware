@@ -653,7 +653,24 @@ limitations under the License.
             
           </xsl:when>
         </xsl:choose>
-         
+
+		<xsl:choose>
+			<xsl:when test="Index = '1'">
+				<xsl:if test="IndexExist != 'yes'">
+				    <sql>
+					    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+				    </sql>
+				</xsl:if>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:if test="IndexExist = 'yes'">
+				    <sql>
+					    <xsl:value-of select="concat('DROP INDEX IF EXISTS ', $TableName, '_', NameInTable, '_idx;')"/>
+				    </sql>
+				</xsl:if>
+			</xsl:otherwise>
+		</xsl:choose>
+
        </xsl:when>
        <xsl:when test="IsExist = 'no'">
 
@@ -668,7 +685,11 @@ limitations under the License.
               <xsl:value-of select="DataType"/>
               <xsl:text>;</xsl:text>
             </sql>
-
+			<xsl:if test="Index = '1'">
+				<sql>
+					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+				</sql>
+			</xsl:if>
           </xsl:for-each>
 
         </xsl:when>
@@ -735,6 +756,11 @@ limitations under the License.
                 </xsl:for-each>
                 <xsl:text>PRIMARY KEY(uid));</xsl:text>
               </sql>
+			  <xsl:for-each select="FieldCreate[Index = '1']">
+				  <sql>
+					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
+				  </sql>
+			  </xsl:for-each>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">
 				  <sql>
 					  <xsl:text>CREATE INDEX IF NOT EXISTS </xsl:text>

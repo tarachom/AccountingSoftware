@@ -57,6 +57,19 @@ namespace AccountingSoftware
 
 			Tables[table].Columns.Add(column, new ConfigurationInformationSchema_Column(column, dataType, udtName));
 		}
+
+		/// <summary>
+		/// Добавлення інформації про індекси
+		/// </summary>
+		/// <param name="table">Таблиця</param>
+		/// <param name="index">Індекс</param>
+		public void AppendIndex(string table, string index)
+        {
+			if (!Tables.ContainsKey(table))
+				Tables.Add(table, new ConfigurationInformationSchema_Table(table));
+
+			Tables[table].Indexes.Add(index, new ConfigurationInformationSchema_Index(index));
+		}
 	}
 
 	/// <summary>
@@ -72,6 +85,7 @@ namespace AccountingSoftware
 		{
 			TableName = tableName;
 			Columns = new Dictionary<string, ConfigurationInformationSchema_Column>();
+			Indexes = new Dictionary<string, ConfigurationInformationSchema_Index>();
 		}
 
 		/// <summary>
@@ -83,6 +97,11 @@ namespace AccountingSoftware
 		/// Стовпці
 		/// </summary>
 		public Dictionary<string, ConfigurationInformationSchema_Column> Columns { get; }
+
+		/// <summary>
+		/// Індекси
+		/// </summary>
+		public Dictionary<string, ConfigurationInformationSchema_Index> Indexes { get; }
 	}
 
 	/// <summary>
@@ -119,5 +138,27 @@ namespace AccountingSoftware
 		/// Тип даних
 		/// </summary>
 		public string UdtName { get; set; }
+	}
+
+	/// <summary>
+	/// Індекс
+	/// </summary>
+	public class ConfigurationInformationSchema_Index
+	{
+		public ConfigurationInformationSchema_Index() { }
+
+		/// <summary>
+		/// Індекс
+		/// </summary>
+		/// <param name="indexName"></param>
+		public ConfigurationInformationSchema_Index(string indexName)
+		{
+			IndexName = indexName;
+		}
+
+		/// <summary>
+		/// Назва індексу
+		/// </summary>
+		public string IndexName { get; set; }
 	}
 }

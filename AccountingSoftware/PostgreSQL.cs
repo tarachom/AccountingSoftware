@@ -1216,6 +1216,10 @@ namespace AccountingSoftware
 		{
 			ConfigurationInformationSchema informationSchema = new ConfigurationInformationSchema();
 
+			//
+			// Таблиці та стовпчики
+			//
+
 			string query = "SELECT table_name, column_name, data_type, udt_name " +
 						   "FROM information_schema.columns " +
 						   "WHERE table_schema = 'public'";
@@ -1230,6 +1234,22 @@ namespace AccountingSoftware
 					reader["column_name"].ToString().ToLower(),
 					reader["data_type"].ToString(),
 					reader["udt_name"].ToString());
+			}
+			reader.Close();
+
+			//
+			// Індекси
+			//
+
+			query = "SELECT tablename, indexname FROM pg_indexes WHERE schemaname = 'public'";
+
+			nCommand = new NpgsqlCommand(query, Connection);
+			reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				informationSchema.AppendIndex(
+					reader["tablename"].ToString().ToLower(),
+					reader["indexname"].ToString().ToLower());
 			}
 			reader.Close();
 
