@@ -33,6 +33,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.buttonDown = new System.Windows.Forms.Button();
+            this.buttonUp = new System.Windows.Forms.Button();
             this.buttonAddField = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -87,6 +89,8 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.buttonDown);
+            this.panel4.Controls.Add(this.buttonUp);
             this.panel4.Controls.Add(this.buttonAddField);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -94,6 +98,26 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(266, 30);
             this.panel4.TabIndex = 3;
+            // 
+            // buttonDown
+            // 
+            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
+            this.buttonDown.Location = new System.Drawing.Point(231, 4);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(32, 23);
+            this.buttonDown.TabIndex = 13;
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            // 
+            // buttonUp
+            // 
+            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
+            this.buttonUp.Location = new System.Drawing.Point(193, 4);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(32, 23);
+            this.buttonUp.TabIndex = 12;
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // buttonAddField
             // 
@@ -274,5 +298,7 @@
 		private System.Windows.Forms.TextBox textBoxTable;
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button buttonAddField;
-	}
+        private System.Windows.Forms.Button buttonDown;
+        private System.Windows.Forms.Button buttonUp;
+    }
 }
