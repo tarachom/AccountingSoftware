@@ -127,6 +127,7 @@ namespace AccountingSoftware
 			if (IsNew)
 			{
 				Kernel.DataBase.InsertDirectoryObject(this, Table, FieldArray, FieldValue);
+				IsNew = false;
 			}
 			else
 			{
