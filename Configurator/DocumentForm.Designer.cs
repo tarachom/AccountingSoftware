@@ -44,12 +44,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.textBoxDesc = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBoxTable = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxTriggersBeforeDelete = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -57,6 +51,14 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxTriggersAfterSave = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.textBoxDesc = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxTable = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.textBoxName = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonDown = new System.Windows.Forms.Button();
+            this.buttonUp = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -76,7 +78,7 @@
             this.listBoxFields.FormattingEnabled = true;
             this.listBoxFields.Location = new System.Drawing.Point(0, 0);
             this.listBoxFields.Name = "listBoxFields";
-            this.listBoxFields.Size = new System.Drawing.Size(266, 236);
+            this.listBoxFields.Size = new System.Drawing.Size(266, 291);
             this.listBoxFields.TabIndex = 0;
             this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
             this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
@@ -95,11 +97,11 @@
             // 
             // panel7
             // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel7.Controls.Add(this.listBoxTabularParts);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(0, 296);
+            this.panel7.Location = new System.Drawing.Point(0, 357);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(266, 237);
+            this.panel7.Size = new System.Drawing.Size(266, 176);
             this.panel7.TabIndex = 1;
             // 
             // listBoxTabularParts
@@ -108,19 +110,19 @@
             this.listBoxTabularParts.FormattingEnabled = true;
             this.listBoxTabularParts.Location = new System.Drawing.Point(0, 0);
             this.listBoxTabularParts.Name = "listBoxTabularParts";
-            this.listBoxTabularParts.Size = new System.Drawing.Size(266, 237);
+            this.listBoxTabularParts.Size = new System.Drawing.Size(266, 176);
             this.listBoxTabularParts.TabIndex = 1;
             this.listBoxTabularParts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxTabularParts_KeyDown);
             this.listBoxTabularParts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxTabularParts_MouseDoubleClick);
             // 
             // panel6
             // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel6.Controls.Add(this.buttonAddTablePart);
             this.panel6.Controls.Add(this.label2);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 266);
+            this.panel6.Location = new System.Drawing.Point(3, 324);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(266, 30);
+            this.panel6.Size = new System.Drawing.Size(260, 30);
             this.panel6.TabIndex = 4;
             // 
             // buttonAddTablePart
@@ -144,15 +146,18 @@
             // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.listBoxFields);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(266, 236);
+            this.panel5.Size = new System.Drawing.Size(266, 291);
             this.panel5.TabIndex = 2;
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.buttonDown);
+            this.panel4.Controls.Add(this.buttonUp);
             this.panel4.Controls.Add(this.buttonAddField);
             this.panel4.Controls.Add(this.label1);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
@@ -239,61 +244,6 @@
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
-            // textBoxDesc
-            // 
-            this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDesc.Location = new System.Drawing.Point(91, 83);
-            this.textBoxDesc.Multiline = true;
-            this.textBoxDesc.Name = "textBoxDesc";
-            this.textBoxDesc.Size = new System.Drawing.Size(453, 62);
-            this.textBoxDesc.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 86);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(36, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Опис:";
-            // 
-            // textBoxTable
-            // 
-            this.textBoxTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxTable.Location = new System.Drawing.Point(91, 57);
-            this.textBoxTable.Name = "textBoxTable";
-            this.textBoxTable.Size = new System.Drawing.Size(453, 20);
-            this.textBoxTable.TabIndex = 3;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 60);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Назва в базі:";
-            // 
-            // textBoxName
-            // 
-            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxName.Location = new System.Drawing.Point(91, 31);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(453, 20);
-            this.textBoxName.TabIndex = 1;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 34);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Назва:";
-            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -306,7 +256,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(14, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 115);
+            this.groupBox1.Size = new System.Drawing.Size(529, 238);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -364,6 +314,81 @@
             this.label8.Size = new System.Drawing.Size(76, 13);
             this.label8.TabIndex = 9;
             this.label8.Text = "Після запису:";
+            // 
+            // textBoxDesc
+            // 
+            this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxDesc.Location = new System.Drawing.Point(91, 83);
+            this.textBoxDesc.Multiline = true;
+            this.textBoxDesc.Name = "textBoxDesc";
+            this.textBoxDesc.Size = new System.Drawing.Size(453, 62);
+            this.textBoxDesc.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 86);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(36, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Опис:";
+            // 
+            // textBoxTable
+            // 
+            this.textBoxTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxTable.Location = new System.Drawing.Point(91, 57);
+            this.textBoxTable.Name = "textBoxTable";
+            this.textBoxTable.Size = new System.Drawing.Size(453, 20);
+            this.textBoxTable.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(11, 60);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Назва в базі:";
+            // 
+            // textBoxName
+            // 
+            this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxName.Location = new System.Drawing.Point(91, 31);
+            this.textBoxName.Name = "textBoxName";
+            this.textBoxName.Size = new System.Drawing.Size(453, 20);
+            this.textBoxName.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 34);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(42, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Назва:";
+            // 
+            // buttonDown
+            // 
+            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
+            this.buttonDown.Location = new System.Drawing.Point(231, 4);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(32, 23);
+            this.buttonDown.TabIndex = 11;
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            // 
+            // buttonUp
+            // 
+            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
+            this.buttonUp.Location = new System.Drawing.Point(193, 4);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(32, 23);
+            this.buttonUp.TabIndex = 10;
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
             // 
             // DocumentForm
             // 
@@ -429,5 +454,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxTriggersAfterSave;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button buttonDown;
+        private System.Windows.Forms.Button buttonUp;
     }
 }

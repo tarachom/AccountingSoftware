@@ -294,5 +294,54 @@ namespace Configurator
 				}
 			}
 		}
+
+		private void RewriteConfDictionaryFields()
+		{
+			//Новий словник полів
+			Dictionary<string, ConfigurationObjectField> newFields = new Dictionary<string, ConfigurationObjectField>();
+
+			//Прохід по полях в списку і копіювання в новий словник
+			foreach (string field in listBoxFields.Items)
+				newFields.Add(field, ConfDocument.Fields[field]);
+
+			//Очищення словника полів конфігурації
+			ConfDocument.Fields.Clear();
+
+			//Копіювання з нового словника в словник конфігурації
+			foreach (KeyValuePair<string, ConfigurationObjectField> item in newFields)
+				ConfDocument.Fields.Add(item.Key, item.Value);
+		}
+
+		private void buttonUp_Click(object sender, EventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null && listBoxFields.SelectedIndex > 0)
+			{
+				object selectedItem = listBoxFields.SelectedItem;
+				int selectIndex = listBoxFields.SelectedIndex;
+
+				listBoxFields.Items.RemoveAt(selectIndex);
+				listBoxFields.Items.Insert(selectIndex - 1, selectedItem);
+
+				listBoxFields.SelectedItem = selectedItem;
+
+				RewriteConfDictionaryFields();
+			}
+		}
+
+		private void buttonDown_Click(object sender, EventArgs e)
+		{
+			if (listBoxFields.SelectedItem != null && listBoxFields.SelectedIndex < listBoxFields.Items.Count - 1)
+			{
+				object selectedItem = listBoxFields.SelectedItem;
+				int selectIndex = listBoxFields.SelectedIndex;
+
+				listBoxFields.Items.RemoveAt(selectIndex);
+				listBoxFields.Items.Insert(selectIndex + 1, selectedItem);
+
+				listBoxFields.SelectedItem = selectedItem;
+
+				RewriteConfDictionaryFields();
+			}
+		}
 	}
 }

@@ -412,7 +412,6 @@ namespace Configurator
 				ConfDirectory.Fields.Add(item.Key, item.Value);
 		}
 
-
 		private void buttonUp_Click(object sender, EventArgs e)
         {
 			if (listBoxFields.SelectedItem != null && listBoxFields.SelectedIndex > 0)

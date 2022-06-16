@@ -34,11 +34,6 @@
             this.contextMenuStripField = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.copyFiled = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.listBoxViews = new System.Windows.Forms.ListBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.buttonAddView = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.listBoxTabularParts = new System.Windows.Forms.ListBox();
             this.contextMenuStripTablePart = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -74,8 +69,6 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.contextMenuStripField.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.panel8.SuspendLayout();
-            this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.contextMenuStripTablePart.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -96,7 +89,7 @@
             this.listBoxFields.FormattingEnabled = true;
             this.listBoxFields.Location = new System.Drawing.Point(0, 0);
             this.listBoxFields.Name = "listBoxFields";
-            this.listBoxFields.Size = new System.Drawing.Size(266, 236);
+            this.listBoxFields.Size = new System.Drawing.Size(266, 342);
             this.listBoxFields.TabIndex = 0;
             this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
             this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
@@ -117,8 +110,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.panel8);
-            this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.panel6);
             this.panel1.Controls.Add(this.panel5);
@@ -129,62 +120,13 @@
             this.panel1.Size = new System.Drawing.Size(266, 533);
             this.panel1.TabIndex = 1;
             // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.listBoxViews);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(0, 426);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(266, 107);
-            this.panel8.TabIndex = 10;
-            // 
-            // listBoxViews
-            // 
-            this.listBoxViews.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxViews.Enabled = false;
-            this.listBoxViews.FormattingEnabled = true;
-            this.listBoxViews.Location = new System.Drawing.Point(0, 0);
-            this.listBoxViews.Name = "listBoxViews";
-            this.listBoxViews.Size = new System.Drawing.Size(266, 107);
-            this.listBoxViews.TabIndex = 0;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.buttonAddView);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 396);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(266, 30);
-            this.panel3.TabIndex = 9;
-            // 
-            // buttonAddView
-            // 
-            this.buttonAddView.Enabled = false;
-            this.buttonAddView.Location = new System.Drawing.Point(105, 3);
-            this.buttonAddView.Name = "buttonAddView";
-            this.buttonAddView.Size = new System.Drawing.Size(55, 23);
-            this.buttonAddView.TabIndex = 8;
-            this.buttonAddView.Text = "Додати";
-            this.buttonAddView.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Enabled = false;
-            this.label6.Location = new System.Drawing.Point(5, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 13);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Візуалізації";
-            // 
             // panel7
             // 
+            this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel7.Controls.Add(this.listBoxTabularParts);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel7.Location = new System.Drawing.Point(0, 296);
+            this.panel7.Location = new System.Drawing.Point(0, 407);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(266, 100);
+            this.panel7.Size = new System.Drawing.Size(266, 123);
             this.panel7.TabIndex = 1;
             // 
             // listBoxTabularParts
@@ -194,7 +136,7 @@
             this.listBoxTabularParts.FormattingEnabled = true;
             this.listBoxTabularParts.Location = new System.Drawing.Point(0, 0);
             this.listBoxTabularParts.Name = "listBoxTabularParts";
-            this.listBoxTabularParts.Size = new System.Drawing.Size(266, 100);
+            this.listBoxTabularParts.Size = new System.Drawing.Size(266, 123);
             this.listBoxTabularParts.TabIndex = 1;
             this.listBoxTabularParts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxTabularParts_KeyDown);
             this.listBoxTabularParts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxTabularParts_MouseDoubleClick);
@@ -215,10 +157,10 @@
             // 
             // panel6
             // 
+            this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel6.Controls.Add(this.buttonAddTablePart);
             this.panel6.Controls.Add(this.label2);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel6.Location = new System.Drawing.Point(0, 266);
+            this.panel6.Location = new System.Drawing.Point(0, 375);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(266, 30);
             this.panel6.TabIndex = 4;
@@ -244,11 +186,12 @@
             // 
             // panel5
             // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.panel5.Controls.Add(this.listBoxFields);
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(0, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(266, 236);
+            this.panel5.Size = new System.Drawing.Size(266, 342);
             this.panel5.TabIndex = 2;
             // 
             // panel4
@@ -356,7 +299,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(15, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 115);
+            this.groupBox1.Size = new System.Drawing.Size(529, 221);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -541,9 +484,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DirectoryForm_KeyDown);
             this.contextMenuStripField.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.contextMenuStripTablePart.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
@@ -586,11 +526,6 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.Button buttonAddField;
 		private System.Windows.Forms.Button buttonAddTablePart;
-		private System.Windows.Forms.Panel panel3;
-		private System.Windows.Forms.Button buttonAddView;
-		private System.Windows.Forms.Label label6;
-		private System.Windows.Forms.Panel panel8;
-		private System.Windows.Forms.ListBox listBoxViews;
 		private System.Windows.Forms.ComboBox comboBoxHierarchical;
 		private System.Windows.Forms.Label label7;
 		private System.Windows.Forms.CheckBox checkBoxHierarchical;
