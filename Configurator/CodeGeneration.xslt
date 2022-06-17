@@ -512,7 +512,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:call-template name="CommentSummary" />
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
-        public const string Table = "<xsl:value-of select="Table"/>";
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -884,7 +884,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:call-template name="CommentSummary" />
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
-        public const string Table = "<xsl:value-of select="Table"/>";
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -1013,7 +1013,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		
 		public string GetPresentation()
         {
-		    return "<xsl:value-of select="$DocumentName"/> " + base.BasePresentation(
+		    return base.BasePresentation(
 				<xsl:text>new string[] { </xsl:text>
                  <xsl:for-each select="Fields/Field[IsPresentation=1]">
                    <xsl:if test="position() != 1">
@@ -1199,7 +1199,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     <xsl:call-template name="CommentSummary" />
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
-        public const string Table = "<xsl:value-of select="Table"/>";
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
@@ -1378,7 +1378,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
     <xsl:call-template name="CommentSummary" />
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
-        public const string Table = "<xsl:value-of select="Table"/>";
+        public const string TABLE = "<xsl:value-of select="Table"/>";
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
