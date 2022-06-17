@@ -510,6 +510,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
     <xsl:call-template name="CommentSummary" />
+    public static class <xsl:value-of select="$DirectoryName"/>_Const
+    {
+        public const string Table = "<xsl:value-of select="Table"/>";
+        <xsl:for-each select="Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+    }
+	
+    <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -685,10 +693,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:text>, </xsl:text>
               </xsl:if>
               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
-            </xsl:for-each> }-->) { }
-        <xsl:for-each select="Fields/Field">
-        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
-        
+            </xsl:for-each> }-->) { }        
         public bool Select() { return base.BaseSelect(); }
         
         public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
@@ -876,7 +881,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
-    
+    <xsl:call-template name="CommentSummary" />
+    public static class <xsl:value-of select="$DocumentName"/>_Const
+    {
+        public const string Table = "<xsl:value-of select="Table"/>";
+        <xsl:for-each select="Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+    }
+	
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
@@ -1027,10 +1039,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect, IDisposable
-    {
-        <xsl:for-each select="Fields/Field">
-        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
-		
+    {		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
         
         public bool Select() { return base.BaseSelect(); }
@@ -1187,7 +1196,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    
+    <xsl:call-template name="CommentSummary" />
+    public static class <xsl:value-of select="$RegisterName"/>_Const
+    {
+        public const string Table = "<xsl:value-of select="Table"/>";
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+    }
+	
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
     {
@@ -1204,8 +1220,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             Records = new List&lt;Record&gt;();
             Filter = new SelectFilter();
         }
-        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
 		
         public List&lt;Record&gt; Records { get; set; }
         
@@ -1361,7 +1375,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
     <xsl:for-each select="Configuration/RegistersAccumulation/RegisterAccumulation">
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    
+    <xsl:call-template name="CommentSummary" />
+    public static class <xsl:value-of select="$RegisterName"/>_Const
+    {
+        public const string Table = "<xsl:value-of select="Table"/>";
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
+    }
+	
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterAccumulationRecordsSet
     {
@@ -1378,8 +1399,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             Records = new List&lt;Record&gt;();
             Filter = new SelectFilter();
         }
-        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-        public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
 		
         public List&lt;Record&gt; Records { get; set; }
         
