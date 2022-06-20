@@ -432,7 +432,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 
                     <xsl:for-each select="Fields/Field">
                         <xsl:text>fieldValue.Add("</xsl:text>
-                        <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                        <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+						<xsl:if test="Type = 'enum'">
+						    <xsl:text>(int)</xsl:text>
+					    </xsl:if>
+						<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
                         <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -679,21 +683,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect, IDisposable
     {
-        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>"<!--,
-            <xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="Fields/Field">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
-            </xsl:for-each> },
-            <xsl:text>new string[] { </xsl:text>
-            <xsl:for-each select="Fields/Field">
-              <xsl:if test="position() != 1">
-                <xsl:text>, </xsl:text>
-              </xsl:if>
-              <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
-            </xsl:for-each> }-->) { }        
+        public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }        
         public bool Select() { return base.BaseSelect(); }
         
         public bool SelectSingle() { if (base.BaseSelectSingle()) { MoveNext(); return true; } else { Current = null; return false; } }
@@ -782,7 +772,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>fieldValue.Add("</xsl:text>
-                    <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+					<xsl:if test="Type = 'enum'">
+						<xsl:text>(int)</xsl:text>
+					</xsl:if>
+					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
                     <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -798,7 +792,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         
         public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
         
         <xsl:call-template name="CommentSummary" />
@@ -1116,7 +1112,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
                 <xsl:for-each select="Fields/Field">
                     <xsl:text>fieldValue.Add("</xsl:text>
-                    <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+					<xsl:if test="Type = 'enum'">
+						<xsl:text>(int)</xsl:text>
+					</xsl:if>
+					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
                     <xsl:when test="Type = 'pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
@@ -1135,7 +1135,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         
         public void Delete()
         {
+            base.BaseBeginTransaction();
             base.BaseDelete(Owner.UnigueID);
+            base.BaseCommitTransaction();
         }
         
         <xsl:call-template name="CommentSummary" />
@@ -1300,7 +1302,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
 
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                      <xsl:if test="Type = 'enum'">
+                         <xsl:text>(int)</xsl:text>      
+                      </xsl:if>
+					  <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
                       </xsl:if>
@@ -1477,7 +1483,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
 
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", record.</xsl:text><xsl:value-of select="Name"/>
+                      <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                      <xsl:if test="Type = 'enum'">
+                         <xsl:text>(int)</xsl:text>      
+                      </xsl:if>
+					  <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                       <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
                       </xsl:if>

@@ -1156,6 +1156,7 @@ namespace AccountingSoftware
 			foreach (string field in fieldArray)
 			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+				//Console.WriteLine(fieldValue[field]);
 			}
 
 			nCommand.ExecuteNonQuery();
