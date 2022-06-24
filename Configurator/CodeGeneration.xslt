@@ -1025,10 +1025,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             return new <xsl:value-of select="$DocumentName"/>_Pointer();
         }
 		
-        public <xsl:value-of select="$DocumentName"/>_Objest GetDocumentObject()
+        public <xsl:value-of select="$DocumentName"/>_Objest GetDocumentObject(bool readAllTablePart = false)
         {
             <xsl:value-of select="$DocumentName"/>_Objest <xsl:value-of select="$DocumentName"/>ObjestItem = new <xsl:value-of select="$DocumentName"/>_Objest();
             <xsl:value-of select="$DocumentName"/>ObjestItem.Read(base.UnigueID);
+			<xsl:if test="count(TabularParts/TablePart) != 0">
+			if (readAllTablePart)
+			{   
+				<xsl:for-each select="TabularParts/TablePart">
+					<xsl:value-of select="$DocumentName"/>ObjestItem.<xsl:value-of select="concat(Name, '_TablePart')"/>.Read();</xsl:for-each>
+			}
+			</xsl:if>
             return <xsl:value-of select="$DocumentName"/>ObjestItem;
         }
     }
