@@ -1146,7 +1146,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             base.BaseDelete(Owner.UnigueID);
             base.BaseCommitTransaction();
         }
-        
+
+        public List&lt;Record&gt; Copy()
+        {
+            List&lt;Record&gt; copyRecords = new List&lt;Record&gt;();
+            copyRecords = Records;
+
+            foreach (Record copyRecordItem in copyRecords)
+                copyRecordItem.UID = Guid.Empty;
+
+            return copyRecords;
+        }
         <xsl:call-template name="CommentSummary" />
         public class Record : DocumentTablePartRecord
         {
