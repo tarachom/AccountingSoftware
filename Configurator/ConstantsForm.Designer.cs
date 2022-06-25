@@ -130,10 +130,10 @@
             // panel7
             // 
             this.panel7.Controls.Add(this.listBoxTabularParts);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel7.Location = new System.Drawing.Point(0, 30);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(211, 142);
+            this.panel7.Size = new System.Drawing.Size(211, 362);
             this.panel7.TabIndex = 6;
             // 
             // listBoxTabularParts
@@ -142,7 +142,7 @@
             this.listBoxTabularParts.FormattingEnabled = true;
             this.listBoxTabularParts.Location = new System.Drawing.Point(0, 0);
             this.listBoxTabularParts.Name = "listBoxTabularParts";
-            this.listBoxTabularParts.Size = new System.Drawing.Size(211, 142);
+            this.listBoxTabularParts.Size = new System.Drawing.Size(211, 362);
             this.listBoxTabularParts.TabIndex = 1;
             this.listBoxTabularParts.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxTabularParts_KeyDown);
             this.listBoxTabularParts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxTabularParts_MouseDoubleClick);

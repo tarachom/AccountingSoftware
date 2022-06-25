@@ -378,7 +378,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             <xsl:variable name="TablePartName" select="Name"/>
             <xsl:variable name="TablePartFullName" select="concat($ConstantsName, '_', $TablePartName)"/>
         
-        <xsl:call-template name="CommentSummary" />
+        <!--<xsl:call-template name="CommentSummary" />-->
         public class <xsl:value-of select="$TablePartFullName"/>_TablePart : ConstantsTablePart
         {
             public <xsl:value-of select="$TablePartFullName"/>_TablePart() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
