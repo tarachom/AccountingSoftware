@@ -392,7 +392,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
             {
                 Records = new List&lt;Record&gt;();
             }
-                
+            
+            public const string TABLE = "<xsl:value-of select="Table"/>";
+            <xsl:for-each select="Fields/Field">
+            public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
             public List&lt;Record&gt; Records { get; set; }
         
             public void Read()
