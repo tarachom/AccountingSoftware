@@ -285,7 +285,11 @@ namespace AccountingSoftware
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Empty));
 			nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue));
 
+			BeginTransaction();
+
 			nCommand.ExecuteNonQuery();
+
+			CommitTransaction();
 		}
 
 		public void SelectConstantsTablePartRecords(string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
