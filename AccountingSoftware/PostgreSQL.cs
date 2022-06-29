@@ -925,6 +925,7 @@ namespace AccountingSoftware
 
 			return presentation;
 		}
+
 		public void SelectDocumentTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = "SELECT uid";

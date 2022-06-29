@@ -618,7 +618,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-			base.BaseDelete();
+			base.BaseDelete(<xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="TabularParts/TablePart">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
+             </xsl:for-each> });
         }
         
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
@@ -971,7 +977,13 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		    <xsl:if test="normalize-space(TriggerFunctions/BeforeDelete) != ''">
                 <xsl:value-of select="TriggerFunctions/BeforeDelete"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-            base.BaseDelete();
+            base.BaseDelete(<xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="TabularParts/TablePart">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
+             </xsl:for-each> });
         }
         
         public <xsl:value-of select="$DocumentName"/>_Pointer GetDocumentPointer()

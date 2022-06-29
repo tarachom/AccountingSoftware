@@ -140,9 +140,19 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Видалення з бази даних
 		/// </summary>
-		protected void BaseDelete()
+		protected void BaseDelete(string[] tablePartsTables)
 		{
+			Kernel.DataBase.BeginTransaction();
+
+			//Видалити сам елемент
 			Kernel.DataBase.DeleteDirectoryObject(UnigueID, Table);
+
+			//Видалення даних з табличних частин
+			foreach (string tablePartsTable in tablePartsTables)
+				Kernel.DataBase.DeleteDirectoryTablePartRecords(UnigueID, tablePartsTable);
+
+			Kernel.DataBase.CommitTransaction();
+						
 			BaseClear();
 		}
 	}
