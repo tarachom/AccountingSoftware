@@ -38,7 +38,6 @@ namespace AccountingSoftware
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
-			//Views = new Dictionary<string, ConfigurationObjectView>();
 			TriggerFunctions = new ConfigurationTriggerFunctions();
 		}
 
@@ -66,11 +65,6 @@ namespace AccountingSoftware
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
 
 		/// <summary>
-		/// Візуалізації
-		/// </summary>
-		//public Dictionary<string, ConfigurationObjectView> Views { get; }
-
-		/// <summary>
 		/// Тригери
 		/// </summary>
 		public ConfigurationTriggerFunctions TriggerFunctions { get; set; }
@@ -92,14 +86,5 @@ namespace AccountingSoftware
 		{
 			TabularParts.Add(tablePart.Name, tablePart);
 		}
-
-		/// <summary>
-		/// Додати нову візуалізацію
-		/// </summary>
-		/// <param name="view">Нова візуалізація</param>
-		//public void AppendView(ConfigurationObjectView view)
-		//{
-		//	Views.Add(view.Name, view);
-		//}
 	}
 }

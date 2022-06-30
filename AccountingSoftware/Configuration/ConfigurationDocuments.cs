@@ -70,7 +70,7 @@ namespace AccountingSoftware
 		public ConfigurationTriggerFunctions TriggerFunctions { get; set; }
 
 		/// <summary>
-		/// Функції проведення/очищення проводок документу
+		/// Функції (проведення/очищення проводок) документу
 		/// </summary>
 		public ConfigurationSpendFunctions SpendFunctions { get; set; }
 
