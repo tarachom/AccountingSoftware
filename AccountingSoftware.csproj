@@ -67,6 +67,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectField.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObject.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationObjectDefaultValue.cs" />
+    <Compile Include="AccountingSoftware\Configuration\ConfigurationSpendFunctions.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationTriggerFunctions.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePart.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePartRecord.cs" />

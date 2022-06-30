@@ -38,6 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.buttonDown = new System.Windows.Forms.Button();
+            this.buttonUp = new System.Windows.Forms.Button();
             this.buttonAddField = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -57,8 +59,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonDown = new System.Windows.Forms.Button();
-            this.buttonUp = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxSpendTheDocument = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxClearSpendTheDocument = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -70,6 +75,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxFields
@@ -166,6 +172,26 @@
             this.panel4.Size = new System.Drawing.Size(266, 30);
             this.panel4.TabIndex = 3;
             // 
+            // buttonDown
+            // 
+            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
+            this.buttonDown.Location = new System.Drawing.Point(231, 4);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(32, 23);
+            this.buttonDown.TabIndex = 11;
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            // 
+            // buttonUp
+            // 
+            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
+            this.buttonUp.Location = new System.Drawing.Point(193, 4);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(32, 23);
+            this.buttonUp.TabIndex = 10;
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
+            // 
             // buttonAddField
             // 
             this.buttonAddField.Location = new System.Drawing.Point(44, 4);
@@ -233,6 +259,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
             this.splitContainer1.Panel2.Controls.Add(this.label5);
@@ -256,7 +283,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(14, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 245);
+            this.groupBox1.Size = new System.Drawing.Size(529, 104);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -370,25 +397,56 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
-            // buttonDown
+            // groupBox2
             // 
-            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
-            this.buttonDown.Location = new System.Drawing.Point(231, 4);
-            this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Size = new System.Drawing.Size(32, 23);
-            this.buttonDown.TabIndex = 11;
-            this.buttonDown.UseVisualStyleBackColor = true;
-            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBoxSpendTheDocument);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.textBoxClearSpendTheDocument);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(15, 261);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(529, 80);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Функції обробки проведення документу";
             // 
-            // buttonUp
+            // textBoxSpendTheDocument
             // 
-            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
-            this.buttonUp.Location = new System.Drawing.Point(193, 4);
-            this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Size = new System.Drawing.Size(32, 23);
-            this.buttonUp.TabIndex = 10;
-            this.buttonUp.UseVisualStyleBackColor = true;
-            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
+            this.textBoxSpendTheDocument.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSpendTheDocument.Location = new System.Drawing.Point(119, 19);
+            this.textBoxSpendTheDocument.Name = "textBoxSpendTheDocument";
+            this.textBoxSpendTheDocument.Size = new System.Drawing.Size(404, 20);
+            this.textBoxSpendTheDocument.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Проведення:";
+            // 
+            // textBoxClearSpendTheDocument
+            // 
+            this.textBoxClearSpendTheDocument.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxClearSpendTheDocument.Location = new System.Drawing.Point(119, 45);
+            this.textBoxClearSpendTheDocument.Name = "textBoxClearSpendTheDocument";
+            this.textBoxClearSpendTheDocument.Size = new System.Drawing.Size(404, 20);
+            this.textBoxClearSpendTheDocument.TabIndex = 10;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Очистка:";
             // 
             // DocumentForm
             // 
@@ -420,6 +478,8 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
 		}
@@ -456,5 +516,10 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox textBoxSpendTheDocument;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxClearSpendTheDocument;
+        private System.Windows.Forms.Label label11;
     }
 }

@@ -870,42 +870,6 @@ namespace AccountingSoftware
 			}
 		}
 
-		/*
-		private static void LoadViews(Dictionary<string, ConfigurationObjectView> views, XPathNavigator xPathDocNavigator)
-		{
-			XPathNodeIterator viewNodes = xPathDocNavigator.Select("Views/View");
-			while (viewNodes.MoveNext())
-			{
-				string nameView = viewNodes.Current.SelectSingleNode("Name").Value;
-				string tableView = viewNodes.Current.SelectSingleNode("Table").Value;
-				string descView = viewNodes.Current.SelectSingleNode("Desc").Value;
-
-				ConfigurationObjectView ConfObjectView = new ConfigurationObjectView(nameView, tableView, descView);
-
-				views.Add(ConfObjectView.Name, ConfObjectView);
-
-				XPathNodeIterator fieldNodes = viewNodes.Current.Select("Fields/Field");
-				while (fieldNodes.MoveNext())
-				{
-					string nameField = fieldNodes.Current.SelectSingleNode("Name").Value;
-					string nameInTableField = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
-
-					ConfObjectView.Fields.Add(nameField, nameInTableField);
-				}
-
-				//
-				//XPathNodeIterator fieldWhere = viewNodes.Current.Select("Where/Field");
-				//while (fieldWhere.MoveNext())
-				//{
-				//	string nameInTableField = fieldWhere.Current.SelectSingleNode("NameInTable").Value;
-
-				//	ConfObjectView.Where.Add(nameInTableField);
-				//}
-				//
-			}
-		} 
-		*/
-
 		private static void LoadTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XPathNavigator xPathDocNavigator)
 		{
 			XPathNavigator nodeTriggerFunctions = xPathDocNavigator.SelectSingleNode("TriggerFunctions");
@@ -918,6 +882,17 @@ namespace AccountingSoftware
 
 			XPathNavigator nodeBeforeDelete = nodeTriggerFunctions.SelectSingleNode("BeforeDelete");
 			triggerFunctions.BeforeDelete = nodeBeforeDelete.Value;
+		}
+
+		private static void LoadSpendFunctions(ConfigurationSpendFunctions spendFunctions, XPathNavigator xPathDocNavigator)
+		{
+			XPathNavigator nodeSpendFunctions = xPathDocNavigator.SelectSingleNode("SpendFunctions");
+
+			XPathNavigator nodeSpend = nodeSpendFunctions.SelectSingleNode("Spend");
+			spendFunctions.Spend = nodeSpend.Value;
+
+			XPathNavigator nodeClearSpend = nodeSpendFunctions.SelectSingleNode("ClearSpend");
+			spendFunctions.ClearSpend = nodeClearSpend.Value;
 		}
 
 		public static void LoadEnums(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -965,6 +940,8 @@ namespace AccountingSoftware
 				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
 
 				LoadTriggerFunctions(configurationDocuments.TriggerFunctions, documentsNode.Current);
+
+				//LoadSpendFunctions(configurationDocuments.SpendFunctions, documentsNode.Current);
 			}
 		}
 
@@ -1252,68 +1229,6 @@ namespace AccountingSoftware
 			}
 		}
 
-		/*
-		private static void SaveViews(Dictionary<string, ConfigurationObjectView> views, ConfigurationDirectories confDirectory, XmlDocument xmlConfDocument, XmlElement rootNode)
-		{
-			XmlElement nodeViews = xmlConfDocument.CreateElement("Views");
-			rootNode.AppendChild(nodeViews);
-
-			foreach (KeyValuePair<string, ConfigurationObjectView> view in views)
-			{
-				XmlElement nodeView = xmlConfDocument.CreateElement("View");
-				nodeViews.AppendChild(nodeView);
-
-				XmlElement nodeViewName = xmlConfDocument.CreateElement("Name");
-				nodeViewName.InnerText = view.Key;
-				nodeView.AppendChild(nodeViewName);
-
-				XmlElement nodeViewTable = xmlConfDocument.CreateElement("Table");
-				nodeViewTable.InnerText = view.Value.Table;
-				nodeView.AppendChild(nodeViewTable);
-
-				XmlElement nodeTablePartDesc = xmlConfDocument.CreateElement("Desc");
-				nodeTablePartDesc.InnerText = view.Value.Desc;
-				nodeView.AppendChild(nodeTablePartDesc);
-
-				XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
-				nodeView.AppendChild(nodeFields);
-
-				foreach (KeyValuePair<string, string> field in view.Value.Fields)
-				{
-					XmlElement nodeField = xmlConfDocument.CreateElement("Field");
-					nodeFields.AppendChild(nodeField);
-
-					XmlElement nodeFieldName = xmlConfDocument.CreateElement("Name");
-					nodeFieldName.InnerText = field.Key;
-					nodeField.AppendChild(nodeFieldName);
-
-					XmlElement nodeFieldNameInTable = xmlConfDocument.CreateElement("NameInTable");
-					nodeFieldNameInTable.InnerText = field.Value;
-					nodeField.AppendChild(nodeFieldNameInTable);
-
-					foreach (ConfigurationObjectField configurationObjectField in confDirectory.Fields.Values)
-					{
-						if (configurationObjectField.NameInTable == field.Value)
-						{
-							XmlElement nodeFieldType = xmlConfDocument.CreateElement("Type");
-							nodeFieldType.InnerText = configurationObjectField.Type;
-							nodeField.AppendChild(nodeFieldType);
-
-							if (configurationObjectField.Type == "pointer" || configurationObjectField.Type == "enum")
-							{
-								XmlElement nodeFieldPointer = xmlConfDocument.CreateElement("Pointer");
-								nodeFieldPointer.InnerText = configurationObjectField.Pointer;
-								nodeField.AppendChild(nodeFieldPointer);
-							}
-
-							break;
-						}
-					}
-				}
-			}
-		}
-		*/
-
 		private static void SaveTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
 			XmlElement nodeTriggerFunctions = xmlConfDocument.CreateElement("TriggerFunctions");
@@ -1330,6 +1245,20 @@ namespace AccountingSoftware
 			XmlElement nodeBeforeDelete = xmlConfDocument.CreateElement("BeforeDelete");
 			nodeBeforeDelete.InnerText = triggerFunctions.BeforeDelete;
 			nodeTriggerFunctions.AppendChild(nodeBeforeDelete);
+		}
+
+		private static void SaveSpendFunctions(ConfigurationSpendFunctions spendFunctions, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement nodeSpendFunctions = xmlConfDocument.CreateElement("SpendFunctions");
+			rootNode.AppendChild(nodeSpendFunctions);
+
+			XmlElement nodeSpend = xmlConfDocument.CreateElement("Spend");
+			nodeSpend.InnerText = spendFunctions.Spend;
+			nodeSpendFunctions.AppendChild(nodeSpend);
+
+			XmlElement nodeClearSpend = xmlConfDocument.CreateElement("ClearSpend");
+			nodeClearSpend.InnerText = spendFunctions.ClearSpend;
+			nodeSpendFunctions.AppendChild(nodeClearSpend);
 		}
 
 		private static void SaveEnums(Dictionary<string, ConfigurationEnums> enums, XmlDocument xmlConfDocument, XmlElement rootNode)
@@ -1404,6 +1333,8 @@ namespace AccountingSoftware
 				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
 
 				SaveTriggerFunctions(ConfDocument.Value.TriggerFunctions, xmlConfDocument, nodeDocument);
+
+				SaveSpendFunctions(ConfDocument.Value.SpendFunctions, xmlConfDocument, nodeDocument);
 			}
 		}
 

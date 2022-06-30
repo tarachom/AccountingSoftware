@@ -38,6 +38,7 @@ namespace AccountingSoftware
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
 			TriggerFunctions = new ConfigurationTriggerFunctions();
+			SpendFunctions = new ConfigurationSpendFunctions();
 		}
 
 		/// <summary>
@@ -67,6 +68,11 @@ namespace AccountingSoftware
 		/// Тригери
 		/// </summary>
 		public ConfigurationTriggerFunctions TriggerFunctions { get; set; }
+
+		/// <summary>
+		/// Функції проведення/очищення проводок документу
+		/// </summary>
+		public ConfigurationSpendFunctions SpendFunctions { get; set; }
 
 		/// <summary>
 		/// Додати нове поле в список полів
