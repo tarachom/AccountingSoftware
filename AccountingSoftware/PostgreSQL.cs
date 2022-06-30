@@ -767,14 +767,12 @@ namespace AccountingSoftware
 
 		#region Document
 
-		public bool SelectDocumentObject(DocumentObject documentObject/*??*/, UnigueID unigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public bool SelectDocumentObject(UnigueID unigueID, ref bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "SELECT uid ";
+			string query = "SELECT uid, spend ";
 
 			foreach (string field in fieldArray)
-			{
 				query += ", " + field;
-			}
 
 			query += " FROM " + table + " WHERE uid = @uid";
 
@@ -789,6 +787,8 @@ namespace AccountingSoftware
 
 			while (reader.Read())
 			{
+				spend = (bool)reader["spend"];
+
 				foreach (string field in fieldArray)
 				{
 					fieldValue[field] = reader[field];
@@ -799,10 +799,10 @@ namespace AccountingSoftware
 			return isSelectDocumentObject;
 		}
 
-		public void InsertDocumentObject(DocumentObject documentObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "uid";
-			string query_values = "@uid";
+			string query_field = "uid, spend";
+			string query_values = "@uid, @spend";
 
 			foreach (string field in fieldArray)
 			{
@@ -813,42 +813,30 @@ namespace AccountingSoftware
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", documentObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("spend", spend));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
 
-			//Console.WriteLine(query);
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void UpdateDocumentObject(DocumentObject documentObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void UpdateDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "UPDATE " + table + " SET ";
-
-			int count = 0;
+			string query = "UPDATE " + table + " SET spend = @spend";
 
 			foreach (string field in fieldArray)
-			{
-				if (count > 0) query += ", ";
-				query += field + " = @" + field;
-
-				count++;
-			}
+				query += ", " + field + " = @" + field;
 
 			query += " WHERE uid = @uid";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", documentObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("spend", spend));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
-
-			//Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}

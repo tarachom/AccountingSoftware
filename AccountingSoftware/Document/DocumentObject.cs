@@ -69,6 +69,11 @@ namespace AccountingSoftware
 		public UnigueID UnigueID { get; private set; }
 
 		/// <summary>
+		/// Документ проведений
+		/// </summary>
+		public bool Spend { get; private set; }
+
+		/// <summary>
 		/// Чи це новий?
 		/// </summary>
 		public bool IsNew { get; private set; }
@@ -80,7 +85,13 @@ namespace AccountingSoftware
 		{
 			UnigueID = new UnigueID(Guid.NewGuid());
 			IsNew = true;
+			IsSave = false;
 		}
+
+		/// <summary>
+		/// Чи вже записаний документ
+		/// </summary>
+		public bool IsSave { get; private set; }
 
 		/// <summary>
 		/// Очистка вн. списку
@@ -103,9 +114,14 @@ namespace AccountingSoftware
 
 			BaseClear();
 
-			if (Kernel.DataBase.SelectDocumentObject(this, uid, Table, FieldArray, FieldValue))
+			bool spend = false;
+
+			if (Kernel.DataBase.SelectDocumentObject(uid, ref spend, Table, FieldArray, FieldValue))
 			{
 				UnigueID = uid;
+				Spend = spend;
+
+				IsSave = true;
 				return true;
 			}
 			else
@@ -119,19 +135,37 @@ namespace AccountingSoftware
 		{
 			if (IsNew)
 			{
-				Kernel.DataBase.InsertDocumentObject(this, Table, FieldArray, FieldValue);
+				Kernel.DataBase.InsertDocumentObject(UnigueID, Spend, Table, FieldArray, FieldValue);
+				IsNew = false;
 			}
 			else
 			{
-				Kernel.DataBase.UpdateDocumentObject(this, Table, FieldArray, FieldValue);
+				if (UnigueID != null)
+					Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, Table, FieldArray, FieldValue);
+				else
+					throw new Exception("Спроба записати неіснуючий документ. Потрібно спочатку створити новий - функція New()");
 			}
 
+			IsSave = true;
+
 			BaseClear();
+		}
+
+		protected void BaseSpend(bool spend)
+        {
+			Spend = spend;
+
+			if (IsSave)
+				//Обновлення поля spend документу, решта полів не зачіпаються
+				Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, Table, new string[] { }, new Dictionary<string, object>());
+			else
+				throw new Exception("Документ спочатку треба записати, а потім вже провести");
 		}
 
 		/// <summary>
 		/// Видалити запис
 		/// </summary>
+		/// <param name="tablePartsTables">Список таблиць табличних частин</param>
 		protected void BaseDelete(string[] tablePartsTables)
 		{
 			Kernel.DataBase.BeginTransaction();

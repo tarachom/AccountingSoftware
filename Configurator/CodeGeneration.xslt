@@ -960,9 +960,22 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 			<xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
-        }
+		}
 
-        public <xsl:value-of select="$DocumentName"/>_Objest Copy()
+		public void SpendTheDocument()
+		{
+            //func
+            BaseSpend(true);
+		}
+
+		public void ClearSpendTheDocument()
+		{
+            //func
+            BaseSpend(false);
+		}
+
+
+		public <xsl:value-of select="$DocumentName"/>_Objest Copy()
         {
             <xsl:value-of select="$DocumentName"/>_Objest copy = new <xsl:value-of select="$DocumentName"/>_Objest();
 			copy.New();

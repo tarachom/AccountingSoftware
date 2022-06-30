@@ -741,8 +741,10 @@ limitations under the License.
                 <xsl:value-of select="$TableName"/>
                 <xsl:text> (</xsl:text>
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
+				<xsl:if test="$TableType = 'Document'">
+					<xsl:text>spend bool NOT NULL, </xsl:text>
+				</xsl:if>
 				<xsl:if test="$TableType = 'RegisterAccumulation'">
-					<!-- Прибуток true, Витрата false -->
 					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
 					<xsl:text>income bool NOT NULL, </xsl:text>
 					<xsl:text>owner uuid NOT NULL, </xsl:text>
@@ -761,6 +763,11 @@ limitations under the License.
 					  <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_', NameInTable, '_idx ON ', $TableName, ' (', NameInTable, ');')"/>
 				  </sql>
 			  </xsl:for-each>
+			  <xsl:if test="$TableType = 'Document'">
+				 <sql>
+					 <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
+				 </sql>
+			  </xsl:if>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">
 				 <sql>
 				    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>

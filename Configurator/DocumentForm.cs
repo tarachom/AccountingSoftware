@@ -55,6 +55,9 @@ namespace Configurator
 				ConfDocument = new ConfigurationDocuments();
 				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
 
+				string newUnigueNameInTable_Назва = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
+				ConfDocument.AppendField(new ConfigurationObjectField("Назва", newUnigueNameInTable_Назва, "string", "", "Назва"));
+
 				string newUnigueNameInTable_ДатаДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
 				ConfDocument.AppendField(new ConfigurationObjectField("ДатаДок", newUnigueNameInTable_ДатаДок, "datetime", "", "ДатаДок"));
 
