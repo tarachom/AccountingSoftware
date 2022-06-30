@@ -976,14 +976,10 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
 		public void ClearSpendTheDocument()
 		{
-            <xsl:choose>
-                <xsl:when test="normalize-space(SpendFunctions/ClearSpend) != ''">
-					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/ClearSpend"/><xsl:text>(this));</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-					<xsl:text>BaseSpend(false);</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
+				<xsl:value-of select="SpendFunctions/ClearSpend"/><xsl:text>(this)</xsl:text>;
+			</xsl:if>
+		    <xsl:text>BaseSpend(false);</xsl:text>
 		}
 
 		public <xsl:value-of select="$DocumentName"/>_Objest Copy()
