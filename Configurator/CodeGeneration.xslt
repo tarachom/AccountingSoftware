@@ -964,16 +964,27 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
 		public void SpendTheDocument()
 		{
-            //func
-            BaseSpend(true);
+            <xsl:choose>
+                <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
+					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this));</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+					<xsl:text>BaseSpend(false);</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
 		}
 
 		public void ClearSpendTheDocument()
 		{
-            //func
-            BaseSpend(false);
+            <xsl:choose>
+                <xsl:when test="normalize-space(SpendFunctions/ClearSpend) != ''">
+					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/ClearSpend"/><xsl:text>(this));</xsl:text>
+                </xsl:when>
+                <xsl:otherwise>
+					<xsl:text>BaseSpend(false);</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
 		}
-
 
 		public <xsl:value-of select="$DocumentName"/>_Objest Copy()
         {

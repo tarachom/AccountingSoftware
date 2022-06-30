@@ -44,15 +44,5 @@ namespace AccountingSoftware
         /// Перед видаленням
         /// </summary>
         public string BeforeDelete { get; set; }
-
-        /// <summary>
-        /// Обробка проведення документу
-        /// </summary>
-        public string Spend { get; set; }
-
-        /// <summary>
-        /// Обробка очищення проводок документу
-        /// </summary>
-        public string ClearSpend { get; set; }
     }
 }
