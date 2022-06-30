@@ -31,21 +31,13 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DirectorySelect
 	{
-		public DirectorySelect(Kernel kernel, string table/*, string[] fieldsNameInTableArray, string[] fieldsNameArray*/)
+		public DirectorySelect(Kernel kernel, string table)
 		{
 			Kernel = kernel;
 			Table = table;
 
 			QuerySelect = new Query(table);
 			BaseSelectList = new List<DirectoryPointer>();
-
-			//Fields = fieldsNameInTableArray;
-
-			//Alias = new Dictionary<string, string>();
-			//for (int i = 0; i < fieldsNameInTableArray.Length; i++)
-			//{
-			//	Alias.Add(fieldsNameArray[i], fieldsNameInTableArray[i]);
-			//}
 		}
 
 		/// <summary>
@@ -85,10 +77,6 @@ namespace AccountingSoftware
 		/// Поточна позиція
 		/// </summary>
 		protected int Position { get; private set; }
-
-		//private string[] Fields { get; set; }
-
-		//public Dictionary<string, string> Alias { get; }
 
 		/// <summary>
 		/// Поточний вказівник
@@ -158,9 +146,6 @@ namespace AccountingSoftware
 		/// <returns>Повертає перший знайдений вказівник</returns>
 		protected DirectoryPointer BaseFindByField(string fieldName, object fieldValue)
 		{
-			//if (!Alias.ContainsKey(fieldName))
-			//	throw new Exception("Поле " + fieldName + " не знайдено!");
-
 			DirectoryPointer directoryPointer = new DirectoryPointer(Kernel, Table);
 
 			Query querySelect = new Query(Table);
@@ -181,9 +166,6 @@ namespace AccountingSoftware
 		/// <returns>Повертає список знайдених вказівників</returns>
 		protected List<DirectoryPointer> BaseFindListByField(string fieldName, object fieldValue, int limit = 0, int offset = 0)
 		{
-			//if (!Alias.ContainsKey(fieldName))
-			//	throw new Exception("Поле " + fieldName + " не знайдено!");
-
 			List<DirectoryPointer> directoryPointerList = new List<DirectoryPointer>();
 
 			Query querySelect = new Query(Table);

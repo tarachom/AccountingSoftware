@@ -1457,7 +1457,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
              </xsl:for-each> }) 
         {
             Records = new List&lt;Record&gt;();
-            Filter = new SelectFilter();
         }
 		
         public List&lt;Record&gt; Records { get; set; }
@@ -1468,39 +1467,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             
             <xsl:variable name="DimensionFieldsCount" select="count(DimensionFields/Fields/Field)" />
             <xsl:if test="$DimensionFieldsCount &gt; 1">bool isExistPreceding = false;</xsl:if>
-            
-            <xsl:for-each select="DimensionFields/Fields/Field">
-            if (Filter.<xsl:value-of select="Name"/> != null)
-            {<xsl:choose>
-              <xsl:when test="position() = 1">
-                base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
-                <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                    <xsl:text>.UnigueID.UGuid</xsl:text>
-                </xsl:if>
-                <xsl:text>, false))</xsl:text>;
-                <xsl:if test="$DimensionFieldsCount &gt; 1">
-                isExistPreceding = true;
-                </xsl:if>
-              </xsl:when>
-              <xsl:otherwise>
-                if (isExistPreceding)
-                    base.BaseFilter.Add(new Where(Comparison.AND, "<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.UnigueID.UGuid</xsl:text>
-                    </xsl:if>
-                    <xsl:text>, false))</xsl:text>;
-                else
-                {
-                    base.BaseFilter.Add(new Where("<xsl:value-of select="NameInTable"/>", Comparison.EQ, Filter.<xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.UnigueID.UGuid</xsl:text>
-                    </xsl:if>
-                    <xsl:text>, false))</xsl:text>;
-                    isExistPreceding = true; 
-                }</xsl:otherwise>
-            </xsl:choose>
-            }
-            </xsl:for-each>
 
             base.BaseRead();
             
@@ -1560,8 +1526,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseDelete(owner);
             base.BaseCommitTransaction();
         }
-
-        public SelectFilter Filter { get; set; }
         
         <xsl:call-template name="CommentSummary" />
         public class Record : RegisterRecord
@@ -1577,28 +1541,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
-              <xsl:text> </xsl:text>
-              <xsl:value-of select="Name"/>
-              <xsl:text> { get; set; </xsl:text>}
-            </xsl:for-each>
-        }
-    
-        public class SelectFilter
-        {
-            public SelectFilter()
-            {
-                 <xsl:for-each select="DimensionFields/Fields/Field">
-                     <xsl:value-of select="Name"/><xsl:text> = null</xsl:text>;
-                 </xsl:for-each>
-            }
-        
-            <xsl:for-each select="DimensionFields/Fields/Field">
-              <xsl:text>public </xsl:text>
-              <xsl:call-template name="FieldType" />
-              <xsl:if test="Type = 'integer' or Type = 'numeric' or Type = 'boolean' or 
-                            Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'enum'">
-                    <xsl:text>?</xsl:text>    
-              </xsl:if>
               <xsl:text> </xsl:text>
               <xsl:value-of select="Name"/>
               <xsl:text> { get; set; </xsl:text>}

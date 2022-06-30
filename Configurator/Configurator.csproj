@@ -120,11 +120,11 @@
     <Compile Include="UnloadingAndLoadingData.Designer.cs">
       <DependentUpon>UnloadingAndLoadingData.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewForm.cs">
+    <None Include="ViewForm.cs_delete">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="ViewForm.Designer.cs">
-      <DependentUpon>ViewForm.cs</DependentUpon>
+      <DependentUpon>ViewForm.cs_delete</DependentUpon>
     </Compile>
     <Compile Include="TablePartForm.cs">
       <SubType>Form</SubType>
@@ -187,7 +187,7 @@
       <DependentUpon>UnloadingAndLoadingData.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm.resx">
-      <DependentUpon>ViewForm.cs</DependentUpon>
+      <DependentUpon>ViewForm.cs_delete</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TablePartForm.resx">
       <DependentUpon>TablePartForm.cs</DependentUpon>

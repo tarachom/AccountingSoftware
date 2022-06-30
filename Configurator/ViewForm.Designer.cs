@@ -1,5 +1,6 @@
 ﻿namespace Configurator
 {
+	/*
 	partial class ViewForm
 	{
 		/// <summary>
@@ -325,4 +326,5 @@
 		private System.Windows.Forms.Label label6;
 		private System.Windows.Forms.Button buttonAddAllField;
 	}
+	*/
 }

@@ -80,7 +80,6 @@ namespace AccountingSoftware
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
-			//JoinValue.Clear();
 		}
 
 		//Зчитування даних
