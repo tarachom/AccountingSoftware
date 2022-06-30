@@ -966,7 +966,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		{
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
-					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/Spend"/><xsl:text>(this));</xsl:text>
+					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/Spend"/>
+					<xsl:text>(this));</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
 					<xsl:text>BaseSpend(false);</xsl:text>
@@ -977,7 +978,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		public void ClearSpendTheDocument()
 		{
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
-				<xsl:value-of select="SpendFunctions/ClearSpend"/><xsl:text>(this)</xsl:text>;
+                <xsl:value-of select="SpendFunctions/ClearSpend"/>
+				<xsl:text>(this); </xsl:text>
 			</xsl:if>
 		    <xsl:text>BaseSpend(false);</xsl:text>
 		}

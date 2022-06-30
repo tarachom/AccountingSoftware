@@ -181,5 +181,20 @@ namespace AccountingSoftware
 
 			BaseClear();
 		}
+
+		protected void BaseBeginTransaction()
+		{
+			Kernel.DataBase.BeginTransaction();
+		}
+
+		protected void BaseCommitTransaction()
+		{
+			Kernel.DataBase.CommitTransaction();
+		}
+
+		protected void BaseRollbackTransaction()
+		{
+			Kernel.DataBase.RollbackTransaction();
+		}
 	}
 }
