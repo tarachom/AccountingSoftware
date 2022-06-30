@@ -60,9 +60,9 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxSpendTheDocument = new System.Windows.Forms.TextBox();
+            this.textBoxSpend = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBoxClearSpendTheDocument = new System.Windows.Forms.TextBox();
+            this.textBoxClearSpend = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -401,9 +401,9 @@
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.textBoxSpendTheDocument);
+            this.groupBox2.Controls.Add(this.textBoxSpend);
             this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBoxClearSpendTheDocument);
+            this.groupBox2.Controls.Add(this.textBoxClearSpend);
             this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Location = new System.Drawing.Point(15, 261);
             this.groupBox2.Name = "groupBox2";
@@ -412,14 +412,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Функції обробки проведення документу";
             // 
-            // textBoxSpendTheDocument
+            // textBoxSpend
             // 
-            this.textBoxSpendTheDocument.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSpendTheDocument.Location = new System.Drawing.Point(119, 19);
-            this.textBoxSpendTheDocument.Name = "textBoxSpendTheDocument";
-            this.textBoxSpendTheDocument.Size = new System.Drawing.Size(404, 20);
-            this.textBoxSpendTheDocument.TabIndex = 12;
+            this.textBoxSpend.Location = new System.Drawing.Point(119, 19);
+            this.textBoxSpend.Name = "textBoxSpend";
+            this.textBoxSpend.Size = new System.Drawing.Size(404, 20);
+            this.textBoxSpend.TabIndex = 12;
             // 
             // label7
             // 
@@ -430,14 +430,14 @@
             this.label7.TabIndex = 11;
             this.label7.Text = "Проведення:";
             // 
-            // textBoxClearSpendTheDocument
+            // textBoxClearSpend
             // 
-            this.textBoxClearSpendTheDocument.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.textBoxClearSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxClearSpendTheDocument.Location = new System.Drawing.Point(119, 45);
-            this.textBoxClearSpendTheDocument.Name = "textBoxClearSpendTheDocument";
-            this.textBoxClearSpendTheDocument.Size = new System.Drawing.Size(404, 20);
-            this.textBoxClearSpendTheDocument.TabIndex = 10;
+            this.textBoxClearSpend.Location = new System.Drawing.Point(119, 45);
+            this.textBoxClearSpend.Name = "textBoxClearSpend";
+            this.textBoxClearSpend.Size = new System.Drawing.Size(404, 20);
+            this.textBoxClearSpend.TabIndex = 10;
             // 
             // label11
             // 
@@ -517,9 +517,9 @@
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonUp;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBoxSpendTheDocument;
+        private System.Windows.Forms.TextBox textBoxSpend;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBoxClearSpendTheDocument;
+        private System.Windows.Forms.TextBox textBoxClearSpend;
         private System.Windows.Forms.Label label11;
     }
 }

@@ -941,7 +941,7 @@ namespace AccountingSoftware
 
 				LoadTriggerFunctions(configurationDocuments.TriggerFunctions, documentsNode.Current);
 
-				//LoadSpendFunctions(configurationDocuments.SpendFunctions, documentsNode.Current);
+				LoadSpendFunctions(configurationDocuments.SpendFunctions, documentsNode.Current);
 			}
 		}
 

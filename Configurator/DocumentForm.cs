@@ -80,6 +80,9 @@ namespace Configurator
 				textBoxTriggersBeforeSave.Text = ConfDocument.TriggerFunctions.BeforeSave;
 				textBoxTriggersBeforeDelete.Text = ConfDocument.TriggerFunctions.BeforeDelete;
 
+				textBoxSpend.Text = ConfDocument.SpendFunctions.Spend;
+				textBoxClearSpend.Text = ConfDocument.SpendFunctions.ClearSpend;
+
 				IsNewDocument = false;
 
 				LoadFieldList();
@@ -114,6 +117,10 @@ namespace Configurator
 			ConfDocument.TriggerFunctions.BeforeSave = textBoxTriggersBeforeSave.Text;
 			ConfDocument.TriggerFunctions.AfterSave = textBoxTriggersAfterSave.Text;
 			ConfDocument.TriggerFunctions.BeforeDelete = textBoxTriggersBeforeDelete.Text;
+
+			//Функції проведення
+			ConfDocument.SpendFunctions.Spend = textBoxSpend.Text;
+			ConfDocument.SpendFunctions.ClearSpend = textBoxClearSpend.Text;
 
 			CallBack.Invoke(OriginalName, ConfDocument, IsNewDocument);
 
