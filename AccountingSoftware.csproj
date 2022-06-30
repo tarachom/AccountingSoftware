@@ -71,7 +71,7 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationTriggerFunctions.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePart.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePartRecord.cs" />
-    <Compile Include="AccountingSoftware\Directory\DirectoryView.cs" />
+    <None Include="AccountingSoftware\Directory\DirectoryView.cs_delete" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePart.cs" />

@@ -47,14 +47,12 @@ namespace AccountingSoftware
 			exception = null;
 
 			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
-			Console.WriteLine(conString);
 
 			Connection = new NpgsqlConnection(conString);
 
 			try
 			{
 				Connection.Open();
-
 				//Start();
 
 				return true;
@@ -69,7 +67,6 @@ namespace AccountingSoftware
 		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
-			//Console.WriteLine(conString);
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -78,7 +75,6 @@ namespace AccountingSoftware
 			try
 			{
 				Connection.Open();
-				//Connection.Close();
 
 				return true;
 			}
@@ -236,7 +232,6 @@ namespace AccountingSoftware
 			}
 
 			query += " FROM " + table + " WHERE uid = @uid";
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", Guid.Empty));
@@ -300,7 +295,6 @@ namespace AccountingSoftware
 				query += ", " + field;
 
 			query += " FROM " + table;
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -330,15 +324,12 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -372,16 +363,8 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
 
-			//Console.WriteLine(Guid.Parse(sender.UID.UID));
-
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-
-				//Console.WriteLine(field + " = " + fields[field]);
-			}
-
-			Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -406,11 +389,7 @@ namespace AccountingSoftware
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", directoryObject.UnigueID.UGuid));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
-
-			Console.WriteLine(query);
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -420,13 +399,9 @@ namespace AccountingSoftware
 			string query = "SELECT uid ";
 
 			foreach (string field in fieldArray)
-			{
 				query += ", " + field;
-			}
 
 			query += " FROM " + table + " WHERE uid = @uid";
-
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
@@ -436,12 +411,9 @@ namespace AccountingSoftware
 			bool isSelectDirectoryObject = reader.HasRows;
 
 			while (reader.Read())
-			{
 				foreach (string field in fieldArray)
-				{
 					fieldValue[field] = reader[field];
-				}
-			}
+
 			reader.Close();
 
 			return isSelectDirectoryObject;
@@ -450,7 +422,6 @@ namespace AccountingSoftware
 		public void DeleteDirectoryObject(UnigueID unigueID, string table)
 		{
 			string query = "DELETE FROM " + table + " WHERE uid = @uid";
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
@@ -461,7 +432,6 @@ namespace AccountingSoftware
 		public void SelectDirectoryPointers(Query QuerySelect, List<DirectoryPointer> listDirectoryPointer)
 		{
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -493,47 +463,38 @@ namespace AccountingSoftware
 		}
 
 		//??? Видалити
-		public string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field)
-		{
-			QuerySelect.Field.Add(field);
-			QuerySelect.Where.Add(new Where("uid", Comparison.EQ, uid));
+		//public string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field)
+		//{
+		//	QuerySelect.Field.Add(field);
+		//	QuerySelect.Where.Add(new Where("uid", Comparison.EQ, uid));
 
-			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
+		//	string query = QuerySelect.Construct();
 
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			nCommand.Parameters.Add(new NpgsqlParameter("uid", uid));
+		//	NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+		//	nCommand.Parameters.Add(new NpgsqlParameter("uid", uid));
 
-			Console.WriteLine("uid = " + uid.ToString());
+		//	string value = "";
 
-			string value = "";
+		//	NpgsqlDataReader reader = nCommand.ExecuteReader();
+		//	if (reader.Read())
+		//		value = reader[field].ToString();
 
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			if (reader.Read())
-			{
-				value = reader[field].ToString();
-				Console.WriteLine(field);
-				Console.WriteLine(value);
-			}
-			reader.Close();
+		//	reader.Close();
 
-			return value;
-		}
+		//	return value;
+		//}
 
 		public bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer)
 		{
 			QuerySelect.Limit = 1;
 
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
 			if (QuerySelect.Where.Count > 0)
-			{
 				foreach (Where field in QuerySelect.Where)
 					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-			}
 
 			bool isFind = false;
 
@@ -557,7 +518,6 @@ namespace AccountingSoftware
 		public string GetDirectoryPresentation(Query QuerySelect, string[] fieldPresentation)
         {
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -568,10 +528,9 @@ namespace AccountingSoftware
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			if (reader.Read())
-			{
 				for (int i = 0; i < fieldPresentation.Length; i++)
 					presentation += (i > 0 ? "/" : "") + reader[fieldPresentation[i]].ToString();
-			}
+
 			reader.Close();
 
 			return presentation;
@@ -584,7 +543,6 @@ namespace AccountingSoftware
 			 	directorySelect.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
 			{
 				string query = "DROP TABLE IF EXISTS " + directorySelect.QuerySelect.TempTable;
-				Console.WriteLine(query);
 
 				NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 				nCommand.ExecuteNonQuery();
@@ -599,8 +557,6 @@ namespace AccountingSoftware
 				query += ", " + field;
 
 			query += " FROM " + table + " WHERE owner = @owner";
-
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
@@ -632,8 +588,6 @@ namespace AccountingSoftware
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
 
-			//Console.WriteLine(query);
-
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
@@ -654,114 +608,106 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public string SelectDirectoryView(DirectoryView directoryView)
-		{
-			string query = directoryView.QuerySelect.Construct();
-			Console.WriteLine(query);
+		//public string SelectDirectoryView(DirectoryView directoryView)
+		//{
+		//	string query = directoryView.QuerySelect.Construct();
 
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+		//	NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			foreach (Where field in directoryView.QuerySelect.Where)
-			{
-				if (field.UsingSQLToValue == false)
-				{
-					nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-					Console.WriteLine(field.Name + " = " + field.Value);
-				}
-			}
+		//	foreach (Where field in directoryView.QuerySelect.Where)
+		//		if (field.UsingSQLToValue == false)
+		//			nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
 
-			if (directoryView.QuerySelect.CreateTempTable == true)
-			{
-				nCommand.ExecuteNonQuery();
+		//	if (directoryView.QuerySelect.CreateTempTable == true)
+		//	{
+		//		nCommand.ExecuteNonQuery();
 
-				query = "SELECT * FROM " + directoryView.QuerySelect.TempTable;
-				nCommand = new NpgsqlCommand(query, Connection);
+		//		query = "SELECT * FROM " + directoryView.QuerySelect.TempTable;
+		//		nCommand = new NpgsqlCommand(query, Connection);
 
-				Console.WriteLine(query);
-			}
+		//	}
 
-			string xml = "<" + directoryView.Name + ">\n";
+		//	string xml = "<" + directoryView.Name + ">\n";
 
-			NpgsqlDataReader reader = nCommand.ExecuteReader();
-			while (reader.Read())
-			{
-				xml += "  <row>\n";
-				xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
+		//	NpgsqlDataReader reader = nCommand.ExecuteReader();
+		//	while (reader.Read())
+		//	{
+		//		xml += "  <row>\n";
+		//		xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
 
-				foreach (string field in directoryView.QuerySelect.Field)
-				{
-					xml += "    <" + directoryView.AliasRevers[field] + ">";
+		//		foreach (string field in directoryView.QuerySelect.Field)
+		//		{
+		//			xml += "    <" + directoryView.AliasRevers[field] + ">";
 
-					switch (directoryView.AliasFieldType[field])
-					{
-						case "string":
-							{
-								xml += "<![CDATA[" + reader[field].ToString() + "]]>";
-								break;
-							}
-						case "integer":
-						case "numeric":
-						case "boolean":
-						case "date":
-						case "datetime":
-						case "time":
-						case "pointer":
-						case "empty_pointer":
-						case "enum":
-							{
-								xml += reader[field].ToString();
-								break;
-							}
-						case "string[]":
-							{
-								string[] mas = (string[])reader[field];
-								foreach (string elem in mas) xml += "<e><![CDATA[" + elem + "]]></e>";
-								break;
-							}
-						case "integer[]":
-							{
-								int[] mas = (int[])reader[field];
-								foreach (int elem in mas) xml += "<e>" + elem.ToString() + "</e>";
-								break;
-							}
-						case "numeric[]":
-							{
-								decimal[] mas = (decimal[])reader[field];
-								foreach (decimal elem in mas) xml += "<e>" + elem.ToString() + "</e>";
-								break;
-							}
-						default:
-							{
-								xml += "<![CDATA[" + reader[field].ToString() + "]]>";
-								break;
-							}
-					}
+		//			switch (directoryView.AliasFieldType[field])
+		//			{
+		//				case "string":
+		//					{
+		//						xml += "<![CDATA[" + reader[field].ToString() + "]]>";
+		//						break;
+		//					}
+		//				case "integer":
+		//				case "numeric":
+		//				case "boolean":
+		//				case "date":
+		//				case "datetime":
+		//				case "time":
+		//				case "pointer":
+		//				case "empty_pointer":
+		//				case "enum":
+		//					{
+		//						xml += reader[field].ToString();
+		//						break;
+		//					}
+		//				case "string[]":
+		//					{
+		//						string[] mas = (string[])reader[field];
+		//						foreach (string elem in mas) xml += "<e><![CDATA[" + elem + "]]></e>";
+		//						break;
+		//					}
+		//				case "integer[]":
+		//					{
+		//						int[] mas = (int[])reader[field];
+		//						foreach (int elem in mas) xml += "<e>" + elem.ToString() + "</e>";
+		//						break;
+		//					}
+		//				case "numeric[]":
+		//					{
+		//						decimal[] mas = (decimal[])reader[field];
+		//						foreach (decimal elem in mas) xml += "<e>" + elem.ToString() + "</e>";
+		//						break;
+		//					}
+		//				default:
+		//					{
+		//						xml += "<![CDATA[" + reader[field].ToString() + "]]>";
+		//						break;
+		//					}
+		//			}
 
-					xml += "</" + directoryView.AliasRevers[field] + ">\n";
-				}
+		//			xml += "</" + directoryView.AliasRevers[field] + ">\n";
+		//		}
 
-				xml += "  </row>\n";
-			}
-			reader.Close();
+		//		xml += "  </row>\n";
+		//	}
+		//	reader.Close();
 
-			xml += "</" + directoryView.Name + ">\n";
+		//	xml += "</" + directoryView.Name + ">\n";
 
-			return xml;
-		}
+		//	return xml;
+		//}
 
-		public void DeleteDirectoryViewTempTable(DirectoryView directoryView)
-		{
-			if (directoryView.QuerySelect.CreateTempTable == true &&
-				directoryView.QuerySelect.TempTable != "" &&
-			 	directoryView.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
-			{
-				string query = "DROP TABLE IF EXISTS " + directoryView.QuerySelect.TempTable;
-				Console.WriteLine(query);
+		//public void DeleteDirectoryViewTempTable(DirectoryView directoryView)
+		//{
+		//	if (directoryView.QuerySelect.CreateTempTable == true &&
+		//		directoryView.QuerySelect.TempTable != "" &&
+		//	 	directoryView.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
+		//	{
+		//		string query = "DROP TABLE IF EXISTS " + directoryView.QuerySelect.TempTable;
 
-				NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-				nCommand.ExecuteNonQueryAsync();
-			}
-		}
+		//		NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+		//		nCommand.ExecuteNonQueryAsync();
+		//	}
+		//}
 
 		#endregion
 
@@ -776,8 +722,6 @@ namespace AccountingSoftware
 
 			query += " FROM " + table + " WHERE uid = @uid";
 
-			//Console.WriteLine(query);
-
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
 
@@ -790,9 +734,7 @@ namespace AccountingSoftware
 				spend = (bool)reader["spend"];
 
 				foreach (string field in fieldArray)
-				{
 					fieldValue[field] = reader[field];
-				}
 			}
 			reader.Close();
 
@@ -854,7 +796,6 @@ namespace AccountingSoftware
 		public void SelectDocumentPointer(Query QuerySelect, List<DocumentPointer> listDocumentPointer)
 		{
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -894,7 +835,6 @@ namespace AccountingSoftware
 		public string GetDocumentPresentation(Query QuerySelect, string[] fieldPresentation)
 		{
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -905,10 +845,9 @@ namespace AccountingSoftware
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			if (reader.Read())
-			{
 				for (int i = 0; i < fieldPresentation.Length; i++)
 					presentation += (i > 0 ? "|" : "") + reader[fieldPresentation[i]].ToString();
-			}
+
 			reader.Close();
 
 			return presentation;
@@ -919,13 +858,9 @@ namespace AccountingSoftware
 			string query = "SELECT uid";
 
 			foreach (string field in fieldArray)
-			{
 				query += ", " + field;
-			}
 
 			query += " FROM " + table + " WHERE owner = @owner";
-
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
@@ -939,9 +874,7 @@ namespace AccountingSoftware
 				fieldValue.Add("uid", reader["uid"]);
 
 				foreach (string field in fieldArray)
-				{
 					fieldValue.Add(field, reader[field]);
-				}
 			}
 			reader.Close();
 		}
@@ -949,7 +882,6 @@ namespace AccountingSoftware
 		public void SelectDocumentTablePartRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList)
 		{
 			string query = QuerySelect.Construct();
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
@@ -985,16 +917,13 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -1002,8 +931,6 @@ namespace AccountingSoftware
 		public void DeleteDocumentTablePartRecords(UnigueID ownerUnigueID, string table)
 		{
 			string query = "DELETE FROM " + table + " WHERE owner = @owner";
-			Console.WriteLine(query);
-			Console.WriteLine(" @owner = " + ownerUnigueID.UGuid);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", ownerUnigueID.UGuid));
@@ -1062,15 +989,12 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-			}
 
 			nCommand.ExecuteNonQuery();
 		}
@@ -1138,7 +1062,6 @@ namespace AccountingSoftware
 			}
 
 			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
-			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
@@ -1147,10 +1070,7 @@ namespace AccountingSoftware
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 
 			foreach (string field in fieldArray)
-			{
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
-				//Console.WriteLine(fieldValue[field]);
-			}
 
 			nCommand.ExecuteNonQuery();
 		}

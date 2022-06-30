@@ -32,15 +32,18 @@ namespace AccountingSoftware
 	public interface IDataBase
 	{
         #region Open
+
         void Open(string connectionString);
 		void Close();
 
 		bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 		bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception);
 		bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase);
+
         #endregion
 
         #region Transaction
+
         void BeginTransaction();
 		void CommitTransaction();
 		void RollbackTransaction();
@@ -67,7 +70,6 @@ namespace AccountingSoftware
 		void DeleteDirectoryObject(UnigueID unigueID, string table);
 
 		void SelectDirectoryPointers(Query QuerySelect, List<DirectoryPointer> listDirectoryPointer);
-		string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field);
 		bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer);
 		string GetDirectoryPresentation(Query QuerySelect, string[] fieldPresentation);
 		void DeleteDirectoryTempTable(DirectorySelect directorySelect);
@@ -75,9 +77,6 @@ namespace AccountingSoftware
 		void SelectDirectoryTablePartRecords(UnigueID ownerUnigueID, string table, string[] fieldArray, List<Dictionary<string, object>> fieldValueList);
 		void InsertDirectoryTablePartRecords(Guid UID, UnigueID ownerUnigueID, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDirectoryTablePartRecords(UnigueID ownerUnigueID, string table);
-
-		//string SelectDirectoryView(DirectoryView directoryView);
-		void DeleteDirectoryViewTempTable(DirectoryView directoryView);
 
 		#endregion
 
