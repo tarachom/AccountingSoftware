@@ -29,21 +29,11 @@ namespace AccountingSoftware
 	/// <summary>
 	/// Запис регістра
 	/// </summary>
-	public abstract class RegisterRecord
+	public abstract class RegisterAccumulationRecord: RegisterRecord
 	{
 		/// <summary>
-		/// Унікальний ідентифікатор
+		/// Прибуток true, Витрата false
 		/// </summary>
-		public Guid UID { get; set; }
-
-		/// <summary>
-		/// Дата запису
-		/// </summary>
-		public DateTime Period { get; set; }
-
-		/// <summary>
-		/// Власник запису
-		/// </summary>
-		public Guid Owner { get; set; }
+		public bool Income { get; set; }
 	}
 }

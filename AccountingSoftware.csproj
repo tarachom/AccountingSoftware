@@ -92,6 +92,8 @@
     <Compile Include="AccountingSoftware\Query.cs" />
     <Compile Include="AccountingSoftware\RegisterAccumulation\RegisterAccumulationRecordsSet.cs" />
     <Compile Include="AccountingSoftware\RegisterInformation\RegisterInformationRecordsSet.cs" />
+    <Compile Include="AccountingSoftware\Register\RegisterInformationRecord.cs" />
+    <Compile Include="AccountingSoftware\Register\RegisterAccumulationRecord.cs" />
     <Compile Include="AccountingSoftware\Register\RegisterRecord.cs" />
     <Compile Include="AccountingSoftware\Register\Register.cs" />
     <Compile Include="AccountingSoftware\Document\Document.cs" />
