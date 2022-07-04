@@ -1304,14 +1304,14 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             base.BaseClear();
         }
         
-        public void Save(bool clear_all_before_save = true) 
+        public void Save(DateTime period, Guid owner)
         {
             if (Records.Count > 0)
             {
                 base.BaseBeginTransaction();
                 
                 if (clear_all_before_save)
-                    base.BaseDelete();
+                    base.BaseDelete(owner);
 
                 foreach (Record record in Records)
                 {

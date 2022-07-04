@@ -744,6 +744,10 @@ limitations under the License.
 				<xsl:if test="$TableType = 'Document'">
 					<xsl:text>spend bool NOT NULL, </xsl:text>
 				</xsl:if>
+				<xsl:if test="$TableType = 'RegisterInformation'">
+					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
+					<xsl:text>owner uuid NOT NULL, </xsl:text>
+				</xsl:if>
 				<xsl:if test="$TableType = 'RegisterAccumulation'">
 					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>
 					<xsl:text>income bool NOT NULL, </xsl:text>
@@ -766,6 +770,14 @@ limitations under the License.
 			  <xsl:if test="$TableType = 'Document'">
 				 <sql>
 					 <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_spend_idx ON ', $TableName, ' (spend);')"/>
+				 </sql>
+			  </xsl:if>
+			  <xsl:if test="$TableType = 'RegisterInformation'">
+				 <sql>
+				    <xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_period_idx ON ', $TableName, ' (period);')"/>
+				 </sql>
+				 <sql>
+					<xsl:value-of select="concat('CREATE INDEX IF NOT EXISTS ', $TableName, '_owner_idx ON ', $TableName, ' (owner);')"/>
 				 </sql>
 			  </xsl:if>
 			  <xsl:if test="$TableType = 'RegisterAccumulation'">

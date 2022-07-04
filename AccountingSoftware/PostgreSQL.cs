@@ -942,22 +942,15 @@ namespace AccountingSoftware
 
 		#region RegistersInformation
 
-		public void SelectRegisterInformationRecords(string table, string[] fieldArray, List<Where> Filter, List<Dictionary<string, object>> fieldValueList)
+		public void SelectRegisterInformationRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList)
 		{
-			Query QuerySelect = new Query(table);
-
-			foreach (string fieldItem in fieldArray)
-				QuerySelect.Field.Add(fieldItem);
-
-			QuerySelect.Where = Filter;
-
 			string query = QuerySelect.Construct();
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			if (Filter.Count > 0)
+			if (QuerySelect.Where.Count > 0)
 			{
-				foreach (Where ItemFilter in Filter)
+				foreach (Where ItemFilter in QuerySelect.Where)
 					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
 			}
 
@@ -969,18 +962,19 @@ namespace AccountingSoftware
 
 				fieldValue.Add("uid", reader["uid"]);
 
-				foreach (string field in fieldArray)
-				{
+				foreach (string field in QuerySelect.Field)
 					fieldValue.Add(field, reader[field]);
-				}
+
+				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();
 		}
 
-		public void InsertRegisterInformationRecords(Guid UID, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertRegisterInformationRecords(Guid UID, string table, DateTime period, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "uid";
-			string query_values = "@uid";
+			string query_field = "uid, period, owner";
+			string query_values = "@uid, @period, @owner";
 
 			foreach (string field in fieldArray)
 			{
@@ -992,6 +986,8 @@ namespace AccountingSoftware
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", UID));
+			nCommand.Parameters.Add(new NpgsqlParameter("period", period));
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 
 			foreach (string field in fieldArray)
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
@@ -999,20 +995,12 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void DeleteRegisterInformationRecords(string table, List<Where> Filter)
+		public void DeleteRegisterInformationRecords(string table, Guid owner)
 		{
-			Query QuerySelect = new Query(table);
-			QuerySelect.Where = Filter;
-
-			string query = "DELETE FROM " + table + " WHERE uid IN (\n" + QuerySelect.Construct() + "\n)";
+			string query = "DELETE FROM " + table + " WHERE owner = @owner";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-
-			if (Filter.Count > 0)
-			{
-				foreach (Where ItemFilter in Filter)
-					nCommand.Parameters.Add(new NpgsqlParameter(ItemFilter.Alias, ItemFilter.Value));
-			}
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
 
 			nCommand.ExecuteNonQuery();
 		}

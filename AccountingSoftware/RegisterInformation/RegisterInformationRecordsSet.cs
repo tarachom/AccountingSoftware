@@ -37,9 +37,19 @@ namespace AccountingSoftware
 			Table = table;
 			FieldArray = fieldsArray;
 
+			QuerySelect = new Query(Table);
+			QuerySelect.Field.AddRange(new string[] { "period", "owner" });
+			QuerySelect.Field.AddRange(fieldsArray);
+
 			FieldValueList = new List<Dictionary<string, object>>();
+			JoinValue = new Dictionary<string, Dictionary<string, string>>();
 			BaseFilter = new List<Where>();
 		}
+
+		/// <summary>
+		/// Запит SELECT
+		/// </summary>
+		public Query QuerySelect { get; set; }
 
 		/// <summary>
 		/// Ядро
@@ -62,6 +72,11 @@ namespace AccountingSoftware
 		protected List<Dictionary<string, object>> FieldValueList { get; private set; }
 
 		/// <summary>
+		/// Додаткові поля
+		/// </summary>
+		public Dictionary<string, Dictionary<string, string>> JoinValue { get; private set; }
+
+		/// <summary>
 		/// Відбір
 		/// </summary>
 		protected List<Where> BaseFilter { get; }
@@ -72,6 +87,7 @@ namespace AccountingSoftware
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
+			JoinValue.Clear();
 		}
 
 		/// <summary>
@@ -80,7 +96,24 @@ namespace AccountingSoftware
 		protected void BaseRead()
 		{
 			BaseClear();
-			Kernel.DataBase.SelectRegisterInformationRecords(Table, FieldArray, BaseFilter, FieldValueList);
+
+			//QuerySelect.Where.Clear(); //???
+			QuerySelect.Where.AddRange(BaseFilter);
+
+			Kernel.DataBase.SelectRegisterInformationRecords(QuerySelect, FieldValueList);
+
+			//Зчитування додаткових полів
+			if (QuerySelect.FieldAndAlias.Count > 0)
+			{
+				foreach (Dictionary<string, object> fieldValue in FieldValueList)
+				{
+					Dictionary<string, string> joinFieldValue = new Dictionary<string, string>();
+					JoinValue.Add(fieldValue["uid"].ToString(), joinFieldValue);
+
+					foreach (KeyValuePair<string, string> fieldAndAlias in QuerySelect.FieldAndAlias)
+						joinFieldValue.Add(fieldAndAlias.Value, fieldValue[fieldAndAlias.Value].ToString());
+				}
+			}
 		}
 
 		protected void BaseBeginTransaction()
@@ -99,22 +132,25 @@ namespace AccountingSoftware
 		}
 
 		/// <summary>
-		/// Видалення записів
+		/// Видалення записів для власника
 		/// </summary>
-		protected void BaseDelete()
+		/// <param name="owner">Унікальний ідентифікатор власника</param>
+		protected void BaseDelete(Guid owner)
 		{
-			Kernel.DataBase.DeleteRegisterInformationRecords(Table, BaseFilter);
+			Kernel.DataBase.DeleteRegisterInformationRecords(Table, owner);
 		}
 
 		/// <summary>
-		/// Запис
+		/// Запис даних в регістр
 		/// </summary>
-		/// <param name="UID"> Унікальний ідентифікатор</param>
+		/// <param name="UID">Унікальний ідентифікатор</param>
+		/// <param name="period">Період - дата запису або дата документу</param>
+		/// <param name="owner">Власник запису</param>
 		/// <param name="fieldValue">Значення полів</param>
-		protected void BaseSave(Guid UID, Dictionary<string, object> fieldValue)
+		protected void BaseSave(Guid UID, DateTime period, Guid owner, Dictionary<string, object> fieldValue)
 		{
 			Guid recordUnigueID = (UID == Guid.Empty ? Guid.NewGuid() : UID);
-			Kernel.DataBase.InsertRegisterInformationRecords(recordUnigueID, Table, FieldArray, fieldValue);
+			Kernel.DataBase.InsertRegisterInformationRecords(recordUnigueID, Table, period, owner, FieldArray, fieldValue);
 		}
 	}
 }
