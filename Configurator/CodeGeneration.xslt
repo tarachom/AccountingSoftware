@@ -1034,12 +1034,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
     {
-        public <xsl:value-of select="$DocumentName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        public <xsl:value-of select="$DocumentName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>")
         {
             base.Init(new UnigueID(uid), null);
         }
         
-        public <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
+        public <xsl:value-of select="$DocumentName"/>_Pointer(UnigueID uid, Dictionary&lt;string, object&gt; fields = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>")
         {
             base.Init(uid, fields);
         }
