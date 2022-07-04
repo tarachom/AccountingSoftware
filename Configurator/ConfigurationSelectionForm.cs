@@ -330,12 +330,20 @@ namespace Configurator
 				Fill_listBoxConfiguration();
 			}
 		}
+
+        private void listBoxConfiguration_KeyDown(object sender, KeyEventArgs e)
+        {
+			if (e.KeyCode == Keys.Enter)
+			{
+				buttonOpenConf_Click(this, new EventArgs());
+			}
+		}
     }
 
-	/// <summary>
-	/// Клас для елементу списку баз даних
-	/// </summary>
-	public class ConfigurationParam
+    /// <summary>
+    /// Клас для елементу списку баз даних
+    /// </summary>
+    public class ConfigurationParam
 	{
 		public ConfigurationParam()
 		{

@@ -43,6 +43,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.buttonDown = new System.Windows.Forms.Button();
+            this.buttonUp = new System.Windows.Forms.Button();
             this.buttonAddField = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -65,8 +67,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.buttonUp = new System.Windows.Forms.Button();
-            this.buttonDown = new System.Windows.Forms.Button();
             this.contextMenuStripField.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -206,6 +206,26 @@
             this.panel4.Size = new System.Drawing.Size(266, 30);
             this.panel4.TabIndex = 3;
             // 
+            // buttonDown
+            // 
+            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
+            this.buttonDown.Location = new System.Drawing.Point(231, 4);
+            this.buttonDown.Name = "buttonDown";
+            this.buttonDown.Size = new System.Drawing.Size(32, 23);
+            this.buttonDown.TabIndex = 9;
+            this.buttonDown.UseVisualStyleBackColor = true;
+            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
+            // 
+            // buttonUp
+            // 
+            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
+            this.buttonUp.Location = new System.Drawing.Point(193, 4);
+            this.buttonUp.Name = "buttonUp";
+            this.buttonUp.Size = new System.Drawing.Size(32, 23);
+            this.buttonUp.TabIndex = 8;
+            this.buttonUp.UseVisualStyleBackColor = true;
+            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
+            // 
             // buttonAddField
             // 
             this.buttonAddField.Location = new System.Drawing.Point(44, 4);
@@ -229,7 +249,7 @@
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-            this.buttonSave.Location = new System.Drawing.Point(590, 3);
+            this.buttonSave.Location = new System.Drawing.Point(680, 3);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(109, 32);
             this.buttonSave.TabIndex = 2;
@@ -245,14 +265,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(10, 583);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(817, 38);
+            this.panel2.Size = new System.Drawing.Size(907, 38);
             this.panel2.TabIndex = 3;
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonClose.Location = new System.Drawing.Point(705, 3);
+            this.buttonClose.Location = new System.Drawing.Point(795, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(109, 32);
             this.buttonClose.TabIndex = 3;
@@ -283,7 +303,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(817, 573);
+            this.splitContainer1.Size = new System.Drawing.Size(907, 573);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -299,7 +319,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(15, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 261);
+            this.groupBox1.Size = new System.Drawing.Size(619, 261);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -310,7 +330,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeDelete.Location = new System.Drawing.Point(119, 71);
             this.textBoxTriggersBeforeDelete.Name = "textBoxTriggersBeforeDelete";
-            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(494, 20);
             this.textBoxTriggersBeforeDelete.TabIndex = 14;
             // 
             // label10
@@ -328,7 +348,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(119, 19);
             this.textBoxTriggersBeforeSave.Name = "textBoxTriggersBeforeSave";
-            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(494, 20);
             this.textBoxTriggersBeforeSave.TabIndex = 12;
             // 
             // label9
@@ -346,7 +366,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(119, 45);
             this.textBoxTriggersAfterSave.Name = "textBoxTriggersAfterSave";
-            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(494, 20);
             this.textBoxTriggersAfterSave.TabIndex = 10;
             // 
             // label8
@@ -399,7 +419,7 @@
             this.textBoxDesc.Location = new System.Drawing.Point(85, 83);
             this.textBoxDesc.Multiline = true;
             this.textBoxDesc.Name = "textBoxDesc";
-            this.textBoxDesc.Size = new System.Drawing.Size(459, 62);
+            this.textBoxDesc.Size = new System.Drawing.Size(549, 62);
             this.textBoxDesc.TabIndex = 5;
             // 
             // label5
@@ -417,7 +437,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTable.Location = new System.Drawing.Point(85, 57);
             this.textBoxTable.Name = "textBoxTable";
-            this.textBoxTable.Size = new System.Drawing.Size(459, 20);
+            this.textBoxTable.Size = new System.Drawing.Size(549, 20);
             this.textBoxTable.TabIndex = 3;
             // 
             // label4
@@ -435,7 +455,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Location = new System.Drawing.Point(85, 31);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(459, 20);
+            this.textBoxName.Size = new System.Drawing.Size(549, 20);
             this.textBoxName.TabIndex = 1;
             // 
             // label3
@@ -447,31 +467,11 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
-            // buttonUp
-            // 
-            this.buttonUp.Image = global::Configurator.Properties.Resources.up;
-            this.buttonUp.Location = new System.Drawing.Point(193, 4);
-            this.buttonUp.Name = "buttonUp";
-            this.buttonUp.Size = new System.Drawing.Size(32, 23);
-            this.buttonUp.TabIndex = 8;
-            this.buttonUp.UseVisualStyleBackColor = true;
-            this.buttonUp.Click += new System.EventHandler(this.buttonUp_Click);
-            // 
-            // buttonDown
-            // 
-            this.buttonDown.Image = global::Configurator.Properties.Resources.down;
-            this.buttonDown.Location = new System.Drawing.Point(231, 4);
-            this.buttonDown.Name = "buttonDown";
-            this.buttonDown.Size = new System.Drawing.Size(32, 23);
-            this.buttonDown.TabIndex = 9;
-            this.buttonDown.UseVisualStyleBackColor = true;
-            this.buttonDown.Click += new System.EventHandler(this.buttonDown_Click);
-            // 
             // DirectoryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 631);
+            this.ClientSize = new System.Drawing.Size(927, 631);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

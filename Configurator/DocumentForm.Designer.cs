@@ -46,6 +46,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBoxSpend = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxClearSpend = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBoxTriggersBeforeDelete = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -59,11 +64,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBoxSpend = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBoxClearSpend = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -74,8 +74,8 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // listBoxFields
@@ -215,7 +215,7 @@
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-            this.buttonSave.Location = new System.Drawing.Point(590, 3);
+            this.buttonSave.Location = new System.Drawing.Point(685, 3);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(109, 32);
             this.buttonSave.TabIndex = 2;
@@ -231,14 +231,14 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(10, 583);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(817, 38);
+            this.panel2.Size = new System.Drawing.Size(912, 38);
             this.panel2.TabIndex = 3;
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonClose.Location = new System.Drawing.Point(705, 3);
+            this.buttonClose.Location = new System.Drawing.Point(800, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(109, 32);
             this.buttonClose.TabIndex = 3;
@@ -267,9 +267,60 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(817, 573);
+            this.splitContainer1.Size = new System.Drawing.Size(912, 573);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.textBoxSpend);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.textBoxClearSpend);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(15, 261);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(624, 80);
+            this.groupBox2.TabIndex = 15;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Функції обробки проведення документу";
+            // 
+            // textBoxSpend
+            // 
+            this.textBoxSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxSpend.Location = new System.Drawing.Point(119, 19);
+            this.textBoxSpend.Name = "textBoxSpend";
+            this.textBoxSpend.Size = new System.Drawing.Size(499, 20);
+            this.textBoxSpend.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 22);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(72, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Проведення:";
+            // 
+            // textBoxClearSpend
+            // 
+            this.textBoxClearSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxClearSpend.Location = new System.Drawing.Point(119, 45);
+            this.textBoxClearSpend.Name = "textBoxClearSpend";
+            this.textBoxClearSpend.Size = new System.Drawing.Size(499, 20);
+            this.textBoxClearSpend.TabIndex = 10;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 48);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(52, 13);
+            this.label11.TabIndex = 9;
+            this.label11.Text = "Очистка:";
             // 
             // groupBox1
             // 
@@ -283,7 +334,7 @@
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Location = new System.Drawing.Point(14, 151);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(529, 104);
+            this.groupBox1.Size = new System.Drawing.Size(624, 104);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -294,7 +345,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeDelete.Location = new System.Drawing.Point(119, 71);
             this.textBoxTriggersBeforeDelete.Name = "textBoxTriggersBeforeDelete";
-            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(499, 20);
             this.textBoxTriggersBeforeDelete.TabIndex = 14;
             // 
             // label10
@@ -312,7 +363,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(119, 19);
             this.textBoxTriggersBeforeSave.Name = "textBoxTriggersBeforeSave";
-            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(499, 20);
             this.textBoxTriggersBeforeSave.TabIndex = 12;
             // 
             // label9
@@ -330,7 +381,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(119, 45);
             this.textBoxTriggersAfterSave.Name = "textBoxTriggersAfterSave";
-            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(404, 20);
+            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(499, 20);
             this.textBoxTriggersAfterSave.TabIndex = 10;
             // 
             // label8
@@ -349,7 +400,7 @@
             this.textBoxDesc.Location = new System.Drawing.Point(91, 83);
             this.textBoxDesc.Multiline = true;
             this.textBoxDesc.Name = "textBoxDesc";
-            this.textBoxDesc.Size = new System.Drawing.Size(453, 62);
+            this.textBoxDesc.Size = new System.Drawing.Size(548, 62);
             this.textBoxDesc.TabIndex = 5;
             // 
             // label5
@@ -367,7 +418,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTable.Location = new System.Drawing.Point(91, 57);
             this.textBoxTable.Name = "textBoxTable";
-            this.textBoxTable.Size = new System.Drawing.Size(453, 20);
+            this.textBoxTable.Size = new System.Drawing.Size(548, 20);
             this.textBoxTable.TabIndex = 3;
             // 
             // label4
@@ -385,7 +436,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxName.Location = new System.Drawing.Point(91, 31);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(453, 20);
+            this.textBoxName.Size = new System.Drawing.Size(548, 20);
             this.textBoxName.TabIndex = 1;
             // 
             // label3
@@ -397,62 +448,11 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.textBoxSpend);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.textBoxClearSpend);
-            this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(15, 261);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(529, 80);
-            this.groupBox2.TabIndex = 15;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Функції обробки проведення документу";
-            // 
-            // textBoxSpend
-            // 
-            this.textBoxSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxSpend.Location = new System.Drawing.Point(119, 19);
-            this.textBoxSpend.Name = "textBoxSpend";
-            this.textBoxSpend.Size = new System.Drawing.Size(404, 20);
-            this.textBoxSpend.TabIndex = 12;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 22);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(72, 13);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Проведення:";
-            // 
-            // textBoxClearSpend
-            // 
-            this.textBoxClearSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxClearSpend.Location = new System.Drawing.Point(119, 45);
-            this.textBoxClearSpend.Name = "textBoxClearSpend";
-            this.textBoxClearSpend.Size = new System.Drawing.Size(404, 20);
-            this.textBoxClearSpend.TabIndex = 10;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 48);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(52, 13);
-            this.label11.TabIndex = 9;
-            this.label11.Text = "Очистка:";
-            // 
             // DocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 631);
+            this.ClientSize = new System.Drawing.Size(932, 631);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -476,10 +476,10 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
 		}
