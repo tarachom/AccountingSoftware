@@ -1341,9 +1341,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             base.BaseDelete(owner);
             base.BaseCommitTransaction();
         }
-                
+
         <xsl:call-template name="CommentSummary" />
-        public class Record : RegisterRecord
+        public class Record : RegisterInformationRecord
         {
             public Record()
             {
@@ -1464,7 +1464,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         }
         
         <xsl:call-template name="CommentSummary" />
-        public class Record : RegisterRecord
+        public class Record : RegisterAccumulationRecord
         {
             public Record()
             {
