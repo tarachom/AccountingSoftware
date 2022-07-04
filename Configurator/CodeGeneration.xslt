@@ -468,7 +468,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                       <xsl:call-template name="DefaultFieldValue" />;
                     </xsl:for-each>
                 }
-        
+                <!--
                 <xsl:if test="count(Fields/Field) > 0">
                 public Record(
                     <xsl:for-each select="Fields/Field">
@@ -494,7 +494,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                     </xsl:for-each>
                 }
                 </xsl:if>
-        
+                -->
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>public </xsl:text>
                   <xsl:call-template name="FieldType" />
@@ -817,7 +817,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                   <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
             }
-        
+            <!--
             <xsl:if test="count(Fields/Field) > 0">
             public Record(
                 <xsl:for-each select="Fields/Field">
@@ -843,7 +843,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:for-each>
             }
             </xsl:if>
-
+            -->
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
@@ -1205,7 +1205,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                   <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
             }
-        
+            <!--
             <xsl:if test="count(Fields/Field) > 0">
             public Record(
                 <xsl:for-each select="Fields/Field">
@@ -1231,7 +1231,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 </xsl:for-each>
             }
             </xsl:if>
-        
+            -->
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
