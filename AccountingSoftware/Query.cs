@@ -156,7 +156,8 @@ namespace AccountingSoftware
 					else if (join.JoinType == JoinType.INNER)
 						query += "INNER ";
 
-					query += "JOIN " + join.JoinTable + " ON " + join.ParentTable + "." + join.JoinField + " = " + join.JoinTable + ".uid ";
+					query += "JOIN " + join.JoinTable + (join.JoinTableAlias != "" ? " AS " + join.JoinTableAlias : "") + " ON " + 
+						join.ParentTable + "." + join.JoinField + " = " + (join.JoinTableAlias != "" ? join.JoinTableAlias : join.JoinTable) + ".uid ";
 				}
 			}
 
@@ -380,11 +381,13 @@ namespace AccountingSoftware
 		/// <param name="joinField">Поле з основної таблиці (ParentTable) із ключами</param>
 		/// <param name="parentTable">Основна таблиця</param>
 		/// <param name="joinType">Тип приєднання</param>
-		public Join(string joinTable, string joinField, string parentTable, JoinType joinType = JoinType.LEFT)
-        {
+		/// <param name="joinTableAlias">Псевдонім для таблиці яку треба приєднати</param>
+		public Join(string joinTable, string joinField, string parentTable, string joinTableAlias = "", JoinType joinType = JoinType.LEFT)
+		{
 			JoinTable = joinTable;
 			JoinField = joinField;
 			ParentTable = parentTable;
+			JoinTableAlias = joinTableAlias;
 			JoinType = joinType;
 		}
 
@@ -392,6 +395,11 @@ namespace AccountingSoftware
 		/// Таблиця яку треба приєднати.
 		/// </summary>
 		public string JoinTable { get; set; }
+
+		/// <summary>
+		/// Псевдонім
+		/// </summary>
+		public string JoinTableAlias { get; set; }
 
 		/// <summary>
 		/// Поле з основної таблиці (ParentTable) із ключами
