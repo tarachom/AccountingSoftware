@@ -1289,7 +1289,8 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                 Record record = new Record();
                 
                 record.UID = (Guid)fieldValue["uid"];
-                  
+				record.Period = DateTime.Parse(fieldValue["period"].ToString());
+                record.Owner = (Guid)fieldValue["owner"];
                 <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                   <xsl:text>record.</xsl:text>
                   <xsl:value-of select="Name"/>
@@ -1309,14 +1310,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             if (Records.Count > 0)
             {
                 base.BaseBeginTransaction();
-                
-                if (clear_all_before_save)
-                    base.BaseDelete(owner);
-
+                base.BaseDelete(owner);
                 foreach (Record record in Records)
                 {
+                    record.Period = period;
+                    record.Owner = owner;
                     Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
@@ -1329,17 +1328,17 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    base.BaseSave(record.UID, fieldValue);
+                    base.BaseSave(record.UID, period, owner, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
             }
         }
         
-        public void Delete()
+        public void Delete(Guid owner)
         {
             base.BaseBeginTransaction();
-            base.BaseDelete();
+            base.BaseDelete(owner);
             base.BaseCommitTransaction();
         }
                 
@@ -1435,8 +1434,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                 base.BaseDelete(owner);
                 foreach (Record record in Records)
                 {
+                    record.Period = period;
+                    record.Owner = owner;
                     Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-
                     <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
                       <xsl:text>fieldValue.Add("</xsl:text>
                       <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
@@ -1449,7 +1449,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                       </xsl:if>
                       <xsl:text>)</xsl:text>;
                     </xsl:for-each>
-                    base.BaseSave(record.UID, period, record.Income, record.Owner, fieldValue);
+                    base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
                 }
                 
                 base.BaseCommitTransaction();
