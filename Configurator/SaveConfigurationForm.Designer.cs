@@ -63,7 +63,7 @@
             this.buttonAnalize.Name = "buttonAnalize";
             this.buttonAnalize.Size = new System.Drawing.Size(109, 32);
             this.buttonAnalize.TabIndex = 4;
-            this.buttonAnalize.Text = "Крок 1. Аналіз.";
+            this.buttonAnalize.Text = "Крок 1. Аналіз";
             this.buttonAnalize.UseVisualStyleBackColor = true;
             this.buttonAnalize.Click += new System.EventHandler(this.buttonAnalize_Click);
             // 
@@ -88,7 +88,7 @@
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(150, 32);
             this.buttonSave.TabIndex = 2;
-            this.buttonSave.Text = "Крок 2. Виконати SQL.";
+            this.buttonSave.Text = "Крок 2. Виконати";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
