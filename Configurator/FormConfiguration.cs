@@ -1468,6 +1468,7 @@ namespace Configurator
 				{
 					string fullName = block.BlockName + "." + constants.Name;
 					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
+					Console.WriteLine(constants.NameInTable);
 				}
 			}
 

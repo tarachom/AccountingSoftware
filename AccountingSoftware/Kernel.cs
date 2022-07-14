@@ -35,19 +35,19 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Не використовується
 		/// </summary>
-		public void Open()
-		{
-			DataBase = new PostgreSQL();
-			DataBase.Open("Server=localhost;User Id=postgres;Password=1;Database=ConfTradeTest;");
+		//public void Open()
+		//{
+		//	DataBase = new PostgreSQL();
+		//	DataBase.Open("Server=localhost;User Id=postgres;Password=1;Database=ConfTradeTest;");
 
-			Console.WriteLine("DataBase Open");
+		//	Console.WriteLine("DataBase Open");
 
-			Conf = new Configuration();
-			Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
-			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
+		//	Conf = new Configuration();
+		//	Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
+		//	Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
 
-			Console.WriteLine("Configuration Load");
-		}
+		//	Console.WriteLine("Configuration Load");
+		//}
 
 		/// <summary>
 		/// Перевірити підключення до сервера
@@ -93,7 +93,7 @@ namespace AccountingSoftware
 		/// <param name="Database">База даних</param>
 		/// <param name="exception">Помилка</param>
 		/// <returns>True якщо підключення відбулось нормально</returns>
-		public bool Open2(string PathToXmlFileConfiguration, string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+		public bool Open(string PathToXmlFileConfiguration, string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
 			DataBase = new PostgreSQL();
 			bool flagConnect = DataBase.Open2(Server, UserId, Password, Port, Database, out exception);
@@ -102,6 +102,14 @@ namespace AccountingSoftware
 			Conf.PathToXmlFileConfiguration = PathToXmlFileConfiguration;
 
 			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
+
+			return flagConnect;
+		}
+
+		public bool OpenOnlyDataBase(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
+        {
+			DataBase = new PostgreSQL();
+			bool flagConnect = DataBase.Open2(Server, UserId, Password, Port, Database, out exception);
 
 			return flagConnect;
 		}

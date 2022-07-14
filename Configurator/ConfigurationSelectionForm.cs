@@ -156,7 +156,7 @@ namespace Configurator
 
 #if DEBUG
 			//Конфігурація береться із папки Configurator
-			PathToConfXML = @"E:\Project\HomeFinaces\HomeFinances\Configurator\Confa.xml";
+			PathToConfXML = @"E:\Project\StorageAndTrade\StorageAndTrade\bin\Debug\Confa.xml";
 #endif
 
 			LoadConfigurationParamFromXML();
@@ -205,7 +205,7 @@ namespace Configurator
         {
 			Program.Kernel = new Kernel();
 
-			bool flagOpen = Program.Kernel.Open2(PathToConfXML,
+			bool flagOpen = Program.Kernel.Open(PathToConfXML,
 				itemConfigurationParam.DataBaseServer,
 				itemConfigurationParam.DataBaseLogin,
 				itemConfigurationParam.DataBasePassword,

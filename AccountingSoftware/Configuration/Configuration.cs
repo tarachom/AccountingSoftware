@@ -501,6 +501,7 @@ namespace AccountingSoftware
 
 					foreach (ConfigurationObjectField configurationObjectField in Fields.Values)
 					{
+						Console.WriteLine($"{configurationObjectField.NameInTable} = {columnNewName}");
 						if (configurationObjectField.NameInTable == columnNewName)
 						{
 							noExistInConf = false;
