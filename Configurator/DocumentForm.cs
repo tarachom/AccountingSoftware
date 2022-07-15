@@ -113,6 +113,11 @@ namespace Configurator
 			ConfDocument.Table = textBoxTable.Text;
 			ConfDocument.Desc = textBoxDesc.Text;
 
+			//Доступні регістри накопичення
+			ConfDocument.AllowRegisterAccumulation.Clear();
+			foreach (string register in checkedListBoxRegisters.CheckedItems)
+				ConfDocument.AllowRegisterAccumulation.Add(register);
+
 			//Тригери
 			ConfDocument.TriggerFunctions.BeforeSave = textBoxTriggersBeforeSave.Text;
 			ConfDocument.TriggerFunctions.AfterSave = textBoxTriggersAfterSave.Text;
@@ -229,7 +234,10 @@ namespace Configurator
 
 			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> configurationRegistersAccumulation in RegistersAccumulation)
 			{
-				checkedListBoxRegisters.Items.Add(configurationRegistersAccumulation.Value.Name);
+				checkedListBoxRegisters.Items.Add(
+					configurationRegistersAccumulation.Value.Name,
+					ConfDocument.AllowRegisterAccumulation.Contains(configurationRegistersAccumulation.Value.Name)
+				);
 			}
 		}
 

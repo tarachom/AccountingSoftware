@@ -65,6 +65,7 @@
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.checkedListBoxRegisters = new System.Windows.Forms.CheckedListBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -85,7 +86,7 @@
             this.listBoxFields.FormattingEnabled = true;
             this.listBoxFields.Location = new System.Drawing.Point(0, 0);
             this.listBoxFields.Name = "listBoxFields";
-            this.listBoxFields.Size = new System.Drawing.Size(266, 366);
+            this.listBoxFields.Size = new System.Drawing.Size(266, 422);
             this.listBoxFields.TabIndex = 0;
             this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
             this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
@@ -99,14 +100,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 573);
+            this.panel1.Size = new System.Drawing.Size(266, 629);
             this.panel1.TabIndex = 1;
             // 
             // panel7
             // 
             this.panel7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel7.Controls.Add(this.listBoxTabularParts);
-            this.panel7.Location = new System.Drawing.Point(0, 431);
+            this.panel7.Location = new System.Drawing.Point(0, 487);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(266, 142);
             this.panel7.TabIndex = 1;
@@ -127,7 +128,7 @@
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel6.Controls.Add(this.buttonAddTablePart);
             this.panel6.Controls.Add(this.label2);
-            this.panel6.Location = new System.Drawing.Point(3, 399);
+            this.panel6.Location = new System.Drawing.Point(3, 455);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(260, 30);
             this.panel6.TabIndex = 4;
@@ -158,7 +159,7 @@
             this.panel5.Controls.Add(this.listBoxFields);
             this.panel5.Location = new System.Drawing.Point(0, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(266, 366);
+            this.panel5.Size = new System.Drawing.Size(266, 422);
             this.panel5.TabIndex = 2;
             // 
             // panel4
@@ -216,7 +217,7 @@
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-            this.buttonSave.Location = new System.Drawing.Point(685, 3);
+            this.buttonSave.Location = new System.Drawing.Point(762, 3);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(109, 32);
             this.buttonSave.TabIndex = 2;
@@ -230,16 +231,16 @@
             this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonSave);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 583);
+            this.panel2.Location = new System.Drawing.Point(10, 639);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(912, 38);
+            this.panel2.Size = new System.Drawing.Size(989, 38);
             this.panel2.TabIndex = 3;
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonClose.Location = new System.Drawing.Point(800, 3);
+            this.buttonClose.Location = new System.Drawing.Point(877, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(109, 32);
             this.buttonClose.TabIndex = 3;
@@ -260,6 +261,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label6);
             this.splitContainer1.Panel2.Controls.Add(this.checkedListBoxRegisters);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
@@ -269,7 +271,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(912, 573);
+            this.splitContainer1.Size = new System.Drawing.Size(989, 629);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -281,9 +283,9 @@
             this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.textBoxClearSpend);
             this.groupBox2.Controls.Add(this.label11);
-            this.groupBox2.Location = new System.Drawing.Point(15, 261);
+            this.groupBox2.Location = new System.Drawing.Point(15, 240);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(624, 80);
+            this.groupBox2.Size = new System.Drawing.Size(701, 80);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Функції обробки проведення документу";
@@ -294,7 +296,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSpend.Location = new System.Drawing.Point(119, 19);
             this.textBoxSpend.Name = "textBoxSpend";
-            this.textBoxSpend.Size = new System.Drawing.Size(499, 20);
+            this.textBoxSpend.Size = new System.Drawing.Size(576, 20);
             this.textBoxSpend.TabIndex = 12;
             // 
             // label7
@@ -312,7 +314,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxClearSpend.Location = new System.Drawing.Point(119, 45);
             this.textBoxClearSpend.Name = "textBoxClearSpend";
-            this.textBoxClearSpend.Size = new System.Drawing.Size(499, 20);
+            this.textBoxClearSpend.Size = new System.Drawing.Size(576, 20);
             this.textBoxClearSpend.TabIndex = 10;
             // 
             // label11
@@ -334,9 +336,9 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.textBoxTriggersAfterSave);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Location = new System.Drawing.Point(14, 151);
+            this.groupBox1.Location = new System.Drawing.Point(14, 130);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(624, 104);
+            this.groupBox1.Size = new System.Drawing.Size(701, 104);
             this.groupBox1.TabIndex = 11;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функції";
@@ -347,7 +349,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeDelete.Location = new System.Drawing.Point(119, 71);
             this.textBoxTriggersBeforeDelete.Name = "textBoxTriggersBeforeDelete";
-            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(499, 20);
+            this.textBoxTriggersBeforeDelete.Size = new System.Drawing.Size(576, 20);
             this.textBoxTriggersBeforeDelete.TabIndex = 14;
             // 
             // label10
@@ -365,7 +367,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersBeforeSave.Location = new System.Drawing.Point(119, 19);
             this.textBoxTriggersBeforeSave.Name = "textBoxTriggersBeforeSave";
-            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(499, 20);
+            this.textBoxTriggersBeforeSave.Size = new System.Drawing.Size(576, 20);
             this.textBoxTriggersBeforeSave.TabIndex = 12;
             // 
             // label9
@@ -383,7 +385,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxTriggersAfterSave.Location = new System.Drawing.Point(119, 45);
             this.textBoxTriggersAfterSave.Name = "textBoxTriggersAfterSave";
-            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(499, 20);
+            this.textBoxTriggersAfterSave.Size = new System.Drawing.Size(576, 20);
             this.textBoxTriggersAfterSave.TabIndex = 10;
             // 
             // label8
@@ -399,16 +401,16 @@
             // 
             this.textBoxDesc.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxDesc.Location = new System.Drawing.Point(91, 83);
+            this.textBoxDesc.Location = new System.Drawing.Point(91, 62);
             this.textBoxDesc.Multiline = true;
             this.textBoxDesc.Name = "textBoxDesc";
-            this.textBoxDesc.Size = new System.Drawing.Size(548, 62);
+            this.textBoxDesc.Size = new System.Drawing.Size(625, 62);
             this.textBoxDesc.TabIndex = 5;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(11, 86);
+            this.label5.Location = new System.Drawing.Point(11, 65);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(36, 13);
             this.label5.TabIndex = 4;
@@ -418,15 +420,15 @@
             // 
             this.textBoxTable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxTable.Location = new System.Drawing.Point(91, 57);
+            this.textBoxTable.Location = new System.Drawing.Point(91, 36);
             this.textBoxTable.Name = "textBoxTable";
-            this.textBoxTable.Size = new System.Drawing.Size(548, 20);
+            this.textBoxTable.Size = new System.Drawing.Size(625, 20);
             this.textBoxTable.TabIndex = 3;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 60);
+            this.label4.Location = new System.Drawing.Point(11, 39);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 2;
@@ -436,15 +438,15 @@
             // 
             this.textBoxName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxName.Location = new System.Drawing.Point(91, 31);
+            this.textBoxName.Location = new System.Drawing.Point(91, 10);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(548, 20);
+            this.textBoxName.Size = new System.Drawing.Size(625, 20);
             this.textBoxName.TabIndex = 1;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 34);
+            this.label3.Location = new System.Drawing.Point(11, 13);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 0;
@@ -452,17 +454,28 @@
             // 
             // checkedListBoxRegisters
             // 
+            this.checkedListBoxRegisters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.checkedListBoxRegisters.FormattingEnabled = true;
-            this.checkedListBoxRegisters.Location = new System.Drawing.Point(15, 347);
+            this.checkedListBoxRegisters.Location = new System.Drawing.Point(15, 356);
             this.checkedListBoxRegisters.Name = "checkedListBoxRegisters";
-            this.checkedListBoxRegisters.Size = new System.Drawing.Size(318, 214);
+            this.checkedListBoxRegisters.Size = new System.Drawing.Size(330, 259);
             this.checkedListBoxRegisters.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(11, 340);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(121, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Регістри накопичення:";
             // 
             // DocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(932, 631);
+            this.ClientSize = new System.Drawing.Size(1009, 687);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -532,5 +545,6 @@
         private System.Windows.Forms.TextBox textBoxClearSpend;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckedListBox checkedListBoxRegisters;
+        private System.Windows.Forms.Label label6;
     }
 }

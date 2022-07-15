@@ -878,10 +878,10 @@ namespace AccountingSoftware
 
 		private static void LoadAllowRegisterAccumulation(List<string> allowRegisterAccumulation, XPathNavigator xPathDocNavigator)
         {
-			XPathNodeIterator tablePartNodes = xPathDocNavigator.Select("AllowRegisterAccumulation/Name");
-			while (tablePartNodes.MoveNext())
+			XPathNodeIterator allowRegisterAccumulationNodes = xPathDocNavigator.Select("AllowRegisterAccumulation/Name");
+			while (allowRegisterAccumulationNodes.MoveNext())
 			{
-				string name = tablePartNodes.Current.SelectSingleNode("Name").Value;
+				string name = allowRegisterAccumulationNodes.Current.Value;
 				allowRegisterAccumulation.Add(name);
 			}
 		}
