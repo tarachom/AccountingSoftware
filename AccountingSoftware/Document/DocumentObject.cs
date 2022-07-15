@@ -31,10 +31,11 @@ namespace AccountingSoftware
 	/// </summary>
 	public abstract class DocumentObject
 	{
-		public DocumentObject(Kernel kernel, string table, string[] fieldsArray)
+		public DocumentObject(Kernel kernel, string table, string typeDocument, string[] fieldsArray)
 		{
 			Kernel = kernel;
 			Table = table;
+			TypeDocument = typeDocument;
 			FieldArray = fieldsArray;
 
 			FieldValue = new Dictionary<string, object>();
@@ -52,6 +53,11 @@ namespace AccountingSoftware
 		/// Таблиця
 		/// </summary>
 		private string Table { get; set; }
+
+		/// <summary>
+		/// Назва як задано в конфігураторі
+		/// </summary>
+		public string TypeDocument { get; set; }
 
 		/// <summary>
 		/// Масив назв полів

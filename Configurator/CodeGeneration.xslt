@@ -898,7 +898,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:call-template name="CommentSummary" />
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
-        public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+        public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>",
              <xsl:text>new string[] { </xsl:text>
              <xsl:for-each select="Fields/Field">
                <xsl:if test="position() != 1">
