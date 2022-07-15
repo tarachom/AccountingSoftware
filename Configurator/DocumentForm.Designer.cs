@@ -465,11 +465,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(11, 340);
+            this.label6.Location = new System.Drawing.Point(12, 340);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(121, 13);
+            this.label6.Size = new System.Drawing.Size(276, 13);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Регістри накопичення:";
+            this.label6.Text = "Регістри накопичення по яких документ робить рухи:";
             // 
             // DocumentForm
             // 
