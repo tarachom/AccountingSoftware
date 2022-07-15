@@ -26,7 +26,7 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Регістри накопичення
+	/// Регістер накопичення
 	/// </summary>
 	public class ConfigurationRegistersAccumulation : ConfigurationObject
 	{

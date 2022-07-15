@@ -817,7 +817,7 @@ namespace AccountingSoftware
 				ConfigurationDirectories ConfObjectDirectories = new ConfigurationDirectories(name, table, desc);
 				Conf.Directories.Add(ConfObjectDirectories.Name, ConfObjectDirectories);
 
-				LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current);
+				LoadFields(ConfObjectDirectories.Fields, directoryNodes.Current, "Directory");
 
 				LoadTabularParts(ConfObjectDirectories.TabularParts, directoryNodes.Current);
 
@@ -827,7 +827,7 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields, XPathNavigator xPathDocNavigator)
+		private static void LoadFields(Dictionary<string, ConfigurationObjectField> fields, XPathNavigator xPathDocNavigator, string parentName)
 		{
 			XPathNodeIterator fieldNodes = xPathDocNavigator.Select("Fields/Field");
 			while (fieldNodes.MoveNext())
@@ -836,10 +836,15 @@ namespace AccountingSoftware
 				string nameInTable = fieldNodes.Current.SelectSingleNode("NameInTable").Value;
 				string type = fieldNodes.Current.SelectSingleNode("Type").Value;
 				string desc = fieldNodes.Current.SelectSingleNode("Desc").Value;
-				string isPresentationString = fieldNodes.Current.SelectSingleNode("IsPresentation").Value;
-				string isIndexString = fieldNodes.Current.SelectSingleNode("IsIndex").Value;
 
-				bool isPresentation = isPresentationString == "1";
+				bool isPresentation = false;
+				if (parentName == "Directory" || parentName == "Document")
+				{
+					string isPresentationString = fieldNodes.Current.SelectSingleNode("IsPresentation").Value;
+					isPresentation = isPresentationString == "1";
+				}
+
+				string isIndexString = fieldNodes.Current.SelectSingleNode("IsIndex").Value;
 				bool isIndex = isIndexString == "1";
 
 				string pointer = "";
@@ -867,7 +872,7 @@ namespace AccountingSoftware
 
 				tabularParts.Add(ConfObjectTablePart.Name, ConfObjectTablePart);
 
-				LoadFields(ConfObjectTablePart.Fields, tablePartNodes.Current);
+				LoadFields(ConfObjectTablePart.Fields, tablePartNodes.Current, "TablePart");
 			}
 		}
 
@@ -946,7 +951,7 @@ namespace AccountingSoftware
 				ConfigurationDocuments configurationDocuments = new ConfigurationDocuments(name, table, desc);
 				Conf.Documents.Add(configurationDocuments.Name, configurationDocuments);
 
-				LoadFields(configurationDocuments.Fields, documentsNode.Current);
+				LoadFields(configurationDocuments.Fields, documentsNode.Current, "Document");
 
 				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
 
@@ -974,17 +979,17 @@ namespace AccountingSoftware
 				XPathNavigator dimensionFieldsNode = registerInformationNode.Current.SelectSingleNode("DimensionFields");
 
 				if (dimensionFieldsNode != null)
-					LoadFields(configurationRegistersInformation.DimensionFields, dimensionFieldsNode);
+					LoadFields(configurationRegistersInformation.DimensionFields, dimensionFieldsNode, "RegisterInformation");
 
 				XPathNavigator resourcesFieldsNode = registerInformationNode.Current.SelectSingleNode("ResourcesFields");
 
 				if (resourcesFieldsNode != null)
-					LoadFields(configurationRegistersInformation.ResourcesFields, resourcesFieldsNode);
+					LoadFields(configurationRegistersInformation.ResourcesFields, resourcesFieldsNode, "RegisterInformation");
 
 				XPathNavigator propertyFieldsNode = registerInformationNode.Current.SelectSingleNode("PropertyFields");
 
 				if (propertyFieldsNode != null)
-					LoadFields(configurationRegistersInformation.PropertyFields, propertyFieldsNode);
+					LoadFields(configurationRegistersInformation.PropertyFields, propertyFieldsNode, "RegisterInformation");
 			}
 		}
 
@@ -1015,17 +1020,17 @@ namespace AccountingSoftware
 				XPathNavigator dimensionFieldsNode = registerAccumulationNode.Current.SelectSingleNode("DimensionFields");
 
 				if (dimensionFieldsNode != null)
-					LoadFields(configurationRegistersAccumulation.DimensionFields, dimensionFieldsNode);
+					LoadFields(configurationRegistersAccumulation.DimensionFields, dimensionFieldsNode, "RegisterAccumulation");
 
 				XPathNavigator resourcesFieldsNode = registerAccumulationNode.Current.SelectSingleNode("ResourcesFields");
 
 				if (resourcesFieldsNode != null)
-					LoadFields(configurationRegistersAccumulation.ResourcesFields, resourcesFieldsNode);
+					LoadFields(configurationRegistersAccumulation.ResourcesFields, resourcesFieldsNode, "RegisterAccumulation");
 
 				XPathNavigator propertyFieldsNode = registerAccumulationNode.Current.SelectSingleNode("PropertyFields");
 
 				if (propertyFieldsNode != null)
-					LoadFields(configurationRegistersAccumulation.PropertyFields, propertyFieldsNode);
+					LoadFields(configurationRegistersAccumulation.PropertyFields, propertyFieldsNode, "RegisterAccumulation");
 			}
 		}
 
@@ -1163,7 +1168,7 @@ namespace AccountingSoftware
 				nodeDirectoryDesc.InnerText = ConfDirectory.Value.Desc;
 				nodeDirectory.AppendChild(nodeDirectoryDesc);
 
-				SaveFields(ConfDirectory.Value.Fields, xmlConfDocument, nodeDirectory);
+				SaveFields(ConfDirectory.Value.Fields, xmlConfDocument, nodeDirectory, "Directory");
 
 				SaveTabularParts(ConfDirectory.Value.TabularParts, xmlConfDocument, nodeDirectory);
 
@@ -1173,7 +1178,7 @@ namespace AccountingSoftware
 			}
 		}
 
-		private static void SaveFields(Dictionary<string, ConfigurationObjectField> fields, XmlDocument xmlConfDocument, XmlElement rootNode)
+		private static void SaveFields(Dictionary<string, ConfigurationObjectField> fields, XmlDocument xmlConfDocument, XmlElement rootNode, string parentName)
 		{
 			XmlElement nodeFields = xmlConfDocument.CreateElement("Fields");
 			rootNode.AppendChild(nodeFields);
@@ -1206,9 +1211,12 @@ namespace AccountingSoftware
 				nodeFieldDesc.InnerText = field.Value.Desc;
 				nodeField.AppendChild(nodeFieldDesc);
 
-				XmlElement nodeFieldIsPresentation = xmlConfDocument.CreateElement("IsPresentation");
-				nodeFieldIsPresentation.InnerText = field.Value.IsPresentation ? "1" : "0";
-				nodeField.AppendChild(nodeFieldIsPresentation);
+				if (parentName == "Directory" || parentName == "Document")
+				{
+					XmlElement nodeFieldIsPresentation = xmlConfDocument.CreateElement("IsPresentation");
+					nodeFieldIsPresentation.InnerText = field.Value.IsPresentation ? "1" : "0";
+					nodeField.AppendChild(nodeFieldIsPresentation);
+				}
 
 				XmlElement nodeFieldIsIndex = xmlConfDocument.CreateElement("IsIndex");
 				nodeFieldIsIndex.InnerText = field.Value.IsIndex ? "1" : "0";
@@ -1238,7 +1246,7 @@ namespace AccountingSoftware
 				nodeTablePartDesc.InnerText = tablePart.Value.Desc;
 				nodeTablePart.AppendChild(nodeTablePartDesc);
 
-				SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTablePart);
+				SaveFields(tablePart.Value.Fields, xmlConfDocument, nodeTablePart, "TablePart");
 			}
 		}
 
@@ -1354,7 +1362,7 @@ namespace AccountingSoftware
 				nodeDocumentDesc.InnerText = ConfDocument.Value.Desc;
 				nodeDocument.AppendChild(nodeDocumentDesc);
 
-				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument);
+				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument, "Document");
 
 				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
 
@@ -1391,17 +1399,17 @@ namespace AccountingSoftware
 				XmlElement nodeDimensionFields = xmlConfDocument.CreateElement("DimensionFields");
 				nodeRegister.AppendChild(nodeDimensionFields);
 
-				SaveFields(ConfRegisterInfo.Value.DimensionFields, xmlConfDocument, nodeDimensionFields);
+				SaveFields(ConfRegisterInfo.Value.DimensionFields, xmlConfDocument, nodeDimensionFields, "RegisterInformation");
 
 				XmlElement nodeResourcesFields = xmlConfDocument.CreateElement("ResourcesFields");
 				nodeRegister.AppendChild(nodeResourcesFields);
 
-				SaveFields(ConfRegisterInfo.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields);
+				SaveFields(ConfRegisterInfo.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields, "RegisterInformation");
 
 				XmlElement nodePropertyFields = xmlConfDocument.CreateElement("PropertyFields");
 				nodeRegister.AppendChild(nodePropertyFields);
 
-				SaveFields(ConfRegisterInfo.Value.PropertyFields, xmlConfDocument, nodePropertyFields);
+				SaveFields(ConfRegisterInfo.Value.PropertyFields, xmlConfDocument, nodePropertyFields, "RegisterInformation");
 			}
 		}
 
@@ -1434,17 +1442,17 @@ namespace AccountingSoftware
 				XmlElement nodeDimensionFields = xmlConfDocument.CreateElement("DimensionFields");
 				nodeRegister.AppendChild(nodeDimensionFields);
 
-				SaveFields(ConfRegisterAccml.Value.DimensionFields, xmlConfDocument, nodeDimensionFields);
+				SaveFields(ConfRegisterAccml.Value.DimensionFields, xmlConfDocument, nodeDimensionFields, "RegisterAccumulation");
 
 				XmlElement nodeResourcesFields = xmlConfDocument.CreateElement("ResourcesFields");
 				nodeRegister.AppendChild(nodeResourcesFields);
 
-				SaveFields(ConfRegisterAccml.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields);
+				SaveFields(ConfRegisterAccml.Value.ResourcesFields, xmlConfDocument, nodeResourcesFields, "RegisterAccumulation");
 
 				XmlElement nodePropertyFields = xmlConfDocument.CreateElement("PropertyFields");
 				nodeRegister.AppendChild(nodePropertyFields);
 
-				SaveFields(ConfRegisterAccml.Value.PropertyFields, xmlConfDocument, nodePropertyFields);
+				SaveFields(ConfRegisterAccml.Value.PropertyFields, xmlConfDocument, nodePropertyFields, "RegisterAccumulation");
 			}
 		}
 

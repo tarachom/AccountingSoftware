@@ -47,6 +47,7 @@ namespace Configurator
 		public ConfigurationDocuments ConfDocument { get; set; }
 		public string OriginalName { get; set; }
 		public bool IsNewDocument { get; set; }
+		public Dictionary<string, ConfigurationRegistersAccumulation> RegistersAccumulation { get; set; }
 
 		private void DirectoryForm_Load(object sender, EventArgs e)
 		{
@@ -65,8 +66,6 @@ namespace Configurator
 				ConfDocument.AppendField(new ConfigurationObjectField("НомерДок", newUnigueNameInTable_НомерДок, "integer", "", "НомерДок"));
 
 				IsNewDocument = true;
-
-				LoadFieldList();
 			}
 			else
 			{
@@ -84,10 +83,11 @@ namespace Configurator
 				textBoxClearSpend.Text = ConfDocument.SpendFunctions.ClearSpend;
 
 				IsNewDocument = false;
-
-				LoadFieldList();
-				LoadTabularPartsList();
 			}
+
+			LoadFieldList();
+			LoadTabularPartsList();
+			LoadRegisters();
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
@@ -227,9 +227,9 @@ namespace Configurator
         {
 			checkedListBoxRegisters.Items.Clear();
 
-			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in ConfDocument.TabularParts)
+			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> configurationRegistersAccumulation in RegistersAccumulation)
 			{
-				listBoxTabularParts.Items.Add(configurationObjectTablePart.Value.Name);
+				checkedListBoxRegisters.Items.Add(configurationRegistersAccumulation.Value.Name);
 			}
 		}
 

@@ -959,6 +959,7 @@ namespace Configurator
 
 				DocumentForm documentForm = new DocumentForm();
 				documentForm.ConfDocument = Conf.Documents[documentName];
+				documentForm.RegistersAccumulation = Conf.RegistersAccumulation;
 				documentForm.CallBack = CallBack_Update_Document;
 				documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
 				documentForm.Show();
@@ -1416,6 +1417,7 @@ namespace Configurator
 		private void addNewDocumentToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			DocumentForm documentForm = new DocumentForm();
+			documentForm.RegistersAccumulation = Conf.RegistersAccumulation;
 			documentForm.CallBack = CallBack_Update_Document;
 			documentForm.CallBack_IsExistDocumentName = CallBack_IsExistDocumentName;
 			documentForm.Show();
