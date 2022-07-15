@@ -963,12 +963,12 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:if>
 		}
 
-		public void SpendTheDocument(DateTime spend_date)
+		public void SpendTheDocument(DateTime spendDate)
 		{
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
 					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/Spend"/>
-					<xsl:text>(this), spend_date);</xsl:text>
+					<xsl:text>(this), spendDate);</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
 					<xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>

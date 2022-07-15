@@ -732,7 +732,7 @@ namespace AccountingSoftware
 			while (reader.Read())
 			{
 				spend = (bool)reader["spend"];
-				spend_date = (DateTime)reader["spend_date"];
+				spend_date = (reader["spend_date"] != DBNull.Value) ? DateTime.Parse(reader["spend_date"].ToString()) : DateTime.MinValue;
 
 				foreach (string field in fieldArray)
 					fieldValue[field] = reader[field];
@@ -768,9 +768,7 @@ namespace AccountingSoftware
 
 		public void UpdateDocumentObject(UnigueID unigueID, bool spend, DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "UPDATE " + table + 
-				" SET spend = @spend, " +
-				" SET spend_date = @spend_date ";
+			string query = "UPDATE " + table + " SET spend = @spend, spend_date = @spend_date";
 
 			foreach (string field in fieldArray)
 				query += ", " + field + " = @" + field;
