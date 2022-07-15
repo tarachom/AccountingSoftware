@@ -36,11 +36,11 @@ namespace AccountingSoftware
 			UnigueID = new UnigueID(Guid.Empty);
 		}
 
-		public DocumentPointer(Kernel kernel, string table, string name) : this()
+		public DocumentPointer(Kernel kernel, string table, string typeDocument) : this()
 		{
 			Table = table;
 			Kernel = kernel;
-			Name = name;
+			TypeDocument = typeDocument;
 		}
 
 		/// <summary>
@@ -67,7 +67,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Назва як задано в конфігураторі
 		/// </summary>
-		public string Name { get; set; }
+		public string TypeDocument { get; set; }
 
 		/// <summary>
 		/// Унікальний ідентифікатор запису
