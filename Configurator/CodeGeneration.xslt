@@ -1282,9 +1282,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         public void Read()
         {
             Records.Clear();
-            
             base.BaseRead();
-            
             foreach (Dictionary&lt;string, object&gt; fieldValue in base.FieldValueList) 
             {
                 Record record = new Record();
@@ -1302,38 +1300,33 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                 </xsl:for-each>
                 Records.Add(record);
             }
-            
             base.BaseClear();
         }
         
         public void Save(DateTime period, Guid owner)
         {
-            if (Records.Count > 0)
+            base.BaseBeginTransaction();
+            base.BaseDelete(owner);
+            foreach (Record record in Records)
             {
-                base.BaseBeginTransaction();
-                base.BaseDelete(owner);
-                foreach (Record record in Records)
-                {
-                    record.Period = period;
-                    record.Owner = owner;
-                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                      <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-                      <xsl:if test="Type = 'enum'">
-                         <xsl:text>(int)</xsl:text>      
-                      </xsl:if>
-					  <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.UnigueID.UGuid</xsl:text>
-                      </xsl:if>
-                      <xsl:text>)</xsl:text>;
-                    </xsl:for-each>
-                    base.BaseSave(record.UID, period, owner, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
+                record.Period = period;
+                record.Owner = owner;
+                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                    <xsl:text>fieldValue.Add("</xsl:text>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                    <xsl:if test="Type = 'enum'">
+                        <xsl:text>(int)</xsl:text>      
+                    </xsl:if>
+					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:text>.UnigueID.UGuid</xsl:text>
+                    </xsl:if>
+                    <xsl:text>)</xsl:text>;
+                </xsl:for-each>
+                base.BaseSave(record.UID, period, owner, fieldValue);
             }
+            base.BaseCommitTransaction();
         }
         
         public void Delete(Guid owner)
@@ -1429,32 +1422,28 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         
         public void Save(DateTime period, Guid owner) 
         {
-            if (Records.Count > 0)
+            base.BaseBeginTransaction();
+            base.BaseDelete(owner);
+            foreach (Record record in Records)
             {
-                base.BaseBeginTransaction();
-                base.BaseDelete(owner);
-                foreach (Record record in Records)
-                {
-                    record.Period = period;
-                    record.Owner = owner;
-                    Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
-                    <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
-                      <xsl:text>fieldValue.Add("</xsl:text>
-                      <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
-                      <xsl:if test="Type = 'enum'">
-                         <xsl:text>(int)</xsl:text>      
-                      </xsl:if>
-					  <xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                      <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
-                        <xsl:text>.UnigueID.UGuid</xsl:text>
-                      </xsl:if>
-                      <xsl:text>)</xsl:text>;
-                    </xsl:for-each>
-                    base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
-                }
-                
-                base.BaseCommitTransaction();
+                record.Period = period;
+                record.Owner = owner;
+                Dictionary&lt;string, object&gt; fieldValue = new Dictionary&lt;string, object&gt;();
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                    <xsl:text>fieldValue.Add("</xsl:text>
+                    <xsl:value-of select="NameInTable"/><xsl:text>", </xsl:text>
+                    <xsl:if test="Type = 'enum'">
+                        <xsl:text>(int)</xsl:text>      
+                    </xsl:if>
+					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
+                    <xsl:text>.UnigueID.UGuid</xsl:text>
+                    </xsl:if>
+                    <xsl:text>)</xsl:text>;
+                </xsl:for-each>
+                base.BaseSave(record.UID, period, record.Income, owner, fieldValue);
             }
+            base.BaseCommitTransaction();
         }
 
         public void Delete(Guid owner)
