@@ -743,6 +743,7 @@ limitations under the License.
                 <xsl:text>uid uuid NOT NULL, </xsl:text>
 				<xsl:if test="$TableType = 'Document'">
 					<xsl:text>spend bool NOT NULL, </xsl:text>
+					<xsl:text>spend_date timestamp without time zone NOT NULL, </xsl:text>
 				</xsl:if>
 				<xsl:if test="$TableType = 'RegisterInformation'">
 					<xsl:text>period timestamp without time zone NOT NULL, </xsl:text>

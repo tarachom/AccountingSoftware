@@ -713,9 +713,9 @@ namespace AccountingSoftware
 
 		#region Document
 
-		public bool SelectDocumentObject(UnigueID unigueID, ref bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public bool SelectDocumentObject(UnigueID unigueID, ref bool spend, ref DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "SELECT uid, spend ";
+			string query = "SELECT uid, spend, spend_date";
 
 			foreach (string field in fieldArray)
 				query += ", " + field;
@@ -732,6 +732,7 @@ namespace AccountingSoftware
 			while (reader.Read())
 			{
 				spend = (bool)reader["spend"];
+				spend_date = (DateTime)reader["spend_date"];
 
 				foreach (string field in fieldArray)
 					fieldValue[field] = reader[field];
@@ -741,10 +742,10 @@ namespace AccountingSoftware
 			return isSelectDocumentObject;
 		}
 
-		public void InsertDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void InsertDocumentObject(UnigueID unigueID, bool spend, DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query_field = "uid, spend";
-			string query_values = "@uid, @spend";
+			string query_field = "uid, spend, spend_date";
+			string query_values = "@uid, @spend, @spend_date";
 
 			foreach (string field in fieldArray)
 			{
@@ -757,6 +758,7 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
 			nCommand.Parameters.Add(new NpgsqlParameter("spend", spend));
+			nCommand.Parameters.Add(new NpgsqlParameter("spend_date", spend_date));
 
 			foreach (string field in fieldArray)
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
@@ -764,9 +766,11 @@ namespace AccountingSoftware
 			nCommand.ExecuteNonQuery();
 		}
 
-		public void UpdateDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		public void UpdateDocumentObject(UnigueID unigueID, bool spend, DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
 		{
-			string query = "UPDATE " + table + " SET spend = @spend";
+			string query = "UPDATE " + table + 
+				" SET spend = @spend, " +
+				" SET spend_date = @spend_date ";
 
 			foreach (string field in fieldArray)
 				query += ", " + field + " = @" + field;
@@ -776,6 +780,7 @@ namespace AccountingSoftware
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("uid", unigueID.UGuid));
 			nCommand.Parameters.Add(new NpgsqlParameter("spend", spend));
+			nCommand.Parameters.Add(new NpgsqlParameter("spend_date", spend_date));
 
 			foreach (string field in fieldArray)
 				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));

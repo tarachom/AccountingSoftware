@@ -82,9 +82,9 @@ namespace AccountingSoftware
 
 		#region Document
 
-		void InsertDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
-		void UpdateDocumentObject(UnigueID unigueID, bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
-		bool SelectDocumentObject(UnigueID unigueID, ref bool spend, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void InsertDocumentObject(UnigueID unigueID, bool spend, DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void UpdateDocumentObject(UnigueID unigueID, bool spend, DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		bool SelectDocumentObject(UnigueID unigueID, ref bool spend, ref DateTime spend_date, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteDocumentObject(UnigueID unigueID, string table);
 
 		void SelectDocumentPointer(Query QuerySelect, List<DocumentPointer> listDocumentPointer);

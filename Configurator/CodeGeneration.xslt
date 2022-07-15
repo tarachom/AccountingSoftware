@@ -963,15 +963,15 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
             </xsl:if>
 		}
 
-		public void SpendTheDocument()
+		public void SpendTheDocument(DateTime spend_date)
 		{
             <xsl:choose>
                 <xsl:when test="normalize-space(SpendFunctions/Spend) != ''">
 					<xsl:text>BaseSpend(</xsl:text><xsl:value-of select="SpendFunctions/Spend"/>
-					<xsl:text>(this));</xsl:text>
+					<xsl:text>(this), spend_date);</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-					<xsl:text>BaseSpend(false);</xsl:text>
+					<xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
 		}
@@ -980,9 +980,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 		{
             <xsl:if test="normalize-space(SpendFunctions/ClearSpend) != ''">
                 <xsl:value-of select="SpendFunctions/ClearSpend"/>
-				<xsl:text>(this); </xsl:text>
+				<xsl:text>(this)</xsl:text>;
 			</xsl:if>
-		    <xsl:text>BaseSpend(false);</xsl:text>
+		    <xsl:text>BaseSpend(false, DateTime.MinValue);</xsl:text>
 		}
 
 		public <xsl:value-of select="$DocumentName"/>_Objest Copy()

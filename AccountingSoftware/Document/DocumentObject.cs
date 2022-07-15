@@ -74,6 +74,11 @@ namespace AccountingSoftware
 		public bool Spend { get; private set; }
 
 		/// <summary>
+		/// Дата проведення документу
+		/// </summary>
+		public DateTime SpendDate { get; private set; }
+
+		/// <summary>
 		/// Чи це новий?
 		/// </summary>
 		public bool IsNew { get; private set; }
@@ -115,11 +120,13 @@ namespace AccountingSoftware
 			BaseClear();
 
 			bool spend = false;
+			DateTime spend_date = DateTime.MinValue;
 
-			if (Kernel.DataBase.SelectDocumentObject(uid, ref spend, Table, FieldArray, FieldValue))
+			if (Kernel.DataBase.SelectDocumentObject(uid, ref spend, ref spend_date, Table, FieldArray, FieldValue))
 			{
 				UnigueID = uid;
 				Spend = spend;
+				SpendDate = spend_date;
 
 				IsSave = true;
 				return true;
@@ -135,13 +142,13 @@ namespace AccountingSoftware
 		{
 			if (IsNew)
 			{
-				Kernel.DataBase.InsertDocumentObject(UnigueID, Spend, Table, FieldArray, FieldValue);
+				Kernel.DataBase.InsertDocumentObject(UnigueID, Spend, SpendDate, Table, FieldArray, FieldValue);
 				IsNew = false;
 			}
 			else
 			{
 				if (UnigueID != null)
-					Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, Table, FieldArray, FieldValue);
+					Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, SpendDate, Table, FieldArray, FieldValue);
 				else
 					throw new Exception("Спроба записати неіснуючий документ. Потрібно спочатку створити новий - функція New()");
 			}
@@ -151,13 +158,14 @@ namespace AccountingSoftware
 			BaseClear();
 		}
 
-		protected void BaseSpend(bool spend)
+		protected void BaseSpend(bool spend, DateTime spend_date)
         {
 			Spend = spend;
+			SpendDate = spend_date;
 
 			if (IsSave)
 				//Обновлення поля spend документу, решта полів не зачіпаються
-				Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, Table, new string[] { }, new Dictionary<string, object>());
+				Kernel.DataBase.UpdateDocumentObject(UnigueID, Spend, SpendDate, Table, new string[] { }, new Dictionary<string, object>());
 			else
 				throw new Exception("Документ спочатку треба записати, а потім вже провести");
 		}
