@@ -871,6 +871,16 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void LoadAllowRegisterAccumulation(List<string> allowRegisterAccumulation, XPathNavigator xPathDocNavigator)
+        {
+			XPathNodeIterator tablePartNodes = xPathDocNavigator.Select("AllowRegisterAccumulation/Name");
+			while (tablePartNodes.MoveNext())
+			{
+				string name = tablePartNodes.Current.SelectSingleNode("Name").Value;
+				allowRegisterAccumulation.Add(name);
+			}
+		}
+
 		private static void LoadTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XPathNavigator xPathDocNavigator)
 		{
 			XPathNavigator nodeTriggerFunctions = xPathDocNavigator.SelectSingleNode("TriggerFunctions");
@@ -939,6 +949,8 @@ namespace AccountingSoftware
 				LoadFields(configurationDocuments.Fields, documentsNode.Current);
 
 				LoadTabularParts(configurationDocuments.TabularParts, documentsNode.Current);
+
+				LoadAllowRegisterAccumulation(configurationDocuments.AllowRegisterAccumulation, documentsNode.Current);
 
 				LoadTriggerFunctions(configurationDocuments.TriggerFunctions, documentsNode.Current);
 
@@ -1230,6 +1242,19 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void SaveAllowRegisterAccumulation(List<string> allowRegisterAccumulation, XmlDocument xmlConfDocument, XmlElement rootNode)
+        {
+			XmlElement nodeAllowRegisterAccumulation = xmlConfDocument.CreateElement("AllowRegisterAccumulation");
+			rootNode.AppendChild(nodeAllowRegisterAccumulation);
+
+			foreach (string name in allowRegisterAccumulation)
+			{
+				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
+				nodeName.InnerText = name;
+				nodeAllowRegisterAccumulation.AppendChild(nodeName);
+			}
+		}
+
 		private static void SaveTriggerFunctions(ConfigurationTriggerFunctions triggerFunctions, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
 			XmlElement nodeTriggerFunctions = xmlConfDocument.CreateElement("TriggerFunctions");
@@ -1332,6 +1357,8 @@ namespace AccountingSoftware
 				SaveFields(ConfDocument.Value.Fields, xmlConfDocument, nodeDocument);
 
 				SaveTabularParts(ConfDocument.Value.TabularParts, xmlConfDocument, nodeDocument);
+
+				SaveAllowRegisterAccumulation(ConfDocument.Value.AllowRegisterAccumulation, xmlConfDocument, nodeDocument);
 
 				SaveTriggerFunctions(ConfDocument.Value.TriggerFunctions, xmlConfDocument, nodeDocument);
 

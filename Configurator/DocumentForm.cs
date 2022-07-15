@@ -223,6 +223,16 @@ namespace Configurator
 			}
 		}
 
+		void LoadRegisters()
+        {
+			checkedListBoxRegisters.Items.Clear();
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> configurationObjectTablePart in ConfDocument.TabularParts)
+			{
+				listBoxTabularParts.Items.Add(configurationObjectTablePart.Value.Name);
+			}
+		}
+
 		private void listBoxFields_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			if (listBoxFields.SelectedItem != null)

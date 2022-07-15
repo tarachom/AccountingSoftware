@@ -64,6 +64,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.checkedListBoxRegisters = new System.Windows.Forms.CheckedListBox();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -259,6 +260,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.checkedListBoxRegisters);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
@@ -448,6 +450,14 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
+            // checkedListBoxRegisters
+            // 
+            this.checkedListBoxRegisters.FormattingEnabled = true;
+            this.checkedListBoxRegisters.Location = new System.Drawing.Point(15, 347);
+            this.checkedListBoxRegisters.Name = "checkedListBoxRegisters";
+            this.checkedListBoxRegisters.Size = new System.Drawing.Size(318, 214);
+            this.checkedListBoxRegisters.TabIndex = 16;
+            // 
             // DocumentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -521,5 +531,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxClearSpend;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckedListBox checkedListBoxRegisters;
     }
 }

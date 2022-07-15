@@ -37,6 +37,7 @@ namespace AccountingSoftware
 		{
 			Fields = new Dictionary<string, ConfigurationObjectField>();
 			TabularParts = new Dictionary<string, ConfigurationObjectTablePart>();
+			AllowRegisterAccumulation = new List<string>();
 			TriggerFunctions = new ConfigurationTriggerFunctions();
 			SpendFunctions = new ConfigurationSpendFunctions();
 		}
@@ -63,6 +64,11 @@ namespace AccountingSoftware
 		/// Табличні частини
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectTablePart> TabularParts { get; }
+
+		/// <summary>
+		/// Регістри накопичення по яких може робити рухи документ
+		/// </summary>
+		public List<string> AllowRegisterAccumulation { get; }
 
 		/// <summary>
 		/// Тригери
