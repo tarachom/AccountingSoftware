@@ -62,6 +62,14 @@ namespace Configurator
             richTextBoxInfo.Text = "";
         }
 
+        #region Import
+
+
+
+        #endregion
+
+        #region Export
+
         void ExportData(object fileExport)
         {
             XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, Encoding = Encoding.UTF8 };
@@ -104,7 +112,6 @@ namespace Configurator
                 }
             }
             xmlWriter.WriteEndElement(); //Constants
-
 
             ApendLine("ДОВІДНИКИ");
 
@@ -320,6 +327,7 @@ namespace Configurator
             xmlWriter.Flush();
         }
 
+        #endregion
 
 
         void SaveTable(string table)
