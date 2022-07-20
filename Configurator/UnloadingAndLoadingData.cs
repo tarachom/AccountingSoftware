@@ -81,32 +81,60 @@ namespace Configurator
                 xmlWriter.WriteAttributeString("name", configurationDirectories.Name);
                 xmlWriter.WriteAttributeString("tab", configurationDirectories.Table);
 
-                string all_fields;
+                WriteFieldsInfo(xmlWriter, configurationDirectories.Fields);
+                WriteTabularPartsInfo(xmlWriter, configurationDirectories.TabularParts);
 
-                WriteFields(xmlWriter, configurationDirectories.Fields, out all_fields);
-                WriteQuerySelect(xmlWriter, $@"SELECT uid{all_fields} FROM {configurationDirectories.Table}");
+                WriteQuerySelect(xmlWriter, $@"SELECT uid{GetAllFields(configurationDirectories.Fields)} FROM {configurationDirectories.Table}");
 
-                xmlWriter.WriteStartElement("TabularParts");
                 foreach (ConfigurationObjectTablePart tablePart in configurationDirectories.TabularParts.Values)
                 {
-                    WriteTablePart(xmlWriter, tablePart, out all_fields);
-                    WriteQuerySelect(xmlWriter, $@"SELECT uid, owner{all_fields} FROM {tablePart.Table}");
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", tablePart.Name);
+                    xmlWriter.WriteAttributeString("tab", tablePart.Table);
+
+                    WriteQuerySelect(xmlWriter, $@"SELECT uid, owner{GetAllFields(tablePart.Fields)} FROM {tablePart.Table}");
+
+                    xmlWriter.WriteEndElement();
                 }
-                xmlWriter.WriteEndElement(); //TabularParts
+
                 xmlWriter.WriteEndElement(); //Directory
             }
-            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndElement(); //Directories
 
-            ApendLine("\nРЕГІСТРИ");
+            ApendLine("ДОКУМЕНТИ");
 
-            foreach (ConfigurationRegistersAccumulation configurationRegistersAccumulation in Conf.RegistersAccumulation.Values)
+            xmlWriter.WriteStartElement("Documents");
+            foreach (ConfigurationDocuments configurationDocuments in Conf.Documents.Values)
             {
-                ApendLine(" --> Регістер накопичення: " + configurationRegistersAccumulation.Name);
+                ApendLine(" --> Документ: " + configurationDocuments.Name);
 
-                //SaveTable(configurationRegistersAccumulation.Table);
+                xmlWriter.WriteStartElement("Document");
+                xmlWriter.WriteAttributeString("name", configurationDocuments.Name);
+                xmlWriter.WriteAttributeString("tab", configurationDocuments.Table);
+
+                WriteFieldsInfo(xmlWriter, configurationDocuments.Fields);
+                WriteTabularPartsInfo(xmlWriter, configurationDocuments.TabularParts);
+
+                WriteQuerySelect(xmlWriter, $@"SELECT uid{GetAllFields(configurationDocuments.Fields)} FROM {configurationDocuments.Table}");
+
+                foreach (ConfigurationObjectTablePart tablePart in configurationDocuments.TabularParts.Values)
+                {
+                    xmlWriter.WriteStartElement("TablePart");
+                    xmlWriter.WriteAttributeString("name", tablePart.Name);
+                    xmlWriter.WriteAttributeString("tab", tablePart.Table);
+
+                    WriteQuerySelect(xmlWriter, $@"SELECT uid, owner{GetAllFields(tablePart.Fields)} FROM {tablePart.Table}");
+
+                    xmlWriter.WriteEndElement();
+                }
+
+                xmlWriter.WriteEndElement(); //Document
             }
+            xmlWriter.WriteEndElement(); //Documents
 
-            xmlWriter.WriteEndElement();
+            
+
+            xmlWriter.WriteEndElement(); //root
             xmlWriter.WriteEndDocument();
             xmlWriter.Close();
 
@@ -116,15 +144,21 @@ namespace Configurator
             ApendLine("Готово!");
         }
 
-        void WriteFields(XmlWriter xmlWriter, Dictionary<string, ConfigurationObjectField> fields, out string guery_all_fields)
+        string GetAllFields(Dictionary<string, ConfigurationObjectField> fields)
         {
-            guery_all_fields = "";
+            string guery_fields = "";
 
-            xmlWriter.WriteStartElement("Fields");
+            foreach (ConfigurationObjectField field in fields.Values)
+                guery_fields += $", {field.NameInTable}";
+
+            return guery_fields;
+        }
+
+        void WriteFieldsInfo(XmlWriter xmlWriter, Dictionary<string, ConfigurationObjectField> fields)
+        {
+            xmlWriter.WriteStartElement("FieldInfo");
             foreach (ConfigurationObjectField field in fields.Values)
             {
-                guery_all_fields += $", {field.NameInTable}";
-
                 xmlWriter.WriteStartElement("Field");
                 xmlWriter.WriteAttributeString("name", field.Name);
                 xmlWriter.WriteAttributeString("col", field.NameInTable);
@@ -136,15 +170,26 @@ namespace Configurator
             xmlWriter.WriteEndElement();
         }
 
-        void WriteTablePart(XmlWriter xmlWriter, ConfigurationObjectTablePart tablePart, out string guery_all_fields)
+        void WriteTablePartInfo(XmlWriter xmlWriter, ConfigurationObjectTablePart tablePart)
         {
             xmlWriter.WriteStartElement("TablePart");
             xmlWriter.WriteAttributeString("name", tablePart.Name);
             xmlWriter.WriteAttributeString("tab", tablePart.Table);
 
-            WriteFields(xmlWriter, tablePart.Fields, out guery_all_fields);
+            WriteFieldsInfo(xmlWriter, tablePart.Fields);
 
             xmlWriter.WriteEndElement();
+        }
+
+        void WriteTabularPartsInfo(XmlWriter xmlWriter, Dictionary<string, ConfigurationObjectTablePart> tabularParts)
+        {
+            if (tabularParts.Count > 0)
+            {
+                xmlWriter.WriteStartElement("TabularPartsInfo");
+                foreach (ConfigurationObjectTablePart tablePart in tabularParts.Values)
+                    WriteTablePartInfo(xmlWriter, tablePart);
+                xmlWriter.WriteEndElement(); //TabularPartsInfo
+            }
         }
 
         void WriteQuerySelect(XmlWriter xmlWriter, string query)
