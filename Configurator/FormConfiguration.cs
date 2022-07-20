@@ -410,7 +410,7 @@ namespace Configurator
 			rootNode.Expand();
 			contantsNode.Expand();
 			directoriesNode.Expand();
-			enumsNode.Expand();
+			//enumsNode.Expand();
 			documentsNode.Expand();
 			registersInformationNode.Expand();
 			registersAccumulationNode.Expand();
@@ -1481,10 +1481,14 @@ namespace Configurator
 
         #endregion
 
+        #region Вигрузка та Загрузка даних
+
         private void вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click(object sender, EventArgs e)
         {
-			//UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
-			//unloadingAndLoadingData.ShowDialog();
+			UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
+			unloadingAndLoadingData.ShowDialog();
 		}
+
+        #endregion
     }
 }

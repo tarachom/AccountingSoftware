@@ -250,9 +250,8 @@
             this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem});
             this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
-            this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.вигрузкаToolStripMenuItem.Text = "Вигрузка";
-            this.вигрузкаToolStripMenuItem.Visible = false;
+            this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.вигрузкаToolStripMenuItem.Text = "Сервіс";
             // 
             // вигрузкаТаЗагрузкаДанихToolStripMenuItem
             // 

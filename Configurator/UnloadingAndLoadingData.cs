@@ -9,9 +9,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Xml;
 using System.Xml.XPath;
 using AccountingSoftware;
 using System.IO;
+
 
 namespace Configurator
 {
@@ -31,11 +33,24 @@ namespace Configurator
 
         private void buttonUnloadingData_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(UnloadingData));
-            thread.Start();
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.FileName = "StorageAndTrade_Export_" + DateTime.Now.ToString("dd_MM_yyyy") + ".xml";
+            saveFileDialog.Filter = "XML|*.xml";
+            saveFileDialog.Title = "Файл для вигрузки даних";
+            saveFileDialog.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
 
-            buttonUnloadingData.Enabled = false;
-            richTextBoxInfo.Text = "";
+            if (!(saveFileDialog.ShowDialog() == DialogResult.OK))
+                return;
+            else
+            {
+                string fileExport = saveFileDialog.FileName;
+
+                Thread thread = new Thread(new ParameterizedThreadStart(ExportData));
+                thread.Start(fileExport);
+
+                buttonUnloadingData.Enabled = false;
+                richTextBoxInfo.Text = "";
+            }
         }
 
         private void buttonLoadingData_Click(object sender, EventArgs e)
@@ -47,41 +62,176 @@ namespace Configurator
             richTextBoxInfo.Text = "";
         }
 
-        void UnloadingData()
+        void ExportData(object fileExport)
         {
-            ApendLine("ДОВІДНИКИ", "");
+            XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, Encoding = Encoding.UTF8 };
 
+            XmlWriter xmlWriter = XmlWriter.Create(fileExport.ToString(), settings);
+            xmlWriter.WriteStartDocument();
+            xmlWriter.WriteStartElement("root");
+
+            ApendLine("ДОВІДНИКИ");
+
+            xmlWriter.WriteStartElement("Directories");
             foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
             {
-                ApendLine(" --> Довідник: ", configurationDirectories.Name);
+                ApendLine(" --> Довідник: " + configurationDirectories.Name);
 
-                SaveTable(configurationDirectories.Table);
+                xmlWriter.WriteStartElement("Directory");
+                xmlWriter.WriteAttributeString("name", configurationDirectories.Name);
+                xmlWriter.WriteAttributeString("tab", configurationDirectories.Table);
+
+                string all_fields;
+
+                WriteFields(xmlWriter, configurationDirectories.Fields, out all_fields);
+                WriteQuerySelect(xmlWriter, $@"SELECT uid{all_fields} FROM {configurationDirectories.Table}");
+
+                xmlWriter.WriteStartElement("TabularParts");
+                foreach (ConfigurationObjectTablePart tablePart in configurationDirectories.TabularParts.Values)
+                {
+                    WriteTablePart(xmlWriter, tablePart, out all_fields);
+                    WriteQuerySelect(xmlWriter, $@"SELECT uid, owner{all_fields} FROM {tablePart.Table}");
+                }
+                xmlWriter.WriteEndElement(); //TabularParts
+                xmlWriter.WriteEndElement(); //Directory
             }
+            xmlWriter.WriteEndElement();
 
-            ApendLine("РЕГІСТРИ", "");
+            ApendLine("\nРЕГІСТРИ");
 
             foreach (ConfigurationRegistersAccumulation configurationRegistersAccumulation in Conf.RegistersAccumulation.Values)
             {
-                ApendLine(" --> Регістер накопичення: ", configurationRegistersAccumulation.Name);
+                ApendLine(" --> Регістер накопичення: " + configurationRegistersAccumulation.Name);
 
-                SaveTable(configurationRegistersAccumulation.Table);
+                //SaveTable(configurationRegistersAccumulation.Table);
             }
+
+            xmlWriter.WriteEndElement();
+            xmlWriter.WriteEndDocument();
+            xmlWriter.Close();
 
             buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));
 
-            ApendLine("", "");
-            ApendLine("Готово!", "");
+            ApendLine("");
+            ApendLine("Готово!");
+        }
+
+        void WriteFields(XmlWriter xmlWriter, Dictionary<string, ConfigurationObjectField> fields, out string guery_all_fields)
+        {
+            guery_all_fields = "";
+
+            xmlWriter.WriteStartElement("Fields");
+            foreach (ConfigurationObjectField field in fields.Values)
+            {
+                guery_all_fields += $", {field.NameInTable}";
+
+                xmlWriter.WriteStartElement("Field");
+                xmlWriter.WriteAttributeString("name", field.Name);
+                xmlWriter.WriteAttributeString("col", field.NameInTable);
+                xmlWriter.WriteAttributeString("type", field.Type);
+                if (field.Type == "pointer" || field.Type == "enum")
+                    xmlWriter.WriteAttributeString("pointer", field.Pointer);
+                xmlWriter.WriteEndElement();
+            }
+            xmlWriter.WriteEndElement();
+        }
+
+        void WriteTablePart(XmlWriter xmlWriter, ConfigurationObjectTablePart tablePart, out string guery_all_fields)
+        {
+            xmlWriter.WriteStartElement("TablePart");
+            xmlWriter.WriteAttributeString("name", tablePart.Name);
+            xmlWriter.WriteAttributeString("tab", tablePart.Table);
+
+            WriteFields(xmlWriter, tablePart.Fields, out guery_all_fields);
+
+            xmlWriter.WriteEndElement();
+        }
+
+        void WriteQuerySelect(XmlWriter xmlWriter, string query)
+        {
+            string[] columnsName;
+            List<object[]> listRow;
+
+            Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            foreach (object[] row in listRow)
+            {
+                int counter = 0;
+
+                xmlWriter.WriteStartElement("row");
+                foreach (string column in columnsName)
+                {
+                    if (String.IsNullOrWhiteSpace(row[counter].ToString()))
+                        continue;
+
+                    xmlWriter.WriteStartElement(column);
+                    xmlWriter.WriteString(row[counter].ToString());
+                    xmlWriter.WriteEndElement();
+                    counter++;
+                }
+                xmlWriter.WriteEndElement();
+            }
+
+            xmlWriter.Flush();
+        }
+
+
+
+        void SaveTable(string table)
+        {
+            string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
+
+            string[] columnsName;
+            List<object[]> listRow;
+
+            string query = "SELECT * FROM " + table;
+
+            Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+            StreamWriter sw = new StreamWriter(pathToUnloadBase);
+            sw.AutoFlush = true;
+
+            sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+            sw.WriteLine("<ВигрузкаДаних>");
+            sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
+
+            sw.WriteLine("<Колонки>");
+
+            for (int k = 0; k < columnsName.Length; k++)
+            {
+                sw.Write("<Колонка>");
+                sw.Write("<Назва>" + columnsName[k] + "</Назва>");
+                sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
+                sw.WriteLine("</Колонка>");
+            }
+
+            sw.WriteLine("</Колонки>");
+            sw.WriteLine("<Записи>");
+
+            foreach (object[] o in listRow)
+            {
+                sw.Write("<row>");
+
+                for (int i = 0; i < o.Length; i++)
+                    sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
+
+                sw.WriteLine("</row>");
+            }
+
+            sw.WriteLine("</Записи>");
+            sw.WriteLine("</ВигрузкаДаних>");
+            sw.Close();
         }
 
         void LoadingData()
         {
-            ApendLine("ДОВІДНИКИ", "");
+            ApendLine("ДОВІДНИКИ");
 
             foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
             {
-                ApendLine(" --> Довідник: ", configurationDirectories.Name);
+                ApendLine(" --> Довідник: " + configurationDirectories.Name);
 
-                LoadTable(configurationDirectories.Table, configurationDirectories);
+                //LoadTable(configurationDirectories.Table, configurationDirectories);
             }
         }
 
@@ -173,84 +323,22 @@ namespace Configurator
                     param.Add(columnItem.Key, obj);
                 }
 
-                ApendLine(" --> " + table + ": ", Program.Kernel.DataBase.InsertSQL(table, param).ToString());
+                ApendLine(" --> " + table + ": " + Program.Kernel.DataBase.InsertSQL(table, param).ToString());
 
             }
         }
 
-        void SaveTable(string table)
-        {
-            string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
-
-            string[] columnsName;
-            List<object[]> listRow;
-
-            string query = "SELECT * FROM " + table;
-           
-            Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-            StreamWriter sw = new StreamWriter(pathToUnloadBase);
-            sw.AutoFlush = true;
-
-            sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-            sw.WriteLine("<ВигрузкаДаних>");
-            sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
-            
-            sw.WriteLine("<Колонки>");
-
-            for (int k = 0; k < columnsName.Length; k++)
-            {
-                sw.Write("<Колонка>");
-                sw.Write("<Назва>" + columnsName[k] + "</Назва>");
-                sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
-                sw.WriteLine("</Колонка>");
-            }
-
-            sw.WriteLine("</Колонки>");
-            sw.WriteLine("<Записи>");
-
-            foreach (object[] o in listRow)
-            {
-                sw.Write("<row>");
-
-                for (int i = 0; i < o.Length; i++)
-                    sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
-
-                sw.WriteLine("</row>");
-            }
-
-            sw.WriteLine("</Записи>");
-            sw.WriteLine("</ВигрузкаДаних>");
-            sw.Close();
-        }
-
-        private void ApendLine(string head, string bodySelect, string futer = "")
+        private void ApendLine(string text)
         {
             if (richTextBoxInfo.InvokeRequired)
             {
-                richTextBoxInfo.Invoke(new Action<string, string, string>(ApendLine), head, bodySelect, futer);
+                richTextBoxInfo.Invoke(new Action<string>(ApendLine), text);
             }
             else
             {
-                richTextBoxInfo.AppendText(head);
-
-                if (!String.IsNullOrEmpty(bodySelect))
-                {
-                    richTextBoxInfo.SelectionFont = new Font("Consolas"/*"Microsoft Sans Serif"*/, 10, FontStyle.Underline);
-                    richTextBoxInfo.SelectionColor = Color.DarkBlue;
-                    richTextBoxInfo.AppendText(bodySelect);
-                }
-
-                if (!String.IsNullOrEmpty(bodySelect))
-                {
-                    richTextBoxInfo.SelectionFont = new Font("Consolas", 10);
-                    richTextBoxInfo.SelectionColor = Color.Black;
-                }
-
-                richTextBoxInfo.AppendText(" " + futer + "\n");
-                richTextBoxInfo.ScrollToCaret();
+                richTextBoxInfo.AppendText("\n" + text);
             }
         }
-        
+
     }
 }
