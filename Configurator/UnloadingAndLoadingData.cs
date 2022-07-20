@@ -70,6 +70,40 @@ namespace Configurator
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("root");
 
+            ApendLine("КОНСТАНТИ");
+
+            xmlWriter.WriteStartElement("Constants");
+            foreach (ConfigurationConstantsBlock configurationConstantsBlock in Conf.ConstantsBlock.Values)
+            {
+                ApendLine("Блок: " + configurationConstantsBlock.BlockName);
+
+                foreach (ConfigurationConstants configurationConstants in configurationConstantsBlock.Constants.Values)
+                {
+                    ApendLine(" --> Константа: " + configurationConstants.Name);
+
+                    xmlWriter.WriteStartElement("Constant");
+                    xmlWriter.WriteAttributeString("name", configurationConstants.Name);
+                    xmlWriter.WriteAttributeString("col", configurationConstants.NameInTable);
+
+                    WriteTabularPartsInfo(xmlWriter, configurationConstants.TabularParts);
+
+                    foreach (ConfigurationObjectTablePart tablePart in configurationConstants.TabularParts.Values)
+                    {
+                        xmlWriter.WriteStartElement("TablePart");
+                        xmlWriter.WriteAttributeString("name", tablePart.Name);
+                        xmlWriter.WriteAttributeString("tab", tablePart.Table);
+
+                        WriteQuerySelect(xmlWriter, $@"SELECT uid{GetAllFields(tablePart.Fields)} FROM {tablePart.Table}");
+
+                        xmlWriter.WriteEndElement();
+                    }
+
+                    WriteQuerySelect(xmlWriter, $@"SELECT {configurationConstants.NameInTable} FROM tab_constants");
+
+                    xmlWriter.WriteEndElement(); //Constant
+                }
+            }
+            xmlWriter.WriteEndElement(); //Constants
 
 
             ApendLine("ДОВІДНИКИ");
