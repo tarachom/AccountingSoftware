@@ -70,6 +70,8 @@ namespace Configurator
             xmlWriter.WriteStartDocument();
             xmlWriter.WriteStartElement("root");
 
+
+
             ApendLine("ДОВІДНИКИ");
 
             xmlWriter.WriteStartElement("Directories");
@@ -132,7 +134,71 @@ namespace Configurator
             }
             xmlWriter.WriteEndElement(); //Documents
 
-            
+            ApendLine("РЕГІСТРИ ІНФОРМАЦІЇ");
+
+            xmlWriter.WriteStartElement("RegistersInformation");
+            foreach (ConfigurationRegistersInformation configurationRegistersInformation in Conf.RegistersInformation.Values)
+            {
+                ApendLine(" --> Регістр: " + configurationRegistersInformation.Name);
+
+                xmlWriter.WriteStartElement("Register");
+                xmlWriter.WriteAttributeString("name", configurationRegistersInformation.Name);
+                xmlWriter.WriteAttributeString("tab", configurationRegistersInformation.Table);
+
+                xmlWriter.WriteStartElement("DimensionFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.DimensionFields);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("ResourcesFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.ResourcesFields);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("PropertyFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.PropertyFields);
+                xmlWriter.WriteEndElement();
+
+                string query_fields = GetAllFields(configurationRegistersInformation.DimensionFields) +
+                    GetAllFields(configurationRegistersInformation.ResourcesFields) +
+                    GetAllFields(configurationRegistersInformation.PropertyFields);
+
+                WriteQuerySelect(xmlWriter, $@"SELECT uid, period, owner{query_fields} FROM {configurationRegistersInformation.Table}");
+
+                xmlWriter.WriteEndElement(); //Register
+            }
+            xmlWriter.WriteEndElement(); //RegistersInformation
+
+            ApendLine("РЕГІСТРИ НАКОПИЧЕННЯ");
+
+            xmlWriter.WriteStartElement("RegistersAccumulation");
+            foreach (ConfigurationRegistersAccumulation configurationRegistersAccumulation in Conf.RegistersAccumulation.Values)
+            {
+                ApendLine(" --> Регістр: " + configurationRegistersAccumulation.Name);
+
+                xmlWriter.WriteStartElement("Register");
+                xmlWriter.WriteAttributeString("name", configurationRegistersAccumulation.Name);
+                xmlWriter.WriteAttributeString("tab", configurationRegistersAccumulation.Table);
+
+                xmlWriter.WriteStartElement("DimensionFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.DimensionFields);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("ResourcesFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.ResourcesFields);
+                xmlWriter.WriteEndElement();
+
+                xmlWriter.WriteStartElement("PropertyFields");
+                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.PropertyFields);
+                xmlWriter.WriteEndElement();
+
+                string query_fields = GetAllFields(configurationRegistersAccumulation.DimensionFields) +
+                    GetAllFields(configurationRegistersAccumulation.ResourcesFields) +
+                    GetAllFields(configurationRegistersAccumulation.PropertyFields);
+
+                WriteQuerySelect(xmlWriter, $@"SELECT uid, period, income, owner{query_fields} FROM {configurationRegistersAccumulation.Table}");
+
+                xmlWriter.WriteEndElement(); //Register
+            }
+            xmlWriter.WriteEndElement(); //RegistersAccumulation
 
             xmlWriter.WriteEndElement(); //root
             xmlWriter.WriteEndDocument();
