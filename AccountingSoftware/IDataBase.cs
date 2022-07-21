@@ -119,12 +119,17 @@ namespace AccountingSoftware
 		ConfigurationInformationSchema SelectInformationSchema();
 		bool IfExistsTable(string tableName);
 		bool IfExistsColumn(string tableName, string columnName);
+
+        #endregion
+
+        #region SQL
+
+        int InsertSQL(string table, Dictionary<string, object> paramQuery);
 		int ExecuteSQL(string SqlQuery);
-
-		#endregion
-
-		int InsertSQL(string table, Dictionary<string, object> paramQuery);
-
+		int ExecuteSQL(string sqlQuery, Dictionary<string, object> paramQuery);
 		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow);
-	}
+		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<NameValue<object>[]> listRow);
+
+        #endregion
+    }
 }

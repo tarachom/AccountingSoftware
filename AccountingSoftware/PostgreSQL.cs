@@ -1161,15 +1161,17 @@ namespace AccountingSoftware
 			return informationSchema;
 		}
 
-		public int ExecuteSQL(string SqlQuery)
-		{
-			NpgsqlCommand nCommand = new NpgsqlCommand(SqlQuery, Connection);
-			return nCommand.ExecuteNonQuery();
-		}
+        #endregion
 
-		#endregion
+        #region SQL
 
-		public int InsertSQL(string table, Dictionary<string, object> paramQuery)
+		/// <summary>
+		/// Вставка даних. Невідомо чи функція використовується.
+		/// </summary>
+		/// <param name="table">Таблиця</param>
+		/// <param name="paramQuery">Поля і значення</param>
+		/// <returns></returns>
+        public int InsertSQL(string table, Dictionary<string, object> paramQuery)
         {
 			string query_field = "";
 			string query_values = "";
@@ -1183,6 +1185,34 @@ namespace AccountingSoftware
 			string insertQuery = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")"; ;
 
 			NpgsqlCommand Command = new NpgsqlCommand(insertQuery, Connection);
+
+			if (paramQuery != null)
+				foreach (KeyValuePair<string, object> param in paramQuery)
+					Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+
+			return Command.ExecuteNonQuery();
+		}
+
+		/// <summary>
+		/// Виконує запит без повернення даних
+		/// </summary>
+		/// <param name="sqlQuery">Запит</param>
+		/// <returns></returns>
+		public int ExecuteSQL(string sqlQuery)
+		{
+			NpgsqlCommand Command = new NpgsqlCommand(sqlQuery, Connection);
+			return Command.ExecuteNonQuery();
+		}
+
+		/// <summary>
+		/// Виконує запит з параметрами без повернення даних
+		/// </summary>
+		/// <param name="sqlQuery">Запит</param>
+		/// <param name="paramQuery">Параметри</param>
+		/// <returns></returns>
+		public int ExecuteSQL(string sqlQuery, Dictionary<string, object> paramQuery)
+		{
+			NpgsqlCommand Command = new NpgsqlCommand(sqlQuery, Connection);
 
 			if (paramQuery != null)
 				foreach (KeyValuePair<string, object> param in paramQuery)
@@ -1228,5 +1258,46 @@ namespace AccountingSoftware
 			reader.Close();
 		}
 
+		/// <summary>
+		/// Виконання запиту SELECT
+		/// </summary>
+		/// <param name="selectQuery">Запит</param>
+		/// <param name="paramQuery">Параметри запиту</param>
+		/// <param name="columnsName">Масив стовпців даних</param>
+		/// <param name="listRow">Список рядочків даних</param>
+		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<NameValue<object>[]> listRow)
+		{
+			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);
+
+			if (paramQuery != null)
+				foreach (KeyValuePair<string, object> param in paramQuery)
+					Command.Parameters.Add(new NpgsqlParameter(param.Key, param.Value));
+
+			NpgsqlDataReader reader = Command.ExecuteReader();
+
+			int columnsCount = reader.FieldCount;
+			columnsName = new string[columnsCount];
+
+			for (int n = 0; n < columnsCount; n++)
+				columnsName[n] = reader.GetName(n);
+
+			listRow = new List<NameValue<object>[]>();
+
+			while (reader.Read())
+			{
+				NameValue<object>[] objRow = new NameValue<object>[columnsCount];
+
+				for (int i = 0; i < columnsCount; i++)
+				{
+					objRow[i].Name = columnsName[i];
+					objRow[i].Value = reader[i];
+				}
+
+				listRow.Add(objRow);
+			}
+			reader.Close();
+		}
+
+		#endregion
 	}
 }
