@@ -125,11 +125,11 @@ namespace AccountingSoftware
         #region SQL
 
         int InsertSQL(string table, Dictionary<string, object> paramQuery);
-		int ExecuteSQL(string SqlQuery);
+		int ExecuteSQL(string sqlQuery);
 		int ExecuteSQL(string sqlQuery, Dictionary<string, object> paramQuery);
 		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<object[]> listRow);
-		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<NameValue<object>[]> listRow);
+		void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<Dictionary<string, object>> listRow);
 
-        #endregion
-    }
+		#endregion
+	}
 }

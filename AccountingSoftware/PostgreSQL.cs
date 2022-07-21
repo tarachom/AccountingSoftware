@@ -1265,7 +1265,7 @@ namespace AccountingSoftware
 		/// <param name="paramQuery">Параметри запиту</param>
 		/// <param name="columnsName">Масив стовпців даних</param>
 		/// <param name="listRow">Список рядочків даних</param>
-		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<NameValue<object>[]> listRow)
+		public void SelectRequest(string selectQuery, Dictionary<string, object> paramQuery, out string[] columnsName, out List<Dictionary<string,object>> listRow)
 		{
 			NpgsqlCommand Command = new NpgsqlCommand(selectQuery, Connection);
 
@@ -1281,17 +1281,14 @@ namespace AccountingSoftware
 			for (int n = 0; n < columnsCount; n++)
 				columnsName[n] = reader.GetName(n);
 
-			listRow = new List<NameValue<object>[]>();
+			listRow = new List<Dictionary<string, object>>();
 
 			while (reader.Read())
 			{
-				NameValue<object>[] objRow = new NameValue<object>[columnsCount];
+				Dictionary<string, object> objRow = new Dictionary<string, object>();
 
 				for (int i = 0; i < columnsCount; i++)
-				{
-					objRow[i].Name = columnsName[i];
-					objRow[i].Value = reader[i];
-				}
+					objRow.Add(columnsName[i], reader[i]);
 
 				listRow.Add(objRow);
 			}
