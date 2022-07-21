@@ -437,6 +437,10 @@ namespace Configurator
 			ApendLine("Користувач: \t\t", Program.Kernel.DataBase_UserId);
 			ApendLine("Порт: \t\t\t", Program.Kernel.DataBase_Port);
 			ApendLine("Назва бази даних: \t", Program.Kernel.DataBase_BaseName);
+
+			ApendLine("", "");
+			ApendLine("[ Опис ]", "");
+			ApendLine(Conf.Desc, "");
 		}
 
 		#endregion

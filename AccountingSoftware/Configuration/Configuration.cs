@@ -70,6 +70,11 @@ namespace AccountingSoftware
 		public string Author { get; set; }
 
 		/// <summary>
+		/// Опис
+		/// </summary>
+		public string Desc { get; set; }
+
+		/// <summary>
 		/// Шлях до хмл файлу конфігурації
 		/// </summary>
 		public string PathToXmlFileConfiguration { get; set; }
@@ -774,7 +779,10 @@ namespace AccountingSoftware
 
 			string author = rootNodeConfiguration.SelectSingleNode("Author").Value;
 			Conf.Author = author;
-		}
+
+            string desc = rootNodeConfiguration.SelectSingleNode("Desc").Value;
+            Conf.Desc = desc;
+        }
 
 		private static void LoadConstants(Configuration Conf, XPathNavigator xPathDocNavigator)
 		{
@@ -1084,6 +1092,10 @@ namespace AccountingSoftware
 			XmlElement nodeAuthor = xmlConfDocument.CreateElement("Author");
 			nodeAuthor.InnerText = Conf.Author;
 			rootNode.AppendChild(nodeAuthor);
+
+			XmlElement nodeDesc = xmlConfDocument.CreateElement("Desc");
+			nodeDesc.InnerText = Conf.Desc;
+			rootNode.AppendChild(nodeDesc);
 
 			XmlElement nodeDateTimeSave = xmlConfDocument.CreateElement("DateTimeSave");
 			nodeDateTimeSave.InnerText = DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");

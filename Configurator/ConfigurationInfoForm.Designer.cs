@@ -39,6 +39,8 @@ namespace Configurator
             this.label2 = new System.Windows.Forms.Label();
             this.textBox_Автор = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox_Desc = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,7 +60,7 @@ namespace Configurator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Назва.Location = new System.Drawing.Point(120, 20);
             this.textBox_Назва.Name = "textBox_Назва";
-            this.textBox_Назва.Size = new System.Drawing.Size(539, 20);
+            this.textBox_Назва.Size = new System.Drawing.Size(716, 20);
             this.textBox_Назва.TabIndex = 1;
             // 
             // panel2
@@ -67,16 +69,16 @@ namespace Configurator
             this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonSave);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 177);
+            this.panel2.Location = new System.Drawing.Point(0, 565);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(671, 38);
+            this.panel2.Size = new System.Drawing.Size(848, 38);
             this.panel2.TabIndex = 4;
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonClose.Location = new System.Drawing.Point(559, 3);
+            this.buttonClose.Location = new System.Drawing.Point(736, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(109, 32);
             this.buttonClose.TabIndex = 3;
@@ -88,7 +90,7 @@ namespace Configurator
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
-            this.buttonSave.Location = new System.Drawing.Point(444, 3);
+            this.buttonSave.Location = new System.Drawing.Point(621, 3);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(109, 32);
             this.buttonSave.TabIndex = 2;
@@ -98,6 +100,8 @@ namespace Configurator
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.textBox_Desc);
+            this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.textBox_Автор);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.textBox_ПростірІмен);
@@ -107,7 +111,7 @@ namespace Configurator
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(671, 177);
+            this.panel1.Size = new System.Drawing.Size(848, 565);
             this.panel1.TabIndex = 4;
             // 
             // textBox_ПростірІмен
@@ -116,7 +120,7 @@ namespace Configurator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_ПростірІмен.Location = new System.Drawing.Point(120, 46);
             this.textBox_ПростірІмен.Name = "textBox_ПростірІмен";
-            this.textBox_ПростірІмен.Size = new System.Drawing.Size(539, 20);
+            this.textBox_ПростірІмен.Size = new System.Drawing.Size(716, 20);
             this.textBox_ПростірІмен.TabIndex = 3;
             // 
             // label2
@@ -134,7 +138,7 @@ namespace Configurator
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox_Автор.Location = new System.Drawing.Point(120, 72);
             this.textBox_Автор.Name = "textBox_Автор";
-            this.textBox_Автор.Size = new System.Drawing.Size(539, 20);
+            this.textBox_Автор.Size = new System.Drawing.Size(716, 20);
             this.textBox_Автор.TabIndex = 5;
             // 
             // label3
@@ -146,11 +150,31 @@ namespace Configurator
             this.label3.TabIndex = 4;
             this.label3.Text = "Автор:";
             // 
+            // textBox_Desc
+            // 
+            this.textBox_Desc.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox_Desc.Location = new System.Drawing.Point(120, 98);
+            this.textBox_Desc.Multiline = true;
+            this.textBox_Desc.Name = "textBox_Desc";
+            this.textBox_Desc.Size = new System.Drawing.Size(716, 461);
+            this.textBox_Desc.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(8, 101);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(36, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Опис:";
+            // 
             // ConfigurationInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(671, 215);
+            this.ClientSize = new System.Drawing.Size(848, 603);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -176,5 +200,7 @@ namespace Configurator
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox_Автор;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox_Desc;
+        private System.Windows.Forms.Label label4;
     }
 }

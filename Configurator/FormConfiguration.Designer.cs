@@ -157,15 +157,16 @@
             // 
             // richTextBoxInfo
             // 
-            this.richTextBoxInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.richTextBoxInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxInfo.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.richTextBoxInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.richTextBoxInfo.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.richTextBoxInfo.Location = new System.Drawing.Point(8, 8);
+            this.richTextBoxInfo.Location = new System.Drawing.Point(8, 0);
             this.richTextBoxInfo.Name = "richTextBoxInfo";
             this.richTextBoxInfo.ReadOnly = true;
-            this.richTextBoxInfo.Size = new System.Drawing.Size(562, 254);
+            this.richTextBoxInfo.Size = new System.Drawing.Size(562, 465);
             this.richTextBoxInfo.TabIndex = 1;
             this.richTextBoxInfo.Text = "";
             // 

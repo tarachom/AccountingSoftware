@@ -27,6 +27,7 @@ namespace Configurator
             textBox_Назва.Text = Conf.Name;
             textBox_ПростірІмен.Text = Conf.NameSpace;
             textBox_Автор.Text = Conf.Author;
+            textBox_Desc.Text = Conf.Desc;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -44,6 +45,7 @@ namespace Configurator
             Conf.Name = textBox_Назва.Text;
             Conf.NameSpace = textBox_ПростірІмен.Text;
             Conf.Author = textBox_Автор.Text;
+            Conf.Desc = textBox_Desc.Text;
 
             if (OwnerForm != null)
                 OwnerForm.LoadConf();
