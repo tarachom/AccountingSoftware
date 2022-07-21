@@ -78,7 +78,38 @@ namespace Configurator
 
         void Import(object fileImport)
         {
+            XPathDocument xPathDocument = new XPathDocument(fileImport.ToString());
+            XPathNavigator xPathNavigator = xPathDocument.CreateNavigator();
 
+            XPathNavigator rootNode = xPathNavigator.SelectSingleNode("root");
+
+            XPathNodeIterator ConstantNode = rootNode.Select("Constants/Constant");
+            while (ConstantNode.MoveNext())
+            {
+                XPathNavigator CurrentNode = ConstantNode.Current;
+
+                string Name = CurrentNode.GetAttribute("name", "");
+                string Col = CurrentNode.GetAttribute("col", "");
+
+                XPathNavigator rowNode = CurrentNode.SelectSingleNode($"row/{Col}");
+
+                if (rowNode != null)
+                {
+
+                }
+
+                XPathNodeIterator TablePartNode = rootNode.Select("Constants/Constant");
+                while (TablePartNode.MoveNext())
+                {
+                    XPathNavigator CurrentTablePartNode = TablePartNode.Current;
+
+                    string TablePart_Name = CurrentNode.GetAttribute("name", "");
+                    string TablePart_Tab = CurrentNode.GetAttribute("tab", "");
+
+                    XPathNodeIterator rowTablePartNode = CurrentTablePartNode.Select("row");
+
+                }
+            }
         }
 
         #endregion

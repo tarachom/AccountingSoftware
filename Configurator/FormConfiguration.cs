@@ -423,6 +423,11 @@ namespace Configurator
 			Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
 			thread.Start();
 
+			LoadConfInfo();
+		}
+
+		public void LoadConfInfo()
+        {
 			richTextBoxInfo.Clear();
 
 			ApendLine("[ Конфігурації ]", "");

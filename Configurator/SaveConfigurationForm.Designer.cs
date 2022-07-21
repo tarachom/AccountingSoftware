@@ -86,9 +86,9 @@
             this.buttonSave.ForeColor = System.Drawing.Color.ForestGreen;
             this.buttonSave.Location = new System.Drawing.Point(118, 3);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(150, 32);
+            this.buttonSave.Size = new System.Drawing.Size(169, 32);
             this.buttonSave.TabIndex = 2;
-            this.buttonSave.Text = "Крок 2. Виконати";
+            this.buttonSave.Text = "Крок 2. Виконати та зберегти";
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 

@@ -48,7 +48,7 @@ namespace Configurator
             Conf.Desc = textBox_Desc.Text;
 
             if (OwnerForm != null)
-                OwnerForm.LoadConf();
+                OwnerForm.LoadConfInfo();
 
             this.Close();
         }
