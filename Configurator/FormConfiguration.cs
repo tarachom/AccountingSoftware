@@ -429,7 +429,7 @@ namespace Configurator
 			ApendLine("Назва: \t\t\t", Conf.Name);
 			ApendLine("Простір імен: \t\t", Conf.NameSpace);
 			ApendLine("Файл конфігурації: \t", Conf.PathToXmlFileConfiguration);
-			//ApendLine("Автор: \t\t\t", Conf.Author);
+			ApendLine("Автор: \t\t\t", Conf.Author);
 
 			ApendLine("", "");
 			ApendLine("[ PostgreSQL ]", "");
@@ -1543,7 +1543,10 @@ namespace Configurator
 
         private void редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }
+			ConfigurationInfoForm configurationInfoForm = new ConfigurationInfoForm();
+			configurationInfoForm.Conf = Conf;
+			configurationInfoForm.OwnerForm = this;
+			configurationInfoForm.Show();
+		}
     }
 }
