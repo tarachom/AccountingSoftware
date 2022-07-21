@@ -501,7 +501,7 @@ namespace AccountingSoftware
 
 					foreach (ConfigurationObjectField configurationObjectField in Fields.Values)
 					{
-						Console.WriteLine($"{configurationObjectField.NameInTable} = {columnNewName}");
+						//Console.WriteLine($"{configurationObjectField.NameInTable} = {columnNewName}");
 						if (configurationObjectField.NameInTable == columnNewName)
 						{
 							noExistInConf = false;
@@ -730,8 +730,11 @@ namespace AccountingSoftware
 		/// </summary>
 		/// <param name="pathToConf">Шлях до файлу конфігурації</param>
 		/// <param name="Conf">Конфігурація</param>
-		public static void Load(string pathToConf, Configuration Conf)
+		public static void Load(string pathToConf, out Configuration Conf)
 		{
+			Conf = new Configuration();
+
+			//??
 			if (!File.Exists(pathToConf))
 			{
 				Configuration EmptyConf = new Configuration();

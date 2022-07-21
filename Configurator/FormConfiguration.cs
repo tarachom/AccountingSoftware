@@ -389,12 +389,6 @@ namespace Configurator
 
 			LoadEnums(enumsNode);
 
-			//TreeNode journalsNode = rootNode.Nodes.Add("Journals", "Журнали документів");
-			//journalsNode.SelectedImageIndex = 3;
-			//journalsNode.ImageIndex = 3;
-
-			////...
-
 			TreeNode registersInformationNode = rootNode.Nodes.Add("RegistersInformation", "Регістри відомостей");
 			registersInformationNode.SelectedImageIndex = 3;
 			registersInformationNode.ImageIndex = 3;
@@ -422,6 +416,27 @@ namespace Configurator
 			{
 				treeConfiguration.Invoke(new Action(LoadTree));
 			}
+		}
+
+		public void LoadConf()
+        {
+			Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
+			thread.Start();
+
+			richTextBoxInfo.Clear();
+
+			ApendLine("[ Конфігурації ]", "");
+			ApendLine("Назва: \t\t\t", Conf.Name);
+			ApendLine("Простір імен: \t\t", Conf.NameSpace);
+			ApendLine("Файл конфігурації: \t", Conf.PathToXmlFileConfiguration);
+			//ApendLine("Автор: \t\t\t", Conf.Author);
+
+			ApendLine("", "");
+			ApendLine("[ PostgreSQL ]", "");
+			ApendLine("Сервер: \t\t\t", Program.Kernel.DataBase_Server);
+			ApendLine("Користувач: \t\t", Program.Kernel.DataBase_UserId);
+			ApendLine("Порт: \t\t\t", Program.Kernel.DataBase_Port);
+			ApendLine("Назва бази даних: \t", Program.Kernel.DataBase_BaseName);
 		}
 
 		#endregion
@@ -466,12 +481,7 @@ namespace Configurator
 			{
 				Conf = Program.Kernel.Conf;
 
-				Thread thread = new Thread(new ThreadStart(LoadTreeAsync));
-				thread.Start();
-
-				ApendLine("Конфігурації: \t\t", Conf.Name);
-				ApendLine("Файл конфігурації: \t", Conf.PathToXmlFileConfiguration);
-				ApendLine("Автор: \t\t\t", Conf.Author);
+				LoadConf();
 			}
             else
             {
@@ -804,17 +814,6 @@ namespace Configurator
 						confTablePartCopy.Fields.Add(confFieldCopy.Name, confFieldCopy);
 					}
 				}
-
-				//foreach (ConfigurationObjectView confViewOriginal in confDirectoriesOriginal.Views.Values)
-				//{
-				//	ConfigurationObjectView confViewCopy = new ConfigurationObjectView(confViewOriginal.Name,
-				//		confViewOriginal.Table, confViewOriginal.Desc);
-
-				//	confDirectoriesCopy.Views.Add(confViewCopy.Name, confViewCopy);
-
-				//	foreach (KeyValuePair<string, string> confViewField in confViewOriginal.Fields)
-				//		confViewCopy.Fields.Add(confViewField.Key, confViewField.Value);
-				//}
 
 				LoadDirectory(treeConfiguration.Nodes["root"].Nodes["Directories"], confDirectoriesCopy);
 			}
@@ -1447,6 +1446,56 @@ namespace Configurator
 			registersAccumulationForm.Show();
 		}
 
+		private void загрузитиКонфігураціюЗФайлуToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog openFileDialog = new OpenFileDialog();
+			openFileDialog.Filter = "XML|*.xml";
+			openFileDialog.Title = "Файл для загрузки конфігурації";
+			openFileDialog.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
+
+			if (!(openFileDialog.ShowDialog() == DialogResult.OK))
+				return;
+			else
+			{
+				string fileConf = openFileDialog.FileName;
+
+				Configuration conf;
+
+				try
+				{
+					Configuration.Load(fileConf, out conf);
+					conf.PathToXmlFileConfiguration = Conf.PathToXmlFileConfiguration;
+
+					Conf = conf;
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show(ex.Message);
+					return;
+				}
+
+				LoadConf();
+			}
+		}
+
+		private void вигрузитиКонфігураціюУФайлToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			SaveFileDialog saveFileDialog = new SaveFileDialog();
+			saveFileDialog.FileName = "Confa_" + Conf.NameSpace + "_" + DateTime.Now.ToString("dd_MM_yyyy") + ".xml";
+			saveFileDialog.Filter = "XML|*.xml";
+			saveFileDialog.Title = "Файл для вигрузки конфігурації";
+			saveFileDialog.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
+
+			if (!(saveFileDialog.ShowDialog() == DialogResult.OK))
+				return;
+			else
+			{
+				string fileConf = saveFileDialog.FileName;
+
+				Configuration.Save(fileConf, Conf);
+			}
+		}
+
 		#endregion
 
 		#region Функції
@@ -1489,6 +1538,12 @@ namespace Configurator
 			unloadingAndLoadingData.ShowDialog();
 		}
 
+
         #endregion
+
+        private void редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

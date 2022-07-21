@@ -41,9 +41,9 @@ namespace Configurator
             // 
             this.buttonUnloadingData.Location = new System.Drawing.Point(12, 12);
             this.buttonUnloadingData.Name = "buttonUnloadingData";
-            this.buttonUnloadingData.Size = new System.Drawing.Size(160, 23);
+            this.buttonUnloadingData.Size = new System.Drawing.Size(80, 30);
             this.buttonUnloadingData.TabIndex = 1;
-            this.buttonUnloadingData.Text = "Вигрузити дані";
+            this.buttonUnloadingData.Text = "Вигрузити";
             this.buttonUnloadingData.UseVisualStyleBackColor = true;
             this.buttonUnloadingData.Click += new System.EventHandler(this.buttonUnloadingData_Click);
             // 
@@ -72,19 +72,19 @@ namespace Configurator
             // 
             // buttonLoadingData
             // 
-            this.buttonLoadingData.Location = new System.Drawing.Point(397, 12);
+            this.buttonLoadingData.Location = new System.Drawing.Point(98, 12);
             this.buttonLoadingData.Name = "buttonLoadingData";
-            this.buttonLoadingData.Size = new System.Drawing.Size(160, 23);
+            this.buttonLoadingData.Size = new System.Drawing.Size(80, 30);
             this.buttonLoadingData.TabIndex = 3;
-            this.buttonLoadingData.Text = "Загрузити дані";
+            this.buttonLoadingData.Text = "Загрузити";
             this.buttonLoadingData.UseVisualStyleBackColor = true;
             this.buttonLoadingData.Click += new System.EventHandler(this.buttonLoadingData_Click);
             // 
             // buttonStop
             // 
-            this.buttonStop.Location = new System.Drawing.Point(178, 12);
+            this.buttonStop.Location = new System.Drawing.Point(250, 12);
             this.buttonStop.Name = "buttonStop";
-            this.buttonStop.Size = new System.Drawing.Size(69, 23);
+            this.buttonStop.Size = new System.Drawing.Size(69, 30);
             this.buttonStop.TabIndex = 4;
             this.buttonStop.Text = "Зупинити";
             this.buttonStop.UseVisualStyleBackColor = true;

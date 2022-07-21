@@ -98,18 +98,46 @@ namespace AccountingSoftware
 			DataBase = new PostgreSQL();
 			bool flagConnect = DataBase.Open2(Server, UserId, Password, Port, Database, out exception);
 
-			Conf = new Configuration();
-			Conf.PathToXmlFileConfiguration = PathToXmlFileConfiguration;
+			DataBase_Server = Server;
+			DataBase_UserId = UserId;
+			DataBase_Port = Port.ToString();
+			DataBase_BaseName = Database;
 
-			Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
+			try
+			{
+				Configuration conf;
+				Configuration.Load(PathToXmlFileConfiguration, out conf);
+				Conf = conf;
+			}
+            catch
+            {
+				return false;
+            }
+
+			Conf.PathToXmlFileConfiguration = PathToXmlFileConfiguration;
 
 			return flagConnect;
 		}
 
+		/// <summary>
+		/// Підключення до сервера баз даних без конфігурації
+		/// </summary>
+		/// <param name="Server">Адреса сервера баз даних</param>
+		/// <param name="UserId">Користувач</param>
+		/// <param name="Password">Пароль</param>
+		/// <param name="Port">Порт</param>
+		/// <param name="Database">База даних</param>
+		/// <param name="exception"Помилка></param>
+		/// <returns>True якщо підключення відбулось нормально</returns>
 		public bool OpenOnlyDataBase(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
         {
 			DataBase = new PostgreSQL();
 			bool flagConnect = DataBase.Open2(Server, UserId, Password, Port, Database, out exception);
+
+			DataBase_Server = Server;
+			DataBase_UserId = UserId;
+			DataBase_Port = Port.ToString();
+			DataBase_BaseName = Database;
 
 			return flagConnect;
 		}
@@ -132,5 +160,14 @@ namespace AccountingSoftware
 		/// Інтерфейс для роботи з базою даних
 		/// </summary>
 		public IDataBase DataBase { get; set; }
-	}
+
+		#region DataBase Info
+
+		public string DataBase_Server { get; private set; }
+		public string DataBase_UserId { get; private set; }
+		public string DataBase_Port { get; private set; }
+		public string DataBase_BaseName { get; private set; }
+
+        #endregion
+    }
 }

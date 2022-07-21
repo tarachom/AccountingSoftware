@@ -55,16 +55,31 @@ namespace Configurator
 
         private void buttonLoadingData_Click(object sender, EventArgs e)
         {
-            Thread thread = new Thread(new ThreadStart(LoadingData));
-            thread.Start();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "XML|*.xml";
+            openFileDialog.Title = "Файл для загрузки даних";
+            openFileDialog.InitialDirectory = Environment.SpecialFolder.Desktop.ToString();
 
-            buttonLoadingData.Enabled = false;
-            richTextBoxInfo.Text = "";
+            if (!(openFileDialog.ShowDialog() == DialogResult.OK))
+                return;
+            else
+            {
+                string fileImport = openFileDialog.FileName;
+
+                Thread thread = new Thread(new ParameterizedThreadStart(Import));
+                thread.Start(fileImport);
+
+                buttonLoadingData.Enabled = false;
+                richTextBoxInfo.Text = "";
+            }
         }
 
         #region Import
 
+        void Import(object fileImport)
+        {
 
+        }
 
         #endregion
 
