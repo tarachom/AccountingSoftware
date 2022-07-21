@@ -204,7 +204,7 @@ namespace Configurator
                 WriteFieldsInfo(xmlWriter, configurationDocuments.Fields);
                 WriteTabularPartsInfo(xmlWriter, configurationDocuments.TabularParts);
 
-                WriteQuerySelect(xmlWriter, $@"SELECT uid{GetAllFields(configurationDocuments.Fields)} FROM {configurationDocuments.Table}");
+                WriteQuerySelect(xmlWriter, $@"SELECT uid, spend, spend_date{GetAllFields(configurationDocuments.Fields)} FROM {configurationDocuments.Table}");
 
                 foreach (ConfigurationObjectTablePart tablePart in configurationDocuments.TabularParts.Values)
                 {
