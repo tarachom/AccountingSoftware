@@ -37,8 +37,11 @@
             this.menuStripTop = new System.Windows.Forms.MenuStrip();
             this.ConfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveConfigurationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.вигрузитиКонфігураціюУФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addContantsBlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addConstatntsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -84,9 +87,8 @@
             this.addItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.обслуговуванняБазиДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
             this.splitContainerBase.Panel1.SuspendLayout();
             this.splitContainerBase.Panel2.SuspendLayout();
@@ -103,8 +105,10 @@
             // 
             // splitContainerBase
             // 
-            this.splitContainerBase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerBase.Location = new System.Drawing.Point(10, 34);
+            this.splitContainerBase.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerBase.Location = new System.Drawing.Point(10, 69);
             this.splitContainerBase.Margin = new System.Windows.Forms.Padding(10);
             this.splitContainerBase.Name = "splitContainerBase";
             // 
@@ -115,7 +119,7 @@
             // splitContainerBase.Panel2
             // 
             this.splitContainerBase.Panel2.Controls.Add(this.richTextBoxInfo);
-            this.splitContainerBase.Size = new System.Drawing.Size(842, 465);
+            this.splitContainerBase.Size = new System.Drawing.Size(842, 430);
             this.splitContainerBase.SplitterDistance = 265;
             this.splitContainerBase.TabIndex = 0;
             // 
@@ -127,7 +131,7 @@
             this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
             this.treeConfiguration.Name = "treeConfiguration";
             this.treeConfiguration.SelectedImageIndex = 0;
-            this.treeConfiguration.Size = new System.Drawing.Size(265, 465);
+            this.treeConfiguration.Size = new System.Drawing.Size(265, 430);
             this.treeConfiguration.TabIndex = 0;
             this.treeConfiguration.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeConfiguration_NodeMouseClick);
             // 
@@ -166,7 +170,7 @@
             this.richTextBoxInfo.Location = new System.Drawing.Point(8, 0);
             this.richTextBoxInfo.Name = "richTextBoxInfo";
             this.richTextBoxInfo.ReadOnly = true;
-            this.richTextBoxInfo.Size = new System.Drawing.Size(562, 465);
+            this.richTextBoxInfo.Size = new System.Drawing.Size(562, 430);
             this.richTextBoxInfo.TabIndex = 1;
             this.richTextBoxInfo.Text = "";
             // 
@@ -198,23 +202,40 @@
             // saveConfigurationToolStripMenuItem
             // 
             this.saveConfigurationToolStripMenuItem.Name = "saveConfigurationToolStripMenuItem";
-            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.saveConfigurationToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.saveConfigurationToolStripMenuItem.Text = "Зберегти конфігурацію";
             this.saveConfigurationToolStripMenuItem.Click += new System.EventHandler(this.saveConfigurationToolStripMenuItem_Click);
             // 
-            // загрузитиКонфігураціюЗФайлуToolStripMenuItem
+            // toolStripSeparator1
             // 
-            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Name = "загрузитиКонфігураціюЗФайлуToolStripMenuItem";
-            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
-            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Text = "Загрузити конфігурацію з файлу";
-            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Click += new System.EventHandler(this.загрузитиКонфігураціюЗФайлуToolStripMenuItem_Click);
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(305, 6);
             // 
             // вигрузитиКонфігураціюУФайлToolStripMenuItem
             // 
             this.вигрузитиКонфігураціюУФайлToolStripMenuItem.Name = "вигрузитиКонфігураціюУФайлToolStripMenuItem";
-            this.вигрузитиКонфігураціюУФайлToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.вигрузитиКонфігураціюУФайлToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
             this.вигрузитиКонфігураціюУФайлToolStripMenuItem.Text = "Вигрузити конфігурацію в файл";
             this.вигрузитиКонфігураціюУФайлToolStripMenuItem.Click += new System.EventHandler(this.вигрузитиКонфігураціюУФайлToolStripMenuItem_Click);
+            // 
+            // загрузитиКонфігураціюЗФайлуToolStripMenuItem
+            // 
+            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Name = "загрузитиКонфігураціюЗФайлуToolStripMenuItem";
+            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Text = "Загрузити конфігурацію з файлу";
+            this.загрузитиКонфігураціюЗФайлуToolStripMenuItem.Click += new System.EventHandler(this.загрузитиКонфігураціюЗФайлуToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(305, 6);
+            // 
+            // редагуватиІнформаціюПроКонфігураціюToolStripMenuItem
+            // 
+            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Name = "редагуватиІнформаціюПроКонфігураціюToolStripMenuItem";
+            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
+            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Text = "Редагувати інформацію про конфігурацію";
+            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Click += new System.EventHandler(this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click);
             // 
             // добавитиToolStripMenuItem
             // 
@@ -282,7 +303,8 @@
             // вигрузкаToolStripMenuItem
             // 
             this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem});
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem,
+            this.обслуговуванняБазиДанихToolStripMenuItem});
             this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
             this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.вигрузкаToolStripMenuItem.Text = "Сервіс";
@@ -290,7 +312,7 @@
             // вигрузкаТаЗагрузкаДанихToolStripMenuItem
             // 
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Name = "вигрузкаТаЗагрузкаДанихToolStripMenuItem";
-            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Text = "Вигрузка та загрузка даних";
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Click += new System.EventHandler(this.вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click);
             // 
@@ -560,28 +582,27 @@
             this.deleteItemRegistersAccumulation.Text = "Видалити";
             this.deleteItemRegistersAccumulation.Click += new System.EventHandler(this.deleteItemRegistersAccumulation_Click);
             // 
-            // toolStripSeparator1
+            // обслуговуванняБазиДанихToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(251, 6);
+            this.обслуговуванняБазиДанихToolStripMenuItem.Name = "обслуговуванняБазиДанихToolStripMenuItem";
+            this.обслуговуванняБазиДанихToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.обслуговуванняБазиДанихToolStripMenuItem.Text = "Обслуговування бази даних";
+            this.обслуговуванняБазиДанихToolStripMenuItem.Click += new System.EventHandler(this.обслуговуванняБазиДанихToolStripMenuItem_Click);
             // 
-            // toolStripSeparator2
+            // toolStrip1
             // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(251, 6);
-            // 
-            // редагуватиІнформаціюПроКонфігураціюToolStripMenuItem
-            // 
-            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Name = "редагуватиІнформаціюПроКонфігураціюToolStripMenuItem";
-            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Size = new System.Drawing.Size(308, 22);
-            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Text = "Редагувати інформацію про конфігурацію";
-            this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem.Click += new System.EventHandler(this.редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click);
+            this.toolStrip1.Location = new System.Drawing.Point(10, 34);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(842, 25);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(862, 509);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.splitContainerBase);
             this.Controls.Add(this.menuStripTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -670,6 +691,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem редагуватиІнформаціюПроКонфігураціюToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem обслуговуванняБазиДанихToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }
 

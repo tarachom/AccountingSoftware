@@ -28,7 +28,7 @@ namespace Configurator
 
         private void UnloadingAndLoadingData_Load(object sender, EventArgs e)
         {
-            Conf = Program.Kernel.Conf;
+
         }
 
         private void buttonUnloadingData_Click(object sender, EventArgs e)
@@ -129,7 +129,7 @@ namespace Configurator
             xmlWriter.WriteStartElement("Constants");
             foreach (ConfigurationConstantsBlock configurationConstantsBlock in Conf.ConstantsBlock.Values)
             {
-                ApendLine("Блок: " + configurationConstantsBlock.BlockName);
+                ApendLine(configurationConstantsBlock.BlockName);
 
                 foreach (ConfigurationConstants configurationConstants in configurationConstantsBlock.Constants.Values)
                 {

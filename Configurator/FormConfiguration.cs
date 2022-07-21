@@ -1544,6 +1544,7 @@ namespace Configurator
         private void вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click(object sender, EventArgs e)
         {
 			UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
+			unloadingAndLoadingData.Conf = Conf;
 			unloadingAndLoadingData.ShowDialog();
 		}
 
@@ -1556,6 +1557,13 @@ namespace Configurator
 			configurationInfoForm.Conf = Conf;
 			configurationInfoForm.OwnerForm = this;
 			configurationInfoForm.Show();
+		}
+
+        private void обслуговуванняБазиДанихToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+			Maintenance maintenance = new Maintenance();
+			maintenance.Conf = Conf;
+			maintenance.ShowDialog();
 		}
     }
 }
