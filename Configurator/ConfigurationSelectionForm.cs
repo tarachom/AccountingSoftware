@@ -78,6 +78,10 @@ namespace Configurator
 
 					XPathNavigator currentNode = ConfigurationParamNodes.Current;
 
+					string SelectAttribute = currentNode.GetAttribute("Select", "");
+					if (!String.IsNullOrEmpty(SelectAttribute))
+						ItemConfigurationParam.Select = bool.Parse(SelectAttribute);
+
 					ItemConfigurationParam.ConfigurationKey = currentNode.SelectSingleNode("Key").Value;
 					ItemConfigurationParam.ConfigurationName = currentNode.SelectSingleNode("Name").Value;
 					ItemConfigurationParam.DataBaseServer = currentNode.SelectSingleNode("Server").Value;
@@ -103,6 +107,10 @@ namespace Configurator
 			{
 				XmlElement configurationNode = xmlConfParamDocument.CreateElement("Configuration");
 				rootNode.AppendChild(configurationNode);
+
+				XmlAttribute selectAttribute = xmlConfParamDocument.CreateAttribute("Select");
+				selectAttribute.Value = ItemConfigurationParam.Select.ToString();
+				configurationNode.Attributes.Append(selectAttribute);
 
 				XmlElement nodeKey = xmlConfParamDocument.CreateElement("Key");
 				nodeKey.InnerText = ItemConfigurationParam.ConfigurationKey;
@@ -139,11 +147,16 @@ namespace Configurator
 		private void Fill_listBoxConfiguration()
 		{
 			listBoxConfiguration.Items.Clear();
-			
+
 			foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+			{
 				listBoxConfiguration.Items.Add(ItemConfigurationParam);
 
-			if (listBoxConfiguration.Items.Count > 0)
+				if (ItemConfigurationParam.Select)
+					listBoxConfiguration.SelectedItem = ItemConfigurationParam;
+			}
+
+			if (listBoxConfiguration.SelectedIndex == -1 && listBoxConfiguration.Items.Count > 0)
 				listBoxConfiguration.SelectedIndex = 0;
 		}
 
@@ -221,8 +234,12 @@ namespace Configurator
 
 		void CallBack_Update(ConfigurationParam itemConfigurationParam, bool isNew)
         {
+			foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+				ItemConfigurationParam.Select = false;
+
 			if (isNew)
 			{
+				itemConfigurationParam.Select = true;
 				ListConfigurationParam.Add(itemConfigurationParam);
 				SaveConfigurationParamFromXML();
 			}
@@ -238,6 +255,7 @@ namespace Configurator
 						ItemConfigurationParam.DataBasePassword = itemConfigurationParam.DataBasePassword;
 						ItemConfigurationParam.DataBaseBaseName = itemConfigurationParam.DataBaseBaseName;
 						ItemConfigurationParam.DataBasePort = itemConfigurationParam.DataBasePort;
+						ItemConfigurationParam.Select = true;
 
 						SaveConfigurationParamFromXML();
 						break;
@@ -245,7 +263,7 @@ namespace Configurator
                 }
 			}
 
-			LoadConfigurationParamFromXML();
+			//LoadConfigurationParamFromXML();
 			Fill_listBoxConfiguration();
 		}
 
@@ -302,6 +320,9 @@ namespace Configurator
 			if (listBoxConfiguration.SelectedItem != null)
 			{
 				ConfigurationParam itemConfigurationParam = (ConfigurationParam)listBoxConfiguration.SelectedItem;
+				foreach (ConfigurationParam ItemConfigurationParam in ListConfigurationParam)
+					ItemConfigurationParam.Select = ItemConfigurationParam.ConfigurationKey == itemConfigurationParam.ConfigurationKey;
+				SaveConfigurationParamFromXML();
 
 				Exception exception;
 				bool flagOpen = OpenConfiguration(itemConfigurationParam, out exception);
@@ -365,6 +386,8 @@ namespace Configurator
 		public string DataBasePassword { get; set; }
 
 		public string DataBaseBaseName { get; set; }
+
+		public bool Select { get; set; }
 
 		public override string ToString()
 		{

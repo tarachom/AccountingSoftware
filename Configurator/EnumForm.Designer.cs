@@ -59,7 +59,7 @@
             this.listBoxFields.FormattingEnabled = true;
             this.listBoxFields.Location = new System.Drawing.Point(0, 0);
             this.listBoxFields.Name = "listBoxFields";
-            this.listBoxFields.Size = new System.Drawing.Size(266, 228);
+            this.listBoxFields.Size = new System.Drawing.Size(266, 597);
             this.listBoxFields.TabIndex = 0;
             this.listBoxFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listBoxFields_KeyDown);
             this.listBoxFields.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listBoxFields_MouseDoubleClick);
@@ -71,7 +71,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 258);
+            this.panel1.Size = new System.Drawing.Size(266, 627);
             this.panel1.TabIndex = 1;
             // 
             // panel5
@@ -80,7 +80,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(266, 228);
+            this.panel5.Size = new System.Drawing.Size(266, 597);
             this.panel5.TabIndex = 2;
             // 
             // panel4
@@ -130,7 +130,7 @@
             this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonSave);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 268);
+            this.panel2.Location = new System.Drawing.Point(10, 637);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(657, 38);
             this.panel2.TabIndex = 3;
@@ -164,7 +164,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label5);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(657, 258);
+            this.splitContainer1.Size = new System.Drawing.Size(657, 627);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -209,7 +209,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 316);
+            this.ClientSize = new System.Drawing.Size(677, 685);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
