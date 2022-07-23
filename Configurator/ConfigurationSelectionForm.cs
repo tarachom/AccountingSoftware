@@ -169,7 +169,7 @@ namespace Configurator
 
 #if DEBUG
 			//Конфігурація береться із папки Configurator
-			PathToConfXML = @"E:\Project\StorageAndTrade\StorageAndTrade\bin\Debug\Confa.xml";
+			//PathToConfXML = @"E:\Project\StorageAndTrade\StorageAndTrade\bin\Debug\Confa.xml";
 #endif
 
 			LoadConfigurationParamFromXML();
@@ -334,7 +334,7 @@ namespace Configurator
 				}
 				else
 				{
-					MessageBox.Show("Помилка відкриття конфігурації: " + exception.Message);
+					MessageBox.Show(exception.Message);
 				}
 			}
 		}

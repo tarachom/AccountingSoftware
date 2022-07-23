@@ -123,6 +123,7 @@ namespace Configurator
 			catch (Exception ex)
 			{
 				ApendLine(ex.Message, "");
+				return;
 			}
 
 			XPathDocument xPathDoc = new XPathDocument(Path.GetDirectoryName(Conf.PathToXmlFileConfiguration) + @"\Comparison.xml");
@@ -425,11 +426,11 @@ namespace Configurator
 		{
 			string assemblyLocation = Path.GetDirectoryName(Application.ExecutablePath);
 
-#if DEBUG
-			PathToXsltTemplate = @"E:\Project\AccountingSoftware_29_05_21\Configurator";
-#else
+//#if DEBUG
+			//PathToXsltTemplate = @"E:\Project\AccountingSoftware_29_05_21\Configurator";
+//#else
 			PathToXsltTemplate = assemblyLocation;
-#endif
+//#endif
 
 			Thread thread = new Thread(new ThreadStart(SaveAndAnalize));
 			thread.Start();
