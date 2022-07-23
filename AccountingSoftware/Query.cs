@@ -38,7 +38,7 @@ namespace AccountingSoftware
 		public Query(string table)
 		{
 			Field = new List<string>();
-			FieldAndAlias = new List<KeyValuePair<string, string>>();
+			FieldAndAlias = new List<NameValue<string>>();
 			Joins = new List<Join>();
 			Where = new List<Where>();
 			Order = new Dictionary<string, SelectOrder>();
@@ -82,8 +82,12 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Поля із псевдонімами
 		/// </summary>
-		public List<KeyValuePair<string, string>> FieldAndAlias { get; set; }
+		public List<NameValue<string>> FieldAndAlias { get; set; }
+		//public List<KeyValuePair<string, string>> FieldAndAlias { get; set; }
 
+		/// <summary>
+		/// Таблиці які потрібно приєднати
+		/// </summary>
 		public List<Join> Joins { get; set; }
 
 		/// <summary>
@@ -137,8 +141,8 @@ namespace AccountingSoftware
 
 			if (FieldAndAlias.Count > 0)
             {
-				foreach (KeyValuePair<string,string> field in FieldAndAlias)
-					query += ", " + field.Key + " AS " + field.Value;
+				foreach (NameValue<string> field in FieldAndAlias)
+					query += ", " + field.Name + " AS " + field.Value;
 			}
 
 			query += "\nFROM " + Table;

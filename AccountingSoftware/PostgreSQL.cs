@@ -450,7 +450,7 @@ namespace AccountingSoftware
 					foreach (string field in QuerySelect.Field)
 						fields.Add(field, reader[field]);
 
-					foreach(KeyValuePair<string,string> field in QuerySelect.FieldAndAlias)
+					foreach(NameValue<string> field in QuerySelect.FieldAndAlias)
 						fields.Add(field.Value, reader[field.Value]);
 				}
 
@@ -817,7 +817,7 @@ namespace AccountingSoftware
 					foreach (string field in QuerySelect.Field)
 						fields.Add(field, reader[field]);
 
-					foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+					foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
 						fields.Add(field.Value, reader[field.Value]);
 				}
 
@@ -902,7 +902,7 @@ namespace AccountingSoftware
 				foreach (string field in QuerySelect.Field)
 					fieldValue.Add(field, reader[field]);
 
-				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+				foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
 					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();
@@ -968,7 +968,7 @@ namespace AccountingSoftware
 				foreach (string field in QuerySelect.Field)
 					fieldValue.Add(field, reader[field]);
 
-				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+				foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
 					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();
@@ -1035,7 +1035,7 @@ namespace AccountingSoftware
 				foreach (string field in QuerySelect.Field)
 					fieldValue.Add(field, reader[field]);
 
-				foreach (KeyValuePair<string, string> field in QuerySelect.FieldAndAlias)
+				foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
 					fieldValue.Add(field.Value, reader[field.Value]);
 			}
 			reader.Close();

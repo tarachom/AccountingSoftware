@@ -102,7 +102,7 @@ namespace AccountingSoftware
 					Dictionary<string, string> joinFieldValue = new Dictionary<string, string>();
 					JoinValue.Add(fieldValue["uid"].ToString(), joinFieldValue);
 
-					foreach (KeyValuePair<string,string> fieldAndAlias in QuerySelect.FieldAndAlias)
+					foreach (NameValue<string> fieldAndAlias in QuerySelect.FieldAndAlias)
 						joinFieldValue.Add(fieldAndAlias.Value, fieldValue[fieldAndAlias.Value].ToString());
 				}
 			}

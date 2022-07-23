@@ -43,7 +43,7 @@ namespace AccountingSoftware
 
 			FieldValueList = new List<Dictionary<string, object>>();
 			JoinValue = new Dictionary<string, Dictionary<string, string>>();
-			BaseFilter = new List<Where>();
+			//BaseFilter = new List<Where>();
 		}
 
 		/// <summary>
@@ -79,7 +79,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Відбір
 		/// </summary>
-		protected List<Where> BaseFilter { get; }
+		//protected List<Where> BaseFilter { get; }
 
 		/// <summary>
 		/// Очищення вн. списків
@@ -87,7 +87,6 @@ namespace AccountingSoftware
 		protected void BaseClear()
 		{
 			FieldValueList.Clear();
-			JoinValue.Clear();
 		}
 
 		/// <summary>
@@ -97,8 +96,10 @@ namespace AccountingSoftware
 		{
 			BaseClear();
 
+			JoinValue.Clear();
+
 			//QuerySelect.Where.Clear(); //???
-			QuerySelect.Where.AddRange(BaseFilter);
+			//QuerySelect.Where.AddRange(BaseFilter);
 
 			Kernel.DataBase.SelectRegisterInformationRecords(QuerySelect, FieldValueList);
 
@@ -110,7 +111,7 @@ namespace AccountingSoftware
 					Dictionary<string, string> joinFieldValue = new Dictionary<string, string>();
 					JoinValue.Add(fieldValue["uid"].ToString(), joinFieldValue);
 
-					foreach (KeyValuePair<string, string> fieldAndAlias in QuerySelect.FieldAndAlias)
+					foreach (NameValue<string> fieldAndAlias in QuerySelect.FieldAndAlias)
 						joinFieldValue.Add(fieldAndAlias.Value, fieldValue[fieldAndAlias.Value].ToString());
 				}
 			}
