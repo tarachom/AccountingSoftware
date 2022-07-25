@@ -40,13 +40,13 @@ limitations under the License.
 			</sql>
 		</xsl:for-each>
 		
-		<xsl:for-each select="root/Constants/Constant[@col = 'col_c3']">
+		<xsl:for-each select="root/Constants/Constant">
 		    <xsl:for-each select="TablePart">			    
 			   <xsl:apply-templates select="row" />
 		    </xsl:for-each>
 		</xsl:for-each>
 
-		<xsl:for-each select="root/Directories/Directory[@tab = '1']">
+		<xsl:for-each select="root/Directories/Directory">
 			<xsl:apply-templates select="row" />
 
 		    <xsl:for-each select="TablePart">			    
@@ -54,7 +54,7 @@ limitations under the License.
 		    </xsl:for-each>
 		</xsl:for-each>
 		
-		<xsl:for-each select="root/Documents/Document[@tab = '1']">
+		<xsl:for-each select="root/Documents/Document">
 			<xsl:apply-templates select="row" />
 
 		    <xsl:for-each select="TablePart">			    
@@ -62,11 +62,11 @@ limitations under the License.
 		    </xsl:for-each>
 		</xsl:for-each>
 			
-		<xsl:for-each select="root/RegistersInformation/Register[@tab = '1']">
+		<xsl:for-each select="root/RegistersInformation/Register">
 			<xsl:apply-templates select="row" />
 		</xsl:for-each>
 		
-		<xsl:for-each select="root/RegistersAccumulation/Register[@tab = '1']">
+		<xsl:for-each select="root/RegistersAccumulation/Register">
 			<xsl:apply-templates select="row" />
 		</xsl:for-each>
 		
