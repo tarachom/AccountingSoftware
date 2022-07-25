@@ -414,6 +414,8 @@ namespace Configurator
 
                     if (row[counter].GetType().Name == "Decimal")
                         xmlWriter.WriteString(row[counter].ToString().Replace(",", "."));
+                    else if (row[counter].GetType().Name == "DateTime")
+                        xmlWriter.WriteString(((DateTime)row[counter]).ToString("yyyy-MM-dd HH:mm:ss"));
                     else
                         xmlWriter.WriteString(row[counter].ToString().Replace("'", "''"));
 
