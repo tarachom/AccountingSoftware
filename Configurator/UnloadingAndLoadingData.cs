@@ -79,10 +79,12 @@ namespace Configurator
 
         void ImportXSLT(object fileImport)
         {
-           string dir = Path.GetDirectoryName(fileImport.ToString());
+            string dir = Path.GetDirectoryName(fileImport.ToString());
+
+            ApendLine(" --> Analize Step 1");
 
             XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-            xsltCodeGnerator.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingData.xslt", new XsltSettings(true, true), null);
+            xsltCodeGnerator.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataXML.xslt", new XsltSettings(true, true), null);
 
             XsltArgumentList xsltArgumentList = new XsltArgumentList();
 
@@ -91,6 +93,35 @@ namespace Configurator
             xsltCodeGnerator.Transform(fileImport.ToString(), xsltArgumentList, fileStream);
 
             fileStream.Close();
+            ApendLine(" --> OK");
+
+            //-----------------
+            ApendLine(" --> Analize Step 2");
+            XslCompiledTransform xsltCodeGnerator2 = new XslCompiledTransform();
+            xsltCodeGnerator2.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataSQL.xslt", new XsltSettings(true, true), null);
+
+            XsltArgumentList xsltArgumentList2 = new XsltArgumentList();
+
+            FileStream fileStream2 = new FileStream(Path.Combine(dir, "sql.xml"), FileMode.Create);
+
+            xsltCodeGnerator2.Transform(Path.Combine(dir, "sql_load.xml"), xsltArgumentList2, fileStream2);
+
+            fileStream2.Close();
+            ApendLine(" --> OK");
+
+            //------------------
+            ApendLine(" --> Load SQL");
+            List<string> SqlList = Configuration.ListComparisonSql(Path.Combine(dir, "sql.xml"));
+
+            ApendLine(" --> Execute SQL");
+            //Execute
+            foreach (string sqlText in SqlList)
+            {
+                int resultSQL = Program.Kernel.DataBase.ExecuteSQL(sqlText);
+                //ApendLine(" --> " + sqlText);
+            }
+
+            ApendLine(" --> OK");
         }
 
         void Import(object fileImport)
@@ -380,7 +411,12 @@ namespace Configurator
                         continue;
 
                     xmlWriter.WriteStartElement(column);
-                    xmlWriter.WriteString(row[counter].ToString());
+
+                    if (row[counter].GetType().Name == "Decimal")
+                        xmlWriter.WriteString(row[counter].ToString().Replace(",", "."));
+                    else
+                        xmlWriter.WriteString(row[counter].ToString().Replace("'", "''"));
+
                     xmlWriter.WriteEndElement();
                     counter++;
                 }
@@ -392,158 +428,6 @@ namespace Configurator
 
         #endregion
 
-
-        void SaveTable(string table)
-        {
-            string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
-
-            string[] columnsName;
-            List<object[]> listRow;
-
-            string query = "SELECT * FROM " + table;
-
-            Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-            StreamWriter sw = new StreamWriter(pathToUnloadBase);
-            sw.AutoFlush = true;
-
-            sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-            sw.WriteLine("<ВигрузкаДаних>");
-            sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
-
-            sw.WriteLine("<Колонки>");
-
-            for (int k = 0; k < columnsName.Length; k++)
-            {
-                sw.Write("<Колонка>");
-                sw.Write("<Назва>" + columnsName[k] + "</Назва>");
-                sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
-                sw.WriteLine("</Колонка>");
-            }
-
-            sw.WriteLine("</Колонки>");
-            sw.WriteLine("<Записи>");
-
-            foreach (object[] o in listRow)
-            {
-                sw.Write("<row>");
-
-                for (int i = 0; i < o.Length; i++)
-                    sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
-
-                sw.WriteLine("</row>");
-            }
-
-            sw.WriteLine("</Записи>");
-            sw.WriteLine("</ВигрузкаДаних>");
-            sw.Close();
-        }
-
-        void LoadingData()
-        {
-            ApendLine("ДОВІДНИКИ");
-
-            foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
-            {
-                ApendLine(" --> Довідник: " + configurationDirectories.Name);
-
-                //LoadTable(configurationDirectories.Table, configurationDirectories);
-            }
-        }
-
-        void LoadTable(string table, ConfigurationDirectories configurationDirectory)
-        {
-            string pathToLoadBase = @"E:\ВигрузкаБази\" + table + ".xml";
-
-            XPathDocument xPathDoc = new XPathDocument(pathToLoadBase);
-            XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
-
-            XPathNavigator rootNode = xPathDocNavigator.SelectSingleNode("/ВигрузкаДаних");
-
-            Dictionary<string, string> columnsList = LoadColumns(rootNode);
-
-            XPathNavigator rowsNode = rootNode.SelectSingleNode("Записи");
-            LoadRows(rowsNode, table, columnsList, configurationDirectory);
-        }
-
-        Dictionary<string, string> LoadColumns(XPathNavigator rootNode)
-        {
-            Dictionary<string, string> columnsList = new Dictionary<string, string>();
-
-            XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
-            while (columnsNodeList.MoveNext())
-            {
-                string columnNodeName = columnsNodeList.Current.SelectSingleNode("Назва").Value;
-                string columnNodeAlias = columnsNodeList.Current.SelectSingleNode("КороткаНазва").Value;
-
-                columnsList.Add(columnNodeName, columnNodeAlias);
-            }
-
-            return columnsList;
-        }
-
-        void LoadRows(XPathNavigator rootNode, string table, Dictionary<string, string> columnsList, ConfigurationDirectories configurationDirectory)
-        {
-            Dictionary<string, object> param = new Dictionary<string, object>();
-
-            XPathNodeIterator rowNodeList = rootNode.Select("row");
-            while (rowNodeList.MoveNext())
-            {
-                param.Clear();
-
-                foreach (KeyValuePair<string, string> columnItem in columnsList)
-                {
-                    string columnValue = rowNodeList.Current.SelectSingleNode(columnItem.Value).Value;
-
-                    string columnType = configurationDirectory.Fields[columnItem.Key].Type;
-
-                    object obj;
-
-                    switch (columnType)
-                    {
-                        case "integer":
-                        case "enum":
-                            {
-                                obj = int.Parse(columnValue);
-                                break;
-                            }
-                        case "numeric":
-                            {
-                                obj = decimal.Parse(columnValue);
-                                break;
-                            }
-                        case "boolean":
-                            {
-                                obj = bool.Parse(columnValue);
-                                break;
-                            }
-                        case "date":
-                        case "datetime":
-                        case "time":
-                            {
-                                obj = DateTime.Parse(columnValue);
-                                break;
-                            }
-                        case "pointer":
-                        case "empty_pointer":
-                            {
-                                obj = Guid.Parse(columnValue);
-                                break;
-                            }
-                        default:
-                            {
-                                throw new Exception("Error type");
-                            }
-                    }
-
-                    param.Add(columnItem.Key, obj);
-                }
-
-                ApendLine(" --> " + table + ": " + Program.Kernel.DataBase.InsertSQL(table, param).ToString());
-
-            }
-        }
-
         private void ApendLine(string text)
         {
             if (richTextBoxInfo.InvokeRequired)
@@ -553,8 +437,160 @@ namespace Configurator
             else
             {
                 richTextBoxInfo.AppendText("\n" + text);
+                richTextBoxInfo.ScrollToCaret();
             }
         }
+
+        //void SaveTable(string table)
+        //{
+        //    string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
+
+        //    string[] columnsName;
+        //    List<object[]> listRow;
+
+        //    string query = "SELECT * FROM " + table;
+
+        //    Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
+
+        //    StreamWriter sw = new StreamWriter(pathToUnloadBase);
+        //    sw.AutoFlush = true;
+
+        //    sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+        //    sw.WriteLine("<ВигрузкаДаних>");
+        //    sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
+
+        //    sw.WriteLine("<Колонки>");
+
+        //    for (int k = 0; k < columnsName.Length; k++)
+        //    {
+        //        sw.Write("<Колонка>");
+        //        sw.Write("<Назва>" + columnsName[k] + "</Назва>");
+        //        sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
+        //        sw.WriteLine("</Колонка>");
+        //    }
+
+        //    sw.WriteLine("</Колонки>");
+        //    sw.WriteLine("<Записи>");
+
+        //    foreach (object[] o in listRow)
+        //    {
+        //        sw.Write("<row>");
+
+        //        for (int i = 0; i < o.Length; i++)
+        //            sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
+
+        //        sw.WriteLine("</row>");
+        //    }
+
+        //    sw.WriteLine("</Записи>");
+        //    sw.WriteLine("</ВигрузкаДаних>");
+        //    sw.Close();
+        //}
+
+        //void LoadingData()
+        //{
+        //    ApendLine("ДОВІДНИКИ");
+
+        //    foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
+        //    {
+        //        ApendLine(" --> Довідник: " + configurationDirectories.Name);
+
+        //        //LoadTable(configurationDirectories.Table, configurationDirectories);
+        //    }
+        //}
+
+        //void LoadTable(string table, ConfigurationDirectories configurationDirectory)
+        //{
+        //    string pathToLoadBase = @"E:\ВигрузкаБази\" + table + ".xml";
+
+        //    XPathDocument xPathDoc = new XPathDocument(pathToLoadBase);
+        //    XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+        //    XPathNavigator rootNode = xPathDocNavigator.SelectSingleNode("/ВигрузкаДаних");
+
+        //    Dictionary<string, string> columnsList = LoadColumns(rootNode);
+
+        //    XPathNavigator rowsNode = rootNode.SelectSingleNode("Записи");
+        //    LoadRows(rowsNode, table, columnsList, configurationDirectory);
+        //}
+
+        //Dictionary<string, string> LoadColumns(XPathNavigator rootNode)
+        //{
+        //    Dictionary<string, string> columnsList = new Dictionary<string, string>();
+
+        //    XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
+        //    while (columnsNodeList.MoveNext())
+        //    {
+        //        string columnNodeName = columnsNodeList.Current.SelectSingleNode("Назва").Value;
+        //        string columnNodeAlias = columnsNodeList.Current.SelectSingleNode("КороткаНазва").Value;
+
+        //        columnsList.Add(columnNodeName, columnNodeAlias);
+        //    }
+
+        //    return columnsList;
+        //}
+
+        //void LoadRows(XPathNavigator rootNode, string table, Dictionary<string, string> columnsList, ConfigurationDirectories configurationDirectory)
+        //{
+        //    Dictionary<string, object> param = new Dictionary<string, object>();
+
+        //    XPathNodeIterator rowNodeList = rootNode.Select("row");
+        //    while (rowNodeList.MoveNext())
+        //    {
+        //        param.Clear();
+
+        //        foreach (KeyValuePair<string, string> columnItem in columnsList)
+        //        {
+        //            string columnValue = rowNodeList.Current.SelectSingleNode(columnItem.Value).Value;
+
+        //            string columnType = configurationDirectory.Fields[columnItem.Key].Type;
+
+        //            object obj;
+
+        //            switch (columnType)
+        //            {
+        //                case "integer":
+        //                case "enum":
+        //                    {
+        //                        obj = int.Parse(columnValue);
+        //                        break;
+        //                    }
+        //                case "numeric":
+        //                    {
+        //                        obj = decimal.Parse(columnValue);
+        //                        break;
+        //                    }
+        //                case "boolean":
+        //                    {
+        //                        obj = bool.Parse(columnValue);
+        //                        break;
+        //                    }
+        //                case "date":
+        //                case "datetime":
+        //                case "time":
+        //                    {
+        //                        obj = DateTime.Parse(columnValue);
+        //                        break;
+        //                    }
+        //                case "pointer":
+        //                case "empty_pointer":
+        //                    {
+        //                        obj = Guid.Parse(columnValue);
+        //                        break;
+        //                    }
+        //                default:
+        //                    {
+        //                        throw new Exception("Error type");
+        //                    }
+        //            }
+
+        //            param.Add(columnItem.Key, obj);
+        //        }
+
+        //        ApendLine(" --> " + table + ": " + Program.Kernel.DataBase.InsertSQL(table, param).ToString());
+
+        //    }
+        //}
 
     }
 }

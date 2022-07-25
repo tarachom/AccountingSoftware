@@ -32,6 +32,7 @@ limitations under the License.
 
 		<xsl:for-each select="root/Constants">
 			<sql tab="tab_constants">
+				<row name="uid">00000000-0000-0000-0000-000000000000</row>
 				<xsl:for-each select="Constant">
 					<xsl:for-each select="row">
 						<xsl:apply-templates select="node()" />
@@ -80,10 +81,9 @@ limitations under the License.
 		</sql>
 	</xsl:template>
 	
-	<xsl:template match="node()">		
+	<xsl:template match="node()">
 		<xsl:if test="self::*">
-			<name><xsl:value-of select="name(.)"/></name>
-		    <value><xsl:value-of select="."/></value>
+			<row name="{name(.)}"><xsl:value-of select="."/></row>
 		</xsl:if>
 	</xsl:template>
 	
