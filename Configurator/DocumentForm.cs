@@ -63,7 +63,7 @@ namespace Configurator
 				ConfDocument.AppendField(new ConfigurationObjectField("ДатаДок", newUnigueNameInTable_ДатаДок, "datetime", "", "ДатаДок"));
 
 				string newUnigueNameInTable_НомерДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
-				ConfDocument.AppendField(new ConfigurationObjectField("НомерДок", newUnigueNameInTable_НомерДок, "integer", "", "НомерДок"));
+				ConfDocument.AppendField(new ConfigurationObjectField("НомерДок", newUnigueNameInTable_НомерДок, "string", "", "НомерДок"));
 
 				IsNewDocument = true;
 			}
