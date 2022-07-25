@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.Xml;
+using System.Xml.Xsl;
 using System.Xml.XPath;
 using AccountingSoftware;
 using System.IO;
@@ -66,7 +67,7 @@ namespace Configurator
             {
                 string fileImport = openFileDialog.FileName;
 
-                Thread thread = new Thread(new ParameterizedThreadStart(Import));
+                Thread thread = new Thread(new ParameterizedThreadStart(ImportXSLT));
                 thread.Start(fileImport);
 
                 buttonLoadingData.Enabled = false;
@@ -75,6 +76,22 @@ namespace Configurator
         }
 
         #region Import
+
+        void ImportXSLT(object fileImport)
+        {
+           string dir = Path.GetDirectoryName(fileImport.ToString());
+
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingData.xslt", new XsltSettings(true, true), null);
+
+            XsltArgumentList xsltArgumentList = new XsltArgumentList();
+
+            FileStream fileStream = new FileStream(Path.Combine(dir, "sql_load.xml"), FileMode.Create);
+
+            xsltCodeGnerator.Transform(fileImport.ToString(), xsltArgumentList, fileStream);
+
+            fileStream.Close();
+        }
 
         void Import(object fileImport)
         {

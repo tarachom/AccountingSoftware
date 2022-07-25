@@ -251,6 +251,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="configurator.ico" />
+    <Content Include="LoadingData.xslt" />
+    <Content Include="XSLTFile1.xslt" />
     <None Include="Resources\up.ico" />
     <None Include="Resources\down.ico" />
   </ItemGroup>
