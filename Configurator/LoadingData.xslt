@@ -40,7 +40,7 @@ limitations under the License.
 			</sql>
 		</xsl:for-each>
 		
-		<xsl:for-each select="root/Constants/Constant">
+		<xsl:for-each select="root/Constants/Constant[@col = 'col_c3']">
 		    <xsl:for-each select="TablePart">			    
 			   <xsl:apply-templates select="row" />
 		    </xsl:for-each>
