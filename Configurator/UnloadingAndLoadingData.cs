@@ -176,6 +176,33 @@ namespace Configurator
                                 paramObj = paramValue;
                                 break;
                             }
+                        case "String[]":
+                            {
+                                paramObj = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                break;
+                            }
+                        case "Int32[]":
+                            {
+                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                int[] tmpIntValue = new int[tmpValue.Length];
+
+                                for (int i=0; i< tmpValue.Length; i++)
+                                    tmpIntValue[i] = int.Parse(tmpValue[i]);
+
+                                paramObj = tmpIntValue;
+                                break;
+                            }
+                        case "Decimal[]":
+                            {
+                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                decimal[] tmpDecimalValue = new decimal[tmpValue.Length];
+
+                                for (int i = 0; i < tmpValue.Length; i++)
+                                    tmpDecimalValue[i] = decimal.Parse(tmpValue[i]);
+
+                                paramObj = tmpDecimalValue;
+                                break;
+                            }
                         default:
                             {
                                 ApendLine("Не оприділений тип: " + paramType);

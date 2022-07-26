@@ -70,7 +70,14 @@ limitations under the License.
 
 				<xsl:for-each select="row">
 					<p name="{@name}" type="{@type}">
-						<xsl:value-of select="text()"/>
+						<xsl:choose>
+							<xsl:when test="@type = 'String[]' or @type = 'Int32[]' or @type = 'Decimal[]'">
+								<xsl:copy-of select="node()"/>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:value-of select="text()"/>
+							</xsl:otherwise>
+						</xsl:choose>
 					</p>
 				</xsl:for-each>
 				

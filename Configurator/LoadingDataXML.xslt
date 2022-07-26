@@ -83,7 +83,16 @@ limitations under the License.
 	
 	<xsl:template match="node()">
 		<xsl:if test="self::*">
-			<row name="{name(.)}" type="{@type}"><xsl:value-of select="."/></row>
+			<row name="{name(.)}" type="{@type}">
+				<xsl:choose>
+					<xsl:when test="@type = 'String[]' or @type = 'Int32[]' or @type = 'Decimal[]'">
+						<xsl:copy-of select="node()"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="."/>
+					</xsl:otherwise>
+				</xsl:choose>
+			</row>
 		</xsl:if>
 	</xsl:template>
 	

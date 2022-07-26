@@ -20,6 +20,8 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
+using System.Xml;
+using System.Xml.XPath;
 
 namespace AccountingSoftware
 {
@@ -50,6 +52,31 @@ namespace AccountingSoftware
 				XmlData += "<e>" + LeftCData + item.ToString() + RightCData + "</e>";
 
 			return XmlData;
+		}
+	}
+
+	public static class ArrayToXml
+    {
+		public static string[] Convert(string xmlValue)
+		{
+			xmlValue = $"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>" + xmlValue + "\n</root>";
+
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(xmlValue);
+
+			XPathNavigator xPathNavigator = xmlDocument.CreateNavigator();
+			XPathNodeIterator eNode = xPathNavigator.Select("root/e");
+
+			int counter = 0;
+			string[] stringValue = new string[eNode.Count];
+
+			while (eNode.MoveNext())
+			{
+				stringValue[counter] = eNode.Current.Value;
+				counter++;
+			}
+
+			return stringValue;
 		}
 	}
 }
