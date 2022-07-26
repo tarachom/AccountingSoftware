@@ -27,9 +27,12 @@ namespace Configurator
 
         public Configuration Conf { get; set; }
 
+        private bool Cancel = false;
+        private Thread thread;
+
         private void UnloadingAndLoadingData_Load(object sender, EventArgs e)
         {
-
+            /**/
         }
 
         private void buttonUnloadingData_Click(object sender, EventArgs e)
@@ -46,11 +49,15 @@ namespace Configurator
             {
                 string fileExport = saveFileDialog.FileName;
 
-                Thread thread = new Thread(new ParameterizedThreadStart(ExportData));
-                thread.Start(fileExport);
+                Cancel = false;
 
-                buttonUnloadingData.Enabled = false;
+                buttonLoadingData.Enabled = buttonUnloadingData.Enabled = false;
+                buttonStop.Enabled = true;
+
                 richTextBoxInfo.Text = "";
+
+                thread = new Thread(new ParameterizedThreadStart(ExportData));
+                thread.Start(fileExport); 
             }
         }
 
@@ -67,16 +74,33 @@ namespace Configurator
             {
                 string fileImport = openFileDialog.FileName;
 
-                Thread thread = new Thread(new ParameterizedThreadStart(ImportData));
-                thread.Start(fileImport);
+                Cancel = false;
 
-                buttonLoadingData.Enabled = false;
+                buttonLoadingData.Enabled = buttonUnloadingData.Enabled = false;
+                buttonStop.Enabled = true;
+
                 richTextBoxInfo.Text = "";
+
+                thread = new Thread(new ParameterizedThreadStart(ImportData));
+                thread.Start(fileImport); 
             }
+        }
+
+        private void buttonStop_Click(object sender, EventArgs e)
+        {
+            buttonLoadingData.Enabled = buttonUnloadingData.Enabled = true;
+
+            buttonStop.Enabled = false;
+
+            Cancel = true;
         }
 
         #region Export
 
+        /// <summary>
+        /// Вигрузка даних
+        /// </summary>
+        /// <param name="fileExport">Файл вигрузки</param>
         void ExportData(object fileExport)
         {
             ApendLine("Файл вигрузки: " + fileExport.ToString() + "\n\n");
@@ -92,10 +116,22 @@ namespace Configurator
             xmlWriter.WriteStartElement("Constants");
             foreach (ConfigurationConstantsBlock configurationConstantsBlock in Conf.ConstantsBlock.Values)
             {
+                if (Cancel)
+                {
+                    xmlWriter.Close();
+                    return;
+                }
+
                 ApendLine(configurationConstantsBlock.BlockName);
 
                 foreach (ConfigurationConstants configurationConstants in configurationConstantsBlock.Constants.Values)
                 {
+                    if (Cancel)
+                    {
+                        xmlWriter.Close();
+                        return;
+                    }
+
                     ApendLine(" --> Константа: " + configurationConstants.Name);
 
                     xmlWriter.WriteStartElement("Constant");
@@ -106,6 +142,12 @@ namespace Configurator
 
                     foreach (ConfigurationObjectTablePart tablePart in configurationConstants.TabularParts.Values)
                     {
+                        if (Cancel)
+                        {
+                            xmlWriter.Close();
+                            return;
+                        }
+
                         xmlWriter.WriteStartElement("TablePart");
                         xmlWriter.WriteAttributeString("name", tablePart.Name);
                         xmlWriter.WriteAttributeString("tab", tablePart.Table);
@@ -127,6 +169,12 @@ namespace Configurator
             xmlWriter.WriteStartElement("Directories");
             foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
             {
+                if (Cancel)
+                {
+                    xmlWriter.Close();
+                    return;
+                }
+
                 ApendLine(" --> Довідник: " + configurationDirectories.Name);
 
                 xmlWriter.WriteStartElement("Directory");
@@ -140,6 +188,12 @@ namespace Configurator
 
                 foreach (ConfigurationObjectTablePart tablePart in configurationDirectories.TabularParts.Values)
                 {
+                    if (Cancel)
+                    {
+                        xmlWriter.Close();
+                        return;
+                    }
+
                     xmlWriter.WriteStartElement("TablePart");
                     xmlWriter.WriteAttributeString("name", tablePart.Name);
                     xmlWriter.WriteAttributeString("tab", tablePart.Table);
@@ -158,6 +212,12 @@ namespace Configurator
             xmlWriter.WriteStartElement("Documents");
             foreach (ConfigurationDocuments configurationDocuments in Conf.Documents.Values)
             {
+                if (Cancel)
+                {
+                    xmlWriter.Close();
+                    return;
+                }
+
                 ApendLine(" --> Документ: " + configurationDocuments.Name);
 
                 xmlWriter.WriteStartElement("Document");
@@ -171,6 +231,12 @@ namespace Configurator
 
                 foreach (ConfigurationObjectTablePart tablePart in configurationDocuments.TabularParts.Values)
                 {
+                    if (Cancel)
+                    {
+                        xmlWriter.Close();
+                        return;
+                    }
+
                     xmlWriter.WriteStartElement("TablePart");
                     xmlWriter.WriteAttributeString("name", tablePart.Name);
                     xmlWriter.WriteAttributeString("tab", tablePart.Table);
@@ -189,6 +255,12 @@ namespace Configurator
             xmlWriter.WriteStartElement("RegistersInformation");
             foreach (ConfigurationRegistersInformation configurationRegistersInformation in Conf.RegistersInformation.Values)
             {
+                if (Cancel)
+                {
+                    xmlWriter.Close();
+                    return;
+                }
+
                 ApendLine(" --> Регістр: " + configurationRegistersInformation.Name);
 
                 xmlWriter.WriteStartElement("Register");
@@ -222,6 +294,12 @@ namespace Configurator
             xmlWriter.WriteStartElement("RegistersAccumulation");
             foreach (ConfigurationRegistersAccumulation configurationRegistersAccumulation in Conf.RegistersAccumulation.Values)
             {
+                if (Cancel)
+                {
+                    xmlWriter.Close();
+                    return;
+                }
+
                 ApendLine(" --> Регістр: " + configurationRegistersAccumulation.Name);
 
                 xmlWriter.WriteStartElement("Register");
@@ -255,11 +333,18 @@ namespace Configurator
             xmlWriter.Close();
 
             buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));
+            buttonLoadingData.Invoke(new Action(() => buttonLoadingData.Enabled = true));
+            buttonStop.Invoke(new Action(() => buttonStop.Enabled = false));
 
             ApendLine("");
             ApendLine("Готово!");
         }
 
+        /// <summary>
+        /// Стрічка для SQL запиту із списком полів
+        /// </summary>
+        /// <param name="fields">Колекція полів</param>
+        /// <returns>Список полів</returns>
         string GetAllFields(Dictionary<string, ConfigurationObjectField> fields)
         {
             string guery_fields = "";
@@ -269,6 +354,8 @@ namespace Configurator
 
             return guery_fields;
         }
+
+        #region Info (додаткові відомості у файл вигрузки)
 
         void WriteFieldsInfo(XmlWriter xmlWriter, Dictionary<string, ConfigurationObjectField> fields)
         {
@@ -308,6 +395,13 @@ namespace Configurator
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Виконання запиту та запис даних
+        /// </summary>
+        /// <param name="xmlWriter">ХМЛ</param>
+        /// <param name="query">Запит</param>
         void WriteQuerySelect(XmlWriter xmlWriter, string query)
         {
             string[] columnsName;
@@ -367,25 +461,64 @@ namespace Configurator
 
         #region Import
 
+        /// <summary>
+        /// Загрузка даних
+        /// </summary>
+        /// <param name="fileImport">Файл загрузки</param>
         void ImportData(object fileImport)
         {
             ApendLine("Файл загрузки: " + fileImport.ToString() + "\n\n");
 
             ApendLine("Аналіз: ");
 
+            if (Cancel)
+                return;
+
             ApendLine(" --> Крок 1");
             string pathToXmlResultStepOne = TransformXmlDataStepOne(fileImport.ToString());
+
+            if (Cancel)
+                return;
 
             ApendLine(" --> Крок 2");
             string pathToXmlResultStepSQL = TransformStepOneToStepSQL(fileImport.ToString(), pathToXmlResultStepOne);
 
+            if (Cancel)
+                return;
+
             ApendLine("Виконання команд: ");
 
-            ExecuteSqlList(pathToXmlResultStepSQL);
+            try
+            {
+                Program.Kernel.DataBase.BeginTransaction();
+
+                bool resultat = ExecuteSqlList(pathToXmlResultStepSQL);
+
+                if (resultat)
+                    Program.Kernel.DataBase.CommitTransaction();
+                else
+                    Program.Kernel.DataBase.RollbackTransaction();
+            }
+            catch (Exception ex)
+            {
+                ApendLine("Помилка: " + ex.Message);
+
+                Program.Kernel.DataBase.RollbackTransaction();
+                return;
+            }
 
             ApendLine(" --> Готово!");
+
+            buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));
+            buttonLoadingData.Invoke(new Action(() => buttonLoadingData.Enabled = true));
+            buttonStop.Invoke(new Action(() => buttonStop.Enabled = false));           
         }
 
+        /// <summary>
+        /// Трансформація даних Крок 1
+        /// </summary>
+        /// <param name="fileImport">Файл загрузки</param>
+        /// <returns>Файл трансформації</returns>
         string TransformXmlDataStepOne(string fileImport)
         {
             string pathToTemplate = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "UnloadingAndLoadingDataXML.xslt");
@@ -406,6 +539,12 @@ namespace Configurator
             return pathToXmlResult;
         }
 
+        /// <summary>
+        /// Трансформація даних Крок 2
+        /// </summary>
+        /// <param name="fileImport">Файл загрузки</param>
+        /// <param name="fileStepOne">Файл першої трансформації (Крок 1)</param>
+        /// <returns>Файл трансформації</returns>
         string TransformStepOneToStepSQL(string fileImport, string fileStepOne)
         {
             string pathToTemplate = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "UnloadingAndLoadingDataSQL.xslt");
@@ -426,7 +565,11 @@ namespace Configurator
             return pathToXmlResult;
         }
 
-        public void ExecuteSqlList(string fileStepSQL)
+        /// <summary>
+        /// Виконання SQL запитів
+        /// </summary>
+        /// <param name="fileStepSQL">Файл з запитами</param>
+        public bool ExecuteSqlList(string fileStepSQL)
         {
             XPathDocument xPathDoc = new XPathDocument(fileStepSQL);
             XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
@@ -434,6 +577,9 @@ namespace Configurator
             XPathNodeIterator rowNodes = xPathDocNavigator.Select("/root/row");
             while (rowNodes.MoveNext())
             {
+                if (Cancel)
+                    return false;
+
                 XPathNavigator sqlNode = rowNodes.Current.SelectSingleNode("sql");
                 string sqlText = sqlNode.Value;
 
@@ -526,6 +672,8 @@ namespace Configurator
                 int result = Program.Kernel.DataBase.ExecuteSQL(sqlText, param);
                 ApendInfo(".");
             }
+
+            return true;
         }
 
         #endregion
@@ -554,6 +702,5 @@ namespace Configurator
                 richTextBoxInfo.AppendText(text);
             }
         }
-
     }
 }

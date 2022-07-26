@@ -88,6 +88,7 @@ namespace Configurator
             this.buttonStop.TabIndex = 4;
             this.buttonStop.Text = "Зупинити";
             this.buttonStop.UseVisualStyleBackColor = true;
+            this.buttonStop.Click += new System.EventHandler(this.buttonStop_Click);
             // 
             // UnloadingAndLoadingData
             // 
