@@ -55,8 +55,17 @@ namespace AccountingSoftware
 		}
 	}
 
+	/// <summary>
+	/// Перетворити стрічку виду "<e>значення 1</e><e>значення 2</e>"
+	/// в масив типу string[]
+	/// </summary>
 	public static class ArrayToXml
     {
+		/// <summary>
+		/// Функція перетоврення стрічки ХМЛ в масив
+		/// </summary>
+		/// <param name="xmlValue">Стрічка хмл</param>
+		/// <returns>Текстовий масив</returns>
 		public static string[] Convert(string xmlValue)
 		{
 			xmlValue = $"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>" + xmlValue + "\n</root>";
