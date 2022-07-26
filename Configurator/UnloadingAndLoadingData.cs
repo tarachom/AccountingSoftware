@@ -98,7 +98,7 @@ namespace Configurator
             //-----------------
             ApendLine(" --> Analize Step 2");
             XslCompiledTransform xsltCodeGnerator2 = new XslCompiledTransform();
-            xsltCodeGnerator2.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataSQL.xslt", new XsltSettings(true, true), null);
+            xsltCodeGnerator2.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataSQL2.xslt", new XsltSettings(true, true), null);
 
             XsltArgumentList xsltArgumentList2 = new XsltArgumentList();
 
@@ -109,19 +109,86 @@ namespace Configurator
             fileStream2.Close();
             ApendLine(" --> OK");
 
-            //------------------
-            ApendLine(" --> Load SQL");
-            List<string> SqlList = Configuration.ListComparisonSql(Path.Combine(dir, "sql.xml"));
-
             ApendLine(" --> Execute SQL");
-            //Execute
-            foreach (string sqlText in SqlList)
-            {
-                int resultSQL = Program.Kernel.DataBase.ExecuteSQL(sqlText);
-                //ApendLine(" --> " + sqlText);
-            }
+            ExecuteListSql(Path.Combine(dir, "sql.xml"));
 
             ApendLine(" --> OK");
+        }
+
+        public void ExecuteListSql(string pathToXML)
+        {
+            XPathDocument xPathDoc = new XPathDocument(pathToXML);
+            XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+            XPathNodeIterator rowNodes = xPathDocNavigator.Select("/root/row");
+            while (rowNodes.MoveNext())
+            {
+                XPathNavigator sqlNode = rowNodes.Current.SelectSingleNode("sql");
+                string sqlText = sqlNode.Value;
+
+                //ApendLine(" --> " + sqlText);
+
+                Dictionary<string, object> param = new Dictionary<string, object>();
+
+                XPathNodeIterator paramNodes = rowNodes.Current.Select("p");
+                while (paramNodes.MoveNext())
+                {
+                    string paramName = paramNodes.Current.GetAttribute("name", "");
+                    string paramType = paramNodes.Current.GetAttribute("type", "");
+
+                    string paramValue = paramNodes.Current.Value;
+                    object paramObj;
+
+                    switch (paramType)
+                    {
+                        case "Guid":
+                            {
+                                paramObj = Guid.Parse(paramValue);
+                                break;
+                            }
+                        case "Int32":
+                            {
+                                paramObj = int.Parse(paramValue);
+                                break;
+                            }
+                        case "DateTime":
+                            {
+                                paramObj = DateTime.Parse(paramValue);
+                                break;
+                            }
+                        case "TimeSpan":
+                            {
+                                paramObj = TimeSpan.Parse(paramValue);
+                                break;
+                            }
+                        case "Boolean":
+                            {
+                                paramObj = Boolean.Parse(paramValue);
+                                break;
+                            }
+                        case "Decimal":
+                            {
+                                paramObj = Decimal.Parse(paramValue);
+                                break;
+                            }
+                        case "String":
+                            {
+                                paramObj = paramValue;
+                                break;
+                            }
+                        default:
+                            {
+                                ApendLine("Не оприділений тип: " + paramType);
+                                paramObj = paramValue;
+                                break;
+                            }
+                    }
+
+                    param.Add(paramName, paramObj);
+                }
+
+                int result = Program.Kernel.DataBase.ExecuteSQL(sqlText, param);
+            }
         }
 
         void Import(object fileImport)
@@ -187,7 +254,7 @@ namespace Configurator
                     xmlWriter.WriteAttributeString("name", configurationConstants.Name);
                     xmlWriter.WriteAttributeString("col", configurationConstants.NameInTable);
 
-                    WriteTabularPartsInfo(xmlWriter, configurationConstants.TabularParts);
+                    //WriteTabularPartsInfo(xmlWriter, configurationConstants.TabularParts);
 
                     foreach (ConfigurationObjectTablePart tablePart in configurationConstants.TabularParts.Values)
                     {
@@ -218,8 +285,8 @@ namespace Configurator
                 xmlWriter.WriteAttributeString("name", configurationDirectories.Name);
                 xmlWriter.WriteAttributeString("tab", configurationDirectories.Table);
 
-                WriteFieldsInfo(xmlWriter, configurationDirectories.Fields);
-                WriteTabularPartsInfo(xmlWriter, configurationDirectories.TabularParts);
+                //WriteFieldsInfo(xmlWriter, configurationDirectories.Fields);
+                //WriteTabularPartsInfo(xmlWriter, configurationDirectories.TabularParts);
 
                 WriteQuerySelect(xmlWriter, $@"SELECT uid{GetAllFields(configurationDirectories.Fields)} FROM {configurationDirectories.Table}");
 
@@ -249,8 +316,8 @@ namespace Configurator
                 xmlWriter.WriteAttributeString("name", configurationDocuments.Name);
                 xmlWriter.WriteAttributeString("tab", configurationDocuments.Table);
 
-                WriteFieldsInfo(xmlWriter, configurationDocuments.Fields);
-                WriteTabularPartsInfo(xmlWriter, configurationDocuments.TabularParts);
+                //WriteFieldsInfo(xmlWriter, configurationDocuments.Fields);
+                //WriteTabularPartsInfo(xmlWriter, configurationDocuments.TabularParts);
 
                 WriteQuerySelect(xmlWriter, $@"SELECT uid, spend, spend_date{GetAllFields(configurationDocuments.Fields)} FROM {configurationDocuments.Table}");
 
@@ -280,17 +347,17 @@ namespace Configurator
                 xmlWriter.WriteAttributeString("name", configurationRegistersInformation.Name);
                 xmlWriter.WriteAttributeString("tab", configurationRegistersInformation.Table);
 
-                xmlWriter.WriteStartElement("DimensionFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.DimensionFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("DimensionFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersInformation.DimensionFields);
+                //xmlWriter.WriteEndElement();
 
-                xmlWriter.WriteStartElement("ResourcesFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.ResourcesFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("ResourcesFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersInformation.ResourcesFields);
+                //xmlWriter.WriteEndElement();
 
-                xmlWriter.WriteStartElement("PropertyFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersInformation.PropertyFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("PropertyFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersInformation.PropertyFields);
+                //xmlWriter.WriteEndElement();
 
                 string query_fields = GetAllFields(configurationRegistersInformation.DimensionFields) +
                     GetAllFields(configurationRegistersInformation.ResourcesFields) +
@@ -313,17 +380,17 @@ namespace Configurator
                 xmlWriter.WriteAttributeString("name", configurationRegistersAccumulation.Name);
                 xmlWriter.WriteAttributeString("tab", configurationRegistersAccumulation.Table);
 
-                xmlWriter.WriteStartElement("DimensionFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.DimensionFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("DimensionFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.DimensionFields);
+                //xmlWriter.WriteEndElement();
 
-                xmlWriter.WriteStartElement("ResourcesFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.ResourcesFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("ResourcesFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.ResourcesFields);
+                //xmlWriter.WriteEndElement();
 
-                xmlWriter.WriteStartElement("PropertyFields");
-                WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.PropertyFields);
-                xmlWriter.WriteEndElement();
+                //xmlWriter.WriteStartElement("PropertyFields");
+                //WriteFieldsInfo(xmlWriter, configurationRegistersAccumulation.PropertyFields);
+                //xmlWriter.WriteEndElement();
 
                 string query_fields = GetAllFields(configurationRegistersAccumulation.DimensionFields) +
                     GetAllFields(configurationRegistersAccumulation.ResourcesFields) +
@@ -407,18 +474,12 @@ namespace Configurator
                 xmlWriter.WriteStartElement("row");
                 foreach (string column in columnsName)
                 {
-                    if (String.IsNullOrWhiteSpace(row[counter].ToString()))
+                    if (row[counter].GetType().Name == "DBNull")
                         continue;
 
                     xmlWriter.WriteStartElement(column);
-
-                    if (row[counter].GetType().Name == "Decimal")
-                        xmlWriter.WriteString(row[counter].ToString().Replace(",", "."));
-                    else if (row[counter].GetType().Name == "DateTime")
-                        xmlWriter.WriteString(((DateTime)row[counter]).ToString("yyyy-MM-dd HH:mm:ss"));
-                    else
-                        xmlWriter.WriteString(row[counter].ToString().Replace("'", "''"));
-
+                    xmlWriter.WriteAttributeString("type", row[counter].GetType().Name);
+                    xmlWriter.WriteString(row[counter].ToString());
                     xmlWriter.WriteEndElement();
                     counter++;
                 }
@@ -439,7 +500,7 @@ namespace Configurator
             else
             {
                 richTextBoxInfo.AppendText("\n" + text);
-                richTextBoxInfo.ScrollToCaret();
+                //richTextBoxInfo.ScrollToCaret();
             }
         }
 
