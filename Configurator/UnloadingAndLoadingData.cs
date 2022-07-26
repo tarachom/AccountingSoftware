@@ -477,9 +477,35 @@ namespace Configurator
                     if (row[counter].GetType().Name == "DBNull")
                         continue;
 
+                    string typeName = row[counter].GetType().Name;
+
                     xmlWriter.WriteStartElement(column);
-                    xmlWriter.WriteAttributeString("type", row[counter].GetType().Name);
-                    xmlWriter.WriteString(row[counter].ToString());
+                    xmlWriter.WriteAttributeString("type", typeName);
+
+                    switch (typeName)
+                    {
+                        case "String[]":
+                            {
+                                xmlWriter.WriteRaw(ArrayToXml<string>.Convert((string[])row[counter]));
+                                break;
+                            }
+                        case "Int32[]":
+                            {
+                                xmlWriter.WriteRaw(ArrayToXml<int>.Convert((int[])row[counter]));
+                                break;
+                            }
+                        case "Decimal[]":
+                            {
+                                xmlWriter.WriteRaw(ArrayToXml<decimal>.Convert((decimal[])row[counter]));
+                                break;
+                            }
+                        default:
+                            {
+                                xmlWriter.WriteString(row[counter].ToString());
+                                break;
+                            }
+                    }
+
                     xmlWriter.WriteEndElement();
                     counter++;
                 }
