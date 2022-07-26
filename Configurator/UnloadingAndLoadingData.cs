@@ -67,7 +67,7 @@ namespace Configurator
             {
                 string fileImport = openFileDialog.FileName;
 
-                Thread thread = new Thread(new ParameterizedThreadStart(ImportXSLT));
+                Thread thread = new Thread(new ParameterizedThreadStart(ImportData));
                 thread.Start(fileImport);
 
                 buttonLoadingData.Enabled = false;
@@ -75,191 +75,12 @@ namespace Configurator
             }
         }
 
-        #region Import
-
-        void ImportXSLT(object fileImport)
-        {
-            string dir = Path.GetDirectoryName(fileImport.ToString());
-
-            ApendLine(" --> Analize Step 1");
-
-            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
-            xsltCodeGnerator.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataXML.xslt", new XsltSettings(true, true), null);
-
-            XsltArgumentList xsltArgumentList = new XsltArgumentList();
-
-            FileStream fileStream = new FileStream(Path.Combine(dir, "sql_load.xml"), FileMode.Create);
-
-            xsltCodeGnerator.Transform(fileImport.ToString(), xsltArgumentList, fileStream);
-
-            fileStream.Close();
-            ApendLine(" --> OK");
-
-            //-----------------
-            ApendLine(" --> Analize Step 2");
-            XslCompiledTransform xsltCodeGnerator2 = new XslCompiledTransform();
-            xsltCodeGnerator2.Load(@"E:\Project\AccountingSoftware\Configurator\LoadingDataSQL2.xslt", new XsltSettings(true, true), null);
-
-            XsltArgumentList xsltArgumentList2 = new XsltArgumentList();
-
-            FileStream fileStream2 = new FileStream(Path.Combine(dir, "sql.xml"), FileMode.Create);
-
-            xsltCodeGnerator2.Transform(Path.Combine(dir, "sql_load.xml"), xsltArgumentList2, fileStream2);
-
-            fileStream2.Close();
-            ApendLine(" --> OK");
-
-            ApendLine(" --> Execute SQL");
-            ExecuteListSql(Path.Combine(dir, "sql.xml"));
-
-            ApendLine(" --> OK");
-        }
-
-        public void ExecuteListSql(string pathToXML)
-        {
-            XPathDocument xPathDoc = new XPathDocument(pathToXML);
-            XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
-
-            XPathNodeIterator rowNodes = xPathDocNavigator.Select("/root/row");
-            while (rowNodes.MoveNext())
-            {
-                XPathNavigator sqlNode = rowNodes.Current.SelectSingleNode("sql");
-                string sqlText = sqlNode.Value;
-
-                //ApendLine(" --> " + sqlText);
-
-                Dictionary<string, object> param = new Dictionary<string, object>();
-
-                XPathNodeIterator paramNodes = rowNodes.Current.Select("p");
-                while (paramNodes.MoveNext())
-                {
-                    string paramName = paramNodes.Current.GetAttribute("name", "");
-                    string paramType = paramNodes.Current.GetAttribute("type", "");
-
-                    string paramValue = paramNodes.Current.Value;
-                    object paramObj;
-
-                    switch (paramType)
-                    {
-                        case "Guid":
-                            {
-                                paramObj = Guid.Parse(paramValue);
-                                break;
-                            }
-                        case "Int32":
-                            {
-                                paramObj = int.Parse(paramValue);
-                                break;
-                            }
-                        case "DateTime":
-                            {
-                                paramObj = DateTime.Parse(paramValue);
-                                break;
-                            }
-                        case "TimeSpan":
-                            {
-                                paramObj = TimeSpan.Parse(paramValue);
-                                break;
-                            }
-                        case "Boolean":
-                            {
-                                paramObj = Boolean.Parse(paramValue);
-                                break;
-                            }
-                        case "Decimal":
-                            {
-                                paramObj = Decimal.Parse(paramValue);
-                                break;
-                            }
-                        case "String":
-                            {
-                                paramObj = paramValue;
-                                break;
-                            }
-                        case "String[]":
-                            {
-                                paramObj = ArrayToXml.Convert(paramNodes.Current.InnerXml);
-                                break;
-                            }
-                        case "Int32[]":
-                            {
-                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
-                                int[] tmpIntValue = new int[tmpValue.Length];
-
-                                for (int i=0; i< tmpValue.Length; i++)
-                                    tmpIntValue[i] = int.Parse(tmpValue[i]);
-
-                                paramObj = tmpIntValue;
-                                break;
-                            }
-                        case "Decimal[]":
-                            {
-                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
-                                decimal[] tmpDecimalValue = new decimal[tmpValue.Length];
-
-                                for (int i = 0; i < tmpValue.Length; i++)
-                                    tmpDecimalValue[i] = decimal.Parse(tmpValue[i]);
-
-                                paramObj = tmpDecimalValue;
-                                break;
-                            }
-                        default:
-                            {
-                                ApendLine("Не оприділений тип: " + paramType);
-                                paramObj = paramValue;
-                                break;
-                            }
-                    }
-
-                    param.Add(paramName, paramObj);
-                }
-
-                int result = Program.Kernel.DataBase.ExecuteSQL(sqlText, param);
-            }
-        }
-
-        void Import(object fileImport)
-        {
-            XPathDocument xPathDocument = new XPathDocument(fileImport.ToString());
-            XPathNavigator xPathNavigator = xPathDocument.CreateNavigator();
-
-            XPathNavigator rootNode = xPathNavigator.SelectSingleNode("root");
-
-            XPathNodeIterator ConstantNode = rootNode.Select("Constants/Constant");
-            while (ConstantNode.MoveNext())
-            {
-                XPathNavigator CurrentNode = ConstantNode.Current;
-
-                string Name = CurrentNode.GetAttribute("name", "");
-                string Col = CurrentNode.GetAttribute("col", "");
-
-                XPathNavigator rowNode = CurrentNode.SelectSingleNode($"row/{Col}");
-
-                if (rowNode != null)
-                {
-
-                }
-
-                XPathNodeIterator TablePartNode = rootNode.Select("Constants/Constant");
-                while (TablePartNode.MoveNext())
-                {
-                    XPathNavigator CurrentTablePartNode = TablePartNode.Current;
-
-                    string TablePart_Name = CurrentNode.GetAttribute("name", "");
-                    string TablePart_Tab = CurrentNode.GetAttribute("tab", "");
-
-                    XPathNodeIterator rowTablePartNode = CurrentTablePartNode.Select("row");
-
-                }
-            }
-        }
-
-        #endregion
-
         #region Export
 
         void ExportData(object fileExport)
         {
+            ApendLine("Файл вигрузки: " + fileExport.ToString() + "\n\n");
+
             XmlWriterSettings settings = new XmlWriterSettings() { Indent = true, Encoding = Encoding.UTF8 };
 
             XmlWriter xmlWriter = XmlWriter.Create(fileExport.ToString(), settings);
@@ -544,6 +365,171 @@ namespace Configurator
 
         #endregion
 
+        #region Import
+
+        void ImportData(object fileImport)
+        {
+            ApendLine("Файл загрузки: " + fileImport.ToString() + "\n\n");
+
+            ApendLine("Аналіз: ");
+
+            ApendLine(" --> Крок 1");
+            string pathToXmlResultStepOne = TransformXmlDataStepOne(fileImport.ToString());
+
+            ApendLine(" --> Крок 2");
+            string pathToXmlResultStepSQL = TransformStepOneToStepSQL(fileImport.ToString(), pathToXmlResultStepOne);
+
+            ApendLine("Виконання команд: ");
+
+            ExecuteSqlList(pathToXmlResultStepSQL);
+
+            ApendLine(" --> Готово!");
+        }
+
+        string TransformXmlDataStepOne(string fileImport)
+        {
+            string pathToTemplate = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "UnloadingAndLoadingDataXML.xslt");
+            string pathToDirFileImport = Path.GetDirectoryName(fileImport);
+            string pathToXmlResult = Path.Combine(pathToDirFileImport, "stepone_" + Guid.NewGuid().ToString().Replace("-", "") + ".xml");
+
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(false, false), null);
+
+            XsltArgumentList xsltArgumentList = new XsltArgumentList();
+
+            FileStream fileStream = new FileStream(pathToXmlResult, FileMode.Create);
+
+            xsltCodeGnerator.Transform(fileImport, xsltArgumentList, fileStream);
+
+            fileStream.Close();
+
+            return pathToXmlResult;
+        }
+
+        string TransformStepOneToStepSQL(string fileImport, string fileStepOne)
+        {
+            string pathToTemplate = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "UnloadingAndLoadingDataSQL.xslt");
+            string pathToDirFileImport = Path.GetDirectoryName(fileImport);
+            string pathToXmlResult = Path.Combine(pathToDirFileImport, "stepsql_" + Guid.NewGuid().ToString().Replace("-", "") + ".xml");
+
+            XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+            xsltCodeGnerator.Load(pathToTemplate, new XsltSettings(false, false), null);
+
+            XsltArgumentList xsltArgumentList = new XsltArgumentList();
+
+            FileStream fileStream = new FileStream(pathToXmlResult, FileMode.Create);
+
+            xsltCodeGnerator.Transform(fileStepOne, xsltArgumentList, fileStream);
+
+            fileStream.Close();
+
+            return pathToXmlResult;
+        }
+
+        public void ExecuteSqlList(string fileStepSQL)
+        {
+            XPathDocument xPathDoc = new XPathDocument(fileStepSQL);
+            XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
+
+            XPathNodeIterator rowNodes = xPathDocNavigator.Select("/root/row");
+            while (rowNodes.MoveNext())
+            {
+                XPathNavigator sqlNode = rowNodes.Current.SelectSingleNode("sql");
+                string sqlText = sqlNode.Value;
+
+                Dictionary<string, object> param = new Dictionary<string, object>();
+
+                XPathNodeIterator paramNodes = rowNodes.Current.Select("p");
+                while (paramNodes.MoveNext())
+                {
+                    string paramName = paramNodes.Current.GetAttribute("name", "");
+                    string paramType = paramNodes.Current.GetAttribute("type", "");
+
+                    string paramValue = paramNodes.Current.Value;
+                    object paramObj;
+
+                    switch (paramType)
+                    {
+                        case "Guid":
+                            {
+                                paramObj = Guid.Parse(paramValue);
+                                break;
+                            }
+                        case "Int32":
+                            {
+                                paramObj = int.Parse(paramValue);
+                                break;
+                            }
+                        case "DateTime":
+                            {
+                                paramObj = DateTime.Parse(paramValue);
+                                break;
+                            }
+                        case "TimeSpan":
+                            {
+                                paramObj = TimeSpan.Parse(paramValue);
+                                break;
+                            }
+                        case "Boolean":
+                            {
+                                paramObj = Boolean.Parse(paramValue);
+                                break;
+                            }
+                        case "Decimal":
+                            {
+                                paramObj = Decimal.Parse(paramValue);
+                                break;
+                            }
+                        case "String":
+                            {
+                                paramObj = paramValue;
+                                break;
+                            }
+                        case "String[]":
+                            {
+                                paramObj = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                break;
+                            }
+                        case "Int32[]":
+                            {
+                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                int[] tmpIntValue = new int[tmpValue.Length];
+
+                                for (int i=0; i< tmpValue.Length; i++)
+                                    tmpIntValue[i] = int.Parse(tmpValue[i]);
+
+                                paramObj = tmpIntValue;
+                                break;
+                            }
+                        case "Decimal[]":
+                            {
+                                string[] tmpValue = ArrayToXml.Convert(paramNodes.Current.InnerXml);
+                                decimal[] tmpDecimalValue = new decimal[tmpValue.Length];
+
+                                for (int i = 0; i < tmpValue.Length; i++)
+                                    tmpDecimalValue[i] = decimal.Parse(tmpValue[i]);
+
+                                paramObj = tmpDecimalValue;
+                                break;
+                            }
+                        default:
+                            {
+                                ApendLine("Не оприділений тип: " + paramType);
+                                paramObj = paramValue;
+                                break;
+                            }
+                    }
+
+                    param.Add(paramName, paramObj);
+                }
+
+                int result = Program.Kernel.DataBase.ExecuteSQL(sqlText, param);
+                ApendInfo(".");
+            }
+        }
+
+        #endregion
+
         private void ApendLine(string text)
         {
             if (richTextBoxInfo.InvokeRequired)
@@ -557,156 +543,17 @@ namespace Configurator
             }
         }
 
-        //void SaveTable(string table)
-        //{
-        //    string pathToUnloadBase = @"E:\ВигрузкаБази\" + table + ".xml";
-
-        //    string[] columnsName;
-        //    List<object[]> listRow;
-
-        //    string query = "SELECT * FROM " + table;
-
-        //    Program.Kernel.DataBase.SelectRequest(query, null, out columnsName, out listRow);
-
-        //    StreamWriter sw = new StreamWriter(pathToUnloadBase);
-        //    sw.AutoFlush = true;
-
-        //    sw.WriteLine("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
-        //    sw.WriteLine("<ВигрузкаДаних>");
-        //    sw.WriteLine("<Таблиця>" + table + "</Таблиця>");
-
-        //    sw.WriteLine("<Колонки>");
-
-        //    for (int k = 0; k < columnsName.Length; k++)
-        //    {
-        //        sw.Write("<Колонка>");
-        //        sw.Write("<Назва>" + columnsName[k] + "</Назва>");
-        //        sw.Write("<КороткаНазва>c" + k.ToString() + "</КороткаНазва>");
-        //        sw.WriteLine("</Колонка>");
-        //    }
-
-        //    sw.WriteLine("</Колонки>");
-        //    sw.WriteLine("<Записи>");
-
-        //    foreach (object[] o in listRow)
-        //    {
-        //        sw.Write("<row>");
-
-        //        for (int i = 0; i < o.Length; i++)
-        //            sw.Write("<c" + i.ToString() + ">" + o[i].ToString() + "</c" + i.ToString() + ">");
-
-        //        sw.WriteLine("</row>");
-        //    }
-
-        //    sw.WriteLine("</Записи>");
-        //    sw.WriteLine("</ВигрузкаДаних>");
-        //    sw.Close();
-        //}
-
-        //void LoadingData()
-        //{
-        //    ApendLine("ДОВІДНИКИ");
-
-        //    foreach (ConfigurationDirectories configurationDirectories in Conf.Directories.Values)
-        //    {
-        //        ApendLine(" --> Довідник: " + configurationDirectories.Name);
-
-        //        //LoadTable(configurationDirectories.Table, configurationDirectories);
-        //    }
-        //}
-
-        //void LoadTable(string table, ConfigurationDirectories configurationDirectory)
-        //{
-        //    string pathToLoadBase = @"E:\ВигрузкаБази\" + table + ".xml";
-
-        //    XPathDocument xPathDoc = new XPathDocument(pathToLoadBase);
-        //    XPathNavigator xPathDocNavigator = xPathDoc.CreateNavigator();
-
-        //    XPathNavigator rootNode = xPathDocNavigator.SelectSingleNode("/ВигрузкаДаних");
-
-        //    Dictionary<string, string> columnsList = LoadColumns(rootNode);
-
-        //    XPathNavigator rowsNode = rootNode.SelectSingleNode("Записи");
-        //    LoadRows(rowsNode, table, columnsList, configurationDirectory);
-        //}
-
-        //Dictionary<string, string> LoadColumns(XPathNavigator rootNode)
-        //{
-        //    Dictionary<string, string> columnsList = new Dictionary<string, string>();
-
-        //    XPathNodeIterator columnsNodeList = rootNode.Select("Колонки/Колонка");
-        //    while (columnsNodeList.MoveNext())
-        //    {
-        //        string columnNodeName = columnsNodeList.Current.SelectSingleNode("Назва").Value;
-        //        string columnNodeAlias = columnsNodeList.Current.SelectSingleNode("КороткаНазва").Value;
-
-        //        columnsList.Add(columnNodeName, columnNodeAlias);
-        //    }
-
-        //    return columnsList;
-        //}
-
-        //void LoadRows(XPathNavigator rootNode, string table, Dictionary<string, string> columnsList, ConfigurationDirectories configurationDirectory)
-        //{
-        //    Dictionary<string, object> param = new Dictionary<string, object>();
-
-        //    XPathNodeIterator rowNodeList = rootNode.Select("row");
-        //    while (rowNodeList.MoveNext())
-        //    {
-        //        param.Clear();
-
-        //        foreach (KeyValuePair<string, string> columnItem in columnsList)
-        //        {
-        //            string columnValue = rowNodeList.Current.SelectSingleNode(columnItem.Value).Value;
-
-        //            string columnType = configurationDirectory.Fields[columnItem.Key].Type;
-
-        //            object obj;
-
-        //            switch (columnType)
-        //            {
-        //                case "integer":
-        //                case "enum":
-        //                    {
-        //                        obj = int.Parse(columnValue);
-        //                        break;
-        //                    }
-        //                case "numeric":
-        //                    {
-        //                        obj = decimal.Parse(columnValue);
-        //                        break;
-        //                    }
-        //                case "boolean":
-        //                    {
-        //                        obj = bool.Parse(columnValue);
-        //                        break;
-        //                    }
-        //                case "date":
-        //                case "datetime":
-        //                case "time":
-        //                    {
-        //                        obj = DateTime.Parse(columnValue);
-        //                        break;
-        //                    }
-        //                case "pointer":
-        //                case "empty_pointer":
-        //                    {
-        //                        obj = Guid.Parse(columnValue);
-        //                        break;
-        //                    }
-        //                default:
-        //                    {
-        //                        throw new Exception("Error type");
-        //                    }
-        //            }
-
-        //            param.Add(columnItem.Key, obj);
-        //        }
-
-        //        ApendLine(" --> " + table + ": " + Program.Kernel.DataBase.InsertSQL(table, param).ToString());
-
-        //    }
-        //}
+        private void ApendInfo(string text)
+        {
+            if (richTextBoxInfo.InvokeRequired)
+            {
+                richTextBoxInfo.Invoke(new Action<string>(ApendInfo), text);
+            }
+            else
+            {
+                richTextBoxInfo.AppendText(text);
+            }
+        }
 
     }
 }

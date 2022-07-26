@@ -251,9 +251,8 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="configurator.ico" />
-    <Content Include="LoadingDataSQL2.xslt" />
-    <Content Include="LoadingDataSQL.xslt" />
-    <Content Include="LoadingDataXML.xslt" />
+    <Content Include="UnloadingAndLoadingDataSQL.xslt" />
+    <Content Include="UnloadingAndLoadingDataXML.xslt" />
     <Content Include="XSLTFile1.xslt" />
     <None Include="Resources\up.ico" />
     <None Include="Resources\down.ico" />
@@ -269,6 +268,10 @@
     <PostBuildEvent>
 copy $(ProjectDir)CodeGeneration.xslt         $(TargetDir)CodeGeneration.xslt
 copy $(ProjectDir)Comparison.xslt                $(TargetDir)Comparison.xslt
-copy $(ProjectDir)ComparisonAnalize.xslt    $(TargetDir)ComparisonAnalize.xslt</PostBuildEvent>
+copy $(ProjectDir)ComparisonAnalize.xslt    $(TargetDir)ComparisonAnalize.xslt
+
+copy $(ProjectDir)UnloadingAndLoadingDataXML.xslt               $(TargetDir)UnloadingAndLoadingDataXML.xslt
+copy $(ProjectDir)UnloadingAndLoadingDataSQL.xslt                $(TargetDir)UnloadingAndLoadingDataSQL.xslt
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

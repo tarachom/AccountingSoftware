@@ -43,7 +43,7 @@ namespace Configurator
             this.buttonUnloadingData.Name = "buttonUnloadingData";
             this.buttonUnloadingData.Size = new System.Drawing.Size(80, 30);
             this.buttonUnloadingData.TabIndex = 1;
-            this.buttonUnloadingData.Text = "Вигрузити";
+            this.buttonUnloadingData.Text = "ВИГРУЗКА";
             this.buttonUnloadingData.UseVisualStyleBackColor = true;
             this.buttonUnloadingData.Click += new System.EventHandler(this.buttonUnloadingData_Click);
             // 
@@ -72,11 +72,11 @@ namespace Configurator
             // 
             // buttonLoadingData
             // 
-            this.buttonLoadingData.Location = new System.Drawing.Point(98, 12);
+            this.buttonLoadingData.Location = new System.Drawing.Point(132, 12);
             this.buttonLoadingData.Name = "buttonLoadingData";
             this.buttonLoadingData.Size = new System.Drawing.Size(80, 30);
             this.buttonLoadingData.TabIndex = 3;
-            this.buttonLoadingData.Text = "Загрузити";
+            this.buttonLoadingData.Text = "ЗАГРУЗКА";
             this.buttonLoadingData.UseVisualStyleBackColor = true;
             this.buttonLoadingData.Click += new System.EventHandler(this.buttonLoadingData_Click);
             // 

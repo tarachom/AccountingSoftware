@@ -21,6 +21,45 @@ limitations under the License.
 Автор:    Тарахомин Юрій Іванович
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
+
+Друга ступінь перетворення ХМЛ файлу вигружених даних в ХМЛ файл готових SQL запитів з параметрами
+
+Результат:
+
+  <row>
+    <sql>
+		INSERT INTO tab_a77 (uid, col_a2, col_a9, col_a1, col_a3, col_a8, col_a5, col_a6, col_a7) 
+		VALUES (@uid, @col_a2, @col_a9, @col_a1, @col_a3, @col_a8, @col_a5, @col_a6, @col_a7) 
+		ON CONFLICT (uid) DO UPDATE SET uid = @uid, col_a2 = @col_a2, col_a9 = @col_a9, col_a1 = @col_a1, col_a3 = @col_a3, 
+		col_a8 = @col_a8, col_a5 = @col_a5, col_a6 = @col_a6, col_a7 = @col_a7
+	</sql>
+	
+    <p name="uid" type="Guid">1a13e463-e587-4184-b8e3-be2c28bd82bd</p>
+    <p name="col_a2" type="DateTime">25.07.2022 17:16:53</p>
+    <p name="col_a9" type="String">1fcdb976-2ca4-40ff-96ef-8d57eb424f0e</p>
+    <p name="col_a1" type="String">АктВиконанихРобіт</p>
+    <p name="col_a3" type="DateTime">25.07.2022 0:00:00</p>
+    <p name="col_a8" type="String">Add</p>
+    <p name="col_a5" type="Boolean">False</p>
+    <p name="col_a6" type="Boolean">True</p>
+    <p name="col_a7" type="String"></p>
+  </row>
+
+
+Перша ступень:
+
+  <sql tab="tab_a77">
+    <row name="uid" type="Guid">1a13e463-e587-4184-b8e3-be2c28bd82bd</row>
+    <row name="col_a2" type="DateTime">25.07.2022 17:16:53</row>
+    <row name="col_a9" type="String">1fcdb976-2ca4-40ff-96ef-8d57eb424f0e</row>
+    <row name="col_a1" type="String">АктВиконанихРобіт</row>
+    <row name="col_a3" type="DateTime">25.07.2022 0:00:00</row>
+    <row name="col_a8" type="String">Add</row>
+    <row name="col_a5" type="Boolean">False</row>
+    <row name="col_a6" type="Boolean">True</row>
+    <row name="col_a7" type="String"></row>
+  </sql>
+
 */
 -->
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
