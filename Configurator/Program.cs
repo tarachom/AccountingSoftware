@@ -40,9 +40,19 @@ namespace Configurator
 
 			FormConfiguration formConfiguration = new FormConfiguration();
 
-			//Ключ конфігурації яку потрібно відкрити автоматично (Guid)
-			if (args.Length > 0)
+			if (args.Length >= 1)
+			{
+				//Ключ конфігурації яку потрібно відкрити автоматично (Guid)
 				formConfiguration.AutoOpenConfigurationKey = args[0];
+
+				//Ключ команди яку потрібно виконати
+				if (args.Length >= 2)
+					formConfiguration.CommandExecuteKey = args[1];
+
+				//Параметр для команди
+				if (args.Length >= 3)
+					formConfiguration.CommandExecuteParam = args[2];
+			}
 
 			Application.Run(formConfiguration);
 		}

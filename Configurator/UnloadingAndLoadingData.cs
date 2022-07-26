@@ -30,9 +30,54 @@ namespace Configurator
         private bool Cancel = false;
         private Thread thread;
 
+        public string AutoCommandExecute { get; set; }
+        public string AutoCommandExecuteParam { get; set; }
+
         private void UnloadingAndLoadingData_Load(object sender, EventArgs e)
         {
-            /**/
+            if (AutoCommandExecute == "unloadingdata")
+            {
+                string fileExport = "";
+
+                if (!String.IsNullOrEmpty(AutoCommandExecuteParam))
+                    fileExport = AutoCommandExecuteParam;
+                else
+                    fileExport = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath),
+                       "StorageAndTrade_Export_" + DateTime.Now.ToString("dd_MM_yyyy") + ".xml");
+
+                Cancel = false;
+
+                buttonLoadingData.Enabled = buttonUnloadingData.Enabled = false;
+                buttonStop.Enabled = true;
+
+                richTextBoxInfo.Text = "";
+
+                thread = new Thread(new ParameterizedThreadStart(ExportData));
+                thread.Start(fileExport);
+            }
+
+            if (AutoCommandExecute == "loadingdata")
+            {
+                string fileImport = "";
+
+                if (!String.IsNullOrEmpty(AutoCommandExecuteParam))
+                    fileImport = AutoCommandExecuteParam;
+                else
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                    return;
+                }
+
+                Cancel = false;
+
+                buttonLoadingData.Enabled = buttonUnloadingData.Enabled = false;
+                buttonStop.Enabled = true;
+
+                richTextBoxInfo.Text = "";
+
+                thread = new Thread(new ParameterizedThreadStart(ImportData));
+                thread.Start(fileImport);
+            }
         }
 
         private void buttonUnloadingData_Click(object sender, EventArgs e)
@@ -338,6 +383,8 @@ namespace Configurator
 
             ApendLine("");
             ApendLine("Готово!");
+
+            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         /// <summary>
@@ -515,7 +562,9 @@ namespace Configurator
 
             buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));
             buttonLoadingData.Invoke(new Action(() => buttonLoadingData.Enabled = true));
-            buttonStop.Invoke(new Action(() => buttonStop.Enabled = false));           
+            buttonStop.Invoke(new Action(() => buttonStop.Enabled = false));
+
+            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         /// <summary>

@@ -43,11 +43,25 @@ namespace Configurator
 			InitializeComponent();
 		}
 
+        #region Запуск з параметрами
+
+        /// <summary>
+        /// Ключ конфігурації яку потрібно відкрити автоматично без вибору в списку.
+        /// Ключ передається як параметр при запуску конфігуратора.
+        /// </summary>
+        public string AutoOpenConfigurationKey { get; set; }
+
 		/// <summary>
-		/// Ключ конфігурації яку потрібно відкрити автоматично без вибору в списку.
-		/// Ключ передається як параметр при запуску конфігуратора.
+		/// Ключ команди яку потрібно виконати автоматично
 		/// </summary>
-		public string AutoOpenConfigurationKey { get; set; }
+		public string CommandExecuteKey { get; set; }
+
+		/// <summary>
+		/// Параметр для команди
+		/// </summary>
+		public string CommandExecuteParam { get; set; }
+
+		#endregion
 
 		public Configuration Conf { get; set; }
 
@@ -491,6 +505,51 @@ namespace Configurator
 				Conf = Program.Kernel.Conf;
 
 				LoadConf();
+
+				switch(CommandExecuteKey)
+                {
+					case "maintenance":
+                        {
+							Maintenance maintenance = new Maintenance();
+							maintenance.AutoCommandExecute = "maintenance";
+
+							DialogResult dialogResultMaintenance = maintenance.ShowDialog();
+
+							if (dialogResultMaintenance == DialogResult.OK)
+                            {
+								maintenance.Close();
+
+								Application.Exit();
+							}
+
+							break;
+						}
+
+					case "unloadingdata":
+					case "loadingdata":
+                        {
+							UnloadingAndLoadingData unloadingAndLoadingData = new UnloadingAndLoadingData();
+							unloadingAndLoadingData.Conf = Conf;
+							unloadingAndLoadingData.AutoCommandExecute = CommandExecuteKey;
+							unloadingAndLoadingData.AutoCommandExecuteParam = CommandExecuteParam;
+
+							DialogResult dialogResultMaintenance = unloadingAndLoadingData.ShowDialog();
+
+							if (dialogResultMaintenance == DialogResult.OK ||
+								dialogResultMaintenance == DialogResult.Cancel)
+							{
+								unloadingAndLoadingData.Close();
+
+								Application.Exit();
+							}
+
+
+							break;
+						}
+
+					default:
+						break;
+                }
 			}
             else
             {
@@ -1455,6 +1514,50 @@ namespace Configurator
 			registersAccumulationForm.Show();
 		}
 
+		private void редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ConfigurationInfoForm configurationInfoForm = new ConfigurationInfoForm();
+			configurationInfoForm.Conf = Conf;
+			configurationInfoForm.OwnerForm = this;
+			configurationInfoForm.Show();
+		}
+
+		#endregion
+
+		#region Функції
+
+		private void AddNewConstants(string defaultBlockName = "")
+		{
+			ConstantsForm constantsForm = new ConstantsForm();
+			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
+			constantsForm.CallBack = CallBack_Update_Constants;
+			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields());
+			constantsForm.ConstantsBlock = defaultBlockName;
+			constantsForm.Show();
+		}
+
+		private Dictionary<string, ConfigurationObjectField> GetConstantsAllFields()
+		{
+			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
+			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
+			{
+				foreach (ConfigurationConstants constants in block.Constants.Values)
+				{
+					string fullName = block.BlockName + "." + constants.Name;
+					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
+					Console.WriteLine(constants.NameInTable);
+				}
+			}
+
+			return ConstantsAllFields;
+		}
+
+
+
+		#endregion
+
+		#region Вигрузка та загрузка конфігурації
+
 		private void загрузитиКонфігураціюЗФайлуToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -1505,38 +1608,6 @@ namespace Configurator
 			}
 		}
 
-		#endregion
-
-		#region Функції
-
-		private void AddNewConstants(string defaultBlockName = "")
-		{
-			ConstantsForm constantsForm = new ConstantsForm();
-			constantsForm.CallBack_IsExistConstants = CallBack_IsExistConstants;
-			constantsForm.CallBack = CallBack_Update_Constants;
-			constantsForm.NewNameInTable = Configuration.GetNewUnigueColumnName(Program.Kernel, "tab_constants", GetConstantsAllFields());
-			constantsForm.ConstantsBlock = defaultBlockName;
-			constantsForm.Show();
-		}
-
-		private Dictionary<string, ConfigurationObjectField> GetConstantsAllFields()
-		{
-			Dictionary<string, ConfigurationObjectField> ConstantsAllFields = new Dictionary<string, ConfigurationObjectField>();
-			foreach (ConfigurationConstantsBlock block in Conf.ConstantsBlock.Values)
-			{
-				foreach (ConfigurationConstants constants in block.Constants.Values)
-				{
-					string fullName = block.BlockName + "." + constants.Name;
-					ConstantsAllFields.Add(fullName, new ConfigurationObjectField(fullName, constants.NameInTable, constants.Type, constants.Pointer, constants.Desc));
-					Console.WriteLine(constants.NameInTable);
-				}
-			}
-
-			return ConstantsAllFields;
-		}
-
-
-
         #endregion
 
         #region Вигрузка та Загрузка даних
@@ -1551,13 +1622,7 @@ namespace Configurator
 
         #endregion
 
-        private void редагуватиІнформаціюПроКонфігураціюToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-			ConfigurationInfoForm configurationInfoForm = new ConfigurationInfoForm();
-			configurationInfoForm.Conf = Conf;
-			configurationInfoForm.OwnerForm = this;
-			configurationInfoForm.Show();
-		}
+        #region Обслуговування бази даних
 
         private void обслуговуванняБазиДанихToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1565,5 +1630,7 @@ namespace Configurator
 			maintenance.Conf = Conf;
 			maintenance.ShowDialog();
 		}
+
+        #endregion 
     }
 }

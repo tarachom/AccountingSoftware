@@ -28,11 +28,18 @@ namespace Configurator
         private bool Cancel = false;
         private Thread thread;
 
+        public string AutoCommandExecute { get; set; }
+
         private void Maintenance_Load(object sender, EventArgs e)
         {
             Conf = Program.Kernel.Conf;
 
             buttonStop.Enabled = false;
+
+            if (AutoCommandExecute == "maintenance")
+            {
+                buttonStart_Click(this, null);
+            }
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -74,6 +81,8 @@ namespace Configurator
 
             ApendLine("");
             ApendLine("Готово!");
+
+            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         private void ApendLine(string text)
