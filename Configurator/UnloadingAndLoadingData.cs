@@ -507,6 +507,10 @@ namespace Configurator
                 return;
             }
 
+            //Видалення тимчасових файлів
+            File.Delete(pathToXmlResultStepOne);
+            File.Delete(pathToXmlResultStepSQL);
+
             ApendLine(" --> Готово!");
 
             buttonUnloadingData.Invoke(new Action(() => buttonUnloadingData.Enabled = true));

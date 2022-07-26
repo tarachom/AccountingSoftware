@@ -387,8 +387,16 @@ namespace Configurator
 				//Execute
 				foreach (string sqlText in SqlList)
 				{
-					int resultSQL = Program.Kernel.DataBase.ExecuteSQL(sqlText);
-					ApendLine(" --> " + sqlText + " [" + resultSQL.ToString() + "]", "");
+					ApendLine(" --> " + sqlText, "");
+
+					try
+                    {
+						Program.Kernel.DataBase.ExecuteSQL(sqlText);
+					}
+					catch(Exception ex)
+                    {
+						ApendLine("Помилка: " + ex.Message, "");
+					}
 				}
 
 			ApendLine("\nЗбереження конфігурації та видалення тимчасових файлів", "", "\n");
