@@ -384,7 +384,8 @@ namespace Configurator
             ApendLine("");
             ApendLine("Готово!");
 
-            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
+            if (!String.IsNullOrEmpty(AutoCommandExecute))
+                this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         /// <summary>
@@ -564,7 +565,8 @@ namespace Configurator
             buttonLoadingData.Invoke(new Action(() => buttonLoadingData.Enabled = true));
             buttonStop.Invoke(new Action(() => buttonStop.Enabled = false));
 
-            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
+            if (!String.IsNullOrEmpty(AutoCommandExecute))
+                this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         /// <summary>

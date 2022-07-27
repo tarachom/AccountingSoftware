@@ -253,7 +253,6 @@
     <Content Include="configurator.ico" />
     <Content Include="UnloadingAndLoadingDataSQL.xslt" />
     <Content Include="UnloadingAndLoadingDataXML.xslt" />
-    <Content Include="XSLTFile1.xslt" />
     <None Include="Resources\up.ico" />
     <None Include="Resources\down.ico" />
   </ItemGroup>

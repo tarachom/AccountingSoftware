@@ -82,7 +82,8 @@ namespace Configurator
             ApendLine("");
             ApendLine("Готово!");
 
-            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
+            if (!String.IsNullOrEmpty(AutoCommandExecute))
+                this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
         }
 
         private void ApendLine(string text)
