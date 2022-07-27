@@ -82,6 +82,7 @@ namespace Configurator
             // 
             // buttonStop
             // 
+            this.buttonStop.Enabled = false;
             this.buttonStop.Location = new System.Drawing.Point(250, 12);
             this.buttonStop.Name = "buttonStop";
             this.buttonStop.Size = new System.Drawing.Size(69, 30);
