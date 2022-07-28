@@ -46,7 +46,7 @@ namespace AccountingSoftware
 		{
 			exception = null;
 
-			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer";
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -66,7 +66,7 @@ namespace AccountingSoftware
 
 		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
-			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};Database={Database};";
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer";
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -90,7 +90,7 @@ namespace AccountingSoftware
 			exception = null;
 			IsExistsDatabase = false;
 
-			string conString = $"Server={Server};User Id={UserId};Password={Password};Port={Port};"; //Database={Database};
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};SSLMode=Prefer";
 
 			Connection = new NpgsqlConnection(conString);
 
