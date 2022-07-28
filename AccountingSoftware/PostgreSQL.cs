@@ -529,7 +529,7 @@ namespace AccountingSoftware
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			if (reader.Read())
 				for (int i = 0; i < fieldPresentation.Length; i++)
-					presentation += (i > 0 ? "/" : "") + reader[fieldPresentation[i]].ToString();
+					presentation += (i > 0 ? ", " : "") + reader[fieldPresentation[i]].ToString();
 
 			reader.Close();
 
@@ -849,7 +849,7 @@ namespace AccountingSoftware
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			if (reader.Read())
 				for (int i = 0; i < fieldPresentation.Length; i++)
-					presentation += (i > 0 ? "|" : "") + reader[fieldPresentation[i]].ToString();
+					presentation += (i > 0 ? ", " : "") + reader[fieldPresentation[i]].ToString();
 
 			reader.Close();
 

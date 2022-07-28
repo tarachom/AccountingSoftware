@@ -572,6 +572,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         
         public void Save()
         {
+		    <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
+			</xsl:if>
             <xsl:for-each select="Fields/Field">
               <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
               <xsl:if test="Type = 'enum'">
@@ -584,9 +587,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-		    <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
-                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this);</xsl:text>      
-            </xsl:if>
             BaseSave();
 			<xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
@@ -942,6 +942,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         
         public void Save()
         {
+            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
+                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this)</xsl:text>;
+			</xsl:if>
             <xsl:for-each select="Fields/Field">
               <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
               <xsl:if test="Type = 'enum'">
@@ -954,9 +957,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                 </xsl:when>
               </xsl:choose>;
             </xsl:for-each>
-            <xsl:if test="normalize-space(TriggerFunctions/BeforeSave) != ''">
-                <xsl:value-of select="TriggerFunctions/BeforeSave"/><xsl:text>(this);</xsl:text>      
-            </xsl:if>
             BaseSave();
 			<xsl:if test="normalize-space(TriggerFunctions/AfterSave) != ''">
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
