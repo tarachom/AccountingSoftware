@@ -1268,7 +1268,7 @@ namespace StorageAndTrade_1_0.Journal
                <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
              </xsl:for-each>}) { }
 
-        public DocumentObject GetDocumentObject(bool readAllTablePart = false)
+        public DocumentObject GetDocumentObject(bool readAllTablePart = true)
         {
             if (Current == null)
                 return null;

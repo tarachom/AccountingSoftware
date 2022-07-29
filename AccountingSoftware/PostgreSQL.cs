@@ -947,16 +947,19 @@ namespace AccountingSoftware
 
 		#region Journal
 
-		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, List<JournalDocument> listDocumentPointer)
+		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, List<JournalDocument> listJournalDocument)
 		{
 			string query = "";
 			int counter = 0;
 
 			foreach (string table in tables)
 			{
-				query += (counter>0? "\nUNION " : "") + $@"(SELECT uid, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})" ;
+				query += (counter > 0 ? "\nUNION " : "") +
+					$"(SELECT uid, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})";
+
 				counter++;
 			}
+
 			query += "\nORDER BY type_doc";
 
 			Console.WriteLine(query);
@@ -969,12 +972,12 @@ namespace AccountingSoftware
 				JournalDocument document = new JournalDocument()
 				{
 					UnigueID = new UnigueID((Guid)reader["uid"], ""),
-					TypeDocument = reader["type_doc"].ToString(),
 					Spend = (bool)reader["spend"],
-					SpendDate = (DateTime)reader["spend_date"]
+					SpendDate = (DateTime)reader["spend_date"],
+					TypeDocument = reader["type_doc"].ToString()
 				};
 
-				listDocumentPointer.Add(document);
+				listJournalDocument.Add(document);
 			}
 			reader.Close();
 		}
