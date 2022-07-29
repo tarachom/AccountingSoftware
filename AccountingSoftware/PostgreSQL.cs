@@ -956,8 +956,11 @@ namespace AccountingSoftware
 			{
 				QuerySelect.Table = table;
 				QuerySelect.FieldAndAlias.Add(new NameValue<string>($"'{typeDocument[counter]}'", "type_document"));
-				query += (query.Length > 0 ? " UNION " : "") + "(" + QuerySelect.Construct() + ")";
+				query += (query.Length > 0 ? "\nUNION\n" : "") + "(" + QuerySelect.Construct() + ")";
+
+				QuerySelect.Table = "";
 				QuerySelect.FieldAndAlias.RemoveAt(QuerySelect.FieldAndAlias.Count - 1);
+
 				counter++;
 			}
 
@@ -985,8 +988,7 @@ namespace AccountingSoftware
 				}
 
 				DocumentPointer elementPointer = new DocumentPointer();
-				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields);
-				elementPointer.TypeDocument = 
+				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields, reader["type_document"].ToString());
 
 				listDocumentPointer.Add(elementPointer);
 			}

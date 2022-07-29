@@ -100,7 +100,7 @@ namespace AccountingSoftware
 
 		#region Journal
 
-		void SelectJournalDocumentPointer(string[] tables, Query QuerySelect, List<DocumentPointer> listDocumentPointer);
+		void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, Query QuerySelect, List<DocumentPointer> listDocumentPointer);
 
 		#endregion
 

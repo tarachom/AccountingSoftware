@@ -48,10 +48,11 @@ namespace AccountingSoftware
 		/// </summary>
 		/// <param name="uid">Унікальний ідентифікатор</param>
 		/// <param name="fields">Поля які потрібно додатково зчитати</param>
-		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
+		public void Init(UnigueID uid, Dictionary<string, object> fields = null, string typeDocument = "")
 		{
 			UnigueID = uid;
 			Fields = fields;
+			TypeDocument = typeDocument;
 		}
 
 		/// <summary>
@@ -67,7 +68,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Назва як задано в конфігураторі
 		/// </summary>
-		public string TypeDocument { get; set; }
+		public string TypeDocument { get; private set; }
 
 		/// <summary>
 		/// Унікальний ідентифікатор запису

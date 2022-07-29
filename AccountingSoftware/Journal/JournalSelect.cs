@@ -117,7 +117,7 @@ namespace AccountingSoftware
 			Current = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, QuerySelect, BaseSelectList);
+			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, QuerySelect, BaseSelectList);
 
 			return Count() > 0;
 		}

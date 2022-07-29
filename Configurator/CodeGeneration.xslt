@@ -1250,6 +1250,30 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
 namespace StorageAndTrade_1_0.Journal
 {
+    public class Journal_Select: JournalSelect
+    {
+        public Journal_Select() : base(Config.Kernel,
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Configuration/Documents/Document">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Table"/><xsl:text>"</xsl:text>
+             </xsl:for-each>},
+			 <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="Configuration/Documents/Document">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
+             </xsl:for-each>}) { }
+
+        public Journal_Document GetJournalDocument()
+        {
+            return new Journal_Document(Current.TypeDocument, Current.UnigueID);
+        }
+    }
+
     public class Journal_Document : JournalObject
     {
         public Journal_Document(string documentType, UnigueID uid) : base(Config.Kernel)
