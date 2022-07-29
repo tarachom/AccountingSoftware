@@ -1248,6 +1248,46 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     </xsl:for-each>
 }
 
+namespace StorageAndTrade_1_0.Journal
+{
+    public class Journal_Document : JournalObject
+    {
+        public Journal_Document(string documentType, UnigueID uid) : base(Config.Kernel)
+        {
+            switch (documentType)
+            {
+			    <xsl:for-each select="Configuration/Documents/Document">
+					<xsl:variable name="DocumentName" select="Name"/>
+                case "<xsl:value-of select="$DocumentName"/>":
+                    {
+                        base.Table = "<xsl:value-of select="Table"/>";
+                        base.TypeDocument = "<xsl:value-of select="$DocumentName"/>";
+
+                        break;
+                    }
+				</xsl:for-each>
+            }
+            base.BaseRead(uid);
+        }
+
+        public void SpendTheDocument()
+        {
+            switch (base.TypeDocument)
+            {
+			    <xsl:for-each select="Configuration/Documents/Document">
+					<xsl:variable name="DocumentName" select="Name"/>
+                case "<xsl:value-of select="$DocumentName"/>":
+                    {
+                        Документи.<xsl:value-of select="$DocumentName"/>_Objest doc = new Документи.<xsl:value-of select="$DocumentName"/>_Objest();
+                        doc.SpendTheDocument(base.SpendDate);
+                        break;
+                    }
+				</xsl:for-each>
+            }
+        }
+    }
+}
+
 namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВідомостей
 {
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">

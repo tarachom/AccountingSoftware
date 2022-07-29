@@ -717,8 +717,9 @@ namespace AccountingSoftware
 		{
 			string query = "SELECT uid, spend, spend_date";
 
-			foreach (string field in fieldArray)
-				query += ", " + field;
+			if (fieldArray != null)
+				foreach (string field in fieldArray)
+					query += ", " + field;
 
 			query += " FROM " + table + " WHERE uid = @uid";
 
@@ -732,10 +733,11 @@ namespace AccountingSoftware
 			while (reader.Read())
 			{
 				spend = (bool)reader["spend"];
-				spend_date = (reader["spend_date"] != DBNull.Value) ? DateTime.Parse(reader["spend_date"].ToString()) : DateTime.MinValue;
+				spend_date = (DateTime)reader["spend_date"];
 
-				foreach (string field in fieldArray)
-					fieldValue[field] = reader[field];
+				if (fieldValue != null)
+					foreach (string field in fieldArray)
+						fieldValue[field] = reader[field];
 			}
 			reader.Close();
 
