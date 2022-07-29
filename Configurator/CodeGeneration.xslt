@@ -1268,12 +1268,22 @@ namespace StorageAndTrade_1_0.Journal
                <xsl:text>"</xsl:text><xsl:value-of select="Name"/><xsl:text>"</xsl:text>
              </xsl:for-each>}) { }
 
-        public Journal_Document GetJournalDocument()
+        public DocumentObject GetDocumentObject(bool readAllTablePart = false)
         {
-            return new Journal_Document(Current.TypeDocument, Current.UnigueID);
+            if (Current == null)
+                return null;
+
+            switch (Current.TypeDocument)
+            {
+			    <xsl:for-each select="Configuration/Documents/Document">
+					<xsl:text>case </xsl:text>"<xsl:value-of select="Name"/>": return new Документи.<xsl:value-of select="Name"/>_Pointer(Current.UnigueID).GetDocumentObject(readAllTablePart);
+				</xsl:for-each>
+            }
+			
+			return null;
         }
     }
-
+<!--
     public class Journal_Document : JournalObject
     {
         public Journal_Document(string documentType, UnigueID uid) : base(Config.Kernel)
@@ -1282,34 +1292,13 @@ namespace StorageAndTrade_1_0.Journal
             {
 			    <xsl:for-each select="Configuration/Documents/Document">
 					<xsl:variable name="DocumentName" select="Name"/>
-                case "<xsl:value-of select="$DocumentName"/>":
-                    {
-                        base.Table = "<xsl:value-of select="Table"/>";
-                        base.TypeDocument = "<xsl:value-of select="$DocumentName"/>";
-
-                        break;
-                    }
+					<xsl:text>case </xsl:text>"<xsl:value-of select="$DocumentName"/>": { base.Table = "<xsl:value-of select="Table"/>"; base.TypeDocument = "<xsl:value-of select="$DocumentName"/>"; break; }
 				</xsl:for-each>
             }
             base.BaseRead(uid);
         }
-
-        public void SpendTheDocument()
-        {
-            switch (base.TypeDocument)
-            {
-			    <xsl:for-each select="Configuration/Documents/Document">
-					<xsl:variable name="DocumentName" select="Name"/>
-                case "<xsl:value-of select="$DocumentName"/>":
-                    {
-                        Документи.<xsl:value-of select="$DocumentName"/>_Objest doc = new Документи.<xsl:value-of select="$DocumentName"/>_Objest();
-                        doc.SpendTheDocument(base.SpendDate);
-                        break;
-                    }
-				</xsl:for-each>
-            }
-        }
     }
+-->
 }
 
 namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВідомостей

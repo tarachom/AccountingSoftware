@@ -130,7 +130,7 @@
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\ArrayToXml.cs" />
     <Compile Include="AccountingSoftware\Journal\JournalSelect.cs" />
-    <Compile Include="AccountingSoftware\Journal\JournalObject.cs" />
+    <Compile Include="AccountingSoftware\Journal\JournalDocument.cs" />
     <Compile Include="AccountingSoftware\NameValue.cs" />
     <Compile Include="AccountingSoftware\PostgreSQL.cs" />
     <Compile Include="AccountingSoftware\Query.cs" />

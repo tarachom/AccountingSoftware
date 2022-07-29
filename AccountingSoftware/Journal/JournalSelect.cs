@@ -37,8 +37,7 @@ namespace AccountingSoftware
 			TableArray = table;
 			TypeDocumentArray = typeDocument;
 
-			QuerySelect = new Query("");
-			BaseSelectList = new List<DocumentPointer>();
+			BaseSelectList = new List<JournalDocument>();
 		}
 
 		/// <summary>
@@ -50,8 +49,6 @@ namespace AccountingSoftware
 		/// Масив типів документів
 		/// </summary>
 		private string[] TypeDocumentArray { get; set; }
-
-		public Query QuerySelect { get; set; }
 
 		/// <summary>
 		/// Переміститися в початок вибірки
@@ -84,7 +81,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Список вибраних вказівників
 		/// </summary>
-		protected List<DocumentPointer> BaseSelectList { get; private set; }
+		protected List<JournalDocument> BaseSelectList { get; private set; }
 
 		/// <summary>
 		/// Переміститися на наступну позицію
@@ -105,7 +102,7 @@ namespace AccountingSoftware
 			}
 		}
 
-		public DocumentPointer Current { get; private set; }
+		public JournalDocument Current { get; private set; }
 
 		/// <summary>
 		/// Зчитати
@@ -117,14 +114,13 @@ namespace AccountingSoftware
 			Current = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, QuerySelect, BaseSelectList);
+			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, BaseSelectList);
 
 			return Count() > 0;
 		}
 
 		public void Dispose()
 		{
-			QuerySelect = null;
 			Kernel = null;
 			Current = null;
 			BaseSelectList = null;

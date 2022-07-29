@@ -947,50 +947,34 @@ namespace AccountingSoftware
 
 		#region Journal
 
-		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, Query QuerySelect, List<DocumentPointer> listDocumentPointer)
+		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, List<JournalDocument> listDocumentPointer)
 		{
 			string query = "";
 			int counter = 0;
 
 			foreach (string table in tables)
 			{
-				QuerySelect.Table = table;
-				QuerySelect.FieldAndAlias.Add(new NameValue<string>($"'{typeDocument[counter]}'", "type_document"));
-				query += (query.Length > 0 ? "\nUNION\n" : "") + "(" + QuerySelect.Construct() + ")";
-
-				QuerySelect.Table = "";
-				QuerySelect.FieldAndAlias.RemoveAt(QuerySelect.FieldAndAlias.Count - 1);
-
+				query += (counter>0? "\nUNION " : "") + $@"(SELECT uid, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})" ;
 				counter++;
 			}
+			query += "\nORDER BY type_doc";
 
 			Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 
-			foreach (Where field in QuerySelect.Where)
-				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())
 			{
-				Dictionary<string, object> fields = null;
-
-				if (QuerySelect.Field.Count > 0 || QuerySelect.FieldAndAlias.Count > 0)
+				JournalDocument document = new JournalDocument()
 				{
-					fields = new Dictionary<string, object>();
+					UnigueID = new UnigueID((Guid)reader["uid"], ""),
+					TypeDocument = reader["type_doc"].ToString(),
+					Spend = (bool)reader["spend"],
+					SpendDate = (DateTime)reader["spend_date"]
+				};
 
-					foreach (string field in QuerySelect.Field)
-						fields.Add(field, reader[field]);
-
-					foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
-						fields.Add(field.Value, reader[field.Value]);
-				}
-
-				DocumentPointer elementPointer = new DocumentPointer();
-				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields, reader["type_document"].ToString());
-
-				listDocumentPointer.Add(elementPointer);
+				listDocumentPointer.Add(document);
 			}
 			reader.Close();
 		}

@@ -27,68 +27,29 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// Журнал Документів
+	/// 
 	/// </summary>
-	public abstract class JournalObject
+	public class JournalDocument
 	{
-		public JournalObject(Kernel kernel)
-		{
-			Kernel = kernel;
-		}
-
-		/// <summary>
-		/// Ядро
-		/// </summary>
-		private Kernel Kernel { get; set; }
-
-		/// <summary>
-		/// Таблиця
-		/// </summary>
-		protected string Table { get; set; }
-
 		/// <summary>
 		/// Назва як задано в конфігураторі
 		/// </summary>
-		protected string TypeDocument { get; set; }
+		public string TypeDocument { get; set; }
 
 		/// <summary>
 		/// Унікальний ідентифікатор запису
 		/// </summary>
-		public UnigueID UnigueID { get; private set; }
+		public UnigueID UnigueID { get; set; }
 
 		/// <summary>
 		/// Документ проведений
 		/// </summary>
-		public bool Spend { get; private set; }
+		public bool Spend { get; set; }
 
 		/// <summary>
 		/// Дата проведення документу
 		/// </summary>
-		public DateTime SpendDate { get; private set; }
+		public DateTime SpendDate { get; set; }
 
-		/// <summary>
-		/// Зчитати дані
-		/// </summary>
-		/// <param name="uid">Унікальний ідентифікатор </param>
-		/// <returns></returns>
-		protected bool BaseRead(UnigueID uid)
-		{
-			if (uid == null || uid.UGuid == Guid.Empty)
-				return false;
-
-			bool spend = false;
-			DateTime spend_date = DateTime.MinValue;
-
-			if (Kernel.DataBase.SelectDocumentObject(uid, ref spend, ref spend_date, Table, null, null))
-			{
-				UnigueID = uid;
-				Spend = spend;
-				SpendDate = spend_date;
-
-				return true;
-			}
-			else
-				return false;
-		}
 	}
 }
