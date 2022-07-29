@@ -56,16 +56,16 @@ namespace Configurator
 				ConfDocument = new ConfigurationDocuments();
 				textBoxTable.Text = Configuration.GetNewUnigueTableName(Program.Kernel);
 
-				string newUnigueNameInTable_Назва = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
-				ConfDocument.AppendField(new ConfigurationObjectField("Назва", newUnigueNameInTable_Назва, "string", "", "Назва"));
+                //string newUnigueNameInTable_Назва = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
+                ConfDocument.AppendField(new ConfigurationObjectField("Назва", "docname", "string", "", "Назва", true));
 
-				string newUnigueNameInTable_ДатаДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
-				ConfDocument.AppendField(new ConfigurationObjectField("ДатаДок", newUnigueNameInTable_ДатаДок, "datetime", "", "ДатаДок"));
+                //string newUnigueNameInTable_ДатаДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
+                ConfDocument.AppendField(new ConfigurationObjectField("ДатаДок", "docdate", "datetime", "", "ДатаДок", false, true));
 
-				string newUnigueNameInTable_НомерДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
-				ConfDocument.AppendField(new ConfigurationObjectField("НомерДок", newUnigueNameInTable_НомерДок, "string", "", "НомерДок"));
+                //string newUnigueNameInTable_НомерДок = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDocument.Table, ConfDocument.Fields);
+                ConfDocument.AppendField(new ConfigurationObjectField("НомерДок", "docnomer", "string", "", "НомерДок", false, true));
 
-				IsNewDocument = true;
+                IsNewDocument = true;
 			}
 			else
 			{

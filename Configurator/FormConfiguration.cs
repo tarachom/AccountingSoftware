@@ -1631,6 +1631,17 @@ namespace Configurator
 			maintenance.ShowDialog();
 		}
 
-        #endregion 
+        #endregion
+
+        private void ntcnToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ConfigurationDocuments document in Conf.Documents.Values)
+            {
+				
+			}
+
+            LoadConf();
+
+		}
     }
 }

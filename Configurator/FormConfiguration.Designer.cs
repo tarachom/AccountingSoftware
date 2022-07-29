@@ -52,6 +52,7 @@
             this.addNewRegisterAccumulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вигрузкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.обслуговуванняБазиДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripDirectory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewDirectiryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,8 +88,8 @@
             this.addItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
-            this.обслуговуванняБазиДанихToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.ntcnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
             this.splitContainerBase.Panel1.SuspendLayout();
             this.splitContainerBase.Panel2.SuspendLayout();
@@ -304,7 +305,8 @@
             // 
             this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem,
-            this.обслуговуванняБазиДанихToolStripMenuItem});
+            this.обслуговуванняБазиДанихToolStripMenuItem,
+            this.ntcnToolStripMenuItem});
             this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
             this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.вигрузкаToolStripMenuItem.Text = "Сервіс";
@@ -315,6 +317,13 @@
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Text = "Вигрузка та загрузка даних";
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem.Click += new System.EventHandler(this.вигрузкаТаЗагрузкаДанихToolStripMenuItem_Click);
+            // 
+            // обслуговуванняБазиДанихToolStripMenuItem
+            // 
+            this.обслуговуванняБазиДанихToolStripMenuItem.Name = "обслуговуванняБазиДанихToolStripMenuItem";
+            this.обслуговуванняБазиДанихToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.обслуговуванняБазиДанихToolStripMenuItem.Text = "Обслуговування бази даних";
+            this.обслуговуванняБазиДанихToolStripMenuItem.Click += new System.EventHandler(this.обслуговуванняБазиДанихToolStripMenuItem_Click);
             // 
             // contextMenuStripDirectory
             // 
@@ -582,13 +591,6 @@
             this.deleteItemRegistersAccumulation.Text = "Видалити";
             this.deleteItemRegistersAccumulation.Click += new System.EventHandler(this.deleteItemRegistersAccumulation_Click);
             // 
-            // обслуговуванняБазиДанихToolStripMenuItem
-            // 
-            this.обслуговуванняБазиДанихToolStripMenuItem.Name = "обслуговуванняБазиДанихToolStripMenuItem";
-            this.обслуговуванняБазиДанихToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.обслуговуванняБазиДанихToolStripMenuItem.Text = "Обслуговування бази даних";
-            this.обслуговуванняБазиДанихToolStripMenuItem.Click += new System.EventHandler(this.обслуговуванняБазиДанихToolStripMenuItem_Click);
-            // 
             // toolStrip1
             // 
             this.toolStrip1.Location = new System.Drawing.Point(10, 34);
@@ -596,6 +598,13 @@
             this.toolStrip1.Size = new System.Drawing.Size(842, 25);
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // ntcnToolStripMenuItem
+            // 
+            this.ntcnToolStripMenuItem.Name = "ntcnToolStripMenuItem";
+            this.ntcnToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.ntcnToolStripMenuItem.Text = "Ntcn";
+            this.ntcnToolStripMenuItem.Click += new System.EventHandler(this.ntcnToolStripMenuItem_Click);
             // 
             // FormConfiguration
             // 
@@ -693,6 +702,7 @@
         private System.Windows.Forms.ToolStripMenuItem редагуватиІнформаціюПроКонфігураціюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обслуговуванняБазиДанихToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripMenuItem ntcnToolStripMenuItem;
     }
 }
 

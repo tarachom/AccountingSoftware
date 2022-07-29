@@ -46,6 +46,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
+            this.checkedListBoxRegisters = new System.Windows.Forms.CheckedListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.textBoxSpend = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -64,8 +66,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkedListBoxRegisters = new System.Windows.Forms.CheckedListBox();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
@@ -275,6 +275,25 @@
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 340);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(276, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Регістри накопичення по яких документ робить рухи:";
+            // 
+            // checkedListBoxRegisters
+            // 
+            this.checkedListBoxRegisters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkedListBoxRegisters.FormattingEnabled = true;
+            this.checkedListBoxRegisters.Location = new System.Drawing.Point(15, 356);
+            this.checkedListBoxRegisters.Name = "checkedListBoxRegisters";
+            this.checkedListBoxRegisters.Size = new System.Drawing.Size(330, 259);
+            this.checkedListBoxRegisters.TabIndex = 16;
+            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -451,25 +470,6 @@
             this.label3.Size = new System.Drawing.Size(42, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
-            // 
-            // checkedListBoxRegisters
-            // 
-            this.checkedListBoxRegisters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkedListBoxRegisters.FormattingEnabled = true;
-            this.checkedListBoxRegisters.Location = new System.Drawing.Point(15, 356);
-            this.checkedListBoxRegisters.Name = "checkedListBoxRegisters";
-            this.checkedListBoxRegisters.Size = new System.Drawing.Size(330, 259);
-            this.checkedListBoxRegisters.TabIndex = 16;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 340);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(276, 13);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Регістри накопичення по яких документ робить рухи:";
             // 
             // DocumentForm
             // 

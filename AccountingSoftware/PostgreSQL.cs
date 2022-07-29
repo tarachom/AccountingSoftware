@@ -955,12 +955,12 @@ namespace AccountingSoftware
 			foreach (string table in tables)
 			{
 				query += (counter > 0 ? "\nUNION " : "") +
-					$"(SELECT uid, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})";
+					$"(SELECT uid, docname, docdate, docnomer, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})";
 
 				counter++;
 			}
 
-			query += "\nORDER BY type_doc";
+			query += "\nORDER BY docdate";
 
 			Console.WriteLine(query);
 
@@ -972,6 +972,9 @@ namespace AccountingSoftware
 				JournalDocument document = new JournalDocument()
 				{
 					UnigueID = new UnigueID((Guid)reader["uid"], ""),
+					DocName = reader["docname"].ToString(),
+					DocDate = reader["docdate"].ToString(),
+					DocNomer = reader["docnomer"].ToString(),
 					Spend = (bool)reader["spend"],
 					SpendDate = (DateTime)reader["spend_date"],
 					TypeDocument = reader["type_doc"].ToString()
