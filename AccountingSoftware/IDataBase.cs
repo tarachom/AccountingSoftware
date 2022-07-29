@@ -98,6 +98,12 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region Journal
+
+		void SelectJournalDocumentPointer(string[] tables, Query QuerySelect, List<DocumentPointer> listDocumentPointer);
+
+		#endregion
+
 		#region RegisterInformation
 
 		void SelectRegisterInformationRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList);

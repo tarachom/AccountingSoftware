@@ -37,7 +37,7 @@ namespace AccountingSoftware
 			TableArray = table;
 			TypeDocumentArray = typeDocument;
 
-			WhereSelect = new List<Where>();
+			QuerySelect = new Query("");
 			BaseSelectList = new List<DocumentPointer>();
 		}
 
@@ -51,8 +51,7 @@ namespace AccountingSoftware
 		/// </summary>
 		private string[] TypeDocumentArray { get; set; }
 
-
-		public List<Where> WhereSelect { get; set; }
+		public Query QuerySelect { get; set; }
 
 		/// <summary>
 		/// Переміститися в початок вибірки
@@ -60,7 +59,7 @@ namespace AccountingSoftware
 		public void MoveToFirst()
 		{
 			Position = 0;
-			MoveToPosition();
+			MoveNext();
 		}
 
 		/// <summary>
@@ -83,11 +82,6 @@ namespace AccountingSoftware
 		protected int Position { get; private set; }
 
 		/// <summary>
-		/// Поточний вказівник
-		/// </summary>
-		protected DocumentPointer DocumentPointerPosition { get; private set; }
-
-		/// <summary>
 		/// Список вибраних вказівників
 		/// </summary>
 		protected List<DocumentPointer> BaseSelectList { get; private set; }
@@ -96,41 +90,43 @@ namespace AccountingSoftware
 		/// Переміститися на наступну позицію
 		/// </summary>
 		/// <returns></returns>
-		protected bool MoveToPosition()
+		public bool MoveNext()
 		{
 			if (Position < BaseSelectList.Count)
 			{
-				DocumentPointerPosition = BaseSelectList[Position];
+				Current = BaseSelectList[Position];
 				Position++;
 				return true;
 			}
 			else
 			{
-				DocumentPointerPosition = null;
+				Current = null;
 				return false;
 			}
 		}
+
+		public DocumentPointer Current { get; private set; }
 
 		/// <summary>
 		/// Зчитати
 		/// </summary>
 		/// <returns></returns>
-		protected bool BaseSelect()
+		public bool Select()
 		{
 			Position = 0;
-			DocumentPointerPosition = null;
+			Current = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectDocumentPointer(QuerySelect, BaseSelectList);
+			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, QuerySelect, BaseSelectList);
 
 			return Count() > 0;
 		}
 
 		public void Dispose()
 		{
-			WhereSelect = null;
+			QuerySelect = null;
 			Kernel = null;
-			DocumentPointerPosition = null;
+			Current = null;
 			BaseSelectList = null;
 			Position = 0;
 		}

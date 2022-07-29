@@ -945,6 +945,56 @@ namespace AccountingSoftware
 
 		#endregion
 
+		#region Journal
+
+		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, Query QuerySelect, List<DocumentPointer> listDocumentPointer)
+		{
+			string query = "";
+			int counter = 0;
+
+			foreach (string table in tables)
+			{
+				QuerySelect.Table = table;
+				QuerySelect.FieldAndAlias.Add(new NameValue<string>($"'{typeDocument[counter]}'", "type_document"));
+				query += (query.Length > 0 ? " UNION " : "") + "(" + QuerySelect.Construct() + ")";
+				QuerySelect.FieldAndAlias.RemoveAt(QuerySelect.FieldAndAlias.Count - 1);
+				counter++;
+			}
+
+			Console.WriteLine(query);
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+
+			foreach (Where field in QuerySelect.Where)
+				nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+			while (reader.Read())
+			{
+				Dictionary<string, object> fields = null;
+
+				if (QuerySelect.Field.Count > 0 || QuerySelect.FieldAndAlias.Count > 0)
+				{
+					fields = new Dictionary<string, object>();
+
+					foreach (string field in QuerySelect.Field)
+						fields.Add(field, reader[field]);
+
+					foreach (NameValue<string> field in QuerySelect.FieldAndAlias)
+						fields.Add(field.Value, reader[field.Value]);
+				}
+
+				DocumentPointer elementPointer = new DocumentPointer();
+				elementPointer.Init(new UnigueID((Guid)reader["uid"], ""), fields);
+				elementPointer.TypeDocument = 
+
+				listDocumentPointer.Add(elementPointer);
+			}
+			reader.Close();
+		}
+
+		#endregion
+
 		#region RegistersInformation
 
 		public void SelectRegisterInformationRecords(Query QuerySelect, List<Dictionary<string, object>> fieldValueList)
