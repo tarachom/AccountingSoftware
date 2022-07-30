@@ -40,10 +40,19 @@ namespace AccountingSoftware
 		/// </summary>
 		public UnigueID UnigueID { get; set; }
 
+		/// <summary>
+		/// Назва документу
+		/// </summary>
 		public string DocName { get; set; }
 
+		/// <summary>
+		/// Номер документу
+		/// </summary>
 		public string DocNomer { get; set; }
 
+		/// <summary>
+		/// Дата документу
+		/// </summary>
 		public string DocDate { get; set; }
 
 		/// <summary>
