@@ -66,7 +66,7 @@ namespace AccountingSoftware
 
 		public bool TryConnectToServer(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
 		{
-			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer";
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer;";
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -90,7 +90,7 @@ namespace AccountingSoftware
 			exception = null;
 			IsExistsDatabase = false;
 
-			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};SSLMode=Prefer";
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};SSLMode=Prefer;";
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -105,9 +105,10 @@ namespace AccountingSoftware
 			}
 
 			string sql = "SELECT EXISTS(" +
-				"SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower('" + Database + "'));";
+				"SELECT datname FROM pg_catalog.pg_database WHERE lower(datname) = lower(@databasename));";
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(sql, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("databasename", Database));
 
 			bool resultSql = false;
 
@@ -947,24 +948,46 @@ namespace AccountingSoftware
 
 		#region Journal
 
-		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, List<JournalDocument> listJournalDocument)
+		public void SelectJournalDocumentPointer(string[] tables, string[] typeDocument, List<JournalDocument> listJournalDocument,
+			DateTime periodStart, DateTime periodEnd, string[] typeDocSelect = null)
 		{
 			string query = "";
 			int counter = 0;
 
 			foreach (string table in tables)
 			{
+				if (typeDocSelect != null)
+				{
+					bool existTypeDoc = false;
+
+					foreach (string typeDoc in typeDocSelect)
+						if (typeDocument[counter] == typeDoc)
+						{
+							existTypeDoc = true;
+							break;
+						}
+
+					if (!existTypeDoc)
+					{
+						counter++;
+						continue;
+					}
+				}
+
 				query += (counter > 0 ? "\nUNION " : "") +
-					$"(SELECT uid, docname, docdate, docnomer, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table})";
+					$"(SELECT uid, docname, docdate, docnomer, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table} \n" +
+					"WHERE docdate >= @periodstart AND docdate <= @periodend)";
 
 				counter++;
 			}
 
 			query += "\nORDER BY docdate";
 
-			Console.WriteLine(query);
+			//Console.WriteLine(query);
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("periodstart", periodStart));
+			nCommand.Parameters.Add(new NpgsqlParameter("periodend", periodEnd));
 
 			NpgsqlDataReader reader = nCommand.ExecuteReader();
 			while (reader.Read())

@@ -119,13 +119,5 @@ namespace AccountingSoftware
 			else
 				return "";
 		}
-
-		/// <summary>
-		/// Видалити запис
-		/// </summary>
-		public void Delete()
-		{
-			Kernel.DataBase.DeleteDocumentObject(UnigueID, Table);
-		}
 	}
 }

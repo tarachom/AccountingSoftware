@@ -108,13 +108,13 @@ namespace AccountingSoftware
 		/// Зчитати
 		/// </summary>
 		/// <returns></returns>
-		public bool Select()
+		public bool Select(DateTime periodStart, DateTime periodEnd, string[] typeDocSelect = null)
 		{
 			Position = 0;
 			Current = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, BaseSelectList);
+			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, BaseSelectList, periodStart, periodEnd, typeDocSelect);
 
 			return Count() > 0;
 		}
