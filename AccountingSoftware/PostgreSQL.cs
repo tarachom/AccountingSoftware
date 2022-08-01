@@ -32,7 +32,9 @@ namespace AccountingSoftware
 	{
 		public PostgreSQL() { }
 
-		private NpgsqlConnection Connection { get; set; }
+        #region Connect
+
+        private NpgsqlConnection Connection { get; set; }
 
 		public void Open(string connectionString)
 		{
@@ -46,7 +48,7 @@ namespace AccountingSoftware
 		{
 			exception = null;
 
-			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer";
+			string conString = $"Server={Server};Username={UserId};Password={Password};Port={Port};Database={Database};SSLMode=Prefer;";
 
 			Connection = new NpgsqlConnection(conString);
 
@@ -141,24 +143,6 @@ namespace AccountingSoftware
 			return true;
 		}
 
-		/*
-		private void Start()
-		{
-			//List<string> StartSQL = new List<string>();
-
-			string query = "SELECT 'Exist' FROM pg_type WHERE typname = 'uuid_and_string'";
-			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-			object result = nCommand.ExecuteScalar();
-
-			if (!(result != null && result.ToString() == "Exist"))
-				ExecuteSQL("CREATE TYPE public.uuid_and_string AS(uuid uuid, string text)");
-
-			//foreach (string sqlQuery in StartSQL)
-			//	ExecuteSQL(sqlQuery);
-
-			Connection.MapComposite<uuid_and_string>("uuid_and_string");
-		}
-		*/
 		public void Close()
 		{
 			try
@@ -168,7 +152,10 @@ namespace AccountingSoftware
 			catch { }
 		}
 
+		#endregion
+
 		#region UserType
+
 		/*
 		public class uuid_and_string
 		{
@@ -192,6 +179,26 @@ namespace AccountingSoftware
 			}
 		}
 		*/
+
+		/*
+		private void Start()
+		{
+			//List<string> StartSQL = new List<string>();
+
+			string query = "SELECT 'Exist' FROM pg_type WHERE typname = 'uuid_and_string'";
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			object result = nCommand.ExecuteScalar();
+
+			if (!(result != null && result.ToString() == "Exist"))
+				ExecuteSQL("CREATE TYPE public.uuid_and_string AS(uuid uuid, string text)");
+
+			//foreach (string sqlQuery in StartSQL)
+			//	ExecuteSQL(sqlQuery);
+
+			Connection.MapComposite<uuid_and_string>("uuid_and_string");
+		}
+		*/
+
 		#endregion
 
 		#region Transaction
