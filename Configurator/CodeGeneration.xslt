@@ -64,6 +64,9 @@ limitations under the License.
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>EmptyPointer</xsl:text>
       </xsl:when>
+	  <xsl:when test="Type = 'any_pointer'">
+        <xsl:text>Guid</xsl:text>
+      </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:value-of select="Pointer"/>
       </xsl:when>
@@ -108,6 +111,9 @@ limitations under the License.
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>new EmptyPointer()</xsl:text>
       </xsl:when>
+	  <xsl:when test="Type = 'any_pointer'">
+        <xsl:text>new Guid()</xsl:text>
+      </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:text>0</xsl:text>
       </xsl:when>
@@ -149,6 +155,9 @@ limitations under the License.
       </xsl:when>
       <xsl:when test="Type = 'empty_pointer'">
         <xsl:text>null</xsl:text>
+      </xsl:when>
+	  <xsl:when test="Type = 'any_pointer'">
+        <xsl:text>Guid.Empty</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'enum'">
         <xsl:text>0</xsl:text>
@@ -211,6 +220,11 @@ limitations under the License.
         <xsl:when test="Type = 'empty_pointer'">
           <xsl:text>new EmptyPointer()</xsl:text>
         </xsl:when>
+		<xsl:when test="Type = 'any_pointer'">
+		  <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
+          <xsl:text>Guid.Parse(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"].ToString())</xsl:text>
+          <xsl:text> : Guid.Empty</xsl:text>
+        </xsl:when>
         <xsl:when test="Type = 'enum'">
           <xsl:text>(</xsl:text><xsl:value-of select="$BaseFieldContainer"/><xsl:text>["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] != DBNull.Value) ? </xsl:text>
           <xsl:text>(</xsl:text><xsl:value-of select="Pointer"/><xsl:text>)</xsl:text>
@@ -253,7 +267,7 @@ limitations under the License.
       </xsl:when>
       <xsl:when test="Type = 'integer' or Type = 'numeric' or 
                 Type = 'date' or Type = 'datetime' or Type = 'time' or
-                Type = 'pointer' or Type = 'empty_pointer'">
+                Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
         <xsl:text>.ToString()</xsl:text>
       </xsl:when>
       <xsl:when test="Type = 'string'">

@@ -79,7 +79,7 @@ namespace AccountingSoftware
 			fieldTypes.Add(new FieldType("time",          "[ time ] - Час"));
 			fieldTypes.Add(new FieldType("enum",          "[ enum ] - Перелічення"));
 			fieldTypes.Add(new FieldType("pointer",       "[ pointer ] - Вказівник на елемент конфігурації"));
-			//fieldTypes.Add(new FieldType("any_pointer",   "[ any_pointer ] - Вказівник на різні елементи конфігурації"));
+			fieldTypes.Add(new FieldType("any_pointer",   "[ any_pointer ] - Вказівник на різні елементи конфігурації"));
 			fieldTypes.Add(new FieldType("empty_pointer", "[ empty_pointer ] - Пустий вказівник")); 
 			//fieldTypes.Add(new FieldType("uuid[]",        "[ uuid1, uuid2, uuid3 ... ] - Масив вказівників на елемент конфігурації"));
 			fieldTypes.Add(new FieldType("string[]",      "[ Текст1, Текст2, ... ] - [ string[] ] - Масив текстових даних"));

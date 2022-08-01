@@ -220,6 +220,18 @@ limitations under the License.
                 </xsl:choose>
               </xsl:if>
 
+			  <xsl:if test="$ConfFieldType = 'any_pointer'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'uuid' and $InfoSchemaFieldUdtName = 'uuid'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>uuid</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+				
               <xsl:if test="$ConfFieldType = 'enum'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'integer' and $InfoSchemaFieldUdtName = 'int4'">
@@ -307,6 +319,9 @@ limitations under the License.
             <xsl:text>uuid</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'empty_pointer'">
+            <xsl:text>uuid</xsl:text>
+          </xsl:when>
+		  <xsl:when test="Type = 'any_pointer'">
             <xsl:text>uuid</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'enum'">
@@ -421,7 +436,7 @@ limitations under the License.
         </xsl:when>
         <xsl:otherwise>
 
-          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer' or $SecondConfFieldType = 'enum'">
+          <xsl:if test="$SecondConfFieldType = 'pointer' or $SecondConfFieldType = 'empty_pointer' or $SecondConfFieldType = 'any_pointer' or $SecondConfFieldType = 'enum'">
 
             <xsl:variable name="DocumentConfigurationType" select="$DocumentConfigurationFieldNodes[NameInTable = $SecondConfFieldNameInTable]/Type" />
 
