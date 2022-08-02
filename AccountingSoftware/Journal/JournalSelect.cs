@@ -34,8 +34,8 @@ namespace AccountingSoftware
 		public JournalSelect(Kernel kernel, string[] table, string[] typeDocument)
 		{
 			Kernel = kernel;
-			TableArray = table;
-			TypeDocumentArray = typeDocument;
+			Tables = table;
+			TypeDocuments = typeDocument;
 
 			BaseSelectList = new List<JournalDocument>();
 		}
@@ -43,12 +43,12 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Масив таблиць
 		/// </summary>
-		private string[] TableArray { get; set; }
+		public string[] Tables { get; private set; }
 
 		/// <summary>
 		/// Масив типів документів
 		/// </summary>
-		private string[] TypeDocumentArray { get; set; }
+		public string[] TypeDocuments { get; private set; }
 
 		/// <summary>
 		/// Переміститися в початок вибірки
@@ -114,7 +114,7 @@ namespace AccountingSoftware
 			Current = null;
 			BaseSelectList.Clear();
 
-			Kernel.DataBase.SelectJournalDocumentPointer(TableArray, TypeDocumentArray, BaseSelectList, periodStart, periodEnd, typeDocSelect);
+			Kernel.DataBase.SelectJournalDocumentPointer(Tables, TypeDocuments, BaseSelectList, periodStart, periodEnd, typeDocSelect);
 
 			return Count() > 0;
 		}

@@ -963,23 +963,23 @@ namespace AccountingSoftware
 
 			foreach (string table in tables)
 			{
-				if (typeDocSelect != null)
-				{
-					bool existTypeDoc = false;
+				//if (typeDocSelect != null)
+				//{
+				//	bool existTypeDoc = false;
 
-					foreach (string typeDoc in typeDocSelect)
-						if (typeDocument[counter] == typeDoc)
-						{
-							existTypeDoc = true;
-							break;
-						}
+				//	foreach (string typeDoc in typeDocSelect)
+				//		if (typeDocument[counter] == typeDoc)
+				//		{
+				//			existTypeDoc = true;
+				//			break;
+				//		}
 
-					if (!existTypeDoc)
-					{
-						counter++;
-						continue;
-					}
-				}
+				//	if (!existTypeDoc)
+				//	{
+				//		counter++;
+				//		continue;
+				//	}
+				//}
 
 				query += (counter > 0 ? "\nUNION " : "") +
 					$"(SELECT uid, docname, docdate, docnomer, spend, spend_date, '{typeDocument[counter]}' AS type_doc FROM {table} \n" +

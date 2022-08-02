@@ -89,7 +89,6 @@
             this.copyItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteItemRegistersAccumulation = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.ntcnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerBase)).BeginInit();
             this.splitContainerBase.Panel1.SuspendLayout();
             this.splitContainerBase.Panel2.SuspendLayout();
@@ -305,8 +304,7 @@
             // 
             this.вигрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.вигрузкаТаЗагрузкаДанихToolStripMenuItem,
-            this.обслуговуванняБазиДанихToolStripMenuItem,
-            this.ntcnToolStripMenuItem});
+            this.обслуговуванняБазиДанихToolStripMenuItem});
             this.вигрузкаToolStripMenuItem.Name = "вигрузкаToolStripMenuItem";
             this.вигрузкаToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.вигрузкаToolStripMenuItem.Text = "Сервіс";
@@ -599,13 +597,6 @@
             this.toolStrip1.TabIndex = 7;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // ntcnToolStripMenuItem
-            // 
-            this.ntcnToolStripMenuItem.Name = "ntcnToolStripMenuItem";
-            this.ntcnToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.ntcnToolStripMenuItem.Text = "Ntcn";
-            this.ntcnToolStripMenuItem.Click += new System.EventHandler(this.ntcnToolStripMenuItem_Click);
-            // 
             // FormConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -702,7 +693,6 @@
         private System.Windows.Forms.ToolStripMenuItem редагуватиІнформаціюПроКонфігураціюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem обслуговуванняБазиДанихToolStripMenuItem;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripMenuItem ntcnToolStripMenuItem;
     }
 }
 

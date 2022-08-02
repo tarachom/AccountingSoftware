@@ -48,11 +48,13 @@ namespace AccountingSoftware
 		/// </summary>
 		/// <param name="uid">Унікальний ідентифікатор</param>
 		/// <param name="fields">Поля які потрібно додатково зчитати</param>
-		public void Init(UnigueID uid, Dictionary<string, object> fields = null, string typeDocument = "")
+		public void Init(UnigueID uid, Dictionary<string, object> fields = null)
 		{
 			UnigueID = uid;
 			Fields = fields;
-			TypeDocument = typeDocument;
+
+			//if (!String.IsNullOrEmpty(typeDocument))
+			//	TypeDocument = typeDocument;
 		}
 
 		/// <summary>
