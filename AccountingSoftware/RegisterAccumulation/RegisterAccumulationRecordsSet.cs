@@ -43,7 +43,6 @@ namespace AccountingSoftware
 
 			FieldValueList = new List<Dictionary<string, object>>();
 			JoinValue = new Dictionary<string, Dictionary<string, string>>();
-			//BaseFilter = new List<Where>();
 		}
 
 		/// <summary>
@@ -77,11 +76,6 @@ namespace AccountingSoftware
 		public Dictionary<string, Dictionary<string, string>> JoinValue { get; private set; }
 
 		/// <summary>
-		/// Відбір
-		/// </summary>
-		//protected List<Where> BaseFilter { get; }
-
-		/// <summary>
 		/// Очитска вн. списків
 		/// </summary>
 		protected void BaseClear()
@@ -97,9 +91,6 @@ namespace AccountingSoftware
 			BaseClear();
 
 			JoinValue.Clear();
-
-			//QuerySelect.Where.Clear(); //???
-			//QuerySelect.Where.AddRange(BaseFilter);
 
 			Kernel.DataBase.SelectRegisterAccumulationRecords(QuerySelect, FieldValueList);
 

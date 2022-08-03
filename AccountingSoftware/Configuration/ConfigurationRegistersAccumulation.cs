@@ -38,6 +38,7 @@ namespace AccountingSoftware
 			DimensionFields = new Dictionary<string, ConfigurationObjectField>();
 			ResourcesFields = new Dictionary<string, ConfigurationObjectField>();
 			PropertyFields = new Dictionary<string, ConfigurationObjectField>();
+			AllowDocumentSpend = new List<string>();
 		}
 
 		/// <summary>
@@ -73,6 +74,11 @@ namespace AccountingSoftware
 		/// Реквізити
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> PropertyFields { get; }
+
+		/// <summary>
+		/// Документи які роблять рухи по даному регістру
+		/// </summary>
+		public List<string> AllowDocumentSpend { get; }
 
 		#region Append
 

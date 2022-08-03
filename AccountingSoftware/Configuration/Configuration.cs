@@ -726,6 +726,27 @@ namespace AccountingSoftware
 			return errorList;
 		}
 
+		/// <summary>
+		/// Функція обчислює для регістрів документи які роблять по ньому рухи.
+		/// </summary>
+		public void CalculateAllowDocumentSpendForRegistersAccumulation()
+		{
+			//Очистити список доступних документів для всіх регістрів
+			foreach (ConfigurationRegistersAccumulation registersAccumulationItem in RegistersAccumulation.Values)
+				registersAccumulationItem.AllowDocumentSpend.Clear();
+
+			//Документи
+			foreach (ConfigurationDocuments documentItem in Documents.Values)
+			{
+                foreach (string register in documentItem.AllowRegisterAccumulation)
+                {
+					ConfigurationRegistersAccumulation confRegAccum = RegistersAccumulation[register];
+					if (!confRegAccum.AllowDocumentSpend.Contains(documentItem.Name))
+						confRegAccum.AllowDocumentSpend.Add(documentItem.Name);
+                }
+			}
+		}
+
 		#endregion
 
 		#region Load (завантаження конфігурації з ХМЛ файлу)
@@ -765,6 +786,9 @@ namespace AccountingSoftware
 			LoadRegistersInformation(Conf, xPathDocNavigator);
 
 			LoadRegistersAccumulation(Conf, xPathDocNavigator);
+
+			//Перерахувати документи які роблять рухи по регістрах накопичення
+			//Conf.CalculateAllowDocumentSpendForRegistersAccumulation();
 		}
 
 		private static void LoadConfigurationInfo(Configuration Conf, XPathNavigator xPathDocNavigator)
@@ -1004,6 +1028,16 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void LoadAllowDocumentSpendRegisterAccumulation(List<string> allowDocumentSpend, XPathNavigator xPathDocNavigator)
+		{
+			XPathNodeIterator allowDocumentSpendNodes = xPathDocNavigator.Select("AllowDocumentSpend/Name");
+			while (allowDocumentSpendNodes.MoveNext())
+			{
+				string name = allowDocumentSpendNodes.Current.Value;
+				allowDocumentSpend.Add(name);
+			}
+		}
+
 		private static void LoadRegistersAccumulation(Configuration Conf, XPathNavigator xPathDocNavigator)
 		{
 			//Регістри накопичення
@@ -1042,6 +1076,8 @@ namespace AccountingSoftware
 
 				if (propertyFieldsNode != null)
 					LoadFields(configurationRegistersAccumulation.PropertyFields, propertyFieldsNode, "RegisterAccumulation");
+
+				LoadAllowDocumentSpendRegisterAccumulation(configurationRegistersAccumulation.AllowDocumentSpend, registerAccumulationNode.Current);
 			}
 		}
 
@@ -1056,6 +1092,9 @@ namespace AccountingSoftware
 		/// <param name="Conf">Конфігурація</param>
 		public static void Save(string pathToConf, Configuration Conf)
 		{
+			//Перерахувати документи які роблять рухи по регістрах накопичення
+			Conf.CalculateAllowDocumentSpendForRegistersAccumulation();
+
 			XmlDocument xmlConfDocument = new XmlDocument();
 			xmlConfDocument.AppendChild(xmlConfDocument.CreateXmlDeclaration("1.0", "utf-8", ""));
 
@@ -1428,15 +1467,28 @@ namespace AccountingSoftware
 			}
 		}
 
+		private static void SaveAllowDocumentSpendRegisterAccumulation(List<string> allowDocumentSpend, XmlDocument xmlConfDocument, XmlElement rootNode)
+		{
+			XmlElement nodeAllowDocumentSpend = xmlConfDocument.CreateElement("AllowDocumentSpend");
+			rootNode.AppendChild(nodeAllowDocumentSpend);
+
+			foreach (string name in allowDocumentSpend)
+			{
+				XmlElement nodeName = xmlConfDocument.CreateElement("Name");
+				nodeName.InnerText = name;
+				nodeAllowDocumentSpend.AppendChild(nodeName);
+			}
+		}
+
 		private static void SaveRegistersAccumulation(Dictionary<string, ConfigurationRegistersAccumulation> ConfRegistersAccumulation, XmlDocument xmlConfDocument, XmlElement rootNode)
 		{
-			XmlElement rootRegistersInformation = xmlConfDocument.CreateElement("RegistersAccumulation");
-			rootNode.AppendChild(rootRegistersInformation);
+			XmlElement rootRegistersAccumulation = xmlConfDocument.CreateElement("RegistersAccumulation");
+			rootNode.AppendChild(rootRegistersAccumulation);
 
 			foreach (KeyValuePair<string, ConfigurationRegistersAccumulation> ConfRegisterAccml in ConfRegistersAccumulation)
 			{
 				XmlElement nodeRegister = xmlConfDocument.CreateElement("RegisterAccumulation");
-				rootRegistersInformation.AppendChild(nodeRegister);
+				rootRegistersAccumulation.AppendChild(nodeRegister);
 
 				XmlElement nodeRegisterName = xmlConfDocument.CreateElement("Name");
 				nodeRegisterName.InnerText = ConfRegisterAccml.Key;
@@ -1468,6 +1520,8 @@ namespace AccountingSoftware
 				nodeRegister.AppendChild(nodePropertyFields);
 
 				SaveFields(ConfRegisterAccml.Value.PropertyFields, xmlConfDocument, nodePropertyFields, "RegisterAccumulation");
+
+				SaveAllowDocumentSpendRegisterAccumulation(ConfRegisterAccml.Value.AllowDocumentSpend, xmlConfDocument, nodeRegister);
 			}
 		}
 

@@ -759,6 +759,8 @@ namespace Configurator
 				}
 			}
 
+			Conf.CalculateAllowDocumentSpendForRegistersAccumulation();
+
 			LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
 		}
 
@@ -1107,6 +1109,8 @@ namespace Configurator
 							Conf.Documents.Remove(documentName);
 							treeConfiguration.Nodes["root"].Nodes["Documents"].Nodes[documentName].Remove();
 							//LoadDocuments(treeConfiguration.Nodes["root"].Nodes["Documents"]);
+
+							Conf.CalculateAllowDocumentSpendForRegistersAccumulation();
 						}
 					}
 					else

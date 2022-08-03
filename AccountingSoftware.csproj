@@ -97,7 +97,6 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationConstantsBlock.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationInformationSchema.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnumField.cs" />
-    <None Include="AccountingSoftware\Configuration\ConfigurationObjectView.cs_delete" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationRegistersInformation.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationRegistersAccumulation.cs" />
     <Compile Include="AccountingSoftware\Configuration\ConfigurationEnums.cs" />
