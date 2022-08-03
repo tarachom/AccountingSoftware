@@ -1432,12 +1432,26 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
 namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНакопичення
 {
     <xsl:for-each select="Configuration/RegistersAccumulation/RegisterAccumulation">
+	   <xsl:variable name="Documents" select="../../Documents"/>
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
     <xsl:call-template name="CommentSummary" />
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
+		public static readonly string[] AllowDocumentSpendTable = new string[] { <xsl:for-each select="AllowDocumentSpend/Name">
+		    <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+            </xsl:if>
+			<xsl:variable name="AllowDocumentSpendName" select="."/>
+            <xsl:text>"</xsl:text><xsl:value-of select="$Documents/Document[Name = $AllowDocumentSpendName]/Table"/><xsl:text>"</xsl:text>
+		</xsl:for-each> };
+		public static readonly string[] AllowDocumentSpendType = new string[] { <xsl:for-each select="AllowDocumentSpend/Name">
+		    <xsl:if test="position() != 1">
+                <xsl:text>, </xsl:text>
+            </xsl:if>
+            <xsl:text>"</xsl:text><xsl:value-of select="."/><xsl:text>"</xsl:text>
+		</xsl:for-each> };
         <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }

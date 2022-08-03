@@ -52,6 +52,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBoxName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.listBoxAllowDocumentSpend = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -70,7 +72,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(266, 374);
+            this.panel1.Size = new System.Drawing.Size(266, 592);
             this.panel1.TabIndex = 1;
             // 
             // panel5
@@ -79,7 +81,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(266, 344);
+            this.panel5.Size = new System.Drawing.Size(266, 562);
             this.panel5.TabIndex = 2;
             // 
             // treeViewFields
@@ -87,7 +89,7 @@
             this.treeViewFields.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeViewFields.Location = new System.Drawing.Point(0, 0);
             this.treeViewFields.Name = "treeViewFields";
-            this.treeViewFields.Size = new System.Drawing.Size(266, 344);
+            this.treeViewFields.Size = new System.Drawing.Size(266, 562);
             this.treeViewFields.TabIndex = 0;
             this.treeViewFields.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewFields_NodeMouseDoubleClick);
             this.treeViewFields.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeViewFields_KeyDown);
@@ -170,7 +172,7 @@
             this.panel2.Controls.Add(this.buttonClose);
             this.panel2.Controls.Add(this.buttonSave);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(10, 384);
+            this.panel2.Location = new System.Drawing.Point(10, 602);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(817, 38);
             this.panel2.TabIndex = 3;
@@ -200,6 +202,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.label6);
+            this.splitContainer1.Panel2.Controls.Add(this.listBoxAllowDocumentSpend);
             this.splitContainer1.Panel2.Controls.Add(this.comboBoxRegisterType);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxDesc);
@@ -208,7 +212,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.label4);
             this.splitContainer1.Panel2.Controls.Add(this.textBoxName);
             this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Size = new System.Drawing.Size(817, 374);
+            this.splitContainer1.Size = new System.Drawing.Size(817, 592);
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -286,11 +290,30 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "Назва:";
             // 
+            // listBoxAllowDocumentSpend
+            // 
+            this.listBoxAllowDocumentSpend.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listBoxAllowDocumentSpend.FormattingEnabled = true;
+            this.listBoxAllowDocumentSpend.Location = new System.Drawing.Point(14, 211);
+            this.listBoxAllowDocumentSpend.Name = "listBoxAllowDocumentSpend";
+            this.listBoxAllowDocumentSpend.Size = new System.Drawing.Size(243, 368);
+            this.listBoxAllowDocumentSpend.TabIndex = 8;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 188);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(249, 13);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Документи які роблять рухи по даному регістру";
+            // 
             // RegistersAccumulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(837, 432);
+            this.ClientSize = new System.Drawing.Size(837, 650);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel2);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -339,5 +362,7 @@
 		private System.Windows.Forms.ToolStripMenuItem addPropertyField;
 		private System.Windows.Forms.ComboBox comboBoxRegisterType;
 		private System.Windows.Forms.Label label2;
-	}
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox listBoxAllowDocumentSpend;
+    }
 }

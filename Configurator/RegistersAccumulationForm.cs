@@ -79,6 +79,7 @@ namespace Configurator
 			}
 
 			LoadTreeViewFields();
+			LoadAllowDocumentSpend();
 		}
 
 		private void LoadTreeViewDimension(TreeNode rootNode)
@@ -130,6 +131,14 @@ namespace Configurator
 			LoadTreeViewProperty(propertyNode);
 
 			rootNode.ExpandAll();
+		}
+
+		void LoadAllowDocumentSpend()
+		{
+			listBoxAllowDocumentSpend.Items.Clear();
+
+			foreach (string allowDocumentSpend in ConfRegistersAccumulation.AllowDocumentSpend)
+				listBoxAllowDocumentSpend.Items.Add(allowDocumentSpend);
 		}
 
 		private void buttonSave_Click(object sender, EventArgs e)
