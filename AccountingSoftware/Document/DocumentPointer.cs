@@ -52,9 +52,6 @@ namespace AccountingSoftware
 		{
 			UnigueID = uid;
 			Fields = fields;
-
-			//if (!String.IsNullOrEmpty(typeDocument))
-			//	TypeDocument = typeDocument;
 		}
 
 		/// <summary>
