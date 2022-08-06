@@ -83,7 +83,6 @@ namespace AccountingSoftware
 		/// Поля із псевдонімами
 		/// </summary>
 		public List<NameValue<string>> FieldAndAlias { get; set; }
-		//public List<KeyValuePair<string, string>> FieldAndAlias { get; set; }
 
 		/// <summary>
 		/// Таблиці які потрібно приєднати
@@ -280,6 +279,16 @@ namespace AccountingSoftware
 			return query;
 		}
 
+		//Очистка колекцій
+		public void Clear()
+        {
+			FieldAndAlias = new List<NameValue<string>>();
+			Joins = new List<Join>();
+			Where = new List<Where>();
+			Order = new Dictionary<string, SelectOrder>();
+
+			_ParamGuidState = 0;
+		}
 	}
 
 	/// <summary>
