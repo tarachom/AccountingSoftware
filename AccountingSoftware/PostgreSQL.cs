@@ -159,7 +159,15 @@ namespace AccountingSoftware
 
 			if (!(result != null && result.ToString() == "Exist"))
 			{
-				ExecuteSQL("CREATE TYPE uuidtext AS(uuid uuid, tablename text, type text, text text)");
+				ExecuteSQL($@"
+CREATE TYPE uuidtext AS 
+(
+    uuid uuid, 
+    tablename text, 
+    type text, 
+    datedoc timestamp without time zone, 
+    text text
+)");
 				Connection.ReloadTypes();
 			}
 

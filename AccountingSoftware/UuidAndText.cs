@@ -52,11 +52,20 @@ namespace AccountingSoftware
 			Type = type;
 		}
 
-		public UuidAndText(Guid uuid, string tablename, string type, string text)
+		public UuidAndText(Guid uuid, string tablename, string type, DateTime dateDoc)
 		{
 			Uuid = uuid;
 			TableName = tablename;
 			Type = type;
+			DateDoc = dateDoc;
+		}
+
+		public UuidAndText(Guid uuid, string tablename, string type, DateTime dateDoc, string text)
+		{
+			Uuid = uuid;
+			TableName = tablename;
+			Type = type;
+			DateDoc = dateDoc;
 			Text = text;
 		}
 
@@ -79,14 +88,29 @@ namespace AccountingSoftware
 		public string Type { get; set; }
 
 		/// <summary>
+		/// Дата
+		/// </summary>
+		[PgName("datedoc")]
+		public DateTime DateDoc { get; set; }
+
+		/// <summary>
 		/// Додаткова інформація
 		/// </summary>
 		[PgName("text")]
 		public string Text { get; set; }
 
+		/// <summary>
+		/// Дані у XML форматі
+		/// </summary>
+		/// <returns></returns>
+		public string ToXml()
+        {
+			return $"<uuid>{Uuid}</uuid><tablename>{TableName}</tablename><type>{Type}</type><datedoc>{DateDoc}</datedoc><text>{Text}</text>";
+		}
+
 		public override string ToString()
 		{
-			return $"('{Uuid}', '{TableName}', '{Type}', '{Text}')";
+			return $"('{Uuid}', '{TableName}', '{Type}', '{DateDoc}', '{Text}')";
 		}
 	}
 }
