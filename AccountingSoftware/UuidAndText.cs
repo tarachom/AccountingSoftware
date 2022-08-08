@@ -27,25 +27,66 @@ using NpgsqlTypes;
 
 namespace AccountingSoftware
 {
+	/// <summary>
+	/// Композитний тип даних
+	/// </summary>
 	public class UuidAndText
 	{
 		public UuidAndText() { }
 
-		public UuidAndText(Guid uuid, string text)
+		public UuidAndText(Guid uuid)
 		{
 			Uuid = uuid;
+		}
+
+		public UuidAndText(Guid uuid, string tablename)
+		{
+			Uuid = uuid;
+			TableName = tablename;
+		}
+
+		public UuidAndText(Guid uuid, string tablename, string type)
+		{
+			Uuid = uuid;
+			TableName = tablename;
+			Type = type;
+		}
+
+		public UuidAndText(Guid uuid, string tablename, string type, string text)
+		{
+			Uuid = uuid;
+			TableName = tablename;
+			Type = type;
 			Text = text;
 		}
 
+		/// <summary>
+		/// Вказівник
+		/// </summary>
 		[PgName("uuid")]
 		public Guid Uuid { get; set; }
 
+		/// <summary>
+		/// Таблиця
+		/// </summary>
+		[PgName("tablename")]
+		public string TableName { get; set; }
+
+		/// <summary>
+		/// Тип як в конфігураторі
+		/// </summary>
+		[PgName("type")]
+		public string Type { get; set; }
+
+		/// <summary>
+		/// Додаткова інформація
+		/// </summary>
 		[PgName("text")]
 		public string Text { get; set; }
 
 		public override string ToString()
 		{
-			return "('" + Uuid.ToString() + "', '" + Text + "')";
+			return $"('{Uuid}', '{TableName}', '{Type}', '{Text}')";
 		}
 	}
 }
