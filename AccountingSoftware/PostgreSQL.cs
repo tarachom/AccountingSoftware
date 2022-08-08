@@ -24,7 +24,6 @@ limitations under the License.
 using System;
 using System.Collections.Generic;
 using Npgsql;
-using NpgsqlTypes;
 
 namespace AccountingSoftware
 {
@@ -41,7 +40,7 @@ namespace AccountingSoftware
 			Connection = new NpgsqlConnection(connectionString);
 			Connection.Open();
 
-			//Start();
+			Start();
 		}
 
 		public bool Open2(string Server, string UserId, string Password, int Port, string Database, out Exception exception)
@@ -55,7 +54,7 @@ namespace AccountingSoftware
 			try
 			{
 				Connection.Open();
-				//Start();
+				Start();
 
 				return true;
 			}
@@ -152,52 +151,20 @@ namespace AccountingSoftware
 			catch { }
 		}
 
-		#endregion
-
-		#region UserType
-
-		/*
-		public class uuid_and_string
-		{
-			public uuid_and_string() { }
-
-			public uuid_and_string(Guid _uuid, string _text)
-			{
-				uuid = _uuid;
-				text = _text;
-			}
-
-			[PgName("uuid")]
-			public Guid uuid { get; set; }
-
-			[PgName("string")]
-			public string text { get; set; }
-
-			public override string ToString()
-			{
-				return "('" + uuid.ToString() + "', '" + text + "')";
-			}
-		}
-		*/
-
-		/*
 		private void Start()
 		{
-			//List<string> StartSQL = new List<string>();
-
-			string query = "SELECT 'Exist' FROM pg_type WHERE typname = 'uuid_and_string'";
+			string query = "SELECT 'Exist' FROM pg_type WHERE typname = 'uuidtext'";
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			object result = nCommand.ExecuteScalar();
 
 			if (!(result != null && result.ToString() == "Exist"))
-				ExecuteSQL("CREATE TYPE public.uuid_and_string AS(uuid uuid, string text)");
+			{
+				ExecuteSQL("CREATE TYPE uuidtext AS(uuid uuid, string text)");
+				Connection.ReloadTypes();
+			}
 
-			//foreach (string sqlQuery in StartSQL)
-			//	ExecuteSQL(sqlQuery);
-
-			Connection.MapComposite<uuid_and_string>("uuid_and_string");
+			Connection.TypeMapper.MapComposite<UuidAndText>("uuidtext");
 		}
-		*/
 
 		#endregion
 

@@ -125,6 +125,7 @@
     <Compile Include="AccountingSoftware\Document\DocumentTablePart.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentObject.cs" />
+    <Compile Include="AccountingSoftware\UuidAndText.cs" />
     <Compile Include="AccountingSoftware\FieldType.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
     <Compile Include="AccountingSoftware\ArrayToXml.cs" />

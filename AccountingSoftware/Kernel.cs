@@ -33,23 +33,6 @@ namespace AccountingSoftware
 		public Kernel() { /**/ }
 
 		/// <summary>
-		/// Не використовується
-		/// </summary>
-		//public void Open()
-		//{
-		//	DataBase = new PostgreSQL();
-		//	DataBase.Open("Server=localhost;User Id=postgres;Password=1;Database=ConfTradeTest;");
-
-		//	Console.WriteLine("DataBase Open");
-
-		//	Conf = new Configuration();
-		//	Conf.PathToXmlFileConfiguration = @"D:\VS\Project\AccountingSoftware\ConfTrade\Configuration.xml";
-		//	Configuration.Load(Conf.PathToXmlFileConfiguration, Conf);
-
-		//	Console.WriteLine("Configuration Load");
-		//}
-
-		/// <summary>
 		/// Перевірити підключення до сервера
 		/// </summary>
 		/// <param name="Server">Адреса сервера баз даних</param>
@@ -75,7 +58,7 @@ namespace AccountingSoftware
 		/// <param name="Database">База даних</param>
 		/// <param name="exception">Помилка</param>
 		/// <param name="IsExistsDatabase">Чи вже є?</param>
-		/// <returns>>True якщо все ок</returns>
+		/// <returns>True якщо все ок</returns>
 		public bool CreateDatabaseIfNotExist(string Server, string UserId, string Password, int Port, string Database, out Exception exception, out bool IsExistsDatabase)
 		{
 			DataBase = new PostgreSQL();

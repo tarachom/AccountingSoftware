@@ -76,6 +76,31 @@ namespace Configurator
 			constantNode.Tag = confConstant;
 			constantNode.SelectedImageIndex = 15;
 			constantNode.ImageIndex = 15;
+
+			if (confConstant.TabularParts.Count > 0)
+			{
+				TreeNode constantTabularPartsNode = constantNode.Nodes.Add("TabularParts", "Табличні частини");
+				constantTabularPartsNode.SelectedImageIndex = 4;
+				constantTabularPartsNode.ImageIndex = 4;
+
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confConstant.TabularParts)
+				{
+					TreeNode constantTablePartNode = constantTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+					constantTablePartNode.SelectedImageIndex = 13;
+					constantTablePartNode.ImageIndex = 13;
+
+					//Поля
+					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+					{
+						string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
+							" -> " + ConfTablePartFields.Value.Pointer : "";
+
+						TreeNode fieldNode = constantTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
+					}
+				}
+			}
 		}
 
 		public void LoadConstants(TreeNode rootNode)
@@ -115,47 +140,30 @@ namespace Configurator
 				fieldNode.ImageIndex = 15;
 			}
 
-			TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
-			directoriTabularPartsNode.SelectedImageIndex = 4;
-			directoriTabularPartsNode.ImageIndex = 4;
-
-			foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDirectory.TabularParts)
+			if (confDirectory.TabularParts.Count > 0)
 			{
-				TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
-				directoriTablePartNode.SelectedImageIndex = 13;
-				directoriTablePartNode.ImageIndex = 13;
+				TreeNode directoriTabularPartsNode = directoryNode.Nodes.Add("TabularParts", "Табличні частини");
+				directoriTabularPartsNode.SelectedImageIndex = 4;
+				directoriTabularPartsNode.ImageIndex = 4;
 
-				//Поля
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDirectory.TabularParts)
 				{
-					string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
-						" -> " + ConfTablePartFields.Value.Pointer : "";
+					TreeNode directoriTablePartNode = directoriTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+					directoriTablePartNode.SelectedImageIndex = 13;
+					directoriTablePartNode.ImageIndex = 13;
 
-					TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
+					//Поля
+					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+					{
+						string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
+							" -> " + ConfTablePartFields.Value.Pointer : "";
+
+						TreeNode fieldNode = directoriTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
+					}
 				}
 			}
-
-			//TreeNode directoriViewsNode = directoryNode.Nodes.Add("Views", "Візуалізації");
-			//directoriViewsNode.SelectedImageIndex = 8;
-			//directoriViewsNode.ImageIndex = 8;
-
-			//foreach (KeyValuePair<string, ConfigurationObjectView> ConfView in confDirectory.Views)
-			//{
-			//	TreeNode directoriViewNode = directoriViewsNode.Nodes.Add(ConfView.Key, ConfView.Value.Name);
-			//	directoriViewNode.SelectedImageIndex = 9;
-			//	directoriViewNode.ImageIndex = 9;
-
-			//	//Поля
-			//	foreach (KeyValuePair<string, string> ConfViewField in ConfView.Value.Fields)
-			//	{
-			//		TreeNode fieldNode = directoriViewNode.Nodes.Add(ConfViewField.Key, ConfViewField.Key);
-
-			//		fieldNode.SelectedImageIndex = 15;
-			//		fieldNode.ImageIndex = 15;
-			//	}
-			//}
 		}
 
 		public void LoadDirectories(TreeNode rootNode)
@@ -186,24 +194,27 @@ namespace Configurator
 				fieldNode.ImageIndex = 15;
 			}
 
-			TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
-			documentTabularPartsNode.SelectedImageIndex = 4;
-			documentTabularPartsNode.ImageIndex = 4;
-
-			foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDocument.TabularParts)
+			if (confDocument.TabularParts.Count > 0)
 			{
-				TreeNode documentTablePartNode = documentTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
-				documentTablePartNode.ImageIndex = 1;
+				TreeNode documentTabularPartsNode = documentNode.Nodes.Add("TabularParts", "Табличні частини");
+				documentTabularPartsNode.SelectedImageIndex = 4;
+				documentTabularPartsNode.ImageIndex = 4;
 
-				//Поля
-				foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+				foreach (KeyValuePair<string, ConfigurationObjectTablePart> ConfTablePart in confDocument.TabularParts)
 				{
-					string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
-						" -> " + ConfTablePartFields.Value.Pointer : "";
+					TreeNode documentTablePartNode = documentTabularPartsNode.Nodes.Add(ConfTablePart.Key, ConfTablePart.Value.Name);
+					documentTablePartNode.ImageIndex = 1;
 
-					TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
-					fieldNode.SelectedImageIndex = 15;
-					fieldNode.ImageIndex = 15;
+					//Поля
+					foreach (KeyValuePair<string, ConfigurationObjectField> ConfTablePartFields in ConfTablePart.Value.Fields)
+					{
+						string info = (ConfTablePartFields.Value.Type == "pointer" || ConfTablePartFields.Value.Type == "enum") ?
+							" -> " + ConfTablePartFields.Value.Pointer : "";
+
+						TreeNode fieldNode = documentTablePartNode.Nodes.Add(ConfTablePartFields.Key, ConfTablePartFields.Value.Name + info);
+						fieldNode.SelectedImageIndex = 15;
+						fieldNode.ImageIndex = 15;
+					}
 				}
 			}
 		}
