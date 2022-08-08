@@ -232,6 +232,18 @@ limitations under the License.
                 </xsl:choose>
               </xsl:if>
 				
+			  <xsl:if test="$ConfFieldType = 'composite_pointer'">
+                <xsl:choose>
+                  <xsl:when test="$InfoSchemaFieldDataType = 'uuidtext' and $InfoSchemaFieldUdtName = 'uuidtext'">
+                    <Coincide>yes</Coincide>
+                  </xsl:when>
+                  <xsl:otherwise>
+                    <Coincide>no</Coincide>
+                    <DataTypeCreate>uuidtext</DataTypeCreate>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </xsl:if>
+				
               <xsl:if test="$ConfFieldType = 'enum'">
                 <xsl:choose>
                   <xsl:when test="$InfoSchemaFieldDataType = 'integer' and $InfoSchemaFieldUdtName = 'int4'">
@@ -323,6 +335,9 @@ limitations under the License.
           </xsl:when>
 		  <xsl:when test="Type = 'any_pointer'">
             <xsl:text>uuid</xsl:text>
+          </xsl:when>
+		  <xsl:when test="Type = 'composite_pointer'">
+            <xsl:text>uuidtext</xsl:text>
           </xsl:when>
           <xsl:when test="Type = 'enum'">
             <xsl:text>integer</xsl:text>

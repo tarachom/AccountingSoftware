@@ -441,7 +441,8 @@ limitations under the License.
                               Type/DataType = 'date' or  
                               Type/DataType = 'time without time zone' or 
                               Type/DataType = 'timestamp without time zone' or 
-                              Type/DataType = 'uuid' ">
+                              Type/DataType = 'uuid' or
+						      Type/DataType = 'uuidtext' ">
                 <xsl:choose>
                   <!-- Значення в Текст -->
                   <xsl:when test="Type/ConfType = 'string'">
@@ -615,7 +616,7 @@ limitations under the License.
                   </xsl:otherwise>
                 </xsl:choose>
               </xsl:when>
-
+			
               <xsl:otherwise>
                 <info>ПОМИЛКА! Не вдалось знайти спосіб реструктуризації для даного типу.</info>
               </xsl:otherwise>
