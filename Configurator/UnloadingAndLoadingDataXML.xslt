@@ -104,7 +104,7 @@ limitations under the License.
 		<xsl:if test="self::*">
 			<row name="{name(.)}" type="{@type}">
 				<xsl:choose>
-					<xsl:when test="@type = 'String[]' or @type = 'Int32[]' or @type = 'Decimal[]'">
+					<xsl:when test="@type = 'String[]' or @type = 'Int32[]' or @type = 'Decimal[]' or @type = 'UuidAndText'">
 						<xsl:copy-of select="node()"/>
 					</xsl:when>
 					<xsl:otherwise>

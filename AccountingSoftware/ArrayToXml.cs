@@ -20,6 +20,8 @@ limitations under the License.
 Адреса:   Україна, м. Львів
 Сайт:     accounting.org.ua
 */
+
+using System;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -86,6 +88,35 @@ namespace AccountingSoftware
 			}
 
 			return stringValue;
+		}
+
+		/// <summary>
+		/// Функція перетоврення стрічки ХМЛ в масив
+		///		<uuid>c3f4b98f-1a6c-4073-aa10-66fda00d0618</uuid>
+		///		<tablename>tab_a83</tablename>
+		///		<type>Документ.ВведенняЗалишків</type>
+		///		<datedoc>07.08.2022 16:24:58</datedoc>
+		///		<text>Введення залишків №00000009 від 07.08.2022</text>
+		/// </summary>
+		/// <param name="xmlValue">Стрічка хмл</param>
+		/// <returns>Текстовий масив</returns>
+		public static UuidAndText ConvertUuidAndText(string xmlValue)
+		{
+			xmlValue = $"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<root>" + xmlValue + "\n</root>";
+
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(xmlValue);
+
+			XPathNavigator xPathNavigator = xmlDocument.CreateNavigator();
+			XPathNavigator root = xPathNavigator.SelectSingleNode("root");
+
+			Guid uuid = Guid.Parse(root.SelectSingleNode("uuid").Value);
+			string tablename = root.SelectSingleNode("tablename").Value;
+			string type = root.SelectSingleNode("type").Value;
+			DateTime datedoc = DateTime.Parse(root.SelectSingleNode("datedoc").Value);
+			string text = root.SelectSingleNode("text").Value;
+
+			return new UuidAndText(uuid, tablename, type, datedoc, text);
 		}
 	}
 }

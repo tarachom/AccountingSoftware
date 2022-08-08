@@ -488,6 +488,11 @@ namespace Configurator
                                     xmlWriter.WriteRaw(ArrayToXml<decimal>.Convert((decimal[])row[counter]));
                                     break;
                                 }
+                            case "UuidAndText":
+                                {
+                                    xmlWriter.WriteRaw(((UuidAndText)row[counter]).ToXml());
+                                    break;
+                                }
                             default:
                                 {
                                     xmlWriter.WriteString(row[counter].ToString());
@@ -712,6 +717,11 @@ namespace Configurator
                                     tmpDecimalValue[i] = decimal.Parse(tmpValue[i]);
 
                                 paramObj = tmpDecimalValue;
+                                break;
+                            }
+                        case "UuidAndText":
+                            {
+                                paramObj = ArrayToXml.ConvertUuidAndText(paramNodes.Current.InnerXml);
                                 break;
                             }
                         default:
