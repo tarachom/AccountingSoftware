@@ -52,12 +52,12 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Таблиця
 		/// </summary>
-		private string Table { get; set; }
+		public string Table { get; private set; }
 
 		/// <summary>
 		/// Назва як задано в конфігураторі
 		/// </summary>
-		public string TypeDocument { get; set; }
+		public string TypeDocument { get; private set; }
 
 		/// <summary>
 		/// Масив назв полів

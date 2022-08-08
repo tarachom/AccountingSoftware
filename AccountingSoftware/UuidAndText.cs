@@ -40,7 +40,7 @@ namespace AccountingSoftware
 		[PgName("uuid")]
 		public Guid Uuid { get; set; }
 
-		[PgName("string")]
+		[PgName("text")]
 		public string Text { get; set; }
 
 		public override string ToString()
