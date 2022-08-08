@@ -234,7 +234,7 @@ limitations under the License.
 				
 			  <xsl:if test="$ConfFieldType = 'composite_pointer'">
                 <xsl:choose>
-                  <xsl:when test="$InfoSchemaFieldDataType = 'uuidtext' and $InfoSchemaFieldUdtName = 'uuidtext'">
+                  <xsl:when test="$InfoSchemaFieldDataType = 'USER-DEFINED' and $InfoSchemaFieldUdtName = 'uuidtext'">
                     <Coincide>yes</Coincide>
                   </xsl:when>
                   <xsl:otherwise>

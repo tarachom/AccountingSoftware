@@ -394,7 +394,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                 <xsl:value-of select="Name"/>
                 <xsl:text>_Const</xsl:text>
                 <xsl:choose>
-                  <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                  <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                   </xsl:when>
                 </xsl:choose>);
@@ -472,7 +472,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
 					    </xsl:if>
 						<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                         <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>
                         </xsl:choose>
@@ -612,7 +612,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
               </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
@@ -818,7 +818,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 					</xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
-                    <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                    <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                         <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:when>
                     </xsl:choose>
@@ -982,7 +982,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
               </xsl:if>
               <xsl:value-of select="Name"/>
               <xsl:choose>
-                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                   <xsl:text>.UnigueID.UGuid</xsl:text>
                 </xsl:when>
               </xsl:choose>;
@@ -1193,7 +1193,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 					</xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
                     <xsl:choose>
-                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                        <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
                             <xsl:text>.UnigueID.UGuid</xsl:text>
                         </xsl:when>				
                     </xsl:choose>
@@ -1401,7 +1401,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
                         <xsl:text>(int)</xsl:text>      
                     </xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>)</xsl:text>;
@@ -1532,7 +1532,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
                         <xsl:text>(int)</xsl:text>      
                     </xsl:if>
 					<xsl:text>record.</xsl:text><xsl:value-of select="Name"/>
-                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer' or Type = 'any_pointer'">
+                    <xsl:if test="Type = 'pointer' or Type = 'empty_pointer'">
                     <xsl:text>.UnigueID.UGuid</xsl:text>
                     </xsl:if>
                     <xsl:text>)</xsl:text>;

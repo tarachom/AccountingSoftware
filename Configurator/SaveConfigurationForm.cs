@@ -221,9 +221,10 @@ namespace Configurator
 					{
 						XPathNavigator nodeFieldName = nodeDirectoryExistField.Current.SelectSingleNode("../Name");
 						XPathNavigator nodeDataType = nodeDirectoryExistField.Current.SelectSingleNode("DataType");
+						XPathNavigator nodeUdtName = nodeDirectoryExistField.Current.SelectSingleNode("UdtName");
 						XPathNavigator nodeDataTypeCreate = nodeDirectoryExistField.Current.SelectSingleNode("DataTypeCreate");
 
-						ApendLine("\t Поле: ", nodeFieldName.Value, " -> змінений тип даних (Тип в базі: " + nodeDataType.Value + " -> Новий тип: " + nodeDataTypeCreate.Value + "). Можлива втрата даних, або колонка буде скопійована!");
+						ApendLine("\t Поле: ", nodeFieldName.Value, " -> змінений тип даних (Тип в базі: " + nodeDataType.Value + "(" + nodeUdtName.Value + ")" + " -> Новий тип: " + nodeDataTypeCreate.Value + "). Можлива втрата даних, або колонка буде скопійована!");
 					}
 
 					XPathNodeIterator nodeDirectoryNewTabularParts = nodeDirectoryExist.Current.Select("Control_TabularParts[IsExist = 'no']");
