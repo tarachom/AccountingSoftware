@@ -1275,7 +1275,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     </xsl:for-each>
 }
 
-namespace StorageAndTrade_1_0.Журнали
+namespace <xsl:value-of select="Configuration/NameSpace"/>.Журнали
 {
     #region Journal
     public class Journal_Select: JournalSelect
