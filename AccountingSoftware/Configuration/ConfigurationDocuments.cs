@@ -68,7 +68,7 @@ namespace AccountingSoftware
 		/// <summary>
 		/// Регістри накопичення по яких може робити рухи документ
 		/// </summary>
-		public List<string> AllowRegisterAccumulation { get; }
+		public List<string> AllowRegisterAccumulation { get; private set; }
 
 		/// <summary>
 		/// Тригери
@@ -79,6 +79,25 @@ namespace AccountingSoftware
 		/// Функції (проведення/очищення проводок) документу
 		/// </summary>
 		public ConfigurationSpendFunctions SpendFunctions { get; set; }
+
+		public ConfigurationDocuments Copy()
+		{
+			ConfigurationDocuments confDocCopy = new ConfigurationDocuments(this.Name, this.Table, this.Desc);
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> fields in this.Fields)
+				confDocCopy.Fields.Add(fields.Key, fields.Value);
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> tablePart in this.TabularParts)
+				confDocCopy.TabularParts.Add(tablePart.Key, tablePart.Value.Copy());
+
+			confDocCopy.TriggerFunctions = this.TriggerFunctions;
+
+			confDocCopy.SpendFunctions = this.SpendFunctions;
+
+			confDocCopy.AllowRegisterAccumulation = this.AllowRegisterAccumulation;
+
+			return confDocCopy;
+		}
 
 		/// <summary>
 		/// Додати нове поле в список полів

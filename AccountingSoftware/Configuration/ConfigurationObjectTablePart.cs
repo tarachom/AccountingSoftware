@@ -57,6 +57,16 @@ namespace AccountingSoftware
 		/// </summary>
 		public Dictionary<string, ConfigurationObjectField> Fields { get; }
 
+		public ConfigurationObjectTablePart Copy()
+        {
+			ConfigurationObjectTablePart confObjectTablePart = new ConfigurationObjectTablePart(this.Name, this.Table, this.Desc);
+
+			foreach (KeyValuePair<string, ConfigurationObjectField> fields in this.Fields)
+				confObjectTablePart.Fields.Add(fields.Key, fields.Value);
+
+			return confObjectTablePart;
+		}
+
 		/// <summary>
 		/// Додати нове поле в список полів
 		/// </summary>

@@ -75,6 +75,12 @@
     <Compile Include="ConstantsForm.Designer.cs">
       <DependentUpon>ConstantsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Constructor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Constructor.Designer.cs">
+      <DependentUpon>Constructor.cs</DependentUpon>
+    </Compile>
     <Compile Include="DocumentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConstantsForm.resx">
       <DependentUpon>ConstantsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Constructor.resx">
+      <DependentUpon>Constructor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DocumentForm.resx">
       <DependentUpon>DocumentForm.cs</DependentUpon>

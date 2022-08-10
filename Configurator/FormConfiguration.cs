@@ -938,6 +938,20 @@ namespace Configurator
 			addDirectoryToolStripMenuItem_Click(sender, e);
 		}
 
+		private void constructorToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string confObjectName = nodeSel.Name;
+
+				Constructor constructor = new Constructor();
+				constructor.Conf = Conf;
+				constructor.ConstructorType = Constructor.ConstructorTypeBuild.Directory;
+				constructor.ConfObjectName = confObjectName;
+				constructor.Show();
+			}
+		}
+
 		#endregion
 
 		#region Контекстне меню перелічення
@@ -1136,6 +1150,20 @@ namespace Configurator
 						MessageBox.Show(textListPointer, "Повідомлення", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
+			}
+		}
+
+		private void constructorDocumentItem_Click(object sender, EventArgs e)
+		{
+			if (nodeSel != null)
+			{
+				string confObjectName = nodeSel.Name;
+
+				Constructor constructor = new Constructor();
+				constructor.Conf = Conf;
+				constructor.ConstructorType = Constructor.ConstructorTypeBuild.Document;
+				constructor.ConfObjectName = confObjectName;
+				constructor.Show();
 			}
 		}
 
@@ -1475,6 +1503,13 @@ namespace Configurator
 			saveConfigurationForm.ShowDialog();
 		}
 
+		private void конструкторФормToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Constructor constructor = new Constructor();
+			constructor.Conf = Conf;
+			constructor.Show();
+		}
+
 		private void addContantsBlockToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			ConstantsBlockForm constantsBlockForm = new ConstantsBlockForm();
@@ -1646,6 +1681,9 @@ namespace Configurator
 			maintenance.ShowDialog();
 		}
 
+
         #endregion
+
+        
     }
 }

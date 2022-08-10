@@ -86,5 +86,6 @@ namespace AccountingSoftware
 		/// Індексувати поле
 		/// </summary>
 		public bool IsIndex { get; set; }
+
 	}
 }

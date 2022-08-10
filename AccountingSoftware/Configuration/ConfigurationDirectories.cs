@@ -69,6 +69,21 @@ namespace AccountingSoftware
 		/// </summary>
 		public ConfigurationTriggerFunctions TriggerFunctions { get; set; }
 
+		public ConfigurationDirectories Copy()
+        {
+			ConfigurationDirectories confDirCopy = new ConfigurationDirectories(this.Name, this.Table, this.Desc);
+
+            foreach (KeyValuePair<string, ConfigurationObjectField> fields in this.Fields)
+				confDirCopy.Fields.Add(fields.Key, fields.Value);
+
+			foreach (KeyValuePair<string, ConfigurationObjectTablePart> tablePart in this.TabularParts)
+				confDirCopy.TabularParts.Add(tablePart.Key, tablePart.Value.Copy());
+
+			confDirCopy.TriggerFunctions = this.TriggerFunctions;
+
+			return confDirCopy;
+		}
+
 		/// <summary>
 		/// Додати нове поле
 		/// </summary>
