@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Xsl;
 
 using AccountingSoftware;
 
@@ -204,6 +206,72 @@ namespace Configurator
 			}
 
 			NodeWork(treeConfiguration.Nodes);
+
+			Construct();
+		}
+
+		private void Construct()
+        {
+			string directoryPath = Path.GetDirectoryName(Application.ExecutablePath);
+			string constructDirPath = Path.Combine(directoryPath, "Construct");
+			string confObjectGroupPath = Path.Combine(constructDirPath, ConstructorType.ToString());
+			string confObjectDirPath = Path.Combine(confObjectGroupPath, ConfObjectName);
+
+			System.IO.Directory.CreateDirectory(constructDirPath);
+			System.IO.Directory.CreateDirectory(confObjectGroupPath);
+			System.IO.Directory.CreateDirectory(confObjectDirPath);
+
+			Configuration ConfNew = new Configuration();
+			ConfNew.Name = Conf.Name;
+			ConfNew.NameSpace = Conf.NameSpace;
+
+			switch (ConstructorType)
+			{
+				case ConstructorTypeBuild.Directory:
+					{
+						ConfNew.Directories.Add(ConfigurationDirectories.Name, ConfigurationDirectories);
+						break;
+					}
+				case ConstructorTypeBuild.Document:
+					{
+						ConfNew.Documents.Add(ConfigurationDocuments.Name, ConfigurationDocuments);
+						break;
+					}
+			}
+
+			string confNewSavePath = Path.Combine(constructDirPath, "Conf.xml");
+
+			Configuration.Save(confNewSavePath, ConfNew);
+
+			XslCompiledTransform xsltCodeGnerator = new XslCompiledTransform();
+			xsltCodeGnerator.Load(Path.Combine(directoryPath, "Constructor.xslt"), new XsltSettings(false, false), null);
+
+			XsltArgumentList xsltArgumentList = new XsltArgumentList(); 
+			xsltArgumentList.AddParam("ConstructorType", "", ConstructorType.ToString());
+			xsltArgumentList.AddParam("ConfObjectName", "", ConfObjectName);
+
+			xsltArgumentList.AddParam("Form", "", "DirectoryFormListDesigner");
+			FileStream fileStreamDesignerList = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}.designer.cs"), FileMode.Create);
+			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamDesignerList);
+			fileStreamDesignerList.Close();
+
+			xsltArgumentList.RemoveParam("Form", "");
+			xsltArgumentList.AddParam("Form", "", "DirectoryFormList");
+			FileStream fileStreamFormList = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}.cs"), FileMode.Create);
+			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormList);
+			fileStreamFormList.Close();
+
+			xsltArgumentList.RemoveParam("Form", "");
+			xsltArgumentList.AddParam("Form", "", "DirectoryFormElementDesigner");
+			FileStream fileStreamFormElementDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}Елемент.designer.cs"), FileMode.Create);
+			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormElementDesigner);
+			fileStreamFormElementDesigner.Close();
+
+			xsltArgumentList.RemoveParam("Form", "");
+			xsltArgumentList.AddParam("Form", "", "DirectoryFormElement");
+			FileStream fileStreamFormElement = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}Елемент.cs"), FileMode.Create);
+			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormElement);
+			fileStreamFormElement.Close();
 		}
 
 		private void NodeWork(TreeNodeCollection nodeCollect)

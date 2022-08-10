@@ -66,9 +66,6 @@ limitations under the License.
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:template match="/">
-		<xsl:variable name="escape">'</xsl:variable>
-		<xsl:variable name="replace">&apos;</xsl:variable>
-
 		<root>
 		
 		<xsl:for-each select="root/sql">

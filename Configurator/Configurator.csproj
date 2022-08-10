@@ -257,6 +257,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="configurator.ico" />
+    <Content Include="Constructor.xslt" />
     <Content Include="UnloadingAndLoadingDataSQL.xslt" />
     <Content Include="UnloadingAndLoadingDataXML.xslt" />
     <None Include="Resources\up.ico" />
@@ -277,6 +278,8 @@ copy $(ProjectDir)ComparisonAnalize.xslt    $(TargetDir)ComparisonAnalize.xslt
 
 copy $(ProjectDir)UnloadingAndLoadingDataXML.xslt               $(TargetDir)UnloadingAndLoadingDataXML.xslt
 copy $(ProjectDir)UnloadingAndLoadingDataSQL.xslt                $(TargetDir)UnloadingAndLoadingDataSQL.xslt
+
+copy $(ProjectDir)Constructor.xslt    $(TargetDir)Constructor.xslt
 </PostBuildEvent>
   </PropertyGroup>
 </Project>

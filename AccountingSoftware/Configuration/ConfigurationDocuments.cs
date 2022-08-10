@@ -94,8 +94,6 @@ namespace AccountingSoftware
 
 			confDocCopy.SpendFunctions = this.SpendFunctions;
 
-			confDocCopy.AllowRegisterAccumulation = this.AllowRegisterAccumulation;
-
 			return confDocCopy;
 		}
 
