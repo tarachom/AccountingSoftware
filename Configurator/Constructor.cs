@@ -272,6 +272,39 @@ namespace Configurator
 			FileStream fileStreamFormElement = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}Елемент.cs"), FileMode.Create);
 			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormElement);
 			fileStreamFormElement.Close();
+
+			switch (ConstructorType)
+			{
+				case ConstructorTypeBuild.Directory:
+					{
+						foreach (ConfigurationObjectTablePart TablePart in ConfigurationDirectories.TabularParts.Values)
+						{
+							xsltArgumentList.RemoveParam("Form", "");
+							xsltArgumentList.RemoveParam("ConfObjectTablePartName", "");
+							xsltArgumentList.AddParam("Form", "", "DirectoryFormTablePartDesigner");
+							xsltArgumentList.AddParam("ConfObjectTablePartName", "", TablePart.Name);
+							FileStream fileStreamFormTablePartDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}_ТабличнаЧастина_{TablePart.Name}.designer.cs"), FileMode.Create);
+							xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormTablePartDesigner);
+							fileStreamFormTablePartDesigner.Close();
+
+							xsltArgumentList.RemoveParam("Form", "");
+							xsltArgumentList.RemoveParam("ConfObjectTablePartName", "");
+							xsltArgumentList.AddParam("Form", "", "DirectoryFormTablePart");
+							xsltArgumentList.AddParam("ConfObjectTablePartName", "", TablePart.Name);
+							FileStream fileStreamFormTablePart = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}_ТабличнаЧастина_{TablePart.Name}.cs"), FileMode.Create);
+							xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormTablePart);
+							fileStreamFormTablePart.Close();
+						}
+
+						break;
+					}
+				case ConstructorTypeBuild.Document:
+					{
+						
+						break;
+					}
+			}
+
 		}
 
 		private void NodeWork(TreeNodeCollection nodeCollect)
