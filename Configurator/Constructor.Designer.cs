@@ -32,6 +32,7 @@ namespace Configurator
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.treeConfiguration = new System.Windows.Forms.TreeView();
             this.button1 = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,9 +51,10 @@ namespace Configurator
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.dateTimePicker1);
             this.splitContainer1.Panel2.Controls.Add(this.button1);
             this.splitContainer1.Size = new System.Drawing.Size(1137, 712);
-            this.splitContainer1.SplitterDistance = 447;
+            this.splitContainer1.SplitterDistance = 446;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeConfiguration
@@ -62,7 +64,7 @@ namespace Configurator
             this.treeConfiguration.Indent = 19;
             this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
             this.treeConfiguration.Name = "treeConfiguration";
-            this.treeConfiguration.Size = new System.Drawing.Size(447, 712);
+            this.treeConfiguration.Size = new System.Drawing.Size(446, 712);
             this.treeConfiguration.TabIndex = 0;
             this.treeConfiguration.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeConfiguration_AfterCheck);
             // 
@@ -75,6 +77,16 @@ namespace Configurator
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "hh:mm:ss";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(20, 59);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.ShowUpDown = true;
+            this.dateTimePicker1.Size = new System.Drawing.Size(86, 20);
+            this.dateTimePicker1.TabIndex = 1;
             // 
             // Constructor
             // 
@@ -99,5 +111,6 @@ namespace Configurator
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TreeView treeConfiguration;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

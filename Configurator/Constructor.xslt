@@ -442,7 +442,9 @@ namespace StorageAndTrade
 
 	<xsl:template name="DirectoryFormElementDesigner">
 		<xsl:variable name="Directory" select="Configuration/Directories/Directory[Name = $ConfObjectName]" />
-
+		<xsl:variable name="coeficient" select="30" />
+		<xsl:variable name="offset_right" select="250" />
+		
 namespace StorageAndTrade
 {
     partial class Form_<xsl:value-of select="$Directory/Name"/>Елемент
@@ -465,57 +467,105 @@ namespace StorageAndTrade
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_<xsl:value-of select="$Directory/Name"/>Елемент));
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+			
 			<xsl:for-each select="$Directory/Fields/Field">
-			this.label_<xsl:value-of select="Name"/> = new System.Windows.Forms.Label();
-            this.textBox_<xsl:value-of select="Name"/> = new System.Windows.Forms.TextBox();
+				
+			    this.label_<xsl:value-of select="Name"/> = new System.Windows.Forms.Label();
+				
+				<xsl:choose>
+				    <xsl:when test="Type = 'string'">
+					    this.textBox_<xsl:value-of select="Name"/> = new System.Windows.Forms.TextBox();
+					</xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+					    this.dateTimePicker_<xsl:value-of select="Name"/> = new System.Windows.Forms.DateTimePicker();
+					</xsl:when>
+				</xsl:choose>
+				
 			</xsl:for-each>
+		
             this.SuspendLayout();
+			
 			<xsl:for-each select="$Directory/Fields/Field">
-            // 
-            // label_<xsl:value-of select="Name"/>
-            // 
-            this.label_<xsl:value-of select="Name"/>.AutoSize = true;
-            this.label_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(556, 15);
-            this.label_<xsl:value-of select="Name"/>.Name = "label_<xsl:value-of select="Name"/>";
-            this.label_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(29, 13);
-            this.label_<xsl:value-of select="Name"/>.Text = "<xsl:value-of select="Name"/>:";
-			// 
-            // textBox_<xsl:value-of select="Name"/>
-            // 
-            this.textBox_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(591, 12);
-            this.textBox_<xsl:value-of select="Name"/>.Name = "textBox_<xsl:value-of select="Name"/>";
-            this.textBox_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(167, 20);
+                this.label_<xsl:value-of select="Name"/>.AutoSize = true;
+                this.label_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(12, <xsl:value-of select="position() * $coeficient"/>);
+                this.label_<xsl:value-of select="Name"/>.Name = "label_<xsl:value-of select="Name"/>";
+                this.label_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(50, 13);
+                this.label_<xsl:value-of select="Name"/>.Text = "<xsl:value-of select="Name"/>:";
+			
+			    <xsl:choose>
+					
+				    <xsl:when test="Type = 'string'"> 
+                        this.textBox_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(<xsl:value-of select="$offset_right"/>, <xsl:value-of select="position() * $coeficient"/>);
+                        this.textBox_<xsl:value-of select="Name"/>.Name = "textBox_<xsl:value-of select="Name"/>";
+                        this.textBox_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(200, 20);				
+				    </xsl:when>
+					
+				    <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+						<xsl:choose>
+						    <xsl:when test="Type = 'date'">
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.CustomFormat = "dd.MM.yyyy";	
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+						    </xsl:when>
+						    <xsl:when test="Type = 'datetime'">
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.CustomFormat = "dd.MM.yyyy hh:mm:ss";	
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+						    </xsl:when>
+						    <xsl:when test="Type = 'time'">
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.CustomFormat = "hh:mm:ss";	
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+								 this.dateTimePicker_<xsl:value-of select="Name"/>.ShowUpDown = true;
+						    </xsl:when>
+						</xsl:choose>
+                        this.dateTimePicker_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(<xsl:value-of select="$offset_right"/>, <xsl:value-of select="position() * $coeficient"/>);
+                        this.dateTimePicker_<xsl:value-of select="Name"/>.Name = "dateTimePicker_<xsl:value-of select="Name"/>";
+                        this.dateTimePicker_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(200, 20);
+			        </xsl:when>
+				
+				</xsl:choose>
 			</xsl:for-each>
+		
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(12, <xsl:value-of select="(count($Directory/Fields/Field) * $coeficient) + 50"/>);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(160, 27);
+            this.buttonSave.TabIndex = 15;
+            this.buttonSave.Text = "Зберегти";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
 			// 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(230, 51);
+            this.buttonClose.Location = new System.Drawing.Point(<xsl:value-of select="$offset_right"/>, <xsl:value-of select="(count($Directory/Fields/Field) * $coeficient) + 50"/>);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(164, 27);
+            this.buttonClose.Size = new System.Drawing.Size(160, 27);
             this.buttonClose.TabIndex = 16;
             this.buttonClose.Text = "Закрити";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // buttonSave
-            // 
-            this.buttonSave.Location = new System.Drawing.Point(60, 51);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(164, 27);
-            this.buttonSave.TabIndex = 15;
-            this.buttonSave.Text = "Зберегти";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
             // Form_<xsl:value-of select="$Directory/Name"/>Елемент
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(773, 97);
+            this.ClientSize = new System.Drawing.Size(600, <xsl:value-of select="(count($Directory/Fields/Field) * $coeficient) + 100"/>);
+			
 			<xsl:for-each select="$Directory/Fields/Field">
-			this.Controls.Add(this.label_<xsl:value-of select="Name"/>);
-            this.Controls.Add(this.textBox_<xsl:value-of select="Name"/>);
+				
+			    this.Controls.Add(this.label_<xsl:value-of select="Name"/>);
+                
+				<xsl:choose>
+				    <xsl:when test="Type = 'string'">
+					    this.Controls.Add(this.textBox_<xsl:value-of select="Name"/>);
+					</xsl:when>
+                    <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+					    this.Controls.Add(this.dateTimePicker_<xsl:value-of select="Name"/>);
+					</xsl:when>
+				</xsl:choose>
+				
 			</xsl:for-each>
+		
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -532,9 +582,20 @@ namespace StorageAndTrade
 
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonSave;
+		
 		<xsl:for-each select="$Directory/Fields/Field">
-		private System.Windows.Forms.Label label_<xsl:value-of select="Name"/>;
-        private System.Windows.Forms.TextBox textBox_<xsl:value-of select="Name"/>;
+			
+		    private System.Windows.Forms.Label label_<xsl:value-of select="Name"/>;
+            
+			<xsl:choose>
+				<xsl:when test="Type = 'string'">
+					private System.Windows.Forms.TextBox textBox_<xsl:value-of select="Name"/>;
+				</xsl:when>
+                <xsl:when test="Type = 'date' or Type = 'datetime' or Type = 'time'">
+					private System.Windows.Forms.DateTimePicker dateTimePicker_<xsl:value-of select="Name"/>;
+				</xsl:when>
+			</xsl:choose>
+			
 		</xsl:for-each>
     }
 }
@@ -594,7 +655,19 @@ namespace StorageAndTrade
 					{
 						this.Text += " - Редагування";
 						<xsl:for-each select="$Directory/Fields/Field">
-			            //textBox_<xsl:value-of select="Name"/>.Text = <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/>;
+			            
+		                    <xsl:choose>
+				                <xsl:when test="Type = 'string'">
+								    textBox_<xsl:value-of select="Name"/>.Text = <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/>;
+					            </xsl:when>
+                                <xsl:when test="Type = 'date' or Type = 'datetime'">
+					                dateTimePicker_<xsl:value-of select="Name"/>.Value = <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/>;
+					            </xsl:when>
+						        <xsl:when test="Type = 'time'">
+					                //dateTimePicker_<xsl:value-of select="Name"/>.Value = <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/>;
+					            </xsl:when>
+				            </xsl:choose>
+
 			            </xsl:for-each>
 					}
 					else
@@ -613,7 +686,19 @@ namespace StorageAndTrade
 				try
 				{
 					<xsl:for-each select="$Directory/Fields/Field">
-			        //<xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/> = textBox_<xsl:value-of select="Name"/>.Text;
+			        
+					    <xsl:choose>
+				            <xsl:when test="Type = 'string'">
+								<xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/> = textBox_<xsl:value-of select="Name"/>.Text;
+					        </xsl:when>
+                            <xsl:when test="Type = 'date' or Type = 'datetime'">
+					            <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/> = dateTimePicker_<xsl:value-of select="Name"/>.Value;
+					        </xsl:when>
+						    <xsl:when test="Type = 'time'">
+					            //<xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/> = dateTimePicker_<xsl:value-of select="Name"/>.Value;
+					        </xsl:when>
+				        </xsl:choose>
+		
 			        </xsl:for-each>
 					<xsl:value-of select="$Directory/Name"/>_Objest.Save();
 				}

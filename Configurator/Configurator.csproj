@@ -105,12 +105,6 @@
     <Compile Include="EnumFieldForm.Designer.cs">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_ОрганізаціїЕлемент.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form_ОрганізаціїЕлемент.designer.cs">
-      <DependentUpon>Form_ОрганізаціїЕлемент.cs</DependentUpon>
-    </Compile>
     <Compile Include="RegistersAccumulationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -201,9 +195,6 @@
     <EmbeddedResource Include="EnumFieldForm.resx">
       <DependentUpon>EnumFieldForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_ОрганізаціїЕлемент.resx">
-      <DependentUpon>Form_ОрганізаціїЕлемент.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="RegistersAccumulationForm.resx">
       <DependentUpon>RegistersAccumulationForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -266,7 +257,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="configurator.ico" />
-    <Content Include="Constructor.xslt" />
+    <Content Include="Constructor.xslt">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="UnloadingAndLoadingDataSQL.xslt" />
     <Content Include="UnloadingAndLoadingDataXML.xslt" />
     <None Include="Resources\up.ico" />
