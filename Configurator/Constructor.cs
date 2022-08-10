@@ -177,7 +177,10 @@ namespace Configurator
         {
 			TreeNode nodeCheck = e.Node;
 
-			RecursionNodeCheck(nodeCheck.Checked, nodeCheck.Nodes);
+			//if (nodeCheck.Parent != null)
+			//	nodeCheck.Parent.Checked = nodeCheck.Checked;
+
+			//RecursionNodeCheck(nodeCheck.Checked, nodeCheck.Nodes);
 		}
 
 		private void RecursionNodeCheck(bool check, TreeNodeCollection nodeCheck)
@@ -251,7 +254,7 @@ namespace Configurator
 			xsltArgumentList.AddParam("ConfObjectName", "", ConfObjectName);
 
 			xsltArgumentList.AddParam("Form", "", "DirectoryFormListDesigner");
-			FileStream fileStreamDesignerList = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}.designer.cs"), FileMode.Create);
+			FileStream fileStreamDesignerList = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}.Designer.cs"), FileMode.Create);
 			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamDesignerList);
 			fileStreamDesignerList.Close();
 
@@ -263,7 +266,7 @@ namespace Configurator
 
 			xsltArgumentList.RemoveParam("Form", "");
 			xsltArgumentList.AddParam("Form", "", "DirectoryFormElementDesigner");
-			FileStream fileStreamFormElementDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}Елемент.designer.cs"), FileMode.Create);
+			FileStream fileStreamFormElementDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}Елемент.Designer.cs"), FileMode.Create);
 			xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormElementDesigner);
 			fileStreamFormElementDesigner.Close();
 
@@ -283,7 +286,7 @@ namespace Configurator
 							xsltArgumentList.RemoveParam("ConfObjectTablePartName", "");
 							xsltArgumentList.AddParam("Form", "", "DirectoryFormTablePartDesigner");
 							xsltArgumentList.AddParam("ConfObjectTablePartName", "", TablePart.Name);
-							FileStream fileStreamFormTablePartDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}_ТабличнаЧастина_{TablePart.Name}.designer.cs"), FileMode.Create);
+							FileStream fileStreamFormTablePartDesigner = new FileStream(Path.Combine(confObjectDirPath, $"Form_{ConfObjectName}_ТабличнаЧастина_{TablePart.Name}.Designer.cs"), FileMode.Create);
 							xsltCodeGnerator.Transform(confNewSavePath, xsltArgumentList, fileStreamFormTablePartDesigner);
 							fileStreamFormTablePartDesigner.Close();
 

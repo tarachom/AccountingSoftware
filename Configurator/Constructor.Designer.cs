@@ -51,8 +51,8 @@ namespace Configurator
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.button1);
-            this.splitContainer1.Size = new System.Drawing.Size(877, 712);
-            this.splitContainer1.SplitterDistance = 345;
+            this.splitContainer1.Size = new System.Drawing.Size(1137, 712);
+            this.splitContainer1.SplitterDistance = 447;
             this.splitContainer1.TabIndex = 0;
             // 
             // treeConfiguration
@@ -62,7 +62,7 @@ namespace Configurator
             this.treeConfiguration.Indent = 19;
             this.treeConfiguration.Location = new System.Drawing.Point(0, 0);
             this.treeConfiguration.Name = "treeConfiguration";
-            this.treeConfiguration.Size = new System.Drawing.Size(345, 712);
+            this.treeConfiguration.Size = new System.Drawing.Size(447, 712);
             this.treeConfiguration.TabIndex = 0;
             this.treeConfiguration.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeConfiguration_AfterCheck);
             // 
@@ -80,7 +80,7 @@ namespace Configurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(897, 732);
+            this.ClientSize = new System.Drawing.Size(1157, 732);
             this.Controls.Add(this.splitContainer1);
             this.Name = "Constructor";
             this.Padding = new System.Windows.Forms.Padding(10);

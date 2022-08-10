@@ -257,12 +257,14 @@ namespace StorageAndTrade
 			RecordsBindingList = new BindingList&lt;Записи&gt;();
 			dataGridViewRecords.DataSource = RecordsBindingList;
 			
-			//dataGridViewRecords.Columns["Image"].Width = 30;
-			//dataGridViewRecords.Columns["Image"].HeaderText = "";
+			dataGridViewRecords.Columns["Image"].Width = 30;
+			dataGridViewRecords.Columns["Image"].HeaderText = "";
 
-			dataGridViewRecords.Columns["ID"].Visible = false;
-			dataGridViewRecords.Columns["Назва"].Width = 300;
-			dataGridViewRecords.Columns["Код"].Width = 50;
+			//dataGridViewRecords.Columns["ID"].Visible = false;
+			
+			<xsl:for-each select="$Directory/Fields/Field">
+			//dataGridViewRecords.Columns["<xsl:value-of select="Name"/>"].Width = 50;
+			</xsl:for-each>
 		}
 
 		public DirectoryPointer DirectoryPointerItem { get; set; }
@@ -282,11 +284,12 @@ namespace StorageAndTrade
 			dataGridViewRecords.Rows.Clear();
 
 			Довідники.<xsl:value-of select="$Directory/Name"/>_Select <xsl:value-of select="$Directory/Name"/>_Select = new Довідники.<xsl:value-of select="$Directory/Name"/>_Select();
-			<xsl:value-of select="$Directory/Name"/>_Select.QuerySelect.Field.Add(Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Назва);
-			<xsl:value-of select="$Directory/Name"/>_Select.QuerySelect.Field.Add(Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Код);
+			<xsl:for-each select="$Directory/Fields/Field">
+			//<xsl:value-of select="$Directory/Name"/>_Select.QuerySelect.Field.Add(Довідники.<xsl:value-of select="$Directory/Name"/>_Const.<xsl:value-of select="Name"/>);
+			</xsl:for-each>
 
 			//ORDER
-			<xsl:value-of select="$Directory/Name"/>_Select.QuerySelect.Order.Add(Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Назва, SelectOrder.ASC);
+			//<xsl:value-of select="$Directory/Name"/>_Select.QuerySelect.Order.Add(Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Назва, SelectOrder.ASC);
 
 			<xsl:value-of select="$Directory/Name"/>_Select.Select();
 			while (<xsl:value-of select="$Directory/Name"/>_Select.MoveNext())
@@ -295,9 +298,10 @@ namespace StorageAndTrade
 
 				RecordsBindingList.Add(new Записи
 				{
-					ID = cur.UnigueID.ToString(),
-					Назва = cur.Fields[Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Назва].ToString(),
-					Код = cur.Fields[Довідники.<xsl:value-of select="$Directory/Name"/>_Const.Код].ToString()
+					ID = cur.UnigueID.ToString() //,
+					<xsl:for-each select="$Directory/Fields/Field">
+			            //<xsl:value-of select="Name"/> = cur.Fields[Довідники.<xsl:value-of select="$Directory/Name"/>_Const.<xsl:value-of select="Name"/>].ToString(),
+			        </xsl:for-each>
 				});
 
 				if (DirectoryPointerItem != null)
@@ -318,8 +322,9 @@ namespace StorageAndTrade
 			public Записи() { /* Image = Properties.Resources.doc_text_image; */ }
 			public Bitmap Image { get; set; }
 			public string ID { get; set; }
-			public string Назва { get; set; }
-			public string Код { get; set; }
+			<xsl:for-each select="$Directory/Fields/Field">
+			//public string <xsl:value-of select="Name"/> { get; set; }
+			</xsl:for-each>
 		}
 
         private void dataGridViewRecords_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -390,7 +395,7 @@ namespace StorageAndTrade
                     if (<xsl:value-of select="$Directory/Name"/>_Objest.Read(new UnigueID(uid)))
                     {
 						Довідники.<xsl:value-of select="$Directory/Name"/>_Objest <xsl:value-of select="$Directory/Name"/>_Objest_Новий = <xsl:value-of select="$Directory/Name"/>_Objest.Copy();
-						<xsl:value-of select="$Directory/Name"/>_Objest_Новий.Назва = <xsl:value-of select="$Directory/Name"/>_Objest_Новий.Назва + " - Копія";
+						//<xsl:value-of select="$Directory/Name"/>_Objest_Новий.Назва = <xsl:value-of select="$Directory/Name"/>_Objest_Новий.Назва + " - Копія";
 						//<xsl:value-of select="$Directory/Name"/>_Objest_Новий.Код = (++Константи.НумераціяДовідників.<xsl:value-of select="$Directory/Name"/>_Const).ToString("D6");
 						<xsl:value-of select="$Directory/Name"/>_Objest_Новий.Save();
 					}
@@ -460,12 +465,28 @@ namespace StorageAndTrade
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_<xsl:value-of select="$Directory/Name"/>Елемент));
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.textBoxName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox_Код = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+			<xsl:for-each select="$Directory/Fields/Field">
+			this.label_<xsl:value-of select="Name"/> = new System.Windows.Forms.Label();
+            this.textBox_<xsl:value-of select="Name"/> = new System.Windows.Forms.TextBox();
+			</xsl:for-each>
             this.SuspendLayout();
+			<xsl:for-each select="$Directory/Fields/Field">
             // 
+            // label_<xsl:value-of select="Name"/>
+            // 
+            this.label_<xsl:value-of select="Name"/>.AutoSize = true;
+            this.label_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(556, 15);
+            this.label_<xsl:value-of select="Name"/>.Name = "label_<xsl:value-of select="Name"/>";
+            this.label_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(29, 13);
+            this.label_<xsl:value-of select="Name"/>.Text = "<xsl:value-of select="Name"/>:";
+			// 
+            // textBox_<xsl:value-of select="Name"/>
+            // 
+            this.textBox_<xsl:value-of select="Name"/>.Location = new System.Drawing.Point(591, 12);
+            this.textBox_<xsl:value-of select="Name"/>.Name = "textBox_<xsl:value-of select="Name"/>";
+            this.textBox_<xsl:value-of select="Name"/>.Size = new System.Drawing.Size(167, 20);
+			</xsl:for-each>
+			// 
             // buttonClose
             // 
             this.buttonClose.Location = new System.Drawing.Point(230, 51);
@@ -486,47 +507,15 @@ namespace StorageAndTrade
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // textBoxName
-            // 
-            this.textBoxName.Location = new System.Drawing.Point(60, 12);
-            this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(489, 20);
-            this.textBoxName.TabIndex = 20;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 19;
-            this.label2.Text = "Назва:";
-            // 
-            // textBox_Код
-            // 
-            this.textBox_Код.Location = new System.Drawing.Point(591, 12);
-            this.textBox_Код.Name = "textBox_Код";
-            this.textBox_Код.Size = new System.Drawing.Size(167, 20);
-            this.textBox_Код.TabIndex = 22;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(556, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "Код:";
-            // 
             // Form_<xsl:value-of select="$Directory/Name"/>Елемент
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(773, 97);
-            this.Controls.Add(this.textBox_Код);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBoxName);
-            this.Controls.Add(this.label2);
+			<xsl:for-each select="$Directory/Fields/Field">
+			this.Controls.Add(this.label_<xsl:value-of select="Name"/>);
+            this.Controls.Add(this.textBox_<xsl:value-of select="Name"/>);
+			</xsl:for-each>
             this.Controls.Add(this.buttonClose);
             this.Controls.Add(this.buttonSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -543,10 +532,10 @@ namespace StorageAndTrade
 
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.TextBox textBoxName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox_Код;
-        private System.Windows.Forms.Label label1;
+		<xsl:for-each select="$Directory/Fields/Field">
+		private System.Windows.Forms.Label label_<xsl:value-of select="Name"/>;
+        private System.Windows.Forms.TextBox textBox_<xsl:value-of select="Name"/>;
+		</xsl:for-each>
     }
 }
 	
@@ -604,9 +593,9 @@ namespace StorageAndTrade
 					if (<xsl:value-of select="$Directory/Name"/>_Objest.Read(new UnigueID(Uid)))
 					{
 						this.Text += " - Редагування";
-
-						textBoxName.Text = <xsl:value-of select="$Directory/Name"/>_Objest.Назва;
-						textBox_Код.Text = <xsl:value-of select="$Directory/Name"/>_Objest.Код;
+						<xsl:for-each select="$Directory/Fields/Field">
+			            //textBox_<xsl:value-of select="Name"/>.Text = <xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/>;
+			            </xsl:for-each>
 					}
 					else
 						MessageBox.Show("Error read");
@@ -623,8 +612,9 @@ namespace StorageAndTrade
 
 				try
 				{
-					<xsl:value-of select="$Directory/Name"/>_Objest.Назва = textBoxName.Text;
-					<xsl:value-of select="$Directory/Name"/>_Objest.Код = textBox_Код.Text;
+					<xsl:for-each select="$Directory/Fields/Field">
+			        //<xsl:value-of select="$Directory/Name"/>_Objest.<xsl:value-of select="Name"/> = textBox_<xsl:value-of select="Name"/>.Text;
+			        </xsl:for-each>
 					<xsl:value-of select="$Directory/Name"/>_Objest.Save();
 				}
 				catch (Exception exp)
