@@ -325,6 +325,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public static Kernel Kernel { get; set; }
         public static Kernel KernelBackgroundTask { get; set; }
+		public static Kernel KernelParalelWork { get; set; }
 		
         public static void ReadAllConstants()
         {
