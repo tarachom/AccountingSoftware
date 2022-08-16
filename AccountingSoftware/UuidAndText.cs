@@ -39,33 +39,9 @@ namespace AccountingSoftware
 			Uuid = uuid;
 		}
 
-		public UuidAndText(Guid uuid, string tablename)
+		public UuidAndText(Guid uuid, string text)
 		{
 			Uuid = uuid;
-			TableName = tablename;
-		}
-
-		public UuidAndText(Guid uuid, string tablename, string type)
-		{
-			Uuid = uuid;
-			TableName = tablename;
-			Type = type;
-		}
-
-		public UuidAndText(Guid uuid, string tablename, string type, DateTime dateDoc)
-		{
-			Uuid = uuid;
-			TableName = tablename;
-			Type = type;
-			DateDoc = dateDoc;
-		}
-
-		public UuidAndText(Guid uuid, string tablename, string type, DateTime dateDoc, string text)
-		{
-			Uuid = uuid;
-			TableName = tablename;
-			Type = type;
-			DateDoc = dateDoc;
 			Text = text;
 		}
 
@@ -74,25 +50,7 @@ namespace AccountingSoftware
 		/// </summary>
 		[PgName("uuid")]
 		public Guid Uuid { get; set; }
-
-		/// <summary>
-		/// Таблиця
-		/// </summary>
-		[PgName("tablename")]
-		public string TableName { get; set; }
-
-		/// <summary>
-		/// Тип як в конфігураторі
-		/// </summary>
-		[PgName("type")]
-		public string Type { get; set; }
-
-		/// <summary>
-		/// Дата
-		/// </summary>
-		[PgName("datedoc")]
-		public DateTime DateDoc { get; set; }
-
+				
 		/// <summary>
 		/// Додаткова інформація
 		/// </summary>
@@ -105,12 +63,12 @@ namespace AccountingSoftware
 		/// <returns></returns>
 		public string ToXml()
         {
-			return $"<uuid>{Uuid}</uuid><tablename>{TableName}</tablename><type>{Type}</type><datedoc>{DateDoc}</datedoc><text>{Text}</text>";
+			return $"<uuid>{Uuid}</uuid><text>{Text}</text>";
 		}
 
 		public override string ToString()
 		{
-			return $"('{Uuid}', '{TableName}', '{Type}', '{DateDoc}', '{Text}')";
+			return $"('{Uuid}', '{Text}')";
 		}
 	}
 }

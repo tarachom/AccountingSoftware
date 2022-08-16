@@ -163,9 +163,6 @@ namespace AccountingSoftware
 CREATE TYPE uuidtext AS 
 (
     uuid uuid, 
-    tablename text, 
-    type text, 
-    datedoc timestamp without time zone, 
     text text
 )");
 				Connection.ReloadTypes();
