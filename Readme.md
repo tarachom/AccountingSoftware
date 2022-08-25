@@ -1,4 +1,4 @@
-#Конфігуратор та бібліотека AccountingSoftware
+# Конфігуратор та бібліотека AccountingSoftware
 
 Для роботи потрібна база даних PostgreSQL.
 
