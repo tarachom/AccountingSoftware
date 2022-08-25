@@ -702,10 +702,9 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             return <xsl:value-of select="$DirectoryName"/>ObjestItem.Read(base.UnigueID) ? <xsl:value-of select="$DirectoryName"/>ObjestItem : null;
         }
 		
-        public <xsl:value-of select="$DirectoryName"/>_Pointer GetDirectoryPointer()
+        public <xsl:value-of select="$DirectoryName"/>_Pointer GetNewDirectoryPointer()
         {
-            <xsl:value-of select="$DirectoryName"/>_Pointer directoryPointer = new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID.UGuid);
-            return directoryPointer;
+            return new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID);
         }
 		
 		public string GetPresentation()
