@@ -548,7 +548,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
     <xsl:for-each select="Configuration/Directories/Directory">
       <xsl:variable name="DirectoryName" select="Name"/>
     #region DIRECTORY "<xsl:value-of select="$DirectoryName"/>"
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$DirectoryName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -556,7 +556,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 	
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DirectoryName"/>_Objest : DirectoryObject
     {
         public <xsl:value-of select="$DirectoryName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -682,7 +682,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         </xsl:for-each>
     }
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DirectoryName"/>_Pointer : DirectoryPointer
     {
         public <xsl:value-of select="$DirectoryName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>")
@@ -726,7 +726,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         }
     }
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DirectoryName"/>_Select : DirectorySelect
     {
         public <xsl:value-of select="$DirectoryName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }        
@@ -759,7 +759,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DirectoryName, '_', $TablePartName)"/>
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DirectoryTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DirectoryName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -843,7 +843,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
             base.BaseCommitTransaction();
         }
         
-        <xsl:call-template name="CommentSummary" />
+        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : DirectoryTablePartRecord
         {
             public Record()
@@ -900,7 +900,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Переліченн�
 {
     <xsl:for-each select="Configuration/Enums/Enum">
     #region ENUM "<xsl:value-of select="Name"/>"
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public enum <xsl:value-of select="Name"/>
     {
          <xsl:variable name="CountEnumField" select="count(Fields/Field)" />
@@ -923,7 +923,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
     <xsl:for-each select="Configuration/Documents/Document">
       <xsl:variable name="DocumentName" select="Name"/>
     #region DOCUMENT "<xsl:value-of select="$DocumentName"/>"
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$DocumentName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -931,7 +931,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 	
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DocumentName"/>_Objest : DocumentObject
     {
         public <xsl:value-of select="$DocumentName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>",
@@ -1068,7 +1068,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         </xsl:for-each>
     }
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DocumentName"/>_Pointer : DocumentPointer
     {
         public <xsl:value-of select="$DocumentName"/>_Pointer(object uid = null) : base(Config.Kernel, "<xsl:value-of select="Table"/>", "<xsl:value-of select="$DocumentName"/>")
@@ -1114,7 +1114,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         }
     }
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$DocumentName"/>_Select : DocumentSelect
     {		
         public <xsl:value-of select="$DocumentName"/>_Select() : base(Config.Kernel, "<xsl:value-of select="Table"/>") { }
@@ -1132,7 +1132,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
         <xsl:variable name="TablePartName" select="Name"/>
         <xsl:variable name="TablePartFullName" select="concat($DocumentName, '_', $TablePartName)"/>
     
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$TablePartFullName"/>_TablePart : DocumentTablePart
     {
         public <xsl:value-of select="$TablePartFullName"/>_TablePart(<xsl:value-of select="$DocumentName"/>_Objest owner) : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -1228,7 +1228,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 
             return copyRecords;
         }
-        <xsl:call-template name="CommentSummary" />
+        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : DocumentTablePartRecord
         {
             public Record()
@@ -1341,7 +1341,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
     <xsl:for-each select="Configuration/RegistersInformation/RegisterInformation">
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -1349,7 +1349,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 	
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterInformationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -1424,7 +1424,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             base.BaseCommitTransaction();
         }
 
-        <xsl:call-template name="CommentSummary" />
+        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : RegisterInformationRecord
         {
             public Record()
@@ -1456,7 +1456,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
 	   <xsl:variable name="Documents" select="../../Documents"/>
        <xsl:variable name="RegisterName" select="Name"/>
     #region REGISTER "<xsl:value-of select="$RegisterName"/>"
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public static class <xsl:value-of select="$RegisterName"/>_Const
     {
         public const string TABLE = "<xsl:value-of select="Table"/>";
@@ -1477,7 +1477,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
         public const string <xsl:value-of select="Name"/> = "<xsl:value-of select="NameInTable"/>";</xsl:for-each>
     }
 	
-    <xsl:call-template name="CommentSummary" />
+    <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$RegisterName"/>_RecordsSet : RegisterAccumulationRecordsSet
     {
         public <xsl:value-of select="$RegisterName"/>_RecordsSet() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
@@ -1555,7 +1555,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриНа�
             base.BaseCommitTransaction();
         }
         
-        <xsl:call-template name="CommentSummary" />
+        <!--<xsl:call-template name="CommentSummary" />-->
         public class Record : RegisterAccumulationRecord
         {
             public Record()
