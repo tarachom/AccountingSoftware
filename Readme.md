@@ -1,6 +1,6 @@
 # Конфігуратор
 
- <img src="https://accounting.org.ua/images/configuration.png" /> <b>Програма для проектування бази даних PostgreSQL.</b>
+ <img src="https://accounting.org.ua/images/configuration.png" /> <b>Програма для проектування бази даних.</b>
 
   Скачати програму      https://accounting.org.ua/configurator.html <br/>
   
