@@ -57,7 +57,7 @@ namespace Configurator
 				IsNewDirectory = true;
 
 				string newUnigueNameInTable_Name = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
-				ConfDirectory.AppendField(new ConfigurationObjectField("Назва", newUnigueNameInTable_Name, "string", "", "Назва"));
+				ConfDirectory.AppendField(new ConfigurationObjectField("Назва", newUnigueNameInTable_Name, "string", "", "Назва", true));
 
 				string newUnigueNameInTable_Code = Configuration.GetNewUnigueColumnName(Program.Kernel, ConfDirectory.Table, ConfDirectory.Fields);
 				ConfDirectory.AppendField(new ConfigurationObjectField("Код", newUnigueNameInTable_Code, "string", "", "Код"));

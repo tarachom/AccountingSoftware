@@ -381,7 +381,21 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
         <xsl:text> </xsl:text>
         <xsl:value-of select="Name"/>_Const
         {
-            get { return m_<xsl:value-of select="Name"/>_Const; }
+            get 
+            {
+                return m_<xsl:value-of select="Name"/><xsl:text>_Const</xsl:text>
+                <xsl:if test="Type = 'pointer'">
+					<xsl:variable name="groupPointer" select="substring-before(Pointer, '.')" />
+					<xsl:choose>
+						<xsl:when test="$groupPointer = 'Довідники'">
+							<xsl:text>.GetNewDirectoryPointer()</xsl:text>
+						</xsl:when>
+						<xsl:when test="$groupPointer = 'Документи'">
+							<xsl:text>.GetNewDocumentPointer()</xsl:text>
+						</xsl:when>
+					</xsl:choose>
+				</xsl:if>;
+            }
             set
             {
                 m_<xsl:value-of select="Name"/>_Const = value;
@@ -500,33 +514,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Константи
                       <xsl:call-template name="DefaultFieldValue" />;
                     </xsl:for-each>
                 }
-                <!--
-                <xsl:if test="count(Fields/Field) > 0">
-                public Record(
-                    <xsl:for-each select="Fields/Field">
-                      <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
-                      <xsl:call-template name="FieldType" />
-                      <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
-                           <xsl:text>? </xsl:text>    
-                      </xsl:if>
-                      <xsl:text> _</xsl:text>
-                      <xsl:value-of select="Name"/>
-                      <xsl:text> = </xsl:text>
-                      <xsl:call-template name="DefaultParamValue" />
-                    </xsl:for-each>)
-                {
-                    <xsl:for-each select="Fields/Field">
-                      <xsl:value-of select="Name"/>
-                      <xsl:text> = _</xsl:text>
-                      <xsl:value-of select="Name"/>
-                      <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'pointer' or Type = 'empty_pointer'">
-                           <xsl:text> ?? </xsl:text>
-                           <xsl:call-template name="DefaultFieldValue" />
-                      </xsl:if>;
-                    </xsl:for-each>
-                }
-                </xsl:if>
-                -->
                 <xsl:for-each select="Fields/Field">
                   <xsl:text>public </xsl:text>
                   <xsl:call-template name="FieldType" />
@@ -623,7 +610,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                 <xsl:value-of select="TriggerFunctions/AfterSave"/><xsl:text>(this);</xsl:text>      
             </xsl:if>
         }
-
+		<!--
         public string Serialize(string root = "<xsl:value-of select="$DirectoryName"/>")
         {
             return 
@@ -634,7 +621,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                </xsl:for-each>
             <xsl:text>"&lt;/" + root + "&gt;"</xsl:text>;
         }
-
+        -->
         public <xsl:value-of select="$DirectoryName"/>_Objest Copy()
         {
             <xsl:value-of select="$DirectoryName"/>_Objest copy = new <xsl:value-of select="$DirectoryName"/>_Objest();
@@ -704,7 +691,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
 		
         public <xsl:value-of select="$DirectoryName"/>_Pointer GetNewDirectoryPointer()
         {
-            return new <xsl:value-of select="$DirectoryName"/>_Pointer(UnigueID);
+            return new <xsl:value-of select="$DirectoryName"/>_Pointer(base.UnigueID);
         }
 		
 		public string GetPresentation()
@@ -854,33 +841,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Довідники
                   <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
             }
-            <!--
-            <xsl:if test="count(Fields/Field) > 0">
-            public Record(
-                <xsl:for-each select="Fields/Field">
-                  <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
-                  <xsl:call-template name="FieldType" />
-                  <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
-                       <xsl:text>? </xsl:text>    
-                  </xsl:if>
-                  <xsl:text> _</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultParamValue" />
-                </xsl:for-each>)
-            {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = _</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'pointer' or Type = 'empty_pointer'">
-                       <xsl:text> ?? </xsl:text>
-                       <xsl:call-template name="DefaultFieldValue" />
-                  </xsl:if>;
-                </xsl:for-each>
-            }
-            </xsl:if>
-            -->
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
@@ -1094,6 +1054,11 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
 			);
         }
 		
+        public <xsl:value-of select="$DocumentName"/>_Pointer GetNewDocumentPointer()
+        {
+            return new <xsl:value-of select="$DocumentName"/>_Pointer(base.UnigueID);
+        }
+		
         public <xsl:value-of select="$DocumentName"/>_Pointer GetEmptyPointer()
         {
             return new <xsl:value-of select="$DocumentName"/>_Pointer();
@@ -1239,33 +1204,6 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.Документи
                   <xsl:call-template name="DefaultFieldValue" />;
                 </xsl:for-each>
             }
-            <!--
-            <xsl:if test="count(Fields/Field) > 0">
-            public Record(
-                <xsl:for-each select="Fields/Field">
-                  <xsl:if test="position() != 1"><xsl:text>, </xsl:text></xsl:if>
-                  <xsl:call-template name="FieldType" />
-                  <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time'">
-                       <xsl:text>? </xsl:text>    
-                  </xsl:if>
-                  <xsl:text> _</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = </xsl:text>
-                  <xsl:call-template name="DefaultParamValue" />
-                </xsl:for-each>)
-            {
-                <xsl:for-each select="Fields/Field">
-                  <xsl:value-of select="Name"/>
-                  <xsl:text> = _</xsl:text>
-                  <xsl:value-of select="Name"/>
-                  <xsl:if test="Type = 'date' or Type = 'datetime' or Type = 'time' or Type = 'pointer' or Type = 'empty_pointer'">
-                       <xsl:text> ?? </xsl:text>
-                       <xsl:call-template name="DefaultFieldValue" />
-                  </xsl:if>;
-                </xsl:for-each>
-            }
-            </xsl:if>
-            -->
             <xsl:for-each select="Fields/Field">
               <xsl:text>public </xsl:text>
               <xsl:call-template name="FieldType" />
