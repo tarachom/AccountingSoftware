@@ -39,10 +39,10 @@ namespace AccountingSoftware
 	public class NameValue<T>
 	{
 		public NameValue() { }
-		
+
 		public NameValue(string name, T value)
 		{
-			Name = name; 
+			Name = name;
 			Value = value;
 		}
 
@@ -50,7 +50,12 @@ namespace AccountingSoftware
 
 		public T Value { get; set; }
 
-		public override string ToString()
+        public bool Equals(T value)
+        {
+			return Value.ToString() == value.ToString();
+		}
+
+        public override string ToString()
 		{
 			return Name;
 		}
