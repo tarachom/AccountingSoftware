@@ -442,28 +442,6 @@ CREATE TYPE uuidtext AS
 			reader.Close();
 		}
 
-		//??? Видалити
-		//public string GetViewDirectoryPointers(Query QuerySelect, Guid uid, string field)
-		//{
-		//	QuerySelect.Field.Add(field);
-		//	QuerySelect.Where.Add(new Where("uid", Comparison.EQ, uid));
-
-		//	string query = QuerySelect.Construct();
-
-		//	NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-		//	nCommand.Parameters.Add(new NpgsqlParameter("uid", uid));
-
-		//	string value = "";
-
-		//	NpgsqlDataReader reader = nCommand.ExecuteReader();
-		//	if (reader.Read())
-		//		value = reader[field].ToString();
-
-		//	reader.Close();
-
-		//	return value;
-		//}
-
 		public bool FindDirectoryPointer(Query QuerySelect, ref DirectoryPointer directoryPointer)
 		{
 			QuerySelect.Limit = 1;
@@ -587,107 +565,6 @@ CREATE TYPE uuidtext AS
 
 			nCommand.ExecuteNonQuery();
 		}
-
-		//public string SelectDirectoryView(DirectoryView directoryView)
-		//{
-		//	string query = directoryView.QuerySelect.Construct();
-
-		//	NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-
-		//	foreach (Where field in directoryView.QuerySelect.Where)
-		//		if (field.UsingSQLToValue == false)
-		//			nCommand.Parameters.Add(new NpgsqlParameter(field.Alias, field.Value));
-
-		//	if (directoryView.QuerySelect.CreateTempTable == true)
-		//	{
-		//		nCommand.ExecuteNonQuery();
-
-		//		query = "SELECT * FROM " + directoryView.QuerySelect.TempTable;
-		//		nCommand = new NpgsqlCommand(query, Connection);
-
-		//	}
-
-		//	string xml = "<" + directoryView.Name + ">\n";
-
-		//	NpgsqlDataReader reader = nCommand.ExecuteReader();
-		//	while (reader.Read())
-		//	{
-		//		xml += "  <row>\n";
-		//		xml += "    <uid>" + reader["uid"].ToString() + "</uid>\n";
-
-		//		foreach (string field in directoryView.QuerySelect.Field)
-		//		{
-		//			xml += "    <" + directoryView.AliasRevers[field] + ">";
-
-		//			switch (directoryView.AliasFieldType[field])
-		//			{
-		//				case "string":
-		//					{
-		//						xml += "<![CDATA[" + reader[field].ToString() + "]]>";
-		//						break;
-		//					}
-		//				case "integer":
-		//				case "numeric":
-		//				case "boolean":
-		//				case "date":
-		//				case "datetime":
-		//				case "time":
-		//				case "pointer":
-		//				case "empty_pointer":
-		//				case "enum":
-		//					{
-		//						xml += reader[field].ToString();
-		//						break;
-		//					}
-		//				case "string[]":
-		//					{
-		//						string[] mas = (string[])reader[field];
-		//						foreach (string elem in mas) xml += "<e><![CDATA[" + elem + "]]></e>";
-		//						break;
-		//					}
-		//				case "integer[]":
-		//					{
-		//						int[] mas = (int[])reader[field];
-		//						foreach (int elem in mas) xml += "<e>" + elem.ToString() + "</e>";
-		//						break;
-		//					}
-		//				case "numeric[]":
-		//					{
-		//						decimal[] mas = (decimal[])reader[field];
-		//						foreach (decimal elem in mas) xml += "<e>" + elem.ToString() + "</e>";
-		//						break;
-		//					}
-		//				default:
-		//					{
-		//						xml += "<![CDATA[" + reader[field].ToString() + "]]>";
-		//						break;
-		//					}
-		//			}
-
-		//			xml += "</" + directoryView.AliasRevers[field] + ">\n";
-		//		}
-
-		//		xml += "  </row>\n";
-		//	}
-		//	reader.Close();
-
-		//	xml += "</" + directoryView.Name + ">\n";
-
-		//	return xml;
-		//}
-
-		//public void DeleteDirectoryViewTempTable(DirectoryView directoryView)
-		//{
-		//	if (directoryView.QuerySelect.CreateTempTable == true &&
-		//		directoryView.QuerySelect.TempTable != "" &&
-		//	 	directoryView.QuerySelect.TempTable.Substring(0, 4) == "tmp_")
-		//	{
-		//		string query = "DROP TABLE IF EXISTS " + directoryView.QuerySelect.TempTable;
-
-		//		NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
-		//		nCommand.ExecuteNonQueryAsync();
-		//	}
-		//}
 
 		#endregion
 
@@ -1050,6 +927,90 @@ CREATE TYPE uuidtext AS
 
 			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
 			nCommand.Parameters.Add(new NpgsqlParameter("owner", owner));
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void InsertRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query_field = "uid, period, owner";
+			string query_values = "@uid, @period, @owner";
+
+			foreach (string field in fieldArray)
+			{
+				query_field += ", " + field;
+				query_values += ", @" + field;
+			}
+
+			string query = "INSERT INTO " + table + " (" + query_field + ") VALUES (" + query_values + ")";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", registerInformationObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("period", registerInformationObject.Period));
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", registerInformationObject.Owner));
+
+			foreach (string field in fieldArray)
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public void UpdateRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query = "UPDATE " + table + " SET period = @period, owner = @owner";
+
+			foreach (string field in fieldArray)
+				query += ", " + field + " = @" + field;
+
+			query += " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", registerInformationObject.UnigueID.UGuid));
+			nCommand.Parameters.Add(new NpgsqlParameter("period", registerInformationObject.Period));
+			nCommand.Parameters.Add(new NpgsqlParameter("owner", registerInformationObject.Owner));
+
+			foreach (string field in fieldArray)
+				nCommand.Parameters.Add(new NpgsqlParameter(field, fieldValue[field]));
+
+			nCommand.ExecuteNonQuery();
+		}
+
+		public bool SelectRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue)
+		{
+			string query = "SELECT uid, period, owner";
+
+			foreach (string field in fieldArray)
+				query += ", " + field;
+
+			query += " FROM " + table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", registerInformationObject.UnigueID.UGuid));
+
+			NpgsqlDataReader reader = nCommand.ExecuteReader();
+
+			bool isSelectDirectoryObject = reader.HasRows;
+
+			while (reader.Read())
+			{
+				registerInformationObject.Period = (DateTime)fieldValue["period"];
+				registerInformationObject.Owner = (Guid)fieldValue["owner"];
+
+				foreach (string field in fieldArray)
+					fieldValue[field] = reader[field];
+			}
+
+			reader.Close();
+
+			return isSelectDirectoryObject;
+		}
+
+		public void DeleteRegisterInformationObject(string table, UnigueID uid)
+		{
+			string query = "DELETE FROM " + table + " WHERE uid = @uid";
+
+			NpgsqlCommand nCommand = new NpgsqlCommand(query, Connection);
+			nCommand.Parameters.Add(new NpgsqlParameter("uid", uid.UGuid));
 
 			nCommand.ExecuteNonQuery();
 		}

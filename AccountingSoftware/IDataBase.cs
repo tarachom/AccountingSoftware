@@ -111,6 +111,11 @@ namespace AccountingSoftware
 		void InsertRegisterInformationRecords(Guid UID, string table, DateTime period, Guid owner, string[] fieldArray, Dictionary<string, object> fieldValue);
 		void DeleteRegisterInformationRecords(string table, Guid owner);
 
+		void InsertRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void UpdateRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		bool SelectRegisterInformationObject(RegisterInformationObject registerInformationObject, string table, string[] fieldArray, Dictionary<string, object> fieldValue);
+		void DeleteRegisterInformationObject(string table, UnigueID uid);
+
 		#endregion
 
 		#region RegisterAccumulation

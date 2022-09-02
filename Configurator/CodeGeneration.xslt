@@ -325,7 +325,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>
     {
         public static Kernel Kernel { get; set; }
         public static Kernel KernelBackgroundTask { get; set; }
-		public static Kernel KernelParalelWork { get; set; }
+        public static Kernel KernelParalelWork { get; set; }
 		
         public static void ReadAllConstants()
         {
@@ -1383,7 +1383,85 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
             </xsl:for-each>
         }
     }
-    
+	
+    <!--<xsl:call-template name="CommentSummary" />-->
+    public class <xsl:value-of select="$RegisterName"/>_Objest : RegisterInformationObject
+		{
+		public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
+             <xsl:text>new string[] { </xsl:text>
+             <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+               <xsl:if test="position() != 1">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+               <xsl:text>"</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"</xsl:text>
+             </xsl:for-each> }) 
+        {
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+              <xsl:value-of select="Name"/>
+              <xsl:text> = </xsl:text>
+              <xsl:call-template name="DefaultFieldValue" />;
+            </xsl:for-each>
+        }
+        
+        public bool Read(UnigueID uid)
+        {
+            if (BaseRead(uid))
+            {
+                <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+                  <xsl:value-of select="Name"/>
+                  <xsl:text> = </xsl:text>
+                  <xsl:call-template name="ReadFieldValue">
+                    <xsl:with-param name="BaseFieldContainer">base.FieldValue</xsl:with-param>
+                  </xsl:call-template>;
+                </xsl:for-each>
+                BaseClear();
+                return true;
+            }
+            else
+                return false;
+        }
+        
+        public void Save()
+        {
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+              <xsl:text>base.FieldValue["</xsl:text><xsl:value-of select="NameInTable"/><xsl:text>"] = </xsl:text>
+              <xsl:if test="Type = 'enum'">
+                  <xsl:text>(int)</xsl:text>      
+              </xsl:if>
+              <xsl:value-of select="Name"/>
+              <xsl:choose>
+                <xsl:when test="Type = 'pointer' or Type = 'empty_pointer'">
+                  <xsl:text>.UnigueID.UGuid</xsl:text>
+                </xsl:when>
+              </xsl:choose>;
+            </xsl:for-each>
+            BaseSave();
+        }
+
+        public <xsl:value-of select="$RegisterName"/>_Objest Copy()
+        {
+            <xsl:value-of select="$RegisterName"/>_Objest copy = new <xsl:value-of select="$RegisterName"/>_Objest();
+			copy.New();
+            <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+				<xsl:text>copy.</xsl:text><xsl:value-of select="Name"/><xsl:text> = </xsl:text><xsl:value-of select="Name"/>;
+			</xsl:for-each>
+			return copy;
+        }
+
+        public void Delete()
+        {
+			base.BaseDelete();
+        }
+                
+        <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">
+          <xsl:text>public </xsl:text>
+          <xsl:call-template name="FieldType" />
+          <xsl:text> </xsl:text>
+          <xsl:value-of select="Name"/>
+          <xsl:text> { get; set; </xsl:text>}
+        </xsl:for-each>
+    }
+	
     #endregion
   </xsl:for-each>
 }

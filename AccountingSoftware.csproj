@@ -113,7 +113,6 @@
     <Compile Include="AccountingSoftware\Configuration\ConfigurationTriggerFunctions.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePart.cs" />
     <Compile Include="AccountingSoftware\Constants\ConstantsTablePartRecord.cs" />
-    <None Include="AccountingSoftware\Directory\DirectoryView.cs_delete" />
     <Compile Include="AccountingSoftware\Directory\DirectorySelect.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Directory\DirectoryTablePart.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="AccountingSoftware\Document\DocumentTablePart.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentTablePartRecord.cs" />
     <Compile Include="AccountingSoftware\Document\DocumentObject.cs" />
+    <Compile Include="AccountingSoftware\RegisterInformation\RegisterInformationObject.cs" />
     <Compile Include="AccountingSoftware\UuidAndText.cs" />
     <Compile Include="AccountingSoftware\FieldType.cs" />
     <Compile Include="AccountingSoftware\IDataBase.cs" />
