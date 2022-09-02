@@ -1386,7 +1386,7 @@ namespace <xsl:value-of select="Configuration/NameSpace"/>.РегістриВі�
 	
     <!--<xsl:call-template name="CommentSummary" />-->
     public class <xsl:value-of select="$RegisterName"/>_Objest : RegisterInformationObject
-		{
+    {
 		public <xsl:value-of select="$RegisterName"/>_Objest() : base(Config.Kernel, "<xsl:value-of select="Table"/>",
              <xsl:text>new string[] { </xsl:text>
              <xsl:for-each select="(DimensionFields|ResourcesFields|PropertyFields)/Fields/Field">

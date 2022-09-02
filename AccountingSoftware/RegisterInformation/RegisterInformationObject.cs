@@ -117,13 +117,15 @@ namespace AccountingSoftware
 
 			BaseClear();
 
+			UnigueID = uid;
+
 			if (Kernel.DataBase.SelectRegisterInformationObject(this, Table, FieldArray, FieldValue))
-			{
-				UnigueID = uid;
 				return true;
-			}
 			else
+			{
+				UnigueID = new UnigueID(Guid.Empty);
 				return false;
+			}
 		}
 
 		/// <summary>

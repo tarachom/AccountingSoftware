@@ -993,8 +993,8 @@ CREATE TYPE uuidtext AS
 
 			while (reader.Read())
 			{
-				registerInformationObject.Period = (DateTime)fieldValue["period"];
-				registerInformationObject.Owner = (Guid)fieldValue["owner"];
+				registerInformationObject.Period = (DateTime)reader["period"];
+				registerInformationObject.Owner = (Guid)reader["owner"];
 
 				foreach (string field in fieldArray)
 					fieldValue[field] = reader[field];
