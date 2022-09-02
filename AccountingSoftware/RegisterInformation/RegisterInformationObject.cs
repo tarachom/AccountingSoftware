@@ -27,7 +27,7 @@ using System.Collections.Generic;
 namespace AccountingSoftware
 {
 	/// <summary>
-	/// 
+	/// Обєкт запис регістру інформації
 	/// </summary>
 	public abstract class RegisterInformationObject
 	{
