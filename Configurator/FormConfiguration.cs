@@ -1503,12 +1503,12 @@ namespace Configurator
 			saveConfigurationForm.ShowDialog();
 		}
 
-		private void конструкторФормToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Constructor constructor = new Constructor();
-			constructor.Conf = Conf;
-			constructor.Show();
-		}
+		//private void конструкторФормToolStripMenuItem_Click(object sender, EventArgs e)
+		//{
+		//	Constructor constructor = new Constructor();
+		//	constructor.Conf = Conf;
+		//	constructor.Show();
+		//}
 
 		private void addContantsBlockToolStripMenuItem_Click(object sender, EventArgs e)
 		{
