@@ -6,5 +6,3 @@
  
  Програма "Конфігуратор" модифікована до версії .NET 6 та знаходиться ось в цьому репозиторії: 
  https://github.com/tarachom/AccountingSoftwareConfigurator
- 
- Версія для .NET Framework 4.7.2 більше не підтримується.
