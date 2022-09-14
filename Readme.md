@@ -4,4 +4,5 @@
 
  <b>.NET Framework 4.7.2</b>
  
- Репозиторій переїхав -> https://github.com/tarachom/AccountingSoftwareConfigurator
+ Програма "Конфігуратор" модифікована до версії .net6 знаходиться ось в цьому репозиторії https://github.com/tarachom/AccountingSoftwareConfigurator
+ Версія для .NET Framework 4.7.2 більше не підтримується
